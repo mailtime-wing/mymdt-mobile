@@ -1,41 +1,38 @@
-import React from 'react';
-import { Button, Text, View } from 'react-native';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Language"
-        onPress={() => navigation.navigate('Language')}
-      />
-    </View>
-  );
-}
-
-function LanguageScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Language Screen</Text>
-    </View>
-  );
-}
+import HomeScreen from './src/screens/HomeScreen'
+import LanguageScreen from './src/screens/LanguageScreen'
+import LanguageProvider, { LanguageContext } from './src/context/LanguageContext';
 
 const Stack = createStackNavigator();
 
-function App() {
-  return (
+const AppContainer = () => {
+  const { translation } = useContext(LanguageContext)
+  return(
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
-          name="Home" 
-          component={HomeScreen} 
+          name={"Home"}
+          component={HomeScreen}
+          options={{ title: translation.home}}
         />
-        <Stack.Screen name="Language" component={LanguageScreen} />
+        <Stack.Screen 
+          name="Language" 
+          component={LanguageScreen} 
+          options={{ title: translation.language}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
+  )
+}
+
+function App(props) {
+  return (
+    <LanguageProvider>
+      <AppContainer {...props}/>
+    </LanguageProvider>
   );
 }
 
