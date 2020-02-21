@@ -2,6 +2,7 @@ import React, { useState, createContext } from 'react';
 import { AsyncStorage } from 'react-native';
 
 import locale from './../constants/locale'
+import { LANGUAGE_STORAGE_KEY } from './../constants/storageKey'
 
 import enMessages from './../intl/en-US.json'
 import hkMessages from './../intl/zh-HK.json'
@@ -10,7 +11,6 @@ import cnMessages from './../intl/zh-CN.json'
 export const LanguageContext = createContext(null);
 
 const LanguageProvider = (props) => {
-  const LANGUAGE_STORAGE_KEY = 'language'
   const languageList = [
     { value: locale.en, label: 'English' },
     { value: locale.hk, label: '中文 （繁體）' },
@@ -22,6 +22,7 @@ const LanguageProvider = (props) => {
     [locale.hk]: hkMessages,
     [locale.cn]: cnMessages,
   }
+
   const [language, setLanguage] = useState(languageList[0].value) // default is english
   const [translation, setTranslation] = useState(translations[language])
 

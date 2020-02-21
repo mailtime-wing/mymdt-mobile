@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { LanguageContext } from '../context/LanguageContext';
+import { LanguageContext } from '../../context/LanguageContext';
 
 const LanguageOption = ({ title, value }) => {
   const { saveLanguage } = useContext(LanguageContext)
