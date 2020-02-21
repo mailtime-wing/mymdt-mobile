@@ -1,28 +1,35 @@
 import React, { useState, createContext } from 'react';
-import { AsyncStorage } from 'react-native'; 
+import { AsyncStorage } from 'react-native';
 
-import en from './../locale/en.json'
-import hk from './../locale/hk.json'
-import cn from './../locale/cn.json'
+import locale from './../constants/locale'
+
+import enMessages from './../intl/en-US.json'
+import hkMessages from './../intl/zh-HK.json'
+import cnMessages from './../intl/zh-CN.json'
 
 export const LanguageContext = createContext(null);
 
 const LanguageProvider = (props) => {
   const LANGUAGE_STORAGE_KEY = 'language'
-  const [languageList] = useState([
-    { value: 'en', label: 'English'},
-    { value: 'hk', label: '中文 （繁體）'},
-    { value: 'cn', label: '中文 （简体）'},
-  ])
-  const translations = { en, hk, cn }
-  const [language, setLanguage] = useState(languageList[0].value)
+  const languageList = [
+    { value: locale.en, label: 'English' },
+    { value: locale.hk, label: '中文 （繁體）' },
+    { value: locale.cn, label: '中文 （简体）' },
+  ]
+
+  const translations = {
+    [locale.en]: enMessages,
+    [locale.hk]: hkMessages,
+    [locale.cn]: cnMessages,
+  }
+  const [language, setLanguage] = useState(languageList[0].value) // default is english
   const [translation, setTranslation] = useState(translations[language])
 
   const saveLanguage = async (value) => {
     try {
       await AsyncStorage.setItem(LANGUAGE_STORAGE_KEY, value);
-        setLanguage(value)
-        setTranslation(translations[value])
+      setLanguage(value)
+      setTranslation(translations[value])
     } catch (error) {
       console.error(error)
     }
@@ -31,7 +38,7 @@ const LanguageProvider = (props) => {
   const loadLanguage = async () => {
     try {
       const data = await AsyncStorage.getItem('language');
-      if(data !== null){
+      if (data !== null) {
         setLanguage(data)
         setTranslation(translations[data])
       }
@@ -40,11 +47,11 @@ const LanguageProvider = (props) => {
     }
   };
   loadLanguage();
-  
+
   return (
-    <LanguageContext.Provider 
+    <LanguageContext.Provider
       value={{
-        languageList: languageList, 
+        languageList: languageList,
         language: language,
         saveLanguage: saveLanguage,
         loadLanguage: loadLanguage,

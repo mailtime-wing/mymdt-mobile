@@ -2,5 +2,6 @@
     "home": "Home",
     "about": "About",
     "setting": "Setting",
-    "language": "Language"
+    "language": "Language",
+    "greetings": "Hi, {name}"
 }

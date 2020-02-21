@@ -31,12 +31,9 @@ function LanguageList() {
 }
 
 export default function LanguageScreen() {
-  const { language } = useContext(LanguageContext)
-
   return (
     <View style={styles.containers}>
       <LanguageList />
-      <Text>Language Screen is using {language}</Text>
     </View>
   );
 }
