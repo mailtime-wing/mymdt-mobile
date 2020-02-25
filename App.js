@@ -1,23 +1,13 @@
-import React, { useContext } from 'react';
-import { IntlProvider } from 'react-intl';
+import React from 'react';
 
 import NavigationContainer from './src/NavigationContainer'
-import LanguageProvider, { LanguageContext } from './src/context/LanguageContext';
+import { IntlProvider } from './src/context/IntlContext';
 
-const AppContainer = () => {
-  const { language, translation } = useContext(LanguageContext)
+function App() {
   return (
-    <IntlProvider locale={language} messages={translation}>
+    <IntlProvider locale="en-US">
       <NavigationContainer />
     </IntlProvider>
-  )
-}
-
-function App(props) {
-  return (
-    <LanguageProvider>
-      <AppContainer {...props} />
-    </LanguageProvider>
   );
 }
 

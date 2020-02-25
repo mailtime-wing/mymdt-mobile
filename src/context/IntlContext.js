@@ -1,16 +1,17 @@
 import React, { useState, createContext } from 'react';
 import { AsyncStorage } from 'react-native';
+import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
-import locale from './../constants/locale'
-import { LANGUAGE_STORAGE_KEY } from './../constants/storageKey'
+import locale from '../constants/locale'
+import { LANGUAGE_STORAGE_KEY } from '../constants/storageKey'
 
 import enMessages from './../intl/en-US.json'
 import hkMessages from './../intl/zh-HK.json'
 import cnMessages from './../intl/zh-CN.json'
 
-export const LanguageContext = createContext(null);
+const IntlContext = createContext(null);
 
-const LanguageProvider = (props) => {
+const IntlProvider = (props) => {
   const languageList = [
     { value: locale.en, label: 'English' },
     { value: locale.hk, label: '中文 （繁體）' },
@@ -25,6 +26,10 @@ const LanguageProvider = (props) => {
 
   const [language, setLanguage] = useState(languageList[0].value) // default is english
   const [translation, setTranslation] = useState(translations[language])
+
+  const cache = createIntlCache()
+  const intl = createIntl({ locale: language, key: language, messages: translation }, cache)
+  intl.formatNumber(20)
 
   const saveLanguage = async (value) => {
     try {
@@ -50,18 +55,22 @@ const LanguageProvider = (props) => {
   loadLanguage();
 
   return (
-    <LanguageContext.Provider
+    <IntlContext.Provider
       value={{
         languageList: languageList,
-        language: language,
         saveLanguage: saveLanguage,
         loadLanguage: loadLanguage,
-        translation: translation
       }}
     >
-      {props.children}
-    </LanguageContext.Provider>
+      <RawIntlProvider
+        defaultLocale="en-US"
+        defaultLocale={"en-US"}
+        value={intl}
+      >
+        {props.children}
+      </RawIntlProvider>
+    </IntlContext.Provider>
   )
 }
 
-export default LanguageProvider
+export { IntlProvider, IntlContext }
