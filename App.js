@@ -1,13 +1,13 @@
 import React from 'react';
 
 import NavigationContainer from './src/NavigationContainer'
-import { IntlProvider } from './src/context/IntlContext';
+import { IntlProviderWrapper } from './src/context/IntlContext';
 
 function App() {
   return (
-    <IntlProvider locale="en-US">
+    <IntlProviderWrapper>
       <NavigationContainer />
-    </IntlProvider>
+    </IntlProviderWrapper>
   );
 }
 
