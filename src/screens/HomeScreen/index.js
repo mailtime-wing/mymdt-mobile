@@ -1,9 +1,19 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, Image, StyleSheet} from 'react-native';
-import {FormattedMessage} from 'react-intl';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { FormattedMessage } from 'react-intl';
+import styled, { css } from '@emotion/native'
+import { useTheme } from 'emotion-theming'
 
-export default function HomeScreen({navigation}) {
-  const name = 'Wing';
+export default function HomeScreen({ navigation }) {
+  const theme = useTheme();
+  const Name = styled.Text`
+    color: ${theme.colors.debug};
+  `
+
+  const Container = styled.View`
+    color: ${theme.colors.pink};
+  `
+  const name = 'Wing'
   return (
     <View style={styles.container}>
       <Text>
@@ -18,7 +28,7 @@ export default function HomeScreen({navigation}) {
       </Text>
       <TouchableOpacity onPress={() => navigation.navigate('Language')}>
         <Text>
-          <FormattedMessage id="setting" />
+          <FormattedMessage id="home" />
         </Text>
         <Image source={require('@/assets/icon.png')} />
       </TouchableOpacity>

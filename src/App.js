@@ -1,14 +1,18 @@
 import React from 'react';
 
 import NavigationContainer from '@/NavigationContainer';
-import {IntlContainer} from '@/context/Intl';
+import { IntlContainer } from '@/context/Intl';
+import { ThemeProvider } from 'emotion-theming'
+import theme from './src/theme'
 
 function App() {
   return (
-    <IntlContainer>
-      <NavigationContainer />
-    </IntlContainer>
-  );
+    <ThemeProvider theme={theme}>
+      <IntlContainer>
+        <NavigationContainer />
+      </IntlContainer>
+    </ThemeProvider>
+  )
 }
 
 export default App;
