@@ -1,0 +1,7 @@
+{
+    "home": "Home",
+    "about": "About",
+    "setting": "Setting",
+    "language": "Language",
+    "greetings": "Hi, {name}"
+}
