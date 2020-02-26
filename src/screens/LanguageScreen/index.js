@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { IntlContext } from './../../context/IntlContext';
+import { IntlContext } from './../../context/Intl';
 
 const LanguageOption = ({ title, value }) => {
   const { saveLanguage } = useContext(IntlContext)

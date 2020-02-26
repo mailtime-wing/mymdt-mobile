@@ -23,7 +23,7 @@ const translations = {
   [locale.cn]: cnMessages,
 }
 
-const IntlProviderWrapper = (props) => {
+const IntlContainer = (props) => {
 
   const [language, setLanguage] = useState(languageList[0].value) // default is english
   const [translation, setTranslation] = useState(translations[language])
@@ -64,7 +64,6 @@ const IntlProviderWrapper = (props) => {
     >
       <IntlProvider
         locale={language}
-        key={language}
         messages={translation}
         defaultLocale="en-US"
       >
@@ -74,4 +73,4 @@ const IntlProviderWrapper = (props) => {
   )
 }
 
-export { IntlProviderWrapper, IntlContext }
+export { IntlContainer, IntlContext }
