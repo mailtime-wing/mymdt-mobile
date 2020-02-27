@@ -3,7 +3,8 @@ module.exports = {
     "@react-native-community",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "prettier"
+    "prettier",
+    "plugin:prettier/recommended"
   ],
   settings: {
     "import/resolver": {

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NavigationContainer from './src/NavigationContainer'
-import { IntlContainer } from './src/context/Intl';
+import NavigationContainer from '@/NavigationContainer';
+import {IntlContainer} from '@/context/Intl';
 
 function App() {
   return (
