@@ -1,17 +1,4 @@
 module.exports = {
-  extends: [
-    "@react-native-community",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "prettier",
-    "plugin:prettier/recommended"
-  ],
-  settings: {
-    "import/resolver": {
-      "eslint-import-resolver-babel-module": {}
-    }
-  },
-  rules: {
-    "prettier/prettier": "error"
-  }
+  root: true,
+  extends: '@react-native-community',
 };
