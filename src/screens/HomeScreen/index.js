@@ -12,7 +12,7 @@ export default function HomeScreen({navigation}) {
       <Text>
         <FormattedMessage
           id="greetings"
-          defaultMessage={`Hi, {name}`}
+          defaultMessage={'Hi, {name}'}
           values={{name: <Text>{name}</Text>}}
         />
       </Text>
@@ -20,7 +20,7 @@ export default function HomeScreen({navigation}) {
         <Text>
           <FormattedMessage id="setting" />
         </Text>
-        <Image source={require('@assets/icon.png')} />
+        <Image source={require('@/assets/icon.png')} />
       </TouchableOpacity>
     </View>
   );
