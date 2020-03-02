@@ -1,9 +1,14 @@
 const theme = {
   colors: {
-    debug: 'blue',
-    pink: 'pink',
-    primary: 'black',
-  }
-}
+    grey: ['#DFDFDF', '#C6C6C6', '#797979'],
+    white: '#ffffff',
+    black: '#000000',
+    gold: '#FFDF6F',
+  },
+};
 
-export default theme
+theme.colors.grey.light = theme.colors.grey[0];
+theme.colors.grey.normal = theme.colors.grey[1];
+theme.colors.grey.dark = theme.colors.grey[2];
+
+export default theme;

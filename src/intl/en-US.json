@@ -3,5 +3,27 @@
     "about": "About",
     "setting": "Setting",
     "language": "Language",
-    "greetings": "Hi, {name}"
+    "greetings": "Hi, {name}",
+
+    "browse": "Browse",
+    "browse_details": "Promtions / Referrals / Share",
+    "bonus": "Bonus",
+    "wallet": "Wallet",
+    "redeem": "Redeem",
+    "redeem_details": "Gift Cards / Special Rewards",
+
+    "gold_member": "VIP GOLD",
+    "total_balance": "Total Balance",
+    "brands_preference": "Brands Preference",
+    "profile": "Profile",
+    "my_referral_code": "My Referral Code",
+    "enter_invite_code": "Enter Invite Code",
+    "sign_out": "Sign Out",
+    "settings": "Settings",
+    "faq_and_support": "FAQ & Support",
+    "terms_of_service": "Terms of Service",
+    "privacy_policy": "Privacy Policy",
+    "about_us": "About Us",
+    "account": "Account",
+    "application": "Application"
 }
