@@ -1,5 +1,4 @@
 import React from 'react';
-import {NavigationContainer as Container} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import styled from '@emotion/native';
 import {Image} from 'react-native';
@@ -24,6 +23,20 @@ const screens = [
   {name: 'about_us', component: LanguageScreen},
 ];
 
+const Container = styled.View`
+  margin-top: 16px;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+  background-color: ${props => props.theme.colors.white};
+`;
+
+const ScrollContainer = styled.ScrollView`
+  background-color: ${props => props.theme.colors.white};
+`;
+
 const CloseButton = styled.TouchableOpacity`
   width: 40px;
   height: 40px;
@@ -31,14 +44,16 @@ const CloseButton = styled.TouchableOpacity`
   margin-left: 30px;
 `;
 
-const Button = ({setShowModal}) => {
+const Button = () => {
   const route = useRoute();
   const navigation = useNavigation();
   let isMenu = route.name === 'menu';
 
   return (
     <CloseButton
-      onPress={() => (isMenu ? setShowModal(false) : navigation.goBack())}>
+      onPress={() =>
+        isMenu ? navigation.navigate('Home') : navigation.navigate('menu')
+      }>
       {isMenu ? (
         <Image source={require('@/assets/close.png')} />
       ) : (
@@ -49,28 +64,33 @@ const Button = ({setShowModal}) => {
 };
 
 const StackNavigationContainer = ({setShowModal}) => (
-  <Container>
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: {
-          marginTop: 30,
-          backgroundColor: 'pink',
-        },
-      }}>
-      {screens.map(screen => (
-        <Stack.Screen
-          name={screen.name}
-          component={props => <screen.component {...props} />}
-          options={{
-            headerTransparent: true,
-            headerTitleStyle: {display: 'none'},
-            headerStyle: {height: 80},
-            headerLeft: () => <Button setShowModal={setShowModal} />,
-          }}
-        />
-      ))}
-    </Stack.Navigator>
-  </Container>
+  <Stack.Navigator
+  // screenOptions={{
+  //   headerStyle: {
+  //     // marginTop: 30,
+  //     backgroundColor: 'pink',
+  //   },
+  // }}
+  >
+    {screens.map(screen => (
+      <Stack.Screen
+        name={screen.name}
+        component={props => (
+          <Container>
+            <ScrollContainer>
+              <screen.component {...props} />
+            </ScrollContainer>
+          </Container>
+        )}
+        options={{
+          headerTransparent: true,
+          headerTitleStyle: {display: 'none'},
+          headerStyle: {height: 80, backgroundColor: 'blue'},
+          headerLeft: () => <Button />,
+        }}
+      />
+    ))}
+  </Stack.Navigator>
 );
 
 export default StackNavigationContainer;

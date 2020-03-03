@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
-import {TouchableOpacity} from 'react-native';
+import React from 'react';
+import {TouchableOpacity, SafeAreaView} from 'react-native';
 import styled from '@emotion/native';
-
-import AccountModal from '@/components/AccountModal';
 
 const AccountIcon = styled.Image`
   width: 36px;
@@ -13,6 +11,7 @@ const AccountIcon = styled.Image`
 const Container = styled.View`
   justify-content: center;
   padding: 30px;
+  background-color: ${props => props.theme.colors.white};
 `;
 
 const AccountContainer = styled.View`
@@ -25,26 +24,17 @@ const RemainMDT = styled.Text`
   font-weight: bold;
 `;
 
-const AccountBar = props => {
-  const [showModal, setShowModal] = useState(false);
-  console.log('props.navigation', props.navigation);
-  return (
-    <>
-      <Container>
-        <AccountContainer>
-          <TouchableOpacity onPress={() => setShowModal(true)}>
-            <AccountIcon source={require('@/assets/zt-mask.jpg')} />
-          </TouchableOpacity>
-          <RemainMDT>6,543 MDT</RemainMDT>
-        </AccountContainer>
-      </Container>
-      <AccountModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        {...props}
-      />
-    </>
-  );
-};
+const AccountBar = ({navigation}) => (
+  <SafeAreaView>
+    <Container>
+      <AccountContainer>
+        <TouchableOpacity onPress={() => navigation.navigate('Modal')}>
+          <AccountIcon source={require('@/assets/zt-mask.jpg')} />
+        </TouchableOpacity>
+        <RemainMDT>6,543 MDT</RemainMDT>
+      </AccountContainer>
+    </Container>
+  </SafeAreaView>
+);
 
 export default AccountBar;

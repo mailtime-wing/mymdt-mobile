@@ -20,16 +20,16 @@ const SubTitle = styled.Text`
   margin-top: 5px;
 `;
 
-const TabPage = ({title, subTitle, contentComponent}) => {
-  return (
+const TabPage = ({children, title, subTitle}) => (
+  <>
     <Container>
       <TitleContainer>
         <Title>{title}</Title>
         <SubTitle>{subTitle}</SubTitle>
       </TitleContainer>
-      {contentComponent}
     </Container>
-  );
-};
+    {children}
+  </>
+);
 
 export default TabPage;

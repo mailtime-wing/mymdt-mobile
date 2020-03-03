@@ -5,9 +5,9 @@ import {IntlProvider} from 'react-intl';
 import locale from '@/constants/locale';
 import {LANGUAGE_STORAGE_KEY} from '@/constants/storageKey';
 
-import enMessages from './intl/en-US.json';
-import hkMessages from './intl/zh-HK.json';
-import cnMessages from './intl/zh-CN.json';
+import enMessages from '@/intl/en-US.json';
+import hkMessages from '@/intl/zh-HK.json';
+import cnMessages from '@/intl/zh-CN.json';
 
 const IntlContext = createContext(null);
 
