@@ -2,6 +2,7 @@ import styled from '@emotion/native';
 
 export const Container = styled.View`
   background-color: ${props => props.theme.colors.white};
+  flex: 1;
 `;
 
 export const TitleContainer = styled.View`

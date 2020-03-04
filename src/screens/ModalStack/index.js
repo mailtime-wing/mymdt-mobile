@@ -4,8 +4,8 @@ import {Image} from 'react-native';
 import {useRoute, useNavigation} from '@react-navigation/native';
 
 import LanguageScreen from '@/screens/LanguageScreen';
-import Menu from '@/screens/MenuScreen';
-import {ModalContainer, Container, ScrollContainer, CloseButton} from './style';
+import MenuScreen from '@/screens/MenuScreen';
+import {ModalContainer, CloseButton} from './style';
 
 const Button = () => {
   const route = useRoute();
@@ -29,7 +29,7 @@ const Button = () => {
 const Stack = createStackNavigator();
 
 const screens = [
-  {name: 'menu', component: Menu},
+  {name: 'menu', component: MenuScreen},
   {name: 'brands_preference', component: LanguageScreen},
   {name: 'profile', component: LanguageScreen},
   {name: 'my_referral_code', component: LanguageScreen},
@@ -47,13 +47,7 @@ const StackNavigationContainer = () => (
     {screens.map(screen => (
       <Stack.Screen
         name={screen.name}
-        component={props => (
-          <Container>
-            <ScrollContainer>
-              <screen.component {...props} />
-            </ScrollContainer>
-          </Container>
-        )}
+        component={screen.component}
         options={{
           headerTransparent: true,
           headerTitleStyle: {display: 'none'},

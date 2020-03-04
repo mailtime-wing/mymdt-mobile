@@ -1,6 +1,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTheme} from 'emotion-theming';
+import styled from '@emotion/native';
 
 import AccountBar from '@/components/AccountBar';
 import BrowseScreen from '@/screens/BrowseScreen';
@@ -11,6 +12,10 @@ import RedeemScreen from '@/screens/RedeemScreen';
 const Tab = createBottomTabNavigator();
 
 // const Label = ({ color, id }) => <Text style={{color: color}}><FormattedMessage id={id} /></Text>
+
+const Container = styled.View`
+  flex: 1;
+`;
 
 const TabNavigatorContainer = () => {
   const theme = useTheme();
@@ -47,10 +52,10 @@ const TabNavigatorContainer = () => {
 
 const HomeStack = props => {
   return (
-    <>
+    <Container>
       <AccountBar {...props} />
       <TabNavigatorContainer />
-    </>
+    </Container>
   );
 };
 
