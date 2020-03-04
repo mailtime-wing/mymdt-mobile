@@ -3,5 +3,27 @@
     "about": "关于",
     "setting": "设定",
     "language": "语言",
-    "greetings": "您好, {name}"
+    "greetings": "您好, {name}",
+    
+    "browse": "发现",
+    "browse_details": "限时活动 / 任务 / 分享",
+    "bonus": "任务",
+    "wallet": "钱包",
+    "redeem": "奖赏",
+    "redeem_details": "充值卡 / 特别会员福利",
+
+    "gold_member": "金钻用户",
+    "total_balance": "总结馀",
+    "brands_preference": "商店喜好",
+    "profile": "用户信息",
+    "my_referral_code": "我的邀请码",
+    "enter_invite_code": "输入邀请码",
+    "sign_out": "登出",
+    "settings": "设定",
+    "faq_and_support": "常见问题与技术支援",
+    "terms_of_service": "使用条款",
+    "privacy_policy": "隐私条款",
+    "about_us": "关于我们",
+    "account": "帐号",
+    "application": "应用"
 }

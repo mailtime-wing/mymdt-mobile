@@ -3,5 +3,27 @@
     "about": "關於",
     "setting": "設定",
     "language": "語言",
-    "greetings": "您好, {name}"
+    "greetings": "您好, {name}",
+
+    "browse": "發現",
+    "browse_details": "限時活動 / 任務 / 分享",
+    "bonus": "任務",
+    "wallet": "錢包",
+    "redeem": "獎賞",
+    "redeem_details": "充值卡 / 特別會員福利",
+
+    "gold_member": "金鑽用戶",
+    "total_balance": "總結馀",
+    "brands_preference": "商店喜好",
+    "profile": "用戶信息",
+    "my_referral_code": "我的邀請碼",
+    "enter_invite_code": "輸入邀請碼",
+    "sign_out": "登出",
+    "settings": "設定",
+    "faq_and_support": "常見問題與技術支援",
+    "terms_of_service": "使用條款",
+    "privacy_policy": "隱私條款",
+    "about_us": "關於我們",
+    "account": "帳號",
+    "application": "應用"
 }
