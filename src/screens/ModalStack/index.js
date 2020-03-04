@@ -1,16 +1,75 @@
 import React from 'react';
-import StackNavigationContainer from '@/components/StackNavigationContainer';
-import styled from '@emotion/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {Image} from 'react-native';
+import {useRoute, useNavigation} from '@react-navigation/native';
 
-const Container = styled.SafeAreaView`
-  height: 100%;
-`;
+import LanguageScreen from '@/screens/LanguageScreen';
+import Menu from '@/screens/MenuScreen';
+import {ModalContainer, Container, ScrollContainer, CloseButton} from './style';
+
+const Button = () => {
+  const route = useRoute();
+  const navigation = useNavigation();
+  let isMenu = route.name === 'menu';
+
+  return (
+    <CloseButton
+      onPress={() =>
+        isMenu ? navigation.navigate('Home') : navigation.navigate('menu')
+      }>
+      {isMenu ? (
+        <Image source={require('@/assets/close.png')} />
+      ) : (
+        <Image source={require('@/assets/return.png')} />
+      )}
+    </CloseButton>
+  );
+};
+
+const Stack = createStackNavigator();
+
+const screens = [
+  {name: 'menu', component: Menu},
+  {name: 'brands_preference', component: LanguageScreen},
+  {name: 'profile', component: LanguageScreen},
+  {name: 'my_referral_code', component: LanguageScreen},
+  {name: 'enter_invite_code', component: LanguageScreen},
+  {name: 'sign_out', component: LanguageScreen},
+  {name: 'settings', component: LanguageScreen},
+  {name: 'faq_and_support', component: LanguageScreen},
+  {name: 'terms_of_service', component: LanguageScreen},
+  {name: 'privacy_policy', component: LanguageScreen},
+  {name: 'about_us', component: LanguageScreen},
+];
+
+const StackNavigationContainer = () => (
+  <Stack.Navigator>
+    {screens.map(screen => (
+      <Stack.Screen
+        name={screen.name}
+        component={props => (
+          <Container>
+            <ScrollContainer>
+              <screen.component {...props} />
+            </ScrollContainer>
+          </Container>
+        )}
+        options={{
+          headerTransparent: true,
+          headerTitleStyle: {display: 'none'},
+          headerStyle: {height: 80, backgroundColor: 'blue'},
+          headerLeft: () => <Button />,
+        }}
+      />
+    ))}
+  </Stack.Navigator>
+);
 
 const ModalStack = props => {
   return (
-    <Container>
+    <ModalContainer>
       <StackNavigationContainer {...props} />
-    </Container>
+    </ModalContainer>
   );
 };
 

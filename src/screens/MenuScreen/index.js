@@ -1,54 +1,18 @@
 import React from 'react';
-import styled from '@emotion/native';
 import {FormattedMessage} from 'react-intl';
 
 import SectionList from '@/components/SectionList';
 import SectionListOption from '@/components/SectionList/SectionListOption';
-
-const AccountInfoContainer = styled.View`
-  align-items: center;
-  margin-bottom: 12px;
-`;
-
-const AccountImage = styled.Image`
-  width: 90px;
-  height: 90px;
-  border-radius: 45px;
-  margin-bottom: 15px;
-`;
-
-const AccountName = styled.Text`
-  font-size: 21px;
-  margin-bottom: 8px;
-`;
-
-const AccountLevelContainer = styled.View`
-  padding: 4px 12px;
-  background-color: ${props => props.theme.colors.gold};
-  border-radius: 32px;
-  margin-bottom: 34px;
-`;
-
-const AccountLevel = styled.Text`
-  font-size: 12px;
-  font-weight: bold;
-`;
-
-const AccountCreditContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 30px;
-`;
-
-const AccountCredit = styled.Text`
-  flex: 1;
-  font-size: 16px;
-`;
-
-const RemainMDT = styled.Text`
-  font-size: 16px;
-  font-weight: bold;
-`;
+import {
+  AccountInfoContainer,
+  AccountImage,
+  AccountName,
+  AccountLevelContainer,
+  AccountLevel,
+  AccountCreditContainer,
+  AccountCredit,
+  RemainMDT,
+} from './style';
 
 const MenuScreen = props => {
   return (

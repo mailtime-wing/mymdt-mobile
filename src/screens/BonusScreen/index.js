@@ -3,7 +3,7 @@ import {Text} from 'react-native';
 import styled from '@emotion/native';
 import {FormattedMessage} from 'react-intl';
 
-import TabPage from '@/components/TabNavigatorContainer/TabPage';
+import TabPage from '@/components/TabPage';
 
 const Container = styled.View`
   justify-content: center;
