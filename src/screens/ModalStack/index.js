@@ -5,6 +5,7 @@ import {useRoute, useNavigation} from '@react-navigation/native';
 
 import LanguageScreen from '@/screens/LanguageScreen';
 import MenuScreen from '@/screens/MenuScreen';
+import SignOutScreen from '@/screens/SignOutScreen';
 import {ModalContainer, CloseButton} from './style';
 
 const Button = () => {
@@ -34,7 +35,7 @@ const screens = [
   {name: 'profile', component: LanguageScreen},
   {name: 'my_referral_code', component: LanguageScreen},
   {name: 'enter_invite_code', component: LanguageScreen},
-  {name: 'sign_out', component: LanguageScreen},
+  {name: 'sign_out', component: SignOutScreen},
   {name: 'settings', component: LanguageScreen},
   {name: 'faq_and_support', component: LanguageScreen},
   {name: 'terms_of_service', component: LanguageScreen},
