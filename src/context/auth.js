@@ -13,8 +13,7 @@ const Stack = createStackNavigator();
 const testAccount = {
   userid: '19',
   phone: '12345678',
-  email: 'wing',
-  password: '1',
+  verificationCode: '191919',
   name: 'Wing',
   surname: 'Chan',
   company: 'mailtime',
@@ -77,8 +76,11 @@ export const AuthProvider = () => {
 
   const authContext = useMemo(
     () => ({
-      signIn: async (email, password) => {
-        if (email === testAccount.email && password === testAccount.password) {
+      signIn: async (phone, verificationCode) => {
+        if (
+          phone === testAccount.phone &&
+          verificationCode === testAccount.verificationCode
+        ) {
           try {
             await AsyncStorage.setItem('authToken', 'dummy_auth_token');
           } catch (error) {
@@ -87,7 +89,7 @@ export const AuthProvider = () => {
 
           dispatch({type: SIGN_IN, payload: 'dummy_auth_token'});
         } else {
-          Alert.alert('email or password is wrong!');
+          Alert.alert('phone or verificationCode is wrong!');
         }
       },
       signOut: async () => {

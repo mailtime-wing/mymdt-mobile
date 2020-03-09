@@ -1,48 +1,101 @@
-import React, {useContext, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import React, {useContext, useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert,
+} from 'react-native';
 import {AuthContext} from '@/context/auth';
+import {FormattedMessage} from 'react-intl';
 
 import Input from '@/components/Input';
+import Button from '@/components/Button';
+import {
+  Container,
+  Title,
+  VerificationContainer,
+  LoginAndAgree,
+  Link,
+} from './style';
 
 const SigninScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [submitEnable, setSubmitEnable] = useState(false);
+  const [verificationCodeSent, setVerificationCodeSent] = useState(false);
 
   const {signIn} = useContext(AuthContext);
 
   const loginOnPressHandler = () => {
-    if (email === '' || password === '') {
-      Alert.alert('please input both email and password');
+    if (phone === '' || verificationCode === '') {
+      Alert.alert('please input both phone and verificationCode');
     } else {
-      signIn(email, password);
+      signIn(phone, verificationCode);
     }
   };
 
+  const verificationCodeOnPressHandler = () => {
+    Alert.alert('verification code sent!');
+    setVerificationCodeSent(true);
+  };
+
+  useEffect(() => {
+    if (phone !== '' && verificationCode !== '') {
+      setSubmitEnable(true);
+    } else {
+      setSubmitEnable(false);
+    }
+  }, [phone, verificationCode]);
+
   return (
-    <View style={style.container}>
-      <Text>This is signin screen</Text>
-      <View>
-        <Text>Email</Text>
-        <Input onChangeText={text => setEmail(text)} value={email} />
-      </View>
-      <View>
-        <Text>Password</Text>
-        <Input onChangeText={text => setPassword(text)} value={password} />
-      </View>
-      <TouchableOpacity onPress={loginOnPressHandler}>
-        <Text>Login</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <Container>
+        <Title>
+          <FormattedMessage id="connect_with_phone" />
+        </Title>
+        <View>
+          <Input
+            type="telephoneNumber"
+            onChangeText={text => setPhone(text)}
+            value={phone}
+            label={<FormattedMessage id="telephone" />}
+          />
+        </View>
+        <VerificationContainer>
+          <Input
+            type="oneTimeCode"
+            onChangeText={text => setVerificationCode(text)}
+            value={verificationCode}
+            label={<FormattedMessage id="verification_code" />}
+          />
+          <Button small onPress={verificationCodeOnPressHandler}>
+            <Text>
+              {verificationCodeSent ? (
+                <FormattedMessage id="resend_verification_code" />
+              ) : (
+                <FormattedMessage id="send_verification_code" />
+              )}
+            </Text>
+          </Button>
+        </VerificationContainer>
+        <Button onPress={loginOnPressHandler} disabled={!submitEnable}>
+          <FormattedMessage id="submit" />
+        </Button>
+        <LoginAndAgree>
+          <FormattedMessage
+            id="loggin_in_agree_terms_and_policy"
+            defaultMessage="By logging in your email address, you agree with MailTime’s <Text>Terms and Service</Text> and Privacy Policy."
+            values={{
+              Text: str => (
+                <Link onPress={() => Alert.alert('terms!')}>{str}</Link>
+              ), // TODO: rich formatting not work in rn
+            }}
+          />
+        </LoginAndAgree>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
-
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  Button: {},
-});
 
 export default SigninScreen;
