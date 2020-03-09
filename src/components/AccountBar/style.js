@@ -9,7 +9,7 @@ export const AccountIcon = styled.Image`
 export const Container = styled.View`
   justify-content: center;
   padding: 30px;
-  background-color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.white.normal};
 `;
 
 export const AccountContainer = styled.View`

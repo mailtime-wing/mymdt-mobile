@@ -1,31 +1,12 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Image} from 'react-native';
-import {useRoute, useNavigation} from '@react-navigation/native';
 
 import LanguageScreen from '@/screens/LanguageScreen';
 import MenuScreen from '@/screens/MenuScreen';
 import SignOutScreen from '@/screens/SignOutScreen';
-import {ModalContainer, CloseButton} from './style';
+import {ModalContainer} from './style';
 
-const Button = () => {
-  const route = useRoute();
-  const navigation = useNavigation();
-  let isMenu = route.name === 'menu';
-
-  return (
-    <CloseButton
-      onPress={() =>
-        isMenu ? navigation.navigate('Home') : navigation.navigate('menu')
-      }>
-      {isMenu ? (
-        <Image source={require('@/assets/close.png')} />
-      ) : (
-        <Image source={require('@/assets/return.png')} />
-      )}
-    </CloseButton>
-  );
-};
+import HeaderButton from '@/components/HeaderButton';
 
 const Stack = createStackNavigator();
 
@@ -53,7 +34,7 @@ const StackNavigationContainer = () => (
           headerTransparent: true,
           headerTitleStyle: {display: 'none'},
           headerStyle: {height: 80, backgroundColor: 'blue'},
-          headerLeft: () => <Button />,
+          headerLeft: () => <HeaderButton root="home" />,
         }}
       />
     ))}

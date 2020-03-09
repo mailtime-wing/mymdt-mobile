@@ -11,27 +11,27 @@ import {FormattedMessage} from 'react-intl';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
-import {
-  Container,
-  Title,
-  VerificationContainer,
-  LoginAndAgree,
-  Link,
-} from './style';
+import {Container, Title, VerificationContainer, LoginAndAgree} from './style';
 
-const SigninScreen = () => {
+const SigninScreen = ({route, navigation}) => {
+  const {signIn, signUp} = useContext(AuthContext);
   const [phone, setPhone] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [submitEnable, setSubmitEnable] = useState(false);
   const [verificationCodeSent, setVerificationCodeSent] = useState(false);
+  const {isSignUp} = route.params;
 
-  const {signIn} = useContext(AuthContext);
-
-  const loginOnPressHandler = () => {
+  const onPressHandler = () => {
     if (phone === '' || verificationCode === '') {
       Alert.alert('please input both phone and verificationCode');
     } else {
-      signIn(phone, verificationCode);
+      console.log('isSignUp in screen', isSignUp);
+      if (isSignUp) {
+        signUp(phone, verificationCode);
+        navigation.navigate('user_profile');
+      } else {
+        signIn(phone, verificationCode);
+      }
     }
   };
 
@@ -52,7 +52,11 @@ const SigninScreen = () => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
         <Title>
-          <FormattedMessage id="connect_with_phone" />
+          {isSignUp ? (
+            <FormattedMessage id="register_with_phone" />
+          ) : (
+            <FormattedMessage id="connect_with_phone" />
+          )}
         </Title>
         <View>
           <Input
@@ -79,20 +83,22 @@ const SigninScreen = () => {
             </Text>
           </Button>
         </VerificationContainer>
-        <Button onPress={loginOnPressHandler} disabled={!submitEnable}>
+        <Button onPress={onPressHandler} disabled={!submitEnable}>
           <FormattedMessage id="submit" />
         </Button>
-        <LoginAndAgree>
-          <FormattedMessage
-            id="loggin_in_agree_terms_and_policy"
-            defaultMessage="By logging in your email address, you agree with MailTime’s <Text>Terms and Service</Text> and Privacy Policy."
-            values={{
-              Text: str => (
-                <Link onPress={() => Alert.alert('terms!')}>{str}</Link>
-              ), // TODO: rich formatting not work in rn
-            }}
-          />
-        </LoginAndAgree>
+        {!isSignUp && (
+          <LoginAndAgree>
+            <FormattedMessage
+              id="login_in_agree_terms_and_policy"
+              defaultMessage="By logging in your email address, you agree with MailTime’s Terms and Service and Privacy Policy."
+              // values={{
+              //   Text: str => (
+              //     <Link onPress={() => Alert.alert('terms!')}>{str}</Link>
+              //   ), // TODO: rich formatting not work in rn
+              // }}
+            />
+          </LoginAndAgree>
+        )}
       </Container>
     </TouchableWithoutFeedback>
   );

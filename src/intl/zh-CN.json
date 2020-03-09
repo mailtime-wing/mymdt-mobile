@@ -27,6 +27,8 @@
     "account": "帐号",
     "application": "应用",
 
+    "start_earning_money": "START EARNING MONEY",
+    "already_have_account": "I already have an account",
     "select_offer_details": "让我们了解你然后为您量身定制奖励！",
     "confirm_select_offer_details": "Once you shop in these {number_of_brands} brands, you will earn cash back.",
     "please_select_brands": "选取{number_of_brands}个最常消费的商店",
@@ -55,5 +57,5 @@
     "login": "LOGIN",
     "unbind": "UNBIND",
     "skip_for_now": "暂时跳过",
-    "loggin_in_agree_terms_and_policy": "By logging in your email address, you agree with MailTime’s Terms of Service and Privacy Policy."
+    "login_in_agree_terms_and_policy": "By logging in your email address, you agree with MailTime’s Terms and Service and Privacy Policy."
 }

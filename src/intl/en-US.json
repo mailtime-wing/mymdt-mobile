@@ -27,6 +27,8 @@
     "account": "Account",
     "application": "Application",
 
+    "start_earning_money": "START EARNING MONEY",
+    "already_have_account": "I already have an account",
     "select_offer_details": "Let us know more about your shopping habits so that we can offer a better cashback rate.",
     "confirm_select_offer_details": "Once you shop in these {number_of_brands} brands, you will earn cash back.",
     "please_select_brands": "Please select {number_of_brands} brands you shop the most.",
@@ -55,5 +57,5 @@
     "login": "LOGIN",
     "unbind": "UNBIND",
     "skip_for_now": "skip for now",
-    "loggin_in_agree_terms_and_policy": "By logging in your email address, you agree with MailTime’s <Text>Terms and Service</Text> and Privacy Policy."
+    "login_in_agree_terms_and_policy": "By logging in your email address, you agree with MailTime’s Terms and Service and Privacy Policy."
 }

@@ -2,7 +2,7 @@ import styled from '@emotion/native';
 
 export const TextInput = styled.TextInput`
   padding: 12px 0;
-  border-bottom-color: ${props => props.theme.colors.black};
+  border-bottom-color: ${props => props.theme.colors.black.normal};
   border-bottom-width: 1px;
 `;
 

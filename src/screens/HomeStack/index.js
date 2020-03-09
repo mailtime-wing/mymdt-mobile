@@ -22,23 +22,21 @@ const TabNavigatorContainer = () => {
   return (
     <Tab.Navigator
       initialRouteName="Browse"
-      activeColor={theme.colors.white}
-      inactiveColor={theme.colors.grey.dark}
       tabBarOptions={{
         backgroundColor: 'blue',
-        activeTintColor: theme.colors.white,
-        activeBackgroundColor: theme.colors.black,
-        inactiveTintColor: theme.colors.grey.dark,
-        inactiveBackgroundColor: theme.colors.black,
+        activeTintColor: theme.colors.white.normal,
+        activeBackgroundColor: theme.colors.black.normal,
+        inactiveTintColor: theme.colors.grey.extremeDark,
+        inactiveBackgroundColor: theme.colors.black.normal,
         labelPosition: 'below-icon',
       }}
-      barStyle={{backgroundColor: theme.colors.white}}>
+      barStyle={{backgroundColor: theme.colors.white.normal}}>
       <Tab.Screen
         name="Browse"
         component={BrowseScreen}
         options={
           {
-            // tabBarLabel: () => <Label id='setting' color={theme.colors.white}/> // TODO: Handle color change with locale
+            // tabBarLabel: () => <Label id='setting' color={theme.colors.white.normal}/> // TODO: Handle color change with locale
             // tabBarIcon: () => <BrowseIcon width={24} height={24}/>, //TODO: Handle svg not work
           }
         }

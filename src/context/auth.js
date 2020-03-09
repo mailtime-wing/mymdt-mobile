@@ -4,8 +4,14 @@ import {NavigationContainer as Container} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeStack from '@/screens/HomeStack';
 import ModalStack from '@/screens/ModalStack';
+import OnboardingScreen from '@/screens/OnboardingScreen';
+import BrandSelectScreen from '@/screens/BrandSelectScreen';
+import BrandSelectConfirmScreen from '@/screens/BrandSelectConfirmScreen';
 import SignInScreen from '@/screens/SignInScreen';
 import SplashScreen from '@/screens/SplashScreen';
+import UserProfileScreen from '@/screens/UserProfileScreen';
+
+import HeaderButton from '@/components/HeaderButton';
 
 export const AuthContext = createContext(null);
 const Stack = createStackNavigator();
@@ -23,6 +29,7 @@ const testAccount = {
 const UPDATE_AUTH_TOKEN = 'updateAuthToken';
 const SIGN_IN = 'signIn';
 const SIGN_OUT = 'signOut';
+const SIGN_UP = 'signUp';
 
 const initialState = {
   isLoading: true,
@@ -46,6 +53,13 @@ const reducer = (state, action) => {
         authToken: action.payload,
       };
     }
+    case SIGN_UP: {
+      return {
+        ...state,
+        isSignIn: false,
+        authToken: action.payload,
+      };
+    }
     case SIGN_OUT: {
       return {
         ...state,
@@ -57,6 +71,14 @@ const reducer = (state, action) => {
       throw new Error();
   }
 };
+
+const screens = [
+  {name: 'onboarding', component: OnboardingScreen},
+  {name: 'sign_in', component: SignInScreen},
+  {name: 'brand_select', component: BrandSelectScreen},
+  {name: 'brand_select_confirm', component: BrandSelectConfirmScreen},
+  {name: 'user_profile', component: UserProfileScreen},
+];
 
 export const AuthProvider = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -82,6 +104,7 @@ export const AuthProvider = () => {
           verificationCode === testAccount.verificationCode
         ) {
           try {
+            // intergate login api
             await AsyncStorage.setItem('authToken', 'dummy_auth_token');
           } catch (error) {
             console.error('error saving token');
@@ -90,6 +113,21 @@ export const AuthProvider = () => {
           dispatch({type: SIGN_IN, payload: 'dummy_auth_token'});
         } else {
           Alert.alert('phone or verificationCode is wrong!');
+        }
+      },
+      signUp: async (phone, verificationCode) => {
+        if (phone && verificationCode) {
+          try {
+            Alert.alert('success to register!');
+            // intergate register api
+            // await AsyncStorage.setItem('authToken', 'dummy_auth_token');
+          } catch (error) {
+            console.error('error saving token');
+          }
+
+          dispatch({type: SIGN_UP, payload: 'dummy_auth_token'});
+        } else {
+          Alert.alert('phone or verificationCode cannot be empty!');
         }
       },
       signOut: async () => {
@@ -113,19 +151,31 @@ export const AuthProvider = () => {
       value={{
         signIn: authContext.signIn,
         signOut: authContext.signOut,
+        signUp: authContext.signUp,
         authToken: state.authToken,
       }}>
       <Container>
-        <Stack.Navigator mode="modal" headerMode="none">
-          {state.authToken == null ? (
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-          ) : (
-            <>
-              <Stack.Screen name="Home" component={HomeStack} />
-              <Stack.Screen name="Modal" component={ModalStack} />
-            </>
-          )}
-        </Stack.Navigator>
+        {state.authToken == null || !state.isSignIn ? (
+          <Stack.Navigator>
+            {screens.map(screen => (
+              <Stack.Screen
+                name={screen.name}
+                component={screen.component}
+                options={{
+                  headerTransparent: true,
+                  headerTitleStyle: {display: 'none'},
+                  headerStyle: {height: 80, backgroundColor: 'blue'},
+                  headerLeft: () => <HeaderButton root="onboarding" />,
+                }}
+              />
+            ))}
+          </Stack.Navigator>
+        ) : (
+          <Stack.Navigator mode="modal" headerMode="none">
+            <Stack.Screen name="home" component={HomeStack} />
+            <Stack.Screen name="modal" component={ModalStack} />
+          </Stack.Navigator>
+        )}
       </Container>
     </AuthContext.Provider>
   );

@@ -21,11 +21,6 @@ export const Container = styled.View`
 
 export const LoginAndAgree = styled.Text`
   font-size: 10px;
-  color: #aaaaaa;
+  color: ${props => props.theme.colors.grey.dark};
   margin-top: 11px;
-  padding: 0px 16px;
-`;
-
-export const Link = styled.Text`
-  color: blue;
 `;
