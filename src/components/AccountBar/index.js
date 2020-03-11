@@ -6,7 +6,7 @@ const AccountBar = ({navigation}) => (
   <SafeAreaView>
     <Container>
       <AccountContainer>
-        <TouchableOpacity onPress={() => navigation.navigate('Modal')}>
+        <TouchableOpacity onPress={() => navigation.navigate('modal')}>
           <AccountIcon source={require('@/assets/zt-mask.jpg')} />
         </TouchableOpacity>
         <RemainMDT>6,543 MDT</RemainMDT>

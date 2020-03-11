@@ -1,7 +1,8 @@
 import styled from '@emotion/native';
 
 export const Container = styled.View`
-  background-color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.white.normal};
+  flex: 1;
 `;
 
 export const TitleContainer = styled.View`
@@ -15,6 +16,6 @@ export const Title = styled.Text`
 
 export const SubTitle = styled.Text`
   font-size: 14px;
-  color: ${props => props.theme.colors.black};
+  color: ${props => props.theme.colors.black.normal};
   margin-top: 5px;
 `;

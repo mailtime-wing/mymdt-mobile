@@ -13,7 +13,7 @@ export const MenuIcon = styled.View`
   width: ${props => `${props.size}px`};
   height: ${props => `${props.size}px`};
   border-radius: ${props => `${props.size / 2}px`};
-  background-color: ${props => props.theme.colors.black};
+  background-color: ${props => props.theme.colors.black.normal};
   margin-right: 12px;
 `;
 

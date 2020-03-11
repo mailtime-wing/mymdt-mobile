@@ -3,6 +3,7 @@ import {FormattedMessage} from 'react-intl';
 
 import SectionList from '@/components/SectionList';
 import SectionListOption from '@/components/SectionList/SectionListOption';
+import ModalContaienr from '@/components/ModalContainer';
 import {
   AccountInfoContainer,
   AccountImage,
@@ -16,7 +17,7 @@ import {
 
 const MenuScreen = props => {
   return (
-    <>
+    <ModalContaienr>
       <AccountInfoContainer>
         <AccountImage source={require('@/assets/zt-mask.jpg')} />
         <AccountName>Adam</AccountName>
@@ -77,7 +78,7 @@ const MenuScreen = props => {
         ]}
         {...props}
       />
-    </>
+    </ModalContaienr>
   );
 };
 

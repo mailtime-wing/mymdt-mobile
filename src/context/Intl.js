@@ -1,5 +1,5 @@
 import React, {useState, createContext, useEffect} from 'react';
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage, Text} from 'react-native';
 import {IntlProvider} from 'react-intl';
 
 import locale from '@/constants/locale';
@@ -9,6 +9,7 @@ import enMessages from '@/intl/en-US.json';
 import hkMessages from '@/intl/zh-HK.json';
 import cnMessages from '@/intl/zh-CN.json';
 
+window.DOMParser = require('xmldom').DOMParser;
 const IntlContext = createContext(null);
 
 const languageList = [
@@ -63,7 +64,8 @@ const IntlContainer = props => {
       <IntlProvider
         locale={language}
         messages={translation}
-        defaultLocale="en-US">
+        defaultLocale="en-US"
+        textComponent={Text}>
         {props.children}
       </IntlProvider>
     </IntlContext.Provider>

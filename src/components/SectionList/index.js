@@ -1,9 +1,10 @@
 import React from 'react';
+import {View} from 'react-native';
 import SectionListOption from './SectionListOption';
 import {Spearator, MenuList, ListTitle} from './style';
 
 const SectionList = ({listTitle, listItem, ...props}) => (
-  <>
+  <View>
     <ListTitle>{listTitle}</ListTitle>
     <Spearator />
     <MenuList
@@ -17,7 +18,7 @@ const SectionList = ({listTitle, listItem, ...props}) => (
         />
       )}
     />
-  </>
+  </View>
 );
 
 export default SectionList;
