@@ -2,22 +2,23 @@ import styled from '@emotion/native';
 
 export const Container = styled.View`
   padding-top: 43px;
-  padding-left: 10px;
-  padding-right: 10px;
 `;
 
 export const ContentContainer = styled.View`
   margin-top: 43px;
   margin-bottom: 43px;
-  padding-left: ${props => `${(props.width * 0.25) / 2}px`};
-  padding-right: ${props => `${(props.width * 0.25) / 2}px`};
-  align-self: center;
+  padding-left: 40px;
+  padding-right: 40px;
+`;
+
+export const ButtonContainer = styled.View`
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 
 export const ColorBackground = styled.View`
   color: ${props => props.backgroundColor};
-  width: ${props => `${props.width * 0.75}px`};
-  height: ${props => `${props.width * 0.75}px`};
+  aspect-ratio: 1;
   border-radius: 24px;
 `;
 

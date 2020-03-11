@@ -8,7 +8,7 @@ const SignOutScreen = () => {
   return (
     <View>
       <Text>This is signout screen</Text>
-      <TouchableOpacity onPress={() => signOut()}>
+      <TouchableOpacity onPress={signOut}>
         <Text>Sign Out</Text>
       </TouchableOpacity>
     </View>

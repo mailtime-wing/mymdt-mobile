@@ -7,7 +7,7 @@ import BrandList from '@/components/BrandList';
 
 const BrandSelectConfirmScreen = ({route, navigation}) => {
   const {numberOfBrand} = route.params;
-  const {selectedBrand} = route.params;
+  const {selectedBrands} = route.params;
 
   const onConfirmHandler = () => {
     navigation.navigate('sign_in', {
@@ -32,7 +32,7 @@ const BrandSelectConfirmScreen = ({route, navigation}) => {
           defaultMessage="If you’re happy with the offer, please confirm your choice."
         />
       </Details>
-      <BrandList brandList={selectedBrand} />
+      <BrandList brandList={selectedBrands} />
       <Button onPress={() => onConfirmHandler()}>
         <FormattedMessage id="confirm" />
       </Button>

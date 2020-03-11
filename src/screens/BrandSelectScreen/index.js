@@ -19,14 +19,14 @@ const brandList = [
 ];
 
 const BrandSelectScreen = ({navigation}) => {
-  const [selectedBrand, setSelectedBrand] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
 
   const onNextHandler = () => {
-    if (selectedBrand.length !== 2) {
+    if (selectedBrands.length !== 2) {
       Alert.alert('you can only choose 2 brands');
     } else {
       navigation.navigate('brand_select_confirm', {
-        selectedBrand: selectedBrand,
+        selectedBrands: selectedBrands,
         numberOfBrand: numberOfBrand,
       });
     }
@@ -48,8 +48,8 @@ const BrandSelectScreen = ({navigation}) => {
       </Details>
       <BrandList
         brandList={brandList}
-        selectedBrand={selectedBrand}
-        setSelectedBrand={setSelectedBrand}
+        selectedBrands={selectedBrands}
+        setSelectedBrands={setSelectedBrands}
       />
       <Button onPress={() => onNextHandler()}>
         <FormattedMessage id="next" />

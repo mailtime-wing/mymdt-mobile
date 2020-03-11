@@ -1,8 +1,8 @@
 import React from 'react';
-import {Dimensions} from 'react-native';
 import {
   Container,
   ContentContainer,
+  ButtonContainer,
   ColorBackground,
   Header,
   Details,
@@ -13,23 +13,22 @@ import {FormattedMessage} from 'react-intl';
 
 const OnboardingScreen = ({navigation}) => (
   <Container>
-    <ContentContainer width={Dimensions.get('window').width}>
-      <ColorBackground
-        backgroundColor="#DFF7FF"
-        width={Dimensions.get('window').width}
-      />
+    <ContentContainer>
+      <ColorBackground backgroundColor="#DFF7FF" />
       <Header>Collect MDT and redeem them on Gift Cards.</Header>
       <Details>
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
         nonummy
       </Details>
     </ContentContainer>
-    <Button onPress={() => navigation.navigate('brand_select')}>
-      <FormattedMessage id="start_earning_money" />
-    </Button>
-    <Skip onPress={() => navigation.navigate('sign_in', {isSignUp: false})}>
-      <FormattedMessage id="already_have_account" />
-    </Skip>
+    <ButtonContainer>
+      <Button onPress={() => navigation.navigate('brand_select')}>
+        <FormattedMessage id="start_earning_money" />
+      </Button>
+      <Skip onPress={() => navigation.navigate('sign_in', {isSignUp: false})}>
+        <FormattedMessage id="already_have_account" />
+      </Skip>
+    </ButtonContainer>
   </Container>
 );
 

@@ -17,13 +17,13 @@ const Brand = ({name, selected, ...props}) => (
   </BrandContainer>
 );
 
-const BrandList = ({brandList, selectedBrand, setSelectedBrand}) => {
-  const OnSelect = ({id, name}) => {
-    if (selectedBrand.find(brand => brand.id === id)) {
-      setSelectedBrand(selectedBrand.filter(brand => brand.id !== id));
+const BrandList = ({brandList, selectedBrands, setSelectedBrands}) => {
+  const onSelect = ({id, name}) => {
+    if (selectedBrands.find(brand => brand.id === id)) {
+      setSelectedBrands(selectedBrands.filter(brand => brand.id !== id));
     } else {
-      setSelectedBrand([
-        ...selectedBrand,
+      setSelectedBrands([
+        ...selectedBrands,
         {
           id: id,
           name: name,
@@ -39,10 +39,10 @@ const BrandList = ({brandList, selectedBrand, setSelectedBrand}) => {
           name={brand.name}
           key={brand.id}
           selected={
-            selectedBrand && !!selectedBrand.find(sb => sb.id === brand.id)
+            selectedBrands && !!selectedBrands.find(sb => sb.id === brand.id)
           }
-          onPress={() => setSelectedBrand && OnSelect(brand)}
-          disabled={!selectedBrand || !setSelectedBrand}
+          onPress={() => setSelectedBrands && onSelect(brand)}
+          disabled={!selectedBrands || !setSelectedBrands}
         />
       ))}
     </BrandsContainer>
