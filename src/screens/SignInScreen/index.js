@@ -25,7 +25,6 @@ const SigninScreen = ({route, navigation}) => {
     if (phone === '' || verificationCode === '') {
       Alert.alert('please input both phone and verificationCode');
     } else {
-      console.log('isSignUp in screen', isSignUp);
       if (isSignUp) {
         signUp(phone, verificationCode);
         navigation.navigate('user_profile');

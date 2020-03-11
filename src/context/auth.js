@@ -2,8 +2,6 @@ import React, {createContext, useReducer, useEffect, useMemo} from 'react';
 import {Alert, AsyncStorage} from 'react-native';
 import SplashScreen from '@/screens/SplashScreen';
 
-import Root from '@/screens/Root';
-
 export const AuthContext = createContext(null);
 
 const testAccount = {
@@ -47,7 +45,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         isSignIn: false,
-        authToken: action.payload,
+        // authToken: action.payload,
       };
     }
     case SIGN_OUT: {
@@ -62,7 +60,7 @@ const reducer = (state, action) => {
   }
 };
 
-export const AuthProvider = () => {
+export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -130,9 +128,7 @@ export const AuthProvider = () => {
   }
 
   return (
-    <AuthContext.Provider value={authContext}>
-      <Root authToken={state.authToken} isSignIn={state.isSignIn} />
-    </AuthContext.Provider>
+    <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>
   );
 };
 

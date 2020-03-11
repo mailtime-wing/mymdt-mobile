@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer as Container} from '@react-navigation/native';
+import {AuthContext} from '@/context/auth';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import BrandSelectScreen from '@/screens/BrandSelectScreen';
@@ -22,30 +23,33 @@ const screens = [
   {name: 'user_profile', component: UserProfileScreen},
 ];
 
-const Root = ({authToken, isSignIn}) => (
-  <Container>
-    {authToken == null || !isSignIn ? (
-      <Stack.Navigator>
-        {screens.map(screen => (
-          <Stack.Screen
-            name={screen.name}
-            component={screen.component}
-            options={{
-              headerTransparent: true,
-              headerTitleStyle: {display: 'none'},
-              headerStyle: {height: 80, backgroundColor: 'blue'},
-              headerLeft: () => <HeaderButton root="onboarding" />,
-            }}
-          />
-        ))}
-      </Stack.Navigator>
-    ) : (
-      <Stack.Navigator mode="modal" headerMode="none">
-        <Stack.Screen name="home" component={HomeStack} />
-        <Stack.Screen name="modal" component={ModalStack} />
-      </Stack.Navigator>
-    )}
-  </Container>
-);
+const Root = () => {
+  const {authToken} = useContext(AuthContext);
+  return (
+    <Container>
+      {authToken == null ? (
+        <Stack.Navigator>
+          {screens.map(screen => (
+            <Stack.Screen
+              name={screen.name}
+              component={screen.component}
+              options={{
+                headerTransparent: true,
+                headerTitleStyle: {display: 'none'},
+                headerStyle: {height: 80, backgroundColor: 'blue'},
+                headerLeft: () => <HeaderButton root="onboarding" />,
+              }}
+            />
+          ))}
+        </Stack.Navigator>
+      ) : (
+        <Stack.Navigator mode="modal" headerMode="none">
+          <Stack.Screen name="home" component={HomeStack} />
+          <Stack.Screen name="modal" component={ModalStack} />
+        </Stack.Navigator>
+      )}
+    </Container>
+  );
+};
 
 export default Root;
