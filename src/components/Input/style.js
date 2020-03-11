@@ -16,3 +16,9 @@ export const Label = styled.Text`
   letter-spacing: 1px;
   font-weight: bold;
 `;
+
+export const Remark = styled.Text`
+  font-size: 14px;
+  line-height: 17px;
+  margin-top: 5px;
+`;

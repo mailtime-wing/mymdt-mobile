@@ -12,6 +12,7 @@ const BrandSelectConfirmScreen = ({route, navigation}) => {
   const onConfirmHandler = () => {
     navigation.navigate('sign_in', {
       isSignUp: true,
+      selectedBrands: selectedBrands,
     });
   };
 

@@ -23,4 +23,5 @@ export const LoginAndAgree = styled.Text`
   font-size: 10px;
   color: ${props => props.theme.colors.grey.dark};
   margin-top: 11px;
+  padding: 0 24px;
 `;

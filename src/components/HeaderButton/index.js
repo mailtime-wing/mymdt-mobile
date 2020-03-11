@@ -8,7 +8,8 @@ const HeaderButton = ({root}) => {
   const navigation = useNavigation();
   let isMenu = route.name === 'menu';
   let isOnboarding = route.name === 'onboarding';
-  if (isOnboarding) {
+  let isFinishedRegister = route.name === 'loading';
+  if (isOnboarding || isFinishedRegister) {
     return null;
   }
 
