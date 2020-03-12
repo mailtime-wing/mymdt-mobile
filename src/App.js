@@ -1,5 +1,7 @@
 import React from 'react';
 import {ThemeProvider} from 'emotion-theming';
+import {ApolloProvider} from '@apollo/react-hooks';
+import client from '@/api/client';
 import theme from '@/theme';
 import {IntlContainer} from '@/context/Intl';
 import {AuthProvider} from '@/context/auth';
@@ -8,13 +10,15 @@ console.disableYellowBox = true;
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <IntlContainer>
-        <AuthProvider>
-          <NavigationRoot />
-        </AuthProvider>
-      </IntlContainer>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <IntlContainer>
+          <AuthProvider>
+            <NavigationRoot />
+          </AuthProvider>
+        </IntlContainer>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }
 

@@ -7,51 +7,82 @@ import {
   Alert,
 } from 'react-native';
 import {AuthContext} from '@/context/auth';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
+import {GET_OTP, LOGIN} from '@/api/auth';
+import {useMutation} from '@apollo/react-hooks';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import {Container, Title, VerificationContainer, LoginAndAgree} from './style';
 
 const SigninScreen = ({route, navigation}) => {
-  const {signIn} = useContext(AuthContext);
+  const intl = useIntl();
+  const {updateAuthToken} = useContext(AuthContext);
   const [phone, setPhone] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [submitEnable, setSubmitEnable] = useState(false);
   const [verificationCodeSent, setVerificationCodeSent] = useState(false);
   const {isSignUp, selectedBrands} = route.params;
 
+  const [otpRequest] = useMutation(GET_OTP);
+  const [loginRequest, {data, error}] = useMutation(LOGIN);
+
+  useEffect(() => {
+    if (phone === '' || verificationCode === '') {
+      setSubmitEnable(false);
+    } else {
+      setSubmitEnable(true);
+    }
+  }, [phone, verificationCode]);
+
+  useEffect(() => {
+    if (data) {
+      updateAuthToken(data.login.accessToken);
+    }
+  }, [data, updateAuthToken]);
+
   const onPressHandler = () => {
     if (phone === '' || verificationCode === '') {
       Alert.alert('please input both phone and verificationCode');
     } else {
       if (isSignUp) {
-        // signUp(phone, verificationCode);
-        let data = {
+        let userData = {
           phone: phone,
           verificationCode: verificationCode,
           selectedBrands: selectedBrands,
         };
-        navigation.navigate('user_profile', data);
+        navigation.navigate('user_profile', userData);
       } else {
-        signIn(phone, verificationCode);
+        loginRequest({
+          variables: {
+            phoneNumber: phone,
+            otp: verificationCode,
+          },
+        });
       }
     }
   };
 
   const verificationCodeOnPressHandler = () => {
-    Alert.alert('verification code sent!');
-    setVerificationCodeSent(true);
+    if (phone !== '') {
+      otpRequest({
+        variables: {
+          phoneNumber: phone,
+          locale: intl.locale,
+          action: isSignUp ? 'REGISTER' : 'LOGIN',
+        },
+      });
+      setVerificationCodeSent(true);
+    } else {
+      Alert.alert('you need to enter phone number to send verification code!');
+    }
   };
 
-  useEffect(() => {
-    if (phone !== '' && verificationCode !== '') {
-      setSubmitEnable(true);
-    } else {
-      setSubmitEnable(false);
+  const renderOtpError = () => {
+    if (error) {
+      return <Text>request fail. {error.message}</Text>;
     }
-  }, [phone, verificationCode]);
-
+  };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
@@ -77,7 +108,10 @@ const SigninScreen = ({route, navigation}) => {
             value={verificationCode}
             label={<FormattedMessage id="verification_code" />}
           />
-          <Button small onPress={verificationCodeOnPressHandler}>
+          <Button
+            small
+            disabled={phone === ''}
+            onPress={verificationCodeOnPressHandler}>
             <Text>
               {verificationCodeSent ? (
                 <FormattedMessage id="resend_verification_code" />
@@ -87,6 +121,7 @@ const SigninScreen = ({route, navigation}) => {
             </Text>
           </Button>
         </VerificationContainer>
+        {renderOtpError()}
         <Button onPress={onPressHandler} disabled={!submitEnable}>
           <FormattedMessage id="submit" />
         </Button>

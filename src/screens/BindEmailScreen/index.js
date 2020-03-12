@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Text, TouchableOpacity, Alert} from 'react-native';
-import {FormattedMessage} from 'react-intl';
+import {useMutation} from '@apollo/react-hooks';
+import {REGISTER} from '@/api/auth';
+import {FormattedMessage, useIntl} from 'react-intl';
+import {AuthContext} from '@/context/auth';
 import {
   Container,
   EmailContainer,
@@ -13,8 +16,27 @@ import {
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 
-const BindEmailScreen = ({navigation}) => {
+const BindEmailScreen = ({route, navigation}) => {
+  const {
+    phone,
+    verificationCode,
+    name,
+    gender,
+    dob,
+    selectedBrands,
+    referralCode,
+  } = route.params;
+  const intl = useIntl();
+  const {updateAuthToken} = useContext(AuthContext);
   const [emails, setEmails] = useState(['']);
+  const [registerRequest, {data, loading, error}] = useMutation(REGISTER);
+
+  useEffect(() => {
+    if (data) {
+      updateAuthToken(data.register.accessToken);
+      navigation.navigate('loading');
+    }
+  }, [data, navigation, updateAuthToken]);
 
   const onPressAddEmailAccount = email => {
     setEmails([
@@ -36,8 +58,27 @@ const BindEmailScreen = ({navigation}) => {
   };
 
   const onPressNextHandler = () => {
-    navigation.navigate('loading');
+    // register
+    registerRequest({
+      variables: {
+        phoneNumber: phone,
+        otp: verificationCode,
+        name: name,
+        gender: gender,
+        dateOfBirth: dob,
+        subscribedBrandIds: selectedBrands.map(brand => brand.id),
+        referalCode: referralCode,
+        locale: intl.locale,
+      },
+    });
   };
+
+  if (loading) {
+    return <Text>loading...</Text>;
+  }
+  if (error) {
+    return <Text>register fail. {error.message}</Text>;
+  }
 
   return (
     <Container>
