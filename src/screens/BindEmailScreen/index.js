@@ -13,11 +13,8 @@ import {
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 
-const BindEmailScreen = ({route, navigation}) => {
-  const data = route.params;
+const BindEmailScreen = ({navigation}) => {
   const [emails, setEmails] = useState(['']);
-
-  console.log('data', data);
 
   const onPressAddEmailAccount = email => {
     setEmails([

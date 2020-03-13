@@ -7,11 +7,6 @@ const HeaderButton = ({root}) => {
   const route = useRoute();
   const navigation = useNavigation();
   let isMenu = route.name === 'menu';
-  let isOnboarding = route.name === 'onboarding';
-  let isFinishedRegister = route.name === 'loading';
-  if (isOnboarding || isFinishedRegister) {
-    return null;
-  }
 
   return (
     <CloseButton

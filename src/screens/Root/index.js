@@ -41,7 +41,11 @@ const Root = () => {
                 headerTransparent: true,
                 headerTitleStyle: {display: 'none'},
                 headerStyle: {height: 80, backgroundColor: 'blue'},
-                headerLeft: () => <HeaderButton root="onboarding" />,
+                headerLeft: () =>
+                  screen.name === 'onboarding' ||
+                  screen.name === 'loading' ? null : (
+                    <HeaderButton root="onboarding" />
+                  ),
               }}
             />
           ))}
