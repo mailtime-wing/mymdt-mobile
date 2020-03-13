@@ -8,6 +8,8 @@ import BrandSelectScreen from '@/screens/BrandSelectScreen';
 import BrandSelectConfirmScreen from '@/screens/BrandSelectConfirmScreen';
 import SignInScreen from '@/screens/SignInScreen';
 import UserProfileScreen from '@/screens/UserProfileScreen';
+import BindEmailScreen from '@/screens/BindEmailScreen';
+import LoadingScreen from '@/screens/LoadingScreen';
 import HomeStack from '@/screens/HomeStack';
 import ModalStack from '@/screens/ModalStack';
 
@@ -21,6 +23,8 @@ const screens = [
   {name: 'brand_select', component: BrandSelectScreen},
   {name: 'brand_select_confirm', component: BrandSelectConfirmScreen},
   {name: 'user_profile', component: UserProfileScreen},
+  {name: 'bind_email', component: BindEmailScreen},
+  {name: 'loading', component: LoadingScreen},
 ];
 
 const Root = () => {
@@ -37,7 +41,11 @@ const Root = () => {
                 headerTransparent: true,
                 headerTitleStyle: {display: 'none'},
                 headerStyle: {height: 80, backgroundColor: 'blue'},
-                headerLeft: () => <HeaderButton root="onboarding" />,
+                headerLeft: () =>
+                  screen.name === 'onboarding' ||
+                  screen.name === 'loading' ? null : (
+                    <HeaderButton root="onboarding" />
+                  ),
               }}
             />
           ))}

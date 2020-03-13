@@ -48,6 +48,7 @@
     "your_name": "YOUR NAME",
     "gender": "你的性别",
     "date_of_birth": "你的生日",
+    "referral_code": "Referral Code",
     "claim_gift_on_birthday": "You can claim gift on your birthday",
     "send_verification_code": "发送验证码",
     "resend_verification_code": "再发送验证码",

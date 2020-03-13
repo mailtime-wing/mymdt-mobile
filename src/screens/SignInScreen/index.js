@@ -14,20 +14,25 @@ import Button from '@/components/Button';
 import {Container, Title, VerificationContainer, LoginAndAgree} from './style';
 
 const SigninScreen = ({route, navigation}) => {
-  const {signIn, signUp} = useContext(AuthContext);
+  const {signIn} = useContext(AuthContext);
   const [phone, setPhone] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [submitEnable, setSubmitEnable] = useState(false);
   const [verificationCodeSent, setVerificationCodeSent] = useState(false);
-  const {isSignUp} = route.params;
+  const {isSignUp, selectedBrands} = route.params;
 
   const onPressHandler = () => {
     if (phone === '' || verificationCode === '') {
       Alert.alert('please input both phone and verificationCode');
     } else {
       if (isSignUp) {
-        signUp(phone, verificationCode);
-        navigation.navigate('user_profile');
+        // signUp(phone, verificationCode);
+        let data = {
+          phone: phone,
+          verificationCode: verificationCode,
+          selectedBrands: selectedBrands,
+        };
+        navigation.navigate('user_profile', data);
       } else {
         signIn(phone, verificationCode);
       }

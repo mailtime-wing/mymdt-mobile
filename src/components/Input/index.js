@@ -1,11 +1,15 @@
 import React from 'react';
-import {Container, TextInput, Label} from './style';
+import {Container, TextInput, Label, Remark} from './style';
 
-const Input = ({label, ...props}) => {
+const Input = ({label, required, remark, ...props}) => {
   return (
     <Container>
-      <Label>{label}</Label>
+      <Label>
+        {label}
+        {required && '*'}
+      </Label>
       <TextInput autoCapitalize="none" {...props} />
+      {remark && <Remark>{remark}</Remark>}
     </Container>
   );
 };
