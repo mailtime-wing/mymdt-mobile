@@ -30,8 +30,8 @@ const Gender = ({gender, setGender}) => {
       selectedValue={gender}
       onValueChange={item => setGender(item)}>
       <Picker.Item label="-" value={null} />
-      <Picker.Item label="Male" value="Male" />
-      <Picker.Item label="Female" value="Female" />
+      <Picker.Item label="Male" value="M" />
+      <Picker.Item label="Female" value="F" />
     </Picker>
   );
 };

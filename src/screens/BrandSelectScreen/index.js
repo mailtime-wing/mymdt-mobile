@@ -9,13 +9,13 @@ import BrandList from '@/components/BrandList';
 let numberOfBrand = 2;
 
 const brandList = [
-  {id: 1, name: 'AAAA'},
-  {id: 2, name: 'BBBB'},
-  {id: 3, name: 'CCCC'},
-  {id: 4, name: 'DDDD'},
-  {id: 5, name: 'EEEE'},
-  {id: 6, name: 'FFFF'},
-  {id: 7, name: 'GGGG'},
+  {id: '111', name: 'AAAA'},
+  {id: '222', name: 'BBBB'},
+  {id: '333', name: 'CCCC'},
+  {id: '444', name: 'DDDD'},
+  {id: '555', name: 'EEEE'},
+  {id: '666', name: 'FFFF'},
+  {id: '777', name: 'GGGG'},
 ];
 
 const BrandSelectScreen = ({navigation}) => {

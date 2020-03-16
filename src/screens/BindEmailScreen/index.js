@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Text, TouchableOpacity, Alert} from 'react-native';
-import {FormattedMessage} from 'react-intl';
+import {useMutation} from '@apollo/react-hooks';
+import {REGISTER} from '@/api/auth';
+import {FormattedMessage, useIntl} from 'react-intl';
+import {AuthContext} from '@/context/auth';
 import {
   Container,
   EmailContainer,
@@ -13,8 +16,20 @@ import {
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 
-const BindEmailScreen = ({navigation}) => {
+const BindEmailScreen = ({route, navigation}) => {
+  const {
+    phone,
+    verificationCode,
+    name,
+    gender,
+    dob,
+    selectedBrands,
+    referralCode,
+  } = route.params;
+  const intl = useIntl();
+  const {updateAuthToken} = useContext(AuthContext);
   const [emails, setEmails] = useState(['']);
+  const [registerRequest, {loading, error}] = useMutation(REGISTER);
 
   const onPressAddEmailAccount = email => {
     setEmails([
@@ -25,7 +40,7 @@ const BindEmailScreen = ({navigation}) => {
     ]);
   };
 
-  const bindEmailOnPressHandler = email => {
+  const bindEmailOnPressHandler = () => {
     Alert.alert('success bind email!');
   };
 
@@ -35,9 +50,33 @@ const BindEmailScreen = ({navigation}) => {
     setEmails(newEmails);
   };
 
-  const onPressNextHandler = () => {
-    navigation.navigate('loading');
+  const onPressNextHandler = async () => {
+    try {
+      const {data} = await registerRequest({
+        variables: {
+          phoneNumber: phone,
+          otp: verificationCode,
+          name: name,
+          gender: gender,
+          dateOfBirth: dob,
+          subscribedBrandIds: selectedBrands.map(brand => brand.id),
+          referalCode: referralCode,
+          locale: intl.locale,
+        },
+      });
+      updateAuthToken(data.register.accessToken);
+      navigation.navigate('loading');
+    } catch (e) {
+      console.error('error in onPressNextHandler: ', e.message);
+    }
   };
+
+  if (loading) {
+    return <Text>loading...</Text>;
+  }
+  if (error) {
+    return <Text>register fail. {error.message}</Text>;
+  }
 
   return (
     <Container>
