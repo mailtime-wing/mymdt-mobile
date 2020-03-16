@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import {Text, TouchableOpacity, Alert} from 'react-native';
 import {useMutation} from '@apollo/react-hooks';
 import {REGISTER} from '@/api/auth';
@@ -29,14 +29,7 @@ const BindEmailScreen = ({route, navigation}) => {
   const intl = useIntl();
   const {updateAuthToken} = useContext(AuthContext);
   const [emails, setEmails] = useState(['']);
-  const [registerRequest, {data, loading, error}] = useMutation(REGISTER);
-
-  useEffect(() => {
-    if (data) {
-      updateAuthToken(data.register.accessToken);
-      navigation.navigate('loading');
-    }
-  }, [data, navigation, updateAuthToken]);
+  const [registerRequest, {loading, error}] = useMutation(REGISTER);
 
   const onPressAddEmailAccount = email => {
     setEmails([
@@ -47,7 +40,7 @@ const BindEmailScreen = ({route, navigation}) => {
     ]);
   };
 
-  const bindEmailOnPressHandler = email => {
+  const bindEmailOnPressHandler = () => {
     Alert.alert('success bind email!');
   };
 
@@ -57,20 +50,25 @@ const BindEmailScreen = ({route, navigation}) => {
     setEmails(newEmails);
   };
 
-  const onPressNextHandler = () => {
-    // register
-    registerRequest({
-      variables: {
-        phoneNumber: phone,
-        otp: verificationCode,
-        name: name,
-        gender: gender,
-        dateOfBirth: dob,
-        subscribedBrandIds: selectedBrands.map(brand => brand.id),
-        referalCode: referralCode,
-        locale: intl.locale,
-      },
-    });
+  const onPressNextHandler = async () => {
+    try {
+      const {data} = await registerRequest({
+        variables: {
+          phoneNumber: phone,
+          otp: verificationCode,
+          name: name,
+          gender: gender,
+          dateOfBirth: dob,
+          subscribedBrandIds: selectedBrands.map(brand => brand.id),
+          referalCode: referralCode,
+          locale: intl.locale,
+        },
+      });
+      updateAuthToken(data.register.accessToken);
+      navigation.navigate('loading');
+    } catch (e) {
+      console.error('error in onPressNextHandler: ', e.message);
+    }
   };
 
   if (loading) {

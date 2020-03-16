@@ -25,7 +25,7 @@ const SigninScreen = ({route, navigation}) => {
   const {isSignUp, selectedBrands} = route.params;
 
   const [otpRequest] = useMutation(GET_OTP);
-  const [loginRequest, {data, error}] = useMutation(LOGIN);
+  const [loginRequest, {error}] = useMutation(LOGIN);
 
   useEffect(() => {
     if (phone === '' || verificationCode === '') {
@@ -35,13 +35,7 @@ const SigninScreen = ({route, navigation}) => {
     }
   }, [phone, verificationCode]);
 
-  useEffect(() => {
-    if (data) {
-      updateAuthToken(data.login.accessToken);
-    }
-  }, [data, updateAuthToken]);
-
-  const onPressHandler = () => {
+  const onPressHandler = async () => {
     if (phone === '' || verificationCode === '') {
       Alert.alert('please input both phone and verificationCode');
     } else {
@@ -53,12 +47,17 @@ const SigninScreen = ({route, navigation}) => {
         };
         navigation.navigate('user_profile', userData);
       } else {
-        loginRequest({
-          variables: {
-            phoneNumber: phone,
-            otp: verificationCode,
-          },
-        });
+        try {
+          const {data} = await loginRequest({
+            variables: {
+              phoneNumber: phone,
+              otp: verificationCode,
+            },
+          });
+          updateAuthToken(data.login.accessToken);
+        } catch (e) {
+          console.error('error in onPressHandler: ', e.message);
+        }
       }
     }
   };
