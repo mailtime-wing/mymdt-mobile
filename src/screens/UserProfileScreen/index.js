@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {
   View,
-  Picker,
-  DatePickerIOS,
+  TouchableWithoutFeedback,
+  Keyboard,
   Alert,
   TouchableOpacity,
 } from 'react-native';
@@ -12,7 +12,21 @@ import {css} from '@emotion/native';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 
-import {Container, Title, Detail} from './style';
+import {
+  Container,
+  Title,
+  Detail,
+  GenderContainer,
+  Gender,
+  GenderText,
+  DatePicker,
+} from './style';
+
+const genderOptions = [
+  {label: 'Male', value: 'M'},
+  {label: 'Female', value: 'F'},
+  {label: 'N/A', value: 'N/A'},
+];
 
 const FormInput = props => (
   <View
@@ -23,36 +37,45 @@ const FormInput = props => (
   </View>
 );
 
-const Gender = ({gender, setGender}) => {
+const GenderOption = ({label, value, setGender, gender}) => {
+  const active = gender === value;
   return (
-    <Picker
-      mode="dropdown"
-      selectedValue={gender}
-      onValueChange={item => setGender(item)}>
-      <Picker.Item label="-" value={null} />
-      <Picker.Item label="Male" value="M" />
-      <Picker.Item label="Female" value="F" />
-    </Picker>
+    <Gender active={active} onPress={() => setGender(value)}>
+      <GenderText active={active}>{label}</GenderText>
+    </Gender>
+  );
+};
+
+const GenderSelector = ({gender, setGender}) => {
+  return (
+    <GenderContainer>
+      {genderOptions.map(g => (
+        <GenderOption
+          label={g.label}
+          value={g.value}
+          setGender={setGender}
+          gender={gender}
+        />
+      ))}
+    </GenderContainer>
   );
 };
 
 const UserProfileScreen = ({route, navigation, intl}) => {
-  const [showPicker, setShowPicker] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [name, setName] = useState('');
-  const [gender, setGender] = useState(null);
+  const [gender, setGender] = useState(genderOptions[0].value);
   const [dob, setDob] = useState(new Date());
   const [referralCode, setReferralCode] = useState(null);
   const {phone, verificationCode, selectedBrands} = route.params;
 
-  const onPressPickerHandler = () => {
-    setShowPicker(!showPicker);
+  const onPressSpaceHandler = () => {
     setShowDatePicker(false);
+    Keyboard.dismiss();
   };
 
   const onPressDatePickerHandler = () => {
     setShowDatePicker(!showDatePicker);
-    setShowPicker(false);
   };
 
   const onPressNextHandler = () => {
@@ -73,64 +96,60 @@ const UserProfileScreen = ({route, navigation, intl}) => {
   };
 
   return (
-    <Container>
-      <Title>
-        <FormattedMessage id="let_us_know" />
-      </Title>
-      <Detail>
-        <FormattedMessage id="we_hope_to_provide" />
-      </Detail>
-      <Detail
-        style={css`
-          margin-bottom: 48px;
-        `}>
-        * means required
-      </Detail>
-      <FormInput
-        label={<FormattedMessage id="your_name" />}
-        required
-        onChangeText={text => setName(text)}
-        value={name}
-      />
-      <TouchableOpacity onPress={() => onPressPickerHandler()}>
+    <TouchableWithoutFeedback onPress={() => onPressSpaceHandler()}>
+      <Container>
+        <Title>
+          <FormattedMessage id="let_us_know" />
+        </Title>
+        <Detail>
+          <FormattedMessage id="we_hope_to_provide" />
+        </Detail>
+        <Detail
+          style={css`
+            margin-bottom: 48px;
+          `}>
+          * means required
+        </Detail>
         <FormInput
-          label={<FormattedMessage id="gender" />}
+          label={<FormattedMessage id="your_name" />}
           required
-          value={gender}
-          editable={false}
+          onChangeText={text => setName(text)}
+          value={name}
         />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => onPressDatePickerHandler()}>
+        <GenderSelector gender={gender} setGender={setGender} />
+        <TouchableOpacity onPress={() => onPressDatePickerHandler()}>
+          <FormInput
+            label={<FormattedMessage id="date_of_birth" />}
+            required
+            value={intl.formatDate(dob, {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            })}
+            editable={false}
+            remark={<FormattedMessage id="claim_gift_on_birthday" />}
+            placeholder="DD/MM/YYYY"
+            placeholderTextColor={props => props.theme.colors.grey.dark}
+          />
+        </TouchableOpacity>
         <FormInput
-          label={<FormattedMessage id="date_of_birth" />}
-          required
-          value={intl.formatDate(dob, {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-          })}
-          editable={false}
-          remark={<FormattedMessage id="claim_gift_on_birthday" />}
-          placeholder="DD/MM/YYYY"
-          placeholderTextColor={props => props.theme.colors.grey.dark}
+          label={<FormattedMessage id="referral_code" />}
+          onChangeText={text => setReferralCode(text)}
+          value={referralCode}
         />
-      </TouchableOpacity>
-      <FormInput
-        label={<FormattedMessage id="referral_code" />}
-        onChangeText={text => setReferralCode(text)}
-        value={referralCode}
-        style={css`
-          margin-bottom: 46px;
-        `}
-      />
-      {showPicker && <Gender gender={gender} setGender={setGender} />}
-      {showDatePicker && (
-        <DatePickerIOS mode="date" date={dob} onDateChange={setDob} />
-      )}
-      <Button onPress={() => onPressNextHandler()}>
-        <FormattedMessage id="next" />
-      </Button>
-    </Container>
+        {showDatePicker && (
+          <DatePicker
+            mode="date"
+            date={dob}
+            onDateChange={setDob}
+            maximumDate={new Date()}
+          />
+        )}
+        <Button onPress={() => onPressNextHandler()}>
+          <FormattedMessage id="next" />
+        </Button>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
 

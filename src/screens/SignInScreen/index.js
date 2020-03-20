@@ -25,6 +25,9 @@ const SigninScreen = ({route, navigation}) => {
   const [submitEnable, setSubmitEnable] = useState(false);
   const [verificationCodeSent, setVerificationCodeSent] = useState(false);
   const [phonePrefix, setPhonePrefix] = useState('');
+  const [verificationCodeSendEnable, setVerificationCodeSendEnable] = useState(
+    true,
+  );
   const {isSignUp, selectedBrands} = route.params;
 
   const [otpRequest] = useMutation(GET_OTP);
@@ -89,6 +92,11 @@ const SigninScreen = ({route, navigation}) => {
     }
   };
 
+  const verificationCodeCoolDown = second => {
+    setVerificationCodeSendEnable(false);
+    setTimeout(() => setVerificationCodeSendEnable(true), second * 1000);
+  };
+
   const verificationCodeOnPressHandler = () => {
     if (phone !== '' && phone.includes('+') && phone.includes(' ')) {
       otpRequest({
@@ -99,6 +107,7 @@ const SigninScreen = ({route, navigation}) => {
         },
       });
       setVerificationCodeSent(true);
+      verificationCodeCoolDown(60);
     } else {
       Alert.alert(
         'you need to enter phone number with prefix number! e.g. +852 xxxxxxxx',
@@ -134,7 +143,7 @@ const SigninScreen = ({route, navigation}) => {
           />
           <Button
             small
-            disabled={phone === ''}
+            disabled={phone === '' || !verificationCodeSendEnable}
             onPress={verificationCodeOnPressHandler}>
             <Text>
               {verificationCodeSent ? (
