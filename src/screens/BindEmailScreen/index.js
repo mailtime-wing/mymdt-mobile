@@ -1,9 +1,8 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import {Text, TouchableOpacity, Alert} from 'react-native';
 import {useMutation} from '@apollo/react-hooks';
 import {REGISTER} from '@/api/auth';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {AuthContext} from '@/context/auth';
 import {
   Container,
   EmailContainer,
@@ -27,7 +26,6 @@ const BindEmailScreen = ({route, navigation}) => {
     referralCode,
   } = route.params;
   const intl = useIntl();
-  const {updateAuthToken} = useContext(AuthContext);
   const [emails, setEmails] = useState(['']);
   const [registerRequest, {loading, error}] = useMutation(REGISTER);
 
@@ -64,8 +62,7 @@ const BindEmailScreen = ({route, navigation}) => {
           locale: intl.locale,
         },
       });
-      updateAuthToken(data.register.accessToken);
-      navigation.navigate('loading');
+      navigation.navigate('loading', {authToken: data.register.accessToken});
     } catch (e) {
       console.error('error in onPressNextHandler: ', e.message);
     }
