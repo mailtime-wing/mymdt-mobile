@@ -10,6 +10,8 @@ import SignInScreen from '@/screens/SignInScreen';
 import UserProfileScreen from '@/screens/UserProfileScreen';
 import BindEmailScreen from '@/screens/BindEmailScreen';
 import LoadingScreen from '@/screens/LoadingScreen';
+import NotificationScreen from '@/screens/NotificationScreen';
+import AccountSetupDoneScreen from '@/screens/AccountSetupDoneScreen';
 import HomeStack from '@/screens/HomeStack';
 import ModalStack from '@/screens/ModalStack';
 
@@ -25,6 +27,15 @@ const screens = [
   {name: 'user_profile', component: UserProfileScreen},
   {name: 'bind_email', component: BindEmailScreen},
   {name: 'loading', component: LoadingScreen},
+  {name: 'notification', component: NotificationScreen},
+  {name: 'account_setup_done', component: AccountSetupDoneScreen},
+];
+
+const noBackScreen = [
+  'onboarding',
+  'loading',
+  'notification',
+  'account_setup_done',
 ];
 
 const Root = () => {
@@ -42,8 +53,7 @@ const Root = () => {
                 headerTitleStyle: {display: 'none'},
                 headerStyle: {height: 80, backgroundColor: 'blue'},
                 headerLeft: () =>
-                  screen.name === 'onboarding' ||
-                  screen.name === 'loading' ? null : (
+                  noBackScreen.includes(screen.name) ? null : (
                     <HeaderButton root="onboarding" />
                   ),
               }}

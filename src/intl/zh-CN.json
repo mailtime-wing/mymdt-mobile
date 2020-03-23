@@ -58,5 +58,14 @@
     "login": "LOGIN",
     "unbind": "UNBIND",
     "skip_for_now": "暂时跳过",
-    "login_in_agree_terms_and_policy": "By logging in your email address, you agree with MailTime’s Terms and Service and Privacy Policy."
+    "login_in_agree_terms_and_policy": "By logging in your email address, you agree with MailTime’s Terms and Service and Privacy Policy.",
+    "setting_up_account": "Setting up your account...",
+    "searching_for_receipts": "Searching for Receipts...",
+    "it_might_take_some_time": "It might take some time, we will notify you once it’s done.",
+    "want_to_receive_latest_info": "Want to Receive Latest Info?",
+    "turn_on_notifications_to_learn": "Turn on notifications to learn more about the latest missions.",
+    "sure": "SURE!",
+    "all_done": "All done!",
+    "let_your_cash_back": "Let your cash back",
+    "see_today_offer": "See Today’s Offers"
 }
