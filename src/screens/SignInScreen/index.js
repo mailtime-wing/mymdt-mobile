@@ -52,7 +52,7 @@ const SigninScreen = ({route, navigation}) => {
         } else {
           setPhonePrefix('');
         }
-      } catch {
+      } catch (e) {
         // handle error later
       }
     };
