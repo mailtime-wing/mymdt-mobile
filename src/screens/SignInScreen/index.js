@@ -40,15 +40,18 @@ const SigninScreen = ({route, navigation}) => {
 
   useEffect(() => {
     // get phone prefix
-    CarrierInfo.isoCountryCode().then(result => {
-      if (result) {
-        setPhonePrefix(
-          countryCodeData.find(c => c.code === result.toUpperCase()).dial_code,
-        );
-      } else {
-        setPhonePrefix('');
-      }
-    });
+    const getPhonePrefix = async () =>
+      await CarrierInfo.isoCountryCode().then(result => {
+        if (result) {
+          setPhonePrefix(
+            countryCodeData.find(c => c.code === result.toUpperCase())
+              .dial_code,
+          );
+        } else {
+          setPhonePrefix('');
+        }
+      });
+    getPhonePrefix();
   }, []);
 
   const onChangeAutoFillPhonePrefix = () => {
@@ -99,12 +102,6 @@ const SigninScreen = ({route, navigation}) => {
     }
   };
 
-  const renderRequestError = () => {
-    if (error) {
-      return <Text>login / register fail. {error.message}</Text>;
-    }
-  };
-
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
@@ -144,7 +141,7 @@ const SigninScreen = ({route, navigation}) => {
             </Text>
           </Button>
         </VerificationContainer>
-        {renderRequestError()}
+        {error && <Text>login / register fail. {error.message}</Text>}
         <Button onPress={onPressHandler} disabled={!submitEnable}>
           <FormattedMessage id="submit" />
         </Button>
