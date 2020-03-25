@@ -44,10 +44,12 @@ const SigninScreen = ({route, navigation}) => {
       try {
         const result = await CarrierInfo.isoCountryCode();
         if (result) {
-          setPhonePrefix(
-            countryCodeData.find(c => c.code === result.toUpperCase())
-              .dial_code,
-          );
+          let dialCode = countryCodeData.find(
+            c => c.code === result.toUpperCase(),
+          )?.dial_code;
+          if (dialCode) {
+            setPhonePrefix(dialCode);
+          }
         }
       } catch (e) {
         // handle error later
