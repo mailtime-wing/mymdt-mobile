@@ -40,10 +40,9 @@ const SigninScreen = ({route, navigation}) => {
 
   useEffect(() => {
     // get phone prefix
-    let result;
     const getPhonePrefix = async () => {
       try {
-        result = await CarrierInfo.isoCountryCode();
+        const result = await CarrierInfo.isoCountryCode();
         if (result) {
           setPhonePrefix(
             countryCodeData.find(c => c.code === result.toUpperCase())
