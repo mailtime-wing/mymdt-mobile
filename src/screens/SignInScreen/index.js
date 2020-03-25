@@ -6,6 +6,7 @@ import {
   Keyboard,
   Alert,
 } from 'react-native';
+import CarrierInfo from 'react-native-carrier-info';
 import {AuthContext} from '@/context/auth';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {GET_OTP, LOGIN} from '@/api/auth';
@@ -14,6 +15,7 @@ import {useMutation} from '@apollo/react-hooks';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import {Container, Title, VerificationContainer, LoginAndAgree} from './style';
+import countryCodeData from './countryCode';
 
 const SigninScreen = ({route, navigation}) => {
   const intl = useIntl();
@@ -22,6 +24,7 @@ const SigninScreen = ({route, navigation}) => {
   const [verificationCode, setVerificationCode] = useState('');
   const [submitEnable, setSubmitEnable] = useState(false);
   const [verificationCodeSent, setVerificationCodeSent] = useState(false);
+  const [phonePrefix, setPhonePrefix] = useState('');
   const {isSignUp, selectedBrands} = route.params;
 
   const [otpRequest] = useMutation(GET_OTP);
@@ -34,6 +37,32 @@ const SigninScreen = ({route, navigation}) => {
       setSubmitEnable(true);
     }
   }, [phone, verificationCode]);
+
+  useEffect(() => {
+    // get phone prefix
+    const getPhonePrefix = async () => {
+      try {
+        const result = await CarrierInfo.isoCountryCode();
+        if (result) {
+          let dialCode = countryCodeData.find(
+            c => c.code === result.toUpperCase(),
+          )?.dial_code;
+          if (dialCode) {
+            setPhonePrefix(dialCode);
+          }
+        }
+      } catch (e) {
+        // handle error later
+      }
+    };
+    getPhonePrefix();
+  }, []);
+
+  const onChangeAutoFillPhonePrefix = () => {
+    if (phonePrefix !== '' && !phone.includes(phonePrefix + ' ')) {
+      setPhone(phonePrefix + ' ');
+    }
+  };
 
   const onPressHandler = async () => {
     if (phone === '' || verificationCode === '') {
@@ -55,15 +84,13 @@ const SigninScreen = ({route, navigation}) => {
             },
           });
           updateAuthToken(data.login.accessToken);
-        } catch (e) {
-          console.error('error in onPressHandler: ', e.message);
-        }
+        } catch (e) {}
       }
     }
   };
 
   const verificationCodeOnPressHandler = () => {
-    if (phone !== '') {
+    if (phone !== '' && phone.includes('+') && phone.includes(' ')) {
       otpRequest({
         variables: {
           phoneNumber: phone,
@@ -73,15 +100,12 @@ const SigninScreen = ({route, navigation}) => {
       });
       setVerificationCodeSent(true);
     } else {
-      Alert.alert('you need to enter phone number to send verification code!');
+      Alert.alert(
+        'you need to enter phone number with prefix number! e.g. +852 xxxxxxxx',
+      );
     }
   };
 
-  const renderOtpError = () => {
-    if (error) {
-      return <Text>request fail. {error.message}</Text>;
-    }
-  };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
@@ -96,6 +120,7 @@ const SigninScreen = ({route, navigation}) => {
           <Input
             type="telephoneNumber"
             onChangeText={text => setPhone(text)}
+            onFocus={() => onChangeAutoFillPhonePrefix(phone)}
             value={phone}
             label={<FormattedMessage id="telephone" />}
           />
@@ -120,7 +145,7 @@ const SigninScreen = ({route, navigation}) => {
             </Text>
           </Button>
         </VerificationContainer>
-        {renderOtpError()}
+        {error && <Text>login / register fail. {error.message}</Text>}
         <Button onPress={onPressHandler} disabled={!submitEnable}>
           <FormattedMessage id="submit" />
         </Button>
