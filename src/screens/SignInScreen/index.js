@@ -48,8 +48,6 @@ const SigninScreen = ({route, navigation}) => {
             countryCodeData.find(c => c.code === result.toUpperCase())
               .dial_code,
           );
-        } else {
-          setPhonePrefix('');
         }
       } catch (e) {
         // handle error later
