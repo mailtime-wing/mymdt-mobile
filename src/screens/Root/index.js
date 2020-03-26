@@ -3,6 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer as Container} from '@react-navigation/native';
 import {AuthContext} from '@/context/auth';
 
+import {UpperSafeAreaView, LowerSafeAreaView} from './style';
+
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import BrandSelectScreen from '@/screens/BrandSelectScreen';
 import BrandSelectConfirmScreen from '@/screens/BrandSelectConfirmScreen';
@@ -41,32 +43,38 @@ const noBackScreen = [
 const Root = () => {
   const {authToken} = useContext(AuthContext);
   return (
-    <Container>
-      {authToken == null ? (
-        <Stack.Navigator>
-          {screens.map(screen => (
-            <Stack.Screen
-              name={screen.name}
-              component={screen.component}
-              options={{
-                headerTransparent: true,
-                headerTitleStyle: {display: 'none'},
-                headerStyle: {height: 80, backgroundColor: 'blue'},
-                headerLeft: () =>
-                  noBackScreen.includes(screen.name) ? null : (
-                    <HeaderButton root="onboarding" />
-                  ),
-              }}
-            />
-          ))}
-        </Stack.Navigator>
-      ) : (
-        <Stack.Navigator mode="modal" headerMode="none">
-          <Stack.Screen name="home" component={HomeStack} />
-          <Stack.Screen name="modal" component={ModalStack} />
-        </Stack.Navigator>
-      )}
-    </Container>
+    <>
+      <UpperSafeAreaView />
+      <LowerSafeAreaView>
+        <Container>
+          {authToken == null ? (
+            <Stack.Navigator>
+              {screens.map(screen => (
+                <Stack.Screen
+                  name={screen.name}
+                  component={screen.component}
+                  options={{
+                    headerTransparent: true,
+                    headerTitleStyle: {display: 'none'},
+                    cardStyle: {backgroundColor: 'white'},
+                    headerStyle: {height: 80},
+                    headerLeft: () =>
+                      noBackScreen.includes(screen.name) ? null : (
+                        <HeaderButton root="onboarding" />
+                      ),
+                  }}
+                />
+              ))}
+            </Stack.Navigator>
+          ) : (
+            <Stack.Navigator mode="modal" headerMode="none">
+              <Stack.Screen name="home" component={HomeStack} />
+              <Stack.Screen name="modal" component={ModalStack} />
+            </Stack.Navigator>
+          )}
+        </Container>
+      </LowerSafeAreaView>
+    </>
   );
 };
 

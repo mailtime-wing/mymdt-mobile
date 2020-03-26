@@ -1,19 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-import {
-  RowContainer,
-  Label,
-  Value,
-} from './style';
+import {RowContainer, View, Text} from './style';
 
-const ProfileDataRow = ({ label, value }) =>
-<RowContainer>
-  <Label>
-    {label}
-  </Label>
-  <Value>
-    {value}
-  </Value>
-</RowContainer>
+const ProfileDataRow = ({label, value}) => (
+  <RowContainer>
+    <Text>{label}</Text>
+    <View>{value}</View>
+  </RowContainer>
+);
 
-export default ProfileDataRow
+export default ProfileDataRow;

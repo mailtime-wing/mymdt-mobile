@@ -20,4 +20,6 @@ export const AccountContainer = styled.View`
 export const RemainMDT = styled.Text`
   font-size: 16px;
   font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 16px;
 `;

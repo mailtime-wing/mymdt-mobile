@@ -7,9 +7,10 @@ export const Container = styled.TouchableOpacity`
       : props.theme.colors.black.normal};
   text-transform: uppercase;
   font-size: 14px;
+  min-height: 33px;
   ${props =>
     props.small
-      ? `padding: 8px 24px;
+      ? `padding: 9.5px 24px;
   border-radius: 28px;`
       : `padding: 20px 50px;
   border-radius: 42px;`}
@@ -20,7 +21,7 @@ export const Text = styled.Text`
     props.disabled
       ? props.theme.colors.black.light
       : props.theme.colors.white.normal};
-  letter-spacing: 2.33333px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   text-align: center;
   font-weight: bold;

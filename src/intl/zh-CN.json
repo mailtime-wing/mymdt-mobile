@@ -16,7 +16,7 @@
     "total_balance": "总结馀",
     "brands_preference": "商店喜好",
     "emails_binding": "邮箱管理",
-    "profile": "用户信息",
+    "edit_profile": "用户信息",
     "my_referral_code": "我的邀请码",
     "enter_invite_code": "输入邀请码",
     "sign_out": "登出",
@@ -27,6 +27,8 @@
     "about_us": "关于我们",
     "account": "帐号",
     "application": "应用",
+    "membership": "Membership",
+    "account_security": "Account Security",
 
     "start_earning_money": "START EARNING MONEY",
     "already_have_account": "I already have an account",

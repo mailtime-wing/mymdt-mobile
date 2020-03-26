@@ -2,6 +2,7 @@ import styled from '@emotion/native';
 
 export const Container = styled.View`
   padding-top: 43px;
+  background-color: white;
 `;
 
 export const ContentContainer = styled.View`

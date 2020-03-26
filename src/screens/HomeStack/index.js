@@ -1,4 +1,5 @@
 import React from 'react';
+import {useRoute} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTheme} from 'emotion-theming';
 import styled from '@emotion/native';
@@ -8,6 +9,7 @@ import BrowseScreen from '@/screens/BrowseScreen';
 import BonusScreen from '@/screens/BonusScreen';
 import WalletScreen from '@/screens/WalletScreen';
 import RedeemScreen from '@/screens/RedeemScreen';
+import ProfileScreen from '@/screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +19,7 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const TabNavigatorContainer = () => {
+const TabNavigatorContainer = navigation => {
   const theme = useTheme();
   return (
     <Tab.Navigator
@@ -44,15 +46,22 @@ const TabNavigatorContainer = () => {
       <Tab.Screen name="Bonus" component={BonusScreen} />
       <Tab.Screen name="Wallet" component={WalletScreen} />
       <Tab.Screen name="Redeem" component={RedeemScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 };
 
+const excludeRouteNames = ['Profile'];
+
 const HomeStack = props => {
+  const route = useRoute();
+  const tabName = route.state
+    ? route.state.routes[route.state.index].name
+    : route.params?.screen || 'Browse';
   return (
     <Container>
-      <AccountBar {...props} />
-      <TabNavigatorContainer />
+      {!excludeRouteNames.includes(tabName) && <AccountBar {...props} />}
+      <TabNavigatorContainer {...props} />
     </Container>
   );
 };

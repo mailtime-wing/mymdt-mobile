@@ -1,6 +1,11 @@
 import styled from '@emotion/native';
 
+export const ScrollContainer = styled.ScrollView`
+  background-color: ${props => props.theme.colors.white.normal};
+`;
+
 export const AccountInfoContainer = styled.View`
+  margin-top: 65px;
   align-items: center;
   margin-bottom: 12px;
 `;
