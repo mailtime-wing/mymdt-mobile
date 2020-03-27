@@ -10,7 +10,7 @@ const AccountSetupDoneScreen = ({route}) => {
   const {updateAuthToken} = useContext(AuthContext);
   const {authToken} = route.params;
 
-  const onPressDoneHandler = () => {
+  const handleDonePress = () => {
     updateAuthToken(authToken);
   };
 
@@ -22,7 +22,7 @@ const AccountSetupDoneScreen = ({route}) => {
       <Detail>
         <FormattedMessage id="let_your_cash_back" />
       </Detail>
-      <Button onPress={() => onPressDoneHandler()}>
+      <Button onPress={() => handleDonePress()}>
         <FormattedMessage id="see_today_offer" />
       </Button>
     </Container>

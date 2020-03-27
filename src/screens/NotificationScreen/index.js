@@ -25,7 +25,7 @@ const NotificationScreen = ({navigation, route}) => {
     PushNotificationIOS.presentLocalNotification(details);
   };
 
-  const onPressSkipHandler = () => {
+  const handleSkipPress = () => {
     if (Platform.OS === 'ios') {
       PushNotificationIOS.checkPermissions(e => {
         if (e.alert) {
@@ -47,7 +47,7 @@ const NotificationScreen = ({navigation, route}) => {
       <Button onPress={() => requestNotificationPermission()}>
         <FormattedMessage id="sure" />
       </Button>
-      <Skip onPress={() => onPressSkipHandler()}>
+      <Skip onPress={() => handleSkipPress()}>
         <FormattedMessage id="skip_for_now" />
       </Skip>
     </Container>

@@ -69,16 +69,16 @@ const UserProfileScreen = ({route, navigation, intl}) => {
   const [referralCode, setReferralCode] = useState(null);
   const {phone, verificationCode, selectedBrands} = route.params;
 
-  const onPressSpaceHandler = () => {
+  const handleSpacePress = () => {
     setShowDatePicker(false);
     Keyboard.dismiss();
   };
 
-  const onPressDatePickerHandler = () => {
+  const handleDatePickerPress = () => {
     setShowDatePicker(!showDatePicker);
   };
 
-  const onPressNextHandler = () => {
+  const handleNextPress = () => {
     if (name === '' || gender === null) {
       Alert.alert('Please input all the required data');
     } else {
@@ -96,7 +96,7 @@ const UserProfileScreen = ({route, navigation, intl}) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => onPressSpaceHandler()}>
+    <TouchableWithoutFeedback onPress={() => handleSpacePress()}>
       <Container>
         <Title>
           <FormattedMessage id="let_us_know" />
@@ -117,7 +117,7 @@ const UserProfileScreen = ({route, navigation, intl}) => {
           value={name}
         />
         <GenderSelector gender={gender} setGender={setGender} />
-        <TouchableOpacity onPress={() => onPressDatePickerHandler()}>
+        <TouchableOpacity onPress={() => handleDatePickerPress()}>
           <FormInput
             label={<FormattedMessage id="date_of_birth" />}
             required
@@ -145,7 +145,7 @@ const UserProfileScreen = ({route, navigation, intl}) => {
             maximumDate={new Date()}
           />
         )}
-        <Button onPress={() => onPressNextHandler()}>
+        <Button onPress={() => handleNextPress()}>
           <FormattedMessage id="next" />
         </Button>
       </Container>

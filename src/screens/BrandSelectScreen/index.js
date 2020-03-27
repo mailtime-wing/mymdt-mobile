@@ -21,7 +21,7 @@ const brandList = [
 const BrandSelectScreen = ({navigation}) => {
   const [selectedBrands, setSelectedBrands] = useState([]);
 
-  const onNextHandler = () => {
+  const handleNextPress = () => {
     if (selectedBrands.length !== 2) {
       Alert.alert('you can only choose 2 brands');
     } else {
@@ -51,7 +51,7 @@ const BrandSelectScreen = ({navigation}) => {
         selectedBrands={selectedBrands}
         setSelectedBrands={setSelectedBrands}
       />
-      <Button onPress={() => onNextHandler()}>
+      <Button onPress={() => handleNextPress()}>
         <FormattedMessage id="next" />
       </Button>
     </ScrollContainer>

@@ -38,17 +38,17 @@ const BindEmailScreen = ({route, navigation}) => {
     ]);
   };
 
-  const bindEmailOnPressHandler = () => {
+  const handleBindEmailPress = () => {
     Alert.alert('success bind email!');
   };
 
-  const emailOnChangeHandler = (email, index) => {
+  const handleEmailOnChange = (email, index) => {
     let newEmails = [...emails];
     newEmails[index] = email;
     setEmails(newEmails);
   };
 
-  const onPressNextHandler = async () => {
+  const handleNextPress = async () => {
     try {
       const {data} = await registerRequest({
         variables: {
@@ -64,7 +64,7 @@ const BindEmailScreen = ({route, navigation}) => {
       });
       navigation.navigate('loading', {authToken: data.register.accessToken});
     } catch (e) {
-      console.error('error in onPressNextHandler: ', e.message);
+      console.error('error in handleNextPress: ', e.message);
     }
   };
 
@@ -88,7 +88,7 @@ const BindEmailScreen = ({route, navigation}) => {
         <EmailContainer>
           <Input
             type="email"
-            onChangeText={text => emailOnChangeHandler(text, index)}
+            onChangeText={text => handleEmailOnChange(text, index)}
             value={email}
             label={
               <FormattedMessage
@@ -101,7 +101,7 @@ const BindEmailScreen = ({route, navigation}) => {
             }
           />
 
-          <Button small onPress={() => bindEmailOnPressHandler(email)}>
+          <Button small onPress={() => handleBindEmailPress(email)}>
             <Text>
               <FormattedMessage id="login" />
             </Text>
@@ -113,10 +113,10 @@ const BindEmailScreen = ({route, navigation}) => {
           <FormattedMessage id="add_email_account" />
         </AddEmail>
       </TouchableOpacity>
-      <Button onPress={onPressNextHandler}>
+      <Button onPress={handleNextPress}>
         <FormattedMessage id="next" />
       </Button>
-      <Skip onPress={onPressNextHandler}>
+      <Skip onPress={handleNextPress}>
         <FormattedMessage id="skip_for_now" />
       </Skip>
     </Container>
