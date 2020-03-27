@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
 import {
-  View,
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
   TouchableOpacity,
 } from 'react-native';
 import {FormattedMessage, injectIntl} from 'react-intl';
-import {css} from '@emotion/native';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
@@ -20,6 +18,7 @@ import {
   Gender,
   GenderText,
   DatePicker,
+  FormInputContainer,
 } from './style';
 
 const genderOptions = [
@@ -29,12 +28,9 @@ const genderOptions = [
 ];
 
 const FormInput = props => (
-  <View
-    style={css`
-      margin-bottom: 24px;
-    `}>
+  <FormInputContainer>
     <Input {...props} />
-  </View>
+  </FormInputContainer>
 );
 
 const GenderOption = ({label, value, setGender, gender}) => {
@@ -104,12 +100,7 @@ const UserProfileScreen = ({route, navigation, intl}) => {
         <Detail>
           <FormattedMessage id="we_hope_to_provide" />
         </Detail>
-        <Detail
-          style={css`
-            margin-bottom: 48px;
-          `}>
-          * means required
-        </Detail>
+        <Detail>* means required</Detail>
         <FormInput
           label={<FormattedMessage id="your_name" />}
           required
