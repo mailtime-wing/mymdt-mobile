@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, TouchableOpacity, Alert} from 'react-native';
 import {useMutation} from '@apollo/react-hooks';
-import {REGISTER} from '@/api/auth';
+import {REGISTER_API} from '@/api/auth';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {
   Container,
@@ -27,7 +27,7 @@ const BindEmailScreen = ({route, navigation}) => {
   } = route.params;
   const intl = useIntl();
   const [emails, setEmails] = useState(['']);
-  const [registerRequest, {loading, error}] = useMutation(REGISTER);
+  const [registerRequest, {loading, error}] = useMutation(REGISTER_API);
 
   const onPressAddEmailAccount = email => {
     setEmails([

@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState, useEffect, useReducer} from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
 import CarrierInfo from 'react-native-carrier-info';
 import {AuthContext} from '@/context/auth';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {GET_OTP, LOGIN} from '@/api/auth';
+import {GET_OTP_API, LOGIN_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
 
 import Input from '@/components/Input';
@@ -17,32 +17,85 @@ import Button from '@/components/Button';
 import {Container, Title, VerificationContainer, LoginAndAgree} from './style';
 import countryCodeData from './countryCode';
 
+const REGISTER = 'REGISTER';
+const LOGIN = 'LOGIN';
+
+const ENABLE_SEND_OTP = 'enableSendOtp';
+const ENABLE_SUBMIT_FORM = 'enableSubmitForm';
+const SET_FORM_TYPE = 'setFormType';
+const SEND_OTP = 'sendOtp';
+
+const initialState = {
+  sendCount: 0,
+  enableSendOtp: true,
+  enableSubmitForm: false,
+  formType: '',
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case ENABLE_SEND_OTP: {
+      return {
+        ...state,
+        enableSendOtp: true,
+      };
+    }
+    case ENABLE_SUBMIT_FORM: {
+      return {
+        ...state,
+        enableSubmitForm: action.payload,
+      };
+    }
+    case SET_FORM_TYPE: {
+      return {
+        ...state,
+        formType: action.payload,
+      };
+    }
+    case SEND_OTP: {
+      return {
+        ...state,
+        sendCount: state.sendCount + 1,
+        enableSendOtp: false,
+      };
+    }
+    default:
+      throw new Error();
+  }
+};
+
 const SigninScreen = ({route, navigation}) => {
+  const {isSignUp, selectedBrands} = route.params;
   const intl = useIntl();
   const {updateAuthToken} = useContext(AuthContext);
+  const [otpRequest] = useMutation(GET_OTP_API);
+  const [loginRequest, {error}] = useMutation(LOGIN_API);
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   const [phone, setPhone] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
-  const [submitEnable, setSubmitEnable] = useState(false);
-  const [verificationCodeSent, setVerificationCodeSent] = useState(false);
   const [phonePrefix, setPhonePrefix] = useState('');
-  const [verificationCodeSendEnable, setVerificationCodeSendEnable] = useState(
-    true,
-  );
-  const {isSignUp, selectedBrands} = route.params;
+  const [verificationCode, setVerificationCode] = useState('');
 
-  const [otpRequest] = useMutation(GET_OTP);
-  const [loginRequest, {error}] = useMutation(LOGIN);
+  // get form type/action
+  useEffect(() => {
+    if (isSignUp) {
+      dispatch({type: SET_FORM_TYPE, payload: REGISTER});
+    } else {
+      dispatch({type: SET_FORM_TYPE, payload: LOGIN});
+    }
+  }, [isSignUp]);
 
+  // check form submit availability
   useEffect(() => {
     if (phone === '' || verificationCode === '') {
-      setSubmitEnable(false);
+      dispatch({type: ENABLE_SUBMIT_FORM, payload: false});
     } else {
-      setSubmitEnable(true);
+      dispatch({type: ENABLE_SUBMIT_FORM, payload: true});
     }
   }, [phone, verificationCode]);
 
+  // get phone prefix
   useEffect(() => {
-    // get phone prefix
     const getPhonePrefix = async () => {
       try {
         const result = await CarrierInfo.isoCountryCode();
@@ -61,14 +114,14 @@ const SigninScreen = ({route, navigation}) => {
     getPhonePrefix();
   }, []);
 
-  const onChangeAutoFillPhonePrefix = () => {
+  const handlePhoneFocus = () => {
     if (phonePrefix !== '' && !phone.includes(phonePrefix + ' ')) {
       setPhone(phonePrefix + ' ');
     }
   };
 
-  const onPressHandler = async () => {
-    if (phone === '' || verificationCode === '') {
+  const handleSubmitPress = async () => {
+    if (!state.enableSubmitForm) {
       Alert.alert('please input both phone and verificationCode');
     } else {
       if (isSignUp) {
@@ -93,21 +146,24 @@ const SigninScreen = ({route, navigation}) => {
   };
 
   const verificationCodeCoolDown = second => {
-    setVerificationCodeSendEnable(false);
-    setTimeout(() => setVerificationCodeSendEnable(true), second * 1000);
+    setTimeout(() => dispatch({type: ENABLE_SEND_OTP}), second * 1000);
   };
 
-  const verificationCodeOnPressHandler = () => {
+  const handleSendPress = async () => {
     if (phone !== '' && phone.includes('+') && phone.includes(' ')) {
-      otpRequest({
-        variables: {
-          phoneNumber: phone,
-          locale: intl.locale,
-          action: isSignUp ? 'REGISTER' : 'LOGIN',
-        },
-      });
-      setVerificationCodeSent(true);
-      verificationCodeCoolDown(60);
+      dispatch({type: SEND_OTP});
+      try {
+        await otpRequest({
+          variables: {
+            phoneNumber: phone,
+            locale: intl.locale,
+            action: state.formType,
+          },
+        });
+        verificationCodeCoolDown(60);
+      } catch (e) {
+        console.error('error on otpRequest with ', state.formType);
+      }
     } else {
       Alert.alert(
         'you need to enter phone number with prefix number! e.g. +852 xxxxxxxx',
@@ -129,7 +185,7 @@ const SigninScreen = ({route, navigation}) => {
           <Input
             type="telephoneNumber"
             onChangeText={text => setPhone(text)}
-            onFocus={() => onChangeAutoFillPhonePrefix(phone)}
+            onFocus={() => handlePhoneFocus(phone)}
             value={phone}
             label={<FormattedMessage id="telephone" />}
           />
@@ -143,10 +199,10 @@ const SigninScreen = ({route, navigation}) => {
           />
           <Button
             small
-            disabled={phone === '' || !verificationCodeSendEnable}
-            onPress={verificationCodeOnPressHandler}>
+            disabled={!state.enableSendOtp}
+            onPress={handleSendPress}>
             <Text>
-              {verificationCodeSent ? (
+              {state.sendCount > 0 ? (
                 <FormattedMessage id="resend_verification_code" />
               ) : (
                 <FormattedMessage id="send_verification_code" />
@@ -155,7 +211,7 @@ const SigninScreen = ({route, navigation}) => {
           </Button>
         </VerificationContainer>
         {error && <Text>login / register fail. {error.message}</Text>}
-        <Button onPress={onPressHandler} disabled={!submitEnable}>
+        <Button onPress={handleSubmitPress} disabled={!state.enableSubmitForm}>
           <FormattedMessage id="submit" />
         </Button>
         {!isSignUp && (
