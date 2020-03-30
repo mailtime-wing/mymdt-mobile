@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect, useReducer} from 'react';
+import React, {useContext, useEffect, useReducer} from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {AuthContext} from '@/context/auth';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {GET_OTP_API, LOGIN_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
+import {Formik, useFormikContext} from 'formik';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
@@ -64,17 +65,16 @@ const reducer = (state, action) => {
   }
 };
 
-const SigninScreen = ({route, navigation}) => {
-  const {isSignUp, selectedBrands} = route.params;
-  const intl = useIntl();
-  const {updateAuthToken} = useContext(AuthContext);
-  const [otpRequest] = useMutation(GET_OTP_API);
-  const [loginRequest, {error}] = useMutation(LOGIN_API);
+const SignInForm = ({isSignUp}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const [phone, setPhone] = useState('');
-  const [phonePrefix, setPhonePrefix] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
+  const intl = useIntl();
+  const [otpRequest] = useMutation(GET_OTP_API);
+  const {
+    values,
+    setFieldValue,
+    handleChange,
+    handleSubmit,
+  } = useFormikContext();
 
   // get form type/action
   useEffect(() => {
@@ -87,12 +87,12 @@ const SigninScreen = ({route, navigation}) => {
 
   // check form submit availability
   useEffect(() => {
-    if (phone === '' || verificationCode === '') {
+    if (values.phone === '' || values.verificationCode === '') {
       dispatch({type: ENABLE_SUBMIT_FORM, payload: false});
     } else {
       dispatch({type: ENABLE_SUBMIT_FORM, payload: true});
     }
-  }, [phone, verificationCode]);
+  }, [values.phone, values.verificationCode]);
 
   // get phone prefix
   useEffect(() => {
@@ -104,7 +104,7 @@ const SigninScreen = ({route, navigation}) => {
             c => c.code === result.toUpperCase(),
           )?.dial_code;
           if (dialCode) {
-            setPhonePrefix(dialCode);
+            setFieldValue('phonePrefix', dialCode);
           }
         }
       } catch (e) {
@@ -112,36 +112,14 @@ const SigninScreen = ({route, navigation}) => {
       }
     };
     getPhonePrefix();
-  }, []);
+  }, [setFieldValue]);
 
   const handlePhoneFocus = () => {
-    if (phonePrefix !== '' && !phone.includes(phonePrefix + ' ')) {
-      setPhone(phonePrefix + ' ');
-    }
-  };
-
-  const handleSubmitPress = async () => {
-    if (!state.enableSubmitForm) {
-      Alert.alert('please input both phone and verificationCode');
-    } else {
-      if (isSignUp) {
-        let userData = {
-          phone: phone,
-          verificationCode: verificationCode,
-          selectedBrands: selectedBrands,
-        };
-        navigation.navigate('user_profile', userData);
-      } else {
-        try {
-          const {data} = await loginRequest({
-            variables: {
-              phoneNumber: phone,
-              otp: verificationCode,
-            },
-          });
-          updateAuthToken(data.login.accessToken);
-        } catch (e) {}
-      }
+    if (
+      values.phonePrefix !== '' &&
+      !values.phone.includes(values.phonePrefix + ' ')
+    ) {
+      setFieldValue('phone', values.phonePrefix + ' ');
     }
   };
 
@@ -150,12 +128,16 @@ const SigninScreen = ({route, navigation}) => {
   };
 
   const handleSendPress = async () => {
-    if (phone !== '' && phone.includes('+') && phone.includes(' ')) {
+    if (
+      values.phone !== '' &&
+      values.phone.includes('+') &&
+      values.phone.includes(' ')
+    ) {
       dispatch({type: SEND_OTP});
       try {
         await otpRequest({
           variables: {
-            phoneNumber: phone,
+            phoneNumber: values.phone,
             locale: intl.locale,
             action: state.formType,
           },
@@ -172,6 +154,74 @@ const SigninScreen = ({route, navigation}) => {
   };
 
   return (
+    <View>
+      <Input
+        type="telephoneNumber"
+        onChangeText={handleChange('phone')}
+        // onChangeText={text => setPhone(text)}
+        onFocus={() => handlePhoneFocus(values, setFieldValue)}
+        value={values.phone}
+        label={<FormattedMessage id="telephone" />}
+      />
+      <VerificationContainer>
+        <Input
+          type="oneTimeCode"
+          onChangeText={handleChange('verificationCode')}
+          // onChangeText={text => setVerificationCode(text)}
+          value={values.verificationCode}
+          label={<FormattedMessage id="verification_code" />}
+        />
+        <Button small disabled={!state.enableSendOtp} onPress={handleSendPress}>
+          <Text>
+            {state.sendCount > 0 ? (
+              <FormattedMessage id="resend_verification_code" />
+            ) : (
+              <FormattedMessage id="send_verification_code" />
+            )}
+          </Text>
+        </Button>
+      </VerificationContainer>
+      <Button
+        onPress={handleSubmit}
+        title="Submit"
+        disabled={!state.enableSubmitForm}>
+        <FormattedMessage id="submit" />
+      </Button>
+    </View>
+  );
+};
+
+const SigninScreen = ({route, navigation}) => {
+  const {isSignUp, selectedBrands} = route.params;
+  const {updateAuthToken} = useContext(AuthContext);
+  const [loginRequest, {error}] = useMutation(LOGIN_API);
+
+  const handleSubmitPress = async values => {
+    if (!values.phone || !values.verificationCode) {
+      Alert.alert('please input both phone and verificationCode');
+    } else {
+      if (isSignUp) {
+        let userData = {
+          phone: values.phone,
+          verificationCode: values.verificationCode,
+          selectedBrands: selectedBrands,
+        };
+        navigation.navigate('user_profile', userData);
+      } else {
+        try {
+          const {data} = await loginRequest({
+            variables: {
+              phoneNumber: values.phone,
+              otp: values.verificationCode,
+            },
+          });
+          updateAuthToken(data.login.accessToken);
+        } catch (e) {}
+      }
+    }
+  };
+
+  return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
         <Title>
@@ -181,39 +231,16 @@ const SigninScreen = ({route, navigation}) => {
             <FormattedMessage id="connect_with_phone" />
           )}
         </Title>
-        <View>
-          <Input
-            type="telephoneNumber"
-            onChangeText={text => setPhone(text)}
-            onFocus={() => handlePhoneFocus(phone)}
-            value={phone}
-            label={<FormattedMessage id="telephone" />}
-          />
-        </View>
-        <VerificationContainer>
-          <Input
-            type="oneTimeCode"
-            onChangeText={text => setVerificationCode(text)}
-            value={verificationCode}
-            label={<FormattedMessage id="verification_code" />}
-          />
-          <Button
-            small
-            disabled={!state.enableSendOtp}
-            onPress={handleSendPress}>
-            <Text>
-              {state.sendCount > 0 ? (
-                <FormattedMessage id="resend_verification_code" />
-              ) : (
-                <FormattedMessage id="send_verification_code" />
-              )}
-            </Text>
-          </Button>
-        </VerificationContainer>
+        <Formik
+          initialValues={{
+            phone: '',
+            phonePrefix: '',
+            verificationCode: '',
+          }}
+          onSubmit={values => handleSubmitPress(values)}>
+          <SignInForm isSignUp={isSignUp} />
+        </Formik>
         {error && <Text>login / register fail. {error.message}</Text>}
-        <Button onPress={handleSubmitPress} disabled={!state.enableSubmitForm}>
-          <FormattedMessage id="submit" />
-        </Button>
         {!isSignUp && (
           <LoginAndAgree>
             <FormattedMessage

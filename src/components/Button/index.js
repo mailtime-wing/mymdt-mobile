@@ -3,7 +3,7 @@ import {Container, Text} from './style';
 
 const Button = ({children, disabled, ...props}) => (
   <Container disabled={disabled} {...props}>
-    <Text {...props}>{children}</Text>
+    <Text>{children}</Text>
   </Container>
 );
 
