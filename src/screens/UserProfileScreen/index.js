@@ -4,8 +4,10 @@ import {
   Keyboard,
   Alert,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {FormattedMessage, injectIntl} from 'react-intl';
+import {Formik} from 'formik';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
@@ -33,23 +35,23 @@ const FormInput = props => (
   </FormInputContainer>
 );
 
-const GenderOption = ({label, value, setGender, gender}) => {
+const GenderOption = ({label, value, setFieldValue, gender}) => {
   const active = gender === value;
   return (
-    <Gender active={active} onPress={() => setGender(value)}>
+    <Gender active={active} onPress={() => setFieldValue('gender', value)}>
       <GenderText active={active}>{label}</GenderText>
     </Gender>
   );
 };
 
-const GenderSelector = ({gender, setGender}) => {
+const GenderSelector = ({gender, setFieldValue}) => {
   return (
     <GenderContainer>
       {genderOptions.map(g => (
         <GenderOption
           label={g.label}
           value={g.value}
-          setGender={setGender}
+          setFieldValue={setFieldValue}
           gender={gender}
         />
       ))}
@@ -59,10 +61,6 @@ const GenderSelector = ({gender, setGender}) => {
 
 const UserProfileScreen = ({route, navigation, intl}) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [name, setName] = useState('');
-  const [gender, setGender] = useState(genderOptions[0].value);
-  const [dob, setDob] = useState(new Date());
-  const [referralCode, setReferralCode] = useState(null);
   const {phone, verificationCode, selectedBrands} = route.params;
 
   const handleSpacePress = () => {
@@ -74,18 +72,18 @@ const UserProfileScreen = ({route, navigation, intl}) => {
     setShowDatePicker(!showDatePicker);
   };
 
-  const handleNextPress = () => {
-    if (name === '' || gender === null) {
+  const handleNextPress = values => {
+    if (values.name === '' || values.gender === null) {
       Alert.alert('Please input all the required data');
     } else {
       const data = {
         phone: phone,
         verificationCode: verificationCode,
-        name: name,
-        gender: gender,
-        dob: dob.toISOString(),
+        name: values.name,
+        gender: values.gender,
+        dob: values.dob.toISOString(),
         selectedBrands: selectedBrands,
-        referralCode: referralCode,
+        referralCode: values.referralCode,
       };
       navigation.navigate('bind_email', data);
     }
@@ -101,44 +99,60 @@ const UserProfileScreen = ({route, navigation, intl}) => {
           <FormattedMessage id="we_hope_to_provide" />
         </Detail>
         <Detail>* means required</Detail>
-        <FormInput
-          label={<FormattedMessage id="your_name" />}
-          required
-          onChangeText={text => setName(text)}
-          value={name}
-        />
-        <GenderSelector gender={gender} setGender={setGender} />
-        <TouchableOpacity onPress={() => handleDatePickerPress()}>
-          <FormInput
-            label={<FormattedMessage id="date_of_birth" />}
-            required
-            value={intl.formatDate(dob, {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-            })}
-            editable={false}
-            remark={<FormattedMessage id="claim_gift_on_birthday" />}
-            placeholder="DD/MM/YYYY"
-            placeholderTextColor={props => props.theme.colors.grey.dark}
-          />
-        </TouchableOpacity>
-        <FormInput
-          label={<FormattedMessage id="referral_code" />}
-          onChangeText={text => setReferralCode(text)}
-          value={referralCode}
-        />
-        {showDatePicker && (
-          <DatePicker
-            mode="date"
-            date={dob}
-            onDateChange={setDob}
-            maximumDate={new Date()}
-          />
-        )}
-        <Button onPress={() => handleNextPress()}>
-          <FormattedMessage id="next" />
-        </Button>
+        <Formik
+          initialValues={{
+            name: '',
+            gender: genderOptions[0].value,
+            dob: new Date(),
+            referralCode: '',
+          }}
+          onSubmit={values => handleNextPress(values)}>
+          {({handleChange, handleSubmit, values, setFieldValue}) => (
+            <View>
+              <FormInput
+                label={<FormattedMessage id="your_name" />}
+                required
+                onChangeText={handleChange('name')}
+                value={values.name}
+              />
+              <GenderSelector
+                gender={values.gender}
+                setFieldValue={setFieldValue}
+              />
+              <TouchableOpacity onPress={() => handleDatePickerPress()}>
+                <FormInput
+                  label={<FormattedMessage id="date_of_birth" />}
+                  required
+                  value={intl.formatDate(values.dob, {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                  })}
+                  editable={false}
+                  remark={<FormattedMessage id="claim_gift_on_birthday" />}
+                  placeholder="DD/MM/YYYY"
+                  placeholderTextColor={props => props.theme.colors.grey.dark}
+                />
+              </TouchableOpacity>
+              <FormInput
+                label={<FormattedMessage id="referral_code" />}
+                onChangeText={handleChange('referralCode')}
+                value={values.referralCode}
+              />
+              {showDatePicker && (
+                <DatePicker
+                  mode="date"
+                  date={values.dob}
+                  onDateChange={date => setFieldValue('dob', date)}
+                  maximumDate={new Date()}
+                />
+              )}
+              <Button onPress={handleSubmit} title="Submit">
+                <FormattedMessage id="next" />
+              </Button>
+            </View>
+          )}
+        </Formik>
       </Container>
     </TouchableWithoutFeedback>
   );
