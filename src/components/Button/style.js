@@ -14,6 +14,7 @@ export const Container = styled.TouchableOpacity`
   border-radius: 28px;`
       : `padding: 20px 50px;
   border-radius: 42px;`}
+  ${props => props.width && `width: ${props.width}; align-self: center;`}
 `;
 
 export const Text = styled.Text`

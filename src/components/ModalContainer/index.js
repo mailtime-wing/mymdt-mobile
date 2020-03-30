@@ -3,8 +3,12 @@ import {Container, ScrollContainer, Title} from './style';
 
 const ModalContaienr = ({title, children}) => (
   <Container>
-    <Title>{title}</Title>
-    <ScrollContainer>{children}</ScrollContainer>
+    <ScrollContainer
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}>
+      <Title>{title}</Title>
+      {children}
+    </ScrollContainer>
   </Container>
 );
 
