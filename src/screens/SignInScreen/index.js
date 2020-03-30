@@ -158,7 +158,6 @@ const SignInForm = ({isSignUp}) => {
       <Input
         type="telephoneNumber"
         onChangeText={handleChange('phone')}
-        // onChangeText={text => setPhone(text)}
         onFocus={() => handlePhoneFocus(values, setFieldValue)}
         value={values.phone}
         label={<FormattedMessage id="telephone" />}
@@ -167,7 +166,6 @@ const SignInForm = ({isSignUp}) => {
         <Input
           type="oneTimeCode"
           onChangeText={handleChange('verificationCode')}
-          // onChangeText={text => setVerificationCode(text)}
           value={values.verificationCode}
           label={<FormattedMessage id="verification_code" />}
         />
