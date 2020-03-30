@@ -7,17 +7,14 @@ import ModalContaienr from '@/components/ModalContainer';
 import ProfileDataRow from '@/components/ProfileDataRow';
 import Switch from '@/components/Switch';
 
-import {Container, Title, ListOption, Image} from './style';
+import {Container, ListOption, Image} from './style';
 
 const SettingScreen = ({navigation}) => {
   const {language} = useContext(IntlContext);
   const [push, setPush] = useState(false); // from api later
   return (
-    <ModalContaienr>
+    <ModalContaienr title={<FormattedMessage id="settings" />}>
       <Container>
-        <Title>
-          <FormattedMessage id="settings" />
-        </Title>
         <ProfileDataRow
           label={
             <Text>

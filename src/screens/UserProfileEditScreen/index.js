@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormattedMessage, FormattedDate} from 'react-intl';
-import {Container, Title, Text, UserIcon} from './style';
+import {Container, Text, UserIcon} from './style';
 
 import ModalContaienr from '@/components/ModalContainer';
 import ProfileDataRow from '@/components/ProfileDataRow';
@@ -18,11 +18,8 @@ const data = [
 
 const UserProfileEditScreen = () => {
   return (
-    <ModalContaienr>
+    <ModalContaienr title={<FormattedMessage id="edit_profile" />}>
       <Container>
-        <Title>
-          <FormattedMessage id="edit_profile" />
-        </Title>
         {data.map(d => (
           <ProfileDataRow label={d.label} value={d.value} />
         ))}

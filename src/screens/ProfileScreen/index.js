@@ -9,6 +9,7 @@ import BindEmailEditScreen from '@/screens/BindEmailEditScreen';
 import MembershipScreen from '@/screens/MembershipScreen';
 import SettingScreen from '@/screens/SettingScreen';
 import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
+import BrandPreferenceEditScreen from '@/screens/BrandPreferenceEditScreen';
 
 import HeaderButton from '@/components/HeaderButton';
 
@@ -18,7 +19,7 @@ const screens = [
   {name: 'edit_profile', component: UserProfileEditScreen},
   {name: 'membership', component: MembershipScreen},
   {name: 'my_referral_code', component: LanguageScreen},
-  {name: 'brands_preference', component: LanguageScreen},
+  {name: 'brands_preference', component: BrandPreferenceEditScreen},
   {name: 'emails_binding', component: BindEmailEditScreen},
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'enter_invite_code', component: LanguageScreen},

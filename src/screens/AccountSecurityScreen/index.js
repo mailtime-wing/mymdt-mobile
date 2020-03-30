@@ -6,16 +6,13 @@ import ModalContaienr from '@/components/ModalContainer';
 import ProfileDataRow from '@/components/ProfileDataRow';
 import Switch from '@/components/Switch';
 
-import {Container, Title, ListOption, Image} from './style';
+import {Container, ListOption, Image} from './style';
 
 const AccountSecurityScreen = ({navigation}) => {
   const [pinAndFaceId, setPinAndFaceId] = useState(false); // from api later
   return (
-    <ModalContaienr>
+    <ModalContaienr title={<FormattedMessage id="account_security" />}>
       <Container>
-        <Title>
-          <FormattedMessage id="account_security" />
-        </Title>
         <ProfileDataRow
           label={
             <Text>

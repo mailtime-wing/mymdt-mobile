@@ -74,5 +74,13 @@
     "pin_and_face_id": "PIN & Face ID",
     "forget_pin": "Forget PIN",
     "change_phone_number": "Change Phone Number",
-    "push_notification": "Push Notification"
+    "currency": "Currency",
+    "push_notification": "Push Notification",
+    "favorite_brands": "favorite Brands",
+    "edit_preference_in_30_days": "You can edit your favorite brand preference once in 30 days. You will receive cashback based on your membership level.",
+    "max_choices": "Max choices",
+    "choose_more_brand_when_upgrade": "You can choose more brands when your membership is upgraded.",
+    "your_choices": "Your choices",
+    "get_reward_from_brands": "Get rewards when you receives email receipts from these brand.",
+    "edit": "Edit"
 }

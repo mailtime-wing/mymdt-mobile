@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {Container, Title, ButtonContainer, Text} from './style';
+import {Container, ButtonContainer, Text} from './style';
 
 import ModalContaienr from '@/components/ModalContainer';
 import ProfileDataRow from '@/components/ProfileDataRow';
@@ -25,11 +25,8 @@ const BindEmailEditScreen = () => {
   };
 
   return (
-    <ModalContaienr>
+    <ModalContaienr title={<FormattedMessage id="emails_binding" />}>
       <Container>
-        <Title>
-          <FormattedMessage id="emails_binding" />
-        </Title>
         {emailsSampleData.map((email, index) => (
           <ProfileDataRow
             label={<Text>{email.email}</Text>}

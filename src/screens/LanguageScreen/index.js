@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import {FormattedMessage} from 'react-intl';
 import {Text, TouchableOpacity, FlatList} from 'react-native';
 import {IntlContext} from '@/context/Intl';
 
@@ -22,7 +23,7 @@ const LanguageScreen = props => {
   const {languageList} = useContext(IntlContext);
 
   return (
-    <ModalContaienr>
+    <ModalContaienr title={<FormattedMessage id="language" />}>
       <FlatList
         data={languageList}
         keyExtractor={(item, index) => index.toString()}
