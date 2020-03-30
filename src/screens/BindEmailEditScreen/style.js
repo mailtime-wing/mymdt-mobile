@@ -8,9 +8,7 @@ export const Title = styled.Text`
   letter-spacing: 1px;
 `;
 
-export const Container = styled.View`
-  padding: 0px 30px;
-`;
+export const Container = styled.View``;
 
 export const CustomeSwitch = styled.Switch`
   border: 2px solid black;

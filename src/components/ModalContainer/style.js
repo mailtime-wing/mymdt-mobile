@@ -7,6 +7,7 @@ export const Container = styled.View`
   border-top-right-radius: 24px;
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
   background-color: ${props => props.theme.colors.white.normal};
+  height: 100%;
 `;
 
 export const ScrollContainer = styled.ScrollView`

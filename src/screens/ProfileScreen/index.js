@@ -7,6 +7,8 @@ import SignOutScreen from '@/screens/SignOutScreen';
 import UserProfileEditScreen from '@/screens/UserProfileEditScreen';
 import BindEmailEditScreen from '@/screens/BindEmailEditScreen';
 import MembershipScreen from '@/screens/MembershipScreen';
+import SettingScreen from '@/screens/SettingScreen';
+import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
 
 import HeaderButton from '@/components/HeaderButton';
 
@@ -18,10 +20,11 @@ const screens = [
   {name: 'my_referral_code', component: LanguageScreen},
   {name: 'brands_preference', component: LanguageScreen},
   {name: 'emails_binding', component: BindEmailEditScreen},
-  {name: 'account_security', component: UserProfileEditScreen},
+  {name: 'account_security', component: AccountSecurityScreen},
   {name: 'enter_invite_code', component: LanguageScreen},
   {name: 'sign_out', component: SignOutScreen},
-  {name: 'settings', component: LanguageScreen},
+  {name: 'settings', component: SettingScreen},
+  {name: 'language', component: LanguageScreen},
   {name: 'faq_and_support', component: LanguageScreen},
   {name: 'terms_of_service', component: LanguageScreen},
   {name: 'privacy_policy', component: LanguageScreen},

@@ -57,6 +57,7 @@ const IntlContainer = props => {
   return (
     <IntlContext.Provider
       value={{
+        language: languageList.find(lang => lang.value === language).label,
         languageList: languageList,
         localeEnum: Object.keys(locales).find(key => locales[key] === language),
         saveLanguage: saveLanguage,

@@ -1,7 +1,6 @@
 {
     "home": "首页",
     "about": "关于",
-    "setting": "设定",
     "language": "语言",
     "greetings": "您好, {name}",
     
@@ -70,5 +69,8 @@
     "sure": "SURE!",
     "all_done": "All done!",
     "let_your_cash_back": "Let your cash back",
-    "see_today_offer": "See Today’s Offers"
+    "see_today_offer": "See Today’s Offers",
+
+    "currency": "Currency",
+    "push_notification": "Push Notification"
 }

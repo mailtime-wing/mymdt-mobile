@@ -1,7 +1,6 @@
 {
     "home": "首頁",
     "about": "關於",
-    "setting": "設定",
     "language": "語言",
     "greetings": "您好, {name}",
 
@@ -70,5 +69,8 @@
     "sure": "SURE!",
     "all_done": "All done!",
     "let_your_cash_back": "Let your cash back",
-    "see_today_offer": "See Today’s Offers"
+    "see_today_offer": "See Today’s Offers",
+    
+    "currency": "Currency",
+    "push_notification": "Push Notification"
 }
