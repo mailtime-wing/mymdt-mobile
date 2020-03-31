@@ -25,12 +25,15 @@ export const DatePicker = styled.DatePickerIOS`
   margin-bottom: 10px;
 `;
 
+export const DateFieldContainer = styled.TouchableOpacity`
+  margin-top: 32px;
+`;
+
 export const GenderContainer = styled.View`
   height: 48px;
   width: 80%;
   border: 1px solid ${props => props.theme.colors.black.normal};
   flex-direction: row;
-  margin-bottom: 32px;
 `;
 
 export const Gender = styled.TouchableOpacity`
@@ -39,7 +42,6 @@ export const Gender = styled.TouchableOpacity`
   align-items: center;
   background-color: ${props =>
     props.active ? props.theme.colors.black.normal : 'transparent'};
-  border-right: 10px solid ${props => props.theme.colors.black.normal};
 `;
 
 export const GenderText = styled.Text`
@@ -51,4 +53,9 @@ export const GenderText = styled.Text`
 
 export const FormInputContainer = styled.View`
   margin-bottom: 24px;
+`;
+
+export const Error = styled.Text`
+  font-size: 12px;
+  color: red;
 `;

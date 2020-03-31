@@ -44,10 +44,10 @@ const NotificationScreen = ({navigation, route}) => {
       <Detail>
         <FormattedMessage id="turn_on_notifications_to_learn" />
       </Detail>
-      <Button onPress={() => requestNotificationPermission()}>
+      <Button onPress={requestNotificationPermission}>
         <FormattedMessage id="sure" />
       </Button>
-      <Skip onPress={() => handleSkipPress()}>
+      <Skip onPress={handleSkipPress}>
         <FormattedMessage id="skip_for_now" />
       </Skip>
     </Container>

@@ -25,3 +25,8 @@ export const Remark = styled.Text`
   line-height: 17px;
   margin-top: 5px;
 `;
+
+export const Error = styled.Text`
+  font-size: 12px;
+  color: red;
+`;

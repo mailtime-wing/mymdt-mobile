@@ -15,21 +15,25 @@ import {Formik, useFormikContext} from 'formik';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
-import {Container, Title, VerificationContainer, LoginAndAgree} from './style';
+import {
+  Container,
+  Title,
+  VerificationContainer,
+  LoginAndAgree,
+  Error,
+} from './style';
 import countryCodeData from './countryCode';
 
 const REGISTER = 'REGISTER';
 const LOGIN = 'LOGIN';
 
 const ENABLE_SEND_OTP = 'enableSendOtp';
-const ENABLE_SUBMIT_FORM = 'enableSubmitForm';
 const SET_FORM_TYPE = 'setFormType';
 const SEND_OTP = 'sendOtp';
 
 const initialState = {
   sendCount: 0,
   enableSendOtp: true,
-  enableSubmitForm: false,
   formType: '',
 };
 
@@ -39,12 +43,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         enableSendOtp: true,
-      };
-    }
-    case ENABLE_SUBMIT_FORM: {
-      return {
-        ...state,
-        enableSubmitForm: action.payload,
       };
     }
     case SET_FORM_TYPE: {
@@ -74,6 +72,8 @@ const SignInForm = ({isSignUp}) => {
     setFieldValue,
     handleChange,
     handleSubmit,
+    errors,
+    isValid,
   } = useFormikContext();
 
   // get form type/action
@@ -84,15 +84,6 @@ const SignInForm = ({isSignUp}) => {
       dispatch({type: SET_FORM_TYPE, payload: LOGIN});
     }
   }, [isSignUp]);
-
-  // check form submit availability
-  useEffect(() => {
-    if (values.phone === '' || values.verificationCode === '') {
-      dispatch({type: ENABLE_SUBMIT_FORM, payload: false});
-    } else {
-      dispatch({type: ENABLE_SUBMIT_FORM, payload: true});
-    }
-  }, [values.phone, values.verificationCode]);
 
   // get phone prefix
   useEffect(() => {
@@ -128,28 +119,18 @@ const SignInForm = ({isSignUp}) => {
   };
 
   const handleSendPress = async () => {
-    if (
-      values.phone !== '' &&
-      values.phone.includes('+') &&
-      values.phone.includes(' ')
-    ) {
-      dispatch({type: SEND_OTP});
-      try {
-        await otpRequest({
-          variables: {
-            phoneNumber: values.phone,
-            locale: intl.locale,
-            action: state.formType,
-          },
-        });
-        verificationCodeCoolDown(60);
-      } catch (e) {
-        console.error('error on otpRequest with ', state.formType);
-      }
-    } else {
-      Alert.alert(
-        'you need to enter phone number with prefix number! e.g. +852 xxxxxxxx',
-      );
+    dispatch({type: SEND_OTP});
+    try {
+      await otpRequest({
+        variables: {
+          phoneNumber: values.phone,
+          locale: intl.locale,
+          action: state.formType,
+        },
+      });
+      verificationCodeCoolDown(60);
+    } catch (e) {
+      console.error('error on otpRequest with ', state.formType);
     }
   };
 
@@ -161,6 +142,7 @@ const SignInForm = ({isSignUp}) => {
         onFocus={() => handlePhoneFocus(values, setFieldValue)}
         value={values.phone}
         label={<FormattedMessage id="telephone" />}
+        error={errors.phone}
       />
       <VerificationContainer>
         <Input
@@ -168,6 +150,7 @@ const SignInForm = ({isSignUp}) => {
           onChangeText={handleChange('verificationCode')}
           value={values.verificationCode}
           label={<FormattedMessage id="verification_code" />}
+          error={errors.verificationCode}
         />
         <Button small disabled={!state.enableSendOtp} onPress={handleSendPress}>
           <Text>
@@ -179,10 +162,7 @@ const SignInForm = ({isSignUp}) => {
           </Text>
         </Button>
       </VerificationContainer>
-      <Button
-        onPress={handleSubmit}
-        title="Submit"
-        disabled={!state.enableSubmitForm}>
+      <Button onPress={handleSubmit} title="Submit" disabled={!isValid}>
         <FormattedMessage id="submit" />
       </Button>
     </View>
@@ -219,6 +199,25 @@ const SigninScreen = ({route, navigation}) => {
     }
   };
 
+  const validate = values => {
+    const errors = {};
+
+    if (!values.phone) {
+      errors.phone = 'Phone Required';
+    } else {
+      if (!values.phone.includes('+') || !values.phone.includes(' ')) {
+        errors.phone =
+          'Phone number with prefix number required! e.g. +852 xxxxxxxx';
+      }
+    }
+
+    if (!values.verificationCode) {
+      errors.verificationCode = 'OTP Required';
+    }
+
+    return errors;
+  };
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
@@ -235,7 +234,8 @@ const SigninScreen = ({route, navigation}) => {
             phonePrefix: '',
             verificationCode: '',
           }}
-          onSubmit={values => handleSubmitPress(values)}>
+          onSubmit={values => handleSubmitPress(values)}
+          validate={values => validate(values)}>
           <SignInForm isSignUp={isSignUp} />
         </Formik>
         {error && <Text>login / register fail. {error.message}</Text>}

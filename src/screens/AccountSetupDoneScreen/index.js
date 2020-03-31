@@ -22,7 +22,7 @@ const AccountSetupDoneScreen = ({route}) => {
       <Detail>
         <FormattedMessage id="let_your_cash_back" />
       </Detail>
-      <Button onPress={() => handleDonePress()}>
+      <Button onPress={handleDonePress}>
         <FormattedMessage id="see_today_offer" />
       </Button>
     </Container>

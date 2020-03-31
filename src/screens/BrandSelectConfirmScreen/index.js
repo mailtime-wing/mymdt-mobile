@@ -34,7 +34,7 @@ const BrandSelectConfirmScreen = ({route, navigation}) => {
         />
       </Details>
       <BrandList brandList={selectedBrands} />
-      <Button onPress={() => handleConfirmPress()}>
+      <Button onPress={handleConfirmPress}>
         <FormattedMessage id="confirm" />
       </Button>
       <EditLater>

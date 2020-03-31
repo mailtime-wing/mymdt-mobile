@@ -51,7 +51,7 @@ const BrandSelectScreen = ({navigation}) => {
         selectedBrands={selectedBrands}
         setSelectedBrands={setSelectedBrands}
       />
-      <Button onPress={() => handleNextPress()}>
+      <Button onPress={handleNextPress}>
         <FormattedMessage id="next" />
       </Button>
     </ScrollContainer>

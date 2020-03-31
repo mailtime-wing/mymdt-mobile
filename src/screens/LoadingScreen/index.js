@@ -28,9 +28,9 @@ const LoadingScreen = ({navigation, route}) => {
             <FormattedMessage id="it_might_take_some_time" />
           </Detail>
           <Button
-            onPress={() =>
-              navigation.navigate('notification', {authToken: authToken})
-            }>
+            onPress={navigation.navigate('notification', {
+              authToken: authToken,
+            })}>
             <FormattedMessage id="next" />
           </Button>
         </>

@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
-import {
-  TouchableWithoutFeedback,
-  Keyboard,
-  Alert,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {TouchableWithoutFeedback, Keyboard, View} from 'react-native';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {Formik} from 'formik';
 
 import Input from '@/components/Input';
@@ -21,6 +15,8 @@ import {
   GenderText,
   DatePicker,
   FormInputContainer,
+  Error,
+  DateFieldContainer,
 } from './style';
 
 const genderOptions = [
@@ -59,7 +55,8 @@ const GenderSelector = ({gender, setFieldValue}) => {
   );
 };
 
-const UserProfileScreen = ({route, navigation, intl}) => {
+const UserProfileScreen = ({route, navigation}) => {
+  const intl = useIntl();
   const [showDatePicker, setShowDatePicker] = useState(false);
   const {phone, verificationCode, selectedBrands} = route.params;
 
@@ -73,20 +70,28 @@ const UserProfileScreen = ({route, navigation, intl}) => {
   };
 
   const handleNextPress = values => {
-    if (values.name === '' || values.gender === null) {
-      Alert.alert('Please input all the required data');
-    } else {
-      const data = {
-        phone: phone,
-        verificationCode: verificationCode,
-        name: values.name,
-        gender: values.gender,
-        dob: values.dob.toISOString(),
-        selectedBrands: selectedBrands,
-        referralCode: values.referralCode,
-      };
-      navigation.navigate('bind_email', data);
+    const data = {
+      phone: phone,
+      verificationCode: verificationCode,
+      name: values.name,
+      gender: values.gender,
+      dob: values.dob.toISOString(),
+      selectedBrands: selectedBrands,
+      referralCode: values.referralCode,
+    };
+    navigation.navigate('bind_email', data);
+  };
+
+  const validate = values => {
+    const errors = {};
+
+    if (!values.name) {
+      errors.name = 'Name Required';
     }
+    if (!values.gender) {
+      errors.gender = 'Gender Required';
+    }
+    return errors;
   };
 
   return (
@@ -106,20 +111,30 @@ const UserProfileScreen = ({route, navigation, intl}) => {
             dob: new Date(),
             referralCode: '',
           }}
-          onSubmit={values => handleNextPress(values)}>
-          {({handleChange, handleSubmit, values, setFieldValue}) => (
+          onSubmit={values => handleNextPress(values)}
+          validate={values => validate(values)}>
+          {({
+            handleChange,
+            handleSubmit,
+            values,
+            setFieldValue,
+            errors,
+            isValid,
+          }) => (
             <View>
               <FormInput
                 label={<FormattedMessage id="your_name" />}
                 required
                 onChangeText={handleChange('name')}
                 value={values.name}
+                error={errors.name}
               />
               <GenderSelector
                 gender={values.gender}
                 setFieldValue={setFieldValue}
               />
-              <TouchableOpacity onPress={() => handleDatePickerPress()}>
+              <Error>{errors.gender ? errors.gender : ' '}</Error>
+              <DateFieldContainer onPress={() => handleDatePickerPress()}>
                 <FormInput
                   label={<FormattedMessage id="date_of_birth" />}
                   required
@@ -133,7 +148,7 @@ const UserProfileScreen = ({route, navigation, intl}) => {
                   placeholder="DD/MM/YYYY"
                   placeholderTextColor={props => props.theme.colors.grey.dark}
                 />
-              </TouchableOpacity>
+              </DateFieldContainer>
               <FormInput
                 label={<FormattedMessage id="referral_code" />}
                 onChangeText={handleChange('referralCode')}
@@ -147,7 +162,7 @@ const UserProfileScreen = ({route, navigation, intl}) => {
                   maximumDate={new Date()}
                 />
               )}
-              <Button onPress={handleSubmit} title="Submit">
+              <Button onPress={handleSubmit} title="Submit" disabled={!isValid}>
                 <FormattedMessage id="next" />
               </Button>
             </View>
@@ -158,4 +173,4 @@ const UserProfileScreen = ({route, navigation, intl}) => {
   );
 };
 
-export default injectIntl(UserProfileScreen);
+export default UserProfileScreen;
