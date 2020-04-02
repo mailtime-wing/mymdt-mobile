@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {TouchableWithoutFeedback, Keyboard, View} from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {Formik} from 'formik';
+import {Formik, useFormikContext} from 'formik';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
@@ -55,18 +55,73 @@ const GenderSelector = ({gender, setFieldValue}) => {
   );
 };
 
-const UserProfileScreen = ({route, navigation}) => {
+const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
   const intl = useIntl();
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const {
+    handleChange,
+    handleSubmit,
+    values,
+    setFieldValue,
+    errors,
+    isValid,
+  } = useFormikContext();
+  return (
+    <View>
+      <FormInput
+        label={<FormattedMessage id="your_name" />}
+        required
+        onChangeText={handleChange('name')}
+        value={values.name}
+        error={errors.name}
+      />
+      <GenderSelector gender={values.gender} setFieldValue={setFieldValue} />
+      <Error>{errors.gender ? errors.gender : ' '}</Error>
+      <DateFieldContainer onPress={handleDatePickerPress}>
+        <FormInput
+          label={<FormattedMessage id="date_of_birth" />}
+          required
+          value={intl.formatDate(values.dob, {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          })}
+          editable={false}
+          remark={<FormattedMessage id="claim_gift_on_birthday" />}
+          placeholder="DD/MM/YYYY"
+          placeholderTextColor={props => props.theme.colors.grey.dark}
+        />
+      </DateFieldContainer>
+      <FormInput
+        label={<FormattedMessage id="referral_code" />}
+        onChangeText={handleChange('referralCode')}
+        value={values.referralCode}
+      />
+      {showDatePicker && (
+        <DatePicker
+          mode="date"
+          date={values.dob}
+          onDateChange={date => setFieldValue('dob', date)}
+          maximumDate={new Date()}
+        />
+      )}
+      <Button onPress={handleSubmit} title="Submit" disabled={!isValid}>
+        <FormattedMessage id="next" />
+      </Button>
+    </View>
+  );
+};
+
+const UserProfileScreen = ({route, navigation}) => {
   const {phone, verificationCode, selectedBrands} = route.params;
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const handleDatePickerPress = () => {
+    setShowDatePicker(!showDatePicker);
+  };
 
   const handleSpacePress = () => {
     setShowDatePicker(false);
     Keyboard.dismiss();
-  };
-
-  const handleDatePickerPress = () => {
-    setShowDatePicker(!showDatePicker);
   };
 
   const handleNextPress = values => {
@@ -113,60 +168,10 @@ const UserProfileScreen = ({route, navigation}) => {
           }}
           onSubmit={values => handleNextPress(values)}
           validate={values => validate(values)}>
-          {({
-            handleChange,
-            handleSubmit,
-            values,
-            setFieldValue,
-            errors,
-            isValid,
-          }) => (
-            <View>
-              <FormInput
-                label={<FormattedMessage id="your_name" />}
-                required
-                onChangeText={handleChange('name')}
-                value={values.name}
-                error={errors.name}
-              />
-              <GenderSelector
-                gender={values.gender}
-                setFieldValue={setFieldValue}
-              />
-              <Error>{errors.gender ? errors.gender : ' '}</Error>
-              <DateFieldContainer onPress={() => handleDatePickerPress()}>
-                <FormInput
-                  label={<FormattedMessage id="date_of_birth" />}
-                  required
-                  value={intl.formatDate(values.dob, {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                  })}
-                  editable={false}
-                  remark={<FormattedMessage id="claim_gift_on_birthday" />}
-                  placeholder="DD/MM/YYYY"
-                  placeholderTextColor={props => props.theme.colors.grey.dark}
-                />
-              </DateFieldContainer>
-              <FormInput
-                label={<FormattedMessage id="referral_code" />}
-                onChangeText={handleChange('referralCode')}
-                value={values.referralCode}
-              />
-              {showDatePicker && (
-                <DatePicker
-                  mode="date"
-                  date={values.dob}
-                  onDateChange={date => setFieldValue('dob', date)}
-                  maximumDate={new Date()}
-                />
-              )}
-              <Button onPress={handleSubmit} title="Submit" disabled={!isValid}>
-                <FormattedMessage id="next" />
-              </Button>
-            </View>
-          )}
+          <UserProfileForm
+            showDatePicker={showDatePicker}
+            handleDatePickerPress={handleDatePickerPress}
+          />
         </Formik>
       </Container>
     </TouchableWithoutFeedback>

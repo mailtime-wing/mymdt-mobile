@@ -1,11 +1,5 @@
 import React, {useContext, useEffect, useReducer} from 'react';
-import {
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Alert,
-} from 'react-native';
+import {View, Text, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import CarrierInfo from 'react-native-carrier-info';
 import {AuthContext} from '@/context/auth';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -152,7 +146,10 @@ const SignInForm = ({isSignUp}) => {
           label={<FormattedMessage id="verification_code" />}
           error={errors.verificationCode}
         />
-        <Button small disabled={!state.enableSendOtp} onPress={handleSendPress}>
+        <Button
+          small
+          disabled={!state.enableSendOtp || errors.phone}
+          onPress={handleSendPress}>
           <Text>
             {state.sendCount > 0 ? (
               <FormattedMessage id="resend_verification_code" />
@@ -175,27 +172,23 @@ const SigninScreen = ({route, navigation}) => {
   const [loginRequest, {error}] = useMutation(LOGIN_API);
 
   const handleSubmitPress = async values => {
-    if (!values.phone || !values.verificationCode) {
-      Alert.alert('please input both phone and verificationCode');
+    if (isSignUp) {
+      let userData = {
+        phone: values.phone,
+        verificationCode: values.verificationCode,
+        selectedBrands: selectedBrands,
+      };
+      navigation.navigate('user_profile', userData);
     } else {
-      if (isSignUp) {
-        let userData = {
-          phone: values.phone,
-          verificationCode: values.verificationCode,
-          selectedBrands: selectedBrands,
-        };
-        navigation.navigate('user_profile', userData);
-      } else {
-        try {
-          const {data} = await loginRequest({
-            variables: {
-              phoneNumber: values.phone,
-              otp: values.verificationCode,
-            },
-          });
-          updateAuthToken(data.login.accessToken);
-        } catch (e) {}
-      }
+      try {
+        const {data} = await loginRequest({
+          variables: {
+            phoneNumber: values.phone,
+            otp: values.verificationCode,
+          },
+        });
+        updateAuthToken(data.login.accessToken);
+      } catch (e) {}
     }
   };
 
