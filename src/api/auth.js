@@ -1,6 +1,6 @@
 import {gql} from 'apollo-boost';
 
-export const GET_OTP = gql`
+export const GET_OTP_API = gql`
   mutation RequestOTPCode(
     $phoneNumber: String!
     $locale: String!
@@ -10,7 +10,7 @@ export const GET_OTP = gql`
   }
 `;
 
-export const REGISTER = gql`
+export const REGISTER_API = gql`
   mutation Register(
     $phoneNumber: String!
     $otp: String!
@@ -37,7 +37,7 @@ export const REGISTER = gql`
   }
 `;
 
-export const LOGIN = gql`
+export const LOGIN_API = gql`
   mutation Login($phoneNumber: String!, $otp: String!) {
     login(phoneNumber: $phoneNumber, otp: $otp) {
       accessToken
@@ -46,11 +46,11 @@ export const LOGIN = gql`
   }
 `;
 
-export const REFRESH_TOKEN = gql`
+export const REFRESH_TOKEN_API = gql`
   mutation RefreshAuthToken($refreshToken: String!) {
     refreshAuthToken(refreshToken: $refreshToken) {
       accessToken
       refreshToken
     }
-}
-`
+  }
+`;

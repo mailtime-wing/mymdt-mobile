@@ -4,7 +4,9 @@ export const TextInput = styled.TextInput`
   padding: 12px 0;
   border-bottom-color: ${props => props.theme.colors.black.normal};
   border-bottom-width: 1px;
-  color: black;
+  color: ${props => props.theme.colors.black.normal};
+  font-size: 16px;
+  line-height: 19px;
 `;
 
 export const Container = styled.View`
@@ -22,4 +24,9 @@ export const Remark = styled.Text`
   font-size: 14px;
   line-height: 17px;
   margin-top: 5px;
+`;
+
+export const Error = styled.Text`
+  font-size: 12px;
+  color: red;
 `;

@@ -9,7 +9,7 @@ const BrandSelectConfirmScreen = ({route, navigation}) => {
   const {numberOfBrand} = route.params;
   const {selectedBrands} = route.params;
 
-  const onConfirmHandler = () => {
+  const handleConfirmPress = () => {
     navigation.navigate('sign_in', {
       isSignUp: true,
       selectedBrands: selectedBrands,
@@ -34,7 +34,7 @@ const BrandSelectConfirmScreen = ({route, navigation}) => {
         />
       </Details>
       <BrandList brandList={selectedBrands} />
-      <Button onPress={() => onConfirmHandler()}>
+      <Button onPress={handleConfirmPress}>
         <FormattedMessage id="confirm" />
       </Button>
       <EditLater>

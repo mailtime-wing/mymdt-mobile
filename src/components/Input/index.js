@@ -1,7 +1,7 @@
 import React from 'react';
-import {Container, TextInput, Label, Remark} from './style';
+import {Container, TextInput, Label, Remark, Error} from './style';
 
-const Input = ({label, required, remark, ...props}) => {
+const Input = ({label, required, remark, error, ...props}) => {
   return (
     <Container>
       <Label>
@@ -9,6 +9,7 @@ const Input = ({label, required, remark, ...props}) => {
         {required && '*'}
       </Label>
       <TextInput autoCapitalize="none" {...props} />
+      {<Error>{error ? error : ' '}</Error>}
       {remark && <Remark>{remark}</Remark>}
     </Container>
   );

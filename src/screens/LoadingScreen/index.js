@@ -29,7 +29,9 @@ const LoadingScreen = ({navigation, route}) => {
           </Detail>
           <Button
             onPress={() =>
-              navigation.navigate('notification', {authToken: authToken})
+              navigation.navigate('notification', {
+                authToken: authToken,
+              })
             }>
             <FormattedMessage id="next" />
           </Button>
