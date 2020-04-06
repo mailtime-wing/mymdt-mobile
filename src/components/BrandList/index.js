@@ -1,4 +1,5 @@
 import React from 'react';
+import {Alert} from 'react-native';
 import {
   BrandsContainer,
   BrandContainer,
@@ -17,18 +18,27 @@ const Brand = ({name, selected, ...props}) => (
   </BrandContainer>
 );
 
-const BrandList = ({brandList, selectedBrands, setSelectedBrands}) => {
+const BrandList = ({
+  brandList,
+  selectedBrands,
+  setSelectedBrands,
+  brandsLimit,
+}) => {
   const onSelect = ({id, name}) => {
     if (selectedBrands.find(brand => brand.id === id)) {
       setSelectedBrands(selectedBrands.filter(brand => brand.id !== id));
     } else {
-      setSelectedBrands([
-        ...selectedBrands,
-        {
-          id: id,
-          name: name,
-        },
-      ]);
+      if (selectedBrands.length >= brandsLimit) {
+        Alert.alert(`you can choose ${brandsLimit} brands only`);
+      } else {
+        setSelectedBrands([
+          ...selectedBrands,
+          {
+            id: id,
+            name: name,
+          },
+        ]);
+      }
     }
   };
 
