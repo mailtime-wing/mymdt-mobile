@@ -45,6 +45,7 @@ const MenuScreen = props => {
         listTitle={<FormattedMessage id="account" />}
         listItem={[
           {key: 'profile', value: <FormattedMessage id="profile" />},
+          {key: 'emails_binding', value: <FormattedMessage id="emails_binding" />},
           {
             key: 'my_referral_code',
             value: <FormattedMessage id="my_referral_code" />,

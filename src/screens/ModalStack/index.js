@@ -4,6 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LanguageScreen from '@/screens/LanguageScreen';
 import MenuScreen from '@/screens/MenuScreen';
 import SignOutScreen from '@/screens/SignOutScreen';
+import UserProfileEditScreen from '@/screens/UserProfileEditScreen';
+import BindEmailEditScreen from '@/screens/BindEmailEditScreen';
 import {ModalContainer} from './style';
 
 import HeaderButton from '@/components/HeaderButton';
@@ -13,7 +15,8 @@ const Stack = createStackNavigator();
 const screens = [
   {name: 'menu', component: MenuScreen},
   {name: 'brands_preference', component: LanguageScreen},
-  {name: 'profile', component: LanguageScreen},
+  {name: 'profile', component: UserProfileEditScreen},
+  {name: 'emails_binding', component: BindEmailEditScreen},
   {name: 'my_referral_code', component: LanguageScreen},
   {name: 'enter_invite_code', component: LanguageScreen},
   {name: 'sign_out', component: SignOutScreen},

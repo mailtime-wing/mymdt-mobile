@@ -2,7 +2,7 @@ import styled from '@emotion/native';
 
 export const Container = styled.View`
   margin-top: 16px;
-  padding-top: 40px;
+  padding-top: 85px;
   padding-bottom: 30px;
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
