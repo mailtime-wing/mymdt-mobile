@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Alert} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {ScrollContainer, Details} from './style';
 
@@ -22,14 +21,10 @@ const BrandSelectScreen = ({navigation}) => {
   const [selectedBrands, setSelectedBrands] = useState([]);
 
   const handleNextPress = () => {
-    if (selectedBrands.length !== 2) {
-      Alert.alert('you can only choose 2 brands');
-    } else {
-      navigation.navigate('brand_select_confirm', {
-        selectedBrands: selectedBrands,
-        numberOfBrand: numberOfBrand,
-      });
-    }
+    navigation.navigate('brand_select_confirm', {
+      selectedBrands: selectedBrands,
+      numberOfBrand: numberOfBrand,
+    });
   };
 
   return (
@@ -50,6 +45,7 @@ const BrandSelectScreen = ({navigation}) => {
         brandList={brandList}
         selectedBrands={selectedBrands}
         setSelectedBrands={setSelectedBrands}
+        brandsLimit={2}
       />
       <Button onPress={handleNextPress}>
         <FormattedMessage id="next" />
