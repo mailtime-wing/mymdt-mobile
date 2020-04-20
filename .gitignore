@@ -61,5 +61,6 @@ buck-out/
 # cache
 .eslintcache
 
-
 .env
+.env.*
+!.env.sample
