@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* mymdtmobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mymdtmobileTests.m */; };
+		00E356F31AD99517003FC87E /* RewardMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RewardMeTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -15,11 +15,11 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* mymdtmobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mymdtmobileTests.m */; };
-		99DCCAC39103D7A2B5FE93A6 /* libPods-mymdtmobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C042B59D362A20C45C42D814 /* libPods-mymdtmobile.a */; };
-		A23213640B271B0E0A985A1A /* libPods-mymdtmobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451F26ADE4D5CC0D7B244A84 /* libPods-mymdtmobile-tvOSTests.a */; };
-		B7ED43D0A393F1E13660EFFC /* libPods-mymdtmobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC09FEFF5803922CDCFE782 /* libPods-mymdtmobileTests.a */; };
-		E4A861414D4F4AFCEC62E206 /* libPods-mymdtmobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6668AC177D9D64DC5B43B235 /* libPods-mymdtmobile-tvOS.a */; };
+		2DCD954D1E0B4F2C00145EB5 /* RewardMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RewardMeTests.m */; };
+		99DCCAC39103D7A2B5FE93A6 /* libPods-RewardMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C042B59D362A20C45C42D814 /* libPods-RewardMe.a */; };
+		A23213640B271B0E0A985A1A /* libPods-RewardMe-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451F26ADE4D5CC0D7B244A84 /* libPods-RewardMe-tvOSTests.a */; };
+		B7ED43D0A393F1E13660EFFC /* libPods-RewardMeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC09FEFF5803922CDCFE782 /* libPods-RewardMeTests.a */; };
+		E4A861414D4F4AFCEC62E206 /* libPods-RewardMe-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6668AC177D9D64DC5B43B235 /* libPods-RewardMe-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,43 +28,43 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = mymdtmobile;
+			remoteInfo = RewardMe;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "mymdtmobile-tvOS";
+			remoteInfo = "RewardMe-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* mymdtmobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mymdtmobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* RewardMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RewardMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* mymdtmobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mymdtmobileTests.m; sourceTree = "<group>"; };
-		0C660135710DCC1D7AB8AB82 /* Pods-mymdtmobile-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mymdtmobile-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-mymdtmobile-tvOSTests/Pods-mymdtmobile-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		11B31DFFF04ED9C5E9D74B2E /* Pods-mymdtmobile-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mymdtmobile-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-mymdtmobile-tvOSTests/Pods-mymdtmobile-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* mymdtmobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mymdtmobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = mymdtmobile/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = mymdtmobile/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* RewardMeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardMeTests.m; sourceTree = "<group>"; };
+		0C660135710DCC1D7AB8AB82 /* Pods-RewardMe-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-RewardMe-tvOSTests/Pods-RewardMe-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		11B31DFFF04ED9C5E9D74B2E /* Pods-RewardMe-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-RewardMe-tvOSTests/Pods-RewardMe-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* RewardMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RewardMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = RewardMe/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = RewardMe/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = mymdtmobile/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = mymdtmobile/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = mymdtmobile/main.m; sourceTree = "<group>"; };
-		2C8D884322C4D9399E441184 /* Pods-mymdtmobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mymdtmobile.debug.xcconfig"; path = "Target Support Files/Pods-mymdtmobile/Pods-mymdtmobile.debug.xcconfig"; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* mymdtmobile-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mymdtmobile-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* mymdtmobile-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mymdtmobile-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2FB8A1F0D6EBBABD4EDF80E7 /* Pods-mymdtmobile-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mymdtmobile-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-mymdtmobile-tvOS/Pods-mymdtmobile-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		451F26ADE4D5CC0D7B244A84 /* libPods-mymdtmobile-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mymdtmobile-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D4F94DD244013BA2C05F355 /* Pods-mymdtmobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mymdtmobileTests.release.xcconfig"; path = "Target Support Files/Pods-mymdtmobileTests/Pods-mymdtmobileTests.release.xcconfig"; sourceTree = "<group>"; };
-		6668AC177D9D64DC5B43B235 /* libPods-mymdtmobile-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mymdtmobile-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EC09FEFF5803922CDCFE782 /* libPods-mymdtmobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mymdtmobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD3657E23D936590108E99FB /* Pods-mymdtmobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mymdtmobile.release.xcconfig"; path = "Target Support Files/Pods-mymdtmobile/Pods-mymdtmobile.release.xcconfig"; sourceTree = "<group>"; };
-		B09D2595440A1FA49E00C4CB /* Pods-mymdtmobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mymdtmobileTests.debug.xcconfig"; path = "Target Support Files/Pods-mymdtmobileTests/Pods-mymdtmobileTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C042B59D362A20C45C42D814 /* libPods-mymdtmobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mymdtmobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD6E0A087DA561327AA6E405 /* Pods-mymdtmobile-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mymdtmobile-tvOS.release.xcconfig"; path = "Target Support Files/Pods-mymdtmobile-tvOS/Pods-mymdtmobile-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RewardMe/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RewardMe/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RewardMe/main.m; sourceTree = "<group>"; };
+		2C8D884322C4D9399E441184 /* Pods-RewardMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe.debug.xcconfig"; path = "Target Support Files/Pods-RewardMe/Pods-RewardMe.debug.xcconfig"; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* RewardMe-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RewardMe-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* RewardMe-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RewardMe-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FB8A1F0D6EBBABD4EDF80E7 /* Pods-RewardMe-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RewardMe-tvOS/Pods-RewardMe-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		451F26ADE4D5CC0D7B244A84 /* libPods-RewardMe-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D4F94DD244013BA2C05F355 /* Pods-RewardMeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMeTests.release.xcconfig"; path = "Target Support Files/Pods-RewardMeTests/Pods-RewardMeTests.release.xcconfig"; sourceTree = "<group>"; };
+		6668AC177D9D64DC5B43B235 /* libPods-RewardMe-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EC09FEFF5803922CDCFE782 /* libPods-RewardMeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD3657E23D936590108E99FB /* Pods-RewardMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe.release.xcconfig"; path = "Target Support Files/Pods-RewardMe/Pods-RewardMe.release.xcconfig"; sourceTree = "<group>"; };
+		B09D2595440A1FA49E00C4CB /* Pods-RewardMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMeTests.debug.xcconfig"; path = "Target Support Files/Pods-RewardMeTests/Pods-RewardMeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C042B59D362A20C45C42D814 /* libPods-RewardMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD6E0A087DA561327AA6E405 /* Pods-RewardMe-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-tvOS.release.xcconfig"; path = "Target Support Files/Pods-RewardMe-tvOS/Pods-RewardMe-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7ED43D0A393F1E13660EFFC /* libPods-mymdtmobileTests.a in Frameworks */,
+				B7ED43D0A393F1E13660EFFC /* libPods-RewardMeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99DCCAC39103D7A2B5FE93A6 /* libPods-mymdtmobile.a in Frameworks */,
+				99DCCAC39103D7A2B5FE93A6 /* libPods-RewardMe.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4A861414D4F4AFCEC62E206 /* libPods-mymdtmobile-tvOS.a in Frameworks */,
+				E4A861414D4F4AFCEC62E206 /* libPods-RewardMe-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,20 +98,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A23213640B271B0E0A985A1A /* libPods-mymdtmobile-tvOSTests.a in Frameworks */,
+				A23213640B271B0E0A985A1A /* libPods-RewardMe-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* mymdtmobileTests */ = {
+		00E356EF1AD99517003FC87E /* RewardMeTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* mymdtmobileTests.m */,
+				00E356F21AD99517003FC87E /* RewardMeTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = mymdtmobileTests;
+			path = RewardMeTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -122,7 +122,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* mymdtmobile */ = {
+		13B07FAE1A68108700A75B9A /* RewardMe */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -133,7 +133,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = mymdtmobile;
+			name = RewardMe;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -141,10 +141,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				C042B59D362A20C45C42D814 /* libPods-mymdtmobile.a */,
-				6668AC177D9D64DC5B43B235 /* libPods-mymdtmobile-tvOS.a */,
-				451F26ADE4D5CC0D7B244A84 /* libPods-mymdtmobile-tvOSTests.a */,
-				7EC09FEFF5803922CDCFE782 /* libPods-mymdtmobileTests.a */,
+				C042B59D362A20C45C42D814 /* libPods-RewardMe.a */,
+				6668AC177D9D64DC5B43B235 /* libPods-RewardMe-tvOS.a */,
+				451F26ADE4D5CC0D7B244A84 /* libPods-RewardMe-tvOSTests.a */,
+				7EC09FEFF5803922CDCFE782 /* libPods-RewardMeTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,9 +159,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* mymdtmobile */,
+				13B07FAE1A68108700A75B9A /* RewardMe */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* mymdtmobileTests */,
+				00E356EF1AD99517003FC87E /* RewardMeTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				8B0856874EAFEFC7C6191321 /* Pods */,
@@ -174,10 +174,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* mymdtmobile.app */,
-				00E356EE1AD99517003FC87E /* mymdtmobileTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* mymdtmobile-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* mymdtmobile-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* RewardMe.app */,
+				00E356EE1AD99517003FC87E /* RewardMeTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* RewardMe-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* RewardMe-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,14 +185,14 @@
 		8B0856874EAFEFC7C6191321 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2C8D884322C4D9399E441184 /* Pods-mymdtmobile.debug.xcconfig */,
-				AD3657E23D936590108E99FB /* Pods-mymdtmobile.release.xcconfig */,
-				2FB8A1F0D6EBBABD4EDF80E7 /* Pods-mymdtmobile-tvOS.debug.xcconfig */,
-				CD6E0A087DA561327AA6E405 /* Pods-mymdtmobile-tvOS.release.xcconfig */,
-				11B31DFFF04ED9C5E9D74B2E /* Pods-mymdtmobile-tvOSTests.debug.xcconfig */,
-				0C660135710DCC1D7AB8AB82 /* Pods-mymdtmobile-tvOSTests.release.xcconfig */,
-				B09D2595440A1FA49E00C4CB /* Pods-mymdtmobileTests.debug.xcconfig */,
-				4D4F94DD244013BA2C05F355 /* Pods-mymdtmobileTests.release.xcconfig */,
+				2C8D884322C4D9399E441184 /* Pods-RewardMe.debug.xcconfig */,
+				AD3657E23D936590108E99FB /* Pods-RewardMe.release.xcconfig */,
+				2FB8A1F0D6EBBABD4EDF80E7 /* Pods-RewardMe-tvOS.debug.xcconfig */,
+				CD6E0A087DA561327AA6E405 /* Pods-RewardMe-tvOS.release.xcconfig */,
+				11B31DFFF04ED9C5E9D74B2E /* Pods-RewardMe-tvOSTests.debug.xcconfig */,
+				0C660135710DCC1D7AB8AB82 /* Pods-RewardMe-tvOSTests.release.xcconfig */,
+				B09D2595440A1FA49E00C4CB /* Pods-RewardMeTests.debug.xcconfig */,
+				4D4F94DD244013BA2C05F355 /* Pods-RewardMeTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -200,9 +200,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* mymdtmobileTests */ = {
+		00E356ED1AD99517003FC87E /* RewardMeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "mymdtmobileTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "RewardMeTests" */;
 			buildPhases = (
 				FA7D4A52DFE65B8C52E2C54F /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -214,14 +214,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = mymdtmobileTests;
-			productName = mymdtmobileTests;
-			productReference = 00E356EE1AD99517003FC87E /* mymdtmobileTests.xctest */;
+			name = RewardMeTests;
+			productName = RewardMeTests;
+			productReference = 00E356EE1AD99517003FC87E /* RewardMeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* mymdtmobile */ = {
+		13B07F861A680F5B00A75B9A /* RewardMe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "mymdtmobile" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RewardMe" */;
 			buildPhases = (
 				C2CF1F9A2E38AD70E9435673 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -234,14 +234,14 @@
 			);
 			dependencies = (
 			);
-			name = mymdtmobile;
-			productName = mymdtmobile;
-			productReference = 13B07F961A680F5B00A75B9A /* mymdtmobile.app */;
+			name = RewardMe;
+			productName = RewardMe;
+			productReference = 13B07F961A680F5B00A75B9A /* RewardMe.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* mymdtmobile-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* RewardMe-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "mymdtmobile-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "RewardMe-tvOS" */;
 			buildPhases = (
 				42E07858D2CA42CE5093C1DC /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -254,14 +254,14 @@
 			);
 			dependencies = (
 			);
-			name = "mymdtmobile-tvOS";
-			productName = "mymdtmobile-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* mymdtmobile-tvOS.app */;
+			name = "RewardMe-tvOS";
+			productName = "RewardMe-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* RewardMe-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* mymdtmobile-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* RewardMe-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "mymdtmobile-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "RewardMe-tvOSTests" */;
 			buildPhases = (
 				3CD921F8F6E2C15AD96158DE /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -273,9 +273,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "mymdtmobile-tvOSTests";
-			productName = "mymdtmobile-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* mymdtmobile-tvOSTests.xctest */;
+			name = "RewardMe-tvOSTests";
+			productName = "RewardMe-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* RewardMe-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -307,7 +307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "mymdtmobile" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "RewardMe" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -321,10 +321,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* mymdtmobile */,
-				00E356ED1AD99517003FC87E /* mymdtmobileTests */,
-				2D02E47A1E0B4A5D006451C7 /* mymdtmobile-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* mymdtmobile-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* RewardMe */,
+				00E356ED1AD99517003FC87E /* RewardMeTests */,
+				2D02E47A1E0B4A5D006451C7 /* RewardMe-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* RewardMe-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -407,7 +407,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mymdtmobile-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-RewardMe-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -429,7 +429,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mymdtmobile-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-RewardMe-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -451,7 +451,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mymdtmobile-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-RewardMe-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -473,7 +473,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mymdtmobileTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-RewardMeTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -525,7 +525,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* mymdtmobileTests.m in Sources */,
+				00E356F31AD99517003FC87E /* RewardMeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,7 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* mymdtmobileTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* RewardMeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,12 +560,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* mymdtmobile */;
+			target = 13B07F861A680F5B00A75B9A /* RewardMe */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* mymdtmobile-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* RewardMe-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -577,7 +577,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = mymdtmobile;
+			path = RewardMe;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -585,7 +585,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B09D2595440A1FA49E00C4CB /* Pods-mymdtmobileTests.debug.xcconfig */;
+			baseConfigurationReference = B09D2595440A1FA49E00C4CB /* Pods-RewardMeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = WLDG9F47A2;
@@ -593,7 +593,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = mymdtmobileTests/Info.plist;
+				INFOPLIST_FILE = RewardMeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -603,18 +603,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mymdtmobile.app/mymdtmobile";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RewardMe.app/RewardMe";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D4F94DD244013BA2C05F355 /* Pods-mymdtmobileTests.release.xcconfig */;
+			baseConfigurationReference = 4D4F94DD244013BA2C05F355 /* Pods-RewardMeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = WLDG9F47A2;
-				INFOPLIST_FILE = mymdtmobileTests/Info.plist;
+				INFOPLIST_FILE = RewardMeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -624,13 +624,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mymdtmobile.app/mymdtmobile";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RewardMe.app/RewardMe";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C8D884322C4D9399E441184 /* Pods-mymdtmobile.debug.xcconfig */;
+			baseConfigurationReference = 2C8D884322C4D9399E441184 /* Pods-RewardMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -638,7 +638,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = WLDG9F47A2;
-				INFOPLIST_FILE = mymdtmobile/Info.plist;
+				INFOPLIST_FILE = RewardMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -646,7 +646,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = mymdtmobile;
+				PRODUCT_NAME = RewardMe;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -654,14 +654,14 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD3657E23D936590108E99FB /* Pods-mymdtmobile.release.xcconfig */;
+			baseConfigurationReference = AD3657E23D936590108E99FB /* Pods-RewardMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WLDG9F47A2;
-				INFOPLIST_FILE = mymdtmobile/Info.plist;
+				INFOPLIST_FILE = RewardMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -669,7 +669,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = mymdtmobile;
+				PRODUCT_NAME = RewardMe;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -677,7 +677,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FB8A1F0D6EBBABD4EDF80E7 /* Pods-mymdtmobile-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 2FB8A1F0D6EBBABD4EDF80E7 /* Pods-RewardMe-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -688,14 +688,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "mymdtmobile-tvOS/Info.plist";
+				INFOPLIST_FILE = "RewardMe-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mymdtmobile-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.RewardMe-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -705,7 +705,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD6E0A087DA561327AA6E405 /* Pods-mymdtmobile-tvOS.release.xcconfig */;
+			baseConfigurationReference = CD6E0A087DA561327AA6E405 /* Pods-RewardMe-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -716,14 +716,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "mymdtmobile-tvOS/Info.plist";
+				INFOPLIST_FILE = "RewardMe-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mymdtmobile-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.RewardMe-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -733,7 +733,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11B31DFFF04ED9C5E9D74B2E /* Pods-mymdtmobile-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 11B31DFFF04ED9C5E9D74B2E /* Pods-RewardMe-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -743,24 +743,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "mymdtmobile-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "RewardMe-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mymdtmobile-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.RewardMe-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mymdtmobile-tvOS.app/mymdtmobile-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RewardMe-tvOS.app/RewardMe-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C660135710DCC1D7AB8AB82 /* Pods-mymdtmobile-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 0C660135710DCC1D7AB8AB82 /* Pods-RewardMe-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -770,17 +770,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "mymdtmobile-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "RewardMe-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mymdtmobile-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.RewardMe-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mymdtmobile-tvOS.app/mymdtmobile-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RewardMe-tvOS.app/RewardMe-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -887,7 +887,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "mymdtmobileTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "RewardMeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -896,7 +896,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "mymdtmobile" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RewardMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -905,7 +905,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "mymdtmobile-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "RewardMe-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -914,7 +914,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "mymdtmobile-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "RewardMe-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -923,7 +923,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "mymdtmobile" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "RewardMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
