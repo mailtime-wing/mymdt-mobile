@@ -77,7 +77,6 @@ const UserProfileEditForm = () => {
     Keyboard.dismiss();
     resetForm();
     setIsEditing(false);
-    console.log('values in resetform', values);
   };
 
   const handleConfirmPress = () => {
@@ -108,7 +107,6 @@ const UserProfileEditForm = () => {
   };
 
   const handleGenderPress = () => {
-    console.log('pressed');
     if (refRBSheet.current) {
       refRBSheet.current.open();
     }
@@ -257,7 +255,8 @@ const UserProfileEditScreen = () => {
             gender: genderOptions[0].value,
             dob: new Date(),
           }}
-          onSubmit={values => console.log(values)}>
+          onSubmit={values => console.log(values)}
+        >
           <UserProfileEditForm />
         </Formik>
       </Container>
