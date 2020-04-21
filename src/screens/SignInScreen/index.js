@@ -2,10 +2,11 @@ import React, {useContext, useEffect, useReducer} from 'react';
 import {View, Text, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import CarrierInfo from 'react-native-carrier-info';
 import {AuthContext} from '@/context/auth';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import {GET_OTP_API, LOGIN_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
 import {Formik, useFormikContext} from 'formik';
+import {IntlContext} from '@/context/Intl';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
@@ -59,7 +60,7 @@ const reducer = (state, action) => {
 
 const SignInForm = ({isSignUp}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const intl = useIntl();
+  const {localeEnum} = useContext(IntlContext);
   const [otpRequest] = useMutation(GET_OTP_API);
   const {
     values,
@@ -118,13 +119,13 @@ const SignInForm = ({isSignUp}) => {
       await otpRequest({
         variables: {
           phoneNumber: values.phone,
-          locale: intl.locale,
+          locale: localeEnum,
           action: state.formType,
         },
       });
       verificationCodeCoolDown(60);
     } catch (e) {
-      console.error('error on otpRequest with ', state.formType);
+      console.error(`error on otpRequest with ${state.formType}: ${e}`);
     }
   };
 

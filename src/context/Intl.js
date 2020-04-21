@@ -2,7 +2,7 @@ import React, {useState, createContext, useEffect} from 'react';
 import {AsyncStorage, Text} from 'react-native';
 import {IntlProvider} from 'react-intl';
 
-import locale from '@/constants/locale';
+import locales from '@/constants/locale';
 import {LANGUAGE_STORAGE_KEY} from '@/constants/storageKey';
 
 import enMessages from '@/intl/en-US.json';
@@ -13,15 +13,15 @@ window.DOMParser = require('xmldom').DOMParser;
 const IntlContext = createContext(null);
 
 const languageList = [
-  {value: locale.en, label: 'English'},
-  {value: locale.hk, label: '中文 （繁體）'},
-  {value: locale.cn, label: '中文 （简体）'},
+  {value: locales.EN_US, label: 'English'},
+  {value: locales.ZH_HK, label: '中文 （繁體）'},
+  {value: locales.ZH_CN, label: '中文 （简体）'},
 ];
 
 const translations = {
-  [locale.en]: enMessages,
-  [locale.hk]: hkMessages,
-  [locale.cn]: cnMessages,
+  [locales.EN_US]: enMessages,
+  [locales.ZH_HK]: hkMessages,
+  [locales.ZH_CN]: cnMessages,
 };
 
 const IntlContainer = props => {
@@ -58,13 +58,14 @@ const IntlContainer = props => {
     <IntlContext.Provider
       value={{
         languageList: languageList,
+        localeEnum: Object.keys(locales).find(key => locales[key] === language),
         saveLanguage: saveLanguage,
         loadLanguage: loadLanguage,
       }}>
       <IntlProvider
         locale={language}
         messages={translation}
-        defaultLocale="en-US"
+        defaultLocale={locales.EN_US}
         textComponent={Text}>
         {props.children}
       </IntlProvider>

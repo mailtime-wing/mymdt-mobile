@@ -1,12 +1,12 @@
 import {gql} from 'apollo-boost';
 
 export const GET_OTP_API = gql`
-  mutation RequestOTPCode(
+  mutation RequestOtpCode(
     $phoneNumber: String!
-    $locale: String!
+    $locale: Locale!
     $action: SMSOtpAction!
   ) {
-    requestOTPCode(phoneNumber: $phoneNumber, locale: $locale, action: $action)
+    requestOtpCode(phoneNumber: $phoneNumber, locale: $locale, action: $action)
   }
 `;
 
@@ -19,7 +19,7 @@ export const REGISTER_API = gql`
     $dateOfBirth: Time!
     $referalCode: String
     $subscribedBrandIds: [String!]
-    $locale: String!
+    $locale: Locale!
   ) {
     register(
       phoneNumber: $phoneNumber

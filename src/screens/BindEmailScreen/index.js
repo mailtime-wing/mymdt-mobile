@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Text, TouchableOpacity, Alert} from 'react-native';
 import {useMutation} from '@apollo/react-hooks';
 import {REGISTER_API} from '@/api/auth';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {IntlContext} from '@/context/Intl';
+import {FormattedMessage} from 'react-intl';
 import {
   Container,
   EmailContainer,
@@ -25,7 +26,7 @@ const BindEmailScreen = ({route, navigation}) => {
     selectedBrands,
     referralCode,
   } = route.params;
-  const intl = useIntl();
+  const {localeEnum} = useContext(IntlContext);
   const [emails, setEmails] = useState(['']);
   const [registerRequest, {loading, error}] = useMutation(REGISTER_API);
 
@@ -59,12 +60,13 @@ const BindEmailScreen = ({route, navigation}) => {
           dateOfBirth: dob,
           subscribedBrandIds: selectedBrands.map(brand => brand.id),
           referalCode: referralCode,
-          locale: intl.locale,
+          locale: localeEnum,
         },
       });
+      console.log('data', data);
       navigation.navigate('loading', {authToken: data.register.accessToken});
     } catch (e) {
-      console.error('error in handleNextPress: ', e.message);
+      console.error('error in handleNextPress: ', e);
     }
   };
 
