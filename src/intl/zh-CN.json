@@ -1,7 +1,6 @@
 {
     "home": "首页",
     "about": "关于",
-    "setting": "设定",
     "language": "语言",
     "greetings": "您好, {name}",
     
@@ -15,7 +14,8 @@
     "gold_member": "金钻用户",
     "total_balance": "总结馀",
     "brands_preference": "商店喜好",
-    "profile": "用户信息",
+    "emails_binding": "邮箱管理",
+    "edit_profile": "用户信息",
     "my_referral_code": "我的邀请码",
     "enter_invite_code": "输入邀请码",
     "sign_out": "登出",
@@ -26,6 +26,8 @@
     "about_us": "关于我们",
     "account": "帐号",
     "application": "应用",
+    "membership": "Membership",
+    "account_security": "Account Security",
 
     "start_earning_money": "START EARNING MONEY",
     "already_have_account": "I already have an account",
@@ -67,5 +69,18 @@
     "sure": "SURE!",
     "all_done": "All done!",
     "let_your_cash_back": "Let your cash back",
-    "see_today_offer": "See Today’s Offers"
+    "see_today_offer": "See Today’s Offers",
+
+    "pin_and_face_id": "PIN & Face ID",
+    "forget_pin": "Forget PIN",
+    "change_phone_number": "Change Phone Number",
+    "currency": "Currency",
+    "push_notification": "Push Notification",
+    "favorite_brands": "favorite Brands",
+    "edit_preference_in_30_days": "You can edit your favorite brand preference once in 30 days. You will receive cashback based on your membership level.",
+    "max_choices": "Max choices",
+    "choose_more_brand_when_upgrade": "You can choose more brands when your membership is upgraded.",
+    "your_choices": "Your choices",
+    "get_reward_from_brands": "Get rewards when you receives email receipts from these brand.",
+    "edit": "Edit"
 }

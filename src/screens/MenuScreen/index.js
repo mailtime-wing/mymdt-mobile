@@ -2,8 +2,6 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import SectionList from '@/components/SectionList';
-import SectionListOption from '@/components/SectionList/SectionListOption';
-import ModalContaienr from '@/components/ModalContainer';
 import {
   AccountInfoContainer,
   AccountImage,
@@ -13,11 +11,12 @@ import {
   AccountCreditContainer,
   AccountCredit,
   RemainMDT,
+  ScrollContainer,
 } from './style';
 
 const MenuScreen = props => {
   return (
-    <ModalContaienr>
+    <ScrollContainer>
       <AccountInfoContainer>
         <AccountImage source={require('@/assets/zt-mask.jpg')} />
         <AccountName>Adam</AccountName>
@@ -34,20 +33,26 @@ const MenuScreen = props => {
         </AccountCreditContainer>
       </AccountInfoContainer>
 
-      <SectionListOption
-        size={30}
-        itemKey="brands_preference"
-        itemName={<FormattedMessage id="brands_preference" />}
-        {...props}
-      />
-
       <SectionList
-        listTitle={<FormattedMessage id="account" />}
+        listTitle=""
         listItem={[
-          {key: 'profile', value: <FormattedMessage id="profile" />},
+          {key: 'edit_profile', value: <FormattedMessage id="edit_profile" />},
+          {key: 'membership', value: <FormattedMessage id="membership" />},
           {
             key: 'my_referral_code',
             value: <FormattedMessage id="my_referral_code" />,
+          },
+          {
+            key: 'brands_preference',
+            value: <FormattedMessage id="brands_preference" />,
+          },
+          {
+            key: 'emails_binding',
+            value: <FormattedMessage id="emails_binding" />,
+          },
+          {
+            key: 'account_security',
+            value: <FormattedMessage id="account_security" />,
           },
           {
             key: 'enter_invite_code',
@@ -78,7 +83,7 @@ const MenuScreen = props => {
         ]}
         {...props}
       />
-    </ModalContaienr>
+    </ScrollContainer>
   );
 };
 

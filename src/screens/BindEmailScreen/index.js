@@ -63,7 +63,6 @@ const BindEmailScreen = ({route, navigation}) => {
           locale: localeEnum,
         },
       });
-      console.log('data', data);
       navigation.navigate('loading', {authToken: data.register.accessToken});
     } catch (e) {
       console.error('error in handleNextPress: ', e);

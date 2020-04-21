@@ -5,7 +5,6 @@ export const BrandsContainer = styled.View`
   flex-wrap: wrap;
   justify-content: space-between;
   justify-items: stretch;
-  background: ${props => props.theme.colors.white.dark};
 `;
 
 export const BrandContainer = styled.TouchableOpacity`

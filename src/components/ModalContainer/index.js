@@ -1,9 +1,14 @@
 import React from 'react';
-import {Container, ScrollContainer} from './style';
+import {Container, ScrollContainer, Title} from './style';
 
-const ModalContaienr = ({children}) => (
+const ModalContaienr = ({title, children}) => (
   <Container>
-    <ScrollContainer>{children}</ScrollContainer>
+    <ScrollContainer
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}>
+      <Title>{title}</Title>
+      {children}
+    </ScrollContainer>
   </Container>
 );
 

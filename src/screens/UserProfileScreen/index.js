@@ -5,55 +5,23 @@ import {Formik, useFormikContext} from 'formik';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+import GenderSelector, {genderOptions} from '@/components/GenderSelector';
 
 import {
   Container,
   Title,
   Detail,
-  GenderContainer,
-  Gender,
-  GenderText,
   DatePicker,
   FormInputContainer,
   Error,
   DateFieldContainer,
 } from './style';
 
-const genderOptions = [
-  {label: 'Male', value: 'M'},
-  {label: 'Female', value: 'F'},
-  {label: 'N/A', value: 'N/A'},
-];
-
 const FormInput = props => (
   <FormInputContainer>
     <Input {...props} />
   </FormInputContainer>
 );
-
-const GenderOption = ({label, value, setFieldValue, gender}) => {
-  const active = gender === value;
-  return (
-    <Gender active={active} onPress={() => setFieldValue('gender', value)}>
-      <GenderText active={active}>{label}</GenderText>
-    </Gender>
-  );
-};
-
-const GenderSelector = ({gender, setFieldValue}) => {
-  return (
-    <GenderContainer>
-      {genderOptions.map(g => (
-        <GenderOption
-          label={g.label}
-          value={g.value}
-          setFieldValue={setFieldValue}
-          gender={gender}
-        />
-      ))}
-    </GenderContainer>
-  );
-};
 
 const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
   const intl = useIntl();

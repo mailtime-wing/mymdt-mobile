@@ -1,19 +1,17 @@
 import React from 'react';
 import {Image} from 'react-native';
-import {useRoute, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {CloseButton} from './style';
 
-const HeaderButton = ({root}) => {
-  const route = useRoute();
+const HeaderButton = ({isModal, root}) => {
   const navigation = useNavigation();
-  let isMenu = route.name === 'menu';
 
   return (
     <CloseButton
       onPress={() =>
-        isMenu ? navigation.navigate(root) : navigation.goBack()
+        isModal ? navigation.navigate(root) : navigation.goBack()
       }>
-      {isMenu ? (
+      {isModal ? (
         <Image source={require('@/assets/close.png')} />
       ) : (
         <Image source={require('@/assets/return.png')} />
