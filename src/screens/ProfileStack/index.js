@@ -32,7 +32,7 @@ const screens = [
   {name: 'about_us', component: LanguageScreen},
 ];
 
-const ProfileScreen = () => (
+const ProfileStack = () => (
   <Stack.Navigator mode="modal">
     <Stack.Screen
       name="menu"
@@ -57,4 +57,4 @@ const ProfileScreen = () => (
   </Stack.Navigator>
 );
 
-export default ProfileScreen;
+export default ProfileStack;

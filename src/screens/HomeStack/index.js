@@ -9,7 +9,7 @@ import BrowseScreen from '@/screens/BrowseScreen';
 import BonusScreen from '@/screens/BonusScreen';
 import WalletScreen from '@/screens/WalletScreen';
 import RedeemScreen from '@/screens/RedeemScreen';
-import ProfileScreen from '@/screens/ProfileScreen';
+import ProfileStack from '@/screens/ProfileStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,7 +46,7 @@ const TabNavigatorContainer = navigation => {
       <Tab.Screen name="Bonus" component={BonusScreen} />
       <Tab.Screen name="Wallet" component={WalletScreen} />
       <Tab.Screen name="Redeem" component={RedeemScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
 };
