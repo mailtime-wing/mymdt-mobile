@@ -18,6 +18,7 @@
     "edit_profile": "Edit Profile",
     "my_referral_code": "My Referral Code",
     "enter_invite_code": "Enter Invite Code",
+    "sign_in": "Sign In",
     "sign_out": "Sign Out",
     "settings": "Settings",
     "faq_and_support": "FAQ & Support",
@@ -29,6 +30,7 @@
     "membership": "Membership",
     "account_security": "Account Security",
 
+    "join_rewardme": "JOIN REWARDME",
     "start_earning_money": "START EARNING MONEY",
     "already_have_account": "I already have an account",
     "select_offer_details": "Let us know more about your shopping habits so that we can offer a better cashback rate.",
