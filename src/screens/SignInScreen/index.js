@@ -21,6 +21,7 @@ import {
   PhonePrefixContainer,
   PhoneContainer,
   VerificationCodeContainer,
+  SignUpDetail,
 } from './style';
 import countryCodeData from './countryCode';
 
@@ -75,7 +76,6 @@ const SignInForm = ({isSignUp}) => {
     errors,
     isValid,
   } = useFormikContext();
-  console.log('values', values);
 
   // get form type/action
   useEffect(() => {
@@ -147,31 +147,56 @@ const SignInForm = ({isSignUp}) => {
           />
         </PhoneContainer>
       </PhoneSectionContainer>
-      <VerificationContainer>
-        <VerificationCodeContainer>
-          <Input
-            keyboardType="number-pad"
-            onChangeText={handleChange('verificationCode')}
-            value={values.verificationCode}
-            label={<FormattedMessage id="verification_code" />}
-            error={errors.verificationCode}
+      {!isSignUp && (
+        <VerificationContainer>
+          <VerificationCodeContainer>
+            <Input
+              keyboardType="number-pad"
+              onChangeText={handleChange('verificationCode')}
+              value={values.verificationCode}
+              label={
+                <FormattedMessage
+                  id="verification_code"
+                  defaultMessage="VERIFICATION CODE"
+                />
+              }
+              error={errors.verificationCode}
+            />
+          </VerificationCodeContainer>
+          <ThemeButton
+            small
+            disabled={!state.enableSendOtp || errors.phone}
+            onPress={handleSendPress}>
+            <Text>
+              {state.sendCount > 0 ? (
+                <FormattedMessage
+                  id="resend_verification_code"
+                  defaultMessage="SEND"
+                />
+              ) : (
+                <FormattedMessage
+                  id="send_verification_code"
+                  defaultMessage="RESEND"
+                />
+              )}
+            </Text>
+          </ThemeButton>
+        </VerificationContainer>
+      )}
+      {isSignUp && (
+        <SignUpDetail>
+          <FormattedMessage
+            id="we_will_send_otp"
+            defaultMessage="We’ll send you a verification code to your phone via text message."
           />
-        </VerificationCodeContainer>
-        <ThemeButton
-          small
-          disabled={!state.enableSendOtp || errors.phone}
-          onPress={handleSendPress}>
-          <Text>
-            {state.sendCount > 0 ? (
-              <FormattedMessage id="resend_verification_code" />
-            ) : (
-              <FormattedMessage id="send_verification_code" />
-            )}
-          </Text>
-        </ThemeButton>
-      </VerificationContainer>
+        </SignUpDetail>
+      )}
       <ThemeButton onPress={handleSubmit} disabled={!isValid}>
-        <FormattedMessage id="sign_in" />
+        {isSignUp ? (
+          <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
+        ) : (
+          <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
+        )}
       </ThemeButton>
     </View>
   );
@@ -183,18 +208,19 @@ const SigninScreen = ({route, navigation}) => {
   const [loginRequest, {error}] = useMutation(LOGIN_API);
 
   const handleSubmitPress = async values => {
+    const completePhoneNumber = values.phonePrefix + ' ' + values.phone;
     if (isSignUp) {
       let userData = {
-        phone: values.phone,
-        verificationCode: values.verificationCode,
+        phone: completePhoneNumber,
         selectedBrands: selectedBrands,
       };
-      navigation.navigate('user_profile', userData);
+      // TODO: handle send otp once
+      navigation.navigate('verify_phone_number', userData);
     } else {
       try {
         const {data} = await loginRequest({
           variables: {
-            phoneNumber: values.phonePrefix + ' ' + values.phone,
+            phoneNumber: completePhoneNumber,
             otp: values.verificationCode,
           },
         });
@@ -214,12 +240,14 @@ const SigninScreen = ({route, navigation}) => {
       errors.phone = 'Phone Required';
     }
 
-    if (!values.verificationCode) {
-      errors.verificationCode = 'OTP Required';
-    }
+    if (!isSignUp) {
+      if (!values.verificationCode) {
+        errors.verificationCode = 'OTP Required';
+      }
 
-    if (values.verificationCode.length !== 6) {
-      errors.verificationCode = 'OTP is a 6 digit number';
+      if (values.verificationCode.length !== 6) {
+        errors.verificationCode = 'OTP is a 6 digit number';
+      }
     }
 
     return errors;
@@ -230,9 +258,9 @@ const SigninScreen = ({route, navigation}) => {
       <Container>
         <Title>
           {isSignUp ? (
-            <FormattedMessage id="register_with_phone" />
+            <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
           ) : (
-            <FormattedMessage id="sign_in" />
+            <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
           )}
         </Title>
         <Formik

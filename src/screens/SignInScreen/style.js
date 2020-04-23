@@ -23,7 +23,7 @@ export const Title = styled.Text`
 `;
 
 export const Container = styled.View`
-  padding-top: 136px;
+  margin-top: 136px;
   padding-left: 30px;
   padding-right: 30px;
 `;
@@ -47,4 +47,12 @@ export const PhonePrefixContainer = styled.View`
 
 export const PhoneContainer = styled.View`
   flex: 1;
+`;
+
+export const SignUpDetail = styled.Text`
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  margin-top: 131px;
+  margin-bottom: 8px;
 `;

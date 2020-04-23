@@ -8,10 +8,10 @@ import BrandList from '@/components/BrandList';
 let numberOfBrand = 2;
 
 const brandList = [
-  {id: '274c896f-fd52-4b46-bb7b-941a3c8bed20', name: 'AAAA'},
-  {id: '5aecd684-11eb-40fe-958f-db2b51926c8f', name: 'BBBB'},
-  {id: 'e7ac5c12-2bee-43a6-86c6-bb4c30a87986', name: 'CCCC'},
-  {id: '549c104c-a7c1-4a70-9e19-963f1d15417b', name: 'DDDD'},
+  {id: 'cf99915a-a3be-4123-87f4-c45f96cd83c0', name: 'AAAA'},
+  {id: '7f3d3616-9956-4cfb-b2c1-bc188cdd5d4c', name: 'BBBB'},
+  {id: '0597c537-cca6-47b1-9d14-14a4497f3bcb', name: 'CCCC'},
+  {id: '6bb2d759-0bc1-493d-9879-47b21812a9de', name: 'DDDD'},
   // {id: 'f2156dea-7b27-49e2-bd49-359138f42535', name: 'EEEE'},
   // {id: 'f2156dea-7b27-49e2-bd49-359138f42535', name: 'FFFF'},
   // {id: 'f2156dea-7b27-49e2-bd49-359138f42535', name: 'GGGG'},
