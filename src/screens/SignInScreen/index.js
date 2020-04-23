@@ -198,7 +198,7 @@ const SigninScreen = ({route, navigation}) => {
             otp: values.verificationCode,
           },
         });
-        updateAuthToken(data.login.accessToken);
+        updateAuthToken(data.login.authToken.accessToken);
       } catch (e) {}
     }
   };

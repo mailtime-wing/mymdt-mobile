@@ -40,8 +40,12 @@ export const REGISTER_API = gql`
 export const LOGIN_API = gql`
   mutation Login($phoneNumber: String!, $otp: String!) {
     login(phoneNumber: $phoneNumber, otp: $otp) {
-      accessToken
-      refreshToken
+      authToken {
+        accessToken
+        refreshToken
+      }
+      isEmailBound
+      isProfileCompleted
     }
   }
 `;
