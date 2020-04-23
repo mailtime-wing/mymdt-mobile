@@ -17,7 +17,7 @@ import AccountSetupDoneScreen from '@/screens/AccountSetupDoneScreen';
 import HomeStack from '@/screens/HomeStack';
 import ModalStack from '@/screens/ModalStack';
 
-import HeaderButton from '@/components/HeaderButton';
+import BackButton from '@/components/BackButton';
 
 const Stack = createStackNavigator();
 
@@ -60,7 +60,8 @@ const Root = () => {
                     headerStyle: {height: 80},
                     headerLeft: () =>
                       noBackScreen.includes(screen.name) ? null : (
-                        <HeaderButton root="onboarding" />
+                        // <HeaderButton root="onboarding" />
+                        <BackButton />
                       ),
                   }}
                 />

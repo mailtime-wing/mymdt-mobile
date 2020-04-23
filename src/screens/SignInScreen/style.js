@@ -3,20 +3,29 @@ import styled from '@emotion/native';
 export const VerificationContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   margin-top: 21px;
-  margin-bottom: 109px;
+  margin-bottom: 37px;
+`;
+
+export const VerificationCodeContainer = styled.View`
+  margin-right: 16px;
+  flex: 1;
 `;
 
 export const Title = styled.Text`
-  font-size: 26px;
-  line-height: 31px;
+  font-size: 36px;
+  color: ${props => props.theme.colors.secondary.normal};
+  line-height: 36px;
   letter-spacing: 2px;
+  font-weight: 500;
   margin-bottom: 29px;
+  text-transform: uppercase;
 `;
 
 export const Container = styled.View`
-  padding: 90px 30px;
+  padding-top: 136px;
+  padding-left: 30px;
+  padding-right: 30px;
 `;
 
 export const LoginAndAgree = styled.Text`
@@ -24,4 +33,18 @@ export const LoginAndAgree = styled.Text`
   color: ${props => props.theme.colors.grey.dark};
   margin-top: 11px;
   padding: 0 24px;
+`;
+
+export const PhoneSectionContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const PhonePrefixContainer = styled.View`
+  width: 28%;
+  margin-right: 8px;
+`;
+
+export const PhoneContainer = styled.View`
+  flex: 1;
 `;

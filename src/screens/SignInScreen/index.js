@@ -9,13 +9,18 @@ import {Formik, useFormikContext} from 'formik';
 import {IntlContext} from '@/context/Intl';
 
 import Input from '@/components/Input';
-import Button from '@/components/Button';
+import ThemeButton from '@/components/ThemeButton';
+import PopupModal from '@/components/PopupModal';
 import {
   Container,
   Title,
   VerificationContainer,
   LoginAndAgree,
   Error,
+  PhoneSectionContainer,
+  PhonePrefixContainer,
+  PhoneContainer,
+  VerificationCodeContainer,
 } from './style';
 import countryCodeData from './countryCode';
 
@@ -70,6 +75,7 @@ const SignInForm = ({isSignUp}) => {
     errors,
     isValid,
   } = useFormikContext();
+  console.log('values', values);
 
   // get form type/action
   useEffect(() => {
@@ -100,15 +106,6 @@ const SignInForm = ({isSignUp}) => {
     getPhonePrefix();
   }, [setFieldValue]);
 
-  const handlePhoneFocus = () => {
-    if (
-      values.phonePrefix !== '' &&
-      !values.phone.includes(values.phonePrefix + ' ')
-    ) {
-      setFieldValue('phone', values.phonePrefix + ' ');
-    }
-  };
-
   const verificationCodeCoolDown = second => {
     setTimeout(() => dispatch({type: ENABLE_SEND_OTP}), second * 1000);
   };
@@ -118,7 +115,7 @@ const SignInForm = ({isSignUp}) => {
     try {
       await otpRequest({
         variables: {
-          phoneNumber: values.phone,
+          phoneNumber: values.phonePrefix + ' ' + values.phone,
           locale: localeEnum,
           action: state.formType,
         },
@@ -131,23 +128,36 @@ const SignInForm = ({isSignUp}) => {
 
   return (
     <View>
-      <Input
-        type="telephoneNumber"
-        onChangeText={handleChange('phone')}
-        onFocus={() => handlePhoneFocus(values, setFieldValue)}
-        value={values.phone}
-        label={<FormattedMessage id="telephone" />}
-        error={errors.phone}
-      />
+      <PhoneSectionContainer>
+        <PhonePrefixContainer>
+          <Input
+            keyboardType="phone-pad"
+            onChangeText={handleChange('phonePrefix')}
+            value={values.phonePrefix}
+            label={<FormattedMessage id="telephone" />}
+            error={errors.phonePrefix}
+          />
+        </PhonePrefixContainer>
+        <PhoneContainer>
+          <Input
+            keyboardType="phone-pad"
+            onChangeText={handleChange('phone')}
+            value={values.phone}
+            error={errors.phone}
+          />
+        </PhoneContainer>
+      </PhoneSectionContainer>
       <VerificationContainer>
-        <Input
-          type="oneTimeCode"
-          onChangeText={handleChange('verificationCode')}
-          value={values.verificationCode}
-          label={<FormattedMessage id="verification_code" />}
-          error={errors.verificationCode}
-        />
-        <Button
+        <VerificationCodeContainer>
+          <Input
+            keyboardType="number-pad"
+            onChangeText={handleChange('verificationCode')}
+            value={values.verificationCode}
+            label={<FormattedMessage id="verification_code" />}
+            error={errors.verificationCode}
+          />
+        </VerificationCodeContainer>
+        <ThemeButton
           small
           disabled={!state.enableSendOtp || errors.phone}
           onPress={handleSendPress}>
@@ -158,11 +168,11 @@ const SignInForm = ({isSignUp}) => {
               <FormattedMessage id="send_verification_code" />
             )}
           </Text>
-        </Button>
+        </ThemeButton>
       </VerificationContainer>
-      <Button onPress={handleSubmit} title="Submit" disabled={!isValid}>
-        <FormattedMessage id="submit" />
-      </Button>
+      <ThemeButton onPress={handleSubmit} disabled={!isValid}>
+        <FormattedMessage id="sign_in" />
+      </ThemeButton>
     </View>
   );
 };
@@ -184,7 +194,7 @@ const SigninScreen = ({route, navigation}) => {
       try {
         const {data} = await loginRequest({
           variables: {
-            phoneNumber: values.phone,
+            phoneNumber: values.phonePrefix + ' ' + values.phone,
             otp: values.verificationCode,
           },
         });
@@ -196,17 +206,20 @@ const SigninScreen = ({route, navigation}) => {
   const validate = values => {
     const errors = {};
 
+    if (!values.phonePrefix) {
+      errors.phonePrefix = 'Dial Code Required';
+    }
+
     if (!values.phone) {
       errors.phone = 'Phone Required';
-    } else {
-      if (!values.phone.includes('+') || !values.phone.includes(' ')) {
-        errors.phone =
-          'Phone number with prefix number required! e.g. +852 xxxxxxxx';
-      }
     }
 
     if (!values.verificationCode) {
       errors.verificationCode = 'OTP Required';
+    }
+
+    if (values.verificationCode.length !== 6) {
+      errors.verificationCode = 'OTP is a 6 digit number';
     }
 
     return errors;
@@ -219,7 +232,7 @@ const SigninScreen = ({route, navigation}) => {
           {isSignUp ? (
             <FormattedMessage id="register_with_phone" />
           ) : (
-            <FormattedMessage id="connect_with_phone" />
+            <FormattedMessage id="sign_in" />
           )}
         </Title>
         <Formik
@@ -232,12 +245,11 @@ const SigninScreen = ({route, navigation}) => {
           validate={values => validate(values)}>
           <SignInForm isSignUp={isSignUp} />
         </Formik>
-        {error && <Text>login / register fail. {error.message}</Text>}
         {!isSignUp && (
           <LoginAndAgree>
             <FormattedMessage
               id="login_in_agree_terms_and_policy"
-              defaultMessage="By logging in your email address, you agree with MailTime’s Terms and Service and Privacy Policy."
+              defaultMessage="By logging in your email address, you agree with RewardMe’s Terms of Service and Privacy Policy."
               // values={{
               //   Text: str => (
               //     <Link onPress={() => Alert.alert('terms!')}>{str}</Link>
@@ -246,6 +258,7 @@ const SigninScreen = ({route, navigation}) => {
             />
           </LoginAndAgree>
         )}
+        {error && <PopupModal title="Login fail" detail={error.message} />}
       </Container>
     </TouchableWithoutFeedback>
   );

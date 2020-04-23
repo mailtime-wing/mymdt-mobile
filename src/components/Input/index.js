@@ -1,15 +1,33 @@
-import React from 'react';
-import {Container, TextInput, Label, Remark, Error} from './style';
+import React, {useState} from 'react';
+import {
+  Container,
+  TextInput,
+  Label,
+  Remark,
+  Error,
+  TextInputContainer,
+} from './style';
 
 const Input = ({label, required, remark, error, ...props}) => {
+  const [isFocus, setIsFocus] = useState(false);
+  const isError = !!error;
   return (
     <Container>
-      <Label>
+      <Label isError={isError} isFocus={isFocus}>
         {label}
         {required && '*'}
       </Label>
-      <TextInput autoCapitalize="none" {...props} />
-      {<Error>{error ? error : ' '}</Error>}
+      <TextInputContainer isError={isError} isFocus={isFocus}>
+        <TextInput
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          autoCapitalize="none"
+          isFocus={isFocus}
+          isError={isError}
+          {...props}
+        />
+      </TextInputContainer>
+      {<Error>{isError ? error : ' '}</Error>}
       {remark && <Remark>{remark}</Remark>}
     </Container>
   );
