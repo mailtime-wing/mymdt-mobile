@@ -18,7 +18,7 @@ export const Detail = styled.Text`
 export const ModalView = styled.View`
   height: auto;
   width: auto;
-  max-width: 90%;
+  width: 80%;
   justify-content: center;
   align-items: center;
   background-color: white;
