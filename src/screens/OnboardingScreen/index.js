@@ -93,7 +93,7 @@ const OnboardingScreen = ({navigation}) => (
   <Container>
     <CardSection />
     <ButtonContainer>
-      <ThemeButton onPress={() => navigation.navigate('brand_select')}>
+      <ThemeButton onPress={() => navigation.navigate('welcome')}>
         <FormattedMessage id="join_rewardme" defaultMessage="JOIN REWARDME" />
       </ThemeButton>
       <MarginContainer />

@@ -24,8 +24,8 @@ export const Title = styled.Text`
 
 export const Container = styled.View`
   margin-top: 136px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 24px;
+  padding-right: 24px;
 `;
 
 export const LoginAndAgree = styled.Text`

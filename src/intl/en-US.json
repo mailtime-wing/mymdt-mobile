@@ -30,6 +30,9 @@
     "application": "Application",
     "membership": "Membership",
     "account_security": "Account Security",
+    "welcome": "Welcome!",
+    "welcome_detail": "RewardMe is a cashback app that let you earn points after online/offline shopping, in-app purchase or subscribe to online services.",
+    "start": "start",
 
     "join_rewardme": "JOIN REWARDME",
     "start_earning_money": "START EARNING MONEY",
@@ -68,6 +71,7 @@
     "unbind": "UNBIND",
     "skip_for_now": "skip for now",
     "login_in_agree_terms_and_policy": "By logging in your email address, you agree with RewardMe’s Terms of Service and Privacy Policy.",
+    "setting_up_agree_terms_and_policy": "By setting up the account, you agree with RewardMe’s Terms of Service and Privacy Policy.",
     "setting_up_account": "Setting up your account...",
     "searching_for_receipts": "Searching for Receipts...",
     "it_might_take_some_time": "It might take some time, we will notify you once it’s done.",

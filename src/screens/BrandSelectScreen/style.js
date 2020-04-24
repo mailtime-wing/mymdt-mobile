@@ -3,8 +3,8 @@ import styled from '@emotion/native';
 export const ScrollContainer = styled.ScrollView`
   margin-top: 100px;
   margin-bottom: 38px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 24px;
+  padding-right: 24px;
 `;
 
 export const Details = styled.Text`

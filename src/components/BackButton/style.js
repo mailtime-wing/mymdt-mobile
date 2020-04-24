@@ -1,8 +1,8 @@
 import styled from '@emotion/native';
 
 export const ButtonContainer = styled.TouchableOpacity`
-  margin-top: 30px;
-  margin-left: 30px;
+  margin-top: 24px;
+  margin-left: 24px;
   padding: 8px;
   height: auto;
   border: 1px solid ${props => props.theme.colors.secondary.light};

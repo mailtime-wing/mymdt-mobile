@@ -15,6 +15,7 @@ import LoadingScreen from '@/screens/LoadingScreen';
 import NotificationScreen from '@/screens/NotificationScreen';
 import AccountSetupDoneScreen from '@/screens/AccountSetupDoneScreen';
 import VerifyPhoneNumberScreen from '@/screens/VerifyPhoneNumberScreen';
+import WelcomeScreen from '@/screens/WelcomeScreen';
 import HomeStack from '@/screens/HomeStack';
 import ModalStack from '@/screens/ModalStack';
 
@@ -25,6 +26,7 @@ const Stack = createStackNavigator();
 const screens = [
   {name: 'onboarding', component: OnboardingScreen},
   {name: 'sign_in', component: SignInScreen},
+  {name: 'welcome', component: WelcomeScreen},
   {name: 'brand_select', component: BrandSelectScreen},
   {name: 'brand_select_confirm', component: BrandSelectConfirmScreen},
   {name: 'verify_phone_number', component: VerifyPhoneNumberScreen},
