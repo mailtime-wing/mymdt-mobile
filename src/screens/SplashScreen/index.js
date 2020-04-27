@@ -1,10 +1,10 @@
 import React from 'react';
-import {Text} from 'react-native';
-import {Container} from './style';
+import {Container, AppName, Icon} from './style';
 
 const SplashScreen = () => (
   <Container>
-    <Text>This is Splash screen</Text>
+    <Icon source={require('@/assets/rewardme.png')} />
+    <AppName>RewardMe</AppName>
   </Container>
 );
 

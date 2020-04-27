@@ -6,15 +6,12 @@ export const Container = styled.View`
 `;
 
 export const ContentContainer = styled.View`
-  margin-top: 43px;
-  margin-bottom: 43px;
-  padding-left: 40px;
-  padding-right: 40px;
+  height: 100%;
 `;
 
 export const ButtonContainer = styled.View`
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
 `;
 
 export const ColorBackground = styled.View`
@@ -24,20 +21,25 @@ export const ColorBackground = styled.View`
 `;
 
 export const Header = styled.Text`
-  font-size: 19px;
+  font-size: 24px;
   margin-top: 40px;
+  line-height: 31px;
   margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
 `;
 
 export const Details = styled.Text`
-  font-size: 10px;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
   margin-bottom: 20px;
 `;
 
-export const Skip = styled.Text`
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-decoration-line: underline;
-  text-align: center;
-  margin-top: 5px;
+export const MarginContainer = styled.View`
+  margin-top: 12px;
+`;
+
+export const SwiperContainer = styled.View`
+  height: 590px;
 `;

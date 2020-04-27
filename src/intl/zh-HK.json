@@ -19,6 +19,7 @@
     "my_referral_code": "我的邀請碼",
     "enter_invite_code": "輸入邀請碼",
     "sign_out": "登出",
+    "sign_in": "登入",
     "settings": "設定",
     "faq_and_support": "常見問題與技術支援",
     "terms_of_service": "使用條款",
@@ -29,6 +30,7 @@
     "membership": "Membership",
     "account_security": "Account Security",
 
+    "join_rewardme": "加入賞我",
     "start_earning_money": "START EARNING MONEY",
     "already_have_account": "I already have an account",
     "select_offer_details": "让我们了解你然后为您量身定制奖励！",
