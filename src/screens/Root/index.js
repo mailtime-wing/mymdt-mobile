@@ -24,13 +24,13 @@ import BackButton from '@/components/BackButton';
 const Stack = createStackNavigator();
 
 const screens = [
+  {name: 'user_profile', component: UserProfileScreen},
   {name: 'onboarding', component: OnboardingScreen},
   {name: 'sign_in', component: SignInScreen},
   {name: 'welcome', component: WelcomeScreen},
   {name: 'brand_select', component: BrandSelectScreen},
   {name: 'brand_select_confirm', component: BrandSelectConfirmScreen},
   {name: 'verify_phone_number', component: VerifyPhoneNumberScreen},
-  {name: 'user_profile', component: UserProfileScreen},
   {name: 'bind_email', component: BindEmailScreen},
   {name: 'loading', component: LoadingScreen},
   {name: 'notification', component: NotificationScreen},
@@ -39,6 +39,7 @@ const screens = [
 
 const noBackScreen = [
   'onboarding',
+  'user_profile',
   'loading',
   'notification',
   'account_setup_done',

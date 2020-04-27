@@ -1,10 +1,11 @@
 import React from 'react';
-
-import {GenderContainer, Gender, GenderText} from './style';
+import {View} from 'react-native';
+import {GenderContainer, Gender, GenderText, GenderLabel} from './style';
 
 export const genderOptions = [
   {label: 'Male', value: 'M'},
   {label: 'Female', value: 'F'},
+  {label: 'Others', value: 'Others'},
   {label: 'N/A', value: 'N/A'},
 ];
 
@@ -19,16 +20,19 @@ const GenderOption = ({label, value, setFieldValue, gender}) => {
 
 const GenderSelector = ({gender, setFieldValue}) => {
   return (
-    <GenderContainer>
-      {genderOptions.map(g => (
-        <GenderOption
-          label={g.label}
-          value={g.value}
-          setFieldValue={setFieldValue}
-          gender={gender}
-        />
-      ))}
-    </GenderContainer>
+    <View>
+      <GenderLabel>GENDER*</GenderLabel>
+      <GenderContainer>
+        {genderOptions.map(g => (
+          <GenderOption
+            label={g.label}
+            value={g.value}
+            setFieldValue={setFieldValue}
+            gender={gender}
+          />
+        ))}
+      </GenderContainer>
+    </View>
   );
 };
 

@@ -27,8 +27,8 @@ const Input = ({label, required, remark, error, ...props}) => {
           {...props}
         />
       </TextInputContainer>
-      {<Error>{isError ? error : ' '}</Error>}
       {remark && <Remark>{remark}</Remark>}
+      {<Error>{isError ? error : ' '}</Error>}
     </Container>
   );
 };

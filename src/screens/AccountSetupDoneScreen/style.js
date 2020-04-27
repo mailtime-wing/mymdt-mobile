@@ -1,19 +1,26 @@
 import styled from '@emotion/native';
 
 export const Container = styled.View`
-  padding: 340px 30px 0px 30px;
+  padding: 340px 24px 0px 24px;
 `;
 
 export const Title = styled.Text`
-  font-size: 26px;
-  font-weight: bold;
-  line-height: 39px;
+  font-size: 36px;
+  color: ${props => props.theme.colors.secondary.normal};
+  line-height: 36px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  text-transform: uppercase;
   text-align: center;
 `;
 
 export const Detail = styled.Text`
   font-size: 18px;
   text-align: center;
-  margin-top: 12px;
-  margin-bottom: 80px;
+  margin-bottom: 242px;
+`;
+
+export const MarginContainer = styled.View`
+  margin-top: 16px;
 `;

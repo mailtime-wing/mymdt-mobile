@@ -17,15 +17,15 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 
 const BindEmailScreen = ({route, navigation}) => {
-  const {
-    phone,
-    verificationCode,
-    name,
-    gender,
-    dob,
-    selectedBrands,
-    referralCode,
-  } = route.params;
+  // const {
+  //   phone,
+  //   verificationCode,
+  //   name,
+  //   gender,
+  //   dob,
+  //   selectedBrands,
+  //   referralCode,
+  // } = route.params;
   const {localeEnum} = useContext(IntlContext);
   const [emails, setEmails] = useState(['']);
   const [registerRequest, {loading, error}] = useMutation(REGISTER_API);
@@ -53,13 +53,13 @@ const BindEmailScreen = ({route, navigation}) => {
     try {
       const {data} = await registerRequest({
         variables: {
-          phoneNumber: phone,
-          otp: verificationCode,
-          name: name,
-          gender: gender,
-          dateOfBirth: dob,
-          subscribedBrandIds: selectedBrands.map(brand => brand.id),
-          referalCode: referralCode,
+          // phoneNumber: phone,
+          // otp: verificationCode,
+          // name: name,
+          // gender: gender,
+          // dateOfBirth: dob,
+          // subscribedBrandIds: selectedBrands.map(brand => brand.id),
+          // referalCode: referralCode,
           locale: localeEnum,
         },
       });
