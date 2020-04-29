@@ -33,6 +33,7 @@
     "welcome": "Welcome!",
     "welcome_detail": "RewardMe is a cashback app that let you earn points after online/offline shopping, in-app purchase or subscribe to online services.",
     "start": "start",
+    "finish": "finish",
 
     "join_rewardme": "JOIN REWARDME",
     "start_earning_money": "START EARNING MONEY",
@@ -48,6 +49,7 @@
     "register_with_phone": "REGISTER WITH PHONE NUMBERS",
     "let_us_know": "LET’S US KNOW MORE ABOUT YOU",
     "bind_email_accounts": "BIND EMAILS",
+    "bind_more_email_later": "You can bind more emails later in profile.",
     "dont_worry": "Don’t worry. We only detect email receipts, not your personal emails.",
     "we_hope_to_provide": "We hope to provide better in-app experience and tailor more offers and redeem options in the future.",
     "we_will_send_otp": "We’ll send you a verification code to your phone via text message.",

@@ -204,7 +204,7 @@ const SignInForm = ({isSignUp}) => {
 
 const SigninScreen = ({route, navigation}) => {
   const {isSignUp, selectedBrands} = route.params;
-  const {updateAuthToken} = useContext(AuthContext);
+  const {updateAuthToken, updateUserAccountData} = useContext(AuthContext);
   const [loginRequest, {error}] = useMutation(LOGIN_API);
 
   const handleSubmitPress = async values => {
@@ -225,7 +225,10 @@ const SigninScreen = ({route, navigation}) => {
           },
         });
         updateAuthToken(data.login.authToken.accessToken);
-      } catch (e) {}
+        updateUserAccountData({isEmailBound: data.login.isEmailBound, isProfileCompleted: data.login.isProfileCompleted})
+      } catch (e) {
+        // handle error later
+      }
     }
   };
 

@@ -8,7 +8,7 @@ import {
   TextInputContainer,
 } from './style';
 
-const Input = ({label, required, remark, error, ...props}) => {
+const Input = ({label, required, remark, error, readOnly, ...props}) => {
   const [isFocus, setIsFocus] = useState(false);
   const isError = !!error;
   return (
@@ -17,7 +17,7 @@ const Input = ({label, required, remark, error, ...props}) => {
         {label}
         {required && '*'}
       </Label>
-      <TextInputContainer isError={isError} isFocus={isFocus}>
+      <TextInputContainer isError={isError} isFocus={isFocus} readOnly={readOnly}>
         <TextInput
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}

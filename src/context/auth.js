@@ -5,11 +5,14 @@ import SplashScreen from '@/screens/SplashScreen';
 export const AuthContext = createContext(null);
 
 const UPDATE_AUTH_TOKEN = 'updateAuthToken';
+const UPDATE_USER_ACCCOUNT_DATA = 'updateUserAccountData';
 const SIGN_OUT = 'signOut';
 
 const initialState = {
   isLoading: true,
   authToken: null,
+  isEmailBound: null,
+  isProfileCompleted: null
 };
 
 const reducer = (state, action) => {
@@ -21,10 +24,20 @@ const reducer = (state, action) => {
         authToken: action.payload,
       };
     }
+    case UPDATE_USER_ACCCOUNT_DATA: {
+      return {
+        ...state,
+        isLoading: false,
+        isEmailBound: action.payload.isEmailBound,
+        isProfileCompleted: action.payload.isProfileCompleted,
+      };
+    }
     case SIGN_OUT: {
       return {
         ...state,
         authToken: null,
+        isEmailBound: null,
+        isProfileCompleted: null
       };
     }
     default:
@@ -47,6 +60,24 @@ export const AuthProvider = ({children}) => {
     };
     getToken();
   }, []);
+  
+  useEffect(() => {
+    let isEmailBound;
+    let isProfileCompleted;
+    const getUserAccountData = async () => {
+      try {
+        isEmailBound = await AsyncStorage.getItem('isEmailBound');
+        isProfileCompleted = await AsyncStorage.getItem('isProfileCompleted');
+      } catch (error) {
+        console.error('error getting account data');
+      }
+      dispatch({type: UPDATE_USER_ACCCOUNT_DATA, payload: {
+        isEmailBound: JSON.parse(isEmailBound), 
+        isProfileCompleted: JSON.parse(isProfileCompleted)}
+      });
+    };
+    getUserAccountData();
+  }, []);
 
   const authContext = useMemo(
     () => ({
@@ -58,6 +89,15 @@ export const AuthProvider = ({children}) => {
         }
         dispatch({type: UPDATE_AUTH_TOKEN, payload: authToken});
       },
+      updateUserAccountData: async ({isEmailBound, isProfileCompleted}) => {
+        try {
+          await AsyncStorage.setItem('isEmailBound', JSON.stringify(isEmailBound));
+          await AsyncStorage.setItem('isProfileCompleted', JSON.stringify(isProfileCompleted));
+        } catch (error) {
+          console.error('error saving user data');
+        }
+        dispatch({type: UPDATE_USER_ACCCOUNT_DATA, payload: {isEmailBound: isEmailBound, isProfileCompleted: isProfileCompleted}});
+      },
       signOut: async () => {
         try {
           await AsyncStorage.removeItem('authToken');
@@ -67,8 +107,10 @@ export const AuthProvider = ({children}) => {
         dispatch({type: SIGN_OUT});
       },
       authToken: state.authToken,
+      isEmailBound: state.isEmailBound,
+      isProfileCompleted: state.isProfileCompleted,
     }),
-    [state.authToken],
+    [state.authToken, state.isEmailBound, state.isProfileCompleted],
   );
 
   if (state.isLoading) {

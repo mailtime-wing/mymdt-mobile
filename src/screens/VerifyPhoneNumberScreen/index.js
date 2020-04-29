@@ -1,6 +1,7 @@
 import React, {useContext, useReducer} from 'react';
 import {View, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {FormattedMessage} from 'react-intl';
+import {AuthContext} from '@/context/auth';
 import {GET_OTP_API, REGISTER_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
 import {Formik, useFormikContext} from 'formik';
@@ -125,6 +126,7 @@ const VerifyPhoneNumberForm = ({phone}) => {
 const VerifyPhoneNumberScreen = ({route, navigation}) => {
   const {phone, selectedBrands} = route.params;
   const {localeEnum} = useContext(IntlContext);
+  const {updateAuthToken} = useContext(AuthContext);
   const [registerRequest] = useMutation(REGISTER_API);
 
   const handleSubmitPress = async values => {
@@ -137,12 +139,11 @@ const VerifyPhoneNumberScreen = ({route, navigation}) => {
           locale: localeEnum,
         },
       });
-      navigation.navigate('user_profile', {
-        authToken: data.register.accessToken,
-      });
+      updateAuthToken(data.register.accessToken);
     } catch (e) {
       // console.error('error in handleSubmitPress: ', e);
     }
+    navigation.navigate('user_profile');
   };
 
   const validate = values => {
