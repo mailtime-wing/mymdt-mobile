@@ -33,21 +33,20 @@ const screens = [
   {name: 'verify_phone_number', component: VerifyPhoneNumberScreen},
   // {name: 'bind_email', component: BindEmailScreen},
   {name: 'loading', component: LoadingScreen},
-  {name: 'notification', component: NotificationScreen},
-  {name: 'account_setup_done', component: AccountSetupDoneScreen},
+  // {name: 'notification', component: NotificationScreen},
+  // {name: 'account_setup_done', component: AccountSetupDoneScreen},
 ];
 
 const noBackScreen = [
   'onboarding',
-  // 'user_profile',
   'loading',
   'notification',
   'account_setup_done',
 ];
 
 const Root = () => {
-  const {authToken, isEmailBound, isProfileCompleted} = useContext(AuthContext); 
-  console.log('authToken',authToken)
+  const {authToken, isEmailBound, isProfileCompleted} = useContext(AuthContext);
+  console.log('authToken', authToken);
   return (
     <>
       <UpperSafeAreaView />
@@ -75,10 +74,31 @@ const Root = () => {
             </Stack.Navigator>
           ) : (
             <Stack.Navigator mode="modal" headerMode="none">
-              {!isProfileCompleted && <Stack.Screen name="user_profile" component={UserProfileScreen} />}
-              {!isEmailBound && <Stack.Screen name="bind_email" component={BindEmailScreen} />}
+              {/* {!isProfileCompleted && <Stack.Screen name="user_profile" component={UserProfileScreen} options={{cardStyle: {backgroundColor: 'white'},}}/>}
+              {!isEmailBound && <Stack.Screen name="bind_email" component={BindEmailScreen} options={{cardStyle: {backgroundColor: 'white'},}}/>} */}
+              {/* comment out above for debug in user_profile*/}
+              <Stack.Screen
+                name="user_profile"
+                component={UserProfileScreen}
+                options={{cardStyle: {backgroundColor: 'white'}}}
+              />
+              <Stack.Screen
+                name="bind_email"
+                component={BindEmailScreen}
+                options={{cardStyle: {backgroundColor: 'white'}}}
+              />
               <Stack.Screen name="home" component={HomeStack} />
               <Stack.Screen name="modal" component={ModalStack} />
+              <Stack.Screen
+                name="notification"
+                component={NotificationScreen}
+                options={{cardStyle: {backgroundColor: 'white'}}}
+              />
+              <Stack.Screen
+                name="account_setup_done"
+                component={AccountSetupDoneScreen}
+                options={{cardStyle: {backgroundColor: 'white'}}}
+              />
             </Stack.Navigator>
           )}
         </Container>
