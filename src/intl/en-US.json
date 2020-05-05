@@ -11,6 +11,7 @@
     "redeem": "Redeem",
     "redeem_details": "Gift Cards / Special Rewards",
 
+    "brands": "brands",
     "gold_member": "VIP GOLD",
     "total_balance": "Total Balance",
     "brands_preference": "Brands Preference",
@@ -68,6 +69,7 @@
     "send_verification_code": "SEND",
     "resend_verification_code": "RESEND",
     "submit": "SUBMIT",
+    "success": "SUCCESS",
     "confirm": "CONFIRM",
     "next": "NEXT",
     "login": "LOGIN",

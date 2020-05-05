@@ -135,15 +135,15 @@ const VerifyPhoneNumberScreen = ({route, navigation}) => {
         variables: {
           phoneNumber: phone,
           otp: values.verificationCode,
-          subscribedBrandIds: selectedBrands.map(brand => brand.id),
+          subscribedOfferIds: selectedBrands.map(brand => brand.id),
           locale: localeEnum,
         },
       });
-      updateAuthToken(data.register.accessToken);
+      await updateAuthToken(data.register.accessToken);
+      navigation.navigate('user_profile');
     } catch (e) {
-      // console.error('error in handleSubmitPress: ', e);
+      console.error('error in handleSubmitPress: ', e);
     }
-    navigation.navigate('user_profile');
   };
 
   const validate = values => {

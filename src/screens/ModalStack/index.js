@@ -1,4 +1,5 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import MembershipScreen from '@/screens/MembershipScreen';
@@ -18,8 +19,8 @@ const ModalStack = () => {
           component={screen.component}
           options={{
             headerTransparent: true,
-            headerTitleStyle: {display: 'none'},
-            headerStyle: {height: 80},
+            headerTitleStyle: styles.headerTitle,
+            headerStyle: styles.header,
             headerLeft: () => <HeaderButton isModal root="home" />,
           }}
         />
@@ -29,3 +30,12 @@ const ModalStack = () => {
 };
 
 export default ModalStack;
+
+const styles = StyleSheet.create({
+  headerTitle: {
+    display: 'none',
+  },
+  header: {
+    height: 80,
+  },
+});

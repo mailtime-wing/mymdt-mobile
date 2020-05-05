@@ -1,4 +1,5 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import LanguageScreen from '@/screens/LanguageScreen';
@@ -47,9 +48,9 @@ const ProfileStack = () => (
         component={screen.component}
         options={{
           headerTransparent: true,
-          headerTitleStyle: {display: 'none'},
-          cardStyle: {backgroundColor: 'white'},
-          headerStyle: {height: 80},
+          headerTitleStyle: styles.headerTitle,
+          cardStyle: styles.card,
+          headerStyle: styles.header,
           headerLeft: () => <HeaderButton isModal root="menu" />,
         }}
       />
@@ -58,3 +59,15 @@ const ProfileStack = () => (
 );
 
 export default ProfileStack;
+
+const styles = StyleSheet.create({
+  headerTitle: {
+    display: 'none',
+  },
+  header: {
+    height: 80,
+  },
+  card: {
+    backgroundColor: 'white',
+  },
+});

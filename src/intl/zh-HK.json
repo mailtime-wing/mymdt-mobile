@@ -11,6 +11,7 @@
     "redeem": "獎賞",
     "redeem_details": "充值卡 / 特別會員福利",
 
+    "brands": "brands",    
     "gold_member": "金鑽用戶",
     "total_balance": "總結馀",
     "brands_preference": "商店喜好",
@@ -68,6 +69,7 @@
     "send_verification_code": "发送验证码",
     "resend_verification_code": "再发送验证码",
     "submit": "提交",
+    "success": "成功",
     "confirm": "CONFIRM",
     "next": "下一步",
     "login": "LOGIN",

@@ -225,7 +225,10 @@ const SigninScreen = ({route, navigation}) => {
           },
         });
         updateAuthToken(data.login.authToken.accessToken);
-        updateUserAccountData({isEmailBound: data.login.isEmailBound, isProfileCompleted: data.login.isProfileCompleted})
+        updateUserAccountData({
+          isEmailBound: data.login.isEmailBound,
+          isProfileCompleted: data.login.isProfileCompleted,
+        });
       } catch (e) {
         // handle error later
       }

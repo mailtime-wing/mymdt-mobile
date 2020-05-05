@@ -3,8 +3,7 @@ import {TouchableWithoutFeedback, Keyboard, View} from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {useMutation} from '@apollo/react-hooks'; // V2.6
-// import {useMutation} from '@apollo/client'; // V3.0 beta
+import {useMutation} from '@apollo/react-hooks';
 import {UPDATE_USER_PROFILE_API} from '@/api/data';
 
 import {AuthContext} from '@/context/auth';
@@ -112,9 +111,7 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
 
 const UserProfileScreen = ({navigation}) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [updateUserProfileRequest, {error}] = useMutation(
-    UPDATE_USER_PROFILE_API,
-  );
+  const [updateUserProfileRequest] = useMutation(UPDATE_USER_PROFILE_API);
   const {authToken} = useContext(AuthContext);
 
   const handleDatePickerPress = () => {
@@ -127,10 +124,8 @@ const UserProfileScreen = ({navigation}) => {
   };
 
   const handleSubmitPress = async values => {
-    // fail due to cannot add authorization header
-
     try {
-      const {data} = await updateUserProfileRequest({
+      await updateUserProfileRequest({
         variables: {
           name: values.name,
           gender: values.gender,
@@ -139,20 +134,15 @@ const UserProfileScreen = ({navigation}) => {
         },
         context: {
           headers: {
-            authorization: `Bearer ${authToken}`,
+            authorization: authToken ? `Bearer ${authToken}` : '',
           },
         },
       });
-      // updateUserAccountData({
-      //   isEmailBound: data.login.isEmailBound,
-      //   isProfileCompleted: data.login.isProfileCompleted,
-      // });
+      navigation.navigate('account_setup_done');
     } catch (e) {
       console.error(e);
       // handle error later
     }
-
-    navigation.navigate('account_setup_done');
   };
 
   const validate = values => {

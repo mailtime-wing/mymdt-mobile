@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer as Container} from '@react-navigation/native';
 import {AuthContext} from '@/context/auth';
@@ -24,17 +25,13 @@ import BackButton from '@/components/BackButton';
 const Stack = createStackNavigator();
 
 const screens = [
-  // {name: 'user_profile', component: UserProfileScreen},
   {name: 'onboarding', component: OnboardingScreen},
   {name: 'sign_in', component: SignInScreen},
   {name: 'welcome', component: WelcomeScreen},
   {name: 'brand_select', component: BrandSelectScreen},
   {name: 'brand_select_confirm', component: BrandSelectConfirmScreen},
   {name: 'verify_phone_number', component: VerifyPhoneNumberScreen},
-  // {name: 'bind_email', component: BindEmailScreen},
   {name: 'loading', component: LoadingScreen},
-  // {name: 'notification', component: NotificationScreen},
-  // {name: 'account_setup_done', component: AccountSetupDoneScreen},
 ];
 
 const noBackScreen = [
@@ -60,9 +57,9 @@ const Root = () => {
                   component={screen.component}
                   options={{
                     headerTransparent: true,
-                    headerTitleStyle: {display: 'none'},
-                    cardStyle: {backgroundColor: 'white'},
-                    headerStyle: {height: 80},
+                    headerTitleStyle: styles.headerTitle,
+                    cardStyle: styles.card,
+                    headerStyle: styles.header,
                     headerLeft: () =>
                       noBackScreen.includes(screen.name) ? null : (
                         // <HeaderButton root="onboarding" />
@@ -74,30 +71,31 @@ const Root = () => {
             </Stack.Navigator>
           ) : (
             <Stack.Navigator mode="modal" headerMode="none">
-              {/* {!isProfileCompleted && <Stack.Screen name="user_profile" component={UserProfileScreen} options={{cardStyle: {backgroundColor: 'white'},}}/>}
-              {!isEmailBound && <Stack.Screen name="bind_email" component={BindEmailScreen} options={{cardStyle: {backgroundColor: 'white'},}}/>} */}
-              {/* comment out above for debug in user_profile*/}
-              <Stack.Screen
-                name="user_profile"
-                component={UserProfileScreen}
-                options={{cardStyle: {backgroundColor: 'white'}}}
-              />
-              <Stack.Screen
-                name="bind_email"
-                component={BindEmailScreen}
-                options={{cardStyle: {backgroundColor: 'white'}}}
-              />
+              {!isProfileCompleted && (
+                <Stack.Screen
+                  name="user_profile"
+                  component={UserProfileScreen}
+                  options={{cardStyle: styles.card}}
+                />
+              )}
+              {!isEmailBound && (
+                <Stack.Screen
+                  name="bind_email"
+                  component={BindEmailScreen}
+                  options={{cardStyle: styles.card}}
+                />
+              )}
               <Stack.Screen name="home" component={HomeStack} />
               <Stack.Screen name="modal" component={ModalStack} />
               <Stack.Screen
                 name="notification"
                 component={NotificationScreen}
-                options={{cardStyle: {backgroundColor: 'white'}}}
+                options={{cardStyle: styles.card}}
               />
               <Stack.Screen
                 name="account_setup_done"
                 component={AccountSetupDoneScreen}
-                options={{cardStyle: {backgroundColor: 'white'}}}
+                options={{cardStyle: styles.card}}
               />
             </Stack.Navigator>
           )}
@@ -108,3 +106,15 @@ const Root = () => {
 };
 
 export default Root;
+
+const styles = StyleSheet.create({
+  headerTitle: {
+    display: 'none',
+  },
+  header: {
+    height: 80,
+  },
+  card: {
+    backgroundColor: 'white',
+  },
+});

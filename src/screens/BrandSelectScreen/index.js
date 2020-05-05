@@ -51,11 +51,26 @@ const BrandSelectScreen = ({navigation}) => {
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const intl = useIntl();
 
+  const formatBrandString = () => {
+    const lastBrandIndex = selectedBrands.length - 1;
+    const lastBrand = selectedBrands[lastBrandIndex]
+      ? selectedBrands[lastBrandIndex].name
+      : '';
+    let result = selectedBrands
+      .map(brand => {
+        if (selectedBrands.indexOf(brand) !== lastBrandIndex) {
+          return brand.name;
+        }
+      })
+      .join(' and ');
+    return result + lastBrand;
+  };
+
   const handlePopupState = state => {
     if (state === 'OK') {
-      navigation.navigate('brand_select_confirm', {
+      navigation.navigate('sign_in', {
+        isSignUp: true,
         selectedBrands: selectedBrands,
-        numberOfBrand: numberOfBrand,
       });
     }
     setShowConfirmPopup(false);
@@ -118,7 +133,7 @@ const BrandSelectScreen = ({navigation}) => {
       {!!showConfirmPopup && (
         <PopupModal
           title="Confirmation"
-          detail="You have chosen Netflix and Airbnb special offers. You can edit the preference in profile settings afterward."
+          detail={`You have chosen ${formatBrandString()} special offers. You can edit the preference in profile settings afterward.`}
           callback={handlePopupState}
         />
       )}

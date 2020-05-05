@@ -1,7 +1,6 @@
 import React from 'react';
 import {ThemeProvider} from 'emotion-theming';
-import {ApolloProvider} from '@apollo/react-hooks'; // V2.6
-// import { ApolloProvider } from '@apollo/client'; // V3.0 beta
+import {ApolloProvider} from '@apollo/react-hooks';
 import client from '@/api/client';
 import theme from '@/theme';
 import {IntlContainer} from '@/context/Intl';
