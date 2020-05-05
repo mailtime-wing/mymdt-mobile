@@ -14,13 +14,13 @@ export const REGISTER_API = gql`
   mutation Register(
     $phoneNumber: String!
     $otp: String!
-    $subscribedBrandIds: [String!]
+    $subscribedOfferIds: [String!]
     $locale: Locale!
   ) {
     register(
       phoneNumber: $phoneNumber
       otp: $otp
-      subscribedBrandIds: $subscribedBrandIds
+      subscribedOfferIds: $subscribedOfferIds
       locale: $locale
     ) {
       accessToken

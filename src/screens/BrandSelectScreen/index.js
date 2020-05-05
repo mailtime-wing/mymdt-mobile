@@ -18,32 +18,32 @@ let numberOfBrand = 2;
 
 const brandList = [
   {
-    id: 'cf99915a-a3be-4123-87f4-c45f96cd83c0',
+    id: '5bf7b9ee-2a9f-4818-8d23-be46951bf300',
     name: 'TencentFilm',
     percentage: '100',
     iconPath: require('@/assets/tencent_film.png'),
   },
   {
-    id: '7f3d3616-9956-4cfb-b2c1-bc188cdd5d4c',
+    id: '4f9d672d-9d58-4041-933c-d8905e877563',
     name: 'Netflix',
     percentage: '75',
     iconPath: require('@/assets/netflix.png'),
   },
   {
-    id: '0597c537-cca6-47b1-9d14-14a4497f3bcb',
+    id: 'a1874666-2bf9-4bb8-a3a0-a52eea0d2737',
     name: 'Apple Store',
     percentage: '5',
     iconPath: require('@/assets/apple_store.png'),
   },
   {
-    id: '6bb2d759-0bc1-493d-9879-47b21812a9de',
+    id: 'fe81dbce-1856-4d56-bc57-1f3ff76c3360',
     name: 'AirBNB',
     percentage: '25',
     iconPath: require('@/assets/airbnb.png'),
   },
-  // {id: 'f2156dea-7b27-49e2-bd49-359138f42535', name: 'EEEE'},
-  // {id: 'f2156dea-7b27-49e2-bd49-359138f42535', name: 'FFFF'},
-  // {id: 'f2156dea-7b27-49e2-bd49-359138f42535', name: 'GGGG'},
+  // {id: 'f80a37c1-7feb-473e-a9d8-a69cab2e1968', name: 'EEEE'},
+  // {id: '8e1f7d65-4e09-4146-98bf-531755e8cfae', name: 'FFFF'},
+  // {id: '37deb0e0-3582-4418-9942-f96aeb6b1d0d', name: 'GGGG'},
 ];
 
 const BrandSelectScreen = ({navigation}) => {
