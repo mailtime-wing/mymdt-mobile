@@ -112,7 +112,7 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
 const UserProfileScreen = ({navigation}) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [updateUserProfileRequest] = useMutation(UPDATE_USER_PROFILE_API);
-  const {authToken} = useContext(AuthContext);
+  const {authToken, updateUserAccountData} = useContext(AuthContext);
 
   const handleDatePickerPress = () => {
     setShowDatePicker(!showDatePicker);
@@ -138,6 +138,7 @@ const UserProfileScreen = ({navigation}) => {
           },
         },
       });
+      updateUserAccountData({isEmailBound: false, isProfileCompleted: true});
       navigation.navigate('account_setup_done');
     } catch (e) {
       console.error(e);

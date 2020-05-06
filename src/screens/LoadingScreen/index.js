@@ -7,7 +7,7 @@ import Button from '@/components/Button';
 
 const LoadingScreen = ({navigation, route}) => {
   const [finishSetup, setFinishSetup] = useState(false);
-  const {authToken} = route.params;
+  const {authToken, refreshToken} = route.params;
 
   useEffect(() => {
     setTimeout(() => setFinishSetup(true), 3000);
@@ -31,6 +31,7 @@ const LoadingScreen = ({navigation, route}) => {
             onPress={() =>
               navigation.navigate('notification', {
                 authToken: authToken,
+                refreshToken: refreshToken,
               })
             }>
             <FormattedMessage id="next" />

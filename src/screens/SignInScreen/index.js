@@ -204,18 +204,30 @@ const SignInForm = ({isSignUp}) => {
 
 const SigninScreen = ({route, navigation}) => {
   const {isSignUp, selectedBrands} = route.params;
+  const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken, updateUserAccountData} = useContext(AuthContext);
   const [loginRequest, {error}] = useMutation(LOGIN_API);
+  const [otpRequest] = useMutation(GET_OTP_API);
 
   const handleSubmitPress = async values => {
     const completePhoneNumber = values.phonePrefix + values.phone;
     if (isSignUp) {
-      let userData = {
-        phone: completePhoneNumber,
-        selectedBrands: selectedBrands,
-      };
-      // TODO: handle send otp once
-      navigation.navigate('verify_phone_number', userData);
+      try {
+        await otpRequest({
+          variables: {
+            phoneNumber: completePhoneNumber,
+            locale: localeEnum,
+            action: REGISTER,
+          },
+        });
+        let userData = {
+          phone: completePhoneNumber,
+          selectedBrands: selectedBrands,
+        };
+        navigation.navigate('verify_phone_number', userData);
+      } catch (e) {
+        console.error(`error on otpRequest with ${REGISTER}: ${e}`);
+      }
     } else {
       try {
         const {data} = await loginRequest({
@@ -224,7 +236,10 @@ const SigninScreen = ({route, navigation}) => {
             otp: values.verificationCode,
           },
         });
-        updateAuthToken(data.login.authToken.accessToken);
+        updateAuthToken(
+          data.login.authToken.accessToken,
+          data.login.authToken.refreshToken,
+        );
         updateUserAccountData({
           isEmailBound: data.login.isEmailBound,
           isProfileCompleted: data.login.isProfileCompleted,

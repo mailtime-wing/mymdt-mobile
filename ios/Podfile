@@ -92,6 +92,8 @@ target 'RewardMe' do
 
   pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'RewardMeTests' do
     inherit! :complete
     # Pods for testing

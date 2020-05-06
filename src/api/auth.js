@@ -43,10 +43,7 @@ export const LOGIN_API = gql`
 `;
 
 export const REFRESH_TOKEN_API = gql`
-  mutation RefreshAuthToken($refreshToken: String!) {
-    refreshAuthToken(refreshToken: $refreshToken) {
-      accessToken
-      refreshToken
-    }
+  mutation RefreshAccessToken($refreshToken: String!) {
+    refreshAccessToken(refreshToken: $refreshToken)
   }
 `;

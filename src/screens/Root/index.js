@@ -42,14 +42,20 @@ const noBackScreen = [
 ];
 
 const Root = () => {
-  const {authToken, isEmailBound, isProfileCompleted} = useContext(AuthContext);
+  const {
+    authToken,
+    refreshToken,
+    isEmailBound,
+    isProfileCompleted,
+  } = useContext(AuthContext);
   console.log('authToken', authToken);
+  console.log('refreshToken', refreshToken);
   return (
     <>
       <UpperSafeAreaView />
       <LowerSafeAreaView>
         <Container>
-          {authToken == null ? (
+          {!authToken ? (
             <Stack.Navigator>
               {screens.map(screen => (
                 <Stack.Screen

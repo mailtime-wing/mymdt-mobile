@@ -36,7 +36,6 @@ const BrandList = ({
   brandsLimit,
 }) => {
   const [error, setError] = useState(null);
-  console.log('error', error);
 
   const handlePopupState = state => {
     if (state) {

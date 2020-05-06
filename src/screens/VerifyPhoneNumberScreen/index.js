@@ -139,7 +139,10 @@ const VerifyPhoneNumberScreen = ({route, navigation}) => {
           locale: localeEnum,
         },
       });
-      await updateAuthToken(data.register.accessToken);
+      await updateAuthToken(
+        data.register.accessToken,
+        data.register.refreshToken,
+      );
       navigation.navigate('user_profile');
     } catch (e) {
       console.error('error in handleSubmitPress: ', e);

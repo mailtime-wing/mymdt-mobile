@@ -1,5 +1,6 @@
 import React, {useState, createContext, useEffect} from 'react';
-import {AsyncStorage, Text} from 'react-native';
+import {Text} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {IntlProvider} from 'react-intl';
 
 import locales from '@/constants/locale';
