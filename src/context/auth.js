@@ -69,6 +69,7 @@ export const AuthProvider = ({children}) => {
   useEffect(() => {
     let authToken;
     let refreshToken;
+    let newToken;
     const getToken = async () => {
       try {
         authToken = await AsyncStorage.getItem('authToken');
@@ -83,8 +84,8 @@ export const AuthProvider = ({children}) => {
                   refreshToken: refreshToken,
                 },
               });
-              authToken = data.refreshAccessToken;
-              authContext.updateAuthToken(authToken, null);
+              newToken = data.refreshAccessToken;
+              authContext.updateAuthToken(newToken, refreshToken);
             } catch (e) {
               console.warn('error refreshing token', e);
               dispatch({type: UPDATE_REFRESH_TOKEN_EXPIRED, payload: true});
@@ -177,7 +178,7 @@ export const AuthProvider = ({children}) => {
           await AsyncStorage.removeItem('isEmailBound');
           await AsyncStorage.removeItem('isProfileCompleted');
         } catch (error) {
-          console.error('error clear authToken');
+          console.error('error when sign out');
         }
         dispatch({type: SIGN_OUT});
       },

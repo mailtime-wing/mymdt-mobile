@@ -42,14 +42,8 @@ const noBackScreen = [
 ];
 
 const Root = () => {
-  const {
-    authToken,
-    refreshToken,
-    isEmailBound,
-    isProfileCompleted,
-  } = useContext(AuthContext);
-  console.log('authToken', authToken);
-  console.log('refreshToken', refreshToken);
+  const {authToken, isEmailBound, isProfileCompleted} = useContext(AuthContext);
+
   return (
     <>
       <UpperSafeAreaView />
