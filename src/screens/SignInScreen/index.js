@@ -28,24 +28,18 @@ import countryCodeData from './countryCode';
 const REGISTER = 'REGISTER';
 const LOGIN = 'LOGIN';
 
-const ENABLE_SEND_OTP = 'enableSendOtp';
 const SET_FORM_TYPE = 'setFormType';
 const SEND_OTP = 'sendOtp';
+const SET_COUNT_DOWN_TIMER = 'setCountDownTimer';
 
 const initialState = {
   sendCount: 0,
-  enableSendOtp: true,
   formType: '',
+  countDownTimer: 0
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ENABLE_SEND_OTP: {
-      return {
-        ...state,
-        enableSendOtp: true,
-      };
-    }
     case SET_FORM_TYPE: {
       return {
         ...state,
@@ -56,7 +50,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         sendCount: state.sendCount + 1,
-        enableSendOtp: false,
+      };
+    }
+    case SET_COUNT_DOWN_TIMER: {
+      return {
+        ...state,
+        countDownTimer: action.payload,
       };
     }
     default:
@@ -67,7 +66,7 @@ const reducer = (state, action) => {
 const SignInForm = ({isSignUp}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {localeEnum} = useContext(IntlContext);
-  const [otpRequest] = useMutation(GET_OTP_API);
+  const [otpRequest, {error}] = useMutation(GET_OTP_API);
   const {
     values,
     setFieldValue,
@@ -106,12 +105,13 @@ const SignInForm = ({isSignUp}) => {
     getPhonePrefix();
   }, [setFieldValue]);
 
-  const verificationCodeCoolDown = second => {
-    setTimeout(() => dispatch({type: ENABLE_SEND_OTP}), second * 1000);
-  };
+  // count down timer
+  useEffect(() => {
+    const timer = state.countDownTimer > 0 && setInterval(() => dispatch({type: SET_COUNT_DOWN_TIMER, payload: state.countDownTimer - 1}), 1000);
+    return () => clearInterval(timer)
+  }, [state.countDownTimer]);
 
   const handleSendPress = async () => {
-    dispatch({type: SEND_OTP});
     try {
       await otpRequest({
         variables: {
@@ -120,9 +120,10 @@ const SignInForm = ({isSignUp}) => {
           action: state.formType,
         },
       });
-      verificationCodeCoolDown(60);
+      dispatch({type: SEND_OTP});
+      dispatch({type: SET_COUNT_DOWN_TIMER, payload: 60});
     } catch (e) {
-      console.error(`error on otpRequest with ${state.formType}: ${e}`);
+      console.warn(`error on otpRequest with ${state.formType}: ${e}`);
     }
   };
 
@@ -165,7 +166,7 @@ const SignInForm = ({isSignUp}) => {
           </VerificationCodeContainer>
           <ThemeButton
             small
-            disabled={!state.enableSendOtp || errors.phone}
+            disabled={state.countDownTimer > 0 || errors.phone}
             onPress={handleSendPress}>
             <Text>
               {state.sendCount > 0 ? (
@@ -179,6 +180,7 @@ const SignInForm = ({isSignUp}) => {
                   defaultMessage="RESEND"
                 />
               )}
+              {state.countDownTimer > 0 && ' ' + state.countDownTimer}
             </Text>
           </ThemeButton>
         </VerificationContainer>
@@ -198,6 +200,7 @@ const SignInForm = ({isSignUp}) => {
           <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
         )}
       </ThemeButton>
+      {error && <PopupModal title="OTP fail" detail={error.message} />}
     </View>
   );
 };
@@ -226,7 +229,7 @@ const SigninScreen = ({route, navigation}) => {
         };
         navigation.navigate('verify_phone_number', userData);
       } catch (e) {
-        console.error(`error on otpRequest with ${REGISTER}: ${e}`);
+        console.warn(`error on otpRequest with ${REGISTER}: ${e}`);
       }
     } else {
       try {
@@ -245,7 +248,7 @@ const SigninScreen = ({route, navigation}) => {
           isProfileCompleted: data.login.isProfileCompleted,
         });
       } catch (e) {
-        // handle error later
+        console.warn(`error on otpRequest with ${LOGIN}: ${e}`);
       }
     }
   };

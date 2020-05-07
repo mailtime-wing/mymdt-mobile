@@ -1,4 +1,4 @@
-import React, {useContext, useReducer} from 'react';
+import React, {useContext, useReducer, useEffect} from 'react';
 import {View, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {AuthContext} from '@/context/auth';
@@ -20,27 +20,18 @@ import {
 
 const REGISTER = 'REGISTER';
 
-const ENABLE_SEND_OTP = 'enableSendOtp';
-const SEND_OTP = 'sendOtp';
+const SET_COUNT_DOWN_TIMER = 'setCountDownTimer';
 
 const initialState = {
-  sendCount: 0,
-  enableSendOtp: true,
+  countDownTimer: 0
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ENABLE_SEND_OTP: {
+    case SET_COUNT_DOWN_TIMER: {
       return {
         ...state,
-        enableSendOtp: true,
-      };
-    }
-    case SEND_OTP: {
-      return {
-        ...state,
-        sendCount: state.sendCount + 1,
-        enableSendOtp: false,
+        countDownTimer: action.payload,
       };
     }
     default:
@@ -61,12 +52,13 @@ const VerifyPhoneNumberForm = ({phone}) => {
     touched,
   } = useFormikContext();
 
-  const verificationCodeCoolDown = second => {
-    setTimeout(() => dispatch({type: ENABLE_SEND_OTP}), second * 1000);
-  };
+  // count down timer
+  useEffect(() => {
+    const timer = state.countDownTimer > 0 && setInterval(() => dispatch({type: SET_COUNT_DOWN_TIMER, payload: state.countDownTimer - 1}), 1000);
+    return () => clearInterval(timer)
+  }, [state.countDownTimer]);
 
   const handleSendPress = async () => {
-    dispatch({type: SEND_OTP});
     try {
       await otpRequest({
         variables: {
@@ -75,7 +67,7 @@ const VerifyPhoneNumberForm = ({phone}) => {
           action: REGISTER,
         },
       });
-      verificationCodeCoolDown(60);
+      dispatch({type: SET_COUNT_DOWN_TIMER, payload: 60});
     } catch (e) {
       // console.error(`error on otpRequest with ${state.formType}: ${e}`);
     }
@@ -93,13 +85,14 @@ const VerifyPhoneNumberForm = ({phone}) => {
         />
       </VerifyDetail>
       <ResendCodeButton
-        disabled={!state.enableSendOtp}
+        disabled={state.countDownTimer > 0}
         onPress={handleSendPress}>
         <ResendCode>
           <FormattedMessage
             id="resend_the_code"
             defaultMessage="Resend the Code"
           />
+          {state.countDownTimer > 0 && ' ' + state.countDownTimer}
         </ResendCode>
       </ResendCodeButton>
       <VerificationContainer>
