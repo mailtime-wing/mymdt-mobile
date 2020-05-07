@@ -38,7 +38,7 @@ const renderItem = ({item, index}) => {
 };
 
 const CardSection = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const refCarousel = useRef(null);
 
   const data = [
