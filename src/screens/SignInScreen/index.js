@@ -35,7 +35,7 @@ const SET_COUNT_DOWN_TIMER = 'setCountDownTimer';
 const initialState = {
   sendCount: 0,
   formType: '',
-  countDownTimer: 0
+  countDownTimer: 0,
 };
 
 const reducer = (state, action) => {
@@ -96,19 +96,30 @@ const SignInForm = ({isSignUp}) => {
           )?.dial_code;
           if (dialCode) {
             setFieldValue('phonePrefix', dialCode);
+            return;
           }
         }
       } catch (e) {
         // handle error later
       }
+      setFieldValue('phonePrefix', '+');
     };
     getPhonePrefix();
   }, [setFieldValue]);
 
   // count down timer
   useEffect(() => {
-    const timer = state.countDownTimer > 0 && setInterval(() => dispatch({type: SET_COUNT_DOWN_TIMER, payload: state.countDownTimer - 1}), 1000);
-    return () => clearInterval(timer)
+    const timer =
+      state.countDownTimer > 0 &&
+      setInterval(
+        () =>
+          dispatch({
+            type: SET_COUNT_DOWN_TIMER,
+            payload: state.countDownTimer - 1,
+          }),
+        1000,
+      );
+    return () => clearInterval(timer);
   }, [state.countDownTimer]);
 
   const handleSendPress = async () => {
@@ -255,8 +266,9 @@ const SigninScreen = ({route, navigation}) => {
 
   const validate = values => {
     const errors = {};
+    const dialCodeRegex = /^(\+)(\d{1,3}|\d{1,4})$/;
 
-    if (!values.phonePrefix) {
+    if (!dialCodeRegex.test(values.phonePrefix)) {
       errors.phonePrefix = 'Dial Code Required';
     }
 
