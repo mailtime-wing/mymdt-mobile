@@ -41,12 +41,12 @@ export const PhoneSectionContainer = styled.View`
 `;
 
 export const PhonePrefixContainer = styled.View`
-  width: 28%;
   margin-right: 8px;
+  flex: 1;
 `;
 
 export const PhoneContainer = styled.View`
-  flex: 1;
+  flex: 2;
 `;
 
 export const SignUpDetail = styled.Text`
