@@ -7,12 +7,17 @@ export const Container = styled.ScrollView`
   padding-right: 24px;
 `;
 
-export const EmailContainer = styled.View`
+export const EmailRowContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 24px;
   opacity: ${props => props.isNext && '0.1'};
+`;
+
+export const EmailContainer = styled.View`
+  margin-right: 16px;
+  flex: 1;
 `;
 
 export const Title = styled.Text`
@@ -47,4 +52,4 @@ export const BindMoreLaterText = styled.Text`
 
 export const MarginContainer = styled.View`
   margin-top: 16px;
-`
+`;
