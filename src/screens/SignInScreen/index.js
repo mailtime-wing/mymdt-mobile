@@ -3,7 +3,7 @@ import {View, Text, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import CarrierInfo from 'react-native-carrier-info';
 import {AuthContext} from '@/context/auth';
 import {FormattedMessage} from 'react-intl';
-import {GET_OTP_API, LOGIN_API} from '@/api/auth';
+import {GET_OTP_API, LOGIN_API, REGISTER_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
 import {Formik, useFormikContext} from 'formik';
 import {IntlContext} from '@/context/Intl';
@@ -159,43 +159,41 @@ const SignInForm = ({isSignUp}) => {
           />
         </PhoneContainer>
       </PhoneSectionContainer>
-      {!isSignUp && (
-        <VerificationContainer>
-          <VerificationCodeContainer>
-            <Input
-              keyboardType="number-pad"
-              onChangeText={handleChange('verificationCode')}
-              value={values.verificationCode}
-              label={
-                <FormattedMessage
-                  id="verification_code"
-                  defaultMessage="VERIFICATION CODE"
-                />
-              }
-              error={errors.verificationCode}
-            />
-          </VerificationCodeContainer>
-          <ThemeButton
-            small
-            disabled={state.countDownTimer > 0 || errors.phone}
-            onPress={handleSendPress}>
-            <Text>
-              {state.sendCount > 0 ? (
-                <FormattedMessage
-                  id="resend_verification_code"
-                  defaultMessage="SEND"
-                />
-              ) : (
-                <FormattedMessage
-                  id="send_verification_code"
-                  defaultMessage="RESEND"
-                />
-              )}
-              {state.countDownTimer > 0 && ' ' + state.countDownTimer}
-            </Text>
-          </ThemeButton>
-        </VerificationContainer>
-      )}
+      <VerificationContainer>
+        <VerificationCodeContainer>
+          <Input
+            keyboardType="number-pad"
+            onChangeText={handleChange('verificationCode')}
+            value={values.verificationCode}
+            label={
+              <FormattedMessage
+                id="verification_code"
+                defaultMessage="VERIFICATION CODE"
+              />
+            }
+            error={errors.verificationCode}
+          />
+        </VerificationCodeContainer>
+        <ThemeButton
+          small
+          disabled={state.countDownTimer > 0 || errors.phone}
+          onPress={handleSendPress}>
+          <Text>
+            {state.sendCount > 0 ? (
+              <FormattedMessage
+                id="resend_verification_code"
+                defaultMessage="SEND"
+              />
+            ) : (
+              <FormattedMessage
+                id="send_verification_code"
+                defaultMessage="RESEND"
+              />
+            )}
+            {state.countDownTimer > 0 && ' ' + state.countDownTimer}
+          </Text>
+        </ThemeButton>
+      </VerificationContainer>
       {isSignUp && (
         <SignUpDetail>
           <FormattedMessage
@@ -221,26 +219,27 @@ const SigninScreen = ({route, navigation}) => {
   const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken, updateUserAccountData} = useContext(AuthContext);
   const [loginRequest, {error}] = useMutation(LOGIN_API);
-  const [otpRequest] = useMutation(GET_OTP_API);
+  const [registerRequest] = useMutation(REGISTER_API);
 
   const handleSubmitPress = async values => {
     const completePhoneNumber = values.phonePrefix + values.phone;
     if (isSignUp) {
       try {
-        await otpRequest({
+        const {data} = await registerRequest({
           variables: {
             phoneNumber: completePhoneNumber,
+            otp: values.verificationCode,
+            subscribedOfferIds: selectedBrands.map(brand => brand.id),
             locale: localeEnum,
-            action: REGISTER,
           },
         });
-        let userData = {
-          phone: completePhoneNumber,
-          selectedBrands: selectedBrands,
-        };
-        navigation.navigate('verify_phone_number', userData);
+        await updateAuthToken(
+          data.register.accessToken,
+          data.register.refreshToken,
+        );
+        navigation.navigate('user_profile');
       } catch (e) {
-        console.warn(`error on otpRequest with ${REGISTER}: ${e}`);
+        console.warn(`error on ${REGISTER}: ${e}`);
       }
     } else {
       try {
@@ -259,7 +258,7 @@ const SigninScreen = ({route, navigation}) => {
           isProfileCompleted: data.login.isProfileCompleted,
         });
       } catch (e) {
-        console.warn(`error on otpRequest with ${LOGIN}: ${e}`);
+        console.warn(`error on ${LOGIN}: ${e}`);
       }
     }
   };
@@ -322,7 +321,9 @@ const SigninScreen = ({route, navigation}) => {
             />
           </LoginAndAgree>
         )}
-        {error && <PopupModal title="Login fail" detail={error.message} />}
+        {error && (
+          <PopupModal title="Login or Register fail" detail={error.message} />
+        )}
       </Container>
     </TouchableWithoutFeedback>
   );
