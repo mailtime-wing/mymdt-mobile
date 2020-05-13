@@ -109,8 +109,8 @@ const SignInForm = ({isSignUp}) => {
 
   // count down timer
   useEffect(() => {
-    const timer =
-      state.countDownTimer > 0 &&
+    let timer = null;
+    if (state.countDownTimer > 0) {
       setInterval(
         () =>
           dispatch({
@@ -119,7 +119,12 @@ const SignInForm = ({isSignUp}) => {
           }),
         1000,
       );
-    return () => clearInterval(timer);
+    }
+    return () => {
+      if (timer != null) {
+        clearInterval(timer);
+      }
+    };
   }, [state.countDownTimer]);
 
   const handleSendPress = async () => {

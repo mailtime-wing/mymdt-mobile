@@ -1,10 +1,9 @@
 import React, {useContext} from 'react';
-import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer as Container} from '@react-navigation/native';
 import {AuthContext} from '@/context/auth';
 
-import {UpperSafeAreaView, LowerSafeAreaView} from './style';
+import {UpperSafeAreaView, LowerSafeAreaView, styles} from './style';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import BrandSelectScreen from '@/screens/BrandSelectScreen';
@@ -106,15 +105,3 @@ const Root = () => {
 };
 
 export default Root;
-
-const styles = StyleSheet.create({
-  headerTitle: {
-    display: 'none',
-  },
-  header: {
-    height: 80,
-  },
-  card: {
-    backgroundColor: 'white',
-  },
-});

@@ -67,10 +67,10 @@ export const AuthProvider = ({children}) => {
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
 
   useEffect(() => {
-    let authToken;
-    let refreshToken;
-    let newToken;
     const getToken = async () => {
+      let authToken;
+      let refreshToken;
+      let newToken;
       try {
         authToken = await AsyncStorage.getItem('authToken');
         refreshToken = await AsyncStorage.getItem('refreshToken');
@@ -107,9 +107,9 @@ export const AuthProvider = ({children}) => {
   }, [authContext, refreshTokenRequest]);
 
   useEffect(() => {
-    let isEmailBound;
-    let isProfileCompleted;
     const getUserAccountData = async () => {
+      let isEmailBound;
+      let isProfileCompleted;
       try {
         isEmailBound = await AsyncStorage.getItem('isEmailBound');
         isProfileCompleted = await AsyncStorage.getItem('isProfileCompleted');

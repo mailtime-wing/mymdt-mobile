@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import LanguageScreen from '@/screens/LanguageScreen';
@@ -13,6 +12,7 @@ import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
 import BrandPreferenceEditScreen from '@/screens/BrandPreferenceEditScreen';
 
 import HeaderButton from '@/components/HeaderButton';
+import {styles} from './style';
 
 const Stack = createStackNavigator();
 
@@ -59,15 +59,3 @@ const ProfileStack = () => (
 );
 
 export default ProfileStack;
-
-const styles = StyleSheet.create({
-  headerTitle: {
-    display: 'none',
-  },
-  header: {
-    height: 80,
-  },
-  card: {
-    backgroundColor: 'white',
-  },
-});
