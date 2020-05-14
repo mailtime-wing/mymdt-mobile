@@ -14,21 +14,13 @@ export const REGISTER_API = gql`
   mutation Register(
     $phoneNumber: String!
     $otp: String!
-    $name: String!
-    $gender: String!
-    $dateOfBirth: Time!
-    $referalCode: String
-    $subscribedBrandIds: [String!]
+    $subscribedOfferIds: [String!]
     $locale: Locale!
   ) {
     register(
       phoneNumber: $phoneNumber
       otp: $otp
-      name: $name
-      gender: $gender
-      dateOfBirth: $dateOfBirth
-      subscribedBrandIds: $subscribedBrandIds
-      referalCode: $referalCode
+      subscribedOfferIds: $subscribedOfferIds
       locale: $locale
     ) {
       accessToken
@@ -40,17 +32,18 @@ export const REGISTER_API = gql`
 export const LOGIN_API = gql`
   mutation Login($phoneNumber: String!, $otp: String!) {
     login(phoneNumber: $phoneNumber, otp: $otp) {
-      accessToken
-      refreshToken
+      authToken {
+        accessToken
+        refreshToken
+      }
+      isEmailBound
+      isProfileCompleted
     }
   }
 `;
 
 export const REFRESH_TOKEN_API = gql`
-  mutation RefreshAuthToken($refreshToken: String!) {
-    refreshAuthToken(refreshToken: $refreshToken) {
-      accessToken
-      refreshToken
-    }
+  mutation RefreshAccessToken($refreshToken: String!) {
+    refreshAccessToken(refreshToken: $refreshToken)
   }
 `;

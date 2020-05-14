@@ -2,7 +2,7 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {Container, Details, EditLater} from './style';
 
-import Button from '@/components/Button';
+import ThemeButton from '@/components/ThemeButton';
 import BrandList from '@/components/BrandList';
 
 const BrandSelectConfirmScreen = ({route, navigation}) => {
@@ -34,9 +34,9 @@ const BrandSelectConfirmScreen = ({route, navigation}) => {
         />
       </Details>
       <BrandList brandList={selectedBrands} />
-      <Button onPress={handleConfirmPress}>
-        <FormattedMessage id="confirm" />
-      </Button>
+      <ThemeButton onPress={handleConfirmPress}>
+        <FormattedMessage id="confirm" default="Confirm" />
+      </ThemeButton>
       <EditLater>
         <FormattedMessage
           id="edit_prefernece_afterward"

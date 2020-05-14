@@ -3,43 +3,43 @@ import {View, Text, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import CarrierInfo from 'react-native-carrier-info';
 import {AuthContext} from '@/context/auth';
 import {FormattedMessage} from 'react-intl';
-import {GET_OTP_API, LOGIN_API} from '@/api/auth';
+import {GET_OTP_API, LOGIN_API, REGISTER_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
 import {Formik, useFormikContext} from 'formik';
 import {IntlContext} from '@/context/Intl';
 
 import Input from '@/components/Input';
-import Button from '@/components/Button';
+import ThemeButton from '@/components/ThemeButton';
+import PopupModal from '@/components/PopupModal';
 import {
   Container,
   Title,
   VerificationContainer,
   LoginAndAgree,
   Error,
+  PhoneSectionContainer,
+  PhonePrefixContainer,
+  PhoneContainer,
+  VerificationCodeContainer,
+  SignUpDetail,
 } from './style';
 import countryCodeData from './countryCode';
 
 const REGISTER = 'REGISTER';
 const LOGIN = 'LOGIN';
 
-const ENABLE_SEND_OTP = 'enableSendOtp';
 const SET_FORM_TYPE = 'setFormType';
 const SEND_OTP = 'sendOtp';
+const SET_COUNT_DOWN_TIMER = 'setCountDownTimer';
 
 const initialState = {
   sendCount: 0,
-  enableSendOtp: true,
   formType: '',
+  countDownTimer: 0,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ENABLE_SEND_OTP: {
-      return {
-        ...state,
-        enableSendOtp: true,
-      };
-    }
     case SET_FORM_TYPE: {
       return {
         ...state,
@@ -50,7 +50,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         sendCount: state.sendCount + 1,
-        enableSendOtp: false,
+      };
+    }
+    case SET_COUNT_DOWN_TIMER: {
+      return {
+        ...state,
+        countDownTimer: action.payload,
       };
     }
     default:
@@ -61,7 +66,7 @@ const reducer = (state, action) => {
 const SignInForm = ({isSignUp}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {localeEnum} = useContext(IntlContext);
-  const [otpRequest] = useMutation(GET_OTP_API);
+  const [otpRequest, {error}] = useMutation(GET_OTP_API);
   const {
     values,
     setFieldValue,
@@ -91,122 +96,198 @@ const SignInForm = ({isSignUp}) => {
           )?.dial_code;
           if (dialCode) {
             setFieldValue('phonePrefix', dialCode);
+            return;
           }
         }
       } catch (e) {
         // handle error later
       }
+      setFieldValue('phonePrefix', '+');
     };
     getPhonePrefix();
   }, [setFieldValue]);
 
-  const handlePhoneFocus = () => {
-    if (
-      values.phonePrefix !== '' &&
-      !values.phone.includes(values.phonePrefix + ' ')
-    ) {
-      setFieldValue('phone', values.phonePrefix + ' ');
+  // count down timer
+  useEffect(() => {
+    let timer = null;
+    if (state.countDownTimer > 0) {
+      setInterval(
+        () =>
+          dispatch({
+            type: SET_COUNT_DOWN_TIMER,
+            payload: state.countDownTimer - 1,
+          }),
+        1000,
+      );
     }
-  };
-
-  const verificationCodeCoolDown = second => {
-    setTimeout(() => dispatch({type: ENABLE_SEND_OTP}), second * 1000);
-  };
+    return () => {
+      if (timer != null) {
+        clearInterval(timer);
+      }
+    };
+  }, [state.countDownTimer]);
 
   const handleSendPress = async () => {
-    dispatch({type: SEND_OTP});
     try {
       await otpRequest({
         variables: {
-          phoneNumber: values.phone,
+          phoneNumber: values.phonePrefix + values.phone,
           locale: localeEnum,
           action: state.formType,
         },
       });
-      verificationCodeCoolDown(60);
+      dispatch({type: SEND_OTP});
+      dispatch({type: SET_COUNT_DOWN_TIMER, payload: 60});
     } catch (e) {
-      console.error(`error on otpRequest with ${state.formType}: ${e}`);
+      console.warn(`error on otpRequest with ${state.formType}: ${e}`);
     }
   };
 
   return (
     <View>
-      <Input
-        type="telephoneNumber"
-        onChangeText={handleChange('phone')}
-        onFocus={() => handlePhoneFocus(values, setFieldValue)}
-        value={values.phone}
-        label={<FormattedMessage id="telephone" />}
-        error={errors.phone}
-      />
+      <PhoneSectionContainer>
+        <PhonePrefixContainer>
+          <Input
+            keyboardType="phone-pad"
+            onChangeText={handleChange('phonePrefix')}
+            value={values.phonePrefix}
+            label={<FormattedMessage id="telephone" />}
+            error={errors.phonePrefix}
+          />
+        </PhonePrefixContainer>
+        <PhoneContainer>
+          <Input
+            keyboardType="phone-pad"
+            onChangeText={handleChange('phone')}
+            value={values.phone}
+            error={errors.phone}
+          />
+        </PhoneContainer>
+      </PhoneSectionContainer>
       <VerificationContainer>
-        <Input
-          type="oneTimeCode"
-          onChangeText={handleChange('verificationCode')}
-          value={values.verificationCode}
-          label={<FormattedMessage id="verification_code" />}
-          error={errors.verificationCode}
-        />
-        <Button
+        <VerificationCodeContainer>
+          <Input
+            keyboardType="number-pad"
+            onChangeText={handleChange('verificationCode')}
+            value={values.verificationCode}
+            label={
+              <FormattedMessage
+                id="verification_code"
+                defaultMessage="VERIFICATION CODE"
+              />
+            }
+            error={errors.verificationCode}
+          />
+        </VerificationCodeContainer>
+        <ThemeButton
           small
-          disabled={!state.enableSendOtp || errors.phone}
+          disabled={state.countDownTimer > 0 || errors.phone}
           onPress={handleSendPress}>
           <Text>
             {state.sendCount > 0 ? (
-              <FormattedMessage id="resend_verification_code" />
+              <FormattedMessage
+                id="resend_verification_code"
+                defaultMessage="SEND"
+              />
             ) : (
-              <FormattedMessage id="send_verification_code" />
+              <FormattedMessage
+                id="send_verification_code"
+                defaultMessage="RESEND"
+              />
             )}
+            {state.countDownTimer > 0 && ' ' + state.countDownTimer}
           </Text>
-        </Button>
+        </ThemeButton>
       </VerificationContainer>
-      <Button onPress={handleSubmit} title="Submit" disabled={!isValid}>
-        <FormattedMessage id="submit" />
-      </Button>
+      {isSignUp && (
+        <SignUpDetail>
+          <FormattedMessage
+            id="we_will_send_otp"
+            defaultMessage="We’ll send you a verification code to your phone via text message."
+          />
+        </SignUpDetail>
+      )}
+      <ThemeButton onPress={handleSubmit} disabled={!isValid}>
+        {isSignUp ? (
+          <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
+        ) : (
+          <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
+        )}
+      </ThemeButton>
+      {error && <PopupModal title="OTP fail" detail={error.message} />}
     </View>
   );
 };
 
 const SigninScreen = ({route, navigation}) => {
   const {isSignUp, selectedBrands} = route.params;
-  const {updateAuthToken} = useContext(AuthContext);
+  const {localeEnum} = useContext(IntlContext);
+  const {updateAuthToken, updateUserAccountData} = useContext(AuthContext);
   const [loginRequest, {error}] = useMutation(LOGIN_API);
+  const [registerRequest] = useMutation(REGISTER_API);
 
   const handleSubmitPress = async values => {
+    const completePhoneNumber = values.phonePrefix + values.phone;
     if (isSignUp) {
-      let userData = {
-        phone: values.phone,
-        verificationCode: values.verificationCode,
-        selectedBrands: selectedBrands,
-      };
-      navigation.navigate('user_profile', userData);
+      try {
+        const {data} = await registerRequest({
+          variables: {
+            phoneNumber: completePhoneNumber,
+            otp: values.verificationCode,
+            subscribedOfferIds: selectedBrands.map(brand => brand.id),
+            locale: localeEnum,
+          },
+        });
+        await updateAuthToken(
+          data.register.accessToken,
+          data.register.refreshToken,
+        );
+        navigation.navigate('user_profile');
+      } catch (e) {
+        console.warn(`error on ${REGISTER}: ${e}`);
+      }
     } else {
       try {
         const {data} = await loginRequest({
           variables: {
-            phoneNumber: values.phone,
+            phoneNumber: completePhoneNumber,
             otp: values.verificationCode,
           },
         });
-        updateAuthToken(data.login.accessToken);
-      } catch (e) {}
+        updateAuthToken(
+          data.login.authToken.accessToken,
+          data.login.authToken.refreshToken,
+        );
+        updateUserAccountData({
+          isEmailBound: data.login.isEmailBound,
+          isProfileCompleted: data.login.isProfileCompleted,
+        });
+      } catch (e) {
+        console.warn(`error on ${LOGIN}: ${e}`);
+      }
     }
   };
 
   const validate = values => {
     const errors = {};
+    const dialCodeRegex = /^(\+)(\d{1,3}|\d{1,4})$/;
+
+    if (!dialCodeRegex.test(values.phonePrefix)) {
+      errors.phonePrefix = 'Dial Code Required';
+    }
 
     if (!values.phone) {
       errors.phone = 'Phone Required';
-    } else {
-      if (!values.phone.includes('+') || !values.phone.includes(' ')) {
-        errors.phone =
-          'Phone number with prefix number required! e.g. +852 xxxxxxxx';
-      }
     }
 
-    if (!values.verificationCode) {
-      errors.verificationCode = 'OTP Required';
+    if (!isSignUp) {
+      if (!values.verificationCode) {
+        errors.verificationCode = 'OTP Required';
+      }
+
+      if (values.verificationCode.length !== 6) {
+        errors.verificationCode = 'OTP is a 6 digit number';
+      }
     }
 
     return errors;
@@ -217,9 +298,9 @@ const SigninScreen = ({route, navigation}) => {
       <Container>
         <Title>
           {isSignUp ? (
-            <FormattedMessage id="register_with_phone" />
+            <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
           ) : (
-            <FormattedMessage id="connect_with_phone" />
+            <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
           )}
         </Title>
         <Formik
@@ -232,12 +313,11 @@ const SigninScreen = ({route, navigation}) => {
           validate={values => validate(values)}>
           <SignInForm isSignUp={isSignUp} />
         </Formik>
-        {error && <Text>login / register fail. {error.message}</Text>}
         {!isSignUp && (
           <LoginAndAgree>
             <FormattedMessage
               id="login_in_agree_terms_and_policy"
-              defaultMessage="By logging in your email address, you agree with MailTime’s Terms and Service and Privacy Policy."
+              defaultMessage="By logging in your email address, you agree with RewardMe’s Terms of Service and Privacy Policy."
               // values={{
               //   Text: str => (
               //     <Link onPress={() => Alert.alert('terms!')}>{str}</Link>
@@ -245,6 +325,9 @@ const SigninScreen = ({route, navigation}) => {
               // }}
             />
           </LoginAndAgree>
+        )}
+        {error && (
+          <PopupModal title="Login or Register fail" detail={error.message} />
         )}
       </Container>
     </TouchableWithoutFeedback>

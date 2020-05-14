@@ -12,6 +12,7 @@ import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
 import BrandPreferenceEditScreen from '@/screens/BrandPreferenceEditScreen';
 
 import HeaderButton from '@/components/HeaderButton';
+import {styles} from './style';
 
 const Stack = createStackNavigator();
 
@@ -47,9 +48,9 @@ const ProfileStack = () => (
         component={screen.component}
         options={{
           headerTransparent: true,
-          headerTitleStyle: {display: 'none'},
-          cardStyle: {backgroundColor: 'white'},
-          headerStyle: {height: 80},
+          headerTitleStyle: styles.headerTitle,
+          cardStyle: styles.card,
+          headerStyle: styles.header,
           headerLeft: () => <HeaderButton isModal root="menu" />,
         }}
       />

@@ -3,13 +3,18 @@ import {Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {FormattedMessage} from 'react-intl';
 
-import Button from '@/components/Button';
+import ThemeButton from '@/components/ThemeButton';
 
-import {Container, Title, Detail, Skip} from './style';
+import {
+  Container,
+  Title,
+  Detail,
+  MarginContainer,
+  NotificationPermission,
+  UpArrow,
+} from './style';
 
-const NotificationScreen = ({navigation, route}) => {
-  const {authToken} = route.params;
-
+const NotificationScreen = ({navigation}) => {
   const requestNotificationPermission = () => {
     if (Platform.OS === 'ios') {
       PushNotificationIOS.requestPermissions();
@@ -33,23 +38,34 @@ const NotificationScreen = ({navigation, route}) => {
         }
       });
     }
-    navigation.navigate('account_setup_done', {authToken: authToken});
+    navigation.navigate('bind_email');
   };
 
   return (
     <Container>
       <Title>
-        <FormattedMessage id="want_to_receive_latest_info" />
+        <FormattedMessage
+          id="want_to_receive_latest_info"
+          defaultMessage="Receive Latest Info"
+        />
       </Title>
       <Detail>
-        <FormattedMessage id="turn_on_notifications_to_learn" />
+        <FormattedMessage
+          id="turn_on_notifications_to_learn"
+          defaultMessage="Turn on notifications to receive news about new rewards, latest promotional events and limited offers."
+        />
       </Detail>
-      <Button onPress={requestNotificationPermission}>
+      <NotificationPermission
+        source={require('@/assets/notification_permission.png')}
+      />
+      <UpArrow source={require('@/assets/arrow_up.png')} />
+      <ThemeButton onPress={requestNotificationPermission}>
         <FormattedMessage id="sure" />
-      </Button>
-      <Skip onPress={handleSkipPress}>
+      </ThemeButton>
+      <MarginContainer />
+      <ThemeButton reverse small onPress={handleSkipPress}>
         <FormattedMessage id="skip_for_now" />
-      </Skip>
+      </ThemeButton>
     </Container>
   );
 };

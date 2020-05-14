@@ -38,7 +38,7 @@ const renderItem = ({item, index}) => {
 };
 
 const CardSection = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const refCarousel = useRef(null);
 
   const data = [
@@ -93,7 +93,7 @@ const OnboardingScreen = ({navigation}) => (
   <Container>
     <CardSection />
     <ButtonContainer>
-      <ThemeButton onPress={() => navigation.navigate('brand_select')}>
+      <ThemeButton onPress={() => navigation.navigate('welcome')}>
         <FormattedMessage id="join_rewardme" defaultMessage="JOIN REWARDME" />
       </ThemeButton>
       <MarginContainer />

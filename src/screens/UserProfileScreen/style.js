@@ -1,32 +1,45 @@
 import styled from '@emotion/native';
 
-export const Container = styled.View`
-  padding: 99px 30px 38px 30px;
+export const Container = styled.KeyboardAvoidingView`
+  padding-top: 68px;
+`;
+
+export const ScrollContainer = styled.ScrollView`
+  padding-left: 24px;
+  padding-right: 24px;
+`;
+
+export const FormContainer = styled.View`
+  margin-bottom: 16px;
 `;
 
 export const Title = styled.Text`
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 36px;
+  color: ${props => props.theme.colors.secondary.normal};
+  line-height: 36px;
   letter-spacing: 2px;
+  font-weight: 500;
+  margin-bottom: 29px;
   text-transform: uppercase;
-  margin-bottom: 16px;
 `;
 
 export const Detail = styled.Text`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 1px;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
 `;
 
-export const DatePicker = styled.DatePickerIOS`
-  background-color: ${props => props.theme.colors.grey.light};
-  margin-bottom: 10px;
+export const RequiredText = styled.Text`
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+  margin-bottom: 24px;
 `;
 
 export const DateFieldContainer = styled.TouchableOpacity`
-  margin-top: 32px;
+  margin-top: 24px;
 `;
 
 export const GenderContainer = styled.View`

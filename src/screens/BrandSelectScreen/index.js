@@ -1,56 +1,143 @@
 import React, {useState} from 'react';
-import {FormattedMessage} from 'react-intl';
-import {ScrollContainer, Details} from './style';
+import {FormattedMessage, defineMessages, useIntl} from 'react-intl';
+import {
+  ScrollContainer,
+  Container,
+  FixedContainer,
+  Details,
+  Title,
+  HightLightText,
+  BrandsSelectedText,
+} from './style';
 
-import Button from '@/components/Button';
+import ThemeButton from '@/components/ThemeButton';
 import BrandList from '@/components/BrandList';
+import PopupModal from '@/components/PopupModal';
 
 let numberOfBrand = 2;
 
 const brandList = [
-  {id: '274c896f-fd52-4b46-bb7b-941a3c8bed20', name: 'AAAA'},
-  {id: '5aecd684-11eb-40fe-958f-db2b51926c8f', name: 'BBBB'},
-  {id: 'e7ac5c12-2bee-43a6-86c6-bb4c30a87986', name: 'CCCC'},
-  {id: '549c104c-a7c1-4a70-9e19-963f1d15417b', name: 'DDDD'},
-  // {id: 'f2156dea-7b27-49e2-bd49-359138f42535', name: 'EEEE'},
-  // {id: 'f2156dea-7b27-49e2-bd49-359138f42535', name: 'FFFF'},
-  // {id: 'f2156dea-7b27-49e2-bd49-359138f42535', name: 'GGGG'},
+  {
+    id: '5bf7b9ee-2a9f-4818-8d23-be46951bf300',
+    name: 'TencentFilm',
+    percentage: '100',
+    iconPath: require('@/assets/tencent_film.png'),
+  },
+  {
+    id: '4f9d672d-9d58-4041-933c-d8905e877563',
+    name: 'Netflix',
+    percentage: '75',
+    iconPath: require('@/assets/netflix.png'),
+  },
+  {
+    id: 'a1874666-2bf9-4bb8-a3a0-a52eea0d2737',
+    name: 'Apple Store',
+    percentage: '5',
+    iconPath: require('@/assets/apple_store.png'),
+  },
+  {
+    id: 'fe81dbce-1856-4d56-bc57-1f3ff76c3360',
+    name: 'AirBNB',
+    percentage: '25',
+    iconPath: require('@/assets/airbnb.png'),
+  },
+  // {id: 'f80a37c1-7feb-473e-a9d8-a69cab2e1968', name: 'EEEE'},
+  // {id: '8e1f7d65-4e09-4146-98bf-531755e8cfae', name: 'FFFF'},
+  // {id: '37deb0e0-3582-4418-9942-f96aeb6b1d0d', name: 'GGGG'},
 ];
 
 const BrandSelectScreen = ({navigation}) => {
   const [selectedBrands, setSelectedBrands] = useState([]);
+  const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const intl = useIntl();
 
-  const handleNextPress = () => {
-    navigation.navigate('brand_select_confirm', {
-      selectedBrands: selectedBrands,
-      numberOfBrand: numberOfBrand,
-    });
+  const formatBrandString = () => {
+    const lastBrandIndex = selectedBrands.length - 1;
+    const lastBrand = selectedBrands[lastBrandIndex]
+      ? selectedBrands[lastBrandIndex].name
+      : '';
+    let result = selectedBrands
+      .map(brand => {
+        if (selectedBrands.indexOf(brand) !== lastBrandIndex) {
+          return brand.name;
+        }
+      })
+      .join(' and ');
+    return result + lastBrand;
   };
 
+  const handlePopupState = state => {
+    if (state === 'OK') {
+      navigation.navigate('sign_in', {
+        isSignUp: true,
+        selectedBrands: selectedBrands,
+      });
+    }
+    setShowConfirmPopup(false);
+  };
+
+  const handleNextPress = () => {
+    setShowConfirmPopup(true);
+  };
+
+  const messages = defineMessages({
+    brands: {
+      id: 'brands',
+      defaultMessage:
+        '{brandCount, plural, =0 {brand} one {brand} other {brands}}',
+    },
+  });
+  const pluralString = intl.formatMessage(messages.brands, {
+    brandCount: selectedBrands.length,
+  });
+  const brandsSelectedText = `${
+    selectedBrands.length
+  } ${pluralString} SELECTED`;
+
   return (
-    <ScrollContainer>
-      <Details>
-        <FormattedMessage id="select_offer_details" />
-      </Details>
-      <Details>
-        <FormattedMessage
-          id="please_select_brands"
-          defaultMessage="Please select {number_of_brands} brands you shop the most."
-          values={{
-            number_of_brands: numberOfBrand,
-          }}
+    <Container>
+      <ScrollContainer>
+        <Title>
+          <FormattedMessage id="special_offer" defaultMessage="Special Offer" />
+        </Title>
+        <Details>
+          <FormattedMessage
+            id="select_offer_details"
+            defaultMessage="We also provide a special offer for everyone. You can choose your favorite or frequently spend brands. The cashback rate depends on your membership level."
+          />
+        </Details>
+        <Details>
+          <FormattedMessage
+            id="please_select_brands"
+            defaultMessage="Please choose <FilterText>{number_of_brands} brands/services</FilterText> to earn points with each time you spend there."
+            values={{
+              number_of_brands: numberOfBrand,
+              FilterText: str => <HightLightText>{str}</HightLightText>,
+              // TOFIX: formatting not work in react native
+            }}
+          />
+        </Details>
+        <BrandList
+          brandList={brandList}
+          selectedBrands={selectedBrands}
+          setSelectedBrands={setSelectedBrands}
+          brandsLimit={numberOfBrand}
         />
-      </Details>
-      <BrandList
-        brandList={brandList}
-        selectedBrands={selectedBrands}
-        setSelectedBrands={setSelectedBrands}
-        brandsLimit={2}
-      />
-      <Button onPress={handleNextPress}>
-        <FormattedMessage id="next" />
-      </Button>
-    </ScrollContainer>
+      </ScrollContainer>
+      <FixedContainer>
+        <BrandsSelectedText>{brandsSelectedText}</BrandsSelectedText>
+        <ThemeButton onPress={handleNextPress}>
+          <FormattedMessage id="next" />
+        </ThemeButton>
+      </FixedContainer>
+      {!!showConfirmPopup && (
+        <PopupModal
+          title="Confirmation"
+          detail={`You have chosen ${formatBrandString()} special offers. You can edit the preference in profile settings afterward.`}
+          callback={handlePopupState}
+        />
+      )}
+    </Container>
   );
 };
 

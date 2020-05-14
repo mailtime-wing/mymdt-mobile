@@ -1,46 +1,42 @@
-import React, {useState, useContext} from 'react';
-import {Text, TouchableOpacity, Alert} from 'react-native';
-import {useMutation} from '@apollo/react-hooks';
-import {REGISTER_API} from '@/api/auth';
-import {IntlContext} from '@/context/Intl';
+import React, {useState} from 'react';
+import {Alert} from 'react-native';
+// import { useMutation } from '@apollo/react-hooks';
+// import { BIND_EMAIL_ACCOUNTS } from '@/api/data';
 import {FormattedMessage} from 'react-intl';
 import {
   Container,
   EmailContainer,
+  EmailRowContainer,
   Title,
   Detail,
-  AddEmail,
-  Skip,
+  BindMoreLaterText,
+  MarginContainer,
 } from './style';
 
 import Input from '@/components/Input';
-import Button from '@/components/Button';
+import ThemeButton from '@/components/ThemeButton';
 
-const BindEmailScreen = ({route, navigation}) => {
-  const {
-    phone,
-    verificationCode,
-    name,
-    gender,
-    dob,
-    selectedBrands,
-    referralCode,
-  } = route.params;
-  const {localeEnum} = useContext(IntlContext);
-  const [emails, setEmails] = useState(['']);
-  const [registerRequest, {loading, error}] = useMutation(REGISTER_API);
+const BindEmailScreen = ({navigation}) => {
+  const [emails, setEmails] = useState(['', '']);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  // const [bindEmailsRequest, { loading, error }] = useMutation(BIND_EMAIL_ACCOUNTS);
 
-  const onPressAddEmailAccount = email => {
-    setEmails([
-      ...emails,
-      {
-        email: email,
-      },
-    ]);
+  const handleUnbindEmailPress = index => {
+    emails.filter(email => email !== emails[index]);
+    Alert.alert(`success unbind email: ${emails[index]}`);
+    setEmails(emails.filter(email => email !== emails[index]));
+    setCurrentIndex(currentIndex - 1);
   };
 
-  const handleBindEmailPress = () => {
-    Alert.alert('success bind email!');
+  const handleBindEmailPress = email => {
+    const regex = /[^@]+@[^\.]+\..+/;
+    if (!regex.test(email)) {
+      Alert.alert('please input valid email');
+      return;
+    }
+    Alert.alert(`success bind email: ${email}`);
+    setEmails([...emails, '']);
+    setCurrentIndex(currentIndex + 1);
   };
 
   const handleEmailOnChange = (email, index) => {
@@ -49,77 +45,77 @@ const BindEmailScreen = ({route, navigation}) => {
     setEmails(newEmails);
   };
 
-  const handleNextPress = async () => {
-    try {
-      const {data} = await registerRequest({
-        variables: {
-          phoneNumber: phone,
-          otp: verificationCode,
-          name: name,
-          gender: gender,
-          dateOfBirth: dob,
-          subscribedBrandIds: selectedBrands.map(brand => brand.id),
-          referalCode: referralCode,
-          locale: localeEnum,
-        },
-      });
-      navigation.navigate('loading', {authToken: data.register.accessToken});
-    } catch (e) {
-      console.error('error in handleNextPress: ', e);
-    }
+  const handleFinishPress = () => {
+    navigation.navigate('home');
   };
-
-  if (loading) {
-    return <Text>loading...</Text>;
-  }
-  if (error) {
-    return <Text>register fail. {error.message}</Text>;
-  }
 
   return (
     <Container>
       <Title>
-        <FormattedMessage id="bind_email_accounts" />
+        <FormattedMessage
+          id="bind_email_accounts"
+          defaultMessage="BIND EMAILS"
+        />
       </Title>
       <Detail>
         <FormattedMessage id="dont_worry" />
       </Detail>
 
-      {emails.map((email, index) => (
-        <EmailContainer>
-          <Input
-            type="email"
-            onChangeText={text => handleEmailOnChange(text, index)}
-            value={email}
-            label={
-              <FormattedMessage
-                id="email_account"
-                defaultMessage="EMAIL ACCOUNT {email_count}"
-                values={{
-                  email_count: index + 1,
-                }}
+      {emails.map((email, index) => {
+        const active = index === currentIndex;
+        const isBind = index < currentIndex;
+        const isNext = !active && !isBind;
+        return (
+          <EmailRowContainer isNext={isNext}>
+            <EmailContainer>
+              <Input
+                type="email"
+                onChangeText={text => handleEmailOnChange(text, index)}
+                value={email}
+                editable={active}
+                readOnly={isBind}
+                label={
+                  <FormattedMessage
+                    id="email_account"
+                    defaultMessage="EMAIL ACCOUNT {email_count}"
+                    values={{
+                      email_count: index + 1,
+                    }}
+                  />
+                }
               />
-            }
-          />
-
-          <Button small onPress={() => handleBindEmailPress(email)}>
-            <Text>
-              <FormattedMessage id="login" />
-            </Text>
-          </Button>
-        </EmailContainer>
-      ))}
-      <TouchableOpacity onPress={() => onPressAddEmailAccount()}>
-        <AddEmail>
-          <FormattedMessage id="add_email_account" />
-        </AddEmail>
-      </TouchableOpacity>
-      <Button onPress={handleNextPress}>
-        <FormattedMessage id="next" />
-      </Button>
-      <Skip onPress={handleNextPress}>
-        <FormattedMessage id="skip_for_now" />
-      </Skip>
+            </EmailContainer>
+            {isBind ? (
+              <ThemeButton
+                small
+                disabled={isNext || !email}
+                onPress={() => handleUnbindEmailPress(index)}>
+                <FormattedMessage id="unbind" defaultMessage="unbind" />
+              </ThemeButton>
+            ) : (
+              <ThemeButton
+                small
+                disabled={isNext || !email}
+                onPress={() => handleBindEmailPress(email)}>
+                <FormattedMessage id="login" />
+              </ThemeButton>
+            )}
+          </EmailRowContainer>
+        );
+      })}
+      <ThemeButton onPress={handleFinishPress}>
+        <FormattedMessage id="finish" defaultMessage="finish" />
+      </ThemeButton>
+      <MarginContainer />
+      <ThemeButton reverse small onPress={handleFinishPress}>
+        <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
+      </ThemeButton>
+      <BindMoreLaterText>
+        <FormattedMessage
+          id="bind_more_email_later"
+          defaultMessage="You can bind more emails later in profile."
+        />
+      </BindMoreLaterText>
     </Container>
   );
 };
