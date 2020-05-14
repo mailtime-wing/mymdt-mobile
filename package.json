@@ -27,6 +27,7 @@
     "emotion-theming": "^10.0.27",
     "formik": "^2.1.4",
     "graphql": "^14.6.0",
+    "intl": "^1.2.5",
     "jwt-decode": "^2.2.0",
     "react": "16.11.0",
     "react-intl": "^3.12.0",
