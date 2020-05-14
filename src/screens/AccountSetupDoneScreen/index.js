@@ -11,7 +11,7 @@ const AccountSetupDoneScreen = ({navigation}) => {
   };
 
   const handleSkipPress = () => {
-    navigation.navigate('notification');
+    navigation.navigate('notification_permission');
   };
 
   return (

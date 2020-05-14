@@ -14,7 +14,7 @@ import {
   UpArrow,
 } from './style';
 
-const NotificationScreen = ({navigation}) => {
+const NotificationPermissionScreen = ({navigation}) => {
   const requestNotificationPermission = () => {
     if (Platform.OS === 'ios') {
       PushNotificationIOS.requestPermissions();
@@ -38,7 +38,7 @@ const NotificationScreen = ({navigation}) => {
         }
       });
     }
-    navigation.navigate('bind_email');
+    navigation.navigate('home');
   };
 
   return (
@@ -70,4 +70,4 @@ const NotificationScreen = ({navigation}) => {
   );
 };
 
-export default NotificationScreen;
+export default NotificationPermissionScreen;

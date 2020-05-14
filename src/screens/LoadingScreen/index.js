@@ -29,7 +29,7 @@ const LoadingScreen = ({navigation, route}) => {
           </Detail>
           <Button
             onPress={() =>
-              navigation.navigate('notification', {
+              navigation.navigate('notification_permission', {
                 authToken: authToken,
                 refreshToken: refreshToken,
               })
