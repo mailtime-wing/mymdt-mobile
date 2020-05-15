@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {styles} from './style';
 
 import MembershipScreen from '@/screens/MembershipScreen';
 
@@ -30,12 +30,3 @@ const ModalStack = () => {
 };
 
 export default ModalStack;
-
-const styles = StyleSheet.create({
-  headerTitle: {
-    display: 'none',
-  },
-  header: {
-    height: 80,
-  },
-});

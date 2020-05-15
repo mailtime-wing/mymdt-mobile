@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {Dimensions, StyleSheet} from 'react-native';
+import {Dimensions} from 'react-native';
 import {
   Container,
   ContentContainer,
@@ -9,6 +9,7 @@ import {
   Details,
   SwiperContainer,
   MarginContainer,
+  styles,
 } from './style';
 import ThemeButton from '@/components/ThemeButton';
 import {FormattedMessage} from 'react-intl';
@@ -108,16 +109,3 @@ const OnboardingScreen = ({navigation}) => (
 );
 
 export default OnboardingScreen;
-
-const styles = StyleSheet.create({
-  container: {overflow: 'visible'},
-  paginationDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginHorizontal: 8,
-  },
-  paginationContainer: {
-    marginVertical: 30,
-  },
-});

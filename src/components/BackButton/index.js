@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {ButtonContainer, BackArrowIcon, Text, Container} from './style';
+import {ButtonContainer, BackArrowIcon, ButtonText, Container} from './style';
 
 const BackButton = () => {
   const navigation = useNavigation();
@@ -9,7 +9,7 @@ const BackButton = () => {
     <ButtonContainer onPress={() => navigation.goBack()}>
       <Container>
         <BackArrowIcon source={require('@/assets/arrow-left.png')} />
-        <Text>BACK</Text>
+        <ButtonText>BACK</ButtonText>
       </Container>
     </ButtonContainer>
   );

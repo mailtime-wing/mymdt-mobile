@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const Container = styled.View`
   padding: 80px 30px 0 30px;
@@ -12,13 +13,16 @@ export const Title = styled.Text`
   font-weight: 500;
   margin-bottom: 16px;
   text-transform: uppercase;
+  font-family: 'Neo Sans Pro';
+  text-align: center;
 `;
 
-export const Detail = styled.Text`
+export const Detail = styled(Text)`
   font-size: 14px;
   line-height: 17px;
   margin-top: 15px;
   margin-bottom: 64px;
+  text-align: center;
 `;
 
 export const MarginContainer = styled.View`

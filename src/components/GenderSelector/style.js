@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const GenderContainer = styled.View`
   height: 32px;
@@ -15,12 +16,12 @@ export const Gender = styled.TouchableOpacity`
   border: ${props =>
     props.active
       ? props.theme.colors.secondary.normal
-      : props.theme.colors.black.light};
+      : props.theme.colors.black.superLight};
   border-radius: 34px;
   margin-right: 8px;
 `;
 
-export const GenderText = styled.Text`
+export const GenderText = styled(Text)`
   color: ${props =>
     props.active
       ? props.theme.colors.white.normal
@@ -31,7 +32,7 @@ export const FormInputContainer = styled.View`
   margin-bottom: 24px;
 `;
 
-export const GenderLabel = styled.Text`
+export const GenderLabel = styled(Text)`
   font-size: 12px;
   line-height: 15px;
   letter-spacing: 1px;

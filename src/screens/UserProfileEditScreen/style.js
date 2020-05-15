@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const Container = styled.View``;
 
@@ -8,7 +9,7 @@ export const UserIcon = styled.Image`
   border-radius: 24px;
 `;
 
-export const Text = styled.Text`
+export const GenderText = styled(Text)`
   font-size: 16px;
   line-height: 16px;
   letter-spacing: 0.5px;
@@ -49,11 +50,11 @@ export const DatePickerButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
 `;
-export const DatePickerButtonDone = styled.Text`
+export const DatePickerButtonDone = styled(Text)`
   font-size: 18px;
   color: #006bff;
 `;
-export const DatePickerButtonCancel = styled.Text`
+export const DatePickerButtonCancel = styled(Text)`
   font-size: 18px;
   color: red;
 `;

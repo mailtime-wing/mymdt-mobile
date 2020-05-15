@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const AccountIcon = styled.Image`
   width: 36px;
@@ -17,7 +18,7 @@ export const AccountContainer = styled.View`
   justify-content: space-between;
   align-items: center;
 `;
-export const RemainMDT = styled.Text`
+export const RemainMDT = styled(Text)`
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1px;

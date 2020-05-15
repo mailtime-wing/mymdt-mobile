@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const Container = styled.TouchableOpacity`
   background-color: ${props => props.theme.colors.secondary.normal};
@@ -9,7 +10,7 @@ export const Container = styled.TouchableOpacity`
 
   ${props =>
     props.small
-      ? `padding: 9.5px 24px;
+      ? `padding: 8px 16px;
   border-radius: 28px;`
       : `padding: 20px 50px;
   border-radius: 42px;`}
@@ -21,16 +22,16 @@ export const Container = styled.TouchableOpacity`
     };`}
 `;
 
-export const Text = styled.Text`
+export const ButtonText = styled(Text)`
   color: ${props => props.theme.colors.white.normal};
-  letter-spacing: 4px;
+  letter-spacing: 1.5px;
   font-size: 16px;
   line-height: 19px;
   text-transform: uppercase;
   text-align: center;
   font-weight: bold;
 
-  ${props => props.small && 'font-size: 14px; letter-spacing: 2px;'};
+  ${props => props.small && 'font-size: 14px;'};
 
   color: ${props =>
     props.reverse

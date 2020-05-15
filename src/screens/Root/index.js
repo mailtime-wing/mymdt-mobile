@@ -14,7 +14,6 @@ import BindEmailScreen from '@/screens/BindEmailScreen';
 import LoadingScreen from '@/screens/LoadingScreen';
 import NotificationPermissionScreen from '@/screens/NotificationPermissionScreen';
 import AccountSetupDoneScreen from '@/screens/AccountSetupDoneScreen';
-import VerifyPhoneNumberScreen from '@/screens/VerifyPhoneNumberScreen';
 import WelcomeScreen from '@/screens/WelcomeScreen';
 import HomeStack from '@/screens/HomeStack';
 import ModalStack from '@/screens/ModalStack';
@@ -29,7 +28,6 @@ const screens = [
   {name: 'welcome', component: WelcomeScreen},
   {name: 'brand_select', component: BrandSelectScreen},
   {name: 'brand_select_confirm', component: BrandSelectConfirmScreen},
-  {name: 'verify_phone_number', component: VerifyPhoneNumberScreen},
   {name: 'loading', component: LoadingScreen},
 ];
 

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {RowContainer, View, Text} from './style';
+import {RowContainer, View, RowText} from './style';
 
 const ProfileDataRow = ({label, value, ...props}) => (
   <RowContainer {...props}>
-    <Text>{label}</Text>
+    <RowText>{label}</RowText>
     <View>{value}</View>
   </RowContainer>
 );

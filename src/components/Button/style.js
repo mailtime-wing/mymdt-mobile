@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const Container = styled.TouchableOpacity`
   background-color: ${props =>
@@ -21,10 +22,10 @@ export const Container = styled.TouchableOpacity`
     };`}
 `;
 
-export const Text = styled.Text`
+export const ButtonText = styled(Text)`
   color: ${props =>
     props.disabled
-      ? props.theme.colors.black.superLight
+      ? props.theme.colors.black.extremeLight
       : props.theme.colors.white.normal};
   letter-spacing: 2px;
   font-size: 16px;

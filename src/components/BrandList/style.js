@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const BrandsContainer = styled.View`
   flex-direction: row;
@@ -48,7 +49,7 @@ export const BrandIcon = styled.Image`
   height: 80px;
 `;
 
-export const BrandName = styled.Text`
+export const BrandName = styled(Text)`
   font-size: 18px;
   line-height: 22px;
   font-weight: 500;
@@ -56,8 +57,8 @@ export const BrandName = styled.Text`
   margin-bottom: 4px;
 `;
 
-export const BrandDiscount = styled.Text`
+export const BrandDiscount = styled(Text)`
   font-size: 12px;
   line-height: 18px;
-  color: ${props => props.theme.colors.black.light};
+  color: ${props => props.theme.colors.black.superLight};
 `;

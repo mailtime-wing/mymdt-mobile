@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const VerificationContainer = styled.View`
   margin-top: 24px;
@@ -13,6 +14,7 @@ export const Title = styled.Text`
   font-weight: 500;
   margin-bottom: 29px;
   text-transform: uppercase;
+  font-family: 'Neo Sans Pro';
 `;
 
 export const Container = styled.View`
@@ -21,14 +23,14 @@ export const Container = styled.View`
   padding-right: 24px;
 `;
 
-export const VerifyDetail = styled.Text`
+export const VerifyDetail = styled(Text)`
   font-size: 16px;
   line-height: 24px;
 `;
 
 export const ResendCodeButton = styled.TouchableOpacity``;
 
-export const ResendCode = styled.Text`
+export const ResendCode = styled(Text)`
   font-size: 16px;
   line-height: 24px;
   text-decoration: underline;

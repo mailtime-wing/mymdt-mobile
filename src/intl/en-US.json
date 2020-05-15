@@ -57,7 +57,7 @@
     "we_have_sent_otp": "We have sent you the verification code to {phone_number}. Didn’t receive the code?",
     "verify_phone_number": "Verify phone number",
     "resend_the_code": "Resend the code",
-    "email_account": "EMAIL ACCOUNT {email_count}",
+    "email_account": "EMAIL {email_count}",
     "add_email_account": "add Account",
     "telephone": "PHONE NUMBER",
     "verification_code": "VERIFICATION CODE",

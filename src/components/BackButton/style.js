@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const ButtonContainer = styled.TouchableOpacity`
   margin-top: 24px;
@@ -15,9 +16,9 @@ export const Container = styled.View`
   align-items: center;
 `;
 
-export const Text = styled.Text`
+export const ButtonText = styled(Text)`
   font-size: 14px;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   color: ${props => props.theme.colors.secondary.normal};
   font-weight: bold;
 `;

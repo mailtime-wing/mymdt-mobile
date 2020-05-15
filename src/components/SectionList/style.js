@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const Spearator = styled.View`
   height: 1px;
@@ -12,7 +13,7 @@ export const MenuList = styled.FlatList`
   margin-bottom: 12px;
 `;
 
-export const ListTitle = styled.Text`
+export const ListTitle = styled(Text)`
   font-size: 16px;
   font-weight: bold;
   padding: 0 30px;
