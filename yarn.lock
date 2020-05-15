@@ -6026,6 +6026,11 @@ react-move@^6.0.0:
     kapellmeister "^3.0.1"
     prop-types "^15.7.2"
 
+react-native-auto-scrolling@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-auto-scrolling/-/react-native-auto-scrolling-2.0.0.tgz#febeccc8602cdab9bc5e8f412362415b2679807c"
+  integrity sha512-gGrfq2GUZ/c1rmPmAE4mnNq5MuSuW0WgABjUpH+mdqtSePjcp0HsIIfSxfe2Us4QD6sWTn1/FRa3Tq9PTcKAWg==
+
 react-native-carrier-info@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/react-native-carrier-info/-/react-native-carrier-info-1.1.2.tgz#4444f7586994acb2f1d78005a2a48635815bae53"
