@@ -12,7 +12,7 @@ import SignInScreen from '@/screens/SignInScreen';
 import UserProfileScreen from '@/screens/UserProfileScreen';
 import BindEmailScreen from '@/screens/BindEmailScreen';
 import LoadingScreen from '@/screens/LoadingScreen';
-import NotificationScreen from '@/screens/NotificationScreen';
+import NotificationPermissionScreen from '@/screens/NotificationPermissionScreen';
 import AccountSetupDoneScreen from '@/screens/AccountSetupDoneScreen';
 import VerifyPhoneNumberScreen from '@/screens/VerifyPhoneNumberScreen';
 import WelcomeScreen from '@/screens/WelcomeScreen';
@@ -36,7 +36,7 @@ const screens = [
 const noBackScreen = [
   'onboarding',
   'loading',
-  'notification',
+  'notification_permission',
   'account_setup_done',
 ];
 
@@ -87,8 +87,8 @@ const Root = () => {
               <Stack.Screen name="home" component={HomeStack} />
               <Stack.Screen name="modal" component={ModalStack} />
               <Stack.Screen
-                name="notification"
-                component={NotificationScreen}
+                name="notification_permission"
+                component={NotificationPermissionScreen}
                 options={{cardStyle: styles.card}}
               />
               <Stack.Screen

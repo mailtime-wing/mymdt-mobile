@@ -46,7 +46,11 @@ const BindEmailScreen = ({navigation}) => {
   };
 
   const handleFinishPress = () => {
-    navigation.navigate('home');
+    navigation.navigate('notification_permission');
+  };
+
+  const handleSkipPress = () => {
+    navigation.navigate('notification_permission');
   };
 
   return (
@@ -107,7 +111,7 @@ const BindEmailScreen = ({navigation}) => {
         <FormattedMessage id="finish" defaultMessage="finish" />
       </ThemeButton>
       <MarginContainer />
-      <ThemeButton reverse small onPress={handleFinishPress}>
+      <ThemeButton reverse small onPress={handleSkipPress}>
         <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
       </ThemeButton>
       <BindMoreLaterText>
