@@ -1,12 +1,11 @@
 import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import Text, {TitleText} from '@/components/AppText';
 
-export const Title = styled.Text`
+export const Title = styled(TitleText)`
   color: ${props => props.theme.colors.black.normal};
   font-size: 24px;
   line-height: 29px;
   font-weight: 500;
-  font-family: 'Neo Sans Pro';
 `;
 
 export const Detail = styled(Text)`

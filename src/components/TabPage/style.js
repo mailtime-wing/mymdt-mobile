@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import Text, {TitleText} from '@/components/AppText';
 
 export const Container = styled.View`
   background-color: ${props => props.theme.colors.white.normal};
@@ -11,7 +11,7 @@ export const TitleContainer = styled.View`
   margin-bottom: 10px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(TitleText)`
   font-size: 26px;
 `;
 

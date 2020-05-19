@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import Text, {TitleText} from '@/components/AppText';
 
 export const ScrollContainer = styled.ScrollView`
   margin-top: 100px;
@@ -15,7 +15,7 @@ export const Details = styled(Text)`
   margin-bottom: 30px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(TitleText)`
   font-size: 36px;
   color: ${props => props.theme.colors.secondary.normal};
   line-height: 36px;
@@ -23,7 +23,6 @@ export const Title = styled.Text`
   font-weight: 500;
   margin-bottom: 29px;
   text-transform: uppercase;
-  font-family: 'Neo Sans Pro';
 `;
 
 export const HightLightText = styled(Text)`

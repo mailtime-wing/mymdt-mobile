@@ -1,11 +1,11 @@
 import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import Text, {TitleText} from '@/components/AppText';
 
 export const Container = styled.View`
   padding: 80px 30px 0 30px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(TitleText)`
   font-size: 36px;
   color: ${props => props.theme.colors.secondary.normal};
   line-height: 36px;
@@ -13,7 +13,6 @@ export const Title = styled.Text`
   font-weight: 500;
   margin-bottom: 16px;
   text-transform: uppercase;
-  font-family: 'Neo Sans Pro';
   text-align: center;
 `;
 

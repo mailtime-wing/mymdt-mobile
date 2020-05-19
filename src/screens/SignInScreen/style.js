@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import Text, {TitleText} from '@/components/AppText';
 
 export const VerificationContainer = styled.View`
   flex-direction: row;
@@ -13,7 +13,7 @@ export const VerificationCodeContainer = styled.View`
   flex: 1;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(TitleText)`
   font-size: 36px;
   color: ${props => props.theme.colors.secondary.normal};
   line-height: 36px;
@@ -21,7 +21,6 @@ export const Title = styled.Text`
   font-weight: 500;
   margin-bottom: 29px;
   text-transform: uppercase;
-  font-family: 'Neo Sans Pro';
 `;
 
 export const Container = styled.View`

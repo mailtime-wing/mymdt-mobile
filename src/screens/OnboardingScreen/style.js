@@ -1,6 +1,6 @@
 import styled from '@emotion/native';
 import {StyleSheet} from 'react-native';
-import Text from '@/components/AppText';
+import Text, {TitleText} from '@/components/AppText';
 
 export const Container = styled.View`
   padding-top: 43px;
@@ -22,14 +22,13 @@ export const ColorBackground = styled.View`
   border-radius: 24px;
 `;
 
-export const Header = styled.Text`
+export const Header = styled(TitleText)`
   font-size: 24px;
   margin-top: 40px;
   line-height: 29px;
   margin-bottom: 10px;
   font-weight: bold;
   text-align: center;
-  font-family: 'Neo Sans Pro';
 `;
 
 export const Details = styled(Text)`
