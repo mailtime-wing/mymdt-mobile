@@ -1,4 +1,4 @@
-package com.rewardme;
+package com.mailtime.rewardme;
 
 import com.facebook.react.ReactActivity;
 

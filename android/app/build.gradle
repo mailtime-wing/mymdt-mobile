@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.rewardme"
+        applicationId "com.mailtime.rewardme"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

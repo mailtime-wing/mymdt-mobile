@@ -1,4 +1,4 @@
-package com.rewardme;
+package com.mailtime.rewardme;
 
 import android.app.Application;
 import android.content.Context;
