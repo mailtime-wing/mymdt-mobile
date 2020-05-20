@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import {TitleText} from '@/components/AppText';
+import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
   margin-top: 16px;

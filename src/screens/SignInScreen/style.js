@@ -1,5 +1,6 @@
 import styled from '@emotion/native';
-import Text, {TitleText} from '@/components/AppText';
+import Text from '@/components/AppText';
+import TitleText from '@/components/TitleText';
 
 export const VerificationContainer = styled.View`
   flex-direction: row;

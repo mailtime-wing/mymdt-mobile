@@ -1,5 +1,6 @@
 import styled from '@emotion/native';
-import Text, {TitleText} from '@/components/AppText';
+import Text from '@/components/AppText';
+import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
   background-color: ${props => props.theme.colors.white.normal};

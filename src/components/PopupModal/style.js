@@ -1,5 +1,6 @@
 import styled from '@emotion/native';
-import Text, {TitleText} from '@/components/AppText';
+import Text from '@/components/AppText';
+import TitleText from '@/components/TitleText';
 
 export const Title = styled(TitleText)`
   color: ${props => props.theme.colors.black.normal};

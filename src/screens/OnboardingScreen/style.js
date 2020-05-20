@@ -1,6 +1,7 @@
 import styled from '@emotion/native';
 import {StyleSheet} from 'react-native';
-import Text, {TitleText} from '@/components/AppText';
+import Text from '@/components/AppText';
+import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
   padding-top: 43px;

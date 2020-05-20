@@ -1,5 +1,6 @@
 import styled from '@emotion/native';
-import Text, {TitleText} from '@/components/AppText';
+import Text from '@/components/AppText';
+import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
   padding: 80px 30px 0 30px;
