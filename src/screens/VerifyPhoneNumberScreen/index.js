@@ -1,4 +1,4 @@
-import React, {useContext, useReducer, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {View, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {AuthContext} from '@/context/auth';
@@ -6,6 +6,7 @@ import {GET_OTP_API, REGISTER_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
 import {Formik, useFormikContext} from 'formik';
 import {IntlContext} from '@/context/Intl';
+import useCountDownTimer from '@/hooks/timer';
 
 import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
@@ -20,27 +21,7 @@ import {
 
 const REGISTER = 'REGISTER';
 
-const SET_COUNT_DOWN_TIMER = 'setCountDownTimer';
-
-const initialState = {
-  countDownTimer: 0
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case SET_COUNT_DOWN_TIMER: {
-      return {
-        ...state,
-        countDownTimer: action.payload,
-      };
-    }
-    default:
-      throw new Error();
-  }
-};
-
 const VerifyPhoneNumberForm = ({phone}) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
   const {localeEnum} = useContext(IntlContext);
   const [otpRequest] = useMutation(GET_OTP_API);
   const {
@@ -51,12 +32,11 @@ const VerifyPhoneNumberForm = ({phone}) => {
     isValid,
     touched,
   } = useFormikContext();
-
-  // count down timer
-  useEffect(() => {
-    const timer = state.countDownTimer > 0 && setInterval(() => dispatch({type: SET_COUNT_DOWN_TIMER, payload: state.countDownTimer - 1}), 1000);
-    return () => clearInterval(timer)
-  }, [state.countDownTimer]);
+  const [
+    countDownLeft,
+    isTimerStarted,
+    startCountDownTimer,
+  ] = useCountDownTimer(60);
 
   const handleSendPress = async () => {
     try {
@@ -67,7 +47,7 @@ const VerifyPhoneNumberForm = ({phone}) => {
           action: REGISTER,
         },
       });
-      dispatch({type: SET_COUNT_DOWN_TIMER, payload: 60});
+      startCountDownTimer();
     } catch (e) {
       // console.error(`error on otpRequest with ${state.formType}: ${e}`);
     }
@@ -84,15 +64,13 @@ const VerifyPhoneNumberForm = ({phone}) => {
           }}
         />
       </VerifyDetail>
-      <ResendCodeButton
-        disabled={state.countDownTimer > 0}
-        onPress={handleSendPress}>
+      <ResendCodeButton disabled={countDownLeft > 0} onPress={handleSendPress}>
         <ResendCode>
           <FormattedMessage
             id="resend_the_code"
             defaultMessage="Resend the Code"
           />
-          {state.countDownTimer > 0 && ' ' + state.countDownTimer}
+          {isTimerStarted && ' ' + countDownLeft}
         </ResendCode>
       </ResendCodeButton>
       <VerificationContainer>
