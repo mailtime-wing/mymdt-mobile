@@ -25,7 +25,7 @@ import {
   ScrollContainer,
   SignUpDetail,
 } from './style';
-import countryCodeData from './countryCode';
+import countryCodeData from '@/constants/countryCode';
 
 const REGISTER = 'REGISTER';
 const LOGIN = 'LOGIN';
