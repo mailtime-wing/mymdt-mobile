@@ -1,5 +1,5 @@
 import styled from '@emotion/native';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
@@ -33,8 +33,8 @@ export const Header = styled(TitleText)`
   margin-top: 40px;
   line-height: 29px;
   margin-bottom: 10px;
-  font-weight: bold;
   text-align: center;
+  font-weight: ${Platform.OS === 'ios' && 'bold'};
 `;
 
 export const Details = styled(Text)`

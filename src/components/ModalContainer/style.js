@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import {Platform} from 'react-native';
 import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
@@ -16,9 +17,9 @@ export const ScrollContainer = styled.ScrollView`
 `;
 
 export const Title = styled(TitleText)`
-  font-weight: bold;
   font-size: 26px;
   line-height: 34px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight: ${Platform.OS === 'ios' && 'bold'};
 `;
