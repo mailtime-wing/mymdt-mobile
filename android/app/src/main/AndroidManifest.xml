@@ -13,6 +13,8 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme"
       android:usesCleartextTraffic="true"
+      tools:targetApi="28"
+      tools:replace="android:theme"
     >
       <activity
         android:name=".MainActivity"
