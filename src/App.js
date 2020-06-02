@@ -5,6 +5,7 @@ import client from '@/api/client';
 import theme from '@/theme';
 import {IntlContainer} from '@/context/Intl';
 import {AuthProvider} from '@/context/auth';
+import {SdkProvider} from '@/context/mailtime-sdk';
 import NavigationRoot from '@/screens/Root';
 console.disableYellowBox = true;
 
@@ -14,7 +15,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <IntlContainer>
           <AuthProvider>
-            <NavigationRoot />
+            <SdkProvider>
+              <NavigationRoot />
+            </SdkProvider>
           </AuthProvider>
         </IntlContainer>
       </ThemeProvider>

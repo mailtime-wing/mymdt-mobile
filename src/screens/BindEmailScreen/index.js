@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Alert} from 'react-native';
-// import { useMutation } from '@apollo/react-hooks';
-// import { BIND_EMAIL_ACCOUNTS } from '@/api/data';
+import {SdkContext} from '@/context/mailtime-sdk';
 import {FormattedMessage} from 'react-intl';
 import {
   Container,
@@ -16,11 +15,20 @@ import {
 
 import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
+import PopupModal from '@/components/PopupModal';
 
 const BindEmailScreen = ({route, navigation}) => {
   const [emails, setEmails] = useState(['', '']);
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [bindEmailsRequest, { loading, error }] = useMutation(BIND_EMAIL_ACCOUNTS);
+  const {loginMailTimeSdk, sdkState, initiateSdk} = useContext(SdkContext);
+  let loginSuccess = !!sdkState.sdkToken && sdkState.isBindingSuccess === true;
+
+  useEffect(() => {
+    if (loginSuccess) {
+      setEmails([...emails, '']);
+      setCurrentIndex(currentIndex + 1);
+    }
+  }, [currentIndex, emails, loginSuccess, sdkState.isBindingSuccess]);
 
   const handleUnbindEmailPress = index => {
     emails.filter(email => email !== emails[index]);
@@ -35,9 +43,7 @@ const BindEmailScreen = ({route, navigation}) => {
       Alert.alert('please input valid email');
       return;
     }
-    Alert.alert(`success bind email: ${email}`);
-    setEmails([...emails, '']);
-    setCurrentIndex(currentIndex + 1);
+    loginMailTimeSdk(email);
   };
 
   const handleEmailOnChange = (email, index) => {
@@ -122,6 +128,29 @@ const BindEmailScreen = ({route, navigation}) => {
             defaultMessage="You can bind more emails later in profile."
           />
         </BindMoreLaterText>
+        {!!sdkState.isLoginCancelled && (
+          <PopupModal
+            title="Cancelled"
+            detail="Login Cancelled"
+            callback={initiateSdk}
+          />
+        )}
+        {sdkState.isLoggingIn && loginSuccess && (
+          <PopupModal
+            title="Success"
+            detail="Login Success"
+            callback={initiateSdk}
+          />
+        )}
+        {sdkState.isLoggingIn &&
+          !sdkState.isLoginCancelled &&
+          !loginSuccess && (
+            <PopupModal
+              title="Fail"
+              detail="Login Fail"
+              callback={initiateSdk}
+            />
+          )}
       </Container>
     </ScrollContainer>
   );
