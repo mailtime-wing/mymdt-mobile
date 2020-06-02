@@ -1,4 +1,6 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
+import TitleText from '@/components/TitleText';
 
 export const VerificationContainer = styled.View`
   flex-direction: row;
@@ -12,7 +14,7 @@ export const VerificationCodeContainer = styled.View`
   flex: 1;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(TitleText)`
   font-size: 36px;
   color: ${props => props.theme.colors.secondary.normal};
   line-height: 36px;
@@ -28,11 +30,13 @@ export const Container = styled.View`
   padding-right: 24px;
 `;
 
-export const LoginAndAgree = styled.Text`
+export const LoginAndAgree = styled(Text)`
   font-size: 10px;
-  color: ${props => props.theme.colors.grey.dark};
+  color: ${props => props.theme.colors.black.light};
+  line-height: 18px;
   margin-top: 11px;
   padding: 0 24px;
+  text-align: center;
 `;
 
 export const PhoneSectionContainer = styled.View`
@@ -49,7 +53,7 @@ export const PhoneContainer = styled.View`
   flex: 2;
 `;
 
-export const SignUpDetail = styled.Text`
+export const SignUpDetail = styled(Text)`
   font-size: 12px;
   line-height: 18px;
   text-align: center;

@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const ScrollContainer = styled.ScrollView`
   background-color: ${props => props.theme.colors.white.normal};
@@ -17,7 +18,7 @@ export const AccountImage = styled.Image`
   margin-bottom: 15px;
 `;
 
-export const AccountName = styled.Text`
+export const AccountName = styled(Text)`
   font-size: 21px;
   margin-bottom: 8px;
 `;
@@ -29,7 +30,7 @@ export const AccountLevelContainer = styled.View`
   margin-bottom: 34px;
 `;
 
-export const AccountLevel = styled.Text`
+export const AccountLevel = styled(Text)`
   font-size: 12px;
   font-weight: bold;
 `;
@@ -40,12 +41,12 @@ export const AccountCreditContainer = styled.View`
   padding: 0 30px;
 `;
 
-export const AccountCredit = styled.Text`
+export const AccountCredit = styled(Text)`
   flex: 1;
   font-size: 16px;
 `;
 
-export const RemainMDT = styled.Text`
+export const RemainMDT = styled(Text)`
   font-size: 16px;
   font-weight: bold;
 `;

@@ -1,11 +1,13 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
+import TitleText from '@/components/TitleText';
 
 export const VerificationContainer = styled.View`
   margin-top: 24px;
   margin-bottom: 46px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(TitleText)`
   font-size: 36px;
   color: ${props => props.theme.colors.secondary.normal};
   line-height: 36px;
@@ -21,14 +23,14 @@ export const Container = styled.View`
   padding-right: 24px;
 `;
 
-export const VerifyDetail = styled.Text`
+export const VerifyDetail = styled(Text)`
   font-size: 16px;
   line-height: 24px;
 `;
 
 export const ResendCodeButton = styled.TouchableOpacity``;
 
-export const ResendCode = styled.Text`
+export const ResendCode = styled(Text)`
   font-size: 16px;
   line-height: 24px;
   text-decoration: underline;

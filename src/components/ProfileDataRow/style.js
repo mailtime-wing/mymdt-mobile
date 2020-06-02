@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const RowContainer = styled.TouchableOpacity`
   flex-direction: row;
@@ -10,7 +11,7 @@ export const RowContainer = styled.TouchableOpacity`
 
 export const View = styled.View``;
 
-export const Text = styled.Text`
+export const RowText = styled(Text)`
   font-size: 16px;
   line-height: 16px;
   letter-spacing: 0.5px;

@@ -1,8 +1,9 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const Container = styled.View``;
 
-export const Header = styled.Text`
+export const Header = styled(Text)`
   font-size: 13px;
   font-weight: bold;
   line-height: 16px;
@@ -18,7 +19,7 @@ export const CardContainer = styled.View`
 
 export const CardImage = styled.Image``;
 
-export const Offer = styled.Text`
+export const Offer = styled(Text)`
   font-size: 14px;
   line-height: 18px;
   text-align: center;
@@ -28,7 +29,7 @@ export const Offer = styled.Text`
   margin-bottom: 7px;
 `;
 
-export const Birthday = styled.Text`
+export const Birthday = styled(Text)`
   font-size: 14px;
   line-height: 18px;
   text-align: center;
@@ -46,7 +47,7 @@ export const ExpirationDateContainer = styled.View`
   margin-bottom: 45px;
 `;
 
-export const ExpirationDate = styled.Text`
+export const ExpirationDate = styled(Text)`
   font-size: 14px;
   font-weight: bold;
   line-height: 16px;
@@ -54,14 +55,14 @@ export const ExpirationDate = styled.Text`
   text-transform: uppercase;
 `;
 
-export const Date = styled.Text`
+export const Date = styled(Text)`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 2.33333px;
   text-transform: uppercase;
 `;
 
-export const NextLevel = styled.Text`
+export const NextLevel = styled(Text)`
   font-weight: bold;
   font-size: 14px;
   line-height: 16px;
@@ -69,7 +70,7 @@ export const NextLevel = styled.Text`
   text-transform: uppercase;
 `;
 
-export const Level = styled.Text`
+export const Level = styled(Text)`
   font-weight: bold;
   font-size: 21px;
   line-height: 27px;
@@ -78,7 +79,7 @@ export const Level = styled.Text`
   margin-bottom: 23px;
 `;
 
-export const MembershipProgram = styled.Text`
+export const MembershipProgram = styled(Text)`
   font-size: 14px;
   line-height: 16px;
   font-weight: bold;

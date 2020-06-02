@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
   margin-top: 16px;
@@ -14,7 +15,7 @@ export const ScrollContainer = styled.ScrollView`
   background-color: ${props => props.theme.colors.white.normal};
 `;
 
-export const Title = styled.Text`
+export const Title = styled(TitleText)`
   font-weight: bold;
   font-size: 26px;
   line-height: 34px;

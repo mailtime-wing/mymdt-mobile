@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const Container = styled.View``;
 
@@ -12,7 +13,7 @@ export const ButtonContainer = styled.View`
   padding: 0 70px;
 `;
 
-export const Text = styled.Text`
+export const EmailText = styled(Text)`
   font-size: 16px;
   line-height: 16px;
   letter-spacing: 0.75px;

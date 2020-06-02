@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const TextInput = styled.TextInput`
   padding: 14px 16px;
@@ -13,7 +14,7 @@ export const TextInputContainer = styled.View`
   border: 2px solid;
   border-color: transparent;
   margin: 4px 0;
-  background-color: ${props => props.theme.colors.black.superLight};
+  background-color: ${props => props.theme.colors.black.extremeLight};
   ${props =>
     props.isError &&
     `background-color: ${props.theme.colors.error.superLight}`};
@@ -31,7 +32,7 @@ export const Container = styled.View`
   min-width: 65%;
 `;
 
-export const Label = styled.Text`
+export const Label = styled(Text)`
   color: ${props => props.theme.colors.black.normal};
   ${props => props.isFocus && `color: ${props.theme.colors.secondary.normal};`};
   ${props => props.isError && `color: ${props.theme.colors.error.dark};`};
@@ -41,13 +42,13 @@ export const Label = styled.Text`
   font-weight: bold;
 `;
 
-export const Remark = styled.Text`
+export const Remark = styled(Text)`
   font-size: 12px;
   line-height: 15px;
-  color: ${props => props.theme.colors.black.light};
+  color: ${props => props.theme.colors.black.superLight};
 `;
 
-export const Error = styled.Text`
+export const Error = styled(Text)`
   font-size: 12px;
   color: ${props => props.theme.colors.error.light};
 `;

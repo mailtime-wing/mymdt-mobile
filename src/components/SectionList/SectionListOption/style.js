@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const MenuOptionContainer = styled.TouchableOpacity`
   padding: 0 30px;
@@ -17,7 +18,7 @@ export const MenuIcon = styled.View`
   margin-right: 12px;
 `;
 
-export const MenuOption = styled.Text`
+export const MenuOption = styled(Text)`
   font-size: 16px;
 `;
 

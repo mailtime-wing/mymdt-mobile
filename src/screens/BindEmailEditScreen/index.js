@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {Container, ButtonContainer, Text} from './style';
+import {Container, ButtonContainer, EmailText} from './style';
 
 import ModalContaienr from '@/components/ModalContainer';
 import ProfileDataRow from '@/components/ProfileDataRow';
@@ -29,7 +29,7 @@ const BindEmailEditScreen = () => {
       <Container>
         {emailsSampleData.map((email, index) => (
           <ProfileDataRow
-            label={<Text>{email.email}</Text>}
+            label={<EmailText>{email.email}</EmailText>}
             value={
               <Switch
                 value={emails[index]}

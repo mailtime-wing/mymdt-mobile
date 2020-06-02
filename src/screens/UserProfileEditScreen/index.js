@@ -6,7 +6,7 @@ import ImagePicker from 'react-native-image-picker';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {
   Container,
-  Text,
+  GenderText,
   UserIcon,
   Input,
   ButtonContainer,
@@ -121,7 +121,7 @@ const UserProfileEditForm = () => {
   const handleCancelPress = () => {
     if (refRBSheetDOB.current) {
       refRBSheetDOB.current.close();
-      resetForm()
+      resetForm();
     }
   };
 
@@ -175,7 +175,7 @@ const UserProfileEditForm = () => {
       />
       <ProfileDataRow
         label={'Gender'}
-        value={<Text>{values.gender}</Text>}
+        value={<GenderText>{values.gender}</GenderText>}
         onPress={() => handleGenderPress()}
       />
       <ProfileDataRow
@@ -197,7 +197,7 @@ const UserProfileEditForm = () => {
             alignItems: 'center',
           },
           wrapper: {
-            backgroundColor: theme.colors.black.light,
+            backgroundColor: theme.colors.black.superLight,
             paddingHorizontal: 10,
             marginBottom: 10,
           },
@@ -221,7 +221,7 @@ const UserProfileEditForm = () => {
             borderRadius: 24,
           },
           wrapper: {
-            backgroundColor: theme.colors.black.light,
+            backgroundColor: theme.colors.black.superLight,
             paddingHorizontal: 10,
             marginBottom: 10,
           },
@@ -237,7 +237,11 @@ const UserProfileEditForm = () => {
             <DatePickerButtonDone>Done</DatePickerButtonDone>
           </DatePickerButton>
         </DatePickerContainer>
-        <DatePickerIOS mode="date" date={values.dob} onDateChange={date => setFieldValue('dob', date)}/>
+        <DatePickerIOS
+          mode="date"
+          date={values.dob}
+          onDateChange={date => setFieldValue('dob', date)}
+        />
       </RBSheet>
     </Container>
   );
@@ -255,8 +259,7 @@ const UserProfileEditScreen = () => {
             gender: genderOptions[0].value,
             dob: new Date(),
           }}
-          onSubmit={values => console.log(values)}
-        >
+          onSubmit={values => console.log(values)}>
           <UserProfileEditForm />
         </Formik>
       </Container>

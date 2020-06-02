@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const ProgressBarIOS = styled.ProgressViewIOS`
   transform: scaleY(2);
@@ -22,13 +23,13 @@ export const ProgressDetailContainer = styled.View`
   justify-content: space-between;
 `;
 
-export const ProgressHeader = styled.Text`
+export const ProgressHeader = styled(Text)`
   font-size: 12px;
   line-height: 15px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 `;
-export const ProgressNumber = styled.Text`
+export const ProgressNumber = styled(Text)`
   font-size: 12px;
   line-height: 15px;
   font-weight: bold;

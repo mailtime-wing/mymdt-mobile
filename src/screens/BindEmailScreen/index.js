@@ -81,7 +81,7 @@ const BindEmailScreen = ({navigation}) => {
                 label={
                   <FormattedMessage
                     id="email_account"
-                    defaultMessage="EMAIL ACCOUNT {email_count}"
+                    defaultMessage="EMAIL {email_count}"
                     values={{
                       email_count: index + 1,
                     }}

@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import Text from '@/components/AppText';
 
 export const CardContainer = styled.View`
   border: 1px solid ${props => props.theme.colors.black.normal};
@@ -21,7 +22,7 @@ export const CardLower = styled.View`
   border-top-width: 1px;
 `;
 
-export const Level = styled.Text`
+export const Level = styled(Text)`
   font-size: 16px;
   line-height: 21px;
   font-weight: bold;
@@ -29,7 +30,7 @@ export const Level = styled.Text`
   text-transform: uppercase;
 `;
 
-export const Discount = styled.Text`
+export const Discount = styled(Text)`
   font-size: 12px;
   line-height: 15px;
   text-transform: uppercase;
@@ -42,13 +43,13 @@ export const LowerDetail = styled.View`
   justify-content: space-between;
 `;
 
-export const LowerLabel = styled.Text`
+export const LowerLabel = styled(Text)`
   font-size: 12px;
   line-height: 15px;
   text-transform: uppercase;
 `;
 
-export const LowerValue = styled.Text`
+export const LowerValue = styled(Text)`
   font-size: 12px;
   line-height: 15px;
   font-weight: bold;
@@ -64,7 +65,7 @@ export const BasicContainer = styled.View`
   min-height: 48px;
 `;
 
-export const BasicDiscount = styled.Text`
+export const BasicDiscount = styled(Text)`
   font-size: 14px;
   line-height: 17px;
   text-transform: uppercase;
