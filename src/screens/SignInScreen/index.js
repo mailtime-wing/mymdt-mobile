@@ -7,6 +7,7 @@ import {GET_OTP_API, LOGIN_API, REGISTER_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
 import {Formik, useFormikContext} from 'formik';
 import {IntlContext} from '@/context/Intl';
+import useCountDownTimer from '@/hooks/timer';
 
 import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
@@ -30,12 +31,9 @@ const LOGIN = 'LOGIN';
 
 const SET_FORM_TYPE = 'setFormType';
 const SEND_OTP = 'sendOtp';
-const SET_COUNT_DOWN_TIMER = 'setCountDownTimer';
-
 const initialState = {
   sendCount: 0,
   formType: '',
-  countDownTimer: 0,
 };
 
 const reducer = (state, action) => {
@@ -52,12 +50,6 @@ const reducer = (state, action) => {
         sendCount: state.sendCount + 1,
       };
     }
-    case SET_COUNT_DOWN_TIMER: {
-      return {
-        ...state,
-        countDownTimer: action.payload,
-      };
-    }
     default:
       throw new Error();
   }
@@ -67,6 +59,9 @@ const SignInForm = ({isSignUp}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {localeEnum} = useContext(IntlContext);
   const [otpRequest, {error}] = useMutation(GET_OTP_API);
+  const [timeLeft, setCountdownTime] = useCountDownTimer(0);
+  const isTimerStarted = timeLeft > 0;
+
   const {
     values,
     setFieldValue,
@@ -107,26 +102,6 @@ const SignInForm = ({isSignUp}) => {
     getPhonePrefix();
   }, [setFieldValue]);
 
-  // count down timer
-  useEffect(() => {
-    let timer = null;
-    if (state.countDownTimer > 0) {
-      setInterval(
-        () =>
-          dispatch({
-            type: SET_COUNT_DOWN_TIMER,
-            payload: state.countDownTimer - 1,
-          }),
-        1000,
-      );
-    }
-    return () => {
-      if (timer != null) {
-        clearInterval(timer);
-      }
-    };
-  }, [state.countDownTimer]);
-
   const handleSendPress = async () => {
     try {
       await otpRequest({
@@ -137,7 +112,7 @@ const SignInForm = ({isSignUp}) => {
         },
       });
       dispatch({type: SEND_OTP});
-      dispatch({type: SET_COUNT_DOWN_TIMER, payload: 60});
+      setCountdownTime(60);
     } catch (e) {
       console.warn(`error on otpRequest with ${state.formType}: ${e}`);
     }
@@ -181,7 +156,7 @@ const SignInForm = ({isSignUp}) => {
         </VerificationCodeContainer>
         <ThemeButton
           small
-          disabled={state.countDownTimer > 0 || errors.phone}
+          disabled={isTimerStarted || errors.phone}
           onPress={handleSendPress}>
           <Text>
             {state.sendCount > 0 ? (
@@ -195,7 +170,7 @@ const SignInForm = ({isSignUp}) => {
                 defaultMessage="RESEND"
               />
             )}
-            {state.countDownTimer > 0 && ' ' + state.countDownTimer}
+            {isTimerStarted && ' ' + timeLeft}
           </Text>
         </ThemeButton>
       </VerificationContainer>
