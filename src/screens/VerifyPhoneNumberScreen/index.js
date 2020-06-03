@@ -32,11 +32,8 @@ const VerifyPhoneNumberForm = ({phone}) => {
     isValid,
     touched,
   } = useFormikContext();
-  const [
-    countDownLeft,
-    isTimerStarted,
-    startCountDownTimer,
-  ] = useCountDownTimer(60);
+  const [timeLeft, setCountdownTime] = useCountDownTimer(60);
+  const isTimerStarted = timeLeft > 0;
 
   const handleSendPress = async () => {
     try {
@@ -47,7 +44,7 @@ const VerifyPhoneNumberForm = ({phone}) => {
           action: REGISTER,
         },
       });
-      startCountDownTimer();
+      setCountdownTime(60);
     } catch (e) {
       // console.error(`error on otpRequest with ${state.formType}: ${e}`);
     }
@@ -64,13 +61,13 @@ const VerifyPhoneNumberForm = ({phone}) => {
           }}
         />
       </VerifyDetail>
-      <ResendCodeButton disabled={countDownLeft > 0} onPress={handleSendPress}>
+      <ResendCodeButton disabled={isTimerStarted} onPress={handleSendPress}>
         <ResendCode>
           <FormattedMessage
             id="resend_the_code"
             defaultMessage="Resend the Code"
           />
-          {isTimerStarted && ' ' + countDownLeft}
+          {isTimerStarted && ' ' + timeLeft}
         </ResendCode>
       </ResendCodeButton>
       <VerificationContainer>

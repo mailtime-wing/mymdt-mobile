@@ -59,11 +59,9 @@ const SignInForm = ({isSignUp}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {localeEnum} = useContext(IntlContext);
   const [otpRequest, {error}] = useMutation(GET_OTP_API);
-  const [
-    countDownLeft,
-    isTimerStarted,
-    startCountDownTimer,
-  ] = useCountDownTimer(60);
+  const [timeLeft, setCountdownTime] = useCountDownTimer(0);
+  const isTimerStarted = timeLeft > 0;
+
   const {
     values,
     setFieldValue,
@@ -114,7 +112,7 @@ const SignInForm = ({isSignUp}) => {
         },
       });
       dispatch({type: SEND_OTP});
-      startCountDownTimer();
+      setCountdownTime(60);
     } catch (e) {
       console.warn(`error on otpRequest with ${state.formType}: ${e}`);
     }
@@ -172,7 +170,7 @@ const SignInForm = ({isSignUp}) => {
                 defaultMessage="RESEND"
               />
             )}
-            {isTimerStarted && ' ' + countDownLeft}
+            {isTimerStarted && ' ' + timeLeft}
           </Text>
         </ThemeButton>
       </VerificationContainer>
