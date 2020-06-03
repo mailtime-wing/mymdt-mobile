@@ -3,16 +3,16 @@ import {FormattedMessage} from 'react-intl';
 import {Container, Details, EditLater} from './style';
 
 import ThemeButton from '@/components/ThemeButton';
-import BrandList from '@/components/BrandList';
+import BrandList from '@/components/OfferList';
 
-const BrandSelectConfirmScreen = ({route, navigation}) => {
+const OfferSelectConfirmScreen = ({route, navigation}) => {
   const {numberOfBrand} = route.params;
-  const {selectedBrands} = route.params;
+  const {selectedOffers} = route.params;
 
   const handleConfirmPress = () => {
     navigation.navigate('sign_in', {
       isSignUp: true,
-      selectedBrands: selectedBrands,
+      selectedOffers: selectedOffers,
     });
   };
 
@@ -21,9 +21,9 @@ const BrandSelectConfirmScreen = ({route, navigation}) => {
       <Details>
         <FormattedMessage
           id="confirm_select_offer_details"
-          defaultMessage="Once you shop in these {number_of_brands} brands, you will earn cash back."
+          defaultMessage="Once you shop in these {number_of_offers} brands, you will earn cash back."
           values={{
-            number_of_brands: numberOfBrand,
+            number_of_offers: numberOfBrand,
           }}
         />
       </Details>
@@ -33,7 +33,7 @@ const BrandSelectConfirmScreen = ({route, navigation}) => {
           defaultMessage="If you’re happy with the offer, please confirm your choice."
         />
       </Details>
-      <BrandList brandList={selectedBrands} />
+      <BrandList offerList={selectedOffers} />
       <ThemeButton onPress={handleConfirmPress}>
         <FormattedMessage id="confirm" default="Confirm" />
       </ThemeButton>
@@ -47,4 +47,4 @@ const BrandSelectConfirmScreen = ({route, navigation}) => {
   );
 };
 
-export default BrandSelectConfirmScreen;
+export default OfferSelectConfirmScreen;

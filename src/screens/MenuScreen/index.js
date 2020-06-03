@@ -43,8 +43,8 @@ const MenuScreen = props => {
             value: <FormattedMessage id="my_referral_code" />,
           },
           {
-            key: 'brands_preference',
-            value: <FormattedMessage id="brands_preference" />,
+            key: 'offers_preference',
+            value: <FormattedMessage id="offers_preference" />,
           },
           {
             key: 'emails_binding',

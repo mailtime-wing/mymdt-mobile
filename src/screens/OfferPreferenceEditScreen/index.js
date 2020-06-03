@@ -2,11 +2,11 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import ModalContaienr from '@/components/ModalContainer';
 import Button from '@/components/Button';
-import BrandList from '@/components/BrandList';
+import BrandList from '@/components/OfferList';
 
 import {Detail, Header, NumberOfBrand, RowContainer} from './style';
 
-const selectedBrands = [
+const selectedOffers = [
   {id: '111', name: 'AAAA'},
   {id: '333', name: 'CCCC'},
   {id: '555', name: 'EEEE'},
@@ -14,7 +14,7 @@ const selectedBrands = [
   {id: '777', name: 'GGGG'},
 ];
 
-const BrandPreferenceEditScreen = () => {
+const OfferPreferenceEditScreen = () => {
   return (
     <ModalContaienr title={<FormattedMessage id="favorite_brands" />}>
       <Detail>
@@ -40,9 +40,9 @@ const BrandPreferenceEditScreen = () => {
       <Detail>
         <FormattedMessage id="get_reward_from_brands" />
       </Detail>
-      <BrandList brandList={selectedBrands} />
+      <BrandList offerList={selectedOffers} />
     </ModalContaienr>
   );
 };
 
-export default BrandPreferenceEditScreen;
+export default OfferPreferenceEditScreen;
