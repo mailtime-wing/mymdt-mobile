@@ -4,12 +4,15 @@ import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
-  padding-top: 43px;
-  background-color: white;
+  margin-top: 32px;
+  margin-bottom: 24px;
 `;
 
+export const ScrollContainer = styled.ScrollView``;
+
 export const ContentContainer = styled.View`
-  height: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
 `;
 
 export const ButtonContainer = styled.View`
@@ -21,6 +24,8 @@ export const ColorBackground = styled.View`
   color: ${props => props.backgroundColor};
   aspect-ratio: 1;
   border-radius: 24px;
+  margin-left: 16px;
+  margin-right: 16px;
 `;
 
 export const Header = styled(TitleText)`
@@ -36,7 +41,6 @@ export const Details = styled(Text)`
   font-size: 16px;
   line-height: 24px;
   text-align: center;
-  margin-bottom: 20px;
   color: ${props => props.theme.colors.black.light};
 `;
 
@@ -44,9 +48,7 @@ export const MarginContainer = styled.View`
   margin-top: 12px;
 `;
 
-export const SwiperContainer = styled.View`
-  height: 590px;
-`;
+export const SwiperContainer = styled.View``;
 
 export const styles = StyleSheet.create({
   container: {
@@ -59,7 +61,5 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     marginHorizontal: 8,
   },
-  paginationContainer: {
-    marginVertical: 10,
-  },
+  paginationContainer: {},
 });

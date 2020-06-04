@@ -13,11 +13,18 @@ const Input = ({label, required, remark, error, readOnly, ...props}) => {
   const isError = !!error;
   return (
     <Container>
-      <Label isError={isError} isFocus={isFocus}>
+      <Label
+        isError={isError}
+        isFocus={isFocus}
+        numberOfLines={1}
+        ellipsizeMode="clip">
         {label}
         {required && '*'}
       </Label>
-      <TextInputContainer isError={isError} isFocus={isFocus} readOnly={readOnly}>
+      <TextInputContainer
+        isError={isError}
+        isFocus={isFocus}
+        readOnly={readOnly}>
         <TextInput
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
@@ -28,7 +35,11 @@ const Input = ({label, required, remark, error, readOnly, ...props}) => {
         />
       </TextInputContainer>
       {remark && <Remark>{remark}</Remark>}
-      {<Error>{isError ? error : ' '}</Error>}
+      {
+        <Error numberOfLines={1} ellipsizeMode="clip">
+          {isError ? error : ' '}
+        </Error>
+      }
     </Container>
   );
 };

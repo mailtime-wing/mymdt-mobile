@@ -12,7 +12,7 @@ export const Container = styled.TouchableOpacity`
     props.small
       ? `padding: 8px 16px;
   border-radius: 28px;`
-      : `padding: 20px 50px;
+      : `padding: 20px 24px;
   border-radius: 42px;`}
   ${props => props.width && `width: ${props.width}; align-self: center;`}
   ${props =>

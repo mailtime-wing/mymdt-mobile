@@ -4,7 +4,8 @@ import AppText from '@/components/AppText';
 
 export const Container = styled.View`
   flex: 1;
-  padding-top: 47px;
+  margin-top: 47px;
+  margin-bottom: 24px;
 `;
 
 export const ScrollContainer = styled.ScrollView`

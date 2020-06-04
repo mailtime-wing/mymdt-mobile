@@ -10,6 +10,7 @@ import {
   Title,
   Detail,
   MarginContainer,
+  ScrollContainer,
   NotificationPermission,
   UpArrow,
 } from './style';
@@ -42,31 +43,33 @@ const NotificationPermissionScreen = ({navigation}) => {
   };
 
   return (
-    <Container>
-      <Title>
-        <FormattedMessage
-          id="want_to_receive_latest_info"
-          defaultMessage="Receive Latest Info"
+    <ScrollContainer>
+      <Container>
+        <Title>
+          <FormattedMessage
+            id="want_to_receive_latest_info"
+            defaultMessage="Receive Latest Info"
+          />
+        </Title>
+        <Detail>
+          <FormattedMessage
+            id="turn_on_notifications_to_learn"
+            defaultMessage="Turn on notifications to receive news about new rewards, latest promotional events and limited offers."
+          />
+        </Detail>
+        <NotificationPermission
+          source={require('@/assets/notification_permission.png')}
         />
-      </Title>
-      <Detail>
-        <FormattedMessage
-          id="turn_on_notifications_to_learn"
-          defaultMessage="Turn on notifications to receive news about new rewards, latest promotional events and limited offers."
-        />
-      </Detail>
-      <NotificationPermission
-        source={require('@/assets/notification_permission.png')}
-      />
-      <UpArrow source={require('@/assets/arrow_up.png')} />
-      <ThemeButton onPress={requestNotificationPermission}>
-        <FormattedMessage id="sure" />
-      </ThemeButton>
-      <MarginContainer />
-      <ThemeButton reverse small onPress={handleSkipPress}>
-        <FormattedMessage id="skip_for_now" />
-      </ThemeButton>
-    </Container>
+        <UpArrow source={require('@/assets/arrow_up.png')} />
+        <ThemeButton onPress={requestNotificationPermission}>
+          <FormattedMessage id="sure" />
+        </ThemeButton>
+        <MarginContainer />
+        <ThemeButton reverse small onPress={handleSkipPress}>
+          <FormattedMessage id="skip_for_now" />
+        </ThemeButton>
+      </Container>
+    </ScrollContainer>
   );
 };
 

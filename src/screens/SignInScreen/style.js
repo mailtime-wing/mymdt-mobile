@@ -25,10 +25,13 @@ export const Title = styled(TitleText)`
 `;
 
 export const Container = styled.View`
-  margin-top: 136px;
+  margin-top: 92px;
   padding-left: 24px;
   padding-right: 24px;
+  margin-bottom: 24px;
 `;
+
+export const ScrollContainer = styled.ScrollView``;
 
 export const LoginAndAgree = styled(Text)`
   font-size: 10px;
@@ -57,6 +60,6 @@ export const SignUpDetail = styled(Text)`
   font-size: 12px;
   line-height: 18px;
   text-align: center;
-  margin-top: 131px;
+  margin-top: 40px;
   margin-bottom: 8px;
 `;

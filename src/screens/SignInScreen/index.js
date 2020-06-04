@@ -22,6 +22,7 @@ import {
   PhonePrefixContainer,
   PhoneContainer,
   VerificationCodeContainer,
+  ScrollContainer,
   SignUpDetail,
 } from './style';
 import countryCodeData from './countryCode';
@@ -247,11 +248,11 @@ const SigninScreen = ({route, navigation}) => {
     const dialCodeRegex = /^(\+)(\d{1,3}|\d{1,4})$/;
 
     if (!dialCodeRegex.test(values.phonePrefix)) {
-      errors.phonePrefix = 'Dial Code Required';
+      errors.phonePrefix = 'Required';
     }
 
     if (!values.phone) {
-      errors.phone = 'Phone Required';
+      errors.phone = 'Required';
     }
 
     if (!isSignUp) {
@@ -269,41 +270,43 @@ const SigninScreen = ({route, navigation}) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <Container>
-        <Title>
-          {isSignUp ? (
-            <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
-          ) : (
-            <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
+      <ScrollContainer>
+        <Container>
+          <Title>
+            {isSignUp ? (
+              <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
+            ) : (
+              <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
+            )}
+          </Title>
+          <Formik
+            initialValues={{
+              phone: '',
+              phonePrefix: '',
+              verificationCode: '',
+            }}
+            onSubmit={values => handleSubmitPress(values)}
+            validate={values => validate(values)}>
+            <SignInForm isSignUp={isSignUp} />
+          </Formik>
+          {!isSignUp && (
+            <LoginAndAgree>
+              <FormattedMessage
+                id="login_in_agree_terms_and_policy"
+                defaultMessage="By logging in your email address, you agree with RewardMe’s Terms of Service and Privacy Policy."
+                // values={{
+                //   Text: str => (
+                //     <Link onPress={() => Alert.alert('terms!')}>{str}</Link>
+                //   ), // TODO: rich formatting not work in rn
+                // }}
+              />
+            </LoginAndAgree>
           )}
-        </Title>
-        <Formik
-          initialValues={{
-            phone: '',
-            phonePrefix: '',
-            verificationCode: '',
-          }}
-          onSubmit={values => handleSubmitPress(values)}
-          validate={values => validate(values)}>
-          <SignInForm isSignUp={isSignUp} />
-        </Formik>
-        {!isSignUp && (
-          <LoginAndAgree>
-            <FormattedMessage
-              id="login_in_agree_terms_and_policy"
-              defaultMessage="By logging in your email address, you agree with RewardMe’s Terms of Service and Privacy Policy."
-              // values={{
-              //   Text: str => (
-              //     <Link onPress={() => Alert.alert('terms!')}>{str}</Link>
-              //   ), // TODO: rich formatting not work in rn
-              // }}
-            />
-          </LoginAndAgree>
-        )}
-        {error && (
-          <PopupModal title="Login or Register fail" detail={error.message} />
-        )}
-      </Container>
+          {error && (
+            <PopupModal title="Login or Register fail" detail={error.message} />
+          )}
+        </Container>
+      </ScrollContainer>
     </TouchableWithoutFeedback>
   );
 };

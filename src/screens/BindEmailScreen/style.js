@@ -3,11 +3,13 @@ import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
 export const Container = styled.ScrollView`
-  margin-top: 100px;
-  margin-bottom: 38px;
+  margin-top: 92px;
+  margin-bottom: 24px;
   padding-left: 24px;
   padding-right: 24px;
 `;
+
+export const ScrollContainer = styled.ScrollView``;
 
 export const EmailRowContainer = styled.View`
   flex-direction: row;

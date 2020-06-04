@@ -11,6 +11,7 @@ import {
   Detail,
   BindMoreLaterText,
   MarginContainer,
+  ScrollContainer,
 } from './style';
 
 import Input from '@/components/Input';
@@ -54,73 +55,75 @@ const BindEmailScreen = ({navigation}) => {
   };
 
   return (
-    <Container>
-      <Title>
-        <FormattedMessage
-          id="bind_email_accounts"
-          defaultMessage="BIND EMAILS"
-        />
-      </Title>
-      <Detail>
-        <FormattedMessage id="dont_worry" />
-      </Detail>
+    <ScrollContainer>
+      <Container>
+        <Title>
+          <FormattedMessage
+            id="bind_email_accounts"
+            defaultMessage="BIND EMAILS"
+          />
+        </Title>
+        <Detail>
+          <FormattedMessage id="dont_worry" />
+        </Detail>
 
-      {emails.map((email, index) => {
-        const active = index === currentIndex;
-        const isBind = index < currentIndex;
-        const isNext = !active && !isBind;
-        return (
-          <EmailRowContainer isNext={isNext}>
-            <EmailContainer>
-              <Input
-                type="email"
-                onChangeText={text => handleEmailOnChange(text, index)}
-                value={email}
-                editable={active}
-                readOnly={isBind}
-                label={
-                  <FormattedMessage
-                    id="email_account"
-                    defaultMessage="EMAIL {email_count}"
-                    values={{
-                      email_count: index + 1,
-                    }}
-                  />
-                }
-              />
-            </EmailContainer>
-            {isBind ? (
-              <ThemeButton
-                small
-                disabled={isNext || !email}
-                onPress={() => handleUnbindEmailPress(index)}>
-                <FormattedMessage id="unbind" defaultMessage="unbind" />
-              </ThemeButton>
-            ) : (
-              <ThemeButton
-                small
-                disabled={isNext || !email}
-                onPress={() => handleBindEmailPress(email)}>
-                <FormattedMessage id="login" />
-              </ThemeButton>
-            )}
-          </EmailRowContainer>
-        );
-      })}
-      <ThemeButton onPress={handleFinishPress}>
-        <FormattedMessage id="finish" defaultMessage="finish" />
-      </ThemeButton>
-      <MarginContainer />
-      <ThemeButton reverse small onPress={handleSkipPress}>
-        <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
-      </ThemeButton>
-      <BindMoreLaterText>
-        <FormattedMessage
-          id="bind_more_email_later"
-          defaultMessage="You can bind more emails later in profile."
-        />
-      </BindMoreLaterText>
-    </Container>
+        {emails.map((email, index) => {
+          const active = index === currentIndex;
+          const isBind = index < currentIndex;
+          const isNext = !active && !isBind;
+          return (
+            <EmailRowContainer isNext={isNext}>
+              <EmailContainer>
+                <Input
+                  type="email"
+                  onChangeText={text => handleEmailOnChange(text, index)}
+                  value={email}
+                  editable={active}
+                  readOnly={isBind}
+                  label={
+                    <FormattedMessage
+                      id="email_account"
+                      defaultMessage="EMAIL {email_count}"
+                      values={{
+                        email_count: index + 1,
+                      }}
+                    />
+                  }
+                />
+              </EmailContainer>
+              {isBind ? (
+                <ThemeButton
+                  small
+                  disabled={isNext || !email}
+                  onPress={() => handleUnbindEmailPress(index)}>
+                  <FormattedMessage id="unbind" defaultMessage="unbind" />
+                </ThemeButton>
+              ) : (
+                <ThemeButton
+                  small
+                  disabled={isNext || !email}
+                  onPress={() => handleBindEmailPress(email)}>
+                  <FormattedMessage id="login" />
+                </ThemeButton>
+              )}
+            </EmailRowContainer>
+          );
+        })}
+        <ThemeButton onPress={handleFinishPress}>
+          <FormattedMessage id="finish" defaultMessage="finish" />
+        </ThemeButton>
+        <MarginContainer />
+        <ThemeButton reverse small onPress={handleSkipPress}>
+          <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
+        </ThemeButton>
+        <BindMoreLaterText>
+          <FormattedMessage
+            id="bind_more_email_later"
+            defaultMessage="You can bind more emails later in profile."
+          />
+        </BindMoreLaterText>
+      </Container>
+    </ScrollContainer>
   );
 };
 
