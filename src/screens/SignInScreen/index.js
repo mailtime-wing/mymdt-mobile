@@ -157,7 +157,7 @@ const SignInForm = ({isSignUp}) => {
         </VerificationCodeContainer>
         <ThemeButton
           small
-          disabled={isTimerStarted || errors.phone}
+          disabled={isTimerStarted || !!errors.phone}
           onPress={handleSendPress}>
           <Text>
             {state.sendCount > 0 ? (
