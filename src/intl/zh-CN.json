@@ -11,7 +11,8 @@
     "redeem": "奖赏",
     "redeem_details": "充值卡 / 特别会员福利",
 
-    "brands": "brands",
+    "offers_selected": "{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
+    "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "gold_member": "金钻用户",
     "total_balance": "总结馀",
     "offers_preference": "商店喜好",

@@ -3,7 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import {Container, Details, EditLater} from './style';
 
 import ThemeButton from '@/components/ThemeButton';
-import BrandList from '@/components/OfferList';
+import OfferList from '@/components/OfferList';
 
 const OfferSelectConfirmScreen = ({route, navigation}) => {
   const {numberOfBrand} = route.params;
@@ -33,7 +33,7 @@ const OfferSelectConfirmScreen = ({route, navigation}) => {
           defaultMessage="If you’re happy with the offer, please confirm your choice."
         />
       </Details>
-      <BrandList offerList={selectedOffers} />
+      <OfferList offerList={selectedOffers} />
       <ThemeButton onPress={handleConfirmPress}>
         <FormattedMessage id="confirm" default="Confirm" />
       </ThemeButton>

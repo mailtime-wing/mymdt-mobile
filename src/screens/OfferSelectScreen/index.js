@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {FormattedMessage, defineMessages, useIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import {IntlContext} from '@/context/Intl';
 import {useQuery} from '@apollo/react-hooks';
 import {GET_BASIC_OFFER_API} from '@/api/data';
@@ -28,7 +28,6 @@ const OfferSelectScreen = ({navigation}) => {
   const {loading, error, data} = useQuery(GET_BASIC_OFFER_API, {
     variables: {locale: localeEnum},
   });
-  const intl = useIntl();
 
   const formatOfferString = () => {
     const lastOfferIndex = selectedOffers.length - 1;
@@ -62,21 +61,6 @@ const OfferSelectScreen = ({navigation}) => {
   const handleErrorCallBack = isError => {
     setIsErrorFromOfferList(isError);
   };
-
-  const messages = defineMessages({
-    offers: {
-      id: 'brand',
-      defaultMessage:
-        '{offerCount, plural, =0 {brand} one {brand} other {brands}}',
-    },
-  });
-  const pluralString = intl.formatMessage(messages.offers, {
-    offerCount: selectedOffers.length,
-  });
-
-  const brandsSelectedText = isErrorFromOfferList
-    ? `MORE THAN ${numberOfOffer} BRANDS SELECTED`
-    : `${selectedOffers.length} ${pluralString} SELECTED`;
 
   if (loading) {
     return <LoadingSpinner />;
@@ -125,7 +109,25 @@ const OfferSelectScreen = ({navigation}) => {
       </ScrollContainer>
       <FixedContainer>
         <BrandsSelectedText isError={isErrorFromOfferList}>
-          {brandsSelectedText}
+          {isErrorFromOfferList ? (
+            <FormattedMessage
+              id="more_offers_selected"
+              defaultMessage="MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED"
+              values={{
+                numberOfOffer: numberOfOffer,
+                offerCount: selectedOffers.length,
+              }}
+            />
+          ) : (
+            <FormattedMessage
+              id="offers_selected"
+              defaultMessage="{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED"
+              values={{
+                numberOfOffer: selectedOffers.length,
+                offerCount: selectedOffers.length,
+              }}
+            />
+          )}
         </BrandsSelectedText>
         <ThemeButton
           small

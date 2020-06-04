@@ -2,7 +2,7 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import ModalContaienr from '@/components/ModalContainer';
 import Button from '@/components/Button';
-import BrandList from '@/components/OfferList';
+import OfferList from '@/components/OfferList';
 
 import {Detail, Header, NumberOfBrand, RowContainer} from './style';
 
@@ -40,7 +40,7 @@ const OfferPreferenceEditScreen = () => {
       <Detail>
         <FormattedMessage id="get_reward_from_brands" />
       </Detail>
-      <BrandList offerList={selectedOffers} />
+      <OfferList offerList={selectedOffers} />
     </ModalContaienr>
   );
 };

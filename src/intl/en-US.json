@@ -11,7 +11,8 @@
     "redeem": "Redeem",
     "redeem_details": "Gift Cards / Special Rewards",
 
-    "brands": "brands",
+    "offers_selected": "{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
+    "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "gold_member": "VIP GOLD",
     "total_balance": "Total Balance",
     "offers_preference": "Brands Preference",
