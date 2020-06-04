@@ -104,7 +104,7 @@ const OfferSelectScreen = ({navigation}) => {
           selectedOffers={selectedOffers}
           setSelectedOffers={setSelectedOffers}
           offersLimit={numberOfOffer}
-          errorCallBack={handleErrorCallBack}
+          onError={handleErrorCallBack}
         />
       </ScrollContainer>
       <FixedContainer>

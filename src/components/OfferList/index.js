@@ -33,9 +33,10 @@ const OfferList = ({
   selectedOffers,
   setSelectedOffers,
   offersLimit,
-  errorCallBack,
+  onError,
 }) => {
   const [isError, setIsError] = useState(false);
+  onError && onError(isError);
 
   useEffect(() => {
     // check brands limit
@@ -45,7 +46,6 @@ const OfferList = ({
       setIsError(false);
     }
   }, [selectedOffers, isError, offersLimit]);
-  errorCallBack(isError);
 
   const onSelect = offer => {
     // deselect offer
