@@ -3,7 +3,6 @@ import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
 export const ScrollContainer = styled.ScrollView`
-  margin-top: 100px;
   padding-left: 24px;
   padding-right: 24px;
 `;
@@ -35,6 +34,10 @@ export const HightLightText = styled(Text)`
 
 export const Container = styled.View`
   flex: 1;
+`;
+
+export const ViewContainer = styled.View`
+  padding-top: 100px;
 `;
 
 export const FixedContainer = styled.View`

@@ -17,19 +17,19 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* RewardMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RewardMeTests.m */; };
 		32264A6F366F97C71935182D /* libPods-RewardMe-RewardMeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FBAC2F8935E97E31D967D09 /* libPods-RewardMe-RewardMeTests.a */; };
+		504367D6D25C442BA4E156EF /* Neo Sans Pro Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6126AC2793E14B81BF6CEEC2 /* Neo Sans Pro Light.ttf */; };
+		5BA11D7B3E334F568C90C124 /* Neo Sans Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C577C665E7714C92AC9E724C /* Neo Sans Pro.ttf */; };
+		6150B33F4BDE4FA198E9ABBA /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6813BCE1474E4C088624D20C /* Inter-Regular.ttf */; };
+		904F8359FA26440899AF6A98 /* Neo Sans Pro Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C40715FBF7E249CAB0C7B691 /* Neo Sans Pro Medium.ttf */; };
+		91F0737104024F06A19E21C0 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 643C86058E4F49CD8FC93D99 /* Inter-Bold.ttf */; };
 		99DCCAC39103D7A2B5FE93A6 /* libPods-RewardMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C042B59D362A20C45C42D814 /* libPods-RewardMe.a */; };
 		A23213640B271B0E0A985A1A /* libPods-RewardMe-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 451F26ADE4D5CC0D7B244A84 /* libPods-RewardMe-tvOSTests.a */; };
 		B606DD94246014BC00CAA2E6 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606DD93246014BC00CAA2E6 /* Dummy.swift */; };
 		B606DDA32461046E00CAA2E6 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606DD93246014BC00CAA2E6 /* Dummy.swift */; };
 		B606DDA42461046F00CAA2E6 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606DD93246014BC00CAA2E6 /* Dummy.swift */; };
 		B606DDA52461047100CAA2E6 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606DD93246014BC00CAA2E6 /* Dummy.swift */; };
-		E4A861414D4F4AFCEC62E206 /* libPods-RewardMe-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6668AC177D9D64DC5B43B235 /* libPods-RewardMe-tvOS.a */; };
-		6150B33F4BDE4FA198E9ABBA /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6813BCE1474E4C088624D20C /* Inter-Regular.ttf */; };
-		5BA11D7B3E334F568C90C124 /* Neo Sans Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C577C665E7714C92AC9E724C /* Neo Sans Pro.ttf */; };
-		504367D6D25C442BA4E156EF /* Neo Sans Pro Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6126AC2793E14B81BF6CEEC2 /* Neo Sans Pro Light.ttf */; };
-		904F8359FA26440899AF6A98 /* Neo Sans Pro Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C40715FBF7E249CAB0C7B691 /* Neo Sans Pro Medium.ttf */; };
 		CE570F21104C4C8889BBF5B2 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4356FC964D94E4FBB247D38 /* Inter-Medium.ttf */; };
-		91F0737104024F06A19E21C0 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 643C86058E4F49CD8FC93D99 /* Inter-Bold.ttf */; };
+		E4A861414D4F4AFCEC62E206 /* libPods-RewardMe-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6668AC177D9D64DC5B43B235 /* libPods-RewardMe-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +69,10 @@
 		2FB8A1F0D6EBBABD4EDF80E7 /* Pods-RewardMe-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RewardMe-tvOS/Pods-RewardMe-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		451F26ADE4D5CC0D7B244A84 /* libPods-RewardMe-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D4F94DD244013BA2C05F355 /* Pods-RewardMeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMeTests.release.xcconfig"; path = "Target Support Files/Pods-RewardMeTests/Pods-RewardMeTests.release.xcconfig"; sourceTree = "<group>"; };
+		6126AC2793E14B81BF6CEEC2 /* Neo Sans Pro Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro Light.ttf"; path = "../assets/Neo Sans Pro Light.ttf"; sourceTree = "<group>"; };
+		643C86058E4F49CD8FC93D99 /* Inter-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.ttf"; path = "../assets/Inter-Bold.ttf"; sourceTree = "<group>"; };
 		6668AC177D9D64DC5B43B235 /* libPods-RewardMe-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6813BCE1474E4C088624D20C /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../assets/Inter-Regular.ttf"; sourceTree = "<group>"; };
 		8FBAC2F8935E97E31D967D09 /* libPods-RewardMe-RewardMeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe-RewardMeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01BD7A605BF1672FD9444E1 /* Pods-RewardMe-RewardMeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-RewardMeTests.release.xcconfig"; path = "Target Support Files/Pods-RewardMe-RewardMeTests/Pods-RewardMe-RewardMeTests.release.xcconfig"; sourceTree = "<group>"; };
 		AD3657E23D936590108E99FB /* Pods-RewardMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe.release.xcconfig"; path = "Target Support Files/Pods-RewardMe/Pods-RewardMe.release.xcconfig"; sourceTree = "<group>"; };
@@ -82,16 +85,13 @@
 		B606DD9D246017E700CAA2E6 /* libswiftObjectiveC.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftObjectiveC.tbd; path = usr/lib/swift/libswiftObjectiveC.tbd; sourceTree = SDKROOT; };
 		B606DD9F246017EF00CAA2E6 /* libswiftCoreFoundation.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftCoreFoundation.tbd; path = usr/lib/swift/libswiftCoreFoundation.tbd; sourceTree = SDKROOT; };
 		C042B59D362A20C45C42D814 /* libPods-RewardMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C40715FBF7E249CAB0C7B691 /* Neo Sans Pro Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro Medium.ttf"; path = "../assets/Neo Sans Pro Medium.ttf"; sourceTree = "<group>"; };
+		C577C665E7714C92AC9E724C /* Neo Sans Pro.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro.ttf"; path = "../assets/Neo Sans Pro.ttf"; sourceTree = "<group>"; };
 		CD6E0A087DA561327AA6E405 /* Pods-RewardMe-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-tvOS.release.xcconfig"; path = "Target Support Files/Pods-RewardMe-tvOS/Pods-RewardMe-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		D4356FC964D94E4FBB247D38 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../assets/Inter-Medium.ttf"; sourceTree = "<group>"; };
 		DFF8B1989C502EC318371828 /* Pods-RewardMe-RewardMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-RewardMeTests.debug.xcconfig"; path = "Target Support Files/Pods-RewardMe-RewardMeTests/Pods-RewardMe-RewardMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		6813BCE1474E4C088624D20C /* Inter-Regular.ttf */ = {isa = PBXFileReference; name = "Inter-Regular.ttf"; path = "../assets/Inter-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C577C665E7714C92AC9E724C /* Neo Sans Pro.ttf */ = {isa = PBXFileReference; name = "Neo Sans Pro.ttf"; path = "../assets/Neo Sans Pro.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6126AC2793E14B81BF6CEEC2 /* Neo Sans Pro Light.ttf */ = {isa = PBXFileReference; name = "Neo Sans Pro Light.ttf"; path = "../assets/Neo Sans Pro Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C40715FBF7E249CAB0C7B691 /* Neo Sans Pro Medium.ttf */ = {isa = PBXFileReference; name = "Neo Sans Pro Medium.ttf"; path = "../assets/Neo Sans Pro Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D4356FC964D94E4FBB247D38 /* Inter-Medium.ttf */ = {isa = PBXFileReference; name = "Inter-Medium.ttf"; path = "../assets/Inter-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		643C86058E4F49CD8FC93D99 /* Inter-Bold.ttf */ = {isa = PBXFileReference; name = "Inter-Bold.ttf"; path = "../assets/Inter-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +233,7 @@
 			sourceTree = "<group>";
 		};
 		D2818A59223B4F578357F0D8 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				6813BCE1474E4C088624D20C /* Inter-Regular.ttf */,
 				C577C665E7714C92AC9E724C /* Neo Sans Pro.ttf */,
@@ -243,8 +243,8 @@
 				643C86058E4F49CD8FC93D99 /* Inter-Bold.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 

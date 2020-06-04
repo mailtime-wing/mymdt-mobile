@@ -6,6 +6,7 @@ import {GET_BASIC_OFFER_API} from '@/api/data';
 import {
   ScrollContainer,
   Container,
+  ViewContainer,
   FixedContainer,
   Details,
   Title,
@@ -46,10 +47,7 @@ const OfferSelectScreen = ({navigation}) => {
 
   const handlePopupState = state => {
     if (state === 'OK') {
-      navigation.navigate('sign_in', {
-        isSignUp: true,
-        selectedOffers: selectedOffers,
-      });
+      navigation.navigate('introduction');
     }
     setShowConfirmPopup(false);
   };
@@ -79,33 +77,38 @@ const OfferSelectScreen = ({navigation}) => {
   return (
     <Container>
       <ScrollContainer>
-        <Title>
-          <FormattedMessage id="special_offer" defaultMessage="Special Offer" />
-        </Title>
-        <Details>
-          <FormattedMessage
-            id="select_offer_details"
-            defaultMessage="We also provide a special offer for everyone. You can choose your favorite or frequently spend brands. The cashback rate depends on your membership level."
+        <ViewContainer>
+          <Title>
+            <FormattedMessage
+              id="special_offer"
+              defaultMessage="Special Offer"
+            />
+          </Title>
+          <Details>
+            <FormattedMessage
+              id="select_offer_details"
+              defaultMessage="We also provide a special offer for everyone. You can choose your favorite or frequently spend brands. The cashback rate depends on your membership level."
+            />
+          </Details>
+          <Details>
+            <FormattedMessage
+              id="please_select_brands"
+              defaultMessage="Please choose <FilterText>{number_of_offers} brands/services</FilterText> to earn points with each time you spend there."
+              values={{
+                number_of_offers: numberOfOffer,
+                FilterText: str => <HightLightText>{str}</HightLightText>,
+                // TOFIX: formatting not work in react native
+              }}
+            />
+          </Details>
+          <OfferList
+            offerList={data && data.basicOffers}
+            selectedOffers={selectedOffers}
+            setSelectedOffers={setSelectedOffers}
+            offersLimit={numberOfOffer}
+            onError={handleError}
           />
-        </Details>
-        <Details>
-          <FormattedMessage
-            id="please_select_brands"
-            defaultMessage="Please choose <FilterText>{number_of_offers} brands/services</FilterText> to earn points with each time you spend there."
-            values={{
-              number_of_offers: numberOfOffer,
-              FilterText: str => <HightLightText>{str}</HightLightText>,
-              // TOFIX: formatting not work in react native
-            }}
-          />
-        </Details>
-        <OfferList
-          offerList={data && data.basicOffers}
-          selectedOffers={selectedOffers}
-          setSelectedOffers={setSelectedOffers}
-          offersLimit={numberOfOffer}
-          onError={handleError}
-        />
+        </ViewContainer>
       </ScrollContainer>
       <FixedContainer>
         <BrandsSelectedText isError={isErrorFromOfferList}>

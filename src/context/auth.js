@@ -12,7 +12,11 @@ export const AuthContext = createContext(null);
 const UPDATE_AUTH_TOKEN = 'updateAuthToken';
 const UPDATE_USER_ACCCOUNT_DATA = 'updateUserAccountData';
 const UPDATE_REFRESH_TOKEN_EXPIRED = 'updateRefreshTokenExpired';
+const UPDATE_CASH_BACK_TYPE = 'updateCashBackType';
 const SIGN_OUT = 'signOut';
+
+export const REWARD_POINT = 'Reward Point';
+export const MDT = 'Measurable Data Token';
 
 const initialState = {
   isLoading: true,
@@ -45,6 +49,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         isRefreshTokenExpired: action.payload,
+      };
+    }
+    case UPDATE_CASH_BACK_TYPE: {
+      return {
+        ...state,
+        cashBackType: action.payload,
       };
     }
     case SIGN_OUT: {
@@ -169,6 +179,17 @@ export const AuthProvider = ({children}) => {
             isEmailBound: isEmailBound,
             isProfileCompleted: isProfileCompleted,
           },
+        });
+      },
+      updateCashBackType: async cashBackType => {
+        try {
+          await AsyncStorage.setItem('cashBackType', cashBackType);
+        } catch (error) {
+          console.error('error saving cash back type');
+        }
+        dispatch({
+          type: UPDATE_CASH_BACK_TYPE,
+          payload: cashBackType,
         });
       },
       signOut: async () => {

@@ -64,7 +64,7 @@ const CardSection = () => {
     <SwiperContainer>
       <Carousel
         ref={refCarousel}
-        layout={'default'}
+        layout="default"
         data={data}
         renderItem={renderItem}
         sliderWidth={sliderWidth}
@@ -72,16 +72,16 @@ const CardSection = () => {
         inactiveSlideScale={1}
         inactiveSlideOpacity={0}
         containerCustomStyle={styles.container}
-        activeAnimationType={'decay'}
+        activeAnimationType="decay"
         onSnapToItem={index => setActiveIndex(index)}
       />
       <Pagination
         dotsLength={data.length}
         activeDotIndex={activeIndex}
         containerStyle={styles.paginationContainer}
-        dotColor={'#00BACE'}
+        dotColor="#00BACE"
         dotStyle={styles.paginationDot}
-        inactiveDotColor={'rgba(3, 99, 239, 0.2)'}
+        inactiveDotColor="rgba(3, 99, 239, 0.2)"
         inactiveDotScale={1}
         carouselRef={refCarousel}
         tappableDots={!!refCarousel}
@@ -94,7 +94,8 @@ const OnboardingScreen = ({navigation}) => (
   <Container>
     <CardSection />
     <ButtonContainer>
-      <ThemeButton onPress={() => navigation.navigate('welcome')}>
+      <ThemeButton
+        onPress={() => navigation.navigate('sign_in', {isSignUp: true})}>
         <FormattedMessage id="join_rewardme" defaultMessage="JOIN REWARDME" />
       </ThemeButton>
       <MarginContainer />

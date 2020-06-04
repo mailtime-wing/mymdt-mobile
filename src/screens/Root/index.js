@@ -7,13 +7,14 @@ import {UpperSafeAreaView, LowerSafeAreaView, styles} from './style';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import OfferSelectScreen from '@/screens/OfferSelectScreen';
-import OfferSelectConfirmScreen from '@/screens/OfferSelectConfirmScreen';
 import SignInScreen from '@/screens/SignInScreen';
 import UserProfileScreen from '@/screens/UserProfileScreen';
 import BindEmailScreen from '@/screens/BindEmailScreen';
 import LoadingScreen from '@/screens/LoadingScreen';
 import NotificationPermissionScreen from '@/screens/NotificationPermissionScreen';
 import AccountSetupDoneScreen from '@/screens/AccountSetupDoneScreen';
+import ChooseCashBackTypeScreen from '@/screens/ChooseCashBackTypeScreen';
+import IntroductionScreen from '@/screens/IntroductionScreen';
 import WelcomeScreen from '@/screens/WelcomeScreen';
 import HomeStack from '@/screens/HomeStack';
 import ModalStack from '@/screens/ModalStack';
@@ -25,18 +26,21 @@ const Stack = createStackNavigator();
 const screens = [
   {name: 'onboarding', component: OnboardingScreen},
   {name: 'sign_in', component: SignInScreen},
-  {name: 'welcome', component: WelcomeScreen},
-  {name: 'offer_select', component: OfferSelectScreen},
-  {name: 'offer_select_confirm', component: OfferSelectConfirmScreen},
   {name: 'loading', component: LoadingScreen},
 ];
 
-const noBackScreen = [
-  'onboarding',
-  'loading',
-  'notification_permission',
-  'account_setup_done',
+const authScreens = [
+  {name: 'choose_cash_back_type', component: ChooseCashBackTypeScreen},
+  {name: 'welcome', component: WelcomeScreen},
+  {name: 'offer_select', component: OfferSelectScreen},
+  {name: 'introduction', component: IntroductionScreen},
+  {name: 'notification_permission', component: NotificationPermissionScreen},
+  {name: 'account_setup_done', component: AccountSetupDoneScreen},
+  {name: 'home', component: HomeStack},
+  {name: 'ModalStack', component: ModalStack},
 ];
+
+const backScreen = ['sign_in', 'welcome', 'offer_select'];
 
 const Root = () => {
   const {authToken, isEmailBound, isProfileCompleted} = useContext(AuthContext);
@@ -58,42 +62,49 @@ const Root = () => {
                     cardStyle: styles.card,
                     headerStyle: styles.header,
                     headerLeft: () =>
-                      noBackScreen.includes(screen.name) ? null : (
-                        // <HeaderButton root="onboarding" />
-                        <BackButton />
-                      ),
+                      backScreen.includes(screen.name) ? <BackButton /> : null,
                   }}
                 />
               ))}
             </Stack.Navigator>
           ) : (
-            <Stack.Navigator mode="modal" headerMode="none">
+            <Stack.Navigator>
               {!isProfileCompleted && (
                 <Stack.Screen
                   name="user_profile"
                   component={UserProfileScreen}
-                  options={{cardStyle: styles.card}}
+                  options={{
+                    headerTransparent: true,
+                    cardStyle: styles.card,
+                    headerTitleStyle: styles.headerTitle,
+                  }}
                 />
               )}
               {!isEmailBound && (
                 <Stack.Screen
                   name="bind_email"
                   component={BindEmailScreen}
-                  options={{cardStyle: styles.card}}
+                  options={{
+                    headerTransparent: true,
+                    cardStyle: styles.card,
+                    headerTitleStyle: styles.headerTitle,
+                  }}
                 />
               )}
-              <Stack.Screen name="home" component={HomeStack} />
-              <Stack.Screen name="modal" component={ModalStack} />
-              <Stack.Screen
-                name="notification_permission"
-                component={NotificationPermissionScreen}
-                options={{cardStyle: styles.card}}
-              />
-              <Stack.Screen
-                name="account_setup_done"
-                component={AccountSetupDoneScreen}
-                options={{cardStyle: styles.card}}
-              />
+              {authScreens.map(screen => (
+                <Stack.Screen
+                  name={screen.name}
+                  component={screen.component}
+                  options={{
+                    headerTransparent: true,
+                    headerTitleStyle: styles.headerTitle,
+                    cardStyle: styles.card,
+                    headerStyle: styles.header,
+                    headerLeft: () =>
+                      backScreen.includes(screen.name) ? <BackButton /> : null,
+                  }}
+                />
+              ))}
             </Stack.Navigator>
           )}
         </Container>

@@ -130,7 +130,7 @@ const UserProfileScreen = ({navigation}) => {
           name: values.name,
           gender: values.gender,
           dateOfBirth: values.dob.toISOString(),
-          referalCode: values.referralCode,
+          referralCode: values.referralCode,
         },
         context: {
           headers: {
@@ -139,7 +139,7 @@ const UserProfileScreen = ({navigation}) => {
         },
       });
       updateUserAccountData({isEmailBound: false, isProfileCompleted: true});
-      navigation.navigate('account_setup_done');
+      navigation.navigate('choose_cash_back_type');
     } catch (e) {
       console.error(e);
       // handle error later
@@ -160,10 +160,10 @@ const UserProfileScreen = ({navigation}) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => handleSpacePress()}>
-      <Container behavior="position">
-        <ScrollContainer
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="always">
+      <ScrollContainer
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="always">
+        <Container behavior="position">
           <Title>
             <FormattedMessage id="let_us_know" />
           </Title>
@@ -185,8 +185,8 @@ const UserProfileScreen = ({navigation}) => {
               handleDatePickerPress={handleDatePickerPress}
             />
           </Formik>
-        </ScrollContainer>
-      </Container>
+        </Container>
+      </ScrollContainer>
     </TouchableWithoutFeedback>
   );
 };
