@@ -50,3 +50,20 @@ export const UPDATE_BASIC_OFFER_API = gql`
     updateBasicOffers(ids: $ids)
   }
 `;
+
+export const GET_USER_MEMBERSHIP_API = gql`
+  query {
+    userProfile {
+      membership {
+        id
+        name
+        level
+        inviteRequired
+        mdtRequired
+        brandsNumAllowed
+        cashbackAdd
+        interestRate
+      }
+    }
+  }
+`;
