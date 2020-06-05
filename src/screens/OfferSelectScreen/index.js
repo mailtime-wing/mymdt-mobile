@@ -58,7 +58,7 @@ const OfferSelectScreen = ({navigation}) => {
     setShowConfirmPopup(true);
   };
 
-  const handleOnError = useCallback(isError => {
+  const handleError = useCallback(isError => {
     setIsErrorFromOfferList(isError);
   }, []);
 
@@ -104,7 +104,7 @@ const OfferSelectScreen = ({navigation}) => {
           selectedOffers={selectedOffers}
           setSelectedOffers={setSelectedOffers}
           offersLimit={numberOfOffer}
-          onError={handleOnError}
+          onError={handleError}
         />
       </ScrollContainer>
       <FixedContainer>
