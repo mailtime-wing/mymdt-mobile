@@ -1,32 +1,31 @@
 import styled from '@emotion/native';
 import Text from '@/components/AppText';
 
-export const BrandsContainer = styled.View`
+export const OffersContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   justify-items: stretch;
 `;
 
-export const BrandContainer = styled.TouchableOpacity`
-  width: 45%;
+export const OfferContainer = styled.TouchableOpacity`
+  width: auto;
+  max-width: 50%;
   justify-content: center;
   align-items: center;
   margin-bottom: 16px;
   padding: 16px;
   position: relative;
   border-radius: 16px;
-  background-color: ${props =>
-    props.selected ? props.theme.colors.secondary.normal : 'transparent'};
-`;
-
-export const BrandContainerView = styled.View`
-  width: 45%;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 16px;
-  padding: 8px;
-  position: relative;
+  background-color: 'transparent';
+  ${props =>
+    props.selected
+      ? `background-color: ${
+          props.isError
+            ? props.theme.colors.error.dark
+            : props.theme.colors.secondary.normal
+        };`
+      : 'background-color: transparent;'}
 `;
 
 export const StateContainer = styled.View`
@@ -44,12 +43,12 @@ export const CheckBox = styled.View`
   border: 2px solid ${props => props.theme.colors.black.normal};
 `;
 
-export const BrandIcon = styled.Image`
+export const OfferIcon = styled.Image`
   width: 80px;
   height: 80px;
 `;
 
-export const BrandName = styled(Text)`
+export const OfferName = styled(Text)`
   font-size: 18px;
   line-height: 22px;
   font-weight: 500;
@@ -57,7 +56,7 @@ export const BrandName = styled(Text)`
   margin-bottom: 4px;
 `;
 
-export const BrandDiscount = styled(Text)`
+export const OfferDiscount = styled(Text)`
   font-size: 12px;
   line-height: 18px;
   color: ${props => props.theme.colors.black.superLight};

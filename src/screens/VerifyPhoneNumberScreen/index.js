@@ -92,7 +92,7 @@ const VerifyPhoneNumberForm = ({phone}) => {
 };
 
 const VerifyPhoneNumberScreen = ({route, navigation}) => {
-  const {phone, selectedBrands} = route.params;
+  const {phone, selectedOffers} = route.params;
   const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken} = useContext(AuthContext);
   const [registerRequest] = useMutation(REGISTER_API);
@@ -103,7 +103,7 @@ const VerifyPhoneNumberScreen = ({route, navigation}) => {
         variables: {
           phoneNumber: phone,
           otp: values.verificationCode,
-          subscribedOfferIds: selectedBrands.map(brand => brand.id),
+          subscribedOfferIds: selectedOffers.map(offer => offer.id),
           locale: localeEnum,
         },
       });

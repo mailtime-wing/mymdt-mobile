@@ -27,3 +27,20 @@ export const BIND_EMAIL_ACCOUNTS = gql`
     }
   }
 `;
+
+export const GET_BASIC_OFFER_API = gql`
+  query BasicOffers($locale: Locale!) {
+    basicOffers(locale: $locale) {
+      id
+      type
+      name
+      description
+      cashbackRate
+      brand {
+        id
+        name
+        logo
+      }
+    }
+  }
+`;

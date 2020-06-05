@@ -38,9 +38,14 @@ export const Container = styled.View`
 `;
 
 export const FixedContainer = styled.View`
-  height: 153px;
-  padding-left: 24px;
-  padding-right: 24px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 110px;
+  border-width: 1px;
+  border-radius: 24px 24px 0px 0px;
+  border-color: rgba(0, 0, 0, 0.2);
+  elevation: 1;
 `;
 
 export const BrandsSelectedText = styled(Text)`
@@ -49,8 +54,13 @@ export const BrandsSelectedText = styled(Text)`
   letter-spacing: 1px;
   font-weight: bold;
   text-transform: uppercase;
-  color: ${props => props.theme.colors.secondary.normal};
+  color: ${props =>
+    props.isError
+      ? props.theme.colors.error.dark
+      : props.theme.colors.secondary.normal};
   text-align: center;
   margin-top: 16px;
   margin-bottom: 16px;
+  max-width: 40%;
+  text-align: left;
 `;

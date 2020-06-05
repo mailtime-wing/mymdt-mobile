@@ -6,8 +6,8 @@ import {AuthContext} from '@/context/auth';
 import {UpperSafeAreaView, LowerSafeAreaView, styles} from './style';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
-import BrandSelectScreen from '@/screens/BrandSelectScreen';
-import BrandSelectConfirmScreen from '@/screens/BrandSelectConfirmScreen';
+import OfferSelectScreen from '@/screens/OfferSelectScreen';
+import OfferSelectConfirmScreen from '@/screens/OfferSelectConfirmScreen';
 import SignInScreen from '@/screens/SignInScreen';
 import UserProfileScreen from '@/screens/UserProfileScreen';
 import BindEmailScreen from '@/screens/BindEmailScreen';
@@ -26,8 +26,8 @@ const screens = [
   {name: 'onboarding', component: OnboardingScreen},
   {name: 'sign_in', component: SignInScreen},
   {name: 'welcome', component: WelcomeScreen},
-  {name: 'brand_select', component: BrandSelectScreen},
-  {name: 'brand_select_confirm', component: BrandSelectConfirmScreen},
+  {name: 'offer_select', component: OfferSelectScreen},
+  {name: 'offer_select_confirm', component: OfferSelectConfirmScreen},
   {name: 'loading', component: LoadingScreen},
 ];
 

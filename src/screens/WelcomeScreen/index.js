@@ -32,7 +32,7 @@ const WelcomeScreen = ({navigation}) => {
         </AutoScrolling>
       </AppIconGridImageContainer>
       <PaddingContainer>
-        <ThemeButton onPress={() => navigation.navigate('brand_select')}>
+        <ThemeButton onPress={() => navigation.navigate('offer_select')}>
           <FormattedMessage id="start" defaultMessage="Start" />
         </ThemeButton>
       </PaddingContainer>
