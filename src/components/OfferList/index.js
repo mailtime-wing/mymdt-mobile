@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {View} from 'react-native';
 import {
   OffersContainer,
@@ -35,17 +35,11 @@ const OfferList = ({
   offersLimit,
   onError,
 }) => {
-  const [isError, setIsError] = useState(false);
+  const isError = selectedOffers.length > offersLimit;
 
   useEffect(() => {
-    // check brands limit
-    if (selectedOffers.length > offersLimit) {
-      setIsError(true);
-    } else {
-      setIsError(false);
-    }
-    onError && onError(isError);
-  }, [selectedOffers, isError, offersLimit, onError]);
+    onError(isError);
+  }, [isError, onError]);
 
   const onSelect = offer => {
     // deselect offer

@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {IntlContext} from '@/context/Intl';
 import {useQuery} from '@apollo/react-hooks';
@@ -58,9 +58,9 @@ const OfferSelectScreen = ({navigation}) => {
     setShowConfirmPopup(true);
   };
 
-  const handleErrorCallBack = isError => {
+  const handleOnError = useCallback(isError => {
     setIsErrorFromOfferList(isError);
-  };
+  }, []);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -104,7 +104,7 @@ const OfferSelectScreen = ({navigation}) => {
           selectedOffers={selectedOffers}
           setSelectedOffers={setSelectedOffers}
           offersLimit={numberOfOffer}
-          onError={handleErrorCallBack}
+          onError={handleOnError}
         />
       </ScrollContainer>
       <FixedContainer>
