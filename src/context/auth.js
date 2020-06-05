@@ -25,6 +25,7 @@ const initialState = {
   isProfileCompleted: null,
   refreshToken: null,
   isRefreshTokenExpired: null,
+  cashBackType: REWARD_POINT, // discuss before to set reward point as default cash back type
 };
 
 const reducer = (state, action) => {
