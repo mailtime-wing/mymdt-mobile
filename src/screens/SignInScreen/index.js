@@ -195,7 +195,7 @@ const SignInForm = ({isSignUp}) => {
 };
 
 const SigninScreen = ({route, navigation}) => {
-  const {isSignUp, selectedOffers} = route.params;
+  const {isSignUp} = route.params;
   const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken, updateUserAccountData} = useContext(AuthContext);
   const [loginRequest, {error}] = useMutation(LOGIN_API);
@@ -209,7 +209,6 @@ const SigninScreen = ({route, navigation}) => {
           variables: {
             phoneNumber: completePhoneNumber,
             otp: values.verificationCode,
-            subscribedOfferIds: selectedOffers.map(offer => offer.id),
             locale: localeEnum,
           },
         });

@@ -5,13 +5,13 @@ export const UPDATE_USER_PROFILE_API = gql`
     $name: String!
     $gender: String!
     $dateOfBirth: Time!
-    $referalCode: String!
+    $referralCode: String!
   ) {
     updateUserProfile(
       name: $name
       gender: $gender
       dateOfBirth: $dateOfBirth
-      referalCode: $referalCode
+      referralCode: $referralCode
     )
   }
 `;
@@ -42,5 +42,11 @@ export const GET_BASIC_OFFER_API = gql`
         logo
       }
     }
+  }
+`;
+
+export const UPDATE_BASIC_OFFER_API = gql`
+  mutation UpdateBasicOffers($ids: [ID!]!) {
+    updateBasicOffers(ids: $ids)
   }
 `;

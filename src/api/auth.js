@@ -11,18 +11,8 @@ export const GET_OTP_API = gql`
 `;
 
 export const REGISTER_API = gql`
-  mutation Register(
-    $phoneNumber: String!
-    $otp: String!
-    $subscribedOfferIds: [String!]
-    $locale: Locale!
-  ) {
-    register(
-      phoneNumber: $phoneNumber
-      otp: $otp
-      subscribedOfferIds: $subscribedOfferIds
-      locale: $locale
-    ) {
+  mutation Register($phoneNumber: String!, $otp: String!, $locale: Locale!) {
+    register(phoneNumber: $phoneNumber, otp: $otp, locale: $locale) {
       accessToken
       refreshToken
     }

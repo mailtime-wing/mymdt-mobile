@@ -20,18 +20,20 @@ export const Container = styled.TouchableOpacity`
     `background-color: ${props.theme.colors.white.normal}; border: 1px solid ${
       props.theme.colors.secondary.light
     };`}
+    
+  ${props =>
+    props.reverseBorder &&
+    `border: 1px solid ${props.theme.colors.white.normal};`}
 `;
 
 export const ButtonText = styled(Text)`
   color: ${props => props.theme.colors.white.normal};
   letter-spacing: 1.5px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 19px;
   text-transform: uppercase;
   text-align: center;
   font-weight: bold;
-
-  ${props => props.small && 'font-size: 14px;'};
 
   color: ${props =>
     props.reverse

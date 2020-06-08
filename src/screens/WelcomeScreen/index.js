@@ -33,7 +33,7 @@ const WelcomeScreen = ({navigation}) => {
       </AppIconGridImageContainer>
       <PaddingContainer>
         <ThemeButton onPress={() => navigation.navigate('offer_select')}>
-          <FormattedMessage id="start" defaultMessage="Start" />
+          <FormattedMessage id="next" defaultMessage="Next" />
         </ThemeButton>
       </PaddingContainer>
       <StartAndAgree>
