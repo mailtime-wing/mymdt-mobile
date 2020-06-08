@@ -138,7 +138,7 @@ const UserProfileScreen = ({navigation}) => {
           },
         },
       });
-      updateUserAccountData({isEmailBound: false, isProfileCompleted: true});
+      updateUserAccountData({isProfileCompleted: true});
       navigation.navigate('choose_cash_back_type');
     } catch (e) {
       console.error(e);

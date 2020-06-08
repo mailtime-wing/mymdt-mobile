@@ -85,6 +85,7 @@
     "turn_on_notifications_to_learn": "Turn on notifications to learn more about the latest missions.",
     "sure": "SURE!",
     "all_done": "All done!",
+    "account_setup_done": "Your account has been set up",
     "let_your_cash_back": "Let your cash back",
     "see_today_offer": "See Today’s Offers",
     "change_cashback_perference_later": "RewardMe provides 2 types of cashback. You can change the perference afterwards.",
@@ -101,5 +102,10 @@
     "choose_more_brand_when_upgrade": "You can choose more brands when your membership is upgraded.",
     "your_choices": "Your choices",
     "get_reward_from_brands": "Get rewards when you receives email receipts from these brand.",
-    "edit": "Edit"
+    "edit": "Edit",
+
+    "continue": "Continue",
+    "you_got": "You got",
+    "got_sign_up_reward": "You got a sign-up reward",
+    "tap_to_open": "Tap to open"
 }

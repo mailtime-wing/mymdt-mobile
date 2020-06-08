@@ -1,7 +1,7 @@
 const theme = {
   colors: {
     primary: ['#0363EF', '#0036C5'],
-    secondary: ['#B5E8EE', '#21CEDB', '#3DB4C8'],
+    secondary: ['#B5E8EE', '#21CEDB', '#00BACE'],
     blue: ['rgba(3, 99, 239, 0.1)'],
     error: [
       'rgba(216, 16, 16, 0.1)',
