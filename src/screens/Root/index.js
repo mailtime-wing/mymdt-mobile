@@ -19,6 +19,7 @@ import WelcomeScreen from '@/screens/WelcomeScreen';
 import SignUpRewardScreen from '@/screens/SignUpRewardScreen';
 import HomeStack from '@/screens/HomeStack';
 import ModalStack from '@/screens/ModalStack';
+import ProfileStack from '@/screens/ProfileStack';
 
 import BackButton from '@/components/BackButton';
 
@@ -58,13 +59,14 @@ const setupScreens = [
 
 const authScreens = [
   {name: 'home', component: HomeStack},
-  {name: 'ModalStack', component: ModalStack},
+  {name: 'modal', component: ModalStack},
+  {name: 'profile', component: ProfileStack},
 ];
 
-const backScreen = ['sign_in', 'welcome', 'offer_select'];
+const backScreen = ['sign_in', 'welcome', 'offer_select', 'profile'];
 
 const Root = () => {
-  const {authToken, setupStatus} = useContext(AuthContext);
+  const {authToken, accountSetupReward, setupStatus} = useContext(AuthContext);
 
   const excludeScreenNames = [];
   if (setupStatus?.isProfileCompleted) {
@@ -82,9 +84,10 @@ const Root = () => {
     excludeScreenNames.push('bind_email');
   }
   if (
-    setupStatus?.isDataSourceBound &&
-    setupStatus?.isCashbackCurrencyCodeSet &&
-    setupStatus?.isBasicOfferSet
+    (setupStatus?.isDataSourceBound &&
+      setupStatus?.isCashbackCurrencyCodeSet &&
+      setupStatus?.isBasicOfferSet) ||
+    !accountSetupReward // hide these screen to perform skip when no accountSetupReward
   ) {
     excludeScreenNames.push('account_setup_done');
     excludeScreenNames.push('sign_up_reward');

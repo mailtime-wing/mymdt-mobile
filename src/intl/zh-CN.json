@@ -5,11 +5,12 @@
     "greetings": "您好, {name}",
 
     "browse": "发现",
-    "browse_details": "限时活动 / 任务 / 分享",
-    "bonus": "任务",
-    "wallet": "钱包",
-    "redeem": "奖赏",
-    "redeem_details": "充值卡 / 特别会员福利",
+    "browse_details": "限时活动 / 任务 / 分享",
+    "bonus": "任务",
+    "point": "钱包",
+    "redeem": "奖赏",
+    "profile": "Profile",
+    "redeem_details": "充值卡 / 特别会员福利",
 
     "offers_selected": "{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",

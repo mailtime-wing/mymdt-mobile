@@ -5,7 +5,7 @@ import {AccountIcon, Container, AccountContainer, RemainMDT} from './style';
 const AccountBar = ({navigation}) => (
   <Container>
     <AccountContainer>
-      <TouchableOpacity onPress={() => navigation.navigate('modal')}>
+      <TouchableOpacity onPress={() => navigation.navigate('profile')}>
         <AccountIcon source={require('@/assets/zt-mask.jpg')} />
       </TouchableOpacity>
       <RemainMDT>6,543 MDT</RemainMDT>

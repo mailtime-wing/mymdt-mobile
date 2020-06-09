@@ -12,12 +12,12 @@ const Container = styled.View`
   background-color: ${props => props.theme.colors.white.normal};
 `;
 
-const WalletScreen = () => (
-  <TabPage title={<FormattedMessage id="wallet" />}>
+const PointScreen = () => (
+  <TabPage title={<FormattedMessage id="point" />}>
     <Container>
-      <Text>This is Wallet Page</Text>
+      <Text>This is Point Page</Text>
     </Container>
   </TabPage>
 );
 
-export default WalletScreen;
+export default PointScreen;
