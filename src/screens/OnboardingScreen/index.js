@@ -9,6 +9,7 @@ import {
   Details,
   SwiperContainer,
   MarginContainer,
+  ScrollContainer,
   styles,
 } from './style';
 import ThemeButton from '@/components/ThemeButton';
@@ -22,8 +23,8 @@ const wp = percentage => {
   return Math.round(value);
 };
 
-const slideWidth = wp(75);
-const itemHorizontalMargin = wp(2);
+const slideWidth = wp(100);
+const itemHorizontalMargin = wp(0);
 
 const sliderWidth = viewportWidth;
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
@@ -91,22 +92,24 @@ const CardSection = () => {
 };
 
 const OnboardingScreen = ({navigation}) => (
-  <Container>
-    <CardSection />
-    <ButtonContainer>
-      <ThemeButton
-        onPress={() => navigation.navigate('sign_in', {isSignUp: true})}>
-        <FormattedMessage id="join_rewardme" defaultMessage="JOIN REWARDME" />
-      </ThemeButton>
-      <MarginContainer />
-      <ThemeButton
-        reverse
-        small
-        onPress={() => navigation.navigate('sign_in', {isSignUp: false})}>
-        <FormattedMessage id="sign_in" defaultMessage="Sign In" />
-      </ThemeButton>
-    </ButtonContainer>
-  </Container>
+  <ScrollContainer>
+    <Container>
+      <CardSection />
+      <ButtonContainer>
+        <ThemeButton
+          onPress={() => navigation.navigate('sign_in', {isSignUp: true})}>
+          <FormattedMessage id="join_rewardme" defaultMessage="JOIN REWARDME" />
+        </ThemeButton>
+        <MarginContainer />
+        <ThemeButton
+          reverse
+          small
+          onPress={() => navigation.navigate('sign_in', {isSignUp: false})}>
+          <FormattedMessage id="sign_in" defaultMessage="Sign In" />
+        </ThemeButton>
+      </ButtonContainer>
+    </Container>
+  </ScrollContainer>
 );
 
 export default OnboardingScreen;

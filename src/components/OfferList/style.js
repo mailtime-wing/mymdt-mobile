@@ -9,8 +9,7 @@ export const OffersContainer = styled.View`
 `;
 
 export const OfferContainer = styled.TouchableOpacity`
-  width: auto;
-  max-width: 50%;
+  width: 48%;
   justify-content: center;
   align-items: center;
   margin-bottom: 16px;
@@ -60,4 +59,5 @@ export const OfferDiscount = styled(Text)`
   font-size: 12px;
   line-height: 18px;
   color: ${props => props.theme.colors.black.superLight};
+  text-align: center;
 `;

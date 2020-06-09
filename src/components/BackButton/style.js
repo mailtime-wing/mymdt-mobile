@@ -8,6 +8,7 @@ export const ButtonContainer = styled.TouchableOpacity`
   height: auto;
   border: 1px solid ${props => props.theme.colors.secondary.light};
   border-radius: 24px;
+  background: ${props => props.theme.colors.white.normal};
 `;
 
 export const Container = styled.View`

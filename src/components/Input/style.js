@@ -11,8 +11,7 @@ export const TextInput = styled.TextInput`
 
 export const TextInputContainer = styled.View`
   border-radius: 8px;
-  border: 2px solid;
-  border-color: transparent;
+  border: 2px solid transparent;
   margin: 4px 0;
   background-color: ${props => props.theme.colors.black.extremeLight};
   ${props =>
@@ -20,11 +19,11 @@ export const TextInputContainer = styled.View`
     `background-color: ${props.theme.colors.error.superLight}`};
   ${props =>
     props.isFocus &&
-    `border-color: ${props.theme.colors.secondary.normal}; 
+    `border: 2px solid ${props.theme.colors.secondary.normal}; 
     background-color: ${props.theme.colors.blue.light}`};
   ${props =>
     props.readOnly &&
-    `border-color: transparent; 
+    `border: 2px solid transparent; 
     background-color: transparent`};
 `;
 
@@ -40,6 +39,7 @@ export const Label = styled(Text)`
   line-height: 15px;
   letter-spacing: 1px;
   font-weight: bold;
+  width: 150%;
 `;
 
 export const Remark = styled(Text)`

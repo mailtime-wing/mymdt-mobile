@@ -25,13 +25,13 @@ const IntroductionScreen = ({navigation}) => {
         <ButtonsContainer>
           <ThemeButton
             reverseBorder
-            width="auto"
+            width="38%"
             onPress={() => navigation.navigate('notification_permission')}>
             <FormattedMessage id="skip" defaultMessage="Skip" />
           </ThemeButton>
           <ThemeButton
             reverse
-            width="auto"
+            width="58%"
             onPress={() => navigation.navigate('bind_email')}>
             <FormattedMessage
               id="bind_email_accounts"

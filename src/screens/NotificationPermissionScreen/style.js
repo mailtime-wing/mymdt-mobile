@@ -3,8 +3,13 @@ import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
-  padding: 80px 30px 0 30px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
 `;
+
+export const ScrollContainer = styled.ScrollView``;
 
 export const Title = styled(TitleText)`
   font-size: 36px;
