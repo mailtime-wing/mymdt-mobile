@@ -1,8 +1,13 @@
 import React, {useState, useContext, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {IntlContext} from '@/context/Intl';
-import {useQuery} from '@apollo/react-hooks';
-import {GET_BASIC_OFFER_API} from '@/api/data';
+import {AuthContext} from '@/context/auth';
+import {useQuery, useMutation} from '@apollo/react-hooks';
+import {
+  GET_BASIC_OFFER_API,
+  GET_USER_MEMBERSHIP_API,
+  UPDATE_BASIC_OFFER_API,
+} from '@/api/data';
 import {
   ScrollContainer,
   Container,
@@ -19,16 +24,26 @@ import OfferList from '@/components/OfferList';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
-let numberOfOffer = 2;
-
 const OfferSelectScreen = ({navigation}) => {
   const [selectedOffers, setSelectedOffers] = useState([]);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [isErrorFromOfferList, setIsErrorFromOfferList] = useState(false);
   const {localeEnum} = useContext(IntlContext);
-  const {loading, error, data} = useQuery(GET_BASIC_OFFER_API, {
+  const {authToken} = useContext(AuthContext);
+  const basicOfferApiData = useQuery(GET_BASIC_OFFER_API, {
     variables: {locale: localeEnum},
   });
+  const userMembershipApiData = useQuery(GET_USER_MEMBERSHIP_API, {
+    context: {
+      headers: {
+        authorization: authToken ? `Bearer ${authToken}` : '',
+      },
+    },
+  });
+  const [updateBasicOfferRequest] = useMutation(UPDATE_BASIC_OFFER_API);
+  const numberOfOffer =
+    userMembershipApiData.data &&
+    userMembershipApiData.data.userProfile.membership.brandsNumAllowed;
 
   const formatOfferString = () => {
     const lastOfferIndex = selectedOffers.length - 1;
@@ -47,7 +62,7 @@ const OfferSelectScreen = ({navigation}) => {
 
   const handlePopupState = state => {
     if (state === 'OK') {
-      navigation.navigate('introduction');
+      handleSubmitBasicOffer();
     }
     setShowConfirmPopup(false);
   };
@@ -60,11 +75,29 @@ const OfferSelectScreen = ({navigation}) => {
     setIsErrorFromOfferList(isError);
   }, []);
 
-  if (loading) {
+  const handleSubmitBasicOffer = async () => {
+    try {
+      await updateBasicOfferRequest({
+        variables: {
+          ids: selectedOffers.map(selectedOffer => selectedOffer.id),
+        },
+        context: {
+          headers: {
+            authorization: authToken ? `Bearer ${authToken}` : '',
+          },
+        },
+      });
+      navigation.navigate('introduction');
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  if (basicOfferApiData.loading || userMembershipApiData.loading) {
     return <LoadingSpinner />;
   }
 
-  if (error) {
+  if (basicOfferApiData.error || userMembershipApiData.error) {
     return (
       <PopupModal
         title="Error"
@@ -102,7 +135,9 @@ const OfferSelectScreen = ({navigation}) => {
             />
           </Details>
           <OfferList
-            offerList={data && data.basicOffers}
+            offerList={
+              basicOfferApiData.data && basicOfferApiData.data.basicOffers
+            }
             selectedOffers={selectedOffers}
             setSelectedOffers={setSelectedOffers}
             offersLimit={numberOfOffer}
