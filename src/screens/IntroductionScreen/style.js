@@ -23,7 +23,7 @@ export const BackgroundImage = styled.Image`
 export const Title = styled(TitleText)`
   font-size: 24px;
   line-height: 29px;
-  font-weight: ${Platform.OS === 'ios' && 'bold'};
+  ${Platform.OS === 'ios' && 'font-weight: bold;'}
   color: ${props => props.theme.colors.white.normal};
   text-align: center;
   margin-bottom: 24px;

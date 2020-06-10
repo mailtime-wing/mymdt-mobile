@@ -7,7 +7,7 @@ export const Title = styled(TitleText)`
   color: ${props => props.theme.colors.black.normal};
   font-size: 24px;
   line-height: 29px;
-  font-weight: ${Platform.OS === 'ios' && 'bold'};
+  ${Platform.OS === 'ios' && 'font-weight: bold;'}
 `;
 
 export const Detail = styled(Text)`

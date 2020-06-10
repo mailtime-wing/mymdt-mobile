@@ -34,7 +34,7 @@ export const Header = styled(TitleText)`
   line-height: 29px;
   margin-bottom: 10px;
   text-align: center;
-  font-weight: ${Platform.OS === 'ios' && 'bold'};
+  ${Platform.OS === 'ios' && 'font-weight: bold;'}
 `;
 
 export const Details = styled(Text)`

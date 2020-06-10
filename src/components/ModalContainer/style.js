@@ -21,5 +21,5 @@ export const Title = styled(TitleText)`
   line-height: 34px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: ${Platform.OS === 'ios' && 'bold'};
+  ${Platform.OS === 'ios' && 'font-weight: bold;'}
 `;
