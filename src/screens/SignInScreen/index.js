@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useReducer} from 'react';
+import React, {useContext, useEffect, useReducer, useState} from 'react';
 import {View, Text, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import CarrierInfo from 'react-native-carrier-info';
 import {AuthContext} from '@/context/auth';
@@ -199,8 +199,94 @@ const SigninScreen = ({route, navigation}) => {
   const {isSignUp} = route.params;
   const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken} = useContext(AuthContext);
-  const [loginRequest, {error}] = useMutation(LOGIN_API);
+  const [loginRequest] = useMutation(LOGIN_API);
   const [registerRequest] = useMutation(REGISTER_API);
+  const [clientError, setClientError] = useState(null);
+  const [isClientError, setIsClientError] = useState(false);
+
+  const handleClientLoginError = e => {
+    const errorCodes = ['100', '202', '203'];
+    switch (errorCodes.find(code => e.includes(code))) {
+      case errorCodes[0]:
+        setClientError(
+          <FormattedMessage
+            id="login_error_code_100"
+            defaultMessage="System Error, Please try again later."
+          />,
+        );
+        break;
+      case errorCodes[1]:
+        setClientError(
+          <FormattedMessage
+            id="login_error_code_202"
+            defaultMessage="Verification Code invalid."
+          />,
+        );
+        break;
+      case errorCodes[2]:
+        setClientError(
+          <FormattedMessage
+            id="login_error_code_203"
+            defaultMessage="Verification Code invalid."
+          />,
+        );
+        break;
+      default:
+        setClientError(
+          <FormattedMessage
+            id="login_error_code_100"
+            defaultMessage="System Error, Please try again later."
+          />,
+        );
+        break;
+    }
+  };
+
+  const handleClientRegisterError = e => {
+    const errorCodes = ['100', '201', '202', '203'];
+    switch (errorCodes.find(code => e.includes(code))) {
+      case errorCodes[0]:
+        setClientError(
+          <FormattedMessage
+            id="register_error_code_100"
+            defaultMessage="System Error, Please try again later."
+          />,
+        );
+        break;
+      case errorCodes[1]:
+        setClientError(
+          <FormattedMessage
+            id="register_error_code_201"
+            defaultMessage="User already exist. Please sign in."
+          />,
+        );
+        break;
+      case errorCodes[2]:
+        setClientError(
+          <FormattedMessage
+            id="register_error_code_202"
+            defaultMessage="Verification Code invalid."
+          />,
+        );
+        break;
+      case errorCodes[3]:
+        setClientError(
+          <FormattedMessage
+            id="register_error_code_203"
+            defaultMessage="Verification Code invalid."
+          />,
+        );
+        break;
+      default:
+        setClientError(
+          <FormattedMessage
+            id="register_error_code_100"
+            defaultMessage="System Error, Please try again later."
+          />,
+        );
+        break;
+    }
+  };
 
   const handleSubmitPress = async values => {
     const completePhoneNumber = values.phonePrefix + values.phone;
@@ -220,6 +306,8 @@ const SigninScreen = ({route, navigation}) => {
         navigation.navigate('user_profile');
       } catch (e) {
         console.warn(`error on ${REGISTER}: ${e}`);
+        setIsClientError(true);
+        handleClientRegisterError(e.message);
       }
     } else {
       try {
@@ -232,6 +320,8 @@ const SigninScreen = ({route, navigation}) => {
         updateAuthToken(data.login.accessToken, data.login.refreshToken);
       } catch (e) {
         console.warn(`error on ${LOGIN}: ${e}`);
+        setIsClientError(true);
+        handleClientLoginError(e.message);
       }
     }
   };
@@ -295,8 +385,17 @@ const SigninScreen = ({route, navigation}) => {
               />
             </LoginAndAgree>
           )}
-          {error && (
-            <PopupModal title="Login or Register fail" detail={error.message} />
+          {isClientError && (
+            <PopupModal
+              title={
+                <FormattedMessage
+                  id="login_or_register_fail"
+                  defaultMessage="Login or register fail"
+                />
+              }
+              detail={clientError}
+              callback={() => setIsClientError(false)}
+            />
           )}
         </Container>
       </ScrollContainer>

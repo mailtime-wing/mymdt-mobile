@@ -107,5 +107,14 @@
     "continue": "Continue",
     "you_got": "You got",
     "got_sign_up_reward": "You got a sign-up reward",
-    "tap_to_open": "Tap to open"
+    "tap_to_open": "Tap to open",
+
+    "login_or_register_fail":  "登入或注册失败",
+    "login_error_code_100": "系统错误，请稍后再试。",
+    "login_error_code_202": "验证码错误。",
+    "login_error_code_203": "验证码错误。",
+    "register_error_code_100": "系统错误，请稍后再试。",
+    "register_error_code_201": "用户已存在，请登入。",
+    "register_error_code_202": "验证码错误。",
+    "register_error_code_203": "验证码错误。"
 }
