@@ -13,7 +13,7 @@ import {
 
 const Offer = ({name, logo, cashbackRate, selected, error, ...props}) => (
   <OfferContainer selected={selected} error={error} {...props}>
-    <OfferIcon source={logo} />
+    <OfferIcon source={{uri: logo}} />
     <OfferName>{name}</OfferName>
     <OfferDiscount>Up to {cashbackRate}% cashback</OfferDiscount>
     {!props.disabled && (
