@@ -22,6 +22,7 @@ export const ButtonText = styled(Text)`
   letter-spacing: 1.5px;
   color: ${props => props.theme.colors.secondary.normal};
   font-weight: bold;
+  text-transform: uppercase;
 `;
 
 export const BackArrowIcon = styled.Image`
