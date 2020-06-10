@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.1.0)
   - boost-for-react-native (1.63.0)
   - BVLinearGradient (2.5.6):
     - React
@@ -69,6 +70,15 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - Moya (14.0.0):
+    - Moya/Core (= 14.0.0)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - MTAuth (0.1.4):
+    - Moya (= 14.0)
+    - ObjectMapper
+    - SVProgressHUD
+  - ObjectMapper (3.5.2)
   - OpenSSL-Universal (1.0.2.19):
     - OpenSSL-Universal/Static (= 1.0.2.19)
   - OpenSSL-Universal/Static (1.0.2.19)
@@ -241,6 +251,9 @@ PODS:
     - React
   - react-native-image-picker (2.3.1):
     - React
+  - react-native-mailtime-sdk (0.1.0):
+    - MTAuth
+    - React
   - react-native-safe-area-context (0.7.3):
     - React
   - React-RCTActionSheet (0.62.2):
@@ -316,6 +329,7 @@ PODS:
     - React
   - RNScreens (2.7.0):
     - React
+  - SVProgressHUD (2.2.5)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -360,6 +374,7 @@ DEPENDENCIES:
   - react-native-carrier-info (from `../node_modules/react-native-carrier-info`)
   - react-native-config (from `../node_modules/react-native-config`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-mailtime-sdk (from `../node_modules/react-native-mailtime-sdk`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -382,6 +397,13 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
+  https://bitbucket.org/mailtimeapp/podspecs.git:
+    - MTAuth
+  https://github.com/CocoaPods/Specs:
+    - Alamofire
+    - Moya
+    - ObjectMapper
+    - SVProgressHUD
   trunk:
     - boost-for-react-native
     - CocoaAsyncSocket
@@ -433,6 +455,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-config"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  react-native-mailtime-sdk:
+    :path: "../node_modules/react-native-mailtime-sdk"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-RCTActionSheet:
@@ -473,6 +497,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
@@ -489,6 +514,9 @@ SPEC CHECKSUMS:
   FlipperKit: 6dc9b8f4ef60d9e5ded7f0264db299c91f18832e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  MTAuth: ac8eec26e9f2972e0d2cb651fb3584145cef6485
+  ObjectMapper: b53ae947d370bf89423e86be7d4e2d2b2a8d3f40
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
@@ -502,6 +530,7 @@ SPEC CHECKSUMS:
   react-native-carrier-info: f94c990c4e27017648738430afc01acf367e102f
   react-native-config: f2c2ae45625a068c35681a16b9bfb1ca58b0adc7
   react-native-image-picker: 6a850c41f57f0848d918c2a77aedd7aa272ffa30
+  react-native-mailtime-sdk: 7453fca4ca4c8b7e152ba3d05c2ff61ae611836a
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0
@@ -520,9 +549,10 @@ SPEC CHECKSUMS:
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 887a8c388d26b44bb632f5f407647d5562725a43
+PODFILE CHECKSUM: b023b77c926028f56eaa2df59c6e801b52e40ed9
 
 COCOAPODS: 1.9.1

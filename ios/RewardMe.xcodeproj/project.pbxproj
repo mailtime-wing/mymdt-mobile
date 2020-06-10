@@ -69,10 +69,10 @@
 		2FB8A1F0D6EBBABD4EDF80E7 /* Pods-RewardMe-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RewardMe-tvOS/Pods-RewardMe-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		451F26ADE4D5CC0D7B244A84 /* libPods-RewardMe-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D4F94DD244013BA2C05F355 /* Pods-RewardMeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMeTests.release.xcconfig"; path = "Target Support Files/Pods-RewardMeTests/Pods-RewardMeTests.release.xcconfig"; sourceTree = "<group>"; };
-		6126AC2793E14B81BF6CEEC2 /* Neo Sans Pro Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro Light.ttf"; path = "../assets/Neo Sans Pro Light.ttf"; sourceTree = "<group>"; };
-		643C86058E4F49CD8FC93D99 /* Inter-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.ttf"; path = "../assets/Inter-Bold.ttf"; sourceTree = "<group>"; };
+		6126AC2793E14B81BF6CEEC2 /* Neo Sans Pro Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro Light.ttf"; path = "../assets/Neo Sans Pro Light.ttf"; sourceTree = "<group>"; };
+		643C86058E4F49CD8FC93D99 /* Inter-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.ttf"; path = "../assets/Inter-Bold.ttf"; sourceTree = "<group>"; };
 		6668AC177D9D64DC5B43B235 /* libPods-RewardMe-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6813BCE1474E4C088624D20C /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../assets/Inter-Regular.ttf"; sourceTree = "<group>"; };
+		6813BCE1474E4C088624D20C /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../assets/Inter-Regular.ttf"; sourceTree = "<group>"; };
 		8FBAC2F8935E97E31D967D09 /* libPods-RewardMe-RewardMeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe-RewardMeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01BD7A605BF1672FD9444E1 /* Pods-RewardMe-RewardMeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-RewardMeTests.release.xcconfig"; path = "Target Support Files/Pods-RewardMe-RewardMeTests/Pods-RewardMe-RewardMeTests.release.xcconfig"; sourceTree = "<group>"; };
 		AD3657E23D936590108E99FB /* Pods-RewardMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe.release.xcconfig"; path = "Target Support Files/Pods-RewardMe/Pods-RewardMe.release.xcconfig"; sourceTree = "<group>"; };
@@ -85,10 +85,10 @@
 		B606DD9D246017E700CAA2E6 /* libswiftObjectiveC.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftObjectiveC.tbd; path = usr/lib/swift/libswiftObjectiveC.tbd; sourceTree = SDKROOT; };
 		B606DD9F246017EF00CAA2E6 /* libswiftCoreFoundation.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftCoreFoundation.tbd; path = usr/lib/swift/libswiftCoreFoundation.tbd; sourceTree = SDKROOT; };
 		C042B59D362A20C45C42D814 /* libPods-RewardMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C40715FBF7E249CAB0C7B691 /* Neo Sans Pro Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro Medium.ttf"; path = "../assets/Neo Sans Pro Medium.ttf"; sourceTree = "<group>"; };
-		C577C665E7714C92AC9E724C /* Neo Sans Pro.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro.ttf"; path = "../assets/Neo Sans Pro.ttf"; sourceTree = "<group>"; };
+		C40715FBF7E249CAB0C7B691 /* Neo Sans Pro Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro Medium.ttf"; path = "../assets/Neo Sans Pro Medium.ttf"; sourceTree = "<group>"; };
+		C577C665E7714C92AC9E724C /* Neo Sans Pro.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro.ttf"; path = "../assets/Neo Sans Pro.ttf"; sourceTree = "<group>"; };
 		CD6E0A087DA561327AA6E405 /* Pods-RewardMe-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-tvOS.release.xcconfig"; path = "Target Support Files/Pods-RewardMe-tvOS/Pods-RewardMe-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		D4356FC964D94E4FBB247D38 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../assets/Inter-Medium.ttf"; sourceTree = "<group>"; };
+		D4356FC964D94E4FBB247D38 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../assets/Inter-Medium.ttf"; sourceTree = "<group>"; };
 		DFF8B1989C502EC318371828 /* Pods-RewardMe-RewardMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-RewardMeTests.debug.xcconfig"; path = "Target Support Files/Pods-RewardMe-RewardMeTests/Pods-RewardMe-RewardMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -243,7 +243,6 @@
 				643C86058E4F49CD8FC93D99 /* Inter-Bold.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +256,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				77720674812A11478992E017 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -278,6 +278,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				6B672E6DE94EAC7381625580 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -491,6 +492,70 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6B672E6DE94EAC7381625580 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RewardMe/Pods-RewardMe-resources.sh",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/Localizable.strings",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAccountLoginCustomConfigViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAccountPasswordInputViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAuthCodeWebViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTCircleButtonView.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTMailMasterProviderWebViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/qqlogin.html",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Localizable.strings",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAccountLoginCustomConfigViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAccountPasswordInputViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAuthCodeWebViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTCircleButtonView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTMailMasterProviderWebViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qqlogin.html",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RewardMe/Pods-RewardMe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77720674812A11478992E017 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RewardMe-RewardMeTests/Pods-RewardMe-RewardMeTests-resources.sh",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/Localizable.strings",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAccountLoginCustomConfigViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAccountPasswordInputViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAuthCodeWebViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTCircleButtonView.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTMailMasterProviderWebViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/qqlogin.html",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Localizable.strings",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAccountLoginCustomConfigViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAccountPasswordInputViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAuthCodeWebViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTCircleButtonView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTMailMasterProviderWebViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qqlogin.html",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RewardMe-RewardMeTests/Pods-RewardMe-RewardMeTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C2CF1F9A2E38AD70E9435673 /* [CP] Check Pods Manifest.lock */ = {
