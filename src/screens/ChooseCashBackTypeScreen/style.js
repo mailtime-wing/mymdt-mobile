@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import {Platform} from 'react-native';
 import TitleText from '@/components/TitleText';
 import AppText from '@/components/AppText';
 
@@ -18,7 +19,7 @@ export const Title = styled(TitleText)`
   color: ${props => props.theme.colors.white.normal};
   line-height: 36px;
   letter-spacing: 1px;
-  font-weight: 500;
+  ${Platform.OS === 'ios' && 'font-weight: bold;'}
   margin-bottom: 24px;
   text-transform: uppercase;
 `;
@@ -51,7 +52,7 @@ export const BoxLevel = styled(AppText)`
 export const BoxTitle = styled(TitleText)`
   font-size: 24px;
   line-height: 29px;
-  font-weight: 500;
+  ${Platform.OS === 'ios' && 'font-weight: bold;'}
   margin-bottom: 16px;
   text-align: center;
 `;

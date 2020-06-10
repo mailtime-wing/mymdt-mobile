@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import {Platform} from 'react-native';
 import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
@@ -14,7 +15,7 @@ export const Title = styled(TitleText)`
   color: ${props => props.theme.colors.secondary.normal};
   line-height: 36px;
   letter-spacing: 1px;
-  font-weight: 500;
+  ${Platform.OS === 'ios' && 'font-weight: bold;'}
   margin-bottom: 29px;
   text-transform: uppercase;
   padding-left: 24px;
