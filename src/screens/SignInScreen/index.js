@@ -198,7 +198,7 @@ const SignInForm = ({isSignUp}) => {
 const SigninScreen = ({route, navigation}) => {
   const {isSignUp} = route.params;
   const {localeEnum} = useContext(IntlContext);
-  const {updateAuthToken, updateUserAccountData} = useContext(AuthContext);
+  const {updateAuthToken} = useContext(AuthContext);
   const [loginRequest, {error}] = useMutation(LOGIN_API);
   const [registerRequest] = useMutation(REGISTER_API);
 
