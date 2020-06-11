@@ -1,8 +1,7 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {FormattedMessage} from 'react-intl';
-import {AuthContext} from '@/context/auth';
 
 import ThemeButton from '@/components/ThemeButton';
 
@@ -17,7 +16,6 @@ import {
 } from './style';
 
 const NotificationPermissionScreen = ({navigation}) => {
-  const {isSignupRewardGot} = useContext(AuthContext);
   const requestNotificationPermission = () => {
     if (Platform.OS === 'ios') {
       PushNotificationIOS.requestPermissions();
@@ -42,11 +40,7 @@ const NotificationPermissionScreen = ({navigation}) => {
       });
     }
 
-    if (isSignupRewardGot) {
-      navigation.navigate('home');
-    } else {
-      navigation.navigate('account_setup_done');
-    }
+    navigation.navigate('account_setup_done');
   };
 
   return (

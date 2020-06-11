@@ -267,14 +267,8 @@ const GiftBoxOpened = ({rewardAmount}) => {
 
 const SignUpRewardScreen = ({navigation}) => {
   const [isOpened, setIsOpened] = useState(false);
-  const {updateUserAccountData} = useContext(AuthContext);
 
   const handleContinuePress = async () => {
-    try {
-      updateUserAccountData({isSignupRewardGot: true});
-    } catch (e) {
-      console.error(e);
-    }
     navigation.navigate('home');
   };
 

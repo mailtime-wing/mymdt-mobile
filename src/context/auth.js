@@ -23,7 +23,6 @@ const initialState = {
   authToken: null,
   isEmailBound: null,
   isProfileCompleted: null,
-  isSignupRewardGot: null,
   refreshToken: null,
   isRefreshTokenExpired: null,
   cashBackType: REWARD_POINT, // discuss before to set reward point as default cash back type
@@ -45,7 +44,6 @@ const reducer = (state, action) => {
         isLoading: false,
         isEmailBound: action.payload.isEmailBound,
         isProfileCompleted: action.payload.isProfileCompleted,
-        isSignupRewardGot: action.payload.isSignupRewardGot,
       };
     }
     case UPDATE_REFRESH_TOKEN_EXPIRED: {
@@ -123,11 +121,9 @@ export const AuthProvider = ({children}) => {
     const getUserAccountData = async () => {
       let isEmailBound;
       let isProfileCompleted;
-      let isSignupRewardGot;
       try {
         isEmailBound = await AsyncStorage.getItem('isEmailBound');
         isProfileCompleted = await AsyncStorage.getItem('isProfileCompleted');
-        isSignupRewardGot = await AsyncStorage.getItem('isSignupRewardGot');
       } catch (error) {
         console.error('error getting account data');
       }
@@ -136,7 +132,6 @@ export const AuthProvider = ({children}) => {
         payload: {
           isEmailBound: JSON.parse(isEmailBound),
           isProfileCompleted: JSON.parse(isProfileCompleted),
-          isSignupRewardGot: JSON.parse(isSignupRewardGot),
         },
       });
     };
@@ -166,11 +161,7 @@ export const AuthProvider = ({children}) => {
           },
         });
       },
-      updateUserAccountData: async ({
-        isEmailBound,
-        isProfileCompleted,
-        isSignupRewardGot,
-      }) => {
+      updateUserAccountData: async ({isEmailBound, isProfileCompleted}) => {
         try {
           isEmailBound &&
             (await AsyncStorage.setItem(
@@ -182,11 +173,6 @@ export const AuthProvider = ({children}) => {
               'isProfileCompleted',
               JSON.stringify(isProfileCompleted),
             ));
-          isSignupRewardGot &&
-            (await AsyncStorage.setItem(
-              'isSignupRewardGot',
-              JSON.stringify(isSignupRewardGot),
-            ));
         } catch (error) {
           console.error('error saving user data', error);
         }
@@ -197,9 +183,6 @@ export const AuthProvider = ({children}) => {
             isProfileCompleted: isProfileCompleted
               ? isProfileCompleted
               : state.isProfileCompleted,
-            isSignupRewardGot: isSignupRewardGot
-              ? isSignupRewardGot
-              : state.isSignupRewardGot,
           },
         });
       },
@@ -220,7 +203,6 @@ export const AuthProvider = ({children}) => {
           await AsyncStorage.removeItem('refreshToken');
           await AsyncStorage.removeItem('isEmailBound');
           await AsyncStorage.removeItem('isProfileCompleted');
-          await AsyncStorage.removeItem('isSignupRewardGot');
         } catch (error) {
           console.error('error when sign out');
         }
@@ -230,7 +212,6 @@ export const AuthProvider = ({children}) => {
       refreshToken: state.refreshToken,
       isEmailBound: state.isEmailBound,
       isProfileCompleted: state.isProfileCompleted,
-      isSignupRewardGot: state.isSignupRewardGot,
       cashBackType: state.cashBackType,
     }),
     [
@@ -238,7 +219,6 @@ export const AuthProvider = ({children}) => {
       state.refreshToken,
       state.isEmailBound,
       state.isProfileCompleted,
-      state.isSignupRewardGot,
       state.cashBackType,
     ],
   );
