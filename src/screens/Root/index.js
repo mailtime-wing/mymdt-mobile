@@ -30,14 +30,33 @@ const screens = [
   {name: 'loading', component: LoadingScreen},
 ];
 
-const authScreens = [
+const setupScreens = [
+  // 1st step: update user profile
+  {name: 'user_profile', component: UserProfileScreen},
+  // 2nd step: choose cashback type
   {name: 'choose_cash_back_type', component: ChooseCashBackTypeScreen},
+  // 3rd step: select offers
   {name: 'welcome', component: WelcomeScreen},
   {name: 'offer_select', component: OfferSelectScreen},
-  {name: 'introduction', component: IntroductionScreen},
+  // 4rd step: bind email (which is skippable)
+  {
+    name: 'introduction',
+    component: IntroductionScreen,
+    skip: 'notification_permission',
+  },
+  {
+    name: 'bind_email',
+    component: BindEmailScreen,
+    skip: 'notification_permission',
+  },
+  // 5th step: turn on notification
   {name: 'notification_permission', component: NotificationPermissionScreen},
+  // 6th step: setup done and gain reward
   {name: 'account_setup_done', component: AccountSetupDoneScreen},
   {name: 'sign_up_reward', component: SignUpRewardScreen},
+];
+
+const authScreens = [
   {name: 'home', component: HomeStack},
   {name: 'ModalStack', component: ModalStack},
 ];
@@ -46,6 +65,18 @@ const backScreen = ['sign_in', 'welcome', 'offer_select'];
 
 const Root = () => {
   const {authToken, isEmailBound, isProfileCompleted} = useContext(AuthContext);
+  const excludeScreenNames = [];
+  if (isProfileCompleted) {
+    excludeScreenNames.push('user_profile');
+  }
+  if (isEmailBound) {
+    excludeScreenNames.push('introduction');
+    excludeScreenNames.push('bind_email');
+  }
+  // TODO: cater also isCashbackCurrencyCodeSet and isBasicOfferSet
+  const filteredSetupScreens = setupScreens.filter(
+    screen => !excludeScreenNames.includes(screen.name),
+  );
 
   return (
     <>
@@ -71,31 +102,31 @@ const Root = () => {
               ))}
             </Stack.Navigator>
           ) : (
+            // TODO: hide setupScreens so that it cannot be back from authScreens
             <Stack.Navigator>
-              {!isProfileCompleted && (
-                <Stack.Screen
-                  name="user_profile"
-                  component={UserProfileScreen}
-                  options={{
-                    headerTransparent: true,
-                    cardStyle: styles.card,
-                    headerTitleStyle: styles.headerTitle,
-                    gestureEnabled: false,
-                  }}
-                />
-              )}
-              {!isEmailBound && (
-                <Stack.Screen
-                  name="bind_email"
-                  component={BindEmailScreen}
-                  options={{
-                    headerTransparent: true,
-                    cardStyle: styles.card,
-                    headerTitleStyle: styles.headerTitle,
-                    gestureEnabled: false,
-                  }}
-                />
-              )}
+              {filteredSetupScreens.map((screen, i) => {
+                const {name, component, ...params} = screen;
+                return (
+                  <Stack.Screen
+                    key={name}
+                    name={name}
+                    component={component}
+                    options={{
+                      headerTransparent: true,
+                      headerTitleStyle: styles.headerTitle,
+                      cardStyle: styles.card,
+                      headerStyle: styles.header,
+                      headerLeft: () =>
+                        backScreen.includes(name) ? <BackButton /> : null,
+                      gestureEnabled: false,
+                    }}
+                    initialParams={{
+                      next: filteredSetupScreens[i + 1]?.name,
+                      ...params,
+                    }}
+                  />
+                );
+              })}
               {authScreens.map(screen => (
                 <Stack.Screen
                   name={screen.name}

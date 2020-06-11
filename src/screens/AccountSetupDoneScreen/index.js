@@ -3,11 +3,11 @@ import {FormattedMessage} from 'react-intl';
 
 import {Container, Title, Detail, ScrollContainer} from './style';
 
-const AccountSetupDoneScreen = ({navigation}) => {
+const AccountSetupDoneScreen = ({route, navigation}) => {
   return (
     <Container
       activeOpacity={1}
-      onPress={() => navigation.navigate('sign_up_reward')}>
+      onPress={() => navigation.navigate(route.params.next)}>
       <ScrollContainer>
         <Title>
           <FormattedMessage id="success" defaultMessage="SUCCESS" />
