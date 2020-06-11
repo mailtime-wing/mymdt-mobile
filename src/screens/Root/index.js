@@ -70,8 +70,10 @@ const Root = () => {
     excludeScreenNames.push('user_profile');
   }
   if (isEmailBound) {
+    excludeScreenNames.push('introduction');
     excludeScreenNames.push('bind_email');
   }
+  // TODO: cater also isCashbackCurrencyCodeSet and isBasicOfferSet
   const filteredSetupScreens = setupScreens.filter(
     screen => !excludeScreenNames.includes(screen.name),
   );
@@ -100,7 +102,7 @@ const Root = () => {
               ))}
             </Stack.Navigator>
           ) : (
-            // hide setupScreens so that it cannot be back from authScreens
+            // TODO: hide setupScreens so that it cannot be back from authScreens
             <Stack.Navigator>
               {filteredSetupScreens.map((screen, i) => {
                 const {name, component, ...params} = screen;
