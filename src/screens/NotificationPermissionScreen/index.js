@@ -15,7 +15,7 @@ import {
   UpArrow,
 } from './style';
 
-const NotificationPermissionScreen = ({navigation}) => {
+const NotificationPermissionScreen = ({route, navigation}) => {
   const requestNotificationPermission = () => {
     if (Platform.OS === 'ios') {
       PushNotificationIOS.requestPermissions();
@@ -40,7 +40,7 @@ const NotificationPermissionScreen = ({navigation}) => {
       });
     }
 
-    navigation.navigate('account_setup_done');
+    navigation.navigate(route.params.next);
   };
 
   return (

@@ -17,7 +17,7 @@ import {
 import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
 
-const BindEmailScreen = ({navigation}) => {
+const BindEmailScreen = ({route, navigation}) => {
   const [emails, setEmails] = useState(['', '']);
   const [currentIndex, setCurrentIndex] = useState(0);
   // const [bindEmailsRequest, { loading, error }] = useMutation(BIND_EMAIL_ACCOUNTS);
@@ -47,11 +47,11 @@ const BindEmailScreen = ({navigation}) => {
   };
 
   const handleFinishPress = () => {
-    navigation.navigate('notification_permission');
+    navigation.navigate(route.params.skip);
   };
 
   const handleSkipPress = () => {
-    navigation.navigate('notification_permission');
+    navigation.navigate(route.params.next);
   };
 
   return (

@@ -12,7 +12,7 @@ import {
 
 import ThemeButton from '@/components/ThemeButton';
 
-const IntroductionScreen = ({navigation}) => {
+const IntroductionScreen = ({route, navigation}) => {
   return (
     <ScrollContainer>
       <Container>
@@ -26,13 +26,13 @@ const IntroductionScreen = ({navigation}) => {
           <ThemeButton
             reverseBorder
             width="38%"
-            onPress={() => navigation.navigate('notification_permission')}>
+            onPress={() => navigation.navigate(route.params.skip)}>
             <FormattedMessage id="skip" defaultMessage="Skip" />
           </ThemeButton>
           <ThemeButton
             reverse
             width="58%"
-            onPress={() => navigation.navigate('bind_email')}>
+            onPress={() => navigation.navigate(route.params.next)}>
             <FormattedMessage
               id="bind_email_accounts"
               defaultMessage="Bind Emails"

@@ -51,7 +51,7 @@ const CashBackType = ({cashback, handleChoosePress}) => (
   </BoxContainer>
 );
 
-const ChooseCashBackTypeScreen = ({navigation}) => {
+const ChooseCashBackTypeScreen = ({route, navigation}) => {
   const [updateUserCashbackCurrencyCodeRequest] = useMutation(
     UPDATE_USER_CASHBACK_CURRENCY_CODE_API,
   );
@@ -73,7 +73,7 @@ const ChooseCashBackTypeScreen = ({navigation}) => {
     } catch (e) {
       console.warn(`error on saving cashback Type ${cashbackType}`, e);
     }
-    navigation.navigate('welcome');
+    navigation.navigate(route.params.next);
   };
 
   return (

@@ -24,7 +24,7 @@ import OfferList from '@/components/OfferList';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
-const OfferSelectScreen = ({navigation}) => {
+const OfferSelectScreen = ({route, navigation}) => {
   const [selectedOffers, setSelectedOffers] = useState([]);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [isErrorFromOfferList, setIsErrorFromOfferList] = useState(false);
@@ -87,7 +87,7 @@ const OfferSelectScreen = ({navigation}) => {
           },
         },
       });
-      navigation.navigate('introduction');
+      navigation.navigate(route.params.next);
     } catch (e) {
       console.error(e);
     }

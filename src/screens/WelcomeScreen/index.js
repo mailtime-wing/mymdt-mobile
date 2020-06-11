@@ -15,7 +15,7 @@ import {
 
 import ThemeButton from '@/components/ThemeButton';
 
-const WelcomeScreen = ({navigation}) => {
+const WelcomeScreen = ({route, navigation}) => {
   return (
     <ScrollContainer>
       <Container>
@@ -34,7 +34,7 @@ const WelcomeScreen = ({navigation}) => {
           </AutoScrolling>
         </AppIconGridImageContainer>
         <PaddingContainer>
-          <ThemeButton onPress={() => navigation.navigate('offer_select')}>
+          <ThemeButton onPress={() => navigation.navigate(route.params.next)}>
             <FormattedMessage id="next" defaultMessage="Next" />
           </ThemeButton>
         </PaddingContainer>
