@@ -112,7 +112,7 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
 const UserProfileScreen = ({navigation}) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [updateUserProfileRequest] = useMutation(UPDATE_USER_PROFILE_API);
-  const {authToken, updateUserAccountData} = useContext(AuthContext);
+  const {authToken} = useContext(AuthContext);
 
   const handleDatePickerPress = () => {
     setShowDatePicker(!showDatePicker);
@@ -138,7 +138,6 @@ const UserProfileScreen = ({navigation}) => {
           },
         },
       });
-      updateUserAccountData({isProfileCompleted: true});
       navigation.navigate('choose_cash_back_type');
     } catch (e) {
       console.error(e);

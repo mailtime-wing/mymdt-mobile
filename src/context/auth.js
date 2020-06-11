@@ -15,17 +15,19 @@ const UPDATE_REFRESH_TOKEN_EXPIRED = 'updateRefreshTokenExpired';
 const UPDATE_CASH_BACK_TYPE = 'updateCashBackType';
 const SIGN_OUT = 'signOut';
 
-export const REWARD_POINT = 'Reward Point';
-export const MDT = 'Measurable Data Token';
+export const MEASURABLE_REWARD_POINT = 'MRP';
+export const MEASURABLE_DATA_TOKEN = 'MDT';
 
 const initialState = {
   isLoading: true,
   authToken: null,
   isEmailBound: null,
   isProfileCompleted: null,
+  isCashbackCurrencyCodeSet: null,
+  isBasicOfferSet: null,
   refreshToken: null,
   isRefreshTokenExpired: null,
-  cashBackType: REWARD_POINT, // discuss before to set reward point as default cash back type
+  cashBackType: MEASURABLE_REWARD_POINT, // discuss before to set reward point as default cash back type
 };
 
 const reducer = (state, action) => {
@@ -44,6 +46,8 @@ const reducer = (state, action) => {
         isLoading: false,
         isEmailBound: action.payload.isEmailBound,
         isProfileCompleted: action.payload.isProfileCompleted,
+        isCashbackCurrencyCodeSet: action.payload.isCashbackCurrencyCodeSet,
+        isBasicOfferSet: action.payload.isBasicOfferSet,
       };
     }
     case UPDATE_REFRESH_TOKEN_EXPIRED: {
@@ -64,6 +68,8 @@ const reducer = (state, action) => {
         authToken: null,
         isEmailBound: null,
         isProfileCompleted: null,
+        isCashbackCurrencyCodeSet: null,
+        isBasicOfferSet: null,
         refreshToken: null,
         isRefreshTokenExpired: null,
       };
@@ -121,9 +127,15 @@ export const AuthProvider = ({children}) => {
     const getUserAccountData = async () => {
       let isEmailBound;
       let isProfileCompleted;
+      let isCashbackCurrencyCodeSet;
+      let isBasicOfferSet;
       try {
         isEmailBound = await AsyncStorage.getItem('isEmailBound');
         isProfileCompleted = await AsyncStorage.getItem('isProfileCompleted');
+        isCashbackCurrencyCodeSet = await AsyncStorage.getItem(
+          'isCashbackCurrencyCodeSet',
+        );
+        isBasicOfferSet = await AsyncStorage.getItem('isBasicOfferSet');
       } catch (error) {
         console.error('error getting account data');
       }
@@ -132,6 +144,8 @@ export const AuthProvider = ({children}) => {
         payload: {
           isEmailBound: JSON.parse(isEmailBound),
           isProfileCompleted: JSON.parse(isProfileCompleted),
+          isCashbackCurrencyCodeSet: JSON.parse(isCashbackCurrencyCodeSet),
+          isBasicOfferSet: JSON.parse(isBasicOfferSet),
         },
       });
     };
@@ -161,7 +175,12 @@ export const AuthProvider = ({children}) => {
           },
         });
       },
-      updateUserAccountData: async ({isEmailBound, isProfileCompleted}) => {
+      updateUserAccountData: async ({
+        isEmailBound,
+        isProfileCompleted,
+        isCashbackCurrencyCodeSet,
+        isBasicOfferSet,
+      }) => {
         try {
           isEmailBound &&
             (await AsyncStorage.setItem(
@@ -173,16 +192,26 @@ export const AuthProvider = ({children}) => {
               'isProfileCompleted',
               JSON.stringify(isProfileCompleted),
             ));
+          isCashbackCurrencyCodeSet &&
+            (await AsyncStorage.setItem(
+              'isCashbackCurrencyCodeSet',
+              JSON.stringify(isCashbackCurrencyCodeSet),
+            ));
+          isBasicOfferSet &&
+            (await AsyncStorage.setItem(
+              'isBasicOfferSet',
+              JSON.stringify(isBasicOfferSet),
+            ));
         } catch (error) {
           console.error('error saving user data', error);
         }
         dispatch({
           type: UPDATE_USER_ACCCOUNT_DATA,
           payload: {
-            isEmailBound: isEmailBound ? isEmailBound : state.isEmailBound,
-            isProfileCompleted: isProfileCompleted
-              ? isProfileCompleted
-              : state.isProfileCompleted,
+            isEmailBound: isEmailBound,
+            isProfileCompleted: isProfileCompleted,
+            isCashbackCurrencyCodeSet: isCashbackCurrencyCodeSet,
+            isBasicOfferSet: isBasicOfferSet,
           },
         });
       },
@@ -203,6 +232,8 @@ export const AuthProvider = ({children}) => {
           await AsyncStorage.removeItem('refreshToken');
           await AsyncStorage.removeItem('isEmailBound');
           await AsyncStorage.removeItem('isProfileCompleted');
+          await AsyncStorage.removeItem('isCashbackCurrencyCodeSet');
+          await AsyncStorage.removeItem('isBasicOfferSet');
         } catch (error) {
           console.error('error when sign out');
         }
@@ -212,15 +243,11 @@ export const AuthProvider = ({children}) => {
       refreshToken: state.refreshToken,
       isEmailBound: state.isEmailBound,
       isProfileCompleted: state.isProfileCompleted,
+      isCashbackCurrencyCodeSet: state.isCashbackCurrencyCodeSet,
+      isBasicOfferSet: state.isBasicOfferSet,
       cashBackType: state.cashBackType,
     }),
-    [
-      state.authToken,
-      state.refreshToken,
-      state.isEmailBound,
-      state.isProfileCompleted,
-      state.cashBackType,
-    ],
+    [state],
   );
 
   if (state.isRefreshTokenExpired) {

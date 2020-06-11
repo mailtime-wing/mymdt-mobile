@@ -19,7 +19,7 @@ import {
   styles,
   ScrollContainer,
 } from './style';
-import {AuthContext, REWARD_POINT} from '@/context/auth';
+import {AuthContext, MEASURABLE_REWARD_POINT} from '@/context/auth';
 
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import ThemeButton from '@/components/ThemeButton';
@@ -200,7 +200,7 @@ const GiftBoxReady = ({setIsOpened}) => {
 const GiftBoxOpened = ({rewardAmount}) => {
   const {cashBackType} = useContext(AuthContext);
   const coinIconSource =
-    cashBackType === REWARD_POINT
+    cashBackType === MEASURABLE_REWARD_POINT
       ? require('@/assets/coin.png')
       : require('@/assets/mdt_coin.png');
 

@@ -67,3 +67,9 @@ export const GET_USER_MEMBERSHIP_API = gql`
     }
   }
 `;
+
+export const UPDATE_USER_CASHBACK_CURRENCY_CODE_API = gql`
+  mutation UpdateUserCashbackCurrencyCode($code: CurrencyCode!) {
+    updateUserCashbackCurrencyCode(code: $code)
+  }
+`;
