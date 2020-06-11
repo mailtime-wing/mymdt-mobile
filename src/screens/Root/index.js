@@ -2,6 +2,8 @@ import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer as Container} from '@react-navigation/native';
 import {AuthContext} from '@/context/auth';
+import {useQuery} from '@apollo/react-hooks';
+import {GET_USER_SETUP_STATUS_API} from '@/api/data';
 
 import {UpperSafeAreaView, LowerSafeAreaView, styles} from './style';
 
@@ -64,30 +66,34 @@ const authScreens = [
 const backScreen = ['sign_in', 'welcome', 'offer_select'];
 
 const Root = () => {
-  const {
-    authToken,
-    isEmailBound,
-    isProfileCompleted,
-    isCashbackCurrencyCodeSet,
-    isBasicOfferSet,
-  } = useContext(AuthContext);
+  const {authToken} = useContext(AuthContext);
+  const userSetupStatusApiData = useQuery(GET_USER_SETUP_STATUS_API, {
+    context: {
+      headers: {
+        authorization: authToken ? `Bearer ${authToken}` : '',
+      },
+    },
+  });
+
+  const setupStatus = userSetupStatusApiData?.data?.userProfile?.setupStatus;
+
   const excludeScreenNames = [];
-  if (isProfileCompleted) {
+  if (setupStatus?.isProfileCompleted) {
     excludeScreenNames.push('user_profile');
   }
-  if (isCashbackCurrencyCodeSet) {
+  if (setupStatus?.isCashbackCurrencyCodeSet) {
     excludeScreenNames.push('choose_cash_back_type');
   }
-  if (isBasicOfferSet) {
+  if (setupStatus?.isBasicOfferSet) {
     excludeScreenNames.push('welcome');
     excludeScreenNames.push('offer_select');
   }
-  if (isEmailBound) {
+  if (setupStatus?.isEmailBound) {
     excludeScreenNames.push('introduction');
     excludeScreenNames.push('bind_email');
   }
 
-  if (isEmailBound && isCashbackCurrencyCodeSet && isBasicOfferSet) {
+  if (setupStatus?.isEmailBound && setupStatus?.isCashbackCurrencyCodeSet && setupStatus?.isBasicOfferSet) {
     excludeScreenNames.push('account_setup_done');
     excludeScreenNames.push('sign_up_reward');
   }
