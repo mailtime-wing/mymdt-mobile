@@ -50,7 +50,7 @@ const setupScreens = [
     skip: 'notification_permission',
   },
   // 5th step: turn on notification
-  {name: 'notification_permission', component: NotificationPermissionScreen},
+  {name: 'notification_permission', component: NotificationPermissionScreen, skip: 'home'},
   // 6th step: setup done and gain reward
   {name: 'account_setup_done', component: AccountSetupDoneScreen},
   {name: 'sign_up_reward', component: SignUpRewardScreen},
