@@ -1,10 +1,14 @@
 import styled from '@emotion/native';
 import {Platform} from 'react-native';
-import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
-export const Container = styled.View`
-  padding: 340px 24px 0px 24px;
+export const ScrollContainer = styled.ScrollView``;
+
+export const Container = styled.TouchableOpacity`
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 50%;
+  flex: 1;
 `;
 
 export const Title = styled(TitleText)`
@@ -18,10 +22,10 @@ export const Title = styled(TitleText)`
   text-align: center;
 `;
 
-export const Detail = styled(Text)`
+export const Detail = styled(TitleText)`
   font-size: 18px;
+  color: ${props => props.theme.colors.secondary.normal};
   text-align: center;
-  margin-bottom: 242px;
 `;
 
 export const MarginContainer = styled.View`

@@ -39,7 +39,8 @@ const NotificationPermissionScreen = ({navigation}) => {
         }
       });
     }
-    navigation.navigate('home');
+
+    navigation.navigate('account_setup_done');
   };
 
   return (

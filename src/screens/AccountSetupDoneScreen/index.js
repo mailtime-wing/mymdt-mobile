@@ -1,40 +1,24 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import ThemeButton from '@/components/ThemeButton';
-
-import {Container, Title, Detail, MarginContainer} from './style';
+import {Container, Title, Detail, ScrollContainer} from './style';
 
 const AccountSetupDoneScreen = ({navigation}) => {
-  const handleBindEmailsPress = () => {
-    navigation.navigate('bind_email');
-  };
-
-  const handleSkipPress = () => {
-    navigation.navigate('notification_permission');
-  };
-
   return (
-    <Container>
-      <Title>
-        <FormattedMessage id="success" defaultMessage="SUCCESS" />
-      </Title>
-      <Detail>
-        <FormattedMessage
-          id="let_your_cash_back"
-          defaultMessage="Let’s bind your emails and start cash back"
-        />
-      </Detail>
-      <ThemeButton onPress={handleBindEmailsPress}>
-        <FormattedMessage
-          id="bind_email_accounts"
-          defaultMessage="Bind emails"
-        />
-      </ThemeButton>
-      <MarginContainer />
-      <ThemeButton small reverse onPress={handleSkipPress}>
-        <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
-      </ThemeButton>
+    <Container
+      activeOpacity={1}
+      onPress={() => navigation.navigate('sign_up_reward')}>
+      <ScrollContainer>
+        <Title>
+          <FormattedMessage id="success" defaultMessage="SUCCESS" />
+        </Title>
+        <Detail>
+          <FormattedMessage
+            id="account_setup_done"
+            defaultMessage="Your account has been set up"
+          />
+        </Detail>
+      </ScrollContainer>
     </Container>
   );
 };

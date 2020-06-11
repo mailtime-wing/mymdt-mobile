@@ -16,6 +16,7 @@ import AccountSetupDoneScreen from '@/screens/AccountSetupDoneScreen';
 import ChooseCashBackTypeScreen from '@/screens/ChooseCashBackTypeScreen';
 import IntroductionScreen from '@/screens/IntroductionScreen';
 import WelcomeScreen from '@/screens/WelcomeScreen';
+import SignUpRewardScreen from '@/screens/SignUpRewardScreen';
 import HomeStack from '@/screens/HomeStack';
 import ModalStack from '@/screens/ModalStack';
 
@@ -36,6 +37,7 @@ const authScreens = [
   {name: 'introduction', component: IntroductionScreen},
   {name: 'notification_permission', component: NotificationPermissionScreen},
   {name: 'account_setup_done', component: AccountSetupDoneScreen},
+  {name: 'sign_up_reward', component: SignUpRewardScreen},
   {name: 'home', component: HomeStack},
   {name: 'ModalStack', component: ModalStack},
 ];
@@ -63,6 +65,7 @@ const Root = () => {
                     headerStyle: styles.header,
                     headerLeft: () =>
                       backScreen.includes(screen.name) ? <BackButton /> : null,
+                    gestureEnabled: false,
                   }}
                 />
               ))}
@@ -77,6 +80,7 @@ const Root = () => {
                     headerTransparent: true,
                     cardStyle: styles.card,
                     headerTitleStyle: styles.headerTitle,
+                    gestureEnabled: false,
                   }}
                 />
               )}
@@ -88,6 +92,7 @@ const Root = () => {
                     headerTransparent: true,
                     cardStyle: styles.card,
                     headerTitleStyle: styles.headerTitle,
+                    gestureEnabled: false,
                   }}
                 />
               )}
@@ -102,6 +107,7 @@ const Root = () => {
                     headerStyle: styles.header,
                     headerLeft: () =>
                       backScreen.includes(screen.name) ? <BackButton /> : null,
+                    gestureEnabled: false,
                   }}
                 />
               ))}

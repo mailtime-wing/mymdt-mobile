@@ -28,6 +28,8 @@ export const LOGIN_API = gql`
       }
       isEmailBound
       isProfileCompleted
+      isCashbackCurrencyCodeSet
+      isBasicOfferSet
     }
   }
 `;

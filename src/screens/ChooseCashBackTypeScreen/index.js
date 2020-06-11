@@ -10,7 +10,13 @@ import {
   BoxDetail,
 } from './style';
 import {FormattedMessage} from 'react-intl';
-import {AuthContext, REWARD_POINT, MDT} from '@/context/auth';
+import {
+  AuthContext,
+  MEASURABLE_REWARD_POINT,
+  MEASURABLE_DATA_TOKEN,
+} from '@/context/auth';
+import {useMutation} from '@apollo/react-hooks';
+import {UPDATE_USER_CASHBACK_CURRENCY_CODE_API} from '@/api/data';
 
 import ThemeButton from '@/components/ThemeButton';
 
@@ -20,14 +26,14 @@ const cashbackTypeList = [
     title: 'Return in RewardPoint',
     detail:
       'The convert rate is more stable and you can redeem gift cards in app.',
-    type: REWARD_POINT,
+    type: MEASURABLE_REWARD_POINT,
   },
   {
     level: 'Advanced',
     title: 'Return in Measurable Data Token',
     detail:
       'MDT is a cryptocurrency that its value may vary from time to time.',
-    type: MDT,
+    type: MEASURABLE_DATA_TOKEN,
   },
 ];
 
@@ -46,11 +52,24 @@ const CashBackType = ({cashback, handleChoosePress}) => (
 );
 
 const ChooseCashBackTypeScreen = ({navigation}) => {
-  const {updateCashBackType} = useContext(AuthContext);
+  const [updateUserCashbackCurrencyCodeRequest] = useMutation(
+    UPDATE_USER_CASHBACK_CURRENCY_CODE_API,
+  );
+  const {authToken, updateCashBackType} = useContext(AuthContext);
 
   const handleChoosePress = async cashbackType => {
     try {
-      await updateCashBackType(cashbackType);
+      await updateUserCashbackCurrencyCodeRequest({
+        variables: {
+          code: cashbackType,
+        },
+        context: {
+          headers: {
+            authorization: authToken ? `Bearer ${authToken}` : '',
+          },
+        },
+      });
+      updateCashBackType(cashbackType);
     } catch (e) {
       console.warn(`error on saving cashback Type ${cashbackType}`, e);
     }

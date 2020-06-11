@@ -236,6 +236,8 @@ const SigninScreen = ({route, navigation}) => {
         updateUserAccountData({
           isEmailBound: data.login.isEmailBound,
           isProfileCompleted: data.login.isProfileCompleted,
+          isCashbackCurrencyCodeSet: data.login.isCashbackCurrencyCodeSet,
+          isBasicOfferSet: data.login.isBasicOfferSet,
         });
       } catch (e) {
         console.warn(`error on ${LOGIN}: ${e}`);
