@@ -64,16 +64,23 @@ const authScreens = [
 const backScreen = ['sign_in', 'welcome', 'offer_select'];
 
 const Root = () => {
-  const {authToken, isEmailBound, isProfileCompleted} = useContext(AuthContext);
+  const {authToken, isEmailBound, isProfileCompleted, isCashbackCurrencyCodeSet, isBasicOfferSet} = useContext(AuthContext);
   const excludeScreenNames = [];
   if (isProfileCompleted) {
     excludeScreenNames.push('user_profile');
+  }
+  if (isCashbackCurrencyCodeSet) {
+    excludeScreenNames.push('choose_cash_back_type');
+  }
+  if (isBasicOfferSet) {
+    excludeScreenNames.push('welcome');
+    excludeScreenNames.push('offer_select');
   }
   if (isEmailBound) {
     excludeScreenNames.push('introduction');
     excludeScreenNames.push('bind_email');
   }
-  // TODO: cater also isCashbackCurrencyCodeSet and isBasicOfferSet
+
   const filteredSetupScreens = setupScreens.filter(
     screen => !excludeScreenNames.includes(screen.name),
   );
@@ -102,7 +109,6 @@ const Root = () => {
               ))}
             </Stack.Navigator>
           ) : (
-            // TODO: hide setupScreens so that it cannot be back from authScreens
             <Stack.Navigator>
               {filteredSetupScreens.map((screen, i) => {
                 const {name, component, ...params} = screen;
