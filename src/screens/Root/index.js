@@ -109,6 +109,7 @@ const Root = () => {
               ))}
             </Stack.Navigator>
           ) : (
+            // TODO: hide setupScreens so that it cannot be back from authScreens
             <Stack.Navigator>
               {filteredSetupScreens.map((screen, i) => {
                 const {name, component, ...params} = screen;
