@@ -86,3 +86,32 @@ export const UPDATE_USER_CASHBACK_CURRENCY_CODE_API = gql`
     updateUserCashbackCurrencyCode(code: $code)
   }
 `;
+
+export const GET_USER_REWARDS_API = gql`
+  query {
+    userProfile {
+      rewards {
+        id
+        name
+        description
+        value
+        claimable
+        claimed_time
+        callback_url
+        user_id
+        status
+        task_id
+      }
+    }
+  }
+`;
+
+export const GET_APP_CONFIG_API = gql`
+  query {
+    appConfig {
+      accountSetupTaskID
+      todayCheckinTaskID
+      inviteFriendTaskID
+    }
+  }
+`;

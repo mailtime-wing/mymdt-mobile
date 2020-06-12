@@ -64,7 +64,7 @@ const authScreens = [
 const backScreen = ['sign_in', 'welcome', 'offer_select'];
 
 const Root = () => {
-  const {authToken, setupStatus} = useContext(AuthContext);
+  const {authToken, accountSetupReward, setupStatus} = useContext(AuthContext);
 
   const excludeScreenNames = [];
   if (setupStatus?.isProfileCompleted) {
@@ -81,11 +81,11 @@ const Root = () => {
     excludeScreenNames.push('introduction');
     excludeScreenNames.push('bind_email');
   }
-
   if (
-    setupStatus?.isDataSourceBound &&
-    setupStatus?.isCashbackCurrencyCodeSet &&
-    setupStatus?.isBasicOfferSet
+    (setupStatus?.isDataSourceBound &&
+      setupStatus?.isCashbackCurrencyCodeSet &&
+      setupStatus?.isBasicOfferSet) ||
+    !accountSetupReward // hide these screen to perform skip when no accountSetupReward
   ) {
     excludeScreenNames.push('account_setup_done');
     excludeScreenNames.push('sign_up_reward');

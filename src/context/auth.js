@@ -3,7 +3,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import jwt_decode from 'jwt-decode';
 import {REFRESH_TOKEN_API} from '@/api/auth';
 import {useMutation, useQuery} from '@apollo/react-hooks';
-import {GET_USER_SETUP_STATUS_API} from '@/api/data';
+import {
+  GET_USER_SETUP_STATUS_API,
+  GET_USER_REWARDS_API,
+  GET_APP_CONFIG_API,
+} from '@/api/data';
 
 import SplashScreen from '@/screens/SplashScreen';
 import PopupModal from '@/components/PopupModal';
@@ -64,16 +68,36 @@ const reducer = (state, action) => {
 export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
-  const {data: userSetupStatusApiData, loading} = useQuery(
+  const skip = !state.authToken;
+  const context = {
+    headers: {
+      authorization: state.authToken ? `Bearer ${state.authToken}` : '',
+    },
+  };
+
+  const {data: userSetupStatusApiData, loading: loadingSetupStatus} = useQuery(
     GET_USER_SETUP_STATUS_API,
     {
-      skip: !state.authToken,
-      context: {
-        headers: {
-          authorization: state.authToken ? `Bearer ${state.authToken}` : '',
-        },
-      },
+      skip: skip,
+      context: context,
     },
+  );
+
+  const {data: appConfigApiData, loading: loadingAppConfig} = useQuery(
+    GET_APP_CONFIG_API,
+  );
+
+  const {data: userRewardsApiData, loading: loadingUserRewards} = useQuery(
+    GET_USER_REWARDS_API,
+    {
+      skip: skip,
+      context: context,
+    },
+  );
+
+  const accountSetupReward = userRewardsApiData?.userProfile?.rewards?.find(
+    reward =>
+      reward.task_id === appConfigApiData?.appConfig?.accountSetupTaskID,
   );
 
   const setupStatus = userSetupStatusApiData?.userProfile?.setupStatus;
@@ -165,8 +189,9 @@ export const AuthProvider = ({children}) => {
       refreshToken: state.refreshToken,
       cashBackType: state.cashBackType,
       setupStatus: setupStatus,
+      accountSetupReward: accountSetupReward,
     }),
-    [state, setupStatus],
+    [state, setupStatus, accountSetupReward],
   );
 
   if (state.isRefreshTokenExpired) {
@@ -179,7 +204,12 @@ export const AuthProvider = ({children}) => {
     );
   }
 
-  if (state.isLoading || loading) {
+  if (
+    state.isLoading ||
+    loadingSetupStatus ||
+    loadingAppConfig ||
+    loadingUserRewards
+  ) {
     return <SplashScreen />;
   }
 

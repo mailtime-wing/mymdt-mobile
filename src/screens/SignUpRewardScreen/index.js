@@ -265,8 +265,10 @@ const GiftBoxOpened = ({rewardAmount}) => {
   );
 };
 
-const SignUpRewardScreen = ({navigation}) => {
+const SignUpRewardScreen = ({route, navigation}) => {
   const [isOpened, setIsOpened] = useState(false);
+  const {accountSetupReward} = useContext(AuthContext);
+  const rewardAmount = accountSetupReward?.value || 0;
 
   const handleContinuePress = async () => {
     navigation.navigate('home');
@@ -277,7 +279,7 @@ const SignUpRewardScreen = ({navigation}) => {
       <ScrollContainer>
         <Container>
           {isOpened ? (
-            <GiftBoxOpened rewardAmount={800} />
+            <GiftBoxOpened rewardAmount={rewardAmount} />
           ) : (
             <GiftBoxReady setIsOpened={setIsOpened} />
           )}
