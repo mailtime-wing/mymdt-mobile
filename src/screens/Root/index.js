@@ -88,12 +88,16 @@ const Root = () => {
     excludeScreenNames.push('welcome');
     excludeScreenNames.push('offer_select');
   }
-  if (setupStatus?.isEmailBound) {
+  if (setupStatus?.isDataSourceBound) {
     excludeScreenNames.push('introduction');
     excludeScreenNames.push('bind_email');
   }
 
-  if (setupStatus?.isEmailBound && setupStatus?.isCashbackCurrencyCodeSet && setupStatus?.isBasicOfferSet) {
+  if (
+    setupStatus?.isDataSourceBound &&
+    setupStatus?.isCashbackCurrencyCodeSet &&
+    setupStatus?.isBasicOfferSet
+  ) {
     excludeScreenNames.push('account_setup_done');
     excludeScreenNames.push('sign_up_reward');
   }

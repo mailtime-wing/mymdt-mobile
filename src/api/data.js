@@ -72,7 +72,7 @@ export const GET_USER_SETUP_STATUS_API = gql`
   query {
     userProfile {
       setupStatus {
-        isEmailBound
+        isDataSourceBound
         isProfileCompleted
         isCashbackCurrencyCodeSet
         isBasicOfferSet
