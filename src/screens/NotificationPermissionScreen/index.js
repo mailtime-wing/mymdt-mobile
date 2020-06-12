@@ -1,8 +1,7 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {FormattedMessage} from 'react-intl';
-import {AuthContext} from '@/context/auth';
 
 import ThemeButton from '@/components/ThemeButton';
 
@@ -17,11 +16,6 @@ import {
 } from './style';
 
 const NotificationPermissionScreen = ({route, navigation}) => {
-  const {
-    isProfileCompleted,
-    isCashbackCurrencyCodeSet,
-    isBasicOfferSet,
-  } = useContext(AuthContext);
   const requestNotificationPermission = () => {
     if (Platform.OS === 'ios') {
       PushNotificationIOS.requestPermissions();
@@ -46,11 +40,7 @@ const NotificationPermissionScreen = ({route, navigation}) => {
       });
     }
 
-    if (isProfileCompleted && isCashbackCurrencyCodeSet && isBasicOfferSet) {
-      navigation.navigate(route.params.skip);
-    } else {
-      navigation.navigate(route.params.next);
-    }
+    navigation.navigate(route.params.next);
   };
 
   return (

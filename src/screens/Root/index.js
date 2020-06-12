@@ -50,7 +50,7 @@ const setupScreens = [
     skip: 'notification_permission',
   },
   // 5th step: turn on notification
-  {name: 'notification_permission', component: NotificationPermissionScreen, skip: 'home'},
+  {name: 'notification_permission', component: NotificationPermissionScreen},
   // 6th step: setup done and gain reward
   {name: 'account_setup_done', component: AccountSetupDoneScreen},
   {name: 'sign_up_reward', component: SignUpRewardScreen},
@@ -64,7 +64,13 @@ const authScreens = [
 const backScreen = ['sign_in', 'welcome', 'offer_select'];
 
 const Root = () => {
-  const {authToken, isEmailBound, isProfileCompleted, isCashbackCurrencyCodeSet, isBasicOfferSet} = useContext(AuthContext);
+  const {
+    authToken,
+    isEmailBound,
+    isProfileCompleted,
+    isCashbackCurrencyCodeSet,
+    isBasicOfferSet,
+  } = useContext(AuthContext);
   const excludeScreenNames = [];
   if (isProfileCompleted) {
     excludeScreenNames.push('user_profile');
@@ -79,6 +85,11 @@ const Root = () => {
   if (isEmailBound) {
     excludeScreenNames.push('introduction');
     excludeScreenNames.push('bind_email');
+  }
+
+  if (isEmailBound && isCashbackCurrencyCodeSet && isBasicOfferSet) {
+    excludeScreenNames.push('account_setup_done');
+    excludeScreenNames.push('sign_up_reward');
   }
 
   const filteredSetupScreens = setupScreens.filter(
@@ -128,7 +139,9 @@ const Root = () => {
                       gestureEnabled: false,
                     }}
                     initialParams={{
-                      next: filteredSetupScreens[i + 1]?.name,
+                      next: filteredSetupScreens[i + 1]
+                        ? filteredSetupScreens[i + 1].name
+                        : 'home',
                       ...params,
                     }}
                   />
