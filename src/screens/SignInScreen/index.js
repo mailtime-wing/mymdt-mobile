@@ -71,6 +71,7 @@ const SignInForm = ({isSignUp}) => {
     handleChange,
     handleSubmit,
     errors,
+    touched,
     isValid,
   } = useFormikContext();
 
@@ -130,7 +131,7 @@ const SignInForm = ({isSignUp}) => {
             onChangeText={handleChange('phonePrefix')}
             value={values.phonePrefix}
             label={<FormattedMessage id="telephone" />}
-            error={errors.phonePrefix}
+            error={touched.phonePrefix && errors.phonePrefix}
           />
         </PhonePrefixContainer>
         <PhoneContainer>
@@ -138,7 +139,7 @@ const SignInForm = ({isSignUp}) => {
             keyboardType="phone-pad"
             onChangeText={handleChange('phone')}
             value={values.phone}
-            error={errors.phone}
+            error={touched.phone && errors.phone}
           />
         </PhoneContainer>
       </PhoneSectionContainer>
@@ -154,7 +155,7 @@ const SignInForm = ({isSignUp}) => {
                 defaultMessage="VERIFICATION CODE"
               />
             }
-            error={errors.verificationCode}
+            error={touched.verificationCode && errors.verificationCode}
           />
         </VerificationCodeContainer>
         <ThemeButton
