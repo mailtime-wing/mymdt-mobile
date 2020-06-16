@@ -1,7 +1,13 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {Alert} from 'react-native';
-import {SdkContext} from '@/context/mailtime-sdk';
 import {FormattedMessage} from 'react-intl';
+import {AuthContext} from '@/context/auth';
+import {useMutation, useQuery} from '@apollo/react-hooks';
+
+import {
+  GET_USER_EMAIL_ACCOUNTS_API,
+  UNBIND_EMAIL_ACCOUNTS_API,
+} from '@/api/data';
+
 import {
   Container,
   EmailContainer,
@@ -16,39 +22,90 @@ import {
 import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
 import PopupModal from '@/components/PopupModal';
+import LoadingSpinner from '@/components/LoadingSpinner';
+
+import useMailTimeSdk from '@/hooks/useMailTimeSdk';
 
 const BindEmailScreen = ({route, navigation}) => {
-  const [emails, setEmails] = useState(['', '']);
+  const [emails, setEmails] = useState([
+    {id: null, emailAddress: ''},
+    {id: null, emailAddress: ''},
+  ]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const {loginMailTimeSdk, sdkState, initiateSdk} = useContext(SdkContext);
-  let loginSuccess = !!sdkState.sdkToken && sdkState.isBindingSuccess === true;
+  const [unbindSuccess, setUnbindSuccess] = useState(false);
+  const [clientError, setClientError] = useState('');
+  const {
+    login,
+    initiateSdk,
+    loading: sdkLoading,
+    error: sdkError,
+    loginSuccess,
+    loginFail,
+    loginCancel,
+  } = useMailTimeSdk();
+  console.log('sdkError', sdkError);
+  const {authToken} = useContext(AuthContext);
+  const apiContext = {
+    context: {
+      headers: {
+        authorization: authToken ? `Bearer ${authToken}` : '',
+      },
+    },
+  };
+  const userEmailAccountsData = useQuery(
+    GET_USER_EMAIL_ACCOUNTS_API,
+    apiContext,
+  );
+  const [unbindEmailRequest, {loading}] = useMutation(
+    UNBIND_EMAIL_ACCOUNTS_API,
+    apiContext,
+  );
 
   useEffect(() => {
-    if (loginSuccess) {
-      setEmails([...emails, '']);
-      setCurrentIndex(currentIndex + 1);
+    // fetch user email accounts
+    const selectedKeys = ['emailAddress', 'id'];
+    if (userEmailAccountsData.data) {
+      let emailAccounts = userEmailAccountsData.data.userProfile.emailAccounts.map(
+        emailAccount =>
+          Object.keys(emailAccount)
+            .filter(key => selectedKeys.includes(key))
+            .reduce((obj, key) => {
+              obj[key] = emailAccount[key];
+              return obj;
+            }, {}),
+      );
+      setCurrentIndex(emailAccounts.length);
+      emailAccounts.push({id: null, emailAddress: ''});
+      setEmails(emailAccounts);
     }
-  }, [currentIndex, emails, loginSuccess, sdkState.isBindingSuccess]);
+  }, [userEmailAccountsData.data]);
 
-  const handleUnbindEmailPress = index => {
-    emails.filter(email => email !== emails[index]);
-    Alert.alert(`success unbind email: ${emails[index]}`);
-    setEmails(emails.filter(email => email !== emails[index]));
-    setCurrentIndex(currentIndex - 1);
+  const handleUnbindEmailPress = async unbindEmailId => {
+    try {
+      await unbindEmailRequest({
+        variables: {
+          ids: [unbindEmailId],
+        },
+      });
+      setUnbindSuccess(true);
+      userEmailAccountsData?.refetch();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleBindEmailPress = email => {
     const regex = /[^@]+@[^\.]+\..+/;
     if (!regex.test(email)) {
-      Alert.alert('please input valid email');
+      setClientError('Please input valid email');
       return;
     }
-    loginMailTimeSdk(email);
+    login(email);
   };
 
   const handleEmailOnChange = (email, index) => {
     let newEmails = [...emails];
-    newEmails[index] = email;
+    newEmails[index] = {emailAddress: email};
     setEmails(newEmails);
   };
 
@@ -59,6 +116,15 @@ const BindEmailScreen = ({route, navigation}) => {
   const handleSkipPress = () => {
     navigation.navigate(route.params.next);
   };
+
+  const handlePopupPress = () => {
+    initiateSdk();
+    userEmailAccountsData?.refetch();
+  };
+
+  if (loading || sdkLoading || userEmailAccountsData.loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <ScrollContainer>
@@ -83,7 +149,7 @@ const BindEmailScreen = ({route, navigation}) => {
                 <Input
                   type="email"
                   onChangeText={text => handleEmailOnChange(text, index)}
-                  value={email}
+                  value={email.emailAddress}
                   editable={active}
                   readOnly={isBind}
                   label={
@@ -100,15 +166,15 @@ const BindEmailScreen = ({route, navigation}) => {
               {isBind ? (
                 <ThemeButton
                   small
-                  disabled={isNext || !email}
-                  onPress={() => handleUnbindEmailPress(index)}>
+                  disabled={isNext || !email.emailAddress}
+                  onPress={() => handleUnbindEmailPress(email.id)}>
                   <FormattedMessage id="unbind" defaultMessage="unbind" />
                 </ThemeButton>
               ) : (
                 <ThemeButton
                   small
-                  disabled={isNext || !email}
-                  onPress={() => handleBindEmailPress(email)}>
+                  disabled={isNext || !email.emailAddress}
+                  onPress={() => handleBindEmailPress(email.emailAddress)}>
                   <FormattedMessage id="login" />
                 </ThemeButton>
               )}
@@ -128,29 +194,48 @@ const BindEmailScreen = ({route, navigation}) => {
             defaultMessage="You can bind more emails later in profile."
           />
         </BindMoreLaterText>
-        {!!sdkState.isLoginCancelled && (
+        {loginCancel && (
           <PopupModal
             title="Cancelled"
             detail="Login Cancelled"
-            callback={initiateSdk}
+            callback={handlePopupPress}
           />
         )}
-        {sdkState.isLoggingIn && loginSuccess && (
+        {loginSuccess && (
           <PopupModal
             title="Success"
             detail="Login Success"
-            callback={initiateSdk}
+            callback={handlePopupPress}
           />
         )}
-        {sdkState.isLoggingIn &&
-          !sdkState.isLoginCancelled &&
-          !loginSuccess && (
-            <PopupModal
-              title="Fail"
-              detail="Login Fail"
-              callback={initiateSdk}
-            />
-          )}
+        {loginFail && (
+          <PopupModal
+            title="Fail"
+            detail="Login Fail"
+            callback={handlePopupPress}
+          />
+        )}
+        {!!sdkError && (
+          <PopupModal
+            title="Error occur"
+            detail="Please try again later"
+            callback={handlePopupPress}
+          />
+        )}
+        {unbindSuccess && (
+          <PopupModal
+            title="Success"
+            detail="Unbind Success"
+            callback={() => setUnbindSuccess(false)}
+          />
+        )}
+        {!!clientError && (
+          <PopupModal
+            title="Error"
+            detail={clientError}
+            callback={() => setClientError('')}
+          />
+        )}
       </Container>
     </ScrollContainer>
   );
