@@ -12,6 +12,7 @@ import useCountDownTimer from '@/hooks/timer';
 import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
 import PopupModal from '@/components/PopupModal';
+
 import {
   Container,
   Title,
@@ -26,6 +27,7 @@ import {
   SignUpDetail,
 } from './style';
 import countryCodeData from '@/constants/countryCode';
+import errorCodeEnum from '@/enum/errorCode';
 
 const REGISTER = 'REGISTER';
 const LOGIN = 'LOGIN';
@@ -202,77 +204,37 @@ const SigninScreen = ({route, navigation}) => {
   const [loginRequest] = useMutation(LOGIN_API);
   const [registerRequest] = useMutation(REGISTER_API);
   const [clientError, setClientError] = useState(null);
-  const [isClientError, setIsClientError] = useState(false);
 
-  const handleClientLoginError = e => {
-    const errorCodes = ['100', '202', '203'];
-    switch (errorCodes.find(code => e.includes(code))) {
-      case errorCodes[0]:
+  const handleClientError = errorCode => {
+    switch (errorCode) {
+      case errorCodeEnum['100']:
         setClientError(
           <FormattedMessage
-            id="login_error_code_100"
+            id="error_code_100"
             defaultMessage="System Error, Please try again later."
           />,
         );
         break;
-      case errorCodes[1]:
+      case errorCodeEnum['201']:
         setClientError(
           <FormattedMessage
-            id="login_error_code_202"
-            defaultMessage="Verification Code invalid."
-          />,
-        );
-        break;
-      case errorCodes[2]:
-        setClientError(
-          <FormattedMessage
-            id="login_error_code_203"
-            defaultMessage="Verification Code invalid."
-          />,
-        );
-        break;
-      default:
-        setClientError(
-          <FormattedMessage
-            id="login_error_code_100"
-            defaultMessage="System Error, Please try again later."
-          />,
-        );
-        break;
-    }
-  };
-
-  const handleClientRegisterError = e => {
-    const errorCodes = ['100', '201', '202', '203'];
-    switch (errorCodes.find(code => e.includes(code))) {
-      case errorCodes[0]:
-        setClientError(
-          <FormattedMessage
-            id="register_error_code_100"
-            defaultMessage="System Error, Please try again later."
-          />,
-        );
-        break;
-      case errorCodes[1]:
-        setClientError(
-          <FormattedMessage
-            id="register_error_code_201"
+            id="error_code_201"
             defaultMessage="User already exist. Please sign in."
           />,
         );
         break;
-      case errorCodes[2]:
+      case errorCodeEnum['202']:
         setClientError(
           <FormattedMessage
-            id="register_error_code_202"
+            id="error_code_202"
             defaultMessage="Verification Code invalid."
           />,
         );
         break;
-      case errorCodes[3]:
+      case errorCodeEnum['203']:
         setClientError(
           <FormattedMessage
-            id="register_error_code_203"
+            id="error_code_203"
             defaultMessage="Verification Code invalid."
           />,
         );
@@ -280,7 +242,7 @@ const SigninScreen = ({route, navigation}) => {
       default:
         setClientError(
           <FormattedMessage
-            id="register_error_code_100"
+            id="error_code_100"
             defaultMessage="System Error, Please try again later."
           />,
         );
@@ -305,9 +267,11 @@ const SigninScreen = ({route, navigation}) => {
         );
         navigation.navigate('user_profile');
       } catch (e) {
-        console.warn(`error on ${REGISTER}: ${e}`);
-        setIsClientError(true);
-        handleClientRegisterError(e.message);
+        const errorStr = JSON.stringify(e);
+        console.warn(`error on ${REGISTER}: ${errorStr}`);
+        const errorCode = JSON.parse(errorStr)?.graphQLErrors[0]?.extensions
+          ?.code;
+        handleClientError(errorCode);
       }
     } else {
       try {
@@ -319,9 +283,11 @@ const SigninScreen = ({route, navigation}) => {
         });
         updateAuthToken(data.login.accessToken, data.login.refreshToken);
       } catch (e) {
-        console.warn(`error on ${LOGIN}: ${e}`);
-        setIsClientError(true);
-        handleClientLoginError(e.message);
+        const errorStr = JSON.stringify(e);
+        console.warn(`error on ${LOGIN}: ${errorStr}`);
+        const errorCode = JSON.parse(errorStr)?.graphQLErrors[0]?.extensions
+          ?.code;
+        handleClientError(errorCode);
       }
     }
   };
@@ -385,7 +351,7 @@ const SigninScreen = ({route, navigation}) => {
               />
             </LoginAndAgree>
           )}
-          {isClientError && (
+          {!!clientError && (
             <PopupModal
               title={
                 <FormattedMessage
@@ -394,7 +360,7 @@ const SigninScreen = ({route, navigation}) => {
                 />
               }
               detail={clientError}
-              callback={() => setIsClientError(false)}
+              callback={() => setClientError(null)}
             />
           )}
         </Container>

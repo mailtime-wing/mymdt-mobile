@@ -110,11 +110,8 @@
     "tap_to_open": "Tap to open",
 
     "login_or_register_fail":  "Login or register fail",
-    "login_error_code_100":  "System Error, Please try again later.",
-    "login_error_code_202":  "Verification Code invalid.",
-    "login_error_code_203":  "Verification Code invalid.",
-    "register_error_code_100":  "System Error, Please try again later.",
-    "register_error_code_201":  "User already exist. Please sign in.",
-    "register_error_code_202":  "Verification Code invalid.",
-    "register_error_code_203":  "Verification Code invalid."
+    "error_code_100":  "System Error, Please try again later.",
+    "error_code_201":  "User already exist. Please sign in.",
+    "error_code_202":  "Verification Code invalid.",
+    "error_code_203":  "Verification Code invalid."
 }
