@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import SectionList from '@/components/SectionList';
@@ -14,7 +14,16 @@ import {
   ScrollContainer,
 } from './style';
 
-const MenuScreen = props => {
+import BackButton from '@/components/BackButton';
+
+const MenuScreen = (props) => {
+  console.log( props.navigation)
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      headerLeft: () => <BackButton />,
+    });
+  }, [])
+
   return (
     <ScrollContainer>
       <AccountInfoContainer>

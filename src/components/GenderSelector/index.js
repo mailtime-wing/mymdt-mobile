@@ -1,5 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
+import {FormattedMessage} from 'react-intl';
+
 import {GenderContainer, Gender, GenderText, GenderLabel} from './style';
 
 export const genderOptions = [
@@ -21,7 +23,7 @@ const GenderOption = ({label, value, setFieldValue, gender}) => {
 const GenderSelector = ({gender, setFieldValue}) => {
   return (
     <View>
-      <GenderLabel>GENDER*</GenderLabel>
+      <GenderLabel><FormattedMessage id='gender' defaultMessage='gender'/>*</GenderLabel>
       <GenderContainer>
         {genderOptions.map(g => (
           <GenderOption

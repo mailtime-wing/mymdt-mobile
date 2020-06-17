@@ -16,6 +16,16 @@ export const UPDATE_USER_PROFILE_API = gql`
   }
 `;
 
+export const UPDATE_USER_PROFILE_EDIT_API = gql`
+  mutation UpdateUserProfile(
+    $name: String!
+    $gender: String!
+    $dateOfBirth: Time!
+  ) {
+    updateUserProfile(name: $name, gender: $gender, dateOfBirth: $dateOfBirth)
+  }
+`;
+
 export const BIND_EMAIL_ACCOUNTS_API = gql`
   mutation BindEmailAccounts($email: String!, $token: String!) {
     bindEmailAccounts(data: {emailAddress: $email, token: $token}) {
@@ -129,6 +139,17 @@ export const GET_APP_CONFIG_API = gql`
       accountSetupTaskID
       todayCheckinTaskID
       inviteFriendTaskID
+    }
+  }
+`;
+
+export const GET_USER_PROFILE_API = gql`
+  query {
+    userProfile {
+      name
+      gender
+      birthday
+      phoneNumber
     }
   }
 `;
