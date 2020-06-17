@@ -27,11 +27,6 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import useMailTimeSdk from '@/hooks/useMailTimeSdk';
 
 const BindEmailScreen = ({route, navigation}) => {
-  const [emails, setEmails] = useState([
-    {id: null, emailAddress: ''},
-    {id: null, emailAddress: ''},
-  ]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [unbindSuccess, setUnbindSuccess] = useState(false);
   const [clientError, setClientError] = useState('');
   const {
@@ -43,7 +38,7 @@ const BindEmailScreen = ({route, navigation}) => {
     loginFail,
     loginCancel,
   } = useMailTimeSdk();
-  console.log('sdkError', sdkError);
+
   const {authToken} = useContext(AuthContext);
   const apiContext = {
     context: {
@@ -61,24 +56,23 @@ const BindEmailScreen = ({route, navigation}) => {
     apiContext,
   );
 
+  const currentIndex =
+    userEmailAccountsData?.data?.userProfile?.emailAccounts?.length || 0;
+
+  const emailAccounts = [
+    ...(userEmailAccountsData?.data?.userProfile.emailAccounts || []),
+    {id: null, emailAddress: ''},
+  ];
+
+  const [emails, setEmails] = useState(
+    emailAccounts || {id: null, emailAddress: ''},
+  );
+
   useEffect(() => {
-    // fetch user email accounts
-    const selectedKeys = ['emailAddress', 'id'];
-    if (userEmailAccountsData.data) {
-      let emailAccounts = userEmailAccountsData.data.userProfile.emailAccounts.map(
-        emailAccount =>
-          Object.keys(emailAccount)
-            .filter(key => selectedKeys.includes(key))
-            .reduce((obj, key) => {
-              obj[key] = emailAccount[key];
-              return obj;
-            }, {}),
-      );
-      setCurrentIndex(emailAccounts.length);
-      emailAccounts.push({id: null, emailAddress: ''});
+    if (userEmailAccountsData?.data) {
       setEmails(emailAccounts);
     }
-  }, [userEmailAccountsData.data]);
+  }, [emailAccounts, userEmailAccountsData]);
 
   const handleUnbindEmailPress = async unbindEmailId => {
     try {
@@ -105,7 +99,7 @@ const BindEmailScreen = ({route, navigation}) => {
 
   const handleEmailOnChange = (email, index) => {
     let newEmails = [...emails];
-    newEmails[index] = {emailAddress: email};
+    newEmails[index].emailAddress = email;
     setEmails(newEmails);
   };
 

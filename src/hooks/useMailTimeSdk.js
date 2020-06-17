@@ -63,7 +63,6 @@ export default () => {
   const {authToken} = useContext(AuthContext);
   const [bindEmailsRequest] = useMutation(BIND_EMAIL_ACCOUNTS_API);
 
-  console.log('state in sdk hooks', state);
   // setup for mailtime sdk
   // TODO: move to app startup in future
   useEffect(() => {
