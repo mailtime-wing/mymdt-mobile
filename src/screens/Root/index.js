@@ -64,30 +64,29 @@ const authScreens = [
 const backScreen = ['sign_in', 'welcome', 'offer_select'];
 
 const Root = () => {
-  const {
-    authToken,
-    isEmailBound,
-    isProfileCompleted,
-    isCashbackCurrencyCodeSet,
-    isBasicOfferSet,
-  } = useContext(AuthContext);
+  const {authToken, setupStatus} = useContext(AuthContext);
+
   const excludeScreenNames = [];
-  if (isProfileCompleted) {
+  if (setupStatus?.isProfileCompleted) {
     excludeScreenNames.push('user_profile');
   }
-  if (isCashbackCurrencyCodeSet) {
+  if (setupStatus?.isCashbackCurrencyCodeSet) {
     excludeScreenNames.push('choose_cash_back_type');
   }
-  if (isBasicOfferSet) {
+  if (setupStatus?.isBasicOfferSet) {
     excludeScreenNames.push('welcome');
     excludeScreenNames.push('offer_select');
   }
-  if (isEmailBound) {
+  if (setupStatus?.isDataSourceBound) {
     excludeScreenNames.push('introduction');
     excludeScreenNames.push('bind_email');
   }
 
-  if (isEmailBound && isCashbackCurrencyCodeSet && isBasicOfferSet) {
+  if (
+    setupStatus?.isDataSourceBound &&
+    setupStatus?.isCashbackCurrencyCodeSet &&
+    setupStatus?.isBasicOfferSet
+  ) {
     excludeScreenNames.push('account_setup_done');
     excludeScreenNames.push('sign_up_reward');
   }

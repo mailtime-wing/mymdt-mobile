@@ -68,6 +68,19 @@ export const GET_USER_MEMBERSHIP_API = gql`
   }
 `;
 
+export const GET_USER_SETUP_STATUS_API = gql`
+  query {
+    userProfile {
+      setupStatus {
+        isDataSourceBound
+        isProfileCompleted
+        isCashbackCurrencyCodeSet
+        isBasicOfferSet
+      }
+    }
+  }
+`;
+
 export const UPDATE_USER_CASHBACK_CURRENCY_CODE_API = gql`
   mutation UpdateUserCashbackCurrencyCode($code: CurrencyCode!) {
     updateUserCashbackCurrencyCode(code: $code)

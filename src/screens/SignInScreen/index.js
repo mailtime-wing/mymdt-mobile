@@ -198,7 +198,7 @@ const SignInForm = ({isSignUp}) => {
 const SigninScreen = ({route, navigation}) => {
   const {isSignUp} = route.params;
   const {localeEnum} = useContext(IntlContext);
-  const {updateAuthToken, updateUserAccountData} = useContext(AuthContext);
+  const {updateAuthToken} = useContext(AuthContext);
   const [loginRequest, {error}] = useMutation(LOGIN_API);
   const [registerRequest] = useMutation(REGISTER_API);
 
@@ -228,12 +228,6 @@ const SigninScreen = ({route, navigation}) => {
             phoneNumber: completePhoneNumber,
             otp: values.verificationCode,
           },
-        });
-        updateUserAccountData({
-          isEmailBound: data.login.isEmailBound,
-          isProfileCompleted: data.login.isProfileCompleted,
-          isCashbackCurrencyCodeSet: data.login.isCashbackCurrencyCodeSet,
-          isBasicOfferSet: data.login.isBasicOfferSet,
         });
         updateAuthToken(data.login.accessToken, data.login.refreshToken);
       } catch (e) {
