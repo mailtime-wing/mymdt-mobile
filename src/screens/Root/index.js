@@ -2,8 +2,6 @@ import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer as Container} from '@react-navigation/native';
 import {AuthContext} from '@/context/auth';
-import {useQuery} from '@apollo/react-hooks';
-import {GET_USER_SETUP_STATUS_API} from '@/api/data';
 
 import {UpperSafeAreaView, LowerSafeAreaView, styles} from './style';
 
@@ -66,16 +64,7 @@ const authScreens = [
 const backScreen = ['sign_in', 'welcome', 'offer_select'];
 
 const Root = () => {
-  const {authToken} = useContext(AuthContext);
-  const userSetupStatusApiData = useQuery(GET_USER_SETUP_STATUS_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-  });
-
-  const setupStatus = userSetupStatusApiData?.data?.userProfile?.setupStatus;
+  const {authToken, setupStatus} = useContext(AuthContext);
 
   const excludeScreenNames = [];
   if (setupStatus?.isProfileCompleted) {

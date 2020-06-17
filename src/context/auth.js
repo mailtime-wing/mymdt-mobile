@@ -2,7 +2,8 @@ import React, {createContext, useReducer, useEffect, useMemo} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import jwt_decode from 'jwt-decode';
 import {REFRESH_TOKEN_API} from '@/api/auth';
-import {useMutation} from '@apollo/react-hooks';
+import {useMutation, useQuery} from '@apollo/react-hooks';
+import {GET_USER_SETUP_STATUS_API} from '@/api/data';
 
 import SplashScreen from '@/screens/SplashScreen';
 import PopupModal from '@/components/PopupModal';
@@ -63,6 +64,19 @@ const reducer = (state, action) => {
 export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
+  const {data: userSetupStatusApiData, loading} = useQuery(
+    GET_USER_SETUP_STATUS_API,
+    {
+      skip: !state.authToken,
+      context: {
+        headers: {
+          authorization: state.authToken ? `Bearer ${state.authToken}` : '',
+        },
+      },
+    },
+  );
+
+  const setupStatus = userSetupStatusApiData?.userProfile?.setupStatus;
 
   useEffect(() => {
     const getToken = async () => {
@@ -150,8 +164,9 @@ export const AuthProvider = ({children}) => {
       authToken: state.authToken,
       refreshToken: state.refreshToken,
       cashBackType: state.cashBackType,
+      setupStatus: setupStatus,
     }),
-    [state],
+    [state, setupStatus],
   );
 
   if (state.isRefreshTokenExpired) {
@@ -164,7 +179,7 @@ export const AuthProvider = ({children}) => {
     );
   }
 
-  if (state.isLoading) {
+  if (state.isLoading || loading) {
     return <SplashScreen />;
   }
 
