@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useReducer} from 'react';
+import React, {useContext, useEffect, useReducer, useState} from 'react';
 import {View, Text, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import CarrierInfo from 'react-native-carrier-info';
 import {AuthContext} from '@/context/auth';
@@ -12,6 +12,7 @@ import useCountDownTimer from '@/hooks/timer';
 import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
 import PopupModal from '@/components/PopupModal';
+
 import {
   Container,
   Title,
@@ -26,6 +27,7 @@ import {
   SignUpDetail,
 } from './style';
 import countryCodeData from '@/constants/countryCode';
+import errorCodeEnum from '@/enum/errorCode';
 
 const REGISTER = 'REGISTER';
 const LOGIN = 'LOGIN';
@@ -115,7 +117,7 @@ const SignInForm = ({isSignUp}) => {
       dispatch({type: SEND_OTP});
       setCountdownTime(60);
     } catch (e) {
-      console.warn(`error on otpRequest with ${state.formType}: ${e}`);
+      // TODO: error handle in #56
     }
   };
 
@@ -199,8 +201,54 @@ const SigninScreen = ({route, navigation}) => {
   const {isSignUp} = route.params;
   const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken} = useContext(AuthContext);
-  const [loginRequest, {error}] = useMutation(LOGIN_API);
+  const [loginRequest] = useMutation(LOGIN_API);
   const [registerRequest] = useMutation(REGISTER_API);
+  const [clientError, setClientError] = useState(null);
+
+  const handleClientError = errorCode => {
+    switch (errorCode) {
+      case errorCodeEnum['100']:
+        setClientError(
+          <FormattedMessage
+            id="error_code_100"
+            defaultMessage="System Error, Please try again later."
+          />,
+        );
+        break;
+      case errorCodeEnum['201']:
+        setClientError(
+          <FormattedMessage
+            id="error_code_201"
+            defaultMessage="User already exist. Please sign in."
+          />,
+        );
+        break;
+      case errorCodeEnum['202']:
+        setClientError(
+          <FormattedMessage
+            id="error_code_202"
+            defaultMessage="Verification Code invalid."
+          />,
+        );
+        break;
+      case errorCodeEnum['203']:
+        setClientError(
+          <FormattedMessage
+            id="error_code_203"
+            defaultMessage="Verification Code invalid."
+          />,
+        );
+        break;
+      default:
+        setClientError(
+          <FormattedMessage
+            id="error_code_100"
+            defaultMessage="System Error, Please try again later."
+          />,
+        );
+        break;
+    }
+  };
 
   const handleSubmitPress = async values => {
     const completePhoneNumber = values.phonePrefix + values.phone;
@@ -219,7 +267,8 @@ const SigninScreen = ({route, navigation}) => {
         );
         navigation.navigate('user_profile');
       } catch (e) {
-        console.warn(`error on ${REGISTER}: ${e}`);
+        const errorCode = e?.graphQLErrors[0]?.extensions?.code;
+        handleClientError(errorCode);
       }
     } else {
       try {
@@ -231,7 +280,8 @@ const SigninScreen = ({route, navigation}) => {
         });
         updateAuthToken(data.login.accessToken, data.login.refreshToken);
       } catch (e) {
-        console.warn(`error on ${LOGIN}: ${e}`);
+        const errorCode = e?.graphQLErrors[0]?.extensions?.code;
+        handleClientError(errorCode);
       }
     }
   };
@@ -295,8 +345,17 @@ const SigninScreen = ({route, navigation}) => {
               />
             </LoginAndAgree>
           )}
-          {error && (
-            <PopupModal title="Login or Register fail" detail={error.message} />
+          {!!clientError && (
+            <PopupModal
+              title={
+                <FormattedMessage
+                  id="login_or_register_fail"
+                  defaultMessage="Login or register fail"
+                />
+              }
+              detail={clientError}
+              callback={() => setClientError(null)}
+            />
           )}
         </Container>
       </ScrollContainer>
