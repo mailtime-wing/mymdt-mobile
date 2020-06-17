@@ -1,10 +1,7 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {FormattedMessage} from 'react-intl';
-import {AuthContext} from '@/context/auth';
-import {useQuery} from '@apollo/react-hooks';
-import {GET_USER_SETUP_STATUS_API} from '@/api/data';
 
 import ThemeButton from '@/components/ThemeButton';
 
@@ -19,17 +16,6 @@ import {
 } from './style';
 
 const NotificationPermissionScreen = ({route, navigation}) => {
-  const {authToken} = useContext(AuthContext);
-  const userSetupStatusApiData = useQuery(GET_USER_SETUP_STATUS_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-  });
-
-  const setupStatus = userSetupStatusApiData?.data?.userProfile?.setupStatus;
-
   const requestNotificationPermission = () => {
     if (Platform.OS === 'ios') {
       PushNotificationIOS.requestPermissions();
