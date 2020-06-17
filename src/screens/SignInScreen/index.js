@@ -117,7 +117,7 @@ const SignInForm = ({isSignUp}) => {
       dispatch({type: SEND_OTP});
       setCountdownTime(60);
     } catch (e) {
-      console.warn(`error on otpRequest with ${state.formType}: ${e}`);
+      // TODO: error handle in #56
     }
   };
 
@@ -267,10 +267,7 @@ const SigninScreen = ({route, navigation}) => {
         );
         navigation.navigate('user_profile');
       } catch (e) {
-        const errorStr = JSON.stringify(e);
-        console.warn(`error on ${REGISTER}: ${errorStr}`);
-        const errorCode = JSON.parse(errorStr)?.graphQLErrors[0]?.extensions
-          ?.code;
+        const errorCode = e?.graphQLErrors[0]?.extensions?.code;
         handleClientError(errorCode);
       }
     } else {
@@ -283,10 +280,7 @@ const SigninScreen = ({route, navigation}) => {
         });
         updateAuthToken(data.login.accessToken, data.login.refreshToken);
       } catch (e) {
-        const errorStr = JSON.stringify(e);
-        console.warn(`error on ${LOGIN}: ${errorStr}`);
-        const errorCode = JSON.parse(errorStr)?.graphQLErrors[0]?.extensions
-          ?.code;
+        const errorCode = e?.graphQLErrors[0]?.extensions?.code;
         handleClientError(errorCode);
       }
     }
