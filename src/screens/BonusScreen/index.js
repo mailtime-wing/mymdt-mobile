@@ -8,12 +8,34 @@ import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import BonusBox from '@/components/BonusBox';
 import NoMoreContent from '@/components/NoMoreContent';
+import MdtOrMrpCoin from '@/components/MdtOrMrpCoin';
+import {
+  MEASURABLE_REWARD_POINT,
+  MEASURABLE_DATA_TOKEN,
+} from '@/constants/currency';
 
 const BonusList = [
   {
     title: <FormattedMessage id="bonus_task_title_1" />,
     detail: <FormattedMessage id="bonus_task_detail_1" />,
-    children: <Text>Children 1</Text>,
+    children: (
+      <>
+        <MdtOrMrpCoin
+          type={MEASURABLE_DATA_TOKEN}
+          amount={64543}
+          size={18}
+          fontSize={16}
+          color={props => props.theme.colors.secondary.normal}
+        />
+        <MdtOrMrpCoin
+          type={MEASURABLE_REWARD_POINT}
+          amount={64543}
+          size={18}
+          fontSize={16}
+          color={props => props.theme.colors.secondary.normal}
+        />
+      </>
+    ),
   },
   {
     title: <FormattedMessage id="bonus_task_title_2" />,
