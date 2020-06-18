@@ -129,7 +129,7 @@ export default () => {
 
   return {
     login: login,
-    initiateSdk: () => dispatch({type: SDK_LOGIN_READY}),
+    reset: () => dispatch({type: SDK_LOGIN_READY}),
     loading: state.emailBindingStatus === STATUS_IN_PROCCESS,
     loginSuccess: state.emailBindingStatus === STATUS_SUCCEEDED,
     loginFail:

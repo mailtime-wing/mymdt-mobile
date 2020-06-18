@@ -31,7 +31,7 @@ const BindEmailScreen = ({route, navigation}) => {
   const [clientError, setClientError] = useState('');
   const {
     login,
-    initiateSdk,
+    reset,
     loading: sdkLoading,
     error: sdkError,
     loginSuccess,
@@ -59,20 +59,16 @@ const BindEmailScreen = ({route, navigation}) => {
   const currentIndex =
     userEmailAccountsData?.data?.userProfile?.emailAccounts?.length || 0;
 
-  const emailAccounts = [
-    ...(userEmailAccountsData?.data?.userProfile.emailAccounts || []),
-    {id: null, emailAddress: ''},
-  ];
-
-  const [emails, setEmails] = useState(
-    emailAccounts || {id: null, emailAddress: ''},
-  );
-
+  const [emails, setEmails] = useState([{id: null, emailAddress: ''}]);
   useEffect(() => {
     if (userEmailAccountsData?.data) {
+      const emailAccounts = [
+        ...(userEmailAccountsData?.data?.userProfile.emailAccounts || []),
+        {id: null, emailAddress: ''},
+      ];
       setEmails(emailAccounts);
     }
-  }, [emailAccounts, userEmailAccountsData]);
+  }, [userEmailAccountsData]);
 
   const handleUnbindEmailPress = async unbindEmailId => {
     try {
@@ -98,9 +94,11 @@ const BindEmailScreen = ({route, navigation}) => {
   };
 
   const handleEmailOnChange = (email, index) => {
-    let newEmails = [...emails];
-    newEmails[index].emailAddress = email;
-    setEmails(newEmails);
+    setEmails(existingEmails => {
+      const newEmails = [...existingEmails];
+      newEmails[index].emailAddress = email;
+      return newEmails;
+    });
   };
 
   const handleFinishPress = () => {
@@ -112,7 +110,7 @@ const BindEmailScreen = ({route, navigation}) => {
   };
 
   const handlePopupPress = () => {
-    initiateSdk();
+    reset();
     userEmailAccountsData?.refetch();
   };
 
