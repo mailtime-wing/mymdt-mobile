@@ -16,7 +16,7 @@ export const UPDATE_USER_PROFILE_API = gql`
   }
 `;
 
-export const BIND_EMAIL_ACCOUNTS = gql`
+export const BIND_EMAIL_ACCOUNTS_API = gql`
   mutation BindEmailAccounts($email: String!, $token: String!) {
     bindEmailAccounts(data: {emailAddress: $email, token: $token}) {
       valids {
@@ -24,6 +24,23 @@ export const BIND_EMAIL_ACCOUNTS = gql`
         emailAddress
       }
       invalids
+    }
+  }
+`;
+
+export const UNBIND_EMAIL_ACCOUNTS_API = gql`
+  mutation UnbindEmailAccounts($ids: [ID!]!) {
+    unbindEmailAccounts(ids: $ids)
+  }
+`;
+
+export const GET_USER_EMAIL_ACCOUNTS_API = gql`
+  query {
+    userProfile {
+      emailAccounts {
+        id
+        emailAddress
+      }
     }
   }
 `;
