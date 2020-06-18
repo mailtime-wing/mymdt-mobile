@@ -4,7 +4,7 @@ import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
-  margin-top: 24px;
+  margin-top: 68px;
   margin-bottom: 24px;
   padding-left: 24px;
   padding-right: 24px;

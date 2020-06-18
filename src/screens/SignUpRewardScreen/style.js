@@ -41,8 +41,7 @@ export const GiftIcon = styled.Image`
 export const TouchableContainer = styled.TouchableOpacity``;
 
 export const Container = styled.View`
-  /* height: 100%; */
-  margin-top: 20%;
+  margin-top: 223px;
   margin-bottom: 24px;
 `;
 

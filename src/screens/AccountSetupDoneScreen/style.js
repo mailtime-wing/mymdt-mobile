@@ -2,13 +2,11 @@ import styled from '@emotion/native';
 import {Platform} from 'react-native';
 import TitleText from '@/components/TitleText';
 
-export const ScrollContainer = styled.ScrollView``;
-
 export const Container = styled.TouchableOpacity`
   padding-left: 24px;
   padding-right: 24px;
-  padding-top: 50%;
   flex: 1;
+  justify-content: center;
 `;
 
 export const Title = styled(TitleText)`

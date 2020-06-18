@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer as Container} from '@react-navigation/native';
 import {AuthContext} from '@/context/auth';
 
-import {UpperSafeAreaView, LowerSafeAreaView, styles} from './style';
+import {styles} from './style';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import OfferSelectScreen from '@/screens/OfferSelectScreen';
@@ -23,6 +23,7 @@ import ModalStack from '@/screens/ModalStack';
 import ProfileStack from '@/screens/ProfileStack';
 
 import BackButton from '@/components/BackButton';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const Stack = createStackNavigator();
 
@@ -99,76 +100,75 @@ const Root = () => {
   );
 
   return (
-    <>
-      <UpperSafeAreaView />
-      <LowerSafeAreaView>
-        <Container>
-          {!authToken ? (
-            <Stack.Navigator>
-              {screens.map(screen => (
+    <SafeAreaProvider>
+      {/* <SafeAreaView style={[styles.safeAreaViewContainer, { backgroundColor: '#FDFBF2'}]}/> */}
+      <Container>
+        {!authToken ? (
+          <Stack.Navigator>
+            {screens.map(screen => (
+              <Stack.Screen
+                name={screen.name}
+                component={screen.component}
+                options={{
+                  headerTransparent: true,
+                  headerTitleStyle: styles.headerTitle,
+                  cardStyle: styles.card,
+                  headerStyle: styles.header,
+                  headerLeft: () =>
+                    backScreen.includes(screen.name) ? <BackButton /> : null,
+                  gestureEnabled: false,
+                }}
+              />
+            ))}
+          </Stack.Navigator>
+        ) : (
+          // TODO: hide setupScreens so that it cannot be back from authScreens
+          <Stack.Navigator>
+            {filteredSetupScreens.map((screen, i) => {
+              const {name, component, ...params} = screen;
+              return (
                 <Stack.Screen
-                  name={screen.name}
-                  component={screen.component}
+                  key={name}
+                  name={name}
+                  component={component}
                   options={{
                     headerTransparent: true,
                     headerTitleStyle: styles.headerTitle,
                     cardStyle: styles.card,
                     headerStyle: styles.header,
                     headerLeft: () =>
-                      backScreen.includes(screen.name) ? <BackButton /> : null,
+                      backScreen.includes(name) ? <BackButton /> : null,
                     gestureEnabled: false,
                   }}
-                />
-              ))}
-            </Stack.Navigator>
-          ) : (
-            // TODO: hide setupScreens so that it cannot be back from authScreens
-            <Stack.Navigator>
-              {filteredSetupScreens.map((screen, i) => {
-                const {name, component, ...params} = screen;
-                return (
-                  <Stack.Screen
-                    key={name}
-                    name={name}
-                    component={component}
-                    options={{
-                      headerTransparent: true,
-                      headerTitleStyle: styles.headerTitle,
-                      cardStyle: styles.card,
-                      headerStyle: styles.header,
-                      headerLeft: () =>
-                        backScreen.includes(name) ? <BackButton /> : null,
-                      gestureEnabled: false,
-                    }}
-                    initialParams={{
-                      next: filteredSetupScreens[i + 1]
-                        ? filteredSetupScreens[i + 1].name
-                        : 'home',
-                      ...params,
-                    }}
-                  />
-                );
-              })}
-              {authScreens.map(screen => (
-                <Stack.Screen
-                  name={screen.name}
-                  component={screen.component}
-                  options={{
-                    headerTransparent: true,
-                    headerTitleStyle: styles.headerTitle,
-                    cardStyle: styles.card,
-                    headerStyle: styles.header,
-                    headerLeft: () =>
-                      backScreen.includes(screen.name) ? <BackButton /> : null,
-                    gestureEnabled: false,
+                  initialParams={{
+                    next: filteredSetupScreens[i + 1]
+                      ? filteredSetupScreens[i + 1].name
+                      : 'home',
+                    ...params,
                   }}
                 />
-              ))}
-            </Stack.Navigator>
-          )}
-        </Container>
-      </LowerSafeAreaView>
-    </>
+              );
+            })}
+
+            {authScreens.map(screen => (
+              <Stack.Screen
+                name={screen.name}
+                component={screen.component}
+                options={{
+                  headerTransparent: true,
+                  headerTitleStyle: styles.headerTitle,
+                  cardStyle: styles.card,
+                  headerStyle: styles.header,
+                  headerLeft: () =>
+                    backScreen.includes(screen.name) ? <BackButton /> : null,
+                  gestureEnabled: false,
+                }}
+              />
+            ))}
+          </Stack.Navigator>
+        )}
+      </Container>
+    </SafeAreaProvider>
   );
 };
 

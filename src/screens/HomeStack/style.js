@@ -2,6 +2,10 @@ import styled from '@emotion/native';
 import {StyleSheet} from 'react-native';
 import Text from '@/components/AppText';
 
+export const Container = styled.View`
+  flex: 1;
+`;
+
 export const LabelText = styled(Text)`
   color: ${props =>
     props.focused
@@ -39,5 +43,8 @@ export const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 2,
     elevation: 1,
+  },
+  safeAreaView: {
+    backgroundColor: '#FDFBF2',
   },
 });

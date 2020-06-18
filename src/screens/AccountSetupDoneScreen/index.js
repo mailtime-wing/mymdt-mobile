@@ -4,7 +4,7 @@ import {AuthContext} from '@/context/auth';
 import {useQuery} from '@apollo/react-hooks';
 import {GET_USER_REWARDS_API} from '@/api/data';
 
-import {Container, Title, Detail, ScrollContainer} from './style';
+import {Container, Title, Detail} from './style';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
 
@@ -38,18 +38,18 @@ const AccountSetupDoneScreen = ({route, navigation}) => {
   }
 
   return (
-    <Container activeOpacity={1} onPress={handlePress}>
-      <ScrollContainer>
-        <Title>
-          <FormattedMessage id="success" defaultMessage="SUCCESS" />
-        </Title>
-        <Detail>
-          <FormattedMessage
-            id="account_setup_done"
-            defaultMessage="Your account has been set up"
-          />
-        </Detail>
-      </ScrollContainer>
+    <Container
+      activeOpacity={1}
+      onPress={() => navigation.navigate(route.params.next)}>
+      <Title>
+        <FormattedMessage id="success" defaultMessage="SUCCESS" />
+      </Title>
+      <Detail>
+        <FormattedMessage
+          id="account_setup_done"
+          defaultMessage="Your account has been set up"
+        />
+      </Detail>
     </Container>
   );
 };

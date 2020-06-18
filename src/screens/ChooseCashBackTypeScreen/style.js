@@ -4,8 +4,8 @@ import TitleText from '@/components/TitleText';
 import AppText from '@/components/AppText';
 
 export const Container = styled.View`
-  flex: 1;
-  padding-top: 76px;
+  padding-top: 120px;
+  padding-bottom: 24px;
 `;
 
 export const ScrollContainer = styled.ScrollView`

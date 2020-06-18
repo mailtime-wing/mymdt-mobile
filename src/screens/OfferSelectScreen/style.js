@@ -38,7 +38,7 @@ export const Container = styled.View`
 `;
 
 export const ViewContainer = styled.View`
-  padding-top: 100px;
+  padding-top: 120px;
 `;
 
 export const FixedContainer = styled.View`
