@@ -52,7 +52,7 @@ const setupScreens = [
   // 5th step: turn on notification
   {name: 'notification_permission', component: NotificationPermissionScreen},
   // 6th step: setup done and gain reward
-  {name: 'account_setup_done', component: AccountSetupDoneScreen},
+  {name: 'account_setup_done', component: AccountSetupDoneScreen, skip: 'home'},
   {name: 'sign_up_reward', component: SignUpRewardScreen},
 ];
 
@@ -81,7 +81,6 @@ const Root = () => {
     excludeScreenNames.push('introduction');
     excludeScreenNames.push('bind_email');
   }
-
   if (
     setupStatus?.isDataSourceBound &&
     setupStatus?.isCashbackCurrencyCodeSet &&
