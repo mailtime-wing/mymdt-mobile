@@ -103,6 +103,9 @@
     "got_sign_up_reward": "You got a sign-up reward",
     "tap_to_open": "Tap to open",
 
+    "required": "請填寫",
+    "invalid_otp": "驗證碼為6位數字",
+
     "login_or_register_fail":  "登入或注册失敗",
     "error_code_100":  "系統錯誤，請稍後再試。",
     "error_code_201":  "用戶已存在，請登入。",

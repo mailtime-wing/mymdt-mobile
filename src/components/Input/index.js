@@ -8,9 +8,23 @@ import {
   TextInputContainer,
 } from './style';
 
-const Input = ({label, required, remark, error, readOnly, ...props}) => {
+const Input = ({
+  label,
+  required,
+  remark,
+  error,
+  readOnly,
+  setFieldTouched,
+  ...props
+}) => {
   const [isFocus, setIsFocus] = useState(false);
   const isError = !!error;
+
+  const handleOnBlur = () => {
+    setFieldTouched(props.name, true, true);
+    setIsFocus(false);
+  };
+
   return (
     <Container>
       <Label
@@ -27,7 +41,7 @@ const Input = ({label, required, remark, error, readOnly, ...props}) => {
         readOnly={readOnly}>
         <TextInput
           onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
+          onBlur={handleOnBlur}
           autoCapitalize="none"
           isFocus={isFocus}
           isError={isError}

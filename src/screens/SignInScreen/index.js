@@ -70,6 +70,7 @@ const SignInForm = ({isSignUp}) => {
     setFieldValue,
     handleChange,
     handleSubmit,
+    setFieldTouched,
     errors,
     touched,
     isValid,
@@ -132,6 +133,8 @@ const SignInForm = ({isSignUp}) => {
             value={values.phonePrefix}
             label={<FormattedMessage id="telephone" />}
             error={touched.phonePrefix && errors.phonePrefix}
+            setFieldTouched={setFieldTouched}
+            name="phonePrefix"
           />
         </PhonePrefixContainer>
         <PhoneContainer>
@@ -140,6 +143,8 @@ const SignInForm = ({isSignUp}) => {
             onChangeText={handleChange('phone')}
             value={values.phone}
             error={touched.phone && errors.phone}
+            setFieldTouched={setFieldTouched}
+            name="phone"
           />
         </PhoneContainer>
       </PhoneSectionContainer>
@@ -156,6 +161,8 @@ const SignInForm = ({isSignUp}) => {
               />
             }
             error={touched.verificationCode && errors.verificationCode}
+            setFieldTouched={setFieldTouched}
+            name="verificationCode"
           />
         </VerificationCodeContainer>
         <ThemeButton
@@ -292,20 +299,31 @@ const SigninScreen = ({route, navigation}) => {
     const dialCodeRegex = /^(\+)(\d{1,3}|\d{1,4})$/;
 
     if (!dialCodeRegex.test(values.phonePrefix)) {
-      errors.phonePrefix = 'Required';
+      errors.phonePrefix = (
+        <FormattedMessage id="required" defaultMessage="Required" />
+      );
     }
 
     if (!values.phone) {
-      errors.phone = 'Required';
+      errors.phone = (
+        <FormattedMessage id="required" defaultMessage="Required" />
+      );
     }
 
     if (!isSignUp) {
       if (!values.verificationCode) {
-        errors.verificationCode = 'OTP Required';
+        errors.verificationCode = (
+          <FormattedMessage id="required" defaultMessage="Required" />
+        );
       }
 
       if (values.verificationCode.length !== 6) {
-        errors.verificationCode = 'OTP is a 6 digit number';
+        errors.verificationCode = (
+          <FormattedMessage
+            id="invalid_otp"
+            defaultMessage="OTP is a 6 digit number"
+          />
+        );
       }
     }
 
@@ -330,7 +348,8 @@ const SigninScreen = ({route, navigation}) => {
               verificationCode: '',
             }}
             onSubmit={values => handleSubmitPress(values)}
-            validate={values => validate(values)}>
+            validate={values => validate(values)}
+            validateOnBlur={true}>
             <SignInForm isSignUp={isSignUp} />
           </Formik>
           {!isSignUp && (

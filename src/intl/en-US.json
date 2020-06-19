@@ -103,6 +103,9 @@
     "got_sign_up_reward": "You got a sign-up reward",
     "tap_to_open": "Tap to open",
 
+    "required": "Required",
+    "invalid_otp": "OTP is a 6 digit number",
+
     "login_or_register_fail":  "Login or register fail",
     "error_code_100":  "System Error, Please try again later.",
     "error_code_201":  "User already exist. Please sign in.",

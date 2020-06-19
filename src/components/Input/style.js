@@ -40,6 +40,7 @@ export const Label = styled(Text)`
   letter-spacing: 1px;
   font-weight: bold;
   width: 150%;
+  height: 16px;
 `;
 
 export const Remark = styled(Text)`
@@ -50,5 +51,6 @@ export const Remark = styled(Text)`
 
 export const Error = styled(Text)`
   font-size: 12px;
+  height: 16px;
   color: ${props => props.theme.colors.error.light};
 `;
