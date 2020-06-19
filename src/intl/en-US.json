@@ -107,5 +107,6 @@
     "error_code_100":  "System Error, Please try again later.",
     "error_code_201":  "User already exist. Please sign in.",
     "error_code_202":  "Verification Code invalid.",
-    "error_code_203":  "Verification Code invalid."
+    "error_code_203":  "Verification Code invalid.",
+    "error_code_305":  "User already exist. "
 }

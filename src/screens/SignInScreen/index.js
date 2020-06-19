@@ -58,10 +58,10 @@ const reducer = (state, action) => {
   }
 };
 
-const SignInForm = ({isSignUp}) => {
+const SignInForm = ({isSignUp, handleClientError}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {localeEnum} = useContext(IntlContext);
-  const [otpRequest, {error}] = useMutation(GET_OTP_API);
+  const [otpRequest] = useMutation(GET_OTP_API);
   const [timeLeft, setCountdownTime] = useCountDownTimer(0);
   const isTimerStarted = timeLeft > 0;
 
@@ -117,7 +117,9 @@ const SignInForm = ({isSignUp}) => {
       dispatch({type: SEND_OTP});
       setCountdownTime(60);
     } catch (e) {
-      // TODO: error handle in #56
+      const errorCode = e?.graphQLErrors[0]?.extensions?.code;
+      console.log('errorCode', errorCode);
+      handleClientError(errorCode);
     }
   };
 
@@ -192,7 +194,6 @@ const SignInForm = ({isSignUp}) => {
           <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
         )}
       </ThemeButton>
-      {error && <PopupModal title="OTP fail" detail={error.message} />}
     </View>
   );
 };
@@ -204,6 +205,7 @@ const SigninScreen = ({route, navigation}) => {
   const [loginRequest] = useMutation(LOGIN_API);
   const [registerRequest] = useMutation(REGISTER_API);
   const [clientError, setClientError] = useState(null);
+  const [isError305, setIsErrorCode305] = useState(false);
 
   const handleClientError = errorCode => {
     switch (errorCode) {
@@ -238,6 +240,15 @@ const SigninScreen = ({route, navigation}) => {
             defaultMessage="Verification Code invalid."
           />,
         );
+        break;
+      case errorCodeEnum['305']:
+        setClientError(
+          <FormattedMessage
+            id="error_code_305"
+            defaultMessage="User already exist."
+          />,
+        );
+        setIsErrorCode305(true);
         break;
       default:
         setClientError(
@@ -286,6 +297,14 @@ const SigninScreen = ({route, navigation}) => {
     }
   };
 
+  const handlePopupPress = () => {
+    if (isError305) {
+      navigation.navigate('sign_in', {isSignUp: false});
+    }
+    setClientError(null);
+    setIsErrorCode305(false);
+  };
+
   const validate = values => {
     const errors = {};
     const dialCodeRegex = /^(\+)(\d{1,3}|\d{1,4})$/;
@@ -330,7 +349,10 @@ const SigninScreen = ({route, navigation}) => {
             }}
             onSubmit={values => handleSubmitPress(values)}
             validate={values => validate(values)}>
-            <SignInForm isSignUp={isSignUp} />
+            <SignInForm
+              isSignUp={isSignUp}
+              handleClientError={handleClientError}
+            />
           </Formik>
           {!isSignUp && (
             <LoginAndAgree>
@@ -348,13 +370,20 @@ const SigninScreen = ({route, navigation}) => {
           {!!clientError && (
             <PopupModal
               title={
-                <FormattedMessage
-                  id="login_or_register_fail"
-                  defaultMessage="Login or register fail"
-                />
+                isError305 ? (
+                  <FormattedMessage
+                    id="request_otp_fail"
+                    defaultMessage="Request otp fail"
+                  />
+                ) : (
+                  <FormattedMessage
+                    id="login_or_register_fail"
+                    defaultMessage="Login or register fail"
+                  />
+                )
               }
               detail={clientError}
-              callback={() => setClientError(null)}
+              callback={handlePopupPress}
             />
           )}
         </Container>
