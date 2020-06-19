@@ -267,11 +267,11 @@ const GiftBoxOpened = ({rewardAmount}) => {
 
 const SignUpRewardScreen = ({route, navigation}) => {
   const [isOpened, setIsOpened] = useState(false);
-  const {accountSetupReward} = useContext(AuthContext);
+  const {accountSetupReward} = route.params;
   const rewardAmount = accountSetupReward?.value || 0;
 
   const handleContinuePress = async () => {
-    navigation.navigate('home');
+    navigation.navigate(route.params.next);
   };
 
   return (

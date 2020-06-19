@@ -52,7 +52,7 @@ const setupScreens = [
   // 5th step: turn on notification
   {name: 'notification_permission', component: NotificationPermissionScreen},
   // 6th step: setup done and gain reward
-  {name: 'account_setup_done', component: AccountSetupDoneScreen},
+  {name: 'account_setup_done', component: AccountSetupDoneScreen, skip: 'home'},
   {name: 'sign_up_reward', component: SignUpRewardScreen},
 ];
 
@@ -64,7 +64,7 @@ const authScreens = [
 const backScreen = ['sign_in', 'welcome', 'offer_select'];
 
 const Root = () => {
-  const {authToken, accountSetupReward, setupStatus} = useContext(AuthContext);
+  const {authToken, setupStatus} = useContext(AuthContext);
 
   const excludeScreenNames = [];
   if (setupStatus?.isProfileCompleted) {
@@ -82,10 +82,9 @@ const Root = () => {
     excludeScreenNames.push('bind_email');
   }
   if (
-    (setupStatus?.isDataSourceBound &&
-      setupStatus?.isCashbackCurrencyCodeSet &&
-      setupStatus?.isBasicOfferSet) ||
-    !accountSetupReward // hide these screen to perform skip when no accountSetupReward
+    setupStatus?.isDataSourceBound &&
+    setupStatus?.isCashbackCurrencyCodeSet &&
+    setupStatus?.isBasicOfferSet
   ) {
     excludeScreenNames.push('account_setup_done');
     excludeScreenNames.push('sign_up_reward');
