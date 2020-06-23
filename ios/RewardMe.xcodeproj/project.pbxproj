@@ -256,6 +256,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				B3DC92966BFDB9353CB0FA50 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -277,6 +278,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				FE11EBA79D69EEA64426CEFB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -492,6 +494,38 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B3DC92966BFDB9353CB0FA50 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RewardMe-RewardMeTests/Pods-RewardMe-RewardMeTests-resources.sh",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/Localizable.strings",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAccountLoginCustomConfigViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAccountPasswordInputViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAuthCodeWebViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTCircleButtonView.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTMailMasterProviderWebViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/qqlogin.html",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Localizable.strings",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAccountLoginCustomConfigViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAccountPasswordInputViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAuthCodeWebViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTCircleButtonView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTMailMasterProviderWebViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qqlogin.html",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RewardMe-RewardMeTests/Pods-RewardMe-RewardMeTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C2CF1F9A2E38AD70E9435673 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -572,6 +606,38 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FE11EBA79D69EEA64426CEFB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RewardMe/Pods-RewardMe-resources.sh",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/Localizable.strings",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAccountLoginCustomConfigViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAccountPasswordInputViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTAuthCodeWebViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTCircleButtonView.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/MTMailMasterProviderWebViewController.xib",
+				"${PODS_ROOT}/MTAuth/MTAuth/Assets/qqlogin.html",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Localizable.strings",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAccountLoginCustomConfigViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAccountPasswordInputViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTAuthCodeWebViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTCircleButtonView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTMailMasterProviderWebViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qqlogin.html",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RewardMe/Pods-RewardMe-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
