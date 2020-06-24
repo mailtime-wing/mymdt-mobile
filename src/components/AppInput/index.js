@@ -42,6 +42,7 @@ const Input = ({label, required, remark, readOnly, ...props}) => {
           onFocus={handleOnFocus}
           onChangeText={field.onChange(props.name)}
           onBlur={handleOnBlur}
+          value={field.value}
           autoCapitalize="none"
           isError={isError}
         />

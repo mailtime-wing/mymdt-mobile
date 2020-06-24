@@ -126,20 +126,18 @@ const SignInForm = ({isSignUp}) => {
         <PhonePrefixContainer>
           <Input
             keyboardType="phone-pad"
-            value={values.phonePrefix}
             label={<FormattedMessage id="telephone" />}
             name="phonePrefix"
           />
         </PhonePrefixContainer>
         <PhoneContainer>
-          <Input keyboardType="phone-pad" value={values.phone} name="phone" />
+          <Input keyboardType="phone-pad" name="phone" />
         </PhoneContainer>
       </PhoneSectionContainer>
       <VerificationContainer>
         <VerificationCodeContainer>
           <Input
             keyboardType="number-pad"
-            value={values.verificationCode}
             label={
               <FormattedMessage
                 id="verification_code"
