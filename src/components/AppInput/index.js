@@ -9,10 +9,10 @@ import {
 } from './style';
 import {useField} from 'formik';
 
-const Input = ({label, required, remark, error, readOnly, ...props}) => {
+const Input = ({label, required, remark, readOnly, ...props}) => {
   const [isFocus, setIsFocus] = useState(false);
   const [field, meta] = useField(props.name);
-  const isError = !!error;
+  const isError = meta.touched && meta.error;
 
   const handleOnFocus = () => {
     setIsFocus(true);
@@ -43,13 +43,13 @@ const Input = ({label, required, remark, error, readOnly, ...props}) => {
           onChangeText={field.onChange(props.name)}
           onBlur={handleOnBlur}
           autoCapitalize="none"
-          isError={meta.touched && meta.error}
+          isError={isError}
         />
       </TextInputContainer>
       {remark && <Remark>{remark}</Remark>}
       {
         <Error numberOfLines={1} ellipsizeMode="clip">
-          {isError ? error : ' '}
+          {isError ? meta.error : ' '}
         </Error>
       }
     </Container>

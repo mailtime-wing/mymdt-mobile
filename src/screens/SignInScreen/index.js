@@ -70,7 +70,6 @@ const SignInForm = ({isSignUp}) => {
     setFieldValue,
     handleSubmit,
     errors,
-    touched,
     isValid,
   } = useFormikContext();
 
@@ -129,17 +128,11 @@ const SignInForm = ({isSignUp}) => {
             keyboardType="phone-pad"
             value={values.phonePrefix}
             label={<FormattedMessage id="telephone" />}
-            error={touched.phonePrefix && errors.phonePrefix}
             name="phonePrefix"
           />
         </PhonePrefixContainer>
         <PhoneContainer>
-          <Input
-            keyboardType="phone-pad"
-            value={values.phone}
-            error={touched.phone && errors.phone}
-            name="phone"
-          />
+          <Input keyboardType="phone-pad" value={values.phone} name="phone" />
         </PhoneContainer>
       </PhoneSectionContainer>
       <VerificationContainer>
@@ -153,7 +146,6 @@ const SignInForm = ({isSignUp}) => {
                 defaultMessage="VERIFICATION CODE"
               />
             }
-            error={touched.verificationCode && errors.verificationCode}
             name="verificationCode"
           />
         </VerificationCodeContainer>
@@ -340,8 +332,7 @@ const SigninScreen = ({route, navigation}) => {
               verificationCode: '',
             }}
             onSubmit={values => handleSubmitPress(values)}
-            validate={values => validate(values)}
-            validateOnBlur={true}>
+            validate={validate}>
             <SignInForm isSignUp={isSignUp} />
           </Formik>
           {!isSignUp && (
