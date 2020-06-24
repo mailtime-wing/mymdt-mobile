@@ -9,7 +9,7 @@ import {Formik, useFormikContext} from 'formik';
 import {IntlContext} from '@/context/Intl';
 import useCountDownTimer from '@/hooks/timer';
 
-import Input from '@/components/Input';
+import Input from '@/components/AppInput';
 import ThemeButton from '@/components/ThemeButton';
 import PopupModal from '@/components/PopupModal';
 
@@ -68,9 +68,7 @@ const SignInForm = ({isSignUp}) => {
   const {
     values,
     setFieldValue,
-    handleChange,
     handleSubmit,
-    setFieldTouched,
     errors,
     touched,
     isValid,
@@ -129,21 +127,17 @@ const SignInForm = ({isSignUp}) => {
         <PhonePrefixContainer>
           <Input
             keyboardType="phone-pad"
-            onChangeText={handleChange('phonePrefix')}
             value={values.phonePrefix}
             label={<FormattedMessage id="telephone" />}
             error={touched.phonePrefix && errors.phonePrefix}
-            setFieldTouched={setFieldTouched}
             name="phonePrefix"
           />
         </PhonePrefixContainer>
         <PhoneContainer>
           <Input
             keyboardType="phone-pad"
-            onChangeText={handleChange('phone')}
             value={values.phone}
             error={touched.phone && errors.phone}
-            setFieldTouched={setFieldTouched}
             name="phone"
           />
         </PhoneContainer>
@@ -152,7 +146,6 @@ const SignInForm = ({isSignUp}) => {
         <VerificationCodeContainer>
           <Input
             keyboardType="number-pad"
-            onChangeText={handleChange('verificationCode')}
             value={values.verificationCode}
             label={
               <FormattedMessage
@@ -161,7 +154,6 @@ const SignInForm = ({isSignUp}) => {
               />
             }
             error={touched.verificationCode && errors.verificationCode}
-            setFieldTouched={setFieldTouched}
             name="verificationCode"
           />
         </VerificationCodeContainer>
