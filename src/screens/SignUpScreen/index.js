@@ -3,34 +3,24 @@ import {ScrollView} from 'react-native';
 
 import {AuthContext} from '@/context/auth';
 import {FormattedMessage} from 'react-intl';
-import {GET_OTP_API, LOGIN_API} from '@/api/auth';
+import {GET_OTP_API, REGISTER_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
 import {IntlContext} from '@/context/Intl';
-
 import PopupModal from '@/components/PopupModal';
 
 import LoginForm from '@/components/LoginForm';
 
 import errorCodeEnum from '@/enum/errorCode';
 
-const SigninScreen = () => {
+const SignUpScreen = ({navigation}) => {
   const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken} = useContext(AuthContext);
-  const [loginRequest] = useMutation(LOGIN_API);
   const [otpRequest] = useMutation(GET_OTP_API);
+  const [registerRequest] = useMutation(REGISTER_API);
   const [clientError, setClientError] = useState(null);
 
   const handleClientError = errorCode => {
     switch (errorCode) {
-      // case errorCodeEnum['200']:
-      // case errorCodeEnum['301']:
-      //   setClientError(
-      //     <FormattedMessage
-      //       id="error_code_301"
-      //       defaultMessage="User not exist."
-      //     />,
-      //   );
-      //   break;
       case errorCodeEnum['202']:
         setClientError(
           <FormattedMessage
@@ -47,6 +37,14 @@ const SigninScreen = () => {
           />,
         );
         break;
+      // case errorCodeEnum['305']:
+      //   setClientError(
+      //     <FormattedMessage
+      //       id="error_code_305"
+      //       defaultMessage="User already exist."
+      //     />,
+      //   );
+      //   break;
       default:
         setClientError(
           <FormattedMessage
@@ -64,7 +62,7 @@ const SigninScreen = () => {
         variables: {
           phoneNumber: values.phonePrefix + values.phone,
           locale: localeEnum,
-          action: 'LOGIN',
+          action: 'REGISTER',
         },
       });
     } catch (e) {
@@ -76,13 +74,18 @@ const SigninScreen = () => {
   const handleSubmitPress = async values => {
     const completePhoneNumber = values.phonePrefix + values.phone;
     try {
-      const {data} = await loginRequest({
+      const {data} = await registerRequest({
         variables: {
           phoneNumber: completePhoneNumber,
           otp: values.verificationCode,
+          locale: localeEnum,
         },
       });
-      updateAuthToken(data.login.accessToken, data.login.refreshToken);
+      await updateAuthToken(
+        data.register.accessToken,
+        data.register.refreshToken,
+      );
+      navigation.navigate('user_profile');
     } catch (e) {
       const errorCode = e?.graphQLErrors[0]?.extensions?.code;
       handleClientError(errorCode);
@@ -92,15 +95,15 @@ const SigninScreen = () => {
   return (
     <ScrollView>
       <LoginForm
-        title={<FormattedMessage id="sign_in" defaultMessage="SIGN IN" />}
+        title={<FormattedMessage id="sign_up" defaultMessage="SIGN UP" />}
         description={
           <FormattedMessage
-            id="login_in_agree_terms_and_policy"
-            defaultMessage="By logging in your email address, you agree with RewardMe’s Terms of Service and Privacy Policy."
+            id="setting_up_agree_terms_and_policy"
+            defaultMessage="By setting up the account, you agree with RewardMe’s Terms of Service and Privacy Policy."
           />
         }
         submitButtonText={
-          <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
+          <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
         }
         onSendPress={handleSendPress}
         onSubmit={handleSubmitPress}
@@ -121,4 +124,4 @@ const SigninScreen = () => {
   );
 };
 
-export default SigninScreen;
+export default SignUpScreen;

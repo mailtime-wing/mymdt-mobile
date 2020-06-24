@@ -32,8 +32,6 @@ export const Container = styled.View`
   margin-bottom: 24px;
 `;
 
-export const ScrollContainer = styled.ScrollView``;
-
 export const LoginAndAgree = styled(Text)`
   font-size: 10px;
   color: ${props => props.theme.colors.black.light};
@@ -55,12 +53,4 @@ export const PhonePrefixContainer = styled.View`
 
 export const PhoneContainer = styled.View`
   flex: 2;
-`;
-
-export const SignUpDetail = styled(Text)`
-  font-size: 12px;
-  line-height: 18px;
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 8px;
 `;
