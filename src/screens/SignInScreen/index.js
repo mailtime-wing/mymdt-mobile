@@ -9,7 +9,7 @@ import {Formik, useFormikContext} from 'formik';
 import {IntlContext} from '@/context/Intl';
 import useCountDownTimer from '@/hooks/timer';
 
-import Input from '@/components/Input';
+import Input from '@/components/AppInput';
 import ThemeButton from '@/components/ThemeButton';
 import PopupModal from '@/components/PopupModal';
 
@@ -68,7 +68,6 @@ const SignInForm = ({isSignUp}) => {
   const {
     values,
     setFieldValue,
-    handleChange,
     handleSubmit,
     errors,
     isValid,
@@ -127,34 +126,25 @@ const SignInForm = ({isSignUp}) => {
         <PhonePrefixContainer>
           <Input
             keyboardType="phone-pad"
-            onChangeText={handleChange('phonePrefix')}
-            value={values.phonePrefix}
             label={<FormattedMessage id="telephone" />}
-            error={errors.phonePrefix}
+            name="phonePrefix"
           />
         </PhonePrefixContainer>
         <PhoneContainer>
-          <Input
-            keyboardType="phone-pad"
-            onChangeText={handleChange('phone')}
-            value={values.phone}
-            error={errors.phone}
-          />
+          <Input keyboardType="phone-pad" name="phone" />
         </PhoneContainer>
       </PhoneSectionContainer>
       <VerificationContainer>
         <VerificationCodeContainer>
           <Input
             keyboardType="number-pad"
-            onChangeText={handleChange('verificationCode')}
-            value={values.verificationCode}
             label={
               <FormattedMessage
                 id="verification_code"
                 defaultMessage="VERIFICATION CODE"
               />
             }
-            error={errors.verificationCode}
+            name="verificationCode"
           />
         </VerificationCodeContainer>
         <ThemeButton
@@ -291,20 +281,31 @@ const SigninScreen = ({route, navigation}) => {
     const dialCodeRegex = /^(\+)(\d{1,3}|\d{1,4})$/;
 
     if (!dialCodeRegex.test(values.phonePrefix)) {
-      errors.phonePrefix = 'Required';
+      errors.phonePrefix = (
+        <FormattedMessage id="required" defaultMessage="Required" />
+      );
     }
 
     if (!values.phone) {
-      errors.phone = 'Required';
+      errors.phone = (
+        <FormattedMessage id="required" defaultMessage="Required" />
+      );
     }
 
     if (!isSignUp) {
       if (!values.verificationCode) {
-        errors.verificationCode = 'OTP Required';
+        errors.verificationCode = (
+          <FormattedMessage id="required" defaultMessage="Required" />
+        );
       }
 
       if (values.verificationCode.length !== 6) {
-        errors.verificationCode = 'OTP is a 6 digit number';
+        errors.verificationCode = (
+          <FormattedMessage
+            id="invalid_otp"
+            defaultMessage="OTP is a 6 digit number"
+          />
+        );
       }
     }
 
@@ -329,7 +330,7 @@ const SigninScreen = ({route, navigation}) => {
               verificationCode: '',
             }}
             onSubmit={values => handleSubmitPress(values)}
-            validate={values => validate(values)}>
+            validate={validate}>
             <SignInForm isSignUp={isSignUp} />
           </Formik>
           {!isSignUp && (
