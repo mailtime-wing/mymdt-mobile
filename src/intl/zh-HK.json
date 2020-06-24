@@ -7,8 +7,9 @@
     "browse": "發現",
     "browse_details": "限時活動 / 任務 / 分享",
     "bonus": "任務",
-    "wallet": "錢包",
+    "point": "錢包",
     "redeem": "獎賞",
+    "profile": "Profile",
     "redeem_details": "充值卡 / 特別會員福利",
 
     "offers_selected": "{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",

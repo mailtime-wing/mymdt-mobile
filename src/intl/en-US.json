@@ -7,8 +7,9 @@
     "browse": "Browse",
     "browse_details": "Promtions / Referrals / Share",
     "bonus": "Bonus",
-    "wallet": "Wallet",
+    "point": "Points",
     "redeem": "Redeem",
+    "profile": "Profile",
     "redeem_details": "Gift Cards / Special Rewards",
 
     "offers_selected": "{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",

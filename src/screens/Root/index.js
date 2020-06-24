@@ -19,6 +19,7 @@ import WelcomeScreen from '@/screens/WelcomeScreen';
 import SignUpRewardScreen from '@/screens/SignUpRewardScreen';
 import HomeStack from '@/screens/HomeStack';
 import ModalStack from '@/screens/ModalStack';
+import ProfileStack from '@/screens/ProfileStack';
 
 import BackButton from '@/components/BackButton';
 
@@ -58,10 +59,11 @@ const setupScreens = [
 
 const authScreens = [
   {name: 'home', component: HomeStack},
-  {name: 'ModalStack', component: ModalStack},
+  {name: 'modal', component: ModalStack},
+  {name: 'profile', component: ProfileStack},
 ];
 
-const backScreen = ['sign_in', 'welcome', 'offer_select'];
+const backScreen = ['sign_in', 'welcome', 'offer_select', 'profile'];
 
 const Root = () => {
   const {authToken, setupStatus} = useContext(AuthContext);
