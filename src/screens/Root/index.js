@@ -21,7 +21,7 @@ import MembershipScreen from '@/screens/MembershipScreen';
 
 import LanguageScreen from '@/screens/LanguageScreen';
 import SignOutScreen from '@/screens/SignOutScreen';
-// import NotificationScreen from '@/screens/NotificationScreen';
+import NotificationScreen from '@/screens/NotificationScreen';
 import UserProfileEditScreen from '@/screens/UserProfileEditScreen';
 import BindEmailEditScreen from '@/screens/BindEmailEditScreen';
 import SettingScreen from '@/screens/SettingScreen';
@@ -82,7 +82,7 @@ const authScreens = [
 
 const authModalScreens = [
   {name: 'settings', component: SettingScreen},
-  // {name: 'notification', component: NotificationScreen},
+  {name: 'notification', component: NotificationScreen},
   {name: 'edit_profile', component: UserProfileEditScreen},
   {name: 'my_referral_code', component: UserProfileEditScreen},
   {name: 'offers_preference', component: OfferPreferenceEditScreen},
