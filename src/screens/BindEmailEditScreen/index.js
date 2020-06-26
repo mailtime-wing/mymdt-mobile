@@ -1,5 +1,18 @@
-import React, {useState, useLayoutEffect, useReducer} from 'react';
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useReducer,
+  useContext,
+} from 'react';
 import {FormattedMessage} from 'react-intl';
+import {AuthContext} from '@/context/auth';
+import {useMutation, useQuery} from '@apollo/react-hooks';
+import {
+  GET_USER_EMAIL_ACCOUNTS_API,
+  UNBIND_EMAIL_ACCOUNTS_API,
+} from '@/api/data';
+
 import {
   Container,
   ButtonContainer,
@@ -7,7 +20,7 @@ import {
   UnbindButton,
   UnbindText,
   TitleContainer,
-  TitleText
+  TitleText,
 } from './style';
 
 import ModalContainer from '@/components/ModalContainer';
@@ -19,16 +32,11 @@ import CancelButton from '@/components/CancelButton';
 import ConfirmButton from '@/components/ConfirmButton';
 import HeaderButton from '@/components/HeaderButton';
 import PopupModal from '@/components/PopupModal';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
-const emailsSampleData = [
-  {email: 'foo@gmail.com', share: true},
-  {email: 'bar@gmail.com', share: false},
-  {email: 'foo.bar@mailtime.com', share: false},
-];
-
+const RESET = 'reset';
 const UPDATE_IS_EDITING = 'updateIsEditing';
 const UPDATE_IS_CONFIRMED = 'updateIsConfirmed';
-const UPDATE_IS_CANCELLED = 'updateIsCancelled';
 const UPDATE_IS_EMAIL_UNBINDING = 'updateIsEmailUnbinding';
 const UPDATE_IS_EMAIL_UNBIND_CANCELLED = 'updateIsEmailUnbindCancelled';
 const UPDATE_IS_EMAIL_UNBIND_CONFIRMED = 'updateIsEmailUnbindConfirmed';
@@ -37,68 +45,88 @@ const initialState = {
   isEditing: false,
   isUnbinding: false,
   isConfirmed: false,
-  unbindingEmail: ''
-}
+  unbindingEmail: {},
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case UPDATE_IS_CANCELLED: {
-      return initialState
+    case RESET: {
+      return initialState;
     }
     case UPDATE_IS_EDITING: {
       return {
         ...state,
-        isEditing: true
-      }
+        isEditing: true,
+      };
     }
     case UPDATE_IS_CONFIRMED: {
       return {
         ...state,
         // no action this moment
-      }
+      };
     }
     case UPDATE_IS_EMAIL_UNBINDING: {
       return {
         ...state,
         isUnbinding: true,
         isConfirmed: false,
-        unbindingEmail: action.payload
-      }
+        unbindingEmail: action.payload,
+      };
     }
     case UPDATE_IS_EMAIL_UNBIND_CANCELLED: {
       return {
         ...state,
         isUnbinding: false,
-        unbindingEmail: ''
-      }
+        unbindingEmail: {},
+      };
     }
     case UPDATE_IS_EMAIL_UNBIND_CONFIRMED: {
       return {
         ...state,
         isEditing: false,
         isUnbinding: false,
-        unbindingEmail: '',
-      }
+        unbindingEmail: {},
+      };
     }
     default:
       throw new Error();
   }
-}
+};
 
 const BindEmailEditScreen = ({navigation}) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const [emails, setEmails] = useState(
-    emailsSampleData.map(email => email.share),
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [emails, setEmails] = useState([{id: null, emailAddress: ''}]);
+  const {authToken} = useContext(AuthContext);
+  const apiContext = {
+    context: {
+      headers: {
+        authorization: authToken ? `Bearer ${authToken}` : '',
+      },
+    },
+  };
+  const userEmailAccountsData = useQuery(
+    GET_USER_EMAIL_ACCOUNTS_API,
+    apiContext,
+  );
+  const [unbindEmailRequest, {loading}] = useMutation(
+    UNBIND_EMAIL_ACCOUNTS_API,
+    apiContext,
   );
 
-  console.log(state)
+  useEffect(() => {
+    dispatch({type: RESET});
+    if (userEmailAccountsData?.data) {
+      let emailAccounts =
+        userEmailAccountsData?.data?.userProfile.emailAccounts || [];
+      emailAccounts = emailAccounts.map(email => ({...email, sharing: false})); // sharing data api later
+      setEmails(emailAccounts);
+    }
+  }, [userEmailAccountsData]);
 
   useLayoutEffect(() => {
     if (state.isEditing) {
       navigation.setOptions({
-        headerLeft: () => (
-          <CancelButton onPress={handleCancelPress} />
-        ),
+        headerLeft: () => <CancelButton onPress={handleCancelPress} />,
         headerRight: () => <ConfirmButton onPress={handleConfirmPress} />,
       });
     } else {
@@ -110,34 +138,52 @@ const BindEmailEditScreen = ({navigation}) => {
   }, [state.isEditing, navigation]);
 
   const handleEditPress = () => {
-    dispatch({ type: UPDATE_IS_EDITING })
+    dispatch({type: UPDATE_IS_EDITING});
   };
 
   const handleCancelPress = () => {
-    dispatch({ type: UPDATE_IS_CANCELLED })
-  }
+    dispatch({type: RESET});
+  };
 
   const handleConfirmPress = () => {
     // no action this moment
   };
 
   const handleUnbindPress = email => {
-    dispatch({ type: UPDATE_IS_EMAIL_UNBINDING, payload: email })
+    dispatch({type: UPDATE_IS_EMAIL_UNBINDING, payload: email});
   };
 
   const handleCallback = result => {
     if (result === 'OK') {
-      dispatch({ type: UPDATE_IS_EMAIL_UNBIND_CONFIRMED })
-      return
+      handleUnbindEmailConfirmPress();
+      return;
     }
-    dispatch({ type: UPDATE_IS_EMAIL_UNBIND_CANCELLED })
+    dispatch({type: UPDATE_IS_EMAIL_UNBIND_CANCELLED});
+  };
+
+  const handleUnbindEmailConfirmPress = async () => {
+    try {
+      await unbindEmailRequest({
+        variables: {
+          ids: [state.unbindingEmail?.id],
+        },
+      });
+      dispatch({type: UPDATE_IS_EMAIL_UNBIND_CANCELLED}); // = reset
+      userEmailAccountsData?.refetch();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleInputChange = index => {
     const data = [...emails];
-    data[index] = !data[index];
+    data[index].sharing = !data[index].sharing;
     setEmails(data);
   };
+
+  if (loading || userEmailAccountsData.loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <ModalContaienr title={<FormattedMessage id="emails_manage" />}>
@@ -145,11 +191,11 @@ const BindEmailEditScreen = ({navigation}) => {
         <TitleText>
           <FormattedMessage id="email" defaultMessage="email" />
         </TitleText>
-        {!state.isEditing && 
+        {!state.isEditing && (
           <TitleText>
             <FormattedMessage id="data_sharing" defaultMessage="data sharing" />
           </TitleText>
-        }
+        )}
       </TitleContainer>
       <Container>
         {emails.map((email, index) => (
@@ -158,12 +204,14 @@ const BindEmailEditScreen = ({navigation}) => {
             label={<EmailText>{email.emailAddress}</EmailText>}
             value={
               state.isEditing ? (
-                <UnbindButton onPress={() => handleUnbindPress(email.email)}>
-                  <UnbindText><FormattedMessage id="unbind" defaultMessage="unbind" /></UnbindText>
+                <UnbindButton onPress={() => handleUnbindPress(email)}>
+                  <UnbindText>
+                    <FormattedMessage id="unbind" defaultMessage="unbind" />
+                  </UnbindText>
                 </UnbindButton>
               ) : (
                 <Switch
-                  value={emails[index]}
+                  value={email.sharing}
                   onChange={() => handleInputChange(index)}
                 />
               )
@@ -171,15 +219,27 @@ const BindEmailEditScreen = ({navigation}) => {
           />
         ))}
       </Container>
-      {state.isEditing && <ButtonContainer>
-        <ThemeButton onPress={() => navigation.navigate('emails_binding', {navigateFromEdit: true})} small width="auto">
-          <FormattedMessage id="add_email_account" defaultMessage="ADD EMAIL" />
-        </ThemeButton>
-      </ButtonContainer>}
+      {state.isEditing && (
+        <ButtonContainer>
+          <ThemeButton
+            onPress={() =>
+              navigation.navigate('emails_binding', {navigateFromEdit: true})
+            }
+            small
+            width="auto">
+            <FormattedMessage
+              id="add_email_account"
+              defaultMessage="ADD EMAIL"
+            />
+          </ThemeButton>
+        </ButtonContainer>
+      )}
       {state.isUnbinding && (
         <PopupModal
           title="Unbind this email"
-          detail={`You will not get any data rewards from ${state.unbindingEmail} after unbinding.`}
+          detail={`You will not get any data rewards from ${
+            state.unbindingEmail?.emailAddress
+          } after unbinding.`}
           callback={handleCallback}
         />
       )}
