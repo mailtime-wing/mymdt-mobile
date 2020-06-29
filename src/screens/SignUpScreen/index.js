@@ -30,14 +30,13 @@ const renderClientError = errorCode => {
           defaultMessage="Verification Code invalid."
         />
       );
-    // case errorCodeEnum['305']:
-    //   return(
-    //     <FormattedMessage
-    //       id="error_code_305"
-    //       defaultMessage="User already exist."
-    //     />
-    //   );
-    //   break;
+    case errorCodeEnum['305']:
+      return (
+        <FormattedMessage
+          id="error_code_305"
+          defaultMessage="User already exist."
+        />
+      );
     default:
       return (
         <FormattedMessage
@@ -66,9 +65,13 @@ const SignUpScreen = ({navigation}) => {
   const errorCode = error?.graphQLErrors[0]?.extensions?.code;
   const clientError = renderClientError(errorCode);
 
-  const reset = () => {
+  const reset = mode => {
     otpRequestReset();
     registerRequestReset();
+
+    if (mode === 'OK' && errorCode === errorCodeEnum[305]) {
+      navigation.navigate('sign_in', {isSignUp: false});
+    }
   };
 
   const handleSendPress = values =>
