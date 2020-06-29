@@ -97,8 +97,10 @@
     "choose_this": "Choose this",
     "choose_cash_back_type": "Choose your cashback type",
     
-    "pin_and_face_id": "開啟密碼 & 面容 ID",
+    "pin": "開啟密碼",
+    "face_id_or_touch_id": "面容 ID/指模 ID",
     "forget_pin": "忘記密碼",
+    "change_pin": "更改密碼",
     "change_phone_number": "更改電話號碼",
     "currency": "貨幣轉換",
     "push_notification": "通知",

@@ -97,8 +97,10 @@
     "choose_this": "Choose this",
     "choose_cash_back_type": "Choose your cashback type",
 
-    "pin_and_face_id": "PIN & Face ID",
+    "pin": "PIN",
+    "face_id_or_touch_id": "Face ID/Tounch ID",
     "forget_pin": "Forget PIN",
+    "change_pin": "Change Pin",
     "change_phone_number": "Change Phone Number",
     "currency": "Currency",
     "push_notification": "Push Notification",

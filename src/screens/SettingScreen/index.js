@@ -1,13 +1,13 @@
 import React, {useContext, useState} from 'react';
-import {Text} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {IntlContext} from '@/context/Intl';
 
 import ModalContaienr from '@/components/ModalContainer';
-import ProfileDataRow from '@/components/ProfileDataRow';
+import SpecialListOption from '@/components/SpecialListOption';
+import ListOption from '@/components/ListOption';
 import Switch from '@/components/Switch';
 
-import {Container, ListOption, Image} from './style';
+import {Container} from './style';
 
 const SettingScreen = ({navigation}) => {
   const {language} = useContext(IntlContext);
@@ -15,38 +15,14 @@ const SettingScreen = ({navigation}) => {
   return (
     <ModalContaienr title={<FormattedMessage id="settings" />}>
       <Container>
-        <ProfileDataRow
-          label={
-            <Text>
-              <FormattedMessage id="language" />
-            </Text>
-          }
-          value={
-            <ListOption onPress={() => navigation.navigate('language')}>
-              <Text>{language}</Text>
-              <Image source={require('@/assets/black_arrow.png')} />
-            </ListOption>
-          }
+        <ListOption
+          label={<FormattedMessage id="language" />}
+          value={language}
+          onPress={() => navigation.navigate('language')}
         />
-        <ProfileDataRow
-          label={
-            <Text>
-              <FormattedMessage id="currency" />
-            </Text>
-          }
-          value={
-            <ListOption>
-              <Text>USD</Text>
-              <Image source={require('@/assets/black_arrow.png')} />
-            </ListOption>
-          }
-        />
-        <ProfileDataRow
-          label={
-            <Text>
-              <FormattedMessage id="push_notification" />
-            </Text>
-          }
+        <ListOption label={<FormattedMessage id="currency" />} value="USD" />
+        <SpecialListOption
+          label={<FormattedMessage id="push_notification" />}
           value={<Switch value={push} onChange={() => setPush(!push)} />}
         />
       </Container>
