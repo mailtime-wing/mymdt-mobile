@@ -1,77 +1,84 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {ScrollView} from 'react-native';
+import {FormattedMessage} from 'react-intl';
 
 import {AuthContext} from '@/context/auth';
-import {FormattedMessage} from 'react-intl';
-import {GET_OTP_API, LOGIN_API} from '@/api/auth';
-import {useMutation} from '@apollo/react-hooks';
 import {IntlContext} from '@/context/Intl';
-
+import {GET_OTP_API, LOGIN_API} from '@/api/auth';
+import useMutationWithReset from '@/hooks/useMutationWithReset';
 import PopupModal from '@/components/PopupModal';
-
 import LoginForm from '@/components/LoginForm';
-
 import errorCodeEnum from '@/enum/errorCode';
+
+const renderClientError = errorCode => {
+  if (!errorCode) {
+    return null;
+  }
+
+  switch (errorCode) {
+    // case errorCodeEnum['200']:
+    // case errorCodeEnum['301']:
+    //   return (
+    //     <FormattedMessage
+    //       id="error_code_301"
+    //       defaultMessage="User not exist."
+    //     />
+    //   );
+    case errorCodeEnum['202']:
+      return (
+        <FormattedMessage
+          id="error_code_202"
+          defaultMessage="Verification Code invalid."
+        />
+      );
+    case errorCodeEnum['203']:
+      return (
+        <FormattedMessage
+          id="error_code_203"
+          defaultMessage="Verification Code invalid."
+        />
+      );
+    default:
+      return (
+        <FormattedMessage
+          id="error_code_100"
+          defaultMessage="System Error, Please try again later."
+        />
+      );
+  }
+};
 
 const SigninScreen = () => {
   const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken} = useContext(AuthContext);
-  const [loginRequest] = useMutation(LOGIN_API);
-  const [otpRequest] = useMutation(GET_OTP_API);
-  const [clientError, setClientError] = useState(null);
+  const [
+    otpRequest,
+    {error: otpRequestError},
+    otpRequestReset,
+  ] = useMutationWithReset(GET_OTP_API);
+  const [
+    loginRequest,
+    {error: loginRequestError},
+    loginRequestReset,
+  ] = useMutationWithReset(LOGIN_API);
 
-  const handleClientError = errorCode => {
-    switch (errorCode) {
-      // case errorCodeEnum['200']:
-      // case errorCodeEnum['301']:
-      //   setClientError(
-      //     <FormattedMessage
-      //       id="error_code_301"
-      //       defaultMessage="User not exist."
-      //     />,
-      //   );
-      //   break;
-      case errorCodeEnum['202']:
-        setClientError(
-          <FormattedMessage
-            id="error_code_202"
-            defaultMessage="Verification Code invalid."
-          />,
-        );
-        break;
-      case errorCodeEnum['203']:
-        setClientError(
-          <FormattedMessage
-            id="error_code_203"
-            defaultMessage="Verification Code invalid."
-          />,
-        );
-        break;
-      default:
-        setClientError(
-          <FormattedMessage
-            id="error_code_100"
-            defaultMessage="System Error, Please try again later."
-          />,
-        );
-        break;
-    }
+  const error = otpRequestError || loginRequestError;
+  const errorCode = error?.graphQLErrors[0]?.extensions?.code;
+  const clientError = renderClientError(errorCode);
+
+  const reset = () => {
+    otpRequestReset();
+    loginRequestReset();
   };
 
-  const handleSendPress = async values => {
-    try {
-      await otpRequest({
-        variables: {
-          phoneNumber: values.phonePrefix + values.phone,
-          locale: localeEnum,
-          action: 'LOGIN',
-        },
-      });
-    } catch (e) {
-      const errorCode = e?.graphQLErrors[0]?.extensions?.code;
-      handleClientError(errorCode);
-    }
-  };
+  const handleSendPress = values =>
+    otpRequest({
+      variables: {
+        phoneNumber: values.phonePrefix + values.phone,
+        locale: localeEnum,
+        action: 'LOGIN',
+      },
+    });
 
   const handleSubmitPress = async values => {
     const completePhoneNumber = values.phonePrefix + values.phone;
@@ -83,10 +90,7 @@ const SigninScreen = () => {
         },
       });
       updateAuthToken(data.login.accessToken, data.login.refreshToken);
-    } catch (e) {
-      const errorCode = e?.graphQLErrors[0]?.extensions?.code;
-      handleClientError(errorCode);
-    }
+    } catch (e) {}
   };
 
   return (
@@ -114,7 +118,7 @@ const SigninScreen = () => {
             />
           }
           detail={clientError}
-          callback={() => setClientError(null)}
+          callback={reset}
         />
       )}
     </ScrollView>
