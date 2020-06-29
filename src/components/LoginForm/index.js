@@ -186,7 +186,6 @@ const LoginForm = ({
         onSubmit={onSubmit}
         validate={validate}>
         <InternalLoginForm
-          isSignUp={true}
           submitButtonText={submitButtonText}
           onSendPress={onSendPress}
         />
