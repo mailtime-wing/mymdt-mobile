@@ -2,13 +2,13 @@ import React, {useContext} from 'react';
 import {ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
+import {GET_OTP_API, REGISTER_API} from '@/api/auth';
+import errorCodeEnum from '@/enum/errorCode';
 import {AuthContext} from '@/context/auth';
 import {IntlContext} from '@/context/Intl';
-import {GET_OTP_API, LOGIN_API} from '@/api/auth';
-import useMutationWithReset from '@/hooks/useMutationWithReset';
 import PopupModal from '@/components/PopupModal';
 import LoginForm from '@/components/LoginForm';
-import errorCodeEnum from '@/enum/errorCode';
+import useMutationWithReset from '@/hooks/useMutationWithReset';
 
 const renderClientError = errorCode => {
   if (!errorCode) {
@@ -16,14 +16,6 @@ const renderClientError = errorCode => {
   }
 
   switch (errorCode) {
-    // case errorCodeEnum['200']:
-    // case errorCodeEnum['301']:
-    //   return (
-    //     <FormattedMessage
-    //       id="error_code_301"
-    //       defaultMessage="User not exist."
-    //     />
-    //   );
     case errorCodeEnum['202']:
       return (
         <FormattedMessage
@@ -38,6 +30,13 @@ const renderClientError = errorCode => {
           defaultMessage="Verification Code invalid."
         />
       );
+    case errorCodeEnum['305']:
+      return (
+        <FormattedMessage
+          id="error_code_305"
+          defaultMessage="User already exist."
+        />
+      );
     default:
       return (
         <FormattedMessage
@@ -48,7 +47,7 @@ const renderClientError = errorCode => {
   }
 };
 
-const SigninScreen = () => {
+const SignUpScreen = ({navigation}) => {
   const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken} = useContext(AuthContext);
   const [
@@ -57,18 +56,22 @@ const SigninScreen = () => {
     otpRequestReset,
   ] = useMutationWithReset(GET_OTP_API);
   const [
-    loginRequest,
-    {error: loginRequestError},
-    loginRequestReset,
-  ] = useMutationWithReset(LOGIN_API);
+    registerRequest,
+    {error: registerRequestError},
+    registerRequestReset,
+  ] = useMutationWithReset(REGISTER_API);
 
-  const error = otpRequestError || loginRequestError;
+  const error = otpRequestError || registerRequestError;
   const errorCode = error?.graphQLErrors[0]?.extensions?.code;
   const clientError = renderClientError(errorCode);
 
-  const reset = () => {
+  const reset = mode => {
     otpRequestReset();
-    loginRequestReset();
+    registerRequestReset();
+
+    if (mode === 'OK' && errorCode === errorCodeEnum[305]) {
+      navigation.navigate('sign_in', {isSignUp: false});
+    }
   };
 
   const handleSendPress = values =>
@@ -76,35 +79,40 @@ const SigninScreen = () => {
       variables: {
         phoneNumber: values.phonePrefix + values.phone,
         locale: localeEnum,
-        action: 'LOGIN',
+        action: 'REGISTER',
       },
     });
 
   const handleSubmitPress = async values => {
     const completePhoneNumber = values.phonePrefix + values.phone;
     try {
-      const {data} = await loginRequest({
+      const {data} = await registerRequest({
         variables: {
           phoneNumber: completePhoneNumber,
           otp: values.verificationCode,
+          locale: localeEnum,
         },
       });
-      updateAuthToken(data.login.accessToken, data.login.refreshToken);
+      await updateAuthToken(
+        data.register.accessToken,
+        data.register.refreshToken,
+      );
+      navigation.navigate('user_profile');
     } catch (e) {}
   };
 
   return (
     <ScrollView>
       <LoginForm
-        title={<FormattedMessage id="sign_in" defaultMessage="SIGN IN" />}
+        title={<FormattedMessage id="sign_up" defaultMessage="SIGN UP" />}
         description={
           <FormattedMessage
-            id="login_in_agree_terms_and_policy"
-            defaultMessage="By logging in your email address, you agree with RewardMe’s Terms of Service and Privacy Policy."
+            id="setting_up_agree_terms_and_policy"
+            defaultMessage="By setting up the account, you agree with RewardMe’s Terms of Service and Privacy Policy."
           />
         }
         submitButtonText={
-          <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
+          <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
         }
         onSendPress={handleSendPress}
         onSubmit={handleSubmitPress}
@@ -125,4 +133,4 @@ const SigninScreen = () => {
   );
 };
 
-export default SigninScreen;
+export default SignUpScreen;

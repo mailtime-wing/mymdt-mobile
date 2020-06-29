@@ -96,15 +96,14 @@ const OnboardingScreen = ({navigation}) => (
     <Container>
       <CardSection />
       <ButtonContainer>
-        <ThemeButton
-          onPress={() => navigation.navigate('sign_in', {isSignUp: true})}>
+        <ThemeButton onPress={() => navigation.navigate('sign_up')}>
           <FormattedMessage id="join_rewardme" defaultMessage="JOIN REWARDME" />
         </ThemeButton>
         <MarginContainer />
         <ThemeButton
           reverse
           small
-          onPress={() => navigation.navigate('sign_in', {isSignUp: false})}>
+          onPress={() => navigation.navigate('sign_in')}>
           <FormattedMessage id="sign_in" defaultMessage="Sign In" />
         </ThemeButton>
       </ButtonContainer>

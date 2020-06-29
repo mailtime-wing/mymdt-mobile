@@ -8,6 +8,7 @@ import {UpperSafeAreaView, LowerSafeAreaView, styles} from './style';
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import OfferSelectScreen from '@/screens/OfferSelectScreen';
 import SignInScreen from '@/screens/SignInScreen';
+import SignUpScreen from '@/screens/SignUpScreen';
 import UserProfileScreen from '@/screens/UserProfileScreen';
 import BindEmailScreen from '@/screens/BindEmailScreen';
 import LoadingScreen from '@/screens/LoadingScreen';
@@ -28,6 +29,7 @@ const Stack = createStackNavigator();
 const screens = [
   {name: 'onboarding', component: OnboardingScreen},
   {name: 'sign_in', component: SignInScreen},
+  {name: 'sign_up', component: SignUpScreen},
   {name: 'loading', component: LoadingScreen},
 ];
 
@@ -63,7 +65,7 @@ const authScreens = [
   {name: 'profile', component: ProfileStack},
 ];
 
-const backScreen = ['sign_in', 'welcome', 'offer_select', 'profile'];
+const backScreen = ['sign_in', 'sign_up', 'welcome', 'offer_select', 'profile'];
 
 const Root = () => {
   const {authToken, setupStatus} = useContext(AuthContext);
