@@ -95,6 +95,25 @@ export const GET_USER_MEMBERSHIP_API = gql`
   }
 `;
 
+export const GET_USER_OFFER_API = gql`
+  query {
+    userProfile {
+      offers {
+        id
+        type
+        brand {
+          id
+          name
+          logo
+        }
+        name
+        description
+        cashbackRate
+      }
+    }
+  }
+`;
+
 export const GET_USER_SETUP_STATUS_API = gql`
   query {
     userProfile {

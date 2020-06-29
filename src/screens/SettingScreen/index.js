@@ -9,6 +9,7 @@ import ModalContainer from '@/components/ModalContainer';
 const SettingScreen = ({navigation}) => {
   const accountSettingList = [
     {id: 'edit_profile'},
+    {id: 'offers_preference'},
     {id: 'emails_binding'},
     {id: 'account_security'},
     {id: 'sign_out'},

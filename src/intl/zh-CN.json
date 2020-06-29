@@ -130,6 +130,7 @@
     "choose_more_brand_when_upgrade": "当你会员等级提升时，你可以选择更多商店。",
     "your_choices": "你的选择",
     "get_reward_from_brands": "Get rewards when you receives email receipts from these brand.",
+    "edited_in_30_days": "You have edited the preference in recent 30 days. You can edit the preference after {date}.",
     "edit": "编辑",
 
     "continue": "继续",
