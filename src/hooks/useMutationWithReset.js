@@ -11,7 +11,7 @@ import {useMutation} from '@apollo/react-hooks';
  * @param  {DocumentNode} mutation
  * @param  {MutationHookOptions=} options
  *
- * @returns {[(options?: MutationFunctionOptions) => Promise<ExecutionResult>, MutationResult, string]}
+ * @returns {[(options?: MutationFunctionOptions) => Promise<ExecutionResult>, MutationResult, () => void]}
  */
 export default function useMutationWithReset(mutation, options) {
   const [, setRenderToggle] = useState(false);
