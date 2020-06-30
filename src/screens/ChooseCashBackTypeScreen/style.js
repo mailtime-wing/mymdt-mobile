@@ -2,9 +2,9 @@ import styled from '@emotion/native';
 import {Platform} from 'react-native';
 import TitleText from '@/components/TitleText';
 import AppText from '@/components/AppText';
+import ScreenContainer from '@/components/ScreenContainer';
 
-export const Container = styled.View`
-  padding-top: 120px;
+export const Container = styled(ScreenContainer)`
   padding-bottom: 24px;
 `;
 

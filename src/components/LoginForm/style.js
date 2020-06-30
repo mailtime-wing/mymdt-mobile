@@ -26,7 +26,6 @@ export const Title = styled(TitleText)`
 `;
 
 export const Container = styled.View`
-  padding-top: 136px;
   padding-left: 24px;
   padding-right: 24px;
   padding-bottom: 24px;
