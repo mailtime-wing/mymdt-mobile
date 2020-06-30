@@ -36,11 +36,11 @@ const AccountSecurityScreen = ({navigation}) => {
   const options = [
     {
       label: <FormattedMessage id="forget_pin" />,
-      onPress: () => navigation.navigate('language'),
+      onPress: () => navigation.navigate('forget_pin'),
     },
     {
       label: <FormattedMessage id="change_pin" />,
-      onPress: () => navigation.navigate('language'),
+      onPress: () => navigation.navigate('change_pin'),
     },
     {
       label: <FormattedMessage id="change_phone_number" />,

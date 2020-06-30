@@ -10,6 +10,8 @@ import MembershipScreen from '@/screens/MembershipScreen';
 import SettingScreen from '@/screens/SettingScreen';
 import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
 import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
+import ChangePinScreen from '@/screens/ChangePinScreen';
+import PinSuccessScreen from '@/screens/PinSuccessScreen';
 
 import HeaderButton from '@/components/HeaderButton';
 import {styles} from './style';
@@ -32,6 +34,9 @@ const screens = [
   {name: 'terms_of_service', component: LanguageScreen},
   {name: 'privacy_policy', component: LanguageScreen},
   {name: 'about_us', component: LanguageScreen},
+  {name: 'change_pin', component: ChangePinScreen},
+  {name: 'forget_pin', component: ChangePinScreen},
+  {name: 'pin_success', component: PinSuccessScreen},
 ];
 
 const ProfileStack = () => (
