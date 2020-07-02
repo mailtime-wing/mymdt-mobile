@@ -249,12 +249,12 @@ const GiftBoxOpened = ({rewardAmount}) => {
           enableShadow
         />
         <AnimatedBox source={require('@/assets/gift_box_head.png')} />
-        <BoxBody source={require('@/assets/gift_box_body.png')} />{' '}
+        <BoxBody source={require('@/assets/gift_box_body.png')} />
         {/* TODO: Fix the BoxBody is not under the circle */}
       </Circle>
       <TextContainer>
         <YouGotRewardAmountText>
-          <FormattedMessage id="you_got" default="You got" />{' '}
+          <FormattedMessage id="you_got" default="You got" />
         </YouGotRewardAmountText>
         <SmallCoin source={coinIconSource} />
         <RewardAmount>{rewardAmount}</RewardAmount>
@@ -265,11 +265,10 @@ const GiftBoxOpened = ({rewardAmount}) => {
 
 const SignUpRewardScreen = ({route, navigation}) => {
   const [isOpened, setIsOpened] = useState(false);
-  const {accountSetupReward} = useContext(AuthContext);
+  const {accountSetupReward} = route.params;
   const rewardAmount = accountSetupReward?.value || 0;
-
-  const handleContinuePress = async () => {
-    navigation.navigate('home');
+  const handleContinuePress = () => {
+    navigation.navigate(route.params.next);
   };
 
   return (
@@ -283,7 +282,7 @@ const SignUpRewardScreen = ({route, navigation}) => {
       </Container>
       <ContinueButton>
         {isOpened && (
-          <ThemeButton onPress={() => handleContinuePress()} width="90%">
+          <ThemeButton onPress={handleContinuePress} width="90%">
             <FormattedMessage id="continue" default="continue" />
           </ThemeButton>
         )}

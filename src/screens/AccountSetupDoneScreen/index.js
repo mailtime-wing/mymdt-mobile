@@ -38,9 +38,7 @@ const AccountSetupDoneScreen = ({route, navigation}) => {
   }
 
   return (
-    <Container
-      activeOpacity={1}
-      onPress={() => navigation.navigate(route.params.next)}>
+    <Container activeOpacity={1} onPress={handlePress}>
       <Title>
         <FormattedMessage id="success" defaultMessage="SUCCESS" />
       </Title>

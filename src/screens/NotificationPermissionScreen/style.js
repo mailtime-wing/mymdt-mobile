@@ -5,7 +5,6 @@ import TitleText from '@/components/TitleText';
 import ScreenContainer from '@/components/ScreenContainer';
 
 export const Container = styled(ScreenContainer)`
-  margin-top: 68px;
   margin-bottom: 24px;
   padding-left: 24px;
   padding-right: 24px;
