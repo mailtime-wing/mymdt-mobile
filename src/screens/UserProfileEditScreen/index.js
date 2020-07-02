@@ -175,11 +175,9 @@ const UserProfileEditForm = ({
           placeholder="DD/MM/YYYY"
           pointerEvents="none"
         />
-        <DateTimeSelector
-          show={formState.showDatePicker}
-          date={values.dob}
-          callback={handleDateChange}
-        />
+        {formState.showDatePicker && (
+          <DateTimeSelector date={values.dob} onChange={handleDateChange} />
+        )}
       </DateFieldContainer>
     </FormContainer>
   );

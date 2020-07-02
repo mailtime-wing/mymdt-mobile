@@ -14,7 +14,7 @@ import {AuthContext} from '@/context/auth';
 import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
-import DateTimeSelector from '@/components/DateTimeSelector'
+import DateTimeSelector from '@/components/DateTimeSelector';
 
 import {
   Container,
@@ -44,9 +44,9 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
     isValid,
   } = useFormikContext();
 
-  const handleDateChange = (date) => {
-    setFieldValue('dob', date)
-  }
+  const handleDateChange = date => {
+    setFieldValue('dob', date);
+  };
 
   return (
     <FormContainer>
@@ -73,11 +73,9 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
           placeholder="DD/MM/YYYY"
           pointerEvents="none"
         />
-        <DateTimeSelector
-          show={showDatePicker}
-          date={values.dob}
-          callback={handleDateChange}
-        />
+        {showDatePicker && (
+          <DateTimeSelector date={values.dob} onChange={handleDateChange} />
+        )}
       </DateFieldContainer>
       <FormInput
         label={<FormattedMessage id="referral_code" />}

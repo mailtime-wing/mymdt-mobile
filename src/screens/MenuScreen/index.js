@@ -16,13 +16,13 @@ import {
 
 import BackButton from '@/components/BackButton';
 
-const MenuScreen = (props) => {
-  console.log( props.navigation)
+const MenuScreen = props => {
+  // TODO: will remove when refactor the profileStack
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerLeft: () => <BackButton />,
     });
-  }, [])
+  }, [props.navigation]);
 
   return (
     <ScrollContainer>

@@ -45,7 +45,7 @@ const ProfileStack = () => (
           headerTitleStyle: styles.headerTitle,
           cardStyle: styles.card,
           headerStyle: styles.header,
-          headerLeft: () => <HeaderButton isModal root="menu" />,
+          headerLeft: props => <HeaderButton isModal root="menu" {...props} />,
           // cardOverlayEnabled: true,
           // cardShadowEnabled: true
         }}

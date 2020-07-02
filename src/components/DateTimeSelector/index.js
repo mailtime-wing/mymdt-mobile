@@ -2,24 +2,23 @@ import React from 'react';
 import {View} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const DateTimeSelector = ({show, date, callback}) => {
-  const onChange = (event, selectedDate) => {
-    callback(selectedDate);
+const DateTimeSelector = ({date, onChange}) => {
+  const handleOnChange = (event, selectedDate) => {
+    onChange(selectedDate);
   };
+
   return (
     <View>
-      {show && (
-        <DateTimePicker
-          testID="date"
-          value={new Date(date)}
-          mode="date"
-          display="default"
-          textColor="black"
-          maximumDate={new Date()}
-          onChange={onChange}
-          // timeZoneOffsetInMinutes={0}
-        />
-      )}
+      <DateTimePicker
+        testID="date"
+        value={new Date(date)}
+        mode="date"
+        display="default"
+        textColor="black"
+        maximumDate={new Date()}
+        onChange={handleOnChange}
+        // timeZoneOffsetInMinutes={0}
+      />
     </View>
   );
 };
