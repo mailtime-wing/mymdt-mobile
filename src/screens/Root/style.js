@@ -7,9 +7,4 @@ export const styles = StyleSheet.create({
   card: {
     backgroundColor: 'white',
   },
-  safeAreaViewContainer: {
-    flex: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 });

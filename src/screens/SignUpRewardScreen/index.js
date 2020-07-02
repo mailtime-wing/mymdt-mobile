@@ -9,7 +9,6 @@ import {
   GotRewardText,
   YouGotRewardAmountText,
   GiftIcon,
-  AnimatedTextContainer,
   SmallCoin,
   BoxBody,
   Circle,
@@ -17,7 +16,7 @@ import {
   RewardAmount,
   TextContainer,
   styles,
-  ScrollContainer,
+  ContinueButton,
 } from './style';
 import {AuthContext, MEASURABLE_REWARD_POINT} from '@/context/auth';
 
@@ -176,7 +175,7 @@ const AnimatedMove = props => {
 
 const GiftBoxReady = ({setIsOpened}) => {
   return (
-    <>
+    <Container>
       <GotRewardText>
         <FormattedMessage
           id="got_sign_up_reward"
@@ -193,7 +192,7 @@ const GiftBoxReady = ({setIsOpened}) => {
           </OpenText>
         </TouchableContainer>
       </AnimatedText>
-    </>
+    </Container>
   );
 };
 
@@ -205,7 +204,7 @@ const GiftBoxOpened = ({rewardAmount}) => {
       : require('@/assets/mdt_coin.png');
 
   return (
-    <>
+    <Container>
       <Circle>
         <AnimatedMove
           width={24}
@@ -250,46 +249,45 @@ const GiftBoxOpened = ({rewardAmount}) => {
           enableShadow
         />
         <AnimatedBox source={require('@/assets/gift_box_head.png')} />
-        <BoxBody source={require('@/assets/gift_box_body.png')} />
+        <BoxBody source={require('@/assets/gift_box_body.png')} />{' '}
+        {/* TODO: Fix the BoxBody is not under the circle */}
       </Circle>
-      <AnimatedTextContainer>
-        <TextContainer>
-          <YouGotRewardAmountText>
-            <FormattedMessage id="you_got" default="You got" />{' '}
-          </YouGotRewardAmountText>
-          <SmallCoin source={coinIconSource} />
-          <RewardAmount>{rewardAmount}</RewardAmount>
-        </TextContainer>
-      </AnimatedTextContainer>
-    </>
+      <TextContainer>
+        <YouGotRewardAmountText>
+          <FormattedMessage id="you_got" default="You got" />{' '}
+        </YouGotRewardAmountText>
+        <SmallCoin source={coinIconSource} />
+        <RewardAmount>{rewardAmount}</RewardAmount>
+      </TextContainer>
+    </Container>
   );
 };
 
 const SignUpRewardScreen = ({route, navigation}) => {
   const [isOpened, setIsOpened] = useState(false);
-  const {accountSetupReward} = route.params;
+  const {accountSetupReward} = useContext(AuthContext);
   const rewardAmount = accountSetupReward?.value || 0;
 
   const handleContinuePress = async () => {
-    navigation.navigate(route.params.next);
+    navigation.navigate('home');
   };
 
   return (
     <LinearGradientBackground colors={['#FDFBF2', '#E2FAFF']}>
-      <ScrollContainer>
-        <Container>
-          {isOpened ? (
-            <GiftBoxOpened rewardAmount={rewardAmount} />
-          ) : (
-            <GiftBoxReady setIsOpened={setIsOpened} />
-          )}
-          {isOpened && (
-            <ThemeButton onPress={() => handleContinuePress()} width="90%">
-              <FormattedMessage id="continue" default="continue" />
-            </ThemeButton>
-          )}
-        </Container>
-      </ScrollContainer>
+      <Container>
+        {isOpened ? (
+          <GiftBoxOpened rewardAmount={rewardAmount} />
+        ) : (
+          <GiftBoxReady setIsOpened={setIsOpened} />
+        )}
+      </Container>
+      <ContinueButton>
+        {isOpened && (
+          <ThemeButton onPress={() => handleContinuePress()} width="90%">
+            <FormattedMessage id="continue" default="continue" />
+          </ThemeButton>
+        )}
+      </ContinueButton>
     </LinearGradientBackground>
   );
 };

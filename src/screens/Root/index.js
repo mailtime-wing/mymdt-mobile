@@ -69,7 +69,14 @@ const authScreens = [
   {name: 'profile', component: ProfileStack},
 ];
 
-const backScreen = ['sign_in', 'sign_up', 'welcome', 'offer_select', 'profile'];
+const backScreen = [
+  'sign_in',
+  'sign_up',
+  'welcome',
+  'offer_select',
+  'bind_email',
+  'profile',
+];
 
 const Root = () => {
   const {authToken, setupStatus} = useContext(AuthContext);

@@ -3,11 +3,6 @@ import {Platform} from 'react-native';
 import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
-export const Container = styled.View`
-  padding-top: 120px;
-  padding-bottom: 24px;
-`;
-
 export const ScrollContainer = styled.ScrollView``;
 
 export const Title = styled(TitleText)`

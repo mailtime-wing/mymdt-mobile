@@ -3,14 +3,11 @@ import {Platform} from 'react-native';
 import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
-export const Container = styled.ScrollView`
-  padding-top: 136px;
+export const ScrollContainer = styled.ScrollView`
   padding-bottom: 24px;
   padding-left: 24px;
   padding-right: 24px;
 `;
-
-export const ScrollContainer = styled.ScrollView``;
 
 export const EmailRowContainer = styled.View`
   flex-direction: row;

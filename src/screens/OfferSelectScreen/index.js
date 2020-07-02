@@ -11,7 +11,6 @@ import {
 import {
   ScrollContainer,
   Container,
-  ViewContainer,
   FixedContainer,
   Details,
   Title,
@@ -23,6 +22,7 @@ import ThemeButton from '@/components/ThemeButton';
 import OfferList from '@/components/OfferList';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import ScreenContainer from '@/components/ScreenContainer';
 
 const OfferSelectScreen = ({route, navigation}) => {
   const [selectedOffers, setSelectedOffers] = useState([]);
@@ -110,7 +110,7 @@ const OfferSelectScreen = ({route, navigation}) => {
   return (
     <Container>
       <ScrollContainer>
-        <ViewContainer>
+        <ScreenContainer hasTopBar>
           <Title>
             <FormattedMessage
               id="special_offer"
@@ -143,7 +143,7 @@ const OfferSelectScreen = ({route, navigation}) => {
             offersLimit={numberOfOffer}
             onError={handleError}
           />
-        </ViewContainer>
+        </ScreenContainer>
       </ScrollContainer>
       <FixedContainer>
         <BrandsSelectedText isError={isErrorFromOfferList}>

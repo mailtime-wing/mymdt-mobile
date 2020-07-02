@@ -9,7 +9,6 @@ import {
 } from '@/api/data';
 
 import {
-  Container,
   EmailContainer,
   EmailRowContainer,
   Title,
@@ -23,6 +22,7 @@ import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import ScreenContainer from '@/components/ScreenContainer';
 
 import useMailTimeSdk from '@/hooks/useMailTimeSdk';
 
@@ -120,7 +120,7 @@ const BindEmailScreen = ({route, navigation}) => {
 
   return (
     <ScrollContainer>
-      <Container>
+      <ScreenContainer hasTopBar>
         <Title>
           <FormattedMessage
             id="bind_email_accounts"
@@ -228,7 +228,7 @@ const BindEmailScreen = ({route, navigation}) => {
             callback={() => setClientError('')}
           />
         )}
-      </Container>
+      </ScreenContainer>
     </ScrollContainer>
   );
 };

@@ -47,4 +47,9 @@ export const styles = StyleSheet.create({
   safeAreaView: {
     backgroundColor: '#FDFBF2',
   },
+  safeAreaViewContainer: {
+    flex: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
