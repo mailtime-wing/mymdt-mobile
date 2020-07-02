@@ -1,9 +1,9 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import AutoScrolling from 'react-native-auto-scrolling';
+import ScreenContainer from '@/components/ScreenContainer';
 
 import {
-  Container,
   Title,
   Detail,
   StartAndAgree,
@@ -18,7 +18,7 @@ import ThemeButton from '@/components/ThemeButton';
 const WelcomeScreen = ({route, navigation}) => {
   return (
     <ScrollContainer>
-      <Container>
+      <ScreenContainer hasTopBar>
         <Title>
           <FormattedMessage id="welcome" defaultMessage="Welcome!" />
         </Title>
@@ -44,7 +44,7 @@ const WelcomeScreen = ({route, navigation}) => {
             defaultMessage="By setting up the account, you agree with RewardMe’s Terms of Service and Privacy Policy."
           />
         </StartAndAgree>
-      </Container>
+      </ScreenContainer>
     </ScrollContainer>
   );
 };

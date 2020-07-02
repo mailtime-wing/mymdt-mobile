@@ -8,6 +8,7 @@ import {GET_OTP_API, LOGIN_API} from '@/api/auth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 import PopupModal from '@/components/PopupModal';
 import LoginForm from '@/components/LoginForm';
+import ScreenContainer from '@/components/ScreenContainer';
 import errorCodeEnum from '@/enum/errorCode';
 
 const renderClientError = errorCode => {
@@ -95,20 +96,22 @@ const SigninScreen = () => {
 
   return (
     <ScrollView>
-      <LoginForm
-        title={<FormattedMessage id="sign_in" defaultMessage="SIGN IN" />}
-        description={
-          <FormattedMessage
-            id="login_in_agree_terms_and_policy"
-            defaultMessage="By logging in your email address, you agree with RewardMe’s Terms of Service and Privacy Policy."
-          />
-        }
-        submitButtonText={
-          <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
-        }
-        onSendPress={handleSendPress}
-        onSubmit={handleSubmitPress}
-      />
+      <ScreenContainer hasTopBar>
+        <LoginForm
+          title={<FormattedMessage id="sign_in" defaultMessage="SIGN IN" />}
+          description={
+            <FormattedMessage
+              id="login_in_agree_terms_and_policy"
+              defaultMessage="By logging in your email address, you agree with RewardMe’s Terms of Service and Privacy Policy."
+            />
+          }
+          submitButtonText={
+            <FormattedMessage id="sign_in" defaultMessage="SIGN IN" />
+          }
+          onSendPress={handleSendPress}
+          onSubmit={handleSubmitPress}
+        />
+      </ScreenContainer>
       {!!clientError && (
         <PopupModal
           title={

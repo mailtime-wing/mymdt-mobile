@@ -37,10 +37,6 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-export const ViewContainer = styled.View`
-  padding-top: 100px;
-`;
-
 export const FixedContainer = styled.View`
   flex-direction: row;
   justify-content: space-around;

@@ -41,18 +41,12 @@ export const GiftIcon = styled.Image`
 export const TouchableContainer = styled.TouchableOpacity``;
 
 export const Container = styled.View`
-  /* height: 100%; */
-  margin-top: 20%;
-  margin-bottom: 24px;
+  flex: 7;
+  justify-content: center;
 `;
 
-export const ScrollContainer = styled.ScrollView`
-  height: 100%;
-`;
-
-export const AnimatedTextContainer = styled.View`
-  margin-top: 67px;
-  margin-bottom: 120px;
+export const ContinueButton = styled.View`
+  flex: 1;
 `;
 
 export const SmallCoin = styled.Image`
@@ -84,6 +78,7 @@ export const AnimatedView = styled(Animated.View)`
 `;
 
 export const TextContainer = styled.View`
+  margin-top: 30px;
   flex-direction: row;
   justify-content: center;
   align-items: center;

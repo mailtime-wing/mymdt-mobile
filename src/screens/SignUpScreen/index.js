@@ -8,6 +8,7 @@ import {AuthContext} from '@/context/auth';
 import {IntlContext} from '@/context/Intl';
 import PopupModal from '@/components/PopupModal';
 import LoginForm from '@/components/LoginForm';
+import ScreenContainer from '@/components/ScreenContainer';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 
 const renderClientError = errorCode => {
@@ -103,20 +104,22 @@ const SignUpScreen = ({navigation}) => {
 
   return (
     <ScrollView>
-      <LoginForm
-        title={<FormattedMessage id="sign_up" defaultMessage="SIGN UP" />}
-        description={
-          <FormattedMessage
-            id="setting_up_agree_terms_and_policy"
-            defaultMessage="By setting up the account, you agree with RewardMe’s Terms of Service and Privacy Policy."
-          />
-        }
-        submitButtonText={
-          <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
-        }
-        onSendPress={handleSendPress}
-        onSubmit={handleSubmitPress}
-      />
+      <ScreenContainer hasTopBar>
+        <LoginForm
+          title={<FormattedMessage id="sign_up" defaultMessage="SIGN UP" />}
+          description={
+            <FormattedMessage
+              id="setting_up_agree_terms_and_policy"
+              defaultMessage="By setting up the account, you agree with RewardMe’s Terms of Service and Privacy Policy."
+            />
+          }
+          submitButtonText={
+            <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
+          }
+          onSendPress={handleSendPress}
+          onSubmit={handleSubmitPress}
+        />
+      </ScreenContainer>
       {!!clientError && (
         <PopupModal
           title={

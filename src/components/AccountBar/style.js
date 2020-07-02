@@ -9,8 +9,7 @@ export const AccountIcon = styled.Image`
 
 export const Container = styled.View`
   justify-content: center;
-  padding: 30px;
-  background-color: ${props => props.theme.colors.white.normal};
+  padding: 24px;
 `;
 
 export const AccountContainer = styled.View`
@@ -18,6 +17,7 @@ export const AccountContainer = styled.View`
   justify-content: space-between;
   align-items: center;
 `;
+
 export const RemainMDT = styled(Text)`
   font-size: 16px;
   font-weight: bold;

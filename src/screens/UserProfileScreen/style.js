@@ -2,12 +2,9 @@ import styled from '@emotion/native';
 import {Platform} from 'react-native';
 import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
+import ScreenContainer from '@/components/ScreenContainer';
 
-export const Container = styled.KeyboardAvoidingView`
-  padding-top: 68px;
-`;
-
-export const ScrollContainer = styled.ScrollView`
+export const Container = styled(ScreenContainer)`
   padding-left: 24px;
   padding-right: 24px;
 `;

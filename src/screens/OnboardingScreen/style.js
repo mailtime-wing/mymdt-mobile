@@ -4,8 +4,8 @@ import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
-  margin-top: 32px;
-  margin-bottom: 24px;
+  padding-top: 76px;
+  padding-bottom: 24px;
 `;
 
 export const ScrollContainer = styled.ScrollView``;

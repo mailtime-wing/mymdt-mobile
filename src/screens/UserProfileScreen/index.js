@@ -1,5 +1,11 @@
 import React, {useState, useContext} from 'react';
-import {TouchableWithoutFeedback, Keyboard, View} from 'react-native';
+import {
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+  ScrollView,
+  View,
+} from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -13,7 +19,6 @@ import GenderSelector, {genderOptions} from '@/components/GenderSelector';
 
 import {
   Container,
-  ScrollContainer,
   FormContainer,
   Title,
   Detail,
@@ -159,33 +164,35 @@ const UserProfileScreen = ({route, navigation}) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => handleSpacePress()}>
-      <ScrollContainer
+      <ScrollView
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="always">
-        <Container behavior="position">
-          <Title>
-            <FormattedMessage id="let_us_know" />
-          </Title>
-          <Detail>
-            <FormattedMessage id="we_hope_to_provide" />
-          </Detail>
-          <RequiredText>* means required</RequiredText>
-          <Formik
-            initialValues={{
-              name: '',
-              gender: genderOptions[0].value,
-              dob: new Date(),
-              referralCode: '',
-            }}
-            onSubmit={values => handleSubmitPress(values)}
-            validate={values => validate(values)}>
-            <UserProfileForm
-              showDatePicker={showDatePicker}
-              handleDatePickerPress={handleDatePickerPress}
-            />
-          </Formik>
-        </Container>
-      </ScrollContainer>
+        <KeyboardAvoidingView behavior="position">
+          <Container>
+            <Title>
+              <FormattedMessage id="let_us_know" />
+            </Title>
+            <Detail>
+              <FormattedMessage id="we_hope_to_provide" />
+            </Detail>
+            <RequiredText>* means required</RequiredText>
+            <Formik
+              initialValues={{
+                name: '',
+                gender: genderOptions[0].value,
+                dob: new Date(),
+                referralCode: '',
+              }}
+              onSubmit={values => handleSubmitPress(values)}
+              validate={values => validate(values)}>
+              <UserProfileForm
+                showDatePicker={showDatePicker}
+                handleDatePickerPress={handleDatePickerPress}
+              />
+            </Formik>
+          </Container>
+        </KeyboardAvoidingView>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 };

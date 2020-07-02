@@ -2,11 +2,10 @@ import styled from '@emotion/native';
 import {Platform} from 'react-native';
 import TitleText from '@/components/TitleText';
 import AppText from '@/components/AppText';
+import ScreenContainer from '@/components/ScreenContainer';
 
-export const Container = styled.View`
-  flex: 1;
-  margin-top: 47px;
-  margin-bottom: 24px;
+export const Container = styled(ScreenContainer)`
+  padding-bottom: 24px;
 `;
 
 export const ScrollContainer = styled.ScrollView`
