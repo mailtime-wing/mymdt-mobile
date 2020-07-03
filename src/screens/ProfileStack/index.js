@@ -17,6 +17,7 @@ import {styles} from './style';
 const Stack = createStackNavigator();
 
 const screens = [
+  {name: 'menu', component: MenuScreen},
   {name: 'edit_profile', component: UserProfileEditScreen},
   {name: 'membership', component: MembershipScreen},
   {name: 'my_referral_code', component: LanguageScreen},
@@ -35,13 +36,6 @@ const screens = [
 
 const ProfileStack = () => (
   <Stack.Navigator mode="modal">
-    <Stack.Screen
-      name="menu"
-      component={MenuScreen}
-      options={{
-        headerShown: false,
-      }}
-    />
     {screens.map(screen => (
       <Stack.Screen
         name={screen.name}
@@ -51,7 +45,9 @@ const ProfileStack = () => (
           headerTitleStyle: styles.headerTitle,
           cardStyle: styles.card,
           headerStyle: styles.header,
-          headerLeft: () => <HeaderButton isModal root="menu" />,
+          headerLeft: props => <HeaderButton isModal root="menu" {...props} />,
+          // cardOverlayEnabled: true,
+          // cardShadowEnabled: true
         }}
       />
     ))}

@@ -4,11 +4,9 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   ScrollView,
-  View,
 } from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import {useMutation} from '@apollo/react-hooks';
 import {UPDATE_USER_PROFILE_API} from '@/api/data';
 
@@ -16,6 +14,7 @@ import {AuthContext} from '@/context/auth';
 import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
+import DateTimeSelector from '@/components/DateTimeSelector';
 
 import {
   Container,
@@ -34,27 +33,6 @@ const FormInput = props => (
   </FormInputContainer>
 );
 
-const DateTimePickerSelector = ({show, date, setFieldValue}) => {
-  const onChange = (event, selectedDate) => {
-    setFieldValue('dob', selectedDate);
-  };
-  return (
-    <View>
-      {show && (
-        <DateTimePicker
-          testID="date"
-          value={date}
-          mode="date"
-          display="default"
-          textColor="black"
-          maximumDate={new Date()}
-          onChange={onChange}
-        />
-      )}
-    </View>
-  );
-};
-
 const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
   const intl = useIntl();
   const {
@@ -65,6 +43,11 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
     errors,
     isValid,
   } = useFormikContext();
+
+  const handleDateChange = date => {
+    setFieldValue('dob', date);
+  };
+
   return (
     <FormContainer>
       <FormInput
@@ -90,11 +73,9 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
           placeholder="DD/MM/YYYY"
           pointerEvents="none"
         />
-        <DateTimePickerSelector
-          show={showDatePicker}
-          date={values.dob}
-          setFieldValue={setFieldValue}
-        />
+        {showDatePicker && (
+          <DateTimeSelector date={values.dob} onChange={handleDateChange} />
+        )}
       </DateFieldContainer>
       <FormInput
         label={<FormattedMessage id="referral_code" />}

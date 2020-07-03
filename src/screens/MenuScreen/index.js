@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import SectionList from '@/components/SectionList';
@@ -14,7 +14,16 @@ import {
   ScrollContainer,
 } from './style';
 
+import BackButton from '@/components/BackButton';
+
 const MenuScreen = props => {
+  // TODO: will remove when refactor the profileStack
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      headerLeft: () => <BackButton />,
+    });
+  }, [props.navigation]);
+
   return (
     <ScrollContainer>
       <AccountInfoContainer>

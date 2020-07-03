@@ -123,7 +123,7 @@ export const AuthProvider = ({children}) => {
       });
     };
     getToken();
-  }, [authContext, refreshTokenRequest]);
+  }, []);
 
   const handlePopupPress = pressed => {
     if (pressed) {
