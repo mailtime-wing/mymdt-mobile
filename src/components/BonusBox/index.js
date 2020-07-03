@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Container,
   HeaderContainer,
-  HeaderLeftContainer,
   HeaderRightContainer,
   Title,
   Detail,
@@ -12,11 +11,7 @@ import {
 const BonusBox = ({title, detail, icon, children}) => (
   <Container>
     <HeaderContainer>
-      {icon && (
-        <HeaderLeftContainer>
-          <Icon source={icon} />
-        </HeaderLeftContainer>
-      )}
+      {icon && <Icon source={icon} />}
       <HeaderRightContainer>
         {title && <Title>{title}</Title>}
         {detail && <Detail>{detail}</Detail>}

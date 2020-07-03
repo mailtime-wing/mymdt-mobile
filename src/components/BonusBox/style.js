@@ -13,11 +13,7 @@ export const HeaderContainer = styled.View`
   flex-direction: row;
 `;
 
-export const HeaderLeftContainer = styled.View`
-  flex: 1;
-`;
 export const HeaderRightContainer = styled.View`
-  padding-left: 16px;
   padding-bottom: 16px;
   flex: 6;
 `;
@@ -39,4 +35,5 @@ export const Icon = styled.Image`
   height: 40px;
   width: 40px;
   border-radius: 20px;
+  margin-right: 16px;
 `;
