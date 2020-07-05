@@ -1,12 +1,26 @@
 import styled from '@emotion/native';
 import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
-import AppText from '@/components/AppText';
 
 export const Container = styled.View``;
 
 export const FormContainer = styled.View`
   padding: 0 24px;
+`;
+
+export const ProfilePictureText = styled(Text)`
+  color: ${props => props.theme.colors.black.normal};
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-transform: uppercase;
+`;
+
+export const UserIcon = styled.Image`
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
 `;
 
 export const ProfilePictureContainer = styled.View`
@@ -16,23 +30,8 @@ export const ProfilePictureContainer = styled.View`
   margin-bottom: 32px;
 `;
 
-export const ProfilePictureText = styled(AppText)`
-  color: ${props => props.theme.colors.black.normal};
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: 1px;
-  font-weight: bold;
-  text-transform: uppercase;
-`;
-
 export const UserIconContainer = styled.TouchableOpacity`
   align-self: flex-end;
-`;
-
-export const UserIcon = styled.Image`
-  width: 56px;
-  height: 56px;
-  border-radius: 28px;
 `;
 
 export const GenderText = styled(Text)``;

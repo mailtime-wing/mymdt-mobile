@@ -28,7 +28,6 @@ export const Detail = styled(Text)`
   line-height: 17px;
   margin-top: 15px;
   margin-bottom: 64px;
-  text-align: center;
 `;
 
 export const MarginContainer = styled.View`

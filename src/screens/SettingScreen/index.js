@@ -1,38 +1,58 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import {IntlContext} from '@/context/Intl';
 
-import ModalContainer from '@/components/ModalContainer';
-import SpecialListOption from '@/components/SpecialListOption';
+import {ScrollContainer, Container, ListHeader} from './style';
+
 import ListOption from '@/components/ListOption';
-import Switch from '@/components/Switch';
-
-import {Container} from './style';
+import ModalContainer from '@/components/ModalContainer';
 
 const SettingScreen = ({navigation}) => {
-  const {language} = useContext(IntlContext);
-  const [push, setPush] = useState(false); // from api later
+  const accountSettingList = [
+    {id: 'edit_profile'},
+    {id: 'emails_binding'},
+    {id: 'account_security'},
+    {id: 'sign_out'},
+  ];
+
+  const generalSettingList = [
+    {id: 'app_settings'},
+    {id: 'faq_and_support'},
+    {id: 'terms_of_service'},
+    {id: 'privacy_policy'},
+    {id: 'about_us'},
+  ];
+
   return (
-    <ModalContainer title={<FormattedMessage id="settings" />}>
-      <Container>
-        <ListOption
-          key="language"
-          label={<FormattedMessage id="language" />}
-          value={language}
-          onPress={() => navigation.navigate('language')}
-        />
-        <ListOption
-          key="currency"
-          label={<FormattedMessage id="currency" />}
-          value="USD"
-        />
-        <SpecialListOption
-          key="push_notification"
-          label={<FormattedMessage id="push_notification" />}
-          value={<Switch value={push} onChange={() => setPush(!push)} />}
-        />
-      </Container>
-    </ModalContainer>
+    <ScrollContainer>
+      <ModalContainer
+        title={<FormattedMessage id="settings" defaultMessage="Settings" />}>
+        <Container>
+          <ListHeader>
+            <FormattedMessage id="account" defaultMessage="Account" />
+          </ListHeader>
+          {accountSettingList.map(as => (
+            <ListOption
+              key={as.id}
+              label={<FormattedMessage id={as.id} />}
+              onPress={() => navigation.navigate(as.id)}
+            />
+          ))}
+          <ListHeader>
+            <FormattedMessage
+              id="settings_and_support"
+              defaultMessage="Settings & Support"
+            />
+          </ListHeader>
+          {generalSettingList.map(gs => (
+            <ListOption
+              key={gs.id}
+              label={<FormattedMessage id={gs.id} />}
+              onPress={() => navigation.navigate(gs.id)}
+            />
+          ))}
+        </Container>
+      </ModalContainer>
+    </ScrollContainer>
   );
 };
 

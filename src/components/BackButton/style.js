@@ -12,11 +12,12 @@ import {
 export const ButtonContainer = styled.TouchableOpacity`
   margin-top: ${String(MARGIN_BETWEEN_STATUS_BAR_AND_TOP_BAR)}px;
   margin-left: 24px;
+  height: 36px;
   padding: 8px;
   height: ${String(TOP_BAR_HEIGHT)}px;
   border: 1px solid ${props => props.theme.colors.secondary.light};
   border-radius: 24px;
-  background: ${props => props.theme.colors.white.normal};
+  background: transparent;
 `;
 
 export const Container = styled.View`
