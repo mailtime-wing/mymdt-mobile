@@ -75,7 +75,6 @@ const backScreen = [
   'welcome',
   'offer_select',
   'bind_email',
-  'profile',
 ];
 
 const Root = () => {
@@ -171,7 +170,6 @@ const Root = () => {
               options={{
                 headerTransparent: true,
                 headerTitleStyle: styles.headerTitle,
-                cardStyle: styles.card,
                 headerStyle: headerStyle,
                 headerLeft: () =>
                   backScreen.includes(screen.name) ? <BackButton /> : null,

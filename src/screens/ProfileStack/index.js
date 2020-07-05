@@ -1,5 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import LanguageScreen from '@/screens/LanguageScreen';
 import MenuScreen from '@/screens/MenuScreen';
@@ -13,7 +14,12 @@ import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
 import ChangePinScreen from '@/screens/ChangePinScreen';
 import PinSuccessScreen from '@/screens/PinSuccessScreen';
 
-import HeaderButton from '@/components/HeaderButton';
+import CloseButton from '@/components/CloseButton';
+
+import {
+  MARGIN_BETWEEN_MODAL_HEAD_AND_TOP_BAR,
+  TOP_BAR_HEIGHT,
+} from '@/constants/layout';
 import {styles} from './style';
 
 const Stack = createStackNavigator();
@@ -39,24 +45,39 @@ const screens = [
   {name: 'pin_success', component: PinSuccessScreen},
 ];
 
-const ProfileStack = () => (
-  <Stack.Navigator mode="modal">
-    {screens.map(screen => (
-      <Stack.Screen
-        name={screen.name}
-        component={screen.component}
-        options={{
-          headerTransparent: true,
-          headerTitleStyle: styles.headerTitle,
-          cardStyle: styles.card,
-          headerStyle: styles.header,
-          headerLeft: props => <HeaderButton isModal root="menu" {...props} />,
-          // cardOverlayEnabled: true,
-          // cardShadowEnabled: true
-        }}
-      />
-    ))}
-  </Stack.Navigator>
-);
+const ProfileStack = () => {
+  const {top} = useSafeAreaInsets();
+
+  const headerStyle = {
+    ...styles.header,
+    height: MARGIN_BETWEEN_MODAL_HEAD_AND_TOP_BAR + TOP_BAR_HEIGHT,
+  };
+
+  const cardStyle = {
+    ...styles.card,
+    marginTop: top,
+  };
+
+  return (
+    <Stack.Navigator mode="modal">
+      {screens.map(screen => (
+        <Stack.Screen
+          name={screen.name}
+          component={screen.component}
+          options={{
+            headerTransparent: true,
+            headerTitleStyle: styles.headerTitle,
+            cardStyle: cardStyle,
+            headerStyle: headerStyle,
+            headerLeft: props => <CloseButton {...props} />,
+            cardOverlayEnabled: true,
+            gestureEnabled: true,
+            headerStatusBarHeight: 0,
+          }}
+        />
+      ))}
+    </Stack.Navigator>
+  );
+};
 
 export default ProfileStack;
