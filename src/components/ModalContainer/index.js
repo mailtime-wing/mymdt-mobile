@@ -1,15 +1,20 @@
 import React from 'react';
-import {Container, ScrollContainer, Title} from './style';
+import {useHeaderHeight} from '@react-navigation/stack';
 
-const ModalContaienr = ({title, children}) => (
-  <Container>
-    <ScrollContainer
-      showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}>
-      <Title>{title}</Title>
-      {children}
-    </ScrollContainer>
-  </Container>
-);
+import {Container, Title} from './style';
 
-export default ModalContaienr;
+const ModalContainer = ({title, children, style, ...props}) => {
+  const headerHeight = useHeaderHeight();
+  const marginTop = headerHeight;
+
+  return (
+    <Container style={[{marginTop}, style]} {...props}>
+      <>
+        <Title>{title}</Title>
+        {children}
+      </>
+    </Container>
+  );
+};
+
+export default ModalContainer;

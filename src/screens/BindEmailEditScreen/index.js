@@ -25,7 +25,7 @@ const BindEmailEditScreen = () => {
   };
 
   return (
-    <ModalContaienr title={<FormattedMessage id="emails_binding" />}>
+    <ModalContainer title={<FormattedMessage id="emails_binding" />}>
       <Container>
         {emails.map((email, index) => (
           <SpecialListOption
@@ -44,7 +44,7 @@ const BindEmailEditScreen = () => {
           <FormattedMessage id="add_email_account" />
         </ThemeButton>
       </ButtonContainer>
-    </ModalContaienr>
+    </ModalContainer>
   );
 };
 

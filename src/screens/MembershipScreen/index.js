@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import ModalContaienr from '@/components/ModalContainer';
+import ModalContainer from '@/components/ModalContainer';
 import {FormattedMessage} from 'react-intl';
 
 import Button from '@/components/Button';
@@ -70,7 +70,7 @@ const CardSection = () => {
 
 const MembershipScreen = () => {
   return (
-    <ModalContaienr title={<FormattedMessage id="membership" />}>
+    <ModalContainer title={<FormattedMessage id="membership" />}>
       <Header>Current LEVEL</Header>
       <CardContainer>
         <CardImage source={require('@/assets/gold_card.png')} />
@@ -102,7 +102,7 @@ const MembershipScreen = () => {
       />
       <MembershipProgram>Membership program</MembershipProgram>
       <CardSection />
-    </ModalContaienr>
+    </ModalContainer>
   );
 };
 
