@@ -1,7 +1,7 @@
 const theme = {
   colors: {
     primary: ['#0363EF', '#0036C5'],
-    secondary: ['#B5E8EE', '#21CEDB', '#00BACE'],
+    secondary: ['#B5E8EE', '#21CEDB', '#00BACE', '#1E7884'],
     blue: ['rgba(3, 99, 239, 0.1)'],
     error: [
       'rgba(216, 16, 16, 0.1)',
@@ -40,6 +40,7 @@ theme.colors.primary.dark = theme.colors.primary[1];
 theme.colors.secondary.light = theme.colors.secondary[0];
 theme.colors.secondary.normal = theme.colors.secondary[1];
 theme.colors.secondary.dark = theme.colors.secondary[2];
+theme.colors.secondary.superDark = theme.colors.secondary[3];
 theme.colors.blue.light = theme.colors.blue[0];
 theme.colors.error.superLight = theme.colors.error[0];
 theme.colors.error.light = theme.colors.error[1];

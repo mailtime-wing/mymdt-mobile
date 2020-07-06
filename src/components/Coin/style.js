@@ -1,6 +1,5 @@
 import styled from '@emotion/native';
 import Text from '@/components/AppText';
-import {MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 
 export const Container = styled.View`
   flex-direction: row;
@@ -17,7 +16,7 @@ export const CoinImage = styled.Image`
 
 export const AmountText = styled(Text)`
   color: ${props =>
-    props.type === MEASURABLE_DATA_TOKEN ? '#0036C5' : '#1E7884'};
+    props.color ? props.color : props.theme.colors.black.normal};
   font-size: ${props => (props.fontSize ? `${props.fontSize}px` : '16px')};
   font-weight: bold;
 `;
