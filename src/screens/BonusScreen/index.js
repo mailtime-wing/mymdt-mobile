@@ -82,7 +82,7 @@ const BonusList = [
 const BonusScreen = props => (
   <LinearGradientBackground>
     <ScrollContainer>
-      <AccountBar {...props} />
+      <AccountBar {...props} showCoins />
       {BonusList.map((bonusTask, index) => (
         <Fragment key={index}>
           <BonusBox

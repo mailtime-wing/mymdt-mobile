@@ -26,9 +26,15 @@
     "profile": "Profile",
     "redeem_details": "Gift Cards / Special Rewards",
 
+    "membership_level_0": "basic",
+    "membership_level_1": "silver",
+    "membership_level_2": "gold",
+    "membership_level_3": "platinum",
+    "membership_level_4": "diamond",
+    "membership_level_5": "special",
+
     "offers_selected": "{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
-    "gold_member": "VIP GOLD",
     "total_balance": "Total Balance",
     "offers_preference": "Brands Preference",
     "emails_binding": "Bind Emails",
