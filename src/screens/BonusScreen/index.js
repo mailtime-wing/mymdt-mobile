@@ -8,28 +8,17 @@ import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import BonusBox from '@/components/BonusBox';
 import NoMoreContent from '@/components/NoMoreContent';
-import MDTCoin from '@/components/MDTCoin';
-import MRPCoin from '@/components/MRPCoin';
+import DailyCheckIn from '@/components/DailyCheckIn';
 
 const BonusList = [
   {
     title: <FormattedMessage id="bonus_task_title_1" />,
     detail: <FormattedMessage id="bonus_task_detail_1" />,
     children: (
-      <>
-        <MDTCoin
-          amount={64543}
-          size={18}
-          fontSize={16}
-          color={props => props.theme.colors.primary.dark}
-        />
-        <MRPCoin
-          amount={64543}
-          size={18}
-          fontSize={16}
-          color={props => props.theme.colors.secondary.superDark}
-        />
-      </>
+      <DailyCheckIn
+        dayListWithAmount={[10, 20, 30, 40, 50, 50, 50, 50]}
+        currentDay={3}
+      />
     ),
   },
   {
