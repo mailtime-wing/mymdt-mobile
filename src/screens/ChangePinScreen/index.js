@@ -7,8 +7,6 @@ import ModalContaienr from '@/components/ModalContainer';
 import {CHANGE_PIN_API} from '@/api/auth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 
-import {Container} from './style';
-
 const NEXT_STEP = 'nextStep';
 const PREVIOUS_STEP = 'previousStep';
 const RESET = 'reset';
@@ -17,7 +15,7 @@ const SAVE_NEW_PIN = 'saveNewPin';
 const SAVE_NEW_CONFIRMED_PIN = 'saveNewConfirmedPin';
 
 const initialState = {
-  step: 0,
+  step: 1,
   oldPin: '',
   newPin: '',
   newConfirmedPin: '',
@@ -139,63 +137,56 @@ const ChangePinScreen = ({navigation}) => {
     state.oldPin,
   ]);
 
-  const RenderStep = () => {
-    switch (state.step) {
-      case 0:
-        return (
-          <PinForm
-            hints={
-              <FormattedMessage
-                id="enter_old_pin"
-                defaultMessage="Enter the old PIN"
-              />
-            }
-            onFulfill={handleOldPinOnFulfill}
-          />
-        );
-      case 1:
-        return (
-          <PinForm
-            hints={
-              <FormattedMessage
-                id="enter_new_pin"
-                defaultMessage="Enter the new PIN"
-              />
-            }
-            onFulfill={handleNewPinOnFulfill}
-          />
-        );
-      case 2:
-        return (
-          <PinForm
-            hints={
-              <FormattedMessage
-                id="enter_pin_to_verify"
-                defaultMessage="Enter the pin again to verify"
-              />
-            }
-            onFulfill={handleVerifyePinOnFinish}
-            error={
-              changePinRequestError && (
-                <FormattedMessage
-                  id="pin_verification_fail"
-                  defaultMessage="Verification failed. Please enter a new pin again."
-                />
-              )
-            }
-          />
-        );
-      default:
-        return null;
-    }
-  };
+  const steps = [
+    {
+      key: 0,
+      hints: (
+        <FormattedMessage
+          id="enter_old_pin"
+          defaultMessage="Enter the old PIN"
+        />
+      ),
+      onFulfill: handleOldPinOnFulfill,
+    },
+    {
+      key: 1,
+      hints: (
+        <FormattedMessage
+          id="enter_new_pin"
+          defaultMessage="Enter the new PIN"
+        />
+      ),
+      onFulfill: handleNewPinOnFulfill,
+    },
+    {
+      key: 2,
+      hints: (
+        <FormattedMessage
+          id="enter_pin_to_verify"
+          defaultMessage="Enter the pin again to verify"
+        />
+      ),
+      onFulfill: handleVerifyePinOnFinish,
+      error: changePinRequestError && (
+        <FormattedMessage
+          id="pin_verification_fail"
+          defaultMessage="Verification failed. Please enter a new pin again."
+        />
+      ),
+    },
+  ];
+
+  const currentStep = steps[state.step - 1];
 
   return (
     <ModalContaienr
       title={<FormattedMessage id="change_pin" defaultMessage="Change Pin" />}>
-      <Container>
-        <RenderStep />
-      </Container>
+      <PinForm
+        hints={currentStep?.hints}
+        onFulfill={currentStep?.onFulfill}
+        error={currentStep?.error}
+        key={currentStep?.key}
+      />
     </ModalContaienr>
   );
 };

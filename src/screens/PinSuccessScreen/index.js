@@ -17,7 +17,7 @@ const PinSuccessScreen = ({navigation, route}) => {
       <ScrollContainer>
         <Container>
           <Detail>{route?.params?.detail}</Detail>
-          <ThemeButton onPress={() => navigation.navigate('account_security')}>
+          <ThemeButton onPress={() => navigation.pop(2)}>
             <FormattedMessage
               id="back_to_account_security"
               defaultMessage="Back to account security"

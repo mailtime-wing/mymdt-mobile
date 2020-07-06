@@ -3,11 +3,11 @@ import {Option, ListLabel, ListValue, RightSide} from './style';
 
 import ArrowIcon from '@/assets/list_arrow.svg';
 
-const ListOption = props => (
+const ListOption = ({label, value, ...props}) => (
   <Option {...props}>
-    <ListLabel>{props.label}</ListLabel>
+    <ListLabel>{label}</ListLabel>
     <RightSide>
-      {!!props.value && <ListValue>{props.value}</ListValue>}
+      {value && <ListValue>{value}</ListValue>}
       <ArrowIcon />
     </RightSide>
   </Option>

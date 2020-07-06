@@ -4,16 +4,7 @@ import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 
 import {Container, Title, Error, Hints, styles} from './style';
 
-const PinForm = ({
-  title,
-  hints,
-  error,
-  onFulfill,
-  // description,
-  // submitButtonText,
-  // onSendPress,
-  // onSubmit,
-}) => {
+const PinForm = ({title, hints, error, onFulfill}) => {
   const pinInput = useRef(null);
   const [pinCode, setPinCode] = useState('');
   const codeLength = 6;
