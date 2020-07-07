@@ -6,12 +6,14 @@ const Button = props => (
     disabled={props.disabled}
     reverse={props.reverse}
     small={props.small}
+    medium={props.medium}
     reverseBorder={props.reverseBorder}
     {...props}>
     <ButtonText
       disabled={props.disabled}
       reverse={props.reverse}
-      small={props.small}>
+      small={props.small}
+      medium={props.medium}>
       {props.children}
     </ButtonText>
   </Container>

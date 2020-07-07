@@ -109,7 +109,7 @@ const InternalLoginForm = ({submitButtonText, onSendPress}) => {
           />
         </VerificationCodeContainer>
         <ThemeButton
-          small
+          medium
           disabled={isTimerStarted || !!errors.phone}
           onPress={handleSendPress}>
           <Text>

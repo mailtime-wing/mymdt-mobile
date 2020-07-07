@@ -66,7 +66,7 @@ const NotificationPermissionScreen = ({route, navigation}) => {
           <FormattedMessage id="sure" />
         </ThemeButton>
         <MarginContainer />
-        <ThemeButton reverse small onPress={handleSkipPress}>
+        <ThemeButton reverse medium onPress={handleSkipPress}>
           <FormattedMessage id="skip_for_now" />
         </ThemeButton>
       </Container>

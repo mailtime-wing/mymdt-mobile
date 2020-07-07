@@ -157,14 +157,14 @@ const BindEmailScreen = ({route, navigation}) => {
               </EmailContainer>
               {isBind ? (
                 <ThemeButton
-                  small
+                  medium
                   disabled={isNext || !email.emailAddress}
                   onPress={() => handleUnbindEmailPress(email.id)}>
                   <FormattedMessage id="unbind" defaultMessage="unbind" />
                 </ThemeButton>
               ) : (
                 <ThemeButton
-                  small
+                  medium
                   disabled={isNext || !email.emailAddress}
                   onPress={() => handleBindEmailPress(email.emailAddress)}>
                   <FormattedMessage id="login" />
@@ -177,7 +177,7 @@ const BindEmailScreen = ({route, navigation}) => {
           <FormattedMessage id="finish" defaultMessage="finish" />
         </ThemeButton>
         <MarginContainer />
-        <ThemeButton reverse small onPress={handleSkipPress}>
+        <ThemeButton reverse medium onPress={handleSkipPress}>
           <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
         </ThemeButton>
         <BindMoreLaterText>

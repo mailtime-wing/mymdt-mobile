@@ -102,7 +102,7 @@ const OnboardingScreen = ({navigation}) => (
         <MarginContainer />
         <ThemeButton
           reverse
-          small
+          medium
           onPress={() => navigation.navigate('sign_in')}>
           <FormattedMessage id="sign_in" defaultMessage="Sign In" />
         </ThemeButton>

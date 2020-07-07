@@ -43,7 +43,7 @@ const CashBackType = ({cashback, handleChoosePress}) => (
     <BoxTitle>{cashback.title}</BoxTitle>
     <BoxDetail>{cashback.detail}</BoxDetail>
     <ThemeButton
-      small
+      medium
       width="auto"
       onPress={() => handleChoosePress(cashback.type)}>
       <FormattedMessage id="choose_this" defaultMessage="Choose This" />
