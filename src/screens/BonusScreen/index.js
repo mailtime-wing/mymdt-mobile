@@ -44,6 +44,7 @@ const BonusList = [
       <DailyCheckIn
         dayListWithAmount={[10, 20, 30, 40, 50, 50, 50, 50]}
         currentDay={3}
+        canCheckIn={true}
       />
     ),
   },
