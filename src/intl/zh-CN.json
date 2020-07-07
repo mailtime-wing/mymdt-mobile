@@ -18,6 +18,8 @@
     "more_to_come": "More to come. Stay tune.",
     "day": "日",
     "check_in": "签到",
+    "claim": "Claim",
+    "claimed_on": "Claimed on {date}",
 
     "point": "钱包",
     "redeem": "奖赏",

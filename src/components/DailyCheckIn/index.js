@@ -43,7 +43,7 @@ const DailyCheckIn = ({dayListWithAmount, currentDay}) => (
         );
       })}
     </HorizontalScrollContainer>
-    <ThemeButton small width="auto">
+    <ThemeButton medium width="auto">
       <FormattedMessage id="check_in" defaultMessage="Check in" />
     </ThemeButton>
   </Container>

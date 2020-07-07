@@ -18,6 +18,8 @@
     "more_to_come": "More to come. Stay tune.",
     "day": "Day",
     "check_in": "Check In",
+    "claim": "Claim",
+    "claimed_on": "Claimed on {date}",
 
     "point": "Points",
     "redeem": "Redeem",
