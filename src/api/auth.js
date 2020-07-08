@@ -33,3 +33,27 @@ export const REFRESH_TOKEN_API = gql`
     refreshAccessToken(refreshToken: $refreshToken)
   }
 `;
+
+export const SETUP_PIN_API = gql`
+  mutation SetupPin($pin: String!, $confirmedPin: String!) {
+    setupPin(pin: $pin, confirmedPin: $confirmedPin)
+  }
+`
+
+export const CHANGE_PIN_API = gql`
+  mutation ChangePin($oldPin: String!, $newPin: String!, $newConfirmedPin: String!) {
+    changePin(oldPin: $oldPin, newPin: $newPin, newConfirmedPin: $newConfirmedPin)
+  }
+`
+
+export const RESET_PIN_API = gql`
+  mutation ResetPin($otp: String!, $newPin: String!, $newConfirmedPin: String!) {
+    resetPin(otp: $otp, newPin: $newPin, newConfirmedPin: $newConfirmedPin)
+  }
+`
+
+export const VERIFY_PIN_API = gql`
+  mutation VerifyPin($pin: String!) {
+    verifyPin(pin: $pin)
+  }
+`

@@ -3,8 +3,8 @@ import {FormattedMessage} from 'react-intl';
 import {Container, ButtonContainer, EmailText} from './style';
 
 import ModalContaienr from '@/components/ModalContainer';
-import ProfileDataRow from '@/components/ProfileDataRow';
-import Button from '@/components/Button';
+import SpecialListOption from '@/components/SpecialListOption';
+import ThemeButton from '@/components/ThemeButton';
 import Switch from '@/components/Switch';
 
 const emailsSampleData = [
@@ -27,9 +27,9 @@ const BindEmailEditScreen = () => {
   return (
     <ModalContaienr title={<FormattedMessage id="emails_binding" />}>
       <Container>
-        {emailsSampleData.map((email, index) => (
-          <ProfileDataRow
-            label={<EmailText>{email.email}</EmailText>}
+        {emails.map((email, index) => (
+          <SpecialListOption
+            label={<EmailText>{email.emailAddress}</EmailText>}
             value={
               <Switch
                 value={emails[index]}
@@ -40,9 +40,9 @@ const BindEmailEditScreen = () => {
         ))}
       </Container>
       <ButtonContainer>
-        <Button small>
+        <ThemeButton small>
           <FormattedMessage id="add_email_account" />
-        </Button>
+        </ThemeButton>
       </ButtonContainer>
     </ModalContaienr>
   );

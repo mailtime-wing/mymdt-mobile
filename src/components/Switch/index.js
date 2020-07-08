@@ -8,16 +8,14 @@ const Switch = props => {
   return (
     <Switches
       shape="pill"
-      borderColor={theme.colors.black.normal}
-      borderWidth={2}
-      buttonSize={12}
-      sliderHeight={20}
-      sliderWidth={36}
-      buttonOffsetLeft={2}
-      buttonOffsetRight={6} // offsetLeft+border
-      buttonColor={theme.colors.black.normal}
-      colorSwitchOff={theme.colors.white.normal}
-      colorSwitchOn={theme.colors.white.normal}
+      buttonSize={28}
+      sliderWidth={60}
+      sliderHeight={36}
+      buttonOffsetLeft={4}
+      buttonOffsetRight={6}
+      buttonColor={theme.colors.white.normal}
+      colorSwitchOff={theme.colors.secondary.normal}
+      colorSwitchOn={theme.colors.secondary.normal}
       showText={false}
       value={props.value}
       {...props}

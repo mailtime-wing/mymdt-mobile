@@ -1,57 +1,64 @@
 import React, {useState} from 'react';
-import {Text} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
-import ModalContaienr from '@/components/ModalContainer';
-import ProfileDataRow from '@/components/ProfileDataRow';
+import ModalContainer from '@/components/ModalContainer';
+import ListOption from '@/components/ListOption';
+import SpecialListOption from '@/components/SpecialListOption';
 import Switch from '@/components/Switch';
 
-import {Container, ListOption, Image} from './style';
+import {Container} from './style';
 
 const AccountSecurityScreen = ({navigation}) => {
-  const [pinAndFaceId, setPinAndFaceId] = useState(false); // from api later
+  const [isPinToggled, setIsPinToggled] = useState(false); // from api later
+  const [isFaceIdToggled, setIsFaceIdToggled] = useState(false); // from api later
+
+  const switchOptions = [
+    {
+      label: <FormattedMessage id="pin" />,
+      value: (
+        <Switch
+          value={isPinToggled}
+          onChange={() => setIsPinToggled(!isPinToggled)}
+        />
+      ),
+    },
+    {
+      label: <FormattedMessage id="face_id_or_touch_id" />,
+      value: (
+        <Switch
+          value={isFaceIdToggled}
+          onChange={() => setIsFaceIdToggled(!isFaceIdToggled)}
+        />
+      ),
+    },
+  ];
+
+  const options = [
+    {
+      label: <FormattedMessage id="forget_pin" />,
+      onPress: () => navigation.navigate('forget_pin'),
+    },
+    {
+      label: <FormattedMessage id="change_pin" />,
+      onPress: () => navigation.navigate('change_pin'),
+    },
+    {
+      label: <FormattedMessage id="change_phone_number" />,
+      onPress: () => navigation.navigate('language'),
+    },
+  ];
+
   return (
-    <ModalContaienr title={<FormattedMessage id="account_security" />}>
+    <ModalContainer title={<FormattedMessage id="account_security" />}>
       <Container>
-        <ProfileDataRow
-          label={
-            <Text>
-              <FormattedMessage id="pin_and_face_id" />
-            </Text>
-          }
-          value={
-            <Switch
-              value={pinAndFaceId}
-              onChange={() => setPinAndFaceId(!pinAndFaceId)}
-            />
-          }
-        />
-        <ProfileDataRow
-          label={
-            <Text>
-              <FormattedMessage id="forget_pin" />
-            </Text>
-          }
-          value={
-            <ListOption onPress={() => navigation.navigate('language')}>
-              <Image source={require('@/assets/black_arrow.png')} />
-            </ListOption>
-          }
-        />
-        <ProfileDataRow
-          label={
-            <Text>
-              <FormattedMessage id="change_phone_number" />
-            </Text>
-          }
-          value={
-            <ListOption>
-              <Image source={require('@/assets/black_arrow.png')} />
-            </ListOption>
-          }
-        />
+        {switchOptions.map(row => (
+          <SpecialListOption label={row.label} value={row.value} />
+        ))}
+        {options.map(option => (
+          <ListOption label={option.label} onPress={option.onPress} />
+        ))}
       </Container>
-    </ModalContaienr>
+    </ModalContainer>
   );
 };
 
