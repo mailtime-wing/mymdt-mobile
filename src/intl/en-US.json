@@ -110,6 +110,7 @@
     "pin_verification_fail": "Verification failed.\nPlease enter a new pin again.",
     "back_to_account_security": "Back to account security",
     "pin_successfully_with_action": "You have successfully {action} your pin.",
+    "pin_action_changed": "changed",
     "change_phone_number": "Change Phone Number",
     "currency": "Currency",
     "push_notification": "Push Notification",

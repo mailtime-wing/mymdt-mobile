@@ -16,7 +16,7 @@ const PinSuccessScreen = ({navigation, route}) => {
       title={<FormattedMessage id="success" defaultMessage="success" />}>
       <ScrollContainer>
         <Container>
-          <Detail>{route?.params?.detail}</Detail>
+          <Detail>{route?.params?.pin_action}</Detail>
           <ThemeButton onPress={() => navigation.pop(2)}>
             <FormattedMessage
               id="back_to_account_security"

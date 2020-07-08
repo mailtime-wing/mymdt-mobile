@@ -1,9 +1,9 @@
 import React, {useReducer, useEffect, useContext, useCallback} from 'react';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {AuthContext} from '@/context/auth';
 
 import PinForm from '@/components/PinForm';
-import ModalContaienr from '@/components/ModalContainer';
+import ModalContainer from '@/components/ModalContainer';
 import {CHANGE_PIN_API} from '@/api/auth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 
@@ -62,19 +62,19 @@ const reducer = (state, action) => {
 };
 
 const ChangePinScreen = ({navigation}) => {
+  const intl = useIntl();
   const [state, dispatch] = useReducer(reducer, initialState);
   const {authToken} = useContext(AuthContext);
-  const [
-    changePinRequest,
-    {error: changePinRequestError},
-    changePinRequestReset,
-  ] = useMutationWithReset(CHANGE_PIN_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
+  const [changePinRequest, {error}, reset] = useMutationWithReset(
+    CHANGE_PIN_API,
+    {
+      context: {
+        headers: {
+          authorization: authToken ? `Bearer ${authToken}` : '',
+        },
       },
     },
-  });
+  );
 
   useEffect(() => {
     if (state.oldPin && state.newPin && state.newConfirmedPin) {
@@ -83,13 +83,13 @@ const ChangePinScreen = ({navigation}) => {
   }, [handleSubmit, state]);
 
   useEffect(() => {
-    if (changePinRequestError) {
+    if (error) {
       setTimeout(() => {
         dispatch({type: RESET});
-        changePinRequestReset();
+        reset();
       }, 2000);
     }
-  }, [changePinRequestError, changePinRequestReset]);
+  }, [error, reset]);
 
   const handleOldPinOnFulfill = pin => {
     dispatch({type: SAVE_OLD_PIN, payload: pin});
@@ -101,7 +101,7 @@ const ChangePinScreen = ({navigation}) => {
     dispatch({type: NEXT_STEP});
   };
 
-  const handleVerifyePinOnFinish = async pin => {
+  const handleVerifyPinOnFinish = async pin => {
     dispatch({type: SAVE_NEW_CONFIRMED_PIN, payload: pin});
   };
 
@@ -117,20 +117,26 @@ const ChangePinScreen = ({navigation}) => {
 
       if (data) {
         navigation.navigate('pin_success', {
-          detail: (
-            <FormattedMessage
-              id="pin_successfully_with_action"
-              defaultMessage="You have successfully {action} your pin."
-              values={{
-                action: 'changed',
-              }}
-            />
+          pin_action: intl.formatMessage(
+            {
+              id: 'pin_successfully_with_action',
+              defaultMessage: intl.messages.pin_successfully_with_action,
+            },
+            {
+              action: (
+                <FormattedMessage
+                  id="pin_action_changed"
+                  defaultMessage="changed"
+                />
+              ),
+            },
           ),
         });
       }
     } catch (e) {}
   }, [
     changePinRequest,
+    intl,
     navigation,
     state.newConfirmedPin,
     state.newPin,
@@ -139,7 +145,6 @@ const ChangePinScreen = ({navigation}) => {
 
   const steps = [
     {
-      key: 0,
       hints: (
         <FormattedMessage
           id="enter_old_pin"
@@ -149,7 +154,6 @@ const ChangePinScreen = ({navigation}) => {
       onFulfill: handleOldPinOnFulfill,
     },
     {
-      key: 1,
       hints: (
         <FormattedMessage
           id="enter_new_pin"
@@ -159,15 +163,14 @@ const ChangePinScreen = ({navigation}) => {
       onFulfill: handleNewPinOnFulfill,
     },
     {
-      key: 2,
       hints: (
         <FormattedMessage
           id="enter_pin_to_verify"
           defaultMessage="Enter the pin again to verify"
         />
       ),
-      onFulfill: handleVerifyePinOnFinish,
-      error: changePinRequestError && (
+      onFulfill: handleVerifyPinOnFinish,
+      error: error && (
         <FormattedMessage
           id="pin_verification_fail"
           defaultMessage="Verification failed. Please enter a new pin again."
@@ -179,15 +182,15 @@ const ChangePinScreen = ({navigation}) => {
   const currentStep = steps[state.step - 1];
 
   return (
-    <ModalContaienr
+    <ModalContainer
       title={<FormattedMessage id="change_pin" defaultMessage="Change Pin" />}>
       <PinForm
-        hints={currentStep?.hints}
-        onFulfill={currentStep?.onFulfill}
-        error={currentStep?.error}
-        key={currentStep?.key}
+        hints={currentStep.hints}
+        onFulfill={currentStep.onFulfill}
+        error={currentStep.error}
+        key={state.step}
       />
-    </ModalContaienr>
+    </ModalContainer>
   );
 };
 
