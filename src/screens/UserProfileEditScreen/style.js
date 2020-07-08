@@ -3,8 +3,7 @@ import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 import AppText from '@/components/AppText';
 
-export const Container = styled.View`
-`;
+export const Container = styled.View``;
 
 export const FormContainer = styled.View`
   padding: 0 24px;
@@ -36,13 +35,13 @@ export const UserIcon = styled.Image`
   border-radius: 28px;
 `;
 
-export const GenderText = styled(Text)``
+export const GenderText = styled(Text)``;
 
 export const FillIcon = styled.Image`
   position: absolute;
   right: -8;
   bottom: 0;
-`
+`;
 
 export const OptionContainer = styled.TouchableOpacity`
   flex-direction: row;
@@ -65,31 +64,6 @@ export const ButtonContainer = styled.View`
 
 export const Modal = styled.Modal`
   padding: 0 30px;
-`;
-
-export const DatePickerContainer = styled.View`
-  height: 45px;
-  /* border-bottom-width: 1px; */
-  flex-direction: row;
-  justify-content: space-between;
-`;
-export const DatePickerButton = styled.TouchableOpacity`
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-`;
-export const DatePickerButtonDone = styled(Text)`
-  font-size: 18px;
-  color: #006bff;
-`;
-export const DatePickerButtonCancel = styled(Text)`
-  font-size: 18px;
-  color: red;
-`;
-
-export const DatePickerIOS = styled.DatePickerIOS`
-  background-color: ${props => props.theme.colors.grey.light};
-  color: black;
 `;
 
 export const DateFieldContainer = styled.TouchableOpacity`

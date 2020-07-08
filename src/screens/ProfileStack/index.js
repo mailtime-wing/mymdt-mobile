@@ -62,6 +62,7 @@ const ProfileStack = () => {
     <Stack.Navigator mode="modal">
       {screens.map(screen => (
         <Stack.Screen
+          key={screen.name}
           name={screen.name}
           component={screen.component}
           options={{

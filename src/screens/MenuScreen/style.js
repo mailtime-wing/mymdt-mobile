@@ -5,6 +5,10 @@ export const ScrollContainer = styled.ScrollView`
   background-color: ${props => props.theme.colors.white.normal};
 `;
 
+export const ListContainer = styled.View`
+  padding: 0 24px;
+`;
+
 export const AccountInfoContainer = styled.View`
   margin-top: 65px;
   align-items: center;

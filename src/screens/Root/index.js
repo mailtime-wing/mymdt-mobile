@@ -120,6 +120,7 @@ const Root = () => {
         <Stack.Navigator>
           {screens.map(screen => (
             <Stack.Screen
+              key={screen.name}
               name={screen.name}
               component={screen.component}
               options={{
@@ -165,6 +166,7 @@ const Root = () => {
 
           {authScreens.map(screen => (
             <Stack.Screen
+              key={screen.name}
               name={screen.name}
               component={screen.component}
               options={{

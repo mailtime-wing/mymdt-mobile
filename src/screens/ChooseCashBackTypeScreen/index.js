@@ -91,8 +91,12 @@ const ChooseCashBackTypeScreen = ({route, navigation}) => {
             defaultMessage="RewardMe provides 2 types of cashback. You can change the perference afterwards."
           />
         </Detail>
-        {cashbackTypeList.map(cbt => (
-          <CashBackType cashback={cbt} handleChoosePress={handleChoosePress} />
+        {cashbackTypeList.map((cbt, index) => (
+          <CashBackType
+            key={index}
+            cashback={cbt}
+            handleChoosePress={handleChoosePress}
+          />
         ))}
       </Container>
     </ScrollContainer>

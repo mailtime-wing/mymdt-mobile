@@ -51,11 +51,15 @@ const AccountSecurityScreen = ({navigation}) => {
   return (
     <ModalContainer title={<FormattedMessage id="account_security" />}>
       <Container>
-        {switchOptions.map(row => (
-          <SpecialListOption label={row.label} value={row.value} />
+        {switchOptions.map((row, index) => (
+          <SpecialListOption key={index} label={row.label} value={row.value} />
         ))}
-        {options.map(option => (
-          <ListOption label={option.label} onPress={option.onPress} />
+        {options.map((option, index) => (
+          <ListOption
+            key={index}
+            label={option.label}
+            onPress={option.onPress}
+          />
         ))}
       </Container>
     </ModalContainer>

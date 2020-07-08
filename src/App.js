@@ -8,7 +8,7 @@ import theme from '@/theme';
 import {IntlContainer} from '@/context/Intl';
 import {AuthProvider} from '@/context/auth';
 import NavigationRoot from '@/screens/Root';
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 function App() {
   return (
