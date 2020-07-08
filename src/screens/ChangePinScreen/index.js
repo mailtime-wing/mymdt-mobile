@@ -123,12 +123,10 @@ const ChangePinScreen = ({navigation}) => {
               defaultMessage: intl.messages.pin_successfully_with_action,
             },
             {
-              action: (
-                <FormattedMessage
-                  id="pin_action_changed"
-                  defaultMessage="changed"
-                />
-              ),
+              action: intl.formatMessage({
+                id: 'pin_action_changed',
+                defaultMessage: intl.messages.pin_action_changed,
+              }),
             },
           ),
         });
