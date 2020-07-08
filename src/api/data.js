@@ -193,6 +193,47 @@ export const REPORT_MISSING_RECEIPT = gql`
       amount: $amount
     )
   }
+`
+
+export const GET_USER_TASK_GROUPS_AND_REWARD_API = gql`
+  query {
+    userProfile {
+      taskGroups {
+        id
+        name
+        description
+        userTasks {
+          taskId
+          name
+          description
+          taskUrl
+          maxCompletion
+          maxAmountToEarn
+          rewardValue
+          tasksFinishedCount
+          isTaskCompleted
+        }
+      }
+      rewards {
+        id
+        name
+        description
+        value
+        claimable
+        callback_url
+        claimed_time
+        user_id
+        task_id
+        status
+      }
+    }
+  }
+`;
+
+export const CLAIM_REWARD_API = gql`
+  mutation ClaimReward($id: ID!) {
+    claimReward(id: $id)
+  }
 `;
 
 export const GET_CHECK_IN_STATUS_API = gql`
