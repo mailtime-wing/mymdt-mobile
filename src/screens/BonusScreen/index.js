@@ -86,7 +86,6 @@ const BonusScreen = props => (
       {BonusList.map((bonusTask, index) => (
         <Fragment key={index}>
           <BonusBox
-            key={index}
             title={bonusTask.title}
             detail={bonusTask.detail}
             icon={bonusTask.icon}

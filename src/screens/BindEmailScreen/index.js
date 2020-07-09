@@ -136,7 +136,7 @@ const BindEmailScreen = ({route, navigation}) => {
           const isBind = index < currentIndex;
           const isNext = !active && !isBind;
           return (
-            <EmailRowContainer key={index} isNext={isNext}>
+            <EmailRowContainer key={email.emailAddress} isNext={isNext}>
               <EmailContainer>
                 <Input
                   type="email"
