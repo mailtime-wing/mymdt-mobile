@@ -2,15 +2,10 @@ import styled from '@emotion/native';
 import {Platform} from 'react-native';
 import TitleText from '@/components/TitleText';
 
-export const Container = styled.View`
-  padding-top: 88px;
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
-  background-color: ${props => props.theme.colors.white.normal};
-  height: 100%;
-`;
+import {MARGIN_BETWEEN_TOP_BAR_AND_TITLE} from '@/constants/layout';
 
-export const ScrollContainer = styled.ScrollView`
-  background-color: ${props => props.theme.colors.white.normal};
+export const Container = styled.View`
+  padding-top: ${String(MARGIN_BETWEEN_TOP_BAR_AND_TITLE)}px;
 `;
 
 export const Title = styled(TitleText)`

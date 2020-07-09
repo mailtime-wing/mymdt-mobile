@@ -23,7 +23,7 @@ import {
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
 import DateTimeSelector from '@/components/DateTimeSelector';
 
-import ModalContaienr from '@/components/ModalContainer';
+import ModalContainer from '@/components/ModalContainer';
 import EditButton from '@/components/EditButton';
 import CancelButton from '@/components/CancelButton';
 import ConfirmButton from '@/components/ConfirmButton';
@@ -294,7 +294,7 @@ const UserProfileEditScreen = ({navigation}) => {
 
   return (
     <TouchableWithoutFeedback onPress={handleSpacePress}>
-      <ModalContaienr
+      <ModalContainer
         title={<FormattedMessage id="edit_profile" defaultMessage="Profile" />}>
         <Container behavior="position">
           <ScrollContainer
@@ -313,7 +313,7 @@ const UserProfileEditScreen = ({navigation}) => {
             </Formik>
           </ScrollContainer>
         </Container>
-      </ModalContaienr>
+      </ModalContainer>
     </TouchableWithoutFeedback>
   );
 };

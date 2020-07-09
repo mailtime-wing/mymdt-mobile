@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {IntlContext} from '@/context/Intl';
 
-import ModalContaienr from '@/components/ModalContainer';
+import ModalContainer from '@/components/ModalContainer';
 import SpecialListOption from '@/components/SpecialListOption';
 import ListOption from '@/components/ListOption';
 import Switch from '@/components/Switch';
@@ -13,7 +13,7 @@ const SettingScreen = ({navigation}) => {
   const {language} = useContext(IntlContext);
   const [push, setPush] = useState(false); // from api later
   return (
-    <ModalContaienr title={<FormattedMessage id="settings" />}>
+    <ModalContainer title={<FormattedMessage id="settings" />}>
       <Container>
         <ListOption
           label={<FormattedMessage id="language" />}
@@ -26,7 +26,7 @@ const SettingScreen = ({navigation}) => {
           value={<Switch value={push} onChange={() => setPush(!push)} />}
         />
       </Container>
-    </ModalContaienr>
+    </ModalContainer>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import ModalContaienr from '@/components/ModalContainer';
+import ModalContainer from '@/components/ModalContainer';
 import Button from '@/components/Button';
 import OfferList from '@/components/OfferList';
 
@@ -16,7 +16,7 @@ const selectedOffers = [
 
 const OfferPreferenceEditScreen = () => {
   return (
-    <ModalContaienr title={<FormattedMessage id="favorite_brands" />}>
+    <ModalContainer title={<FormattedMessage id="favorite_brands" />}>
       <Detail>
         <FormattedMessage id="edit_preference_in_30_days" />
       </Detail>
@@ -41,7 +41,7 @@ const OfferPreferenceEditScreen = () => {
         <FormattedMessage id="get_reward_from_brands" />
       </Detail>
       <OfferList offerList={selectedOffers} />
-    </ModalContaienr>
+    </ModalContainer>
   );
 };
 
