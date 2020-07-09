@@ -168,7 +168,7 @@ const OfferSelectScreen = ({route, navigation}) => {
           )}
         </BrandsSelectedText>
         <ThemeButton
-          small
+          medium
           onPress={handleNextPress}
           disabled={isErrorFromOfferList}>
           <FormattedMessage id="confirm" defaultMessage="confirm" />

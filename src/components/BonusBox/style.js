@@ -6,15 +6,14 @@ import Text from '@/components/AppText';
 export const Container = styled.View`
   background: ${props => props.theme.colors.white.normal};
   border-radius: 24px;
-  padding: 24px;
 `;
 
 export const HeaderContainer = styled.View`
   flex-direction: row;
+  padding: 24px;
 `;
 
 export const HeaderRightContainer = styled.View`
-  padding-bottom: 16px;
   flex: 6;
 `;
 

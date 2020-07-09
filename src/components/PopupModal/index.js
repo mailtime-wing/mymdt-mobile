@@ -32,11 +32,11 @@ const PopupModal = ({title, detail, callback}) => {
             <Title>{title}</Title>
             <Detail>{detail}</Detail>
             <ButtonContainer>
-              <ThemeButton small reverse onPress={handleCancelPress}>
+              <ThemeButton medium reverse onPress={handleCancelPress}>
                 cancel
               </ThemeButton>
               <MarginContainer />
-              <ThemeButton small onPress={handleOkPress}>
+              <ThemeButton medium onPress={handleOkPress}>
                 OKAY
               </ThemeButton>
             </ButtonContainer>

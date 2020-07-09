@@ -33,7 +33,7 @@ const OfferPreferenceEditScreen = () => {
         <Header>
           <FormattedMessage id="your_choices" />
         </Header>
-        <Button small>
+        <Button medium>
           <FormattedMessage id="edit" />
         </Button>
       </RowContainer>

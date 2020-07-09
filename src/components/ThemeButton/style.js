@@ -6,14 +6,19 @@ export const Container = styled.TouchableOpacity`
   opacity: ${props => props.disabled && '0.5'};
 
   text-transform: uppercase;
-  min-height: 33px;
+  justify-content: center;
+
+  padding: 20px 24px;
+  border-radius: 42px;
 
   ${props =>
-    props.small
-      ? `padding: 8px 16px;
-  border-radius: 28px;`
-      : `padding: 20px 24px;
-  border-radius: 42px;`}
+    props.small &&
+    `padding: 4px 8px;
+    `}
+  ${props =>
+    props.medium &&
+    `padding: 10px 12px;
+    `}
   ${props => props.width && `width: ${props.width}; align-self: center;`}
   ${props =>
     props.reverse &&
