@@ -8,7 +8,7 @@ import {Container, LabelText, styles} from './style';
 
 import BrowseScreen from '@/screens/BrowseScreen';
 import BonusScreen from '@/screens/BonusScreen';
-import PointScreen from '@/screens/PointScreen';
+import WalletScreen from '@/screens/WalletScreen';
 import RedeemScreen from '@/screens/RedeemScreen';
 
 import BrowseIcon from '@/assets/browse.svg';
@@ -95,10 +95,10 @@ const TabNavigatorContainer = () => {
           }}
         />
         <Tab.Screen
-          name="Point"
-          component={PointScreen}
+          name="wallet"
+          component={WalletScreen}
           options={{
-            tabBarLabel: ({focused}) => <Label id="point" focused={focused} />,
+            tabBarLabel: ({focused}) => <Label id="wallet" focused={focused} />,
             tabBarIcon: ({focused}) => (
               <PointIcon
                 width={iconWidth}
