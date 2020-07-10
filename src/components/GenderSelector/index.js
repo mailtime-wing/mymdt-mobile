@@ -23,10 +23,13 @@ const GenderOption = ({label, value, setFieldValue, gender}) => {
 const GenderSelector = ({gender, setFieldValue}) => {
   return (
     <View>
-      <GenderLabel><FormattedMessage id='gender' defaultMessage='gender'/>*</GenderLabel>
+      <GenderLabel>
+        <FormattedMessage id="gender" defaultMessage="gender" />*
+      </GenderLabel>
       <GenderContainer>
         {genderOptions.map(g => (
           <GenderOption
+            key={g.value}
             label={g.label}
             value={g.value}
             setFieldValue={setFieldValue}

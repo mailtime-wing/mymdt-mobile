@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {Text, TouchableOpacity, FlatList} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {IntlContext} from '@/context/Intl';
 
 import ModalContainer from '@/components/ModalContainer';
@@ -24,13 +24,14 @@ const LanguageScreen = props => {
 
   return (
     <ModalContainer title={<FormattedMessage id="language" />}>
-      <FlatList
-        data={languageList}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({item}) => (
-          <LanguageOption title={item.label} value={item.value} {...props} />
-        )}
-      />
+      {languageList.map(language => (
+        <LanguageOption
+          key={language.value}
+          title={language.label}
+          value={language.value}
+          {...props}
+        />
+      ))}
     </ModalContainer>
   );
 };

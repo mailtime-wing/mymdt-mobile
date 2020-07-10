@@ -16,12 +16,18 @@ const SettingScreen = ({navigation}) => {
     <ModalContainer title={<FormattedMessage id="settings" />}>
       <Container>
         <ListOption
+          key="language"
           label={<FormattedMessage id="language" />}
           value={language}
           onPress={() => navigation.navigate('language')}
         />
-        <ListOption label={<FormattedMessage id="currency" />} value="USD" />
+        <ListOption
+          key="currency"
+          label={<FormattedMessage id="currency" />}
+          value="USD"
+        />
         <SpecialListOption
+          key="push_notification"
           label={<FormattedMessage id="push_notification" />}
           value={<Switch value={push} onChange={() => setPush(!push)} />}
         />

@@ -22,7 +22,7 @@ const DailyCheckIn = ({dayListWithAmount, currentDay}) => (
         const passedDay = day < currentDay;
         const today = day === currentDay;
         return (
-          <Card passedDay={passedDay} today={today}>
+          <Card key={index} passedDay={passedDay} today={today}>
             <CardNumberText passedDay={passedDay} today={today}>
               {day}
             </CardNumberText>

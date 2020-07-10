@@ -29,6 +29,7 @@ const BindEmailEditScreen = () => {
       <Container>
         {emails.map((email, index) => (
           <SpecialListOption
+            key={email.emailAddress}
             label={<EmailText>{email.emailAddress}</EmailText>}
             value={
               <Switch

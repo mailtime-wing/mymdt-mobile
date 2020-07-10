@@ -1,8 +1,8 @@
 import React from 'react';
 import {Platform} from 'react-native';
+import {ProgressView as ProgressBarIOS} from '@react-native-community/progress-view';
+import {ProgressBar as ProgressBarAndroid} from '@react-native-community/progress-bar-android';
 import {
-  ProgressBarIOS,
-  ProgressBarAndroid,
   ProgressContainer,
   ProgressDetailContainer,
   ProgressHeader,

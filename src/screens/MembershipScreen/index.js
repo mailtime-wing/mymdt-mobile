@@ -56,6 +56,7 @@ const CardSection = () => {
     <View>
       {cards.map(card => (
         <Card
+          key={card.level}
           level={card.level}
           cashBackPercentage={card.percentage}
           brands={card.brands}

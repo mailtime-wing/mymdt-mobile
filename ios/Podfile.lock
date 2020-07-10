@@ -254,6 +254,10 @@ PODS:
   - react-native-mailtime-sdk (0.1.0):
     - MTAuth
     - React
+  - react-native-progress-bar-android (1.0.3):
+    - React
+  - react-native-progress-view (1.0.3):
+    - React
   - react-native-safe-area-context (3.0.6):
     - React
   - React-RCTActionSheet (0.62.2):
@@ -377,6 +381,8 @@ DEPENDENCIES:
   - react-native-config (from `../node_modules/react-native-config`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-mailtime-sdk (from `../node_modules/react-native-mailtime-sdk`)
+  - "react-native-progress-bar-android (from `../node_modules/@react-native-community/progress-bar-android`)"
+  - "react-native-progress-view (from `../node_modules/@react-native-community/progress-view`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -460,6 +466,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-image-picker"
   react-native-mailtime-sdk:
     :path: "../node_modules/react-native-mailtime-sdk"
+  react-native-progress-bar-android:
+    :path: "../node_modules/@react-native-community/progress-bar-android"
+  react-native-progress-view:
+    :path: "../node_modules/@react-native-community/progress-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-RCTActionSheet:
@@ -536,6 +546,8 @@ SPEC CHECKSUMS:
   react-native-config: f2c2ae45625a068c35681a16b9bfb1ca58b0adc7
   react-native-image-picker: 6a850c41f57f0848d918c2a77aedd7aa272ffa30
   react-native-mailtime-sdk: 7453fca4ca4c8b7e152ba3d05c2ff61ae611836a
+  react-native-progress-bar-android: d1ec460350b7c0d27418b0c0b9ebf073646db016
+  react-native-progress-view: d6127184789afb752faae9acdbe7fa320632a662
   react-native-safe-area-context: e22a8ca00f758273d2408953965cb8db67da7925
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0

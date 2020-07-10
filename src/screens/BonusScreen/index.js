@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {MarginBottom, ScrollContainer, TaskListContainer} from './style';
@@ -84,7 +84,7 @@ const BonusScreen = props => (
     <ScrollContainer>
       <AccountBar {...props} />
       {BonusList.map((bonusTask, index) => (
-        <>
+        <Fragment key={index}>
           <BonusBox
             title={bonusTask.title}
             detail={bonusTask.detail}
@@ -92,7 +92,7 @@ const BonusScreen = props => (
             children={bonusTask.children}
           />
           {index !== BonusList.length - 1 && <MarginBottom />}
-        </>
+        </Fragment>
       ))}
       <NoMoreContent />
     </ScrollContainer>

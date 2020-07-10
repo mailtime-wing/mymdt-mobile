@@ -92,7 +92,11 @@ const ChooseCashBackTypeScreen = ({route, navigation}) => {
           />
         </Detail>
         {cashbackTypeList.map(cbt => (
-          <CashBackType cashback={cbt} handleChoosePress={handleChoosePress} />
+          <CashBackType
+            key={cbt.type}
+            cashback={cbt}
+            handleChoosePress={handleChoosePress}
+          />
         ))}
       </Container>
     </ScrollContainer>

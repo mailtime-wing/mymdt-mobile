@@ -13,7 +13,7 @@ const TaskList = ({taskList}) => (
     {taskList.map(({name, amount, claimedDate, isTaskCompleted}) => {
       const claimed = !!claimedDate;
       return (
-        <RowContainer>
+        <RowContainer key={name}>
           <Container>
             <TaskName>{name}</TaskName>
             {claimedDate && (
