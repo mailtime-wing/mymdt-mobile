@@ -104,24 +104,23 @@ const BindEmailEditScreen = ({navigation}) => {
       },
     },
   };
-  const userEmailAccountsData = useQuery(
+  const {data, loading, refetch} = useQuery(
     GET_USER_EMAIL_ACCOUNTS_API,
     apiContext,
   );
-  const [unbindEmailRequest, {loading}] = useMutation(
+  const [unbindEmailRequest, {loading: unbindEmailLoading}] = useMutation(
     UNBIND_EMAIL_ACCOUNTS_API,
     apiContext,
   );
 
   useEffect(() => {
     dispatch({type: RESET});
-    if (userEmailAccountsData?.data) {
-      let emailAccounts =
-        userEmailAccountsData?.data?.userProfile.emailAccounts || [];
+    if (data) {
+      let emailAccounts = data?.userProfile.emailAccounts || [];
       emailAccounts = emailAccounts.map(email => ({...email, sharing: false})); // sharing data api later
       setEmails(emailAccounts);
     }
-  }, [userEmailAccountsData]);
+  }, [data]);
 
   useLayoutEffect(() => {
     if (state.isEditing) {
@@ -169,19 +168,19 @@ const BindEmailEditScreen = ({navigation}) => {
         },
       });
       dispatch({type: UPDATE_IS_EMAIL_UNBIND_CANCELLED}); // = reset
-      userEmailAccountsData?.refetch();
+      refetch();
     } catch (e) {
       console.error(e);
     }
   };
 
   const handleInputChange = index => {
-    const data = [...emails];
-    data[index].sharing = !data[index].sharing;
-    setEmails(data);
+    const newEmails = [...emails];
+    newEmails[index].sharing = !newEmails[index].sharing;
+    setEmails(newEmails);
   };
 
-  if (loading || userEmailAccountsData.loading) {
+  if (loading || unbindEmailLoading) {
     return <LoadingSpinner />;
   }
 

@@ -8,8 +8,6 @@ export const RowContainer = styled.View`
   align-items: center;
 `;
 
-export const View = styled.TouchableOpacity``;
-
 export const RowText = styled(Text)`
   font-size: 16px;
   line-height: 24px;
