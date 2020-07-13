@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Keyboard} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
-import ModalContaienr from '@/components/ModalContainer';
+import ModalContainer from '@/components/ModalContainer';
 import ThemeButton from '@/components/ThemeButton';
 
 import {ScrollContainer, Container, Detail} from './style';
@@ -12,7 +12,7 @@ const PinSuccessScreen = ({navigation, route}) => {
     Keyboard.dismiss();
   }, []);
   return (
-    <ModalContaienr
+    <ModalContainer
       title={<FormattedMessage id="success" defaultMessage="success" />}>
       <ScrollContainer>
         <Container>
@@ -25,7 +25,7 @@ const PinSuccessScreen = ({navigation, route}) => {
           </ThemeButton>
         </Container>
       </ScrollContainer>
-    </ModalContaienr>
+    </ModalContainer>
   );
 };
 

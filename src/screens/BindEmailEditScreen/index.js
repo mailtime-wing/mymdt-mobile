@@ -185,7 +185,7 @@ const BindEmailEditScreen = ({navigation}) => {
   }
 
   return (
-    <ModalContaienr title={<FormattedMessage id="emails_manage" />}>
+    <ModalContainer title={<FormattedMessage id="emails_manage" />}>
       <TitleContainer>
         <TitleText>
           <FormattedMessage id="email" defaultMessage="email" />
@@ -242,7 +242,7 @@ const BindEmailEditScreen = ({navigation}) => {
           callback={handleCallback}
         />
       )}
-    </ModalContaienr>
+    </ModalContainer>
   );
 };
 
