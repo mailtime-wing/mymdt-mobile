@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {Container, ButtonContainer, EmailText} from './style';
 
-import ModalContaienr from '@/components/ModalContainer';
+import ModalContainer from '@/components/ModalContainer';
 import SpecialListOption from '@/components/SpecialListOption';
 import ThemeButton from '@/components/ThemeButton';
 import Switch from '@/components/Switch';

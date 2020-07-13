@@ -60,7 +60,7 @@ const AccountSecurityScreen = ({navigation}) => {
         ))}
         {options.map((option, index) => (
           <ListOption
-            key={index}
+            key={option.label}
             label={option.label}
             onPress={option.onPress}
           />

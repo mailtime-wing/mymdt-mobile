@@ -17,13 +17,25 @@ import IntroductionScreen from '@/screens/IntroductionScreen';
 import WelcomeScreen from '@/screens/WelcomeScreen';
 import SignUpRewardScreen from '@/screens/SignUpRewardScreen';
 import HomeStack from '@/screens/HomeStack';
-import ModalStack from '@/screens/ModalStack';
-import ProfileStack from '@/screens/ProfileStack';
+import MembershipScreen from '@/screens/MembershipScreen';
+
+import LanguageScreen from '@/screens/LanguageScreen';
+import SignOutScreen from '@/screens/SignOutScreen';
+import NotificationScreen from '@/screens/NotificationScreen';
+import UserProfileEditScreen from '@/screens/UserProfileEditScreen';
+import BindEmailEditScreen from '@/screens/BindEmailEditScreen';
+import SettingScreen from '@/screens/SettingScreen';
+import AppSettingScreen from '@/screens/AppSettingScreen';
+import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
+import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
+
 import {AuthContext} from '@/context/auth';
 import BackButton from '@/components/BackButton';
+import CloseButton from '@/components/CloseButton';
 import {
   MARGIN_BETWEEN_STATUS_BAR_AND_TOP_BAR,
   TOP_BAR_HEIGHT,
+  MARGIN_BETWEEN_MODAL_HEAD_AND_TOP_BAR,
 } from '@/constants/layout';
 
 import {styles} from './style';
@@ -65,8 +77,25 @@ const setupScreens = [
 
 const authScreens = [
   {name: 'home', component: HomeStack},
-  {name: 'modal', component: ModalStack},
-  {name: 'profile', component: ProfileStack},
+  {name: 'membership', component: MembershipScreen},
+];
+
+const authModalScreens = [
+  {name: 'settings', component: SettingScreen},
+  {name: 'notification', component: NotificationScreen},
+  {name: 'edit_profile', component: UserProfileEditScreen},
+  {name: 'my_referral_code', component: UserProfileEditScreen},
+  {name: 'offers_preference', component: OfferPreferenceEditScreen},
+  {name: 'emails_binding', component: BindEmailEditScreen},
+  {name: 'account_security', component: AccountSecurityScreen},
+  {name: 'enter_invite_code', component: LanguageScreen},
+  {name: 'sign_out', component: SignOutScreen},
+  {name: 'app_settings', component: AppSettingScreen},
+  {name: 'language', component: LanguageScreen},
+  {name: 'faq_and_support', component: LanguageScreen},
+  {name: 'terms_of_service', component: LanguageScreen},
+  {name: 'privacy_policy', component: LanguageScreen},
+  {name: 'about_us', component: LanguageScreen},
 ];
 
 const backScreen = [
@@ -75,6 +104,7 @@ const backScreen = [
   'welcome',
   'offer_select',
   'bind_email',
+  'membership',
 ];
 
 const Root = () => {
@@ -114,6 +144,19 @@ const Root = () => {
     height: top + MARGIN_BETWEEN_STATUS_BAR_AND_TOP_BAR + TOP_BAR_HEIGHT,
   };
 
+  const modalHeaderStyle = {
+    ...styles.header,
+    height: MARGIN_BETWEEN_MODAL_HEAD_AND_TOP_BAR + TOP_BAR_HEIGHT,
+  };
+
+  const modalCardStyle = [
+    {
+      ...styles.card,
+      marginTop: top,
+    },
+    styles.modalCard,
+  ];
+
   return (
     <Container>
       {!authToken ? (
@@ -137,7 +180,7 @@ const Root = () => {
         </Stack.Navigator>
       ) : (
         // TODO: hide setupScreens so that it cannot be back from authScreens
-        <Stack.Navigator>
+        <Stack.Navigator mode="modal">
           {filteredSetupScreens.map((screen, i) => {
             const {name, component, ...params} = screen;
             return (
@@ -173,9 +216,30 @@ const Root = () => {
                 headerTransparent: true,
                 headerTitleStyle: styles.headerTitle,
                 headerStyle: headerStyle,
-                headerLeft: () =>
-                  backScreen.includes(screen.name) ? <BackButton /> : null,
+                cardStyle: styles.card,
+                headerLeft: props =>
+                  backScreen.includes(screen.name) ? (
+                    <BackButton {...props} />
+                  ) : null,
                 gestureEnabled: false,
+              }}
+            />
+          ))}
+
+          {authModalScreens.map(screen => (
+            <Stack.Screen
+              key={screen.name}
+              name={screen.name}
+              component={screen.component}
+              options={{
+                headerTransparent: true,
+                headerTitleStyle: styles.headerTitle,
+                headerStyle: modalHeaderStyle,
+                cardStyle: modalCardStyle,
+                headerLeft: props => <CloseButton {...props} />,
+                cardOverlayEnabled: true,
+                gestureEnabled: true,
+                headerStatusBarHeight: 0,
               }}
             />
           ))}

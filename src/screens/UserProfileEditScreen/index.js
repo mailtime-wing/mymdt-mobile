@@ -27,7 +27,7 @@ import ModalContainer from '@/components/ModalContainer';
 import EditButton from '@/components/EditButton';
 import CancelButton from '@/components/CancelButton';
 import ConfirmButton from '@/components/ConfirmButton';
-import HeaderButton from '@/components/HeaderButton';
+import CloseButton from '@/components/CloseButton';
 import Input from '@/components/AppInput';
 import FormInput from '@/components/Input';
 
@@ -286,7 +286,7 @@ const UserProfileEditScreen = ({navigation}) => {
       });
     } else {
       navigation.setOptions({
-        headerLeft: () => <HeaderButton isModal root="menu" />,
+        headerLeft: props => <CloseButton {...props} />,
         headerRight: () => <EditButton onPress={handleEditPress} />,
       });
     }

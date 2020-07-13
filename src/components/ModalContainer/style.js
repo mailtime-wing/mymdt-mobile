@@ -13,7 +13,6 @@ export const Title = styled(TitleText)`
   color: ${props => props.theme.colors.secondary.normal};
   line-height: 36px;
   letter-spacing: 1px;
-  margin-bottom: 16px;
   text-transform: uppercase;
   padding-left: 24px;
   ${Platform.OS === 'ios' && 'font-weight: bold;'}
