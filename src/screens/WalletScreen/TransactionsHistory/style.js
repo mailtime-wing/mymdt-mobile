@@ -10,7 +10,6 @@ export const HistoryListContainer = styled.View`
 
 export const HistoryListHeader = styled.View`
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   padding: 24px 24px 16px 24px;
   border-bottom-width: 1px;
@@ -21,7 +20,9 @@ export const HistoryListHeader = styled.View`
 
 export const FilterButton = styled.TouchableOpacity`
   flex-direction: row;
-`
+  flex: 1;
+  margin-right: 8px;
+`;
 
 export const FilterText = styled(Text)`
   font-size: 14px;
@@ -31,4 +32,4 @@ export const FilterText = styled(Text)`
   color: ${props => props.color && props.color};
   ${Platform.OS === 'ios' && 'font-weight: bold;'}
   margin-left: 8px;
-`
+`;

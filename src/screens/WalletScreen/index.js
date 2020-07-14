@@ -6,6 +6,7 @@ import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
+import BottomSheet from '@/components/BottomSheet';
 
 import CardList from './CardList';
 import ActionButtons from './ActionButtons';
@@ -78,9 +79,13 @@ const cardList = [
   },
 ];
 
+const filterList = ['All', 'abc@email.com', 'foobar@gmail.commmmmmmm'];
+
 const WalletScreen = ({...props}) => {
   const [currentTheme, setCurrentTheme] = useState(cardList[0].theme);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const [showBottomSheet, setShowBottomSheet] = useState(false);
+  const [activeFilterIndex, setActiveFilterIndex] = useState(0);
 
   const transactionsHistory = [
     // TODO: integrate transactions data from api
@@ -121,6 +126,19 @@ const WalletScreen = ({...props}) => {
     setActiveCardIndex(cardIndex);
   };
 
+  const handleFilterPress = () => {
+    setShowBottomSheet(true);
+  };
+
+  const handleLayoutPress = () => {
+    setShowBottomSheet(false);
+  };
+
+  const handleItemPress = index => {
+    setActiveFilterIndex(index);
+    setShowBottomSheet(false);
+  };
+
   return (
     <LinearGradientBackground>
       <ScrollContainer>
@@ -134,8 +152,19 @@ const WalletScreen = ({...props}) => {
           transactionsHistoryList={transactionsHistory}
           currentTheme={currentTheme}
           cardType={cardList[activeCardIndex].type}
+          currentFilter={filterList[activeFilterIndex]}
+          handleFilterPress={handleFilterPress}
         />
       </ScrollContainer>
+      {showBottomSheet && (
+        <BottomSheet
+          title={'Transaction filter'}
+          items={filterList}
+          activeItemIndex={activeFilterIndex}
+          onLayoutPress={handleLayoutPress}
+          onItemPress={handleItemPress}
+        />
+      )}
     </LinearGradientBackground>
   );
 };
