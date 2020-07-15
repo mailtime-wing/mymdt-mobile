@@ -27,7 +27,7 @@ const IntroductionScreen = ({route, navigation}) => {
             reverseBorder
             width="38%"
             onPress={() => navigation.navigate(route.params.skip)}>
-            <FormattedMessage id="skip" defaultMessage="Skip" />
+            <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
           </ThemeButton>
           <ThemeButton
             reverse

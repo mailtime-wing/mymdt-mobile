@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useLayoutEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {AuthContext} from '@/context/auth';
 import {useMutation, useQuery} from '@apollo/react-hooks';
@@ -20,6 +20,7 @@ import {
 
 import Input from '@/components/Input';
 import ThemeButton from '@/components/ThemeButton';
+import BackButton from '@/components/BackButton';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ScreenContainer from '@/components/ScreenContainer';
@@ -29,6 +30,7 @@ import useMailTimeSdk from '@/hooks/useMailTimeSdk';
 const BindEmailScreen = ({route, navigation}) => {
   const [unbindSuccess, setUnbindSuccess] = useState(false);
   const [clientError, setClientError] = useState('');
+  const {navigateFromEdit} = route.params;
   const {
     login,
     reset,
@@ -114,6 +116,16 @@ const BindEmailScreen = ({route, navigation}) => {
     userEmailAccountsData?.refetch();
   };
 
+  useLayoutEffect(() => {
+    if(navigateFromEdit) {
+      navigation.setOptions({
+        headerLeft: () => (
+          <BackButton onPress={() => navigation.goBack()} />
+        ),
+      });
+    }
+  }, [navigation, navigateFromEdit])
+
   if (loading || sdkLoading || userEmailAccountsData.loading) {
     return <LoadingSpinner />;
   }
@@ -173,19 +185,23 @@ const BindEmailScreen = ({route, navigation}) => {
             </EmailRowContainer>
           );
         })}
-        <ThemeButton onPress={handleFinishPress}>
-          <FormattedMessage id="finish" defaultMessage="finish" />
-        </ThemeButton>
-        <MarginContainer />
-        <ThemeButton reverse medium onPress={handleSkipPress}>
-          <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
-        </ThemeButton>
-        <BindMoreLaterText>
-          <FormattedMessage
-            id="bind_more_email_later"
-            defaultMessage="You can bind more emails later in profile."
-          />
-        </BindMoreLaterText>
+        {!navigateFromEdit && 
+          <>
+            <ThemeButton onPress={handleFinishPress}>
+              <FormattedMessage id="finish" defaultMessage="finish" />
+            </ThemeButton>
+            <MarginContainer />
+            <ThemeButton reverse small onPress={handleSkipPress}>
+              <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
+            </ThemeButton>
+            <BindMoreLaterText>
+              <FormattedMessage
+                id="bind_more_email_later"
+                defaultMessage="You can bind more emails later in profile."
+              />
+            </BindMoreLaterText>
+          </>
+        }
         {loginCancel && (
           <PopupModal
             title="Cancelled"
