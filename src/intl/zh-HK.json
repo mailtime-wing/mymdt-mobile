@@ -26,9 +26,15 @@
     "profile": "Profile",
     "redeem_details": "充值卡 / 特別會員福利",
 
+    "membership_level_0": "普通用戶",
+    "membership_level_1": "白銀用戶",
+    "membership_level_2": "金鑽用戶",
+    "membership_level_3": "白金用戶",
+    "membership_level_4": "鑽石用戶",
+    "membership_level_5": "特級用戶",
+
     "offers_selected": "{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
-    "gold_member": "金鑽用戶",
     "total_balance": "總結馀",
     "offers_preference": "商店喜好",
     "emails_binding": "綁定郵箱",

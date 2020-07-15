@@ -19,6 +19,14 @@ const theme = {
       '#000000',
     ],
     gold: '#FFDF6F',
+    membership: {
+      basic: ['#000000', '#FFFFFF'],
+      silver: ['#EAEAEA', '#707070'],
+      gold: ['#FFDC22', '#8F722E'],
+      platinum: ['#DFE3EB', '#466C8E'],
+      diamond: ['#DCF3F4', '#417296'],
+      special: ['#0363EF', '#FFFFFF'],
+    },
   },
 };
 
@@ -46,5 +54,19 @@ theme.colors.error.superLight = theme.colors.error[0];
 theme.colors.error.light = theme.colors.error[1];
 theme.colors.error.normal = theme.colors.error[2];
 theme.colors.error.dark = theme.colors.error[3];
+
+theme.colors.membership.basic.background = theme.colors.membership.basic[0];
+theme.colors.membership.basic.text = theme.colors.membership.basic[1];
+theme.colors.membership.silver.background = theme.colors.membership.silver[0];
+theme.colors.membership.silver.text = theme.colors.membership.silver[1];
+theme.colors.membership.gold.background = theme.colors.membership.gold[0];
+theme.colors.membership.gold.text = theme.colors.membership.gold[1];
+theme.colors.membership.platinum.background =
+  theme.colors.membership.platinum[0];
+theme.colors.membership.platinum.text = theme.colors.membership.platinum[1];
+theme.colors.membership.diamond.background = theme.colors.membership.diamond[0];
+theme.colors.membership.diamond.text = theme.colors.membership.diamond[1];
+theme.colors.membership.special.background = theme.colors.membership.special[0];
+theme.colors.membership.special.text = theme.colors.membership.special[1];
 
 export default theme;

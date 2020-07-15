@@ -26,6 +26,13 @@
     "profile": "Profile",
     "redeem_details": "充值卡 / 特别会员福利",
 
+    "membership_level_0": "普通用户",
+    "membership_level_1": "白银用户",
+    "membership_level_2": "金钻用户",
+    "membership_level_3": "白金用户",
+    "membership_level_4": "钻石用户",
+    "membership_level_5": "特级用户",
+
     "offers_selected": "{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "gold_member": "金钻用户",
