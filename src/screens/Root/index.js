@@ -86,6 +86,7 @@ const authModalScreens = [
   {name: 'edit_profile', component: UserProfileEditScreen},
   {name: 'my_referral_code', component: UserProfileEditScreen},
   {name: 'offers_preference', component: OfferPreferenceEditScreen},
+  {name: 'offers_preference_edit', component: OfferSelectScreen},
   {name: 'emails_binding', component: BindEmailEditScreen},
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'enter_invite_code', component: LanguageScreen},

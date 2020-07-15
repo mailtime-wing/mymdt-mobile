@@ -37,7 +37,6 @@ const OfferList = ({
 }) => {
   const isError = !selectedOffers ? true : selectedOffers.length > offersLimit;
 
-  console.log('selectedOffers', selectedOffers);
   useEffect(() => {
     if (onError) {
       onError(isError);

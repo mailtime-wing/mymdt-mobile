@@ -88,10 +88,9 @@ const OfferSelectScreen = ({route, navigation}) => {
         },
       });
 
-      if(route?.params?.onGoBack) {
+      if (route?.params?.fromOfferPreference) {
         navigation.navigate('offers_preference');
-        route.params.onGoBack();
-        return
+        return;
       }
 
       navigation.navigate(route.params.next);

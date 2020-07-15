@@ -38,7 +38,9 @@ export const RowContainer = styled.View`
   justify-content: space-between;
 `;
 
-export const ScrollContainer = styled.ScrollView`
+export const ScrollContainer = styled.ScrollView``;
+
+export const Container = styled.View`
   padding: 0 24px;
 `;
 
