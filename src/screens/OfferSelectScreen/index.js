@@ -88,8 +88,8 @@ const OfferSelectScreen = ({route, navigation}) => {
         },
       });
 
-      if (route?.params?.fromOfferPreference) {
-        navigation.navigate('offers_preference');
+      if (route?.params?.fromOfferPreferenceEditScreen) {
+        navigation.goBack();
         return;
       }
 

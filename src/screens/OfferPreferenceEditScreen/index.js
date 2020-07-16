@@ -54,8 +54,8 @@ const OfferPreferenceEditScreen = ({navigation}) => {
 
   const handleEditPress = () => {
     if (canEdit) {
-      navigation.navigate('offers_preference_edit', {
-        fromOfferPreference: true,
+      navigation.navigate('offers_preference', {
+        fromOfferPreferenceEditScreen: true,
       });
     } else {
       setShowModal(true);

@@ -30,7 +30,7 @@
     "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "gold_member": "金鑽用戶",
     "total_balance": "總結馀",
-    "offers_preference": "商店喜好",
+    "offers_preference_edit": "商店喜好",
     "emails_binding": "綁定郵箱",
     "emails_manage": "郵箱管理",
     "email": "電郵",

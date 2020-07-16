@@ -30,7 +30,7 @@
     "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "gold_member": "VIP GOLD",
     "total_balance": "Total Balance",
-    "offers_preference": "Brands Preference",
+    "offers_preference_edit": "Brands Preference",
     "emails_binding": "Bind Emails",
     "emails_manage": "Manage Emails",
     "email": "email",
