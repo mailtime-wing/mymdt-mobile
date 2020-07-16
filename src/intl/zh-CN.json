@@ -22,6 +22,12 @@
     "claimed_on": "Claimed on {date}",
 
     "wallet": "钱包",
+    "convert": "Convert",
+    "converter": "Converter",
+    "conversion_rate": "Conversion Rate",
+    "converter_detail": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, ut odio nulla posuere turpis mauris purus.",
+    "lastupdate_at": "Last update at {time}",
+
     "redeem": "奖赏",
     "profile": "Profile",
     "redeem_details": "充值卡 / 特别会员福利",

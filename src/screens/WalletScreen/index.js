@@ -53,7 +53,11 @@ const cardList = [
     ),
     theme: {color: mrpTheme.color, borderColor: mrpTheme.borderColor},
     actionList: [
-      {name: 'convert', icon: <ConvertIcon fill={mrpTheme.color} />},
+      {
+        name: 'convert',
+        id: 'converter',
+        icon: <ConvertIcon fill={mrpTheme.color} />,
+      },
       {name: 'redeem gift', icon: <RedeemGiftIcon fill={mrpTheme.color} />},
     ],
   },
@@ -147,6 +151,7 @@ const WalletScreen = ({...props}) => {
         <ActionButtons
           actionList={cardList[activeCardIndex].actionList}
           color={currentTheme.color}
+          {...props}
         />
         <TransactionsHistory
           transactionsHistoryList={transactionsHistory}
