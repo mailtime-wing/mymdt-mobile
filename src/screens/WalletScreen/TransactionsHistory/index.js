@@ -7,23 +7,17 @@ import {
   FilterText,
 } from './style';
 
-import {
-  MEASURABLE_REWARD_POINT,
-  MEASURABLE_DATA_TOKEN,
-} from '@/constants/currency';
-
 import FilterIcon from '@/assets/filter.svg';
 
 import ThemeButton from '@/components/ThemeButton';
-import MRPTransactionHistory from './MRPTransactionHistory';
-import MDTTransactionHistory from './MDTTransactionHistory';
+import TransactionList from './TransactionList';
 
 const TransactionsHistory = ({
-  cardType,
   transactionsHistoryList,
   currentTheme,
   currentFilter,
   handleFilterPress,
+  ...props
 }) => {
   return (
     <HistoryListContainer>
@@ -37,20 +31,18 @@ const TransactionsHistory = ({
             {currentFilter}
           </FilterText>
         </FilterButton>
-        <ThemeButton style={currentTheme} reverse small>
+        <ThemeButton
+          textStyle={`color: ${currentTheme.color}`}
+          buttonStyle={`borderColor: ${currentTheme.borderColor}`}
+          reverse
+          small>
           missing receipt
         </ThemeButton>
       </HistoryListHeader>
-      {cardType === MEASURABLE_REWARD_POINT && (
-        <MRPTransactionHistory
-          transactionsHistoryList={transactionsHistoryList}
-        />
-      )}
-      {cardType === MEASURABLE_DATA_TOKEN && (
-        <MDTTransactionHistory
-          transactionsHistoryList={transactionsHistoryList}
-        />
-      )}
+      <TransactionList
+        transactionsHistoryList={transactionsHistoryList}
+        {...props}
+      />
     </HistoryListContainer>
   );
 };

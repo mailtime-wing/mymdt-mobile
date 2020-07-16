@@ -1,23 +1,22 @@
 import React from 'react';
 import {Container, ButtonText} from './style';
 
-const Button = ({style, ...props}) => (
+const Button = ({style, textStyle, buttonStyle, ...props}) => (
   <Container
     disabled={props.disabled}
     reverse={props.reverse}
     small={props.small}
     medium={props.medium}
     reverseBorder={props.reverseBorder}
-    style={style}
+    style={buttonStyle}
     {...props}>
     <ButtonText
       disabled={props.disabled}
       reverse={props.reverse}
       small={props.small}
       medium={props.medium}
-      style={style}
-      {...props}
-    >
+      style={textStyle}
+      {...props}>
       {props.children}
     </ButtonText>
   </Container>

@@ -1,14 +1,9 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {Dimensions} from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
 
-import {
-  Card,
-  CardName,
-  AroundInUSD,
-  SliderContainer,
-} from './style';
+import {Card, CardName, AroundInUSD, SliderContainer} from './style';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -36,11 +31,9 @@ const renderItem = ({item, index}) => {
 };
 
 const CardList = ({cardList, onSnapToItem, onScroll}) => {
-  const refCarousel = useRef(null);
   return (
     <SliderContainer>
       <Carousel
-        ref={refCarousel}
         data={cardList}
         layout="default"
         renderItem={renderItem}

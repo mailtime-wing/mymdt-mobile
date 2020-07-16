@@ -1,10 +1,6 @@
 import styled from '@emotion/native';
 import Text from '@/components/AppText';
 
-export const Container = styled.View`
-  padding: 0 24px;
-`;
-
 export const TransactionContainer = styled.View`
   flex: 3;
   justify-content: center;
