@@ -197,8 +197,6 @@ const UserProfileEditScreen = ({navigation}) => {
     fetchPolicy: 'network-only',
   });
 
-  console.log(state);
-
   const handleDatePickerPress = () => {
     dispatch({type: UPDATE_SHOW_DATE_PICKER, payload: !state.showDatePicker});
   };

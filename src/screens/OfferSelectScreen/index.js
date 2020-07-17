@@ -87,6 +87,12 @@ const OfferSelectScreen = ({route, navigation}) => {
           },
         },
       });
+
+      if (route?.params?.fromOfferPreferenceEditScreen) {
+        navigation.goBack();
+        return;
+      }
+
       navigation.navigate(route.params.next);
     } catch (e) {
       console.error(e);

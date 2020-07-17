@@ -37,7 +37,7 @@
     "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "gold_member": "金钻用户",
     "total_balance": "总结馀",
-    "offers_preference": "商店喜好",
+    "offers_preference_edit": "商店喜好",
     "emails_binding": "绑定邮箱",
     "emails_manage": "邮箱管理",
     "email": "电邮",
@@ -137,6 +137,7 @@
     "choose_more_brand_when_upgrade": "当你会员等级提升时，你可以选择更多商店。",
     "your_choices": "你的选择",
     "get_reward_from_brands": "Get rewards when you receives email receipts from these brand.",
+    "edited_in_30_days": "You have edited the preference in recent 30 days. You can edit the preference after {date}.",
     "edit": "编辑",
 
     "continue": "继续",

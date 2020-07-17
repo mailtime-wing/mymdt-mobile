@@ -36,7 +36,7 @@
     "offers_selected": "{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
     "total_balance": "總結馀",
-    "offers_preference": "商店喜好",
+    "offers_preference_edit": "商店喜好",
     "emails_binding": "綁定郵箱",
     "emails_manage": "郵箱管理",
     "email": "電郵",
@@ -136,6 +136,7 @@
     "choose_more_brand_when_upgrade": "當你會員等級提升時，你可以選擇更多商店。",
     "your_choices": "你的選擇",
     "get_reward_from_brands": "Get rewards when you receives email receipts from these brand.",
+    "edited_in_30_days": "You have edited the preference in recent 30 days. You can edit the preference after {date}.",
     "edit": "編輯",
 
     "continue": "繼續",

@@ -35,10 +35,12 @@ const OfferList = ({
   offersLimit,
   onError,
 }) => {
-  const isError = selectedOffers.length > offersLimit;
+  const isError = !selectedOffers ? true : selectedOffers.length > offersLimit;
 
   useEffect(() => {
-    onError(isError);
+    if (onError) {
+      onError(isError);
+    }
   }, [isError, onError]);
 
   const onSelect = offer => {
