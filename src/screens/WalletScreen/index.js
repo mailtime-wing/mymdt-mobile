@@ -85,7 +85,7 @@ const cardList = [
 
 const filterList = ['All', 'abc@email.com', 'foobar@gmail.commmmmmmm'];
 
-const WalletScreen = ({...props}) => {
+const WalletScreen = ({navigation}) => {
   const [currentTheme, setCurrentTheme] = useState(cardList[0].theme);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const [showBottomSheet, setShowBottomSheet] = useState(false);
@@ -146,12 +146,12 @@ const WalletScreen = ({...props}) => {
   return (
     <LinearGradientBackground>
       <ScrollContainer>
-        <AccountBar {...props} />
+        <AccountBar navigation={navigation} />
         <CardList cardList={cardList} onSnapToItem={handleOnSnapToItem} />
         <ActionButtons
           actionList={cardList[activeCardIndex].actionList}
           color={currentTheme.color}
-          {...props}
+          navigation={navigation}
         />
         <TransactionsHistory
           transactionsHistoryList={transactionsHistory}

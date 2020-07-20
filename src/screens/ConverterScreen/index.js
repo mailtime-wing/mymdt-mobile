@@ -1,9 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {FormattedMessage, FormattedTime} from 'react-intl';
-import {InputAccessoryView, KeyboardAvoidingView} from 'react-native';
+import {
+  InputAccessoryView,
+  KeyboardAvoidingView,
+  ScrollView,
+} from 'react-native';
+import {Formik, useFormikContext, useField} from 'formik';
 
 import {
-  ScrollContainer,
   Container,
   Detail,
   RowContainer,
@@ -15,7 +19,7 @@ import {
   ConvertersContainer,
   ConverterContainer,
   ConverterType,
-  ConverterInput,
+  Input,
   Margin,
   InputAccessoryViewContainer,
   InputAccessoryButton,
@@ -35,37 +39,97 @@ const inputAccessoryViewID = 'converterButtons';
 const KeyboardButtons = ({handleConverterOnChange}) => (
   <InputAccessoryView nativeID={inputAccessoryViewID}>
     <InputAccessoryViewContainer>
-      <InputAccessoryButton>
-        <InputAccessoryButtonText onPress={() => handleConverterOnChange(0)}>
-          Clear
+      <InputAccessoryButton onPress={() => handleConverterOnChange(0)}>
+        <InputAccessoryButtonText>
+          <FormattedMessage id="clear" defaultMessage="clear" />
         </InputAccessoryButtonText>
       </InputAccessoryButton>
-      <InputAccessoryButton>
-        <InputAccessoryButtonText
-          onPress={() => handleConverterOnChange(6666666)}>
-          Convert all
+      <InputAccessoryButton onPress={() => handleConverterOnChange(6666666)}>
+        <InputAccessoryButtonText>
+          <FormattedMessage id="convert_all" defaultMessage="Convert all" />
         </InputAccessoryButtonText>
       </InputAccessoryButton>
     </InputAccessoryViewContainer>
   </InputAccessoryView>
 );
 
-const ConverterScreen = () => {
-  const [conversionRate] = useState(1.5);
+const ConverterInput = ({title, name, ...props}) => {
+  const [field] = useField(name);
+  return (
+    <Input
+      value={Number(field.value).toString()}
+      onChangeText={field.onChange(name)}
+      {...props}
+    />
+  );
+};
+
+const ConverterForm = ({conversionRate}) => {
+  const {values, setFieldValue, handleSubmit, isValid} = useFormikContext();
   const [isMRPFocus, setIsMRPFocus] = useState(false);
-  const [mrpAmount, setMrpAmount] = useState(0);
-  const mdtAmount = mrpAmount * conversionRate;
+
+  useEffect(() => {
+    setFieldValue('mdtAmount', values.mrpAmount * conversionRate);
+  }, [conversionRate, setFieldValue, values]);
 
   const handleOnBlur = () => {
     setIsMRPFocus(false);
   };
 
   const handleConverterOnChange = amount => {
-    setMrpAmount(Number(amount));
+    setFieldValue('mrpAmount', amount);
   };
 
   return (
-    <ScrollContainer keyboardShouldPersistTaps="handled">
+    <>
+      <ConvertersContainer>
+        <ConverterContainer
+          onBlur={handleOnBlur}
+          onFocus={() => setIsMRPFocus(true)}
+          isFocus={isMRPFocus}>
+          <ConverterType isFocus={isMRPFocus}>RewardPoint</ConverterType>
+          <ConverterInput
+            keyboardType="numeric"
+            name="mrpAmount"
+            inputAccessoryViewID={inputAccessoryViewID}
+            editable={true}
+          />
+          <KeyboardButtons handleConverterOnChange={handleConverterOnChange} />
+        </ConverterContainer>
+        <Margin />
+        <ConvertIcon fill="#21CEDB" style={styles.convertIcon} />
+        <ConverterContainer isFocus={false}>
+          <ConverterType>Measurable Data Token</ConverterType>
+          <ConverterInput
+            keyboardType="numeric"
+            name="mdtAmount"
+            editable={false}
+          />
+        </ConverterContainer>
+      </ConvertersContainer>
+      <ThemeButton onPress={handleSubmit} disabled={!isValid}>
+        <FormattedMessage id="convert" defaultMessage="convert" />
+      </ThemeButton>
+    </>
+  );
+};
+
+const ConverterScreen = () => {
+  const conversionRate = 1.5; // TODO: get from api
+
+  const handleConvertPress = async values => {
+    // TODO: integrate convert api
+  };
+
+  const validate = values => {
+    const errors = {};
+    // TODO: handle when integrate convert api
+
+    return errors;
+  };
+
+  return (
+    <ScrollView keyboardShouldPersistTaps="handled">
       <KeyboardAvoidingView behavior="position">
         <ModalContainer
           title={
@@ -112,37 +176,20 @@ const ConverterScreen = () => {
                 />
               </ConversionRateRightContainer>
             </RowContainer>
-            <ConvertersContainer>
-              <ConverterContainer
-                onBlur={handleOnBlur}
-                onFocus={() => setIsMRPFocus(true)}
-                isFocus={isMRPFocus}>
-                <ConverterType isFocus={isMRPFocus}>RewardPoint</ConverterType>
-                <ConverterInput
-                  keyboardType="numeric"
-                  value={mrpAmount.toString()}
-                  onChangeText={handleConverterOnChange}
-                  inputAccessoryViewID={inputAccessoryViewID}
-                  editable={true}
-                />
-                <KeyboardButtons
-                  handleConverterOnChange={handleConverterOnChange}
-                />
-              </ConverterContainer>
-              <Margin />
-              <ConvertIcon fill="#21CEDB" style={styles.convertIcon} />
-              <ConverterContainer isFocus={false}>
-                <ConverterType>Measurable Data Token</ConverterType>
-                <ConverterInput value={mdtAmount.toString()} editable={false} />
-              </ConverterContainer>
-            </ConvertersContainer>
-            <ThemeButton>
-              <FormattedMessage id="convert" defaultMessage="convert" />
-            </ThemeButton>
+            <Formik
+              initialValues={{
+                mrpAmount: 0,
+                mdtAmount: 0,
+                conversionRate: conversionRate,
+              }}
+              onSubmit={handleConvertPress}
+              validate={validate}>
+              <ConverterForm conversionRate={conversionRate} />
+            </Formik>
           </Container>
         </ModalContainer>
       </KeyboardAvoidingView>
-    </ScrollContainer>
+    </ScrollView>
   );
 };
 

@@ -3,8 +3,6 @@ import {Platform, StyleSheet} from 'react-native';
 import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
-export const ScrollContainer = styled.ScrollView``;
-
 export const Container = styled.View`
   padding: 0 24px;
 `;
@@ -79,7 +77,7 @@ export const ConverterType = styled(TitleText)`
   margin-bottom: 8px;
 `;
 
-export const ConverterInput = styled.TextInput`
+export const Input = styled.TextInput`
   font-size: 36px;
   line-height: 44px;
   flex: 1;
