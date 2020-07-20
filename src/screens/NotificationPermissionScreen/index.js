@@ -18,8 +18,15 @@ import {
 const NotificationPermissionScreen = ({route, navigation}) => {
   const requestNotificationPermission = () => {
     if (Platform.OS === 'ios') {
-      PushNotificationIOS.requestPermissions();
+      PushNotificationIOS.checkPermissions(e => {
+        if (e.alert) {
+          sendLocalNotification();
+        } else {
+          PushNotificationIOS.requestPermissions();
+        }
+      });
     }
+    navigation.navigate(route.params.next);
   };
 
   const sendLocalNotification = () => {
@@ -32,14 +39,6 @@ const NotificationPermissionScreen = ({route, navigation}) => {
   };
 
   const handleSkipPress = () => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.checkPermissions(e => {
-        if (e.alert) {
-          sendLocalNotification();
-        }
-      });
-    }
-
     navigation.navigate(route.params.next);
   };
 

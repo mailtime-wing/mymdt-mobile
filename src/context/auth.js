@@ -1,4 +1,12 @@
-import React, {createContext, useReducer, useEffect, useMemo} from 'react';
+import React, {
+  createContext,
+  useReducer,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
+import {Platform} from 'react-native';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import AsyncStorage from '@react-native-community/async-storage';
 import jwt_decode from 'jwt-decode';
 import {REFRESH_TOKEN_API} from '@/api/auth';
@@ -64,6 +72,8 @@ const reducer = (state, action) => {
 export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
+  const [notificationEnabled, setNotificationEnabled] = useState(false);
+
   const skip = !state.authToken;
   const context = {
     headers: {
@@ -84,6 +94,17 @@ export const AuthProvider = ({children}) => {
   );
 
   const setupStatus = userSetupStatusApiData?.userProfile?.setupStatus;
+
+  useEffect(() => {
+    // check notification permission
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.checkPermissions(e => {
+        if (e.alert) {
+          setNotificationEnabled(true);
+        }
+      });
+    }
+  }, []);
 
   useEffect(() => {
     const getToken = async () => {
@@ -123,7 +144,7 @@ export const AuthProvider = ({children}) => {
       });
     };
     getToken();
-  }, []);
+  }, [authContext, refreshTokenRequest]);
 
   const handlePopupPress = pressed => {
     if (pressed) {
@@ -173,8 +194,16 @@ export const AuthProvider = ({children}) => {
       cashBackType: state.cashBackType,
       setupStatus: setupStatus,
       appConfig: appConfigApiData,
+      notificationEnabled: notificationEnabled,
     }),
-    [state, setupStatus, appConfigApiData],
+    [
+      state.authToken,
+      state.refreshToken,
+      state.cashBackType,
+      setupStatus,
+      appConfigApiData,
+      notificationEnabled,
+    ],
   );
 
   if (state.isRefreshTokenExpired) {

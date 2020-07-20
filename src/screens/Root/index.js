@@ -109,7 +109,7 @@ const backScreen = [
 ];
 
 const Root = () => {
-  const {authToken, setupStatus} = useContext(AuthContext);
+  const {authToken, setupStatus, notificationEnabled} = useContext(AuthContext);
   const {top} = useSafeAreaInsets();
 
   const excludeScreenNames = [];
@@ -134,6 +134,10 @@ const Root = () => {
   ) {
     excludeScreenNames.push('account_setup_done');
     excludeScreenNames.push('sign_up_reward');
+  }
+
+  if (notificationEnabled) {
+    excludeScreenNames.push('notification_permission');
   }
 
   const filteredSetupScreens = setupScreens.filter(
