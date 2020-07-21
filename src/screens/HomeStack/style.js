@@ -52,4 +52,17 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  headerTitle: {
+    display: 'none',
+  },
+  header: {
+    height: 80, // will change when rebase to header related commit
+  },
+  card: {
+    backgroundColor: 'white',
+  },
+  modalCard: {
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+  },
 });

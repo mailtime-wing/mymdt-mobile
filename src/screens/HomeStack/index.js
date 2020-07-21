@@ -1,6 +1,7 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 import {useTheme} from 'emotion-theming';
 import SafeAreaView from 'react-native-safe-area-view';
 
@@ -10,6 +11,13 @@ import BrowseScreen from '@/screens/BrowseScreen';
 import BonusScreen from '@/screens/BonusScreen';
 import WalletScreen from '@/screens/WalletScreen';
 import RedeemScreen from '@/screens/RedeemScreen';
+import ConverterScreen from '@/screens/ConverterScreen';
+import CloseButton from '@/components/CloseButton';
+
+import {
+  TOP_BAR_HEIGHT,
+  MARGIN_BETWEEN_MODAL_HEAD_AND_TOP_BAR,
+} from '@/constants/layout';
 
 import BrowseIcon from '@/assets/browse.svg';
 import BonusIcon from '@/assets/bonus.svg';
@@ -17,6 +25,12 @@ import RedeemIcon from '@/assets/redeem.svg';
 import PointIcon from '@/assets/point.svg';
 
 const Tab = createBottomTabNavigator();
+const WalletStack = createStackNavigator();
+
+const walletStackScreens = [
+  {name: 'wallet', component: WalletScreen},
+  {name: 'converter', component: ConverterScreen, modal: true},
+];
 
 const Label = ({focused, id}) => (
   <LabelText focused={focused}>
@@ -96,7 +110,7 @@ const TabNavigatorContainer = () => {
         />
         <Tab.Screen
           name="wallet"
-          component={WalletScreen}
+          component={WalletTabStack}
           options={{
             tabBarLabel: ({focused}) => <Label id="wallet" focused={focused} />,
             tabBarIcon: ({focused}) => (
@@ -111,6 +125,45 @@ const TabNavigatorContainer = () => {
         />
       </Tab.Navigator>
     </>
+  );
+};
+
+const WalletTabStack = () => {
+  const modalHeaderStyle = {
+    ...styles.header,
+    height: MARGIN_BETWEEN_MODAL_HEAD_AND_TOP_BAR + TOP_BAR_HEIGHT,
+  };
+
+  const modalCardStyle = [
+    {
+      ...styles.card,
+    },
+    styles.modalCard,
+  ];
+
+  return (
+    <WalletStack.Navigator
+      mode="modal"
+      initialRouteName={walletStackScreens[0].name}>
+      {walletStackScreens.map(screen => (
+        <WalletStack.Screen
+          key={screen.name}
+          name={screen.name}
+          component={screen.component}
+          options={{
+            headerTransparent: true,
+            headerTitleStyle: styles.headerTitle,
+            headerStyle: modalHeaderStyle,
+            cardStyle: screen.modal ? modalCardStyle : styles.card,
+            headerLeft: props =>
+              screen.modal ? <CloseButton {...props} /> : null,
+            cardOverlayEnabled: true,
+            gestureEnabled: true,
+            headerStatusBarHeight: 0,
+          }}
+        />
+      ))}
+    </WalletStack.Navigator>
   );
 };
 
