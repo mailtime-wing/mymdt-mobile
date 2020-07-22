@@ -194,3 +194,22 @@ export const REPORT_MISSING_RECEIPT = gql`
     )
   }
 `;
+
+export const GET_CHECK_IN_STATUS_API = gql`
+  query {
+    userProfile {
+      checkInStatus {
+        today
+        hasCheckedInToday
+        rewards
+      }
+      cashbackCurrencyCode
+    }
+  }
+`;
+
+export const CHECK_IN_API = gql`
+  mutation CheckIn {
+    checkIn
+  }
+`;

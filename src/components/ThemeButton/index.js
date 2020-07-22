@@ -15,8 +15,7 @@ const Button = ({style, textStyle, buttonStyle, ...props}) => (
       reverse={props.reverse}
       small={props.small}
       medium={props.medium}
-      style={textStyle}
-      {...props}>
+      style={textStyle}>
       {props.children}
     </ButtonText>
   </Container>

@@ -41,11 +41,7 @@ const BonusList = [
     title: <FormattedMessage id="bonus_task_title_1" />,
     detail: <FormattedMessage id="bonus_task_detail_1" />,
     children: (
-      <DailyCheckIn
-        dayListWithAmount={[10, 20, 30, 40, 50, 50, 50, 50]}
-        currentDay={3}
-        canCheckIn={true}
-      />
+      <DailyCheckIn />
     ),
   },
   {

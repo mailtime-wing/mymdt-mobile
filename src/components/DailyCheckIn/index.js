@@ -1,22 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
+import {useMutation, useQuery} from '@apollo/react-hooks';
+import {GET_CHECK_IN_STATUS_API, CHECK_IN_API} from '@/api/data';
+import {AuthContext} from '@/context/auth';
+import {IntlContext} from '@/context/Intl';
 
 import {
   Container,
   HorizontalScrollContainer,
-  CardNumberText,
-  CardText,
-  Card,
   GotCheckInRewardText,
   CovertedContainer,
   ConvertedText,
   MarginTop,
+  MarginLeft,
 } from './style';
 
 import MRPCoin from '@/components/MRPCoin';
 import MRPGiftBox from '@/components/MRPGiftBox';
 import ThemeButton from '@/components/ThemeButton';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
+import DayList from './DayList';
+import AchievementBadge from './AchievementBadge';
 
 const giftBoxStyle = {
   transform: [
@@ -26,49 +30,78 @@ const giftBoxStyle = {
   ],
 };
 
-const DailyCheckIn = ({
-  dayListWithAmount,
-  currentDay,
-  canCheckIn,
-  converted,
-}) => {
+const DailyCheckIn = ({converted}) => {
   const [showCheckInReward, setShowCheckInReward] = useState(false);
+  const [daysPresentInBadge, setDaysPresentInBadge] = useState(0);
+  const {authToken} = useContext(AuthContext);
+  const {localeEnum} = useContext(IntlContext);
+
+  const {data} = useQuery(GET_CHECK_IN_STATUS_API, {
+    context: {
+      headers: {
+        authorization: authToken ? `Bearer ${authToken}` : '',
+      },
+    },
+  });
+
+  const [checkIn] = useMutation(CHECK_IN_API);
+
+  const handleCheckInPress = async () => {
+    try {
+      await checkIn({
+        context: {
+          headers: {
+            authorization: authToken ? `Bearer ${authToken}` : '',
+          },
+        },
+      });
+      setShowCheckInReward(true);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const isEnglish = localeEnum === 'EN_US';
+  const today = data?.userProfile?.checkInStatus?.today;
+  const checkedInToday = data?.userProfile?.checkInStatus?.hasCheckedInToday;
+  const todayAndAfterRewards = data?.userProfile?.checkInStatus?.rewards;
+  const todayRewardAmount =
+    (todayAndAfterRewards && todayAndAfterRewards[today - 1]) || 0;
+  const cashbackCurrencyCode = data?.userProfile?.cashbackCurrencyCode;
   const coinColor = props => props.theme.colors.secondary.superDark;
+
   return (
     <Container>
       <HorizontalScrollContainer
         horizontal={true}
         showsHorizontalScrollIndicator={false}>
-        {dayListWithAmount.map((amount, index) => {
-          const day = index + 1;
-          const passedDay = day < currentDay;
-          const today = day === currentDay;
-          return (
-            <Card key={index} passedDay={passedDay} today={today}>
-              <CardNumberText passedDay={passedDay} today={today}>
-                {day}
-              </CardNumberText>
-              <CardText passedDay={passedDay} today={today}>
-                <FormattedMessage id="day" defaultMessage="Day" />
-              </CardText>
-              <MRPCoin
-                amount={amount}
-                size={18}
-                fontSize={16}
-                color={props =>
-                  passedDay ? props.theme.colors.white.normal : coinColor
-                }
-              />
-            </Card>
-          );
-        })}
+        <MarginLeft />
+        <AchievementBadge
+          day={today}
+          setDaysPresentInBadge={setDaysPresentInBadge}
+          isEnglish={isEnglish}
+        />
+        <DayList
+          daysPresentInBadge={daysPresentInBadge}
+          today={today}
+          checkedInToday={checkedInToday}
+          todayAndAfterRewards={todayAndAfterRewards}
+          cashbackCurrencyCode={cashbackCurrencyCode}
+          isEnglish={isEnglish}
+          coinColor={coinColor}
+        />
+        <MarginLeft />
       </HorizontalScrollContainer>
       <ThemeButton
-        onPress={() => setShowCheckInReward(true)}
-        disabled={!canCheckIn}
         medium
-        width="auto">
-        <FormattedMessage id="check_in" defaultMessage="Check in" />
+        width="auto"
+        disabled={checkedInToday}
+        onPress={handleCheckInPress}>
+        {checkedInToday ? (
+          <FormattedMessage id="checked_in" defaultMessage="Checked in" />
+        ) : (
+          <FormattedMessage id="check_in" defaultMessage="Check in" />
+        )}
       </ThemeButton>
       {showCheckInReward && (
         <PopupModalWithLinearGradient
@@ -77,11 +110,21 @@ const DailyCheckIn = ({
           <GotCheckInRewardText color={coinColor}>
             You got a check-in reward!
           </GotCheckInRewardText>
-          <MRPCoin amount={50} size={28} fontSize={24} color={coinColor} />
+          <MRPCoin
+            amount={todayRewardAmount}
+            size={28}
+            fontSize={24}
+            color={coinColor}
+          />
           {converted && (
             <CovertedContainer>
               <ConvertedText>Converted from</ConvertedText>
-              <MRPCoin amount={50} size={16} fontSize={16} color={coinColor} />
+              <MRPCoin
+                amount={todayRewardAmount}
+                size={16}
+                fontSize={16}
+                color={coinColor}
+              />
             </CovertedContainer>
           )}
           <MarginTop />
