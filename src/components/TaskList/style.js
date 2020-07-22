@@ -22,3 +22,7 @@ export const ClaimedDate = styled(Text)`
   line-height: 18px;
   color: ${props => props.theme.colors.black.superLight};
 `;
+
+export const MarginLeft = styled.View`
+  margin-left: 8px;
+`;

@@ -10,6 +10,7 @@ export const Container = styled.TouchableOpacity`
 
   padding: 20px 24px;
   border-radius: 42px;
+  min-width: 64px; /* for chinese character ui*/
 
   ${props =>
     props.small &&

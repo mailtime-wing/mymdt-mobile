@@ -1,7 +1,13 @@
 import React from 'react';
 import {FormattedMessage, FormattedDate} from 'react-intl';
 
-import {Container, RowContainer, TaskName, ClaimedDate} from './style';
+import {
+  Container,
+  RowContainer,
+  TaskName,
+  ClaimedDate,
+  MarginLeft,
+} from './style';
 
 import MRPCoin from '@/components/MRPCoin';
 import ThemeButton from '@/components/ThemeButton';
@@ -43,15 +49,17 @@ const TaskList = ({taskList}) => (
             style={claimed && flexEnd}
           />
           {!claimed ? (
-            isTaskCompleted ? (
-              <ThemeButton small width="auto">
-                <FormattedMessage id="claim" defaultMessage="Claim" />
-              </ThemeButton>
-            ) : (
-              <ThemeButton small reverse width="auto">
-                <FormattedMessage id="start" defaultMessage="Start" />
-              </ThemeButton>
-            )
+            <MarginLeft>
+              {isTaskCompleted ? (
+                <ThemeButton small width="auto">
+                  <FormattedMessage id="claim" defaultMessage="Claim" />
+                </ThemeButton>
+              ) : (
+                <ThemeButton small reverse width="auto">
+                  <FormattedMessage id="start" defaultMessage="Start" />
+                </ThemeButton>
+              )}
+            </MarginLeft>
           ) : null}
         </RowContainer>
       );
