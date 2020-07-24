@@ -4,11 +4,13 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
+  View,
 } from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
 
-import {Container, Detail, DateFieldContainer, ScrollContainer} from './style';
+import {Container, Detail} from './style';
 
 import DateTimeSelector from '@/components/DateTimeSelector';
 
@@ -50,7 +52,7 @@ const Form = ({showDatePicker, handleDatePickerPress, changeDateFormat}) => {
         name="senderEmail"
         keyboardType="email-address"
       />
-      <DateFieldContainer onPress={handleDatePickerPress}>
+      <View onPress={handleDatePickerPress}>
         <FormInput // use old input becoz of date format
           label={
             <FormattedMessage id="receipt_date" defaultMessage="Receipt Date" />
@@ -68,7 +70,7 @@ const Form = ({showDatePicker, handleDatePickerPress, changeDateFormat}) => {
             onChange={handleDateChange}
           />
         )}
-      </DateFieldContainer>
+      </View>
       <Input
         label={
           <FormattedMessage id="order_number" defaultMessage="Order Number" />
@@ -159,7 +161,7 @@ const MissingReceiptScreen = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <ScrollContainer showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <TouchableWithoutFeedback onPress={handleSpacePress}>
           <ModalContainer
             title={
@@ -190,7 +192,7 @@ const MissingReceiptScreen = () => {
             </Container>
           </ModalContainer>
         </TouchableWithoutFeedback>
-      </ScrollContainer>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
