@@ -167,6 +167,7 @@ const WalletScreen = ({navigation}) => {
             <FormattedMessage id="filter" defaultMessage="FILTER" />
           }
           handleFilterPress={handleFilterPress}
+          navigation={navigation}
         />
       </ScrollContainer>
       {showBottomSheet && (

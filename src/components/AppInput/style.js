@@ -41,6 +41,7 @@ export const Label = styled(Text)`
   font-weight: bold;
   width: 150%;
   height: 16px;
+  text-transform: uppercase;
 `;
 
 export const Remark = styled(Text)`
