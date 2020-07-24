@@ -36,6 +36,7 @@ const TransactionsHistory = ({
           </FilterText>
         </FilterButton>
         <ThemeButton
+          onPress={() => navigation.navigate('missing_receipt')}
           textStyle={`color: ${currentTheme.color}`}
           buttonStyle={`borderColor: ${currentTheme.borderColor}`}
           reverse

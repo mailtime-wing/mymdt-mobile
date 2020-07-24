@@ -77,8 +77,8 @@ const cardList = [
     aroundInUsd: 123,
     theme: {color: mdtTheme.color, borderColor: mdtTheme.borderColor},
     actionList: [
-      {name: 'convert', icon: <ConvertIcon fill={mdtTheme.color} />},
-      {name: 'withdrawal', icon: <WithdrawalIcon fill={mdtTheme.color} />},
+      {name: 'convert', id: 'converter', icon: <ConvertIcon fill={mdtTheme.color} />},
+      {name: 'withdrawal', id: 'withdrawal', icon: <WithdrawalIcon fill={mdtTheme.color} />},
       {name: 'gift code', icon: <MdtGiftCodeIcon fill={mdtTheme.color} />},
     ],
   },
