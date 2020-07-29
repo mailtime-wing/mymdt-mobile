@@ -299,7 +299,6 @@ const UserProfileEditScreen = ({navigation}) => {
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="always">
             <Formik
-              enableReinitialize={true}
               initialValues={initialValues}
               onSubmit={values => handleSubmitPress(values)}
               validate={values => validate(values)}>

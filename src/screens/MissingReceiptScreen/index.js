@@ -5,7 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  View,
+  TouchableOpacity,
 } from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
@@ -52,7 +52,7 @@ const Form = ({showDatePicker, handleDatePickerPress, changeDateFormat}) => {
         name="senderEmail"
         keyboardType="email-address"
       />
-      <View onPress={handleDatePickerPress}>
+      <TouchableOpacity onPress={handleDatePickerPress}>
         <FormInput // use old input becoz of date format
           label={
             <FormattedMessage id="receipt_date" defaultMessage="Receipt Date" />
@@ -70,7 +70,7 @@ const Form = ({showDatePicker, handleDatePickerPress, changeDateFormat}) => {
             onChange={handleDateChange}
           />
         )}
-      </View>
+      </TouchableOpacity>
       <Input
         label={
           <FormattedMessage id="order_number" defaultMessage="Order Number" />
@@ -179,7 +179,6 @@ const MissingReceiptScreen = () => {
               </Detail>
               <Detail>* required</Detail>
               <Formik
-                enableReinitialize={true}
                 initialValues={initialValues}
                 onSubmit={values => handleSubmitPress(values)}
                 validate={values => validate(values)}>
