@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import {ScrollContainer} from './style';
 
@@ -83,7 +84,13 @@ const cardList = [
   },
 ];
 
-const filterList = ['All', 'abc@email.com', 'foobar@gmail.commmmmmmm'];
+const filterList = [
+  'All',
+  'abc@email.com',
+  'foobar@gmail.commmmmmmm',
+  ['foo@gmail.com', 'bar@gmail.com'],
+  ['Mastercard (•••• 1001)', 'ABC Bank (•••• 1234)', 'ABC Bank (•••• 4567)'],
+];
 
 const WalletScreen = ({navigation}) => {
   const [currentTheme, setCurrentTheme] = useState(cardList[0].theme);
@@ -140,7 +147,6 @@ const WalletScreen = ({navigation}) => {
 
   const handleItemPress = index => {
     setActiveFilterIndex(index);
-    setShowBottomSheet(false);
   };
 
   return (
@@ -157,15 +163,17 @@ const WalletScreen = ({navigation}) => {
           transactionsHistoryList={transactionsHistory}
           currentTheme={currentTheme}
           cardType={cardList[activeCardIndex].type}
-          currentFilter={filterList[activeFilterIndex]}
+          currentFilter={
+            <FormattedMessage id="filter" defaultMessage="FILTER" />
+          }
           handleFilterPress={handleFilterPress}
         />
       </ScrollContainer>
       {showBottomSheet && (
         <BottomSheet
-          title={'Transaction filter'}
+          title={<FormattedMessage id="filter_by" defaultMessage="Filter by" />}
           items={filterList}
-          activeItemIndex={activeFilterIndex}
+          activeOptionIndex={activeFilterIndex}
           onLayoutPress={handleLayoutPress}
           onItemPress={handleItemPress}
         />

@@ -6,13 +6,14 @@ export const Option = styled.TouchableOpacity`
   align-items: center;
   justify-content: space-between;
   padding: 12px 24px;
-  ${props => props.active && 'background: rgba(33, 206, 219, 0.2);'}
+  ${props => props.active && 'background: rgba(33, 206, 219, 0.1);'}
 `;
 
 export const ListLabel = styled(Text)`
   font-size: 16px;
   line-height: 24px;
   color: rgba(0, 0, 0, 0.8);
+  ${props => props.active && `color: ${props.theme.colors.secondary.dark};`}
 `;
 
 export const ListValue = styled(Text)`

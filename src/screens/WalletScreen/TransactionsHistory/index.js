@@ -1,4 +1,5 @@
 import React from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import {
   HistoryListContainer,
@@ -22,7 +23,9 @@ const TransactionsHistory = ({
   return (
     <HistoryListContainer>
       <HistoryListHeader>
-        <FilterButton onPress={handleFilterPress}>
+        <FilterButton
+          onPress={handleFilterPress}
+          borderColor={currentTheme.borderColor}>
           <FilterIcon stroke={currentTheme.color} strokeWidth={2} />
           <FilterText
             numberOfLines={1}
@@ -36,7 +39,10 @@ const TransactionsHistory = ({
           buttonStyle={`borderColor: ${currentTheme.borderColor}`}
           reverse
           small>
-          missing receipt
+          <FormattedMessage
+            id="missing_receipt"
+            defaultMessage="missing receipt"
+          />
         </ThemeButton>
       </HistoryListHeader>
       <TransactionList
