@@ -176,8 +176,10 @@ const Root = () => {
                 headerTitleStyle: styles.headerTitle,
                 cardStyle: styles.card,
                 headerStyle: headerStyle,
-                headerLeft: () =>
-                  backScreen.includes(screen.name) ? <BackButton /> : null,
+                headerLeft: props =>
+                  backScreen.includes(screen.name) ? (
+                    <BackButton {...props} />
+                  ) : null,
                 gestureEnabled: false,
               }}
             />
@@ -198,8 +200,10 @@ const Root = () => {
                   headerTitleStyle: styles.headerTitle,
                   cardStyle: styles.card,
                   headerStyle: headerStyle,
-                  headerLeft: () =>
-                    backScreen.includes(name) ? <BackButton /> : null,
+                  headerLeft: props =>
+                    backScreen.includes(name) ? (
+                      <BackButton {...props} />
+                    ) : null,
                   gestureEnabled: false,
                 }}
                 initialParams={{
