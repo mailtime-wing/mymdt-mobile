@@ -1,16 +1,33 @@
 import React, {useState} from 'react';
-import {Title, Modal, CenteredView, ModalView} from './style';
+import {FormattedMessage} from 'react-intl';
+import {
+  Title,
+  Modal,
+  CenteredView,
+  ModalView,
+  Divider,
+  MarginTop,
+  ButtonContainers,
+} from './style';
 
-import BottomSheetListOption from '@/components/BottomSheetListOption';
+import BottomSheetOption from '@/components/BottomSheetOption';
+import BottomSheetOptionList from '@/components/BottomSheetOptionList';
+import ThemeButton from '@/components/ThemeButton';
 
 const BottomSheet = ({
   title,
   items,
   onLayoutPress,
   onItemPress,
-  activeItemIndex,
+  activeOptionIndex,
 }) => {
   const [show] = useState(true);
+
+  const handleResetPress = () => {
+    onItemPress(null);
+  };
+
+  const handleApplyPress = () => {};
 
   return (
     <CenteredView>
@@ -18,14 +35,41 @@ const BottomSheet = ({
         <CenteredView onPress={onLayoutPress}>
           <ModalView>
             <Title>{title}</Title>
-            {items.map((item, index) => (
-              <BottomSheetListOption
-                active={activeItemIndex === index}
-                key={item}
-                onPress={() => onItemPress(index)}
-                label={item}
-              />
-            ))}
+            <Divider />
+            {items.map((item, index) => {
+              if (Array.isArray(item)) {
+                return (
+                  <BottomSheetOptionList
+                    currentActive={activeOptionIndex === index}
+                    onItemPress={() => onItemPress(index)}
+                    options={item}
+                    title="Cash Back"
+                  />
+                );
+              } else {
+                return (
+                  <BottomSheetOption
+                    active={activeOptionIndex === index}
+                    key={item}
+                    onPress={() => onItemPress(index)}
+                    label={item}
+                  />
+                );
+              }
+            })}
+            <Divider />
+            <MarginTop />
+            <ButtonContainers>
+              <ThemeButton medium reverse onPress={handleResetPress}>
+                <FormattedMessage id="reset" defaultMessage="Reset" />
+              </ThemeButton>
+              <ThemeButton
+                medium
+                disabled={activeOptionIndex === null}
+                onPress={handleApplyPress}>
+                <FormattedMessage id="apply" defaultMessage="Apply" />
+              </ThemeButton>
+            </ButtonContainers>
           </ModalView>
         </CenteredView>
       </Modal>

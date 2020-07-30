@@ -3,9 +3,9 @@ import {Option, ListLabel, ListValue, RightSide} from './style';
 
 import TickIcon from '@/assets/tick.svg';
 
-const BottomSheetListOption = ({label, value, active, ...props}) => (
+const BottomSheetOption = ({label, value, active, ...props}) => (
   <Option active={active} {...props}>
-    <ListLabel>{label}</ListLabel>
+    <ListLabel active={active}>{label}</ListLabel>
     <RightSide>
       {value && <ListValue>{value}</ListValue>}
       {active && <TickIcon />}
@@ -13,4 +13,4 @@ const BottomSheetListOption = ({label, value, active, ...props}) => (
   </Option>
 );
 
-export default BottomSheetListOption;
+export default BottomSheetOption;

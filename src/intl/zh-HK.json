@@ -29,6 +29,11 @@
     "lastupdate_at": "Last update at {time}",
     "clear": "Clear",
     "convert_all": "Convert all",
+    "reset": "Reset",
+    "apply": "Apply",
+    "filter": "Filter",
+    "filter_by": "Filter by",
+    "missing_receipt": "missing receipt",
 
     "redeem": "獎賞",
     "profile": "Profile",
