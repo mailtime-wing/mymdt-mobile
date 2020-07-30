@@ -6,6 +6,7 @@ import ScreenContainer from '@/components/ScreenContainer';
 
 export const Container = styled(ScreenContainer)`
   padding-bottom: 24px;
+  align-items: center;
 `;
 
 export const ScrollContainer = styled.ScrollView`
@@ -16,7 +17,7 @@ export const ScrollContainer = styled.ScrollView`
 
 export const BackgroundImage = styled.Image`
   align-self: center;
-  margin-bottom: 85px;
+  margin-bottom: 16px;
 `;
 
 export const Title = styled(TitleText)`
@@ -25,7 +26,7 @@ export const Title = styled(TitleText)`
   ${Platform.OS === 'ios' && 'font-weight: bold;'}
   color: ${props => props.theme.colors.white.normal};
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 `;
 
 export const Detail = styled(AppText)`
@@ -33,10 +34,5 @@ export const Detail = styled(AppText)`
   line-height: 24px;
   color: ${props => props.theme.colors.white.normal};
   text-align: center;
-  margin-bottom: 80px;
-`;
-
-export const ButtonsContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
+  margin-bottom: 16px;
 `;

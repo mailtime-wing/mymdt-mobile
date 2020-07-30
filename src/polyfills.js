@@ -1,3 +1,5 @@
+import 'react-native-url-polyfill/auto';
+
 /**
  * This is polyfill required by `Intl` (which comes from `react-intl`)
  * TODO: check the following

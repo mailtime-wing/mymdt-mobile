@@ -93,7 +93,8 @@ const OfferSelectScreen = ({route, navigation}) => {
         return;
       }
 
-      navigation.navigate(route.params.next);
+      // TODO: improve the setup navigation flow structure
+      navigation.navigate({name: route.params.next, key: 'introduction-setup'});
     } catch (e) {
       console.error(e);
     }

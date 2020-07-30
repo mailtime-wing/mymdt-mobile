@@ -4,41 +4,44 @@ import {FormattedMessage} from 'react-intl';
 import {
   ScrollContainer,
   Container,
-  ButtonsContainer,
   BackgroundImage,
   Title,
   Detail,
 } from './style';
 
+import BindingButton from './BindingButton';
 import ThemeButton from '@/components/ThemeButton';
+import BindingEmailIcon from '@/assets/binding-email.svg';
+import BindingBankAccountIcon from '@/assets/binding-bank-account.svg';
 
 const IntroductionScreen = ({route, navigation}) => {
   return (
     <ScrollContainer>
       <Container>
         <BackgroundImage source={require('@/assets/introduce_1.png')} />
-        <Title>We need shopping receipts to give you cash back</Title>
+        <Title>Select which way to retrieve your shopping records</Title>
         <Detail>
-          If you are worried about your privacy, we recommend you to bind the
-          email inbox receiving shopping receipts only.
+          RewardMe needs your shopping transaction records in order to give your
+          cash back.
         </Detail>
-        <ButtonsContainer>
-          <ThemeButton
-            reverseBorder
-            width="38%"
-            onPress={() => navigation.navigate(route.params.skip)}>
-            <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
-          </ThemeButton>
-          <ThemeButton
-            reverse
-            width="58%"
-            onPress={() => navigation.navigate(route.params.next)}>
-            <FormattedMessage
-              id="bind_email_accounts"
-              defaultMessage="Bind Emails"
-            />
-          </ThemeButton>
-        </ButtonsContainer>
+        <BindingButton
+          icon={<BindingEmailIcon />}
+          title="Connect with Emails"
+          caption="Powered by MailTime"
+          onPress={() => navigation.navigate('bind_email')}
+        />
+        <BindingButton
+          icon={<BindingBankAccountIcon />}
+          title="Link Credit/Debit Cards"
+          caption="Powered by Plaid and CrediGO"
+          onPress={() => navigation.navigate('choose_region')}
+        />
+        <ThemeButton
+          reverseBorder
+          width="100%"
+          onPress={() => navigation.navigate(route.params.skip)}>
+          <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
+        </ThemeButton>
       </Container>
     </ScrollContainer>
   );

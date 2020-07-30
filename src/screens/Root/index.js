@@ -18,6 +18,9 @@ import WelcomeScreen from '@/screens/WelcomeScreen';
 import SignUpRewardScreen from '@/screens/SignUpRewardScreen';
 import HomeStack from '@/screens/HomeStack';
 import MembershipScreen from '@/screens/MembershipScreen';
+import ChooseRegionScreen from '@/screens/ChooseRegionScreen';
+import DataSourceInfoScreen from '@/screens/DataSourceInfoScreen';
+import LinkedCardsScreen from '@/screens/LinkedCardsScreen';
 
 import LanguageScreen from '@/screens/LanguageScreen';
 import SignOutScreen from '@/screens/SignOutScreen';
@@ -66,7 +69,19 @@ const setupScreens = [
   {
     name: 'bind_email',
     component: BindEmailScreen,
-    skip: 'notification_permission',
+    next: 'notification_permission',
+  },
+  {
+    name: 'choose_region',
+    component: ChooseRegionScreen,
+  },
+  {
+    name: 'data_source_info',
+    component: DataSourceInfoScreen,
+  },
+  {
+    name: 'linked_cards',
+    component: LinkedCardsScreen,
   },
   // 5th step: turn on notification
   {name: 'notification_permission', component: NotificationPermissionScreen},
@@ -106,6 +121,8 @@ const backScreen = [
   'offer_select',
   'bind_email',
   'membership',
+  'choose_region',
+  'data_source_info',
 ];
 
 const Root = () => {
