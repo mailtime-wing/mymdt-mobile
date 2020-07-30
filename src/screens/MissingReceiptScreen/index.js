@@ -7,24 +7,18 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
 
 import {Container, Detail} from './style';
 
-import DateTimeSelector from '@/components/DateTimeSelector';
-
 import ModalContainer from '@/components/ModalContainer';
 import ThemeButton from '@/components/ThemeButton';
 import Input from '@/components/AppInput';
-import FormInput from '@/components/Input';
+import DateTimePickerInput from '@/components/DateTimePickerInput';
 
-const Form = ({showDatePicker, handleDatePickerPress, changeDateFormat}) => {
-  const {setFieldValue, values, handleSubmit, isValid} = useFormikContext();
-
-  const handleDateChange = date => {
-    setFieldValue('receiptDate', date);
-  };
+const Form = ({showDatePicker, handleDatePickerPress}) => {
+  const {handleSubmit, isValid} = useFormikContext();
 
   return (
     <>
@@ -53,23 +47,14 @@ const Form = ({showDatePicker, handleDatePickerPress, changeDateFormat}) => {
         keyboardType="email-address"
       />
       <TouchableOpacity onPress={handleDatePickerPress}>
-        <FormInput // use old input becoz of date format
+        <DateTimePickerInput
           label={
             <FormattedMessage id="receipt_date" defaultMessage="Receipt Date" />
           }
           required
-          value={changeDateFormat(values.receiptDate)}
           name="receiptDate"
-          editable={false}
-          placeholder="DD/MM/YYYY"
-          pointerEvents="none"
+          showDatePicker={showDatePicker}
         />
-        {showDatePicker && (
-          <DateTimeSelector
-            date={values.receiptDate}
-            onChange={handleDateChange}
-          />
-        )}
       </TouchableOpacity>
       <Input
         label={
@@ -90,7 +75,6 @@ const Form = ({showDatePicker, handleDatePickerPress, changeDateFormat}) => {
 };
 
 const MissingReceiptScreen = () => {
-  const intl = useIntl();
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleDatePickerPress = () => {
@@ -109,14 +93,6 @@ const MissingReceiptScreen = () => {
       console.error('Error in updating user profile edit screen', e);
     }
     Keyboard.dismiss();
-  };
-
-  const changeDateFormat = isoDate => {
-    return intl.formatDate(isoDate, {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
   };
 
   const initialValues = {
@@ -185,7 +161,6 @@ const MissingReceiptScreen = () => {
                 <Form
                   showDatePicker={showDatePicker}
                   handleDatePickerPress={handleDatePickerPress}
-                  changeDateFormat={changeDateFormat}
                 />
               </Formik>
             </Container>

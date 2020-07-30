@@ -66,10 +66,6 @@ export const GenderText = styled(Text)`
       : props.theme.colors.black.normal};
 `;
 
-export const FormInputContainer = styled.View`
-  margin-bottom: 24px;
-`;
-
 export const Error = styled(Text)`
   font-size: 12px;
   color: red;
