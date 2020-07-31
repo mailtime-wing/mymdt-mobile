@@ -61,18 +61,20 @@ const WalletScreen = ({navigation}) => {
   const [showBottomSheet, setShowBottomSheet] = useState(false);
   const [activeFilterIndex, setActiveFilterIndex] = useState(0);
   const {authToken} = useContext(AuthContext);
-  const [getTransactions, {data, loading}] = useLazyQuery(TRANSACTIONS_QUERY, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
+  const [getTransactions, { data, loading, fetchMore }] = useLazyQuery(
+    TRANSACTIONS_QUERY, {
+      context: {
+        headers: {
+          authorization: authToken ? `Bearer ${authToken}` : '',
+        },
       },
-    },
-    fetchPolicy: 'network-only',
-  });
+      fetchPolicy: "network-only",
+    }
+  );
 
   useEffect(() => {
-    getTransactions();
-  }, [getTransactions]);
+    getTransactions()
+  }, [])
 
   const mrpTheme = {
     color: theme.colors.secondary.normal,

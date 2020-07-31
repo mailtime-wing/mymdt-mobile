@@ -354,3 +354,31 @@ export const GET_USER_ID = gql`
     }
   }
 `;
+
+export const TRANSACTIONS_QUERY = gql`
+  query GetCurrecy($cursor: String, $filter: TransactionFilter){
+    userProfile{
+      currencyAccounts {
+        id
+        currencyCode
+        balance
+        transactions(first: 5, after: $cursor, filter: $filter) {
+          edges {
+            cursor
+            node {
+              id
+              type
+              transactionTime
+              amount
+              title
+            }
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+        }
+      }
+    }
+  }
+`;
