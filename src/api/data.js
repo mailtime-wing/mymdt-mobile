@@ -269,6 +269,35 @@ export const GET_CONVERSION_RATE_API = gql`
   }
 `;
 
+export const TRANSACTIONS_QUERY = gql`
+  query GetCurrecy($cursor: String, $filter: TransactionFilter){
+    userProfile{
+      currencyAccounts {
+        id
+        currencyCode
+        balance
+        transactions(first: 10, after: $cursor, filter: $filter) {
+          edges {
+            cursor
+            node {
+              id
+              type
+              transactionTime
+              amount
+              title
+            }
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
+        }
+      }
+    }
+  }
+`;
+
+
 export const BIND_BANK_ITEM = gql`
   mutation BindBankItem(
     $syncServerItemId: String!

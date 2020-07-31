@@ -23,7 +23,7 @@ const renderItem = ({item, index}) => {
     <Card key={index} background={item.theme.color}>
       <CardName>{item.title}</CardName>
       {item.coin}
-      {item.aroundInUsd && (
+      {item.aroundInUsd !== undefined && (
         <AroundInUSD>≈ ${item.aroundInUsd} USD </AroundInUSD>
       )}
     </Card>
