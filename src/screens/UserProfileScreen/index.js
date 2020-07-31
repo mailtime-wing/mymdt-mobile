@@ -5,16 +5,16 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
 import {useMutation} from '@apollo/react-hooks';
 import {UPDATE_USER_PROFILE_API} from '@/api/data';
 
 import {AuthContext} from '@/context/auth';
-import Input from '@/components/Input';
+import Input from '@/components/AppInput';
 import ThemeButton from '@/components/ThemeButton';
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
-import DateTimeSelector from '@/components/DateTimeSelector';
+import DateTimePickerInput from '@/components/DateTimePickerInput';
 
 import {
   Container,
@@ -22,21 +22,12 @@ import {
   Title,
   Detail,
   RequiredText,
-  FormInputContainer,
   Error,
   DateFieldContainer,
 } from './style';
 
-const FormInput = props => (
-  <FormInputContainer>
-    <Input {...props} />
-  </FormInputContainer>
-);
-
 const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
-  const intl = useIntl();
   const {
-    handleChange,
     handleSubmit,
     values,
     setFieldValue,
@@ -44,49 +35,33 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
     isValid,
   } = useFormikContext();
 
-  const handleDateChange = date => {
-    setFieldValue('dob', date);
-  };
-
   return (
     <FormContainer>
-      <FormInput
-        label={<FormattedMessage id="your_name" />}
-        required
-        onChangeText={handleChange('name')}
-        value={values.name}
-        error={errors.name}
-      />
+      <Input label={<FormattedMessage id="your_name" />} required name="name" />
       <GenderSelector gender={values.gender} setFieldValue={setFieldValue} />
       <Error>{errors.gender ? errors.gender : ' '}</Error>
       <DateFieldContainer onPress={handleDatePickerPress}>
-        <FormInput
-          label={<FormattedMessage id="date_of_birth" />}
+        <DateTimePickerInput
+          label={
+            <FormattedMessage
+              id="date_of_birth"
+              defaultMessage="DATE OF BIRTH"
+            />
+          }
           required
-          value={intl.formatDate(values.dob, {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-          })}
-          editable={false}
-          remark={<FormattedMessage id="claim_gift_on_birthday" />}
-          placeholder="DD/MM/YYYY"
-          pointerEvents="none"
+          name="dob"
+          showDatePicker={showDatePicker}
         />
-        {showDatePicker && (
-          <DateTimeSelector date={values.dob} onChange={handleDateChange} />
-        )}
       </DateFieldContainer>
-      <FormInput
+      <Input
         label={<FormattedMessage id="referral_code" />}
-        onChangeText={handleChange('referralCode')}
         remark={
           <FormattedMessage
             id="edit_prefernece_afterward"
             defaultMessage="You can fill in later in profile page"
           />
         }
-        value={values.referralCode}
+        name="referralCode"
       />
       <ThemeButton onPress={handleSubmit} title="Submit" disabled={!isValid}>
         <FormattedMessage id="submit" defaultMessage="submit" />

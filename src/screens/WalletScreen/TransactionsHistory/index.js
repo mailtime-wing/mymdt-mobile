@@ -18,6 +18,7 @@ const TransactionsHistory = ({
   currentTheme,
   currentFilter,
   handleFilterPress,
+  navigation,
   ...props
 }) => {
   return (
@@ -38,7 +39,9 @@ const TransactionsHistory = ({
           textStyle={`color: ${currentTheme.color}`}
           buttonStyle={`borderColor: ${currentTheme.borderColor}`}
           reverse
-          small>
+          small
+          onPress={() => navigation.navigate('missing_receipt')}
+        >
           <FormattedMessage
             id="missing_receipt"
             defaultMessage="missing receipt"

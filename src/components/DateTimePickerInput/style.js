@@ -21,10 +21,6 @@ export const TextInputContainer = styled.View`
     props.isFocus &&
     `border: 2px solid ${props.theme.colors.secondary.normal}; 
     background-color: ${props.theme.colors.blue.light}`};
-  ${props =>
-    props.readOnly &&
-    `border: 2px solid transparent; 
-    background-color: transparent`};
 `;
 
 export const Container = styled.View`

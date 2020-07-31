@@ -1,6 +1,6 @@
 import React, {useContext, useLayoutEffect, useEffect, useReducer} from 'react';
 import {TouchableWithoutFeedback, Keyboard} from 'react-native';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import ImagePicker from 'react-native-image-picker';
 import {Formik, useFormikContext} from 'formik';
 import {useMutation, useQuery} from '@apollo/react-hooks';
@@ -21,7 +21,7 @@ import {
 } from './style';
 
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
-import DateTimeSelector from '@/components/DateTimeSelector';
+import DateTimePickerInput from '@/components/DateTimePickerInput';
 
 import ModalContainer from '@/components/ModalContainer';
 import EditButton from '@/components/EditButton';
@@ -29,7 +29,6 @@ import CancelButton from '@/components/CancelButton';
 import ConfirmButton from '@/components/ConfirmButton';
 import CloseButton from '@/components/CloseButton';
 import Input from '@/components/AppInput';
-import FormInput from '@/components/Input';
 
 const RESET_FORM = 'resetForm';
 const UPDATE_IS_CANCELLED = 'updateIsCancelled';
@@ -105,11 +104,7 @@ const cameraOptions = {
   },
 };
 
-const UserProfileEditForm = ({
-  handleDatePickerPress,
-  formState,
-  changeDateFormat,
-}) => {
+const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
   const {
     setFieldValue,
     values,
@@ -127,10 +122,6 @@ const UserProfileEditForm = ({
       resetForm();
     }
   }, [formState.isConfirmed, formState.isCancelled, submitForm, resetForm]);
-
-  const handleDateChange = date => {
-    setFieldValue('dob', date);
-  };
 
   const handleCameraPress = () => {
     ImagePicker.showImagePicker(cameraOptions, response => {
@@ -165,26 +156,23 @@ const UserProfileEditForm = ({
       <GenderSelector gender={values.gender} setFieldValue={setFieldValue} />
       <Error>{errors.gender ? errors.gender : ' '}</Error>
       <DateFieldContainer onPress={handleDatePickerPress}>
-        <FormInput // use old input becoz of date format
-          label={<FormattedMessage id="date_of_birth" />}
+        <DateTimePickerInput
+          label={
+            <FormattedMessage
+              id="date_of_birth"
+              defaultMessage="DATE OF BIRTH"
+            />
+          }
           required
-          value={changeDateFormat(values.dob)}
           name="dob"
-          editable={false}
-          remark={<FormattedMessage id="claim_gift_on_birthday" />}
-          placeholder="DD/MM/YYYY"
-          pointerEvents="none"
+          showDatePicker={formState.showDatePicker}
         />
-        {formState.showDatePicker && (
-          <DateTimeSelector date={values.dob} onChange={handleDateChange} />
-        )}
       </DateFieldContainer>
     </FormContainer>
   );
 };
 
 const UserProfileEditScreen = ({navigation}) => {
-  const intl = useIntl();
   const {authToken} = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [updateUserProfileRequest] = useMutation(UPDATE_USER_PROFILE_EDIT_API);
@@ -241,21 +229,13 @@ const UserProfileEditScreen = ({navigation}) => {
     refetch();
   };
 
-  const changeDateFormat = isoDate => {
-    return intl.formatDate(isoDate, {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-  };
-
   const initialValues = {
     profilePicture: require('@/assets/zt-mask.jpg'),
-    name: data?.userProfile.name,
+    name: data?.userProfile?.name,
     gender: genderOptions.find(
-      gender => gender.value === data?.userProfile.gender,
+      gender => gender.value === data?.userProfile?.gender,
     )?.value,
-    dob: data?.userProfile.birthday,
+    dob: data?.userProfile?.birthday,
   };
 
   const validate = values => {
@@ -306,7 +286,6 @@ const UserProfileEditScreen = ({navigation}) => {
               <UserProfileEditForm
                 handleDatePickerPress={handleDatePickerPress}
                 formState={state}
-                changeDateFormat={changeDateFormat}
               />
             </Formik>
           </ScrollContainer>

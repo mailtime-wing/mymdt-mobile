@@ -12,6 +12,7 @@ import BonusScreen from '@/screens/BonusScreen';
 import WalletScreen from '@/screens/WalletScreen';
 import RedeemScreen from '@/screens/RedeemScreen';
 import ConverterScreen from '@/screens/ConverterScreen';
+import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
 import CloseButton from '@/components/CloseButton';
 
 import {
@@ -30,6 +31,7 @@ const WalletStack = createStackNavigator();
 const walletStackScreens = [
   {name: 'wallet', component: WalletScreen},
   {name: 'converter', component: ConverterScreen, modal: true},
+  {name: 'missing_receipt', component: MissingReceiptScreen, modal: true},
 ];
 
 const Label = ({focused, id}) => (
