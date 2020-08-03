@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useTheme} from 'emotion-theming'
 import {
   Container,
   TextInput,
@@ -9,7 +10,8 @@ import {
 } from './style';
 import {useField} from 'formik';
 
-const Input = ({label, required, remark, readOnly, ...props}) => {
+const Input = ({label, required, remark, readOnly, remarkStyle, textStyle ,placeholder, additionalStringToValue, ...props}) => {
+  const theme = useTheme()
   const [isFocus, setIsFocus] = useState(false);
   const [field, meta] = useField(props.name);
   const isError = meta.touched && meta.error;
@@ -45,9 +47,12 @@ const Input = ({label, required, remark, readOnly, ...props}) => {
           value={field.value}
           autoCapitalize="none"
           isError={isError}
+          placeholder={placeholder}
+          placeholderTextColor={theme.colors.black.superLight}
+          style={textStyle}
         />
       </TextInputContainer>
-      {remark && <Remark>{remark}</Remark>}
+      {remark && <Remark style={remarkStyle}>{remark}</Remark>}
       {
         <Error numberOfLines={1} ellipsizeMode="clip">
           {isError ? meta.error : ' '}
