@@ -172,3 +172,25 @@ export const GET_USER_PROFILE_API = gql`
     }
   }
 `;
+
+export const REPORT_MISSING_RECEIPT = gql`
+  mutation reportMissingReceipt(
+    $recipient: String!
+    $subject: String!
+    $sender: String!
+    $emailDate: Time!
+    $orderNumber: String
+    $currencyCode: String
+    $amount: Float
+  ) {
+    reportMissingReceipt(
+      recipient: $recipient
+      subject: $subject
+      sender: $sender
+      emailDate: $emailDate
+      orderNumber: $orderNumber
+      currencyCode: $currencyCode
+      amount: $amount
+    )
+  }
+`;

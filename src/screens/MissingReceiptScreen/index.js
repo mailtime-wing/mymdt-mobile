@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   TouchableWithoutFeedback,
   Keyboard,
@@ -9,8 +9,17 @@ import {
 } from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
+import {AuthContext} from '@/context/auth';
+import {useMutation} from '@apollo/react-hooks';
+import {REPORT_MISSING_RECEIPT} from '@/api/data';
 
-import {Container, Detail} from './style';
+import {
+  Container,
+  Detail,
+  AmountCurrencyContainer,
+  CurrencyContainer,
+  AmountContainer,
+} from './style';
 
 import ModalContainer from '@/components/ModalContainer';
 import ThemeButton from '@/components/ThemeButton';
@@ -62,11 +71,17 @@ const Form = ({showDatePicker, handleDatePickerPress}) => {
         }
         name="orderNumber"
       />
-      <Input
-        label={<FormattedMessage id="amount" defaultMessage="amount" />}
-        name="amount"
-        keyboardType="numeric"
-      />
+      <AmountCurrencyContainer>
+        <CurrencyContainer>
+          <Input
+            label={<FormattedMessage id="amount" defaultMessage="amount" />}
+            name="currencyCode"
+          />
+        </CurrencyContainer>
+        <AmountContainer>
+          <Input name="amount" keyboardType="numeric" />
+        </AmountContainer>
+      </AmountCurrencyContainer>
       <ThemeButton onPress={handleSubmit} title="Submit" disabled={!isValid}>
         <FormattedMessage id="submit" defaultMessage="submit" />
       </ThemeButton>
@@ -74,8 +89,10 @@ const Form = ({showDatePicker, handleDatePickerPress}) => {
   );
 };
 
-const MissingReceiptScreen = () => {
+const MissingReceiptScreen = ({navigation}) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const {authToken} = useContext(AuthContext);
+  const [reportMissingReceipt] = useMutation(REPORT_MISSING_RECEIPT);
 
   const handleDatePickerPress = () => {
     setShowDatePicker(!showDatePicker);
@@ -88,7 +105,24 @@ const MissingReceiptScreen = () => {
 
   const handleSubmitPress = async values => {
     try {
-      // TODO: integrate API
+      await reportMissingReceipt({
+        variables: {
+          recipient: values.email,
+          subject: values.receiptTitle,
+          sender: values.senderEmail,
+          emailDate: values.receiptDate,
+          orderNumber: values.orderNumber,
+          currencyCode: values.currencyCode,
+          amount: values.amount,
+        },
+        context: {
+          headers: {
+            authorization: authToken ? `Bearer ${authToken}` : '',
+          },
+        },
+      });
+
+      navigation.pop();
     } catch (e) {
       console.error('Error in updating user profile edit screen', e);
     }
@@ -101,6 +135,7 @@ const MissingReceiptScreen = () => {
     senderEmail: '',
     receiptDate: new Date(),
     orderNumber: '',
+    currencyCode: 'HKD',
     amount: '',
   };
 
