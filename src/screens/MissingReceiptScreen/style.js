@@ -12,3 +12,17 @@ export const Detail = styled(Text)`
   color: ${props => props.theme.colors.black.light};
   margin-bottom: 24px;
 `;
+
+export const AmountCurrencyContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const CurrencyContainer = styled.View`
+  margin-right: 8px;
+  flex: 1;
+`;
+
+export const AmountContainer = styled.View`
+  flex: 2;
+`;
