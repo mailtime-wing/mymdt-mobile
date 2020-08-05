@@ -9,7 +9,12 @@ const ActionButtons = ({actionList, color, navigation}) => {
         actionList.map((action, index) => (
           <ButtonContainer
             key={index}
-            onPress={() => navigation.navigate(action.id)}>
+            onPress={() =>
+              navigation.navigate(action.id, {
+                from: action.from,
+                to: action.to,
+              })
+            }>
             {action.icon}
             <ButtonText color={color}>{action.name}</ButtonText>
           </ButtonContainer>
