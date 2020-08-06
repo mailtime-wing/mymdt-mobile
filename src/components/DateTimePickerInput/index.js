@@ -24,7 +24,6 @@ const DateTimePickerInput = ({
   const [field, meta] = useField(name);
   const isError = meta.error;
   const {setFieldValue} = useFormikContext();
-  console.log('field.value', field.value);
 
   const handleDateChange = date => {
     setFieldValue(name, date);
