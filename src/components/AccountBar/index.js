@@ -33,8 +33,6 @@ const AccountBar = ({navigation, showCoins}) => {
     },
   });
 
-  console.log('data',data)
-
   return (
     <Container>
       <AccountContainer>
