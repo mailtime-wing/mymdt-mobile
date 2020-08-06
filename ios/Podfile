@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://bitbucket.org/mailtimeapp/podspecs.git'
+source 'https://github.com/measurabledatatoken/podspecs.git'
 
 platform :ios, '11.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
