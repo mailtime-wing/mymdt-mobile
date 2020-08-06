@@ -143,6 +143,9 @@ const Root = () => {
   if (setupStatus?.isDataSourceBound) {
     excludeScreenNames.push('introduction');
     excludeScreenNames.push('bind_email');
+    excludeScreenNames.push('choose_region');
+    excludeScreenNames.push('data_source_info');
+    excludeScreenNames.push('linked_cards');
   }
   if (
     setupStatus?.isDataSourceBound &&
