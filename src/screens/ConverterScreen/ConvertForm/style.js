@@ -89,6 +89,12 @@ export const NumberText = styled(Text)`
       : props.theme.colors.black.superLight};
 `;
 
+export const Error = styled(Text)`
+  font-size: 12px;
+  height: 16px;
+  color: ${props => props.theme.colors.error.light};
+`;
+
 export const Margin = styled.View`
   margin-bottom: 16px;
 `;

@@ -25,6 +25,7 @@ import {
   InputAccessoryButton,
   InputAccessoryButtonText,
   NumberText,
+  Error,
   styles,
 } from './style';
 
@@ -36,6 +37,7 @@ import ConvertIcon from '@/assets/convert.svg';
 
 const inputAccessoryViewID = 'converterButtons';
 
+// TODO: handle Convert all press, merge transaction api commit later
 const KeyboardButtons = ({handleConverterOnChange}) => (
   <InputAccessoryView nativeID={inputAccessoryViewID}>
     <InputAccessoryViewContainer>
@@ -44,7 +46,7 @@ const KeyboardButtons = ({handleConverterOnChange}) => (
           <FormattedMessage id="clear" defaultMessage="clear" />
         </InputAccessoryButtonText>
       </InputAccessoryButton>
-      <InputAccessoryButton onPress={() => handleConverterOnChange(6666666)}>
+      <InputAccessoryButton onPress={() => handleConverterOnChange(20)}>
         <InputAccessoryButtonText>
           <FormattedMessage id="convert_all" defaultMessage="Convert all" />
         </InputAccessoryButtonText>
@@ -55,13 +57,20 @@ const KeyboardButtons = ({handleConverterOnChange}) => (
 
 const ConverterInput = ({title, name, ...props}) => {
   const intl = useIntl();
-  const [field] = useField(name);
+  const [field, meta] = useField(name);
+  const isError = meta.error;
+
   return (
-    <Input
-      value={intl.formatNumber(field.value)}
-      onChangeText={field.onChange(name)}
-      {...props}
-    />
+    <>
+      <Input
+        value={intl.formatNumber(field.value)}
+        onChangeText={field.onChange(name)}
+        {...props}
+      />
+      <Error numberOfLines={1} ellipsizeMode="clip">
+        {isError ? meta.error : ' '}
+      </Error>
+    </>
   );
 };
 

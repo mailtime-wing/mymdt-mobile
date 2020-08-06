@@ -3,18 +3,19 @@ import {FormattedMessage} from 'react-intl';
 import {KeyboardAvoidingView, ScrollView} from 'react-native';
 import {Formik} from 'formik';
 import {AuthContext} from '@/context/auth';
-import {useQuery} from '@apollo/react-hooks';
-import {GET_CONVERSION_RATE_API} from '@/api/data';
+import {useQuery, useMutation} from '@apollo/react-hooks';
+import {GET_CONVERSION_RATE_API, CURRENCY_CONVERT_API} from '@/api/data';
 
 import {Container, Detail} from './style';
 
 import ModalContainer from '@/components/ModalContainer';
 import ConvertForm from './ConvertForm';
 
-const ConverterScreen = ({route}) => {
+const ConverterScreen = ({navigation, route}) => {
   const from = route.params.from;
   const to = route.params.to;
   const {authToken} = useContext(AuthContext);
+  const [convert] = useMutation(CURRENCY_CONVERT_API);
   const {data} = useQuery(GET_CONVERSION_RATE_API, {
     context: {
       headers: {
@@ -30,13 +31,37 @@ const ConverterScreen = ({route}) => {
   const conversionRate = data?.conversionRate || 0;
 
   const handleConvertPress = async values => {
-    // TODO: integrate convert api
-    console.log(values);
+    try {
+      const result = await convert({
+        variables: {
+          from: values.from,
+          to: values.to,
+          amount: values.amount,
+        },
+        context: {
+          headers: {
+            authorization: authToken ? `Bearer ${authToken}` : '',
+          },
+        },
+      });
+
+      if (result) {
+        navigation.pop();
+      }
+    } catch (e) {
+      console.error(
+        `Error in convert currency from ${values.from} to ${
+          values.to
+        } with amount ${values.amount}`,
+        e,
+      );
+    }
   };
 
   const validate = values => {
     const errors = {};
-    // TODO: handle when integrate convert api
+    // TODO: handle if amount is not enough / return meaningful error from backend
+    // errors.amount = 'Do not have enough amount'
 
     return errors;
   };
