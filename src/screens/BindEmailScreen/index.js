@@ -1,24 +1,8 @@
-import React, {useState, useContext, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {AuthContext} from '@/context/auth';
-import {useMutation, useQuery} from '@apollo/react-hooks';
+import {Formik} from 'formik';
 
-import {
-  GET_USER_EMAIL_ACCOUNTS_API,
-  UNBIND_EMAIL_ACCOUNTS_API,
-} from '@/api/data';
-
-import {
-  EmailContainer,
-  EmailRowContainer,
-  Title,
-  Detail,
-  BindMoreLaterText,
-  MarginContainer,
-  ScrollContainer,
-} from './style';
-
-import Input from '@/components/Input';
+import Input from '@/components/AppInput';
 import ThemeButton from '@/components/ThemeButton';
 import BackButton from '@/components/BackButton';
 import PopupModal from '@/components/PopupModal';
@@ -26,6 +10,8 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import ScreenContainer from '@/components/ScreenContainer';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import useMailTimeSdk from '@/hooks/useMailTimeSdk';
+
+import {Title, Detail, ScrollContainer} from './style';
 
 const BindEmailScreen = ({route, navigation}) => {
   const [unbindSuccess, setUnbindSuccess] = useState(false);
@@ -42,79 +28,18 @@ const BindEmailScreen = ({route, navigation}) => {
   } = useMailTimeSdk();
   const {navigateByFlow} = useSetupFlow();
 
-  const {authToken} = useContext(AuthContext);
-  const apiContext = {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-  };
-  const userEmailAccountsData = useQuery(
-    GET_USER_EMAIL_ACCOUNTS_API,
-    apiContext,
-  );
-  const [unbindEmailRequest, {loading}] = useMutation(
-    UNBIND_EMAIL_ACCOUNTS_API,
-    apiContext,
-  );
-
-  const currentIndex =
-    userEmailAccountsData?.data?.userProfile?.emailAccounts?.length || 0;
-
-  const [emails, setEmails] = useState([{id: null, emailAddress: ''}]);
   useEffect(() => {
-    if (userEmailAccountsData?.data) {
-      const emailAccounts = [
-        ...(userEmailAccountsData?.data?.userProfile.emailAccounts || []),
-        {id: null, emailAddress: ''},
-      ];
-      setEmails(emailAccounts);
+    if (loginSuccess) {
+      navigateByFlow('next', {loginSuccess: true});
     }
-  }, [userEmailAccountsData]);
+  }, [loginSuccess, navigateByFlow]);
 
-  const handleUnbindEmailPress = async unbindEmailId => {
-    try {
-      await unbindEmailRequest({
-        variables: {
-          ids: [unbindEmailId],
-        },
-      });
-      setUnbindSuccess(true);
-      userEmailAccountsData?.refetch();
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const handleBindEmailPress = email => {
-    const regex = /[^@]+@[^\.]+\..+/;
-    if (!regex.test(email)) {
-      setClientError('Please input valid email');
-      return;
-    }
-    login(email);
-  };
-
-  const handleEmailOnChange = (email, index) => {
-    setEmails(existingEmails => {
-      const newEmails = [...existingEmails];
-      newEmails[index].emailAddress = email;
-      return newEmails;
-    });
-  };
-
-  const handleFinishPress = () => {
-    navigateByFlow();
-  };
-
-  const handleSkipPress = () => {
-    navigateByFlow();
+  const handleConnectPress = values => {
+    login(values.email);
   };
 
   const handlePopupPress = () => {
     reset();
-    userEmailAccountsData?.refetch();
   };
 
   useLayoutEffect(() => {
@@ -125,9 +50,31 @@ const BindEmailScreen = ({route, navigation}) => {
     }
   }, [navigation, navigateFromEdit]);
 
-  if (loading || sdkLoading || userEmailAccountsData.loading) {
+  if (sdkLoading) {
     return <LoadingSpinner />;
   }
+
+  const validate = values => {
+    const errors = {};
+
+    if (!values.email) {
+      errors.email = (
+        <FormattedMessage id="required" defaultMessage="Required" />
+      );
+    }
+
+    const emailRegex = /[^@]+@[^\.]+\..+/;
+    if (!emailRegex.test(values.email)) {
+      errors.email = (
+        <FormattedMessage
+          id="please_input_valid_email"
+          defaultMessage="Please input valid email"
+        />
+      );
+    }
+
+    return errors;
+  };
 
   return (
     <ScrollContainer>
@@ -141,69 +88,24 @@ const BindEmailScreen = ({route, navigation}) => {
         <Detail>
           <FormattedMessage id="dont_worry" />
         </Detail>
-
-        {emails.map((email, index) => {
-          const active = index === currentIndex;
-          const isBind = index < currentIndex;
-          const isNext = !active && !isBind;
-          return (
-            <EmailRowContainer key={email.emailAddress} isNext={isNext}>
-              <EmailContainer>
-                <Input
-                  type="email"
-                  onChangeText={text => handleEmailOnChange(text, index)}
-                  value={email.emailAddress}
-                  editable={active}
-                  readOnly={isBind}
-                  label={
-                    <FormattedMessage
-                      id="email_account"
-                      defaultMessage="EMAIL {email_count}"
-                      values={{
-                        email_count: index + 1,
-                      }}
-                    />
-                  }
-                />
-              </EmailContainer>
-              {isBind ? (
-                <ThemeButton
-                  medium
-                  disabled={isNext || !email.emailAddress}
-                  onPress={() => handleUnbindEmailPress(email.id)}>
-                  <FormattedMessage id="unbind" defaultMessage="unbind" />
-                </ThemeButton>
-              ) : (
-                <ThemeButton
-                  medium
-                  disabled={isNext || !email.emailAddress}
-                  onPress={() => handleBindEmailPress(email.emailAddress)}>
-                  <FormattedMessage id="login" />
-                </ThemeButton>
-              )}
-            </EmailRowContainer>
-          );
-        })}
-        {!navigateFromEdit && (
-          <>
-            <ThemeButton onPress={handleFinishPress}>
-              <FormattedMessage id="finish" defaultMessage="finish" />
-            </ThemeButton>
-            <MarginContainer />
-            <ThemeButton reverse small onPress={handleSkipPress}>
-              <FormattedMessage
-                id="skip_for_now"
-                defaultMessage="Skip for now"
+        <Formik
+          initialValues={{email: ''}}
+          onSubmit={handleConnectPress}
+          validate={validate}>
+          {({handleSubmit, isValid}) => (
+            <>
+              <Input
+                label={<FormattedMessage id="email" defaultMessage="Email" />}
+                required
+                name="email"
+                keyboardType="email-address"
               />
-            </ThemeButton>
-            <BindMoreLaterText>
-              <FormattedMessage
-                id="bind_more_email_later"
-                defaultMessage="You can bind more emails later in profile."
-              />
-            </BindMoreLaterText>
-          </>
-        )}
+              <ThemeButton disabled={!isValid} onPress={handleSubmit}>
+                <FormattedMessage id="connect" defaultMessage="Connect" />
+              </ThemeButton>
+            </>
+          )}
+        </Formik>
         {loginCancel && (
           <PopupModal
             title="Cancelled"

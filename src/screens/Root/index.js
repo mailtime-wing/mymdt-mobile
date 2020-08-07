@@ -21,6 +21,7 @@ import MembershipScreen from '@/screens/MembershipScreen';
 import ChooseRegionScreen from '@/screens/ChooseRegionScreen';
 import DataSourceInfoScreen from '@/screens/DataSourceInfoScreen';
 import LinkedCardsScreen from '@/screens/LinkedCardsScreen';
+import LinkedEmailsScreen from '@/screens/LinkedEmailsScreen';
 
 import LanguageScreen from '@/screens/LanguageScreen';
 import SignOutScreen from '@/screens/SignOutScreen';
@@ -70,12 +71,15 @@ const setupScreens = [
   {
     name: 'introduction',
     component: IntroductionScreen,
-    skip: 'notification_permission',
+    // skip: 'notification_permission',
   },
   {
-    name: 'bind_email',
+    name: 'add_email',
     component: BindEmailScreen,
-    next: 'notification_permission',
+  },
+  {
+    name: 'linked_emails',
+    component: LinkedEmailsScreen,
   },
   {
     name: 'choose_region',
@@ -108,7 +112,8 @@ const authModalScreens = [
   {name: 'my_referral_code', component: UserProfileEditScreen},
   {name: 'offers_preference_edit', component: OfferPreferenceEditScreen},
   {name: 'offers_preference', component: OfferSelectScreen},
-  {name: 'emails_binding', component: BindEmailEditScreen},
+  {name: 'emails_binding', component: BindEmailScreen}, // same as add_email in setupScreens (but different navigator)
+  {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'enter_invite_code', component: LanguageScreen},
   {name: 'sign_out', component: SignOutScreen},
@@ -128,7 +133,7 @@ const backScreen = [
   'sign_up',
   'welcome',
   'offer_select',
-  'bind_email',
+  'add_email',
   'membership',
   'choose_region',
   'data_source_info',

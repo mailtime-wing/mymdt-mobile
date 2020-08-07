@@ -40,8 +40,11 @@ export const SetupFlowProvider = ({children}) => {
     'next',
   );
   graph.setEdge('introduction', 'notification_permission', 'skip');
-  graph.setEdge('introduction', 'bind_email', 'email_flow');
-  graph.setPath(['bind_email', 'notification_permission'], 'next');
+  graph.setEdge('introduction', 'add_email', 'email_flow');
+  graph.setPath(
+    ['add_email', 'linked_emails', 'notification_permission'],
+    'next',
+  );
   graph.setEdge('introduction', 'choose_region', 'card_flow');
   graph.setPath(
     [
