@@ -32,6 +32,11 @@ import AppSettingScreen from '@/screens/AppSettingScreen';
 import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
 import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
 
+// wallet page
+import ConverterScreen from '@/screens/ConverterScreen';
+import WithdrawalScreen from '@/screens/WithdrawalScreen';
+import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
+
 import {AuthContext} from '@/context/auth';
 import {PreloadDataContext} from '@/context/preloadData';
 import BackButton from '@/components/BackButton';
@@ -113,6 +118,9 @@ const authModalScreens = [
   {name: 'terms_of_service', component: LanguageScreen},
   {name: 'privacy_policy', component: LanguageScreen},
   {name: 'about_us', component: LanguageScreen},
+  {name: 'converter', component: ConverterScreen},
+  {name: 'withdrawal', component: WithdrawalScreen},
+  {name: 'missing_receipt', component: MissingReceiptScreen},
 ];
 
 const backScreen = [

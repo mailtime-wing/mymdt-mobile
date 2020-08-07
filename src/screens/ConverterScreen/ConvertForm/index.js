@@ -25,7 +25,7 @@ import {
   InputAccessoryButton,
   InputAccessoryButtonText,
   NumberText,
-  Error,
+  // Error,
   styles,
 } from './style';
 
@@ -57,8 +57,8 @@ const KeyboardButtons = ({handleConverterOnChange}) => (
 
 const ConverterInput = ({title, name, ...props}) => {
   const intl = useIntl();
-  const [field, meta] = useField(name);
-  const isError = meta.error;
+  const [field] = useField(name);
+  // TODO: handle when have error design
 
   return (
     <>
@@ -67,9 +67,6 @@ const ConverterInput = ({title, name, ...props}) => {
         onChangeText={field.onChange(name)}
         {...props}
       />
-      <Error numberOfLines={1} ellipsizeMode="clip">
-        {isError ? meta.error : ' '}
-      </Error>
     </>
   );
 };
