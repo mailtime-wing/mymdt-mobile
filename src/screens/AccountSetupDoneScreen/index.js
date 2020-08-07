@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {AuthContext} from '@/context/auth';
+import {PreloadDataContext} from '@/context/preloadData';
 import {useQuery} from '@apollo/react-hooks';
 import {GET_USER_REWARDS_API} from '@/api/data';
 
@@ -9,7 +10,8 @@ import {Container, Title, Detail} from './style';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
 const AccountSetupDoneScreen = ({route, navigation}) => {
-  const {authToken, appConfig} = useContext(AuthContext);
+  const {authToken} = useContext(AuthContext);
+  const {appConfig} = useContext(PreloadDataContext);
   const {data: userRewardsApiData, loading: loadingUserRewards} = useQuery(
     GET_USER_REWARDS_API,
     {
@@ -22,7 +24,7 @@ const AccountSetupDoneScreen = ({route, navigation}) => {
   );
 
   const accountSetupReward = userRewardsApiData?.userProfile?.rewards?.find(
-    reward => reward.task_id === appConfig?.appConfig?.accountSetupTaskID,
+    reward => reward.task_id === appConfig.accountSetupTaskID,
   );
 
   const handlePress = () => {

@@ -10,10 +10,8 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import AsyncStorage from '@react-native-community/async-storage';
 import jwt_decode from 'jwt-decode';
 import {REFRESH_TOKEN_API} from '@/api/auth';
-import {useMutation, useQuery} from '@apollo/react-hooks';
-import {GET_USER_SETUP_STATUS_API, GET_APP_CONFIG_API} from '@/api/data';
+import {useMutation} from '@apollo/react-hooks';
 
-import SplashScreen from '@/screens/SplashScreen';
 import PopupModal from '@/components/PopupModal';
 
 export const AuthContext = createContext(null);
@@ -73,27 +71,6 @@ export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
   const [notificationEnabled, setNotificationEnabled] = useState(false);
-
-  const skip = !state.authToken;
-  const context = {
-    headers: {
-      authorization: state.authToken ? `Bearer ${state.authToken}` : '',
-    },
-  };
-
-  const {data: userSetupStatusApiData, loading: loadingSetupStatus} = useQuery(
-    GET_USER_SETUP_STATUS_API,
-    {
-      skip: skip,
-      context: context,
-    },
-  );
-
-  const {data: appConfigApiData, loading: loadingAppConfig} = useQuery(
-    GET_APP_CONFIG_API,
-  );
-
-  const setupStatus = userSetupStatusApiData?.userProfile?.setupStatus;
 
   useEffect(() => {
     // check notification permission
@@ -192,16 +169,12 @@ export const AuthProvider = ({children}) => {
       authToken: state.authToken,
       refreshToken: state.refreshToken,
       cashBackType: state.cashBackType,
-      setupStatus: setupStatus,
-      appConfig: appConfigApiData,
       notificationEnabled: notificationEnabled,
     }),
     [
       state.authToken,
       state.refreshToken,
       state.cashBackType,
-      setupStatus,
-      appConfigApiData,
       notificationEnabled,
     ],
   );
@@ -214,10 +187,6 @@ export const AuthProvider = ({children}) => {
         callback={handlePopupPress}
       />
     );
-  }
-
-  if (state.isLoading || loadingSetupStatus || loadingAppConfig) {
-    return <SplashScreen />;
   }
 
   return (

@@ -7,6 +7,7 @@ import client from '@/api/client';
 import theme from '@/theme';
 import {IntlContainer} from '@/context/Intl';
 import {AuthProvider} from '@/context/auth';
+import {PreloadDataProvider} from '@/context/preloadData';
 import NavigationRoot from '@/screens/Root';
 
 function App() {
@@ -16,7 +17,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <IntlContainer>
             <AuthProvider>
-              <NavigationRoot />
+              <PreloadDataProvider>
+                <NavigationRoot />
+              </PreloadDataProvider>
             </AuthProvider>
           </IntlContainer>
         </ThemeProvider>

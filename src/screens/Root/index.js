@@ -33,6 +33,7 @@ import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
 import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
 
 import {AuthContext} from '@/context/auth';
+import {PreloadDataContext} from '@/context/preloadData';
 import BackButton from '@/components/BackButton';
 import CloseButton from '@/components/CloseButton';
 import {
@@ -126,7 +127,8 @@ const backScreen = [
 ];
 
 const Root = () => {
-  const {authToken, setupStatus, notificationEnabled} = useContext(AuthContext);
+  const {authToken, notificationEnabled} = useContext(AuthContext);
+  const {setupStatus} = useContext(PreloadDataContext);
   const {top} = useSafeAreaInsets();
 
   const excludeScreenNames = [];
