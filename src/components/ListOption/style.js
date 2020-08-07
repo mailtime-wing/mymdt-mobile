@@ -18,10 +18,13 @@ export const ListValue = styled(Text)`
   font-size: 16px;
   line-height: 24px;
   color: ${props => props.theme.colors.black.superLight};
-  margin-right: 16px;
 `;
 
 export const RightSide = styled.View`
   flex-direction: row;
   align-items: center;
+`;
+
+export const Margin = styled.View`
+  margin-right: 16px;
 `;

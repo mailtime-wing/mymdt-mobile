@@ -38,4 +38,5 @@ export const GenderLabel = styled(Text)`
   letter-spacing: 1px;
   font-weight: bold;
   margin-bottom: 8px;
+  text-transform: uppercase;
 `;
