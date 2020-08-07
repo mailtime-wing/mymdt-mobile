@@ -57,6 +57,8 @@ const cardList = [
       {
         name: 'convert',
         id: 'converter',
+        from: MEASURABLE_REWARD_POINT,
+        to: MEASURABLE_DATA_TOKEN,
         icon: <ConvertIcon fill={mrpTheme.color} />,
       },
       {name: 'redeem gift', icon: <RedeemGiftIcon fill={mrpTheme.color} />},
@@ -77,8 +79,18 @@ const cardList = [
     aroundInUsd: 123,
     theme: {color: mdtTheme.color, borderColor: mdtTheme.borderColor},
     actionList: [
-      {name: 'convert', id: 'converter', icon: <ConvertIcon fill={mdtTheme.color} />},
-      {name: 'withdrawal', id: 'withdrawal', icon: <WithdrawalIcon fill={mdtTheme.color} />},
+      {
+        name: 'convert',
+        id: 'converter',
+        from: MEASURABLE_DATA_TOKEN,
+        to: MEASURABLE_REWARD_POINT,
+        icon: <ConvertIcon fill={mdtTheme.color} />,
+      },
+      {
+        name: 'withdrawal',
+        id: 'withdrawal',
+        icon: <WithdrawalIcon fill={mdtTheme.color} />,
+      },
       {name: 'gift code', icon: <MdtGiftCodeIcon fill={mdtTheme.color} />},
     ],
   },
