@@ -99,8 +99,14 @@ export default function useFetch(
   useEffect(() => {
     unmountedRef.current = false;
 
+    async function _fetchData() {
+      try {
+        await fetchData();
+      } catch (e) {}
+    }
+
     if (!lazy) {
-      fetchData();
+      _fetchData();
     }
 
     return () => {

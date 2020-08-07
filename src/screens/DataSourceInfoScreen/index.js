@@ -28,17 +28,21 @@ const layouts = {
   },
 };
 
-const DataSourceInfoScreen = ({navigation}) => {
-  const type = 'PLAID';
+const DataSourceInfoScreen = ({route, navigation}) => {
+  const type = route.params.type;
   const layout = layouts[type];
 
-  const [login, {isError, isLoading}] = useBankLogin(type, 'US', {
-    onConnected: data => {
-      navigation.navigate('linked_cards', {
-        accountDetails: data.accountDetails,
-      });
+  const [login, {isError, isLoading}] = useBankLogin(
+    type,
+    route.params.countryCode,
+    {
+      onConnected: data => {
+        navigation.navigate('linked_cards', {
+          accountDetails: data.accountDetails,
+        });
+      },
     },
-  });
+  );
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -46,7 +50,6 @@ const DataSourceInfoScreen = ({navigation}) => {
 
   if (isError) {
     // TODO: handle error
-    console.error('error occurs');
   }
 
   return (

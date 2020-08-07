@@ -1513,6 +1513,10 @@
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
+"@umpirsky/country-list@https://github.com/umpirsky/country-list.git":
+  version "1.0.0"
+  resolved "https://github.com/umpirsky/country-list.git#0007d7ce1736f15ed691d1d35c7c32801a769753"
+
 "@wry/context@^0.4.0":
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/@wry/context/-/context-0.4.4.tgz#e50f5fa1d6cfaabf2977d1fda5ae91717f8815f8"

@@ -1,4 +1,9 @@
 import React from 'react';
+import {FormattedMessage} from 'react-intl';
+
+import LoadingSpinner from '@/components/LoadingSpinner';
+import useFetch from '@/hooks/useFetch';
+
 import {
   Container,
   SectionList,
@@ -9,53 +14,81 @@ import {
   SectionText,
   Item,
   ItemText,
+  CountryFlag,
 } from './style';
 
-const DATA = [
-  {
-    region: 'Americas',
-    data: [
-      {
-        id: '1',
-        country: 'United States',
-      },
-      {
-        id: '2',
-        country: 'Canada',
-      },
-    ],
-  },
-  {
-    region: 'Europe',
-    data: [
-      {
-        id: '3',
-        country: 'United Kingdom',
-      },
-      {
-        id: '4',
-        country: 'France',
-      },
-    ],
-  },
-];
+const initialFetchOptions = {
+  method: 'GET',
+};
+
+// TODO: support other providers
+const supportedDataAPIType = ['PLAID'];
 
 const ChooseRegionScreen = ({route, navigation}) => {
+  const [, {data: fetchedData, isError, isLoading}] = useFetch(
+    'https://bankwebhook-alpha.reward.me/bankcountryconfig',
+    {
+      initialFetchOptions,
+    },
+  );
+
   const renderItem = ({item}) => (
-    <Item onPress={() => navigation.navigate(route.params.next)}>
-      <ItemText>{item.country}</ItemText>
+    <Item
+      onPress={() =>
+        navigation.navigate(route.params.next, {
+          type: item.dataAPIType,
+          countryCode: item.countryCode,
+        })
+      }>
+      <CountryFlag
+        source={{
+          uri: `${fetchedData.imgBaseUrl}${item.countryFlag._meta.key}`,
+        }}
+      />
+      <ItemText>
+        <FormattedMessage
+          id={item.countryCode}
+          defaultMessage={item.countryCode}
+        />
+      </ItemText>
     </Item>
   );
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (isError) {
+    // TODO: handle error
+  }
+
+  /** @type {Object.<string, Array<any>} */
+  const dataByContinent = {};
+  fetchedData?.countryData?.forEach(countryItem => {
+    if (!dataByContinent[countryItem.continent]) {
+      dataByContinent[countryItem.continent] = [];
+    }
+
+    if (supportedDataAPIType.includes(countryItem.dataAPIType)) {
+      dataByContinent[countryItem.continent].push(countryItem);
+    }
+  });
+  const data = Object.keys(dataByContinent)
+    .filter(continent => dataByContinent[continent].length > 0)
+    .map(continent => ({
+      continent,
+      data: dataByContinent[continent],
+    }));
 
   return (
     <Container hasTopBar>
       <SectionList
-        sections={DATA}
-        keyExtractor={item => item.id}
+        sections={data}
+        keyExtractor={item => item._id}
         renderItem={renderItem}
-        renderSectionHeader={({section: {region}}) => (
+        renderSectionHeader={({section: {continent}}) => (
           <Section>
-            <SectionText>{region}</SectionText>
+            <SectionText>{continent}</SectionText>
           </Section>
         )}
         ListHeaderComponent={

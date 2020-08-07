@@ -9,6 +9,9 @@ import {LANGUAGE_STORAGE_KEY} from '@/constants/storageKey';
 import enMessages from '@/intl/en-US.json';
 import hkMessages from '@/intl/zh-HK.json';
 import cnMessages from '@/intl/zh-CN.json';
+import enCountryNames from '@umpirsky/country-list/data/en_US/country.json';
+import hkCountryNames from '@umpirsky/country-list/data/zh_HK/country.json';
+import cnCountryNames from '@umpirsky/country-list/data/zh_CN/country.json';
 
 window.DOMParser = require('xmldom').DOMParser;
 const IntlContext = createContext(null);
@@ -20,9 +23,18 @@ const languageList = [
 ];
 
 const translations = {
-  [locales.EN_US]: enMessages,
-  [locales.ZH_HK]: hkMessages,
-  [locales.ZH_CN]: cnMessages,
+  [locales.EN_US]: {
+    ...enCountryNames,
+    ...enMessages,
+  },
+  [locales.ZH_HK]: {
+    ...hkCountryNames,
+    ...hkMessages,
+  },
+  [locales.ZH_CN]: {
+    ...cnCountryNames,
+    ...cnMessages,
+  },
 };
 
 const IntlContainer = props => {

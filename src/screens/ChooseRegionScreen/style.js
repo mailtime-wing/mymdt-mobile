@@ -9,6 +9,7 @@ export const Container = styled(ScreenContainer)`
 
 export const SectionList = styled.SectionList`
   flex: 1;
+  margin-bottom: 40px;
 `;
 
 export const Header = styled.View`
@@ -41,14 +42,24 @@ export const SectionText = styled(AppText)`
   font-weight: 700;
   line-height: 15px;
   color: ${props => props.theme.colors.black.superLight};
+  text-transform: uppercase;
 `;
 
 export const Item = styled.TouchableOpacity`
   padding: 16px 24px;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const ItemText = styled(AppText)`
   font-size: 16px;
   line-height: 24px;
   color: ${props => props.theme.colors.black.normal};
+`;
+
+export const CountryFlag = styled.Image`
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+  border-radius: 20px;
 `;
