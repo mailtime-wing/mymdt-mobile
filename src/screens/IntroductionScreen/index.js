@@ -11,10 +11,12 @@ import {
 
 import BindingButton from './BindingButton';
 import ThemeButton from '@/components/ThemeButton';
+import useSetupFlow from '@/hooks/useSetupFlow';
 import BindingEmailIcon from '@/assets/binding-email.svg';
 import BindingBankAccountIcon from '@/assets/binding-bank-account.svg';
 
-const IntroductionScreen = ({route, navigation}) => {
+const IntroductionScreen = () => {
+  const {navigateByFlow} = useSetupFlow();
   return (
     <ScrollContainer>
       <Container>
@@ -28,18 +30,18 @@ const IntroductionScreen = ({route, navigation}) => {
           icon={<BindingEmailIcon />}
           title="Connect with Emails"
           caption="Powered by MailTime"
-          onPress={() => navigation.navigate('bind_email')}
+          onPress={() => navigateByFlow('email_flow')}
         />
         <BindingButton
           icon={<BindingBankAccountIcon />}
           title="Link Credit/Debit Cards"
           caption="Powered by Plaid and CrediGO"
-          onPress={() => navigation.navigate('choose_region')}
+          onPress={() => navigateByFlow('card_flow')}
         />
         <ThemeButton
           reverseBorder
           width="100%"
-          onPress={() => navigation.navigate(route.params.skip)}>
+          onPress={() => navigateByFlow('skip')}>
           <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
         </ThemeButton>
       </Container>

@@ -3,6 +3,7 @@ import {FormattedMessage} from 'react-intl';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
 import useFetch from '@/hooks/useFetch';
+import useSetupFlow from '@/hooks/useSetupFlow';
 
 import {
   Container,
@@ -24,7 +25,8 @@ const initialFetchOptions = {
 // TODO: support other providers
 const supportedDataAPIType = ['PLAID'];
 
-const ChooseRegionScreen = ({route, navigation}) => {
+const ChooseRegionScreen = () => {
+  const {navigateByFlow} = useSetupFlow();
   const [, {data: fetchedData, isError, isLoading}] = useFetch(
     'https://bankwebhook-alpha.reward.me/bankcountryconfig',
     {
@@ -35,7 +37,7 @@ const ChooseRegionScreen = ({route, navigation}) => {
   const renderItem = ({item}) => (
     <Item
       onPress={() =>
-        navigation.navigate(route.params.next, {
+        navigateByFlow('next', {
           type: item.dataAPIType,
           countryCode: item.countryCode,
         })

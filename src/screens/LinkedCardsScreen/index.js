@@ -6,6 +6,7 @@ import ScreenContainer from '@/components/ScreenContainer';
 import TitleText from '@/components/TitleText';
 import ThemeButton from '@/components/ThemeButton';
 import AppText from '@/components/AppText';
+import useSetupFlow from '@/hooks/useSetupFlow';
 import UnknownCardLogo from '@/assets/icon_unknown_card.svg';
 
 import {
@@ -45,6 +46,7 @@ const ListFooter = ({onDonePress, onMorePress}) => (
 );
 
 const LinkCardsScreen = ({route, navigation}) => {
+  const {navigateByFlow, goBackTo} = useSetupFlow();
   const theme = useTheme();
 
   const renderItem = ({item}) => (
@@ -64,10 +66,10 @@ const LinkCardsScreen = ({route, navigation}) => {
         ListFooterComponent={
           <ListFooter
             onDonePress={() => {
-              navigation.navigate(route.params.next);
+              navigateByFlow();
             }}
             onMorePress={() => {
-              navigation.navigate({key: 'introduction-setup'});
+              goBackTo('introduction');
             }}
           />
         }

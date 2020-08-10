@@ -7,6 +7,7 @@ import {screenStyle} from './style';
 import ScreenContainer from '@/components/ScreenContainer';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import useBankLogin from '@/hooks/useBankLogin';
+import useSetupFlow from '@/hooks/useSetupFlow';
 import PlaidLogo from '@/assets/logo-plaid.svg';
 import BankIcon from '@/assets/icon_bank.svg';
 
@@ -28,7 +29,9 @@ const layouts = {
   },
 };
 
-const DataSourceInfoScreen = ({route, navigation}) => {
+const DataSourceInfoScreen = ({route}) => {
+  const {navigateByFlow} = useSetupFlow();
+
   const type = route.params.type;
   const layout = layouts[type];
 
@@ -37,7 +40,7 @@ const DataSourceInfoScreen = ({route, navigation}) => {
     route.params.countryCode,
     {
       onConnected: data => {
-        navigation.navigate('linked_cards', {
+        navigateByFlow('next', {
           accountDetails: data.accountDetails,
         });
       },
