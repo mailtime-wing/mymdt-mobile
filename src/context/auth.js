@@ -189,6 +189,10 @@ export const AuthProvider = ({children}) => {
     );
   }
 
+  if (state.isLoading) {
+    return null;
+  }
+
   return (
     <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>
   );
