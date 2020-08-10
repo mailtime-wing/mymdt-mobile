@@ -10,7 +10,7 @@ const SettingScreen = ({navigation}) => {
   const accountSettingList = [
     {id: 'edit_profile'},
     {id: 'offers_preference_edit'},
-    {id: 'emails_binding'},
+    {id: 'emails_binding_edit'},
     {id: 'account_security'},
     {id: 'sign_out'},
   ];

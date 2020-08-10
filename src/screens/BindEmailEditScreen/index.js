@@ -30,7 +30,7 @@ import Switch from '@/components/Switch';
 import EditButton from '@/components/EditButton';
 import CancelButton from '@/components/CancelButton';
 import ConfirmButton from '@/components/ConfirmButton';
-import HeaderButton from '@/components/HeaderButton';
+import CloseButton from '@/components/CloseButton';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
@@ -130,7 +130,7 @@ const BindEmailEditScreen = ({navigation}) => {
       });
     } else {
       navigation.setOptions({
-        headerLeft: () => <HeaderButton isModal root="menu" />,
+        headerLeft: props => <CloseButton {...props} />,
         headerRight: () => <EditButton onPress={handleEditPress} />,
       });
     }
@@ -185,7 +185,7 @@ const BindEmailEditScreen = ({navigation}) => {
   }
 
   return (
-    <ModalContainer title={<FormattedMessage id="emails_manage" />}>
+    <ModalContainer title={<FormattedMessage id="linked_emails" />}>
       <TitleContainer>
         <TitleText>
           <FormattedMessage id="email" defaultMessage="email" />
@@ -224,7 +224,7 @@ const BindEmailEditScreen = ({navigation}) => {
             onPress={() =>
               navigation.navigate('emails_binding', {navigateFromEdit: true})
             }
-            small
+            medium
             width="auto">
             <FormattedMessage
               id="add_email_account"
