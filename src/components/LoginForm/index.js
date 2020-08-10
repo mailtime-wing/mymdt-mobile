@@ -42,7 +42,7 @@ const reducer = (state, action) => {
 
 const InternalLoginForm = ({submitButtonText, onSendPress}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [timeLeft, setCountdownTime] = useCountDownTimer(0);
+  const [timeLeft, setCountdownTime] = useCountDownTimer(0, state.sendCount);
   const isTimerStarted = timeLeft > 0;
 
   const {
@@ -75,9 +75,9 @@ const InternalLoginForm = ({submitButtonText, onSendPress}) => {
 
   const handleSendPress = async () => {
     try {
-      await onSendPress(values);
-      dispatch({type: SEND_OTP});
       setCountdownTime(60);
+      dispatch({type: SEND_OTP});
+      onSendPress(values);
     } catch (e) {}
   };
 

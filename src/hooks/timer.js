@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 
-function useCountDownTimer(initialCountdownTime) {
+function useCountDownTimer(initialCountdownTime, count) {
   const [countDownTime, setCountDownTime] = useState(initialCountdownTime);
   const [timeLeft, setTimeLeft] = useState(initialCountdownTime);
 
@@ -10,6 +10,7 @@ function useCountDownTimer(initialCountdownTime) {
     }
 
     let timeToCount = countDownTime;
+    setTimeLeft(timeToCount); // setTimeLeft > 0 to get the timerStarted state immediately
     let lastTime = Date.now();
     let id = setInterval(() => {
       timeToCount = timeToCount - (Date.now() - lastTime) / 1000;
@@ -29,7 +30,7 @@ function useCountDownTimer(initialCountdownTime) {
         clearInterval(id);
       }
     };
-  }, [countDownTime]);
+  }, [countDownTime, count]);
 
   return [timeLeft, setCountDownTime];
 }
