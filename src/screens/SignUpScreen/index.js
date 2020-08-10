@@ -126,6 +126,9 @@ const SignUpScreen = ({navigation}) => {
           }
           detail={clientError}
           callback={reset}
+          buttonWording={{
+            confirm: <FormattedMessage id="login" defaultMessage="login" />,
+          }}
         />
       )}
     </ScrollView>

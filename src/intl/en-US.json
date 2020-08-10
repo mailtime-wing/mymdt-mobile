@@ -127,6 +127,8 @@
   "success": "SUCCESS",
   "confirm": "CONFIRM",
   "connect": "Connect",
+  "okay": "Okay",
+  "cancel": "Cancel",
   "remove": "Remove",
   "next": "NEXT",
   "login": "LOGIN",
