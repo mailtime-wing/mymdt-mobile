@@ -1,13 +1,21 @@
 import React, {useState, useContext, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
+import {useQuery, useMutation} from '@apollo/react-hooks';
+
 import {IntlContext} from '@/context/Intl';
 import {AuthContext} from '@/context/auth';
-import {useQuery, useMutation} from '@apollo/react-hooks';
+import ThemeButton from '@/components/ThemeButton';
+import OfferList from '@/components/OfferList';
+import PopupModal from '@/components/PopupModal';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import ScreenContainer from '@/components/ScreenContainer';
+import useSetupFlow from '@/hooks/useSetupFlow';
 import {
   GET_BASIC_OFFER_API,
   GET_USER_MEMBERSHIP_API,
   UPDATE_BASIC_OFFER_API,
 } from '@/api/data';
+
 import {
   ScrollContainer,
   Container,
@@ -18,13 +26,8 @@ import {
   BrandsSelectedText,
 } from './style';
 
-import ThemeButton from '@/components/ThemeButton';
-import OfferList from '@/components/OfferList';
-import PopupModal from '@/components/PopupModal';
-import LoadingSpinner from '@/components/LoadingSpinner';
-import ScreenContainer from '@/components/ScreenContainer';
-
 const OfferSelectScreen = ({route, navigation}) => {
+  const {navigateByFlow} = useSetupFlow();
   const [selectedOffers, setSelectedOffers] = useState([]);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [isErrorFromOfferList, setIsErrorFromOfferList] = useState(false);
@@ -93,8 +96,7 @@ const OfferSelectScreen = ({route, navigation}) => {
         return;
       }
 
-      // TODO: improve the setup navigation flow structure
-      navigation.navigate({name: route.params.next, key: 'introduction-setup'});
+      navigateByFlow();
     } catch (e) {
       console.error(e);
     }

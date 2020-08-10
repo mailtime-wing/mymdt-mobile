@@ -1,7 +1,10 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import AutoScrolling from 'react-native-auto-scrolling';
+
+import ThemeButton from '@/components/ThemeButton';
 import ScreenContainer from '@/components/ScreenContainer';
+import useSetupFlow from '@/hooks/useSetupFlow';
 
 import {
   Title,
@@ -13,9 +16,9 @@ import {
   ScrollContainer,
 } from './style';
 
-import ThemeButton from '@/components/ThemeButton';
+const WelcomeScreen = () => {
+  const {navigateByFlow} = useSetupFlow();
 
-const WelcomeScreen = ({route, navigation}) => {
   return (
     <ScrollContainer>
       <ScreenContainer hasTopBar>
@@ -34,7 +37,7 @@ const WelcomeScreen = ({route, navigation}) => {
           </AutoScrolling>
         </AppIconGridImageContainer>
         <PaddingContainer>
-          <ThemeButton onPress={() => navigation.navigate(route.params.next)}>
+          <ThemeButton onPress={() => navigateByFlow()}>
             <FormattedMessage id="next" defaultMessage="Next" />
           </ThemeButton>
         </PaddingContainer>

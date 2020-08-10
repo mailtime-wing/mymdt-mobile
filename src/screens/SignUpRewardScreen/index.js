@@ -1,6 +1,13 @@
 import React, {useRef, useEffect, useState, useContext} from 'react';
 import {Animated} from 'react-native';
 import {FormattedMessage} from 'react-intl';
+
+import {AuthContext, MEASURABLE_REWARD_POINT} from '@/context/auth';
+import LinearGradientBackground from '@/components/LinearGradientBackground';
+import MDTGiftBox from '@/components/MDTGiftBox';
+import ThemeButton from '@/components/ThemeButton';
+import useSetupFlow from '@/hooks/useSetupFlow';
+
 import {
   Container,
   TouchableContainer,
@@ -13,11 +20,6 @@ import {
   TextContainer,
   ContinueButton,
 } from './style';
-import {AuthContext, MEASURABLE_REWARD_POINT} from '@/context/auth';
-
-import LinearGradientBackground from '@/components/LinearGradientBackground';
-import MDTGiftBox from '@/components/MDTGiftBox';
-import ThemeButton from '@/components/ThemeButton';
 
 const AnimatedText = props => {
   const fadeAnim = useRef(new Animated.Value(0.2)).current;
@@ -128,12 +130,13 @@ const GiftBoxOpened = ({rewardAmount}) => {
   );
 };
 
-const SignUpRewardScreen = ({route, navigation}) => {
+const SignUpRewardScreen = ({route}) => {
   const [isOpened, setIsOpened] = useState(false);
-  const {accountSetupReward} = route.params;
+  const {navigateByFlow} = useSetupFlow();
+  const accountSetupReward = route?.params?.accountSetupReward;
   const rewardAmount = accountSetupReward?.value || 0;
   const handleContinuePress = () => {
-    navigation.navigate(route.params.next);
+    navigateByFlow();
   };
 
   return (

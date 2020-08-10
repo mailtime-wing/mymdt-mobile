@@ -24,13 +24,13 @@ import BackButton from '@/components/BackButton';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ScreenContainer from '@/components/ScreenContainer';
-
+import useSetupFlow from '@/hooks/useSetupFlow';
 import useMailTimeSdk from '@/hooks/useMailTimeSdk';
 
 const BindEmailScreen = ({route, navigation}) => {
   const [unbindSuccess, setUnbindSuccess] = useState(false);
   const [clientError, setClientError] = useState('');
-  const {navigateFromEdit} = route.params;
+  const navigateFromEdit = route?.params?.navigateFromEdit;
   const {
     login,
     reset,
@@ -40,6 +40,7 @@ const BindEmailScreen = ({route, navigation}) => {
     loginFail,
     loginCancel,
   } = useMailTimeSdk();
+  const {navigateByFlow} = useSetupFlow();
 
   const {authToken} = useContext(AuthContext);
   const apiContext = {
@@ -104,11 +105,11 @@ const BindEmailScreen = ({route, navigation}) => {
   };
 
   const handleFinishPress = () => {
-    navigation.navigate(route.params.skip);
+    navigateByFlow();
   };
 
   const handleSkipPress = () => {
-    navigation.navigate(route.params.next);
+    navigateByFlow();
   };
 
   const handlePopupPress = () => {
@@ -117,14 +118,12 @@ const BindEmailScreen = ({route, navigation}) => {
   };
 
   useLayoutEffect(() => {
-    if(navigateFromEdit) {
+    if (navigateFromEdit) {
       navigation.setOptions({
-        headerLeft: () => (
-          <BackButton onPress={() => navigation.goBack()} />
-        ),
+        headerLeft: () => <BackButton onPress={() => navigation.goBack()} />,
       });
     }
-  }, [navigation, navigateFromEdit])
+  }, [navigation, navigateFromEdit]);
 
   if (loading || sdkLoading || userEmailAccountsData.loading) {
     return <LoadingSpinner />;
@@ -185,14 +184,17 @@ const BindEmailScreen = ({route, navigation}) => {
             </EmailRowContainer>
           );
         })}
-        {!navigateFromEdit && 
+        {!navigateFromEdit && (
           <>
             <ThemeButton onPress={handleFinishPress}>
               <FormattedMessage id="finish" defaultMessage="finish" />
             </ThemeButton>
             <MarginContainer />
             <ThemeButton reverse small onPress={handleSkipPress}>
-              <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
+              <FormattedMessage
+                id="skip_for_now"
+                defaultMessage="Skip for now"
+              />
             </ThemeButton>
             <BindMoreLaterText>
               <FormattedMessage
@@ -201,7 +203,7 @@ const BindEmailScreen = ({route, navigation}) => {
               />
             </BindMoreLaterText>
           </>
-        }
+        )}
         {loginCancel && (
           <PopupModal
             title="Cancelled"

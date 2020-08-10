@@ -1,17 +1,20 @@
 import React, {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
+import {useQuery} from '@apollo/react-hooks';
+
+import LoadingSpinner from '@/components/LoadingSpinner';
+import useSetupFlow from '@/hooks/useSetupFlow';
 import {AuthContext} from '@/context/auth';
 import {PreloadDataContext} from '@/context/preloadData';
-import {useQuery} from '@apollo/react-hooks';
 import {GET_USER_REWARDS_API} from '@/api/data';
 
 import {Container, Title, Detail} from './style';
 
-import LoadingSpinner from '@/components/LoadingSpinner';
-
-const AccountSetupDoneScreen = ({route, navigation}) => {
+const AccountSetupDoneScreen = () => {
   const {authToken} = useContext(AuthContext);
   const {appConfig} = useContext(PreloadDataContext);
+  const {navigateByFlow} = useSetupFlow();
+
   const {data: userRewardsApiData, loading: loadingUserRewards} = useQuery(
     GET_USER_REWARDS_API,
     {
@@ -29,9 +32,9 @@ const AccountSetupDoneScreen = ({route, navigation}) => {
 
   const handlePress = () => {
     if (accountSetupReward) {
-      navigation.navigate(route.params.next, {accountSetupReward});
+      navigateByFlow('next', {accountSetupReward});
     } else {
-      navigation.navigate(route.params.skip);
+      navigateByFlow('back');
     }
   };
 

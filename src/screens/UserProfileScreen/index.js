@@ -8,11 +8,12 @@ import {
 import {FormattedMessage} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
 import {useMutation} from '@apollo/react-hooks';
-import {UPDATE_USER_PROFILE_API} from '@/api/data';
 
 import {AuthContext} from '@/context/auth';
 import Input from '@/components/AppInput';
 import ThemeButton from '@/components/ThemeButton';
+import useSetupFlow from '@/hooks/useSetupFlow';
+import {UPDATE_USER_PROFILE_API} from '@/api/data';
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
 import DateTimePickerInput from '@/components/DateTimePickerInput';
 
@@ -70,10 +71,11 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
   );
 };
 
-const UserProfileScreen = ({route, navigation}) => {
+const UserProfileScreen = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [updateUserProfileRequest] = useMutation(UPDATE_USER_PROFILE_API);
   const {authToken} = useContext(AuthContext);
+  const {navigateByFlow} = useSetupFlow();
 
   const handleDatePickerPress = () => {
     setShowDatePicker(!showDatePicker);
@@ -99,7 +101,7 @@ const UserProfileScreen = ({route, navigation}) => {
           },
         },
       });
-      navigation.navigate(route.params.next);
+      navigateByFlow();
     } catch (e) {
       console.error(e);
       // handle error later

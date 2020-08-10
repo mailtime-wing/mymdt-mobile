@@ -38,7 +38,7 @@ import WithdrawalScreen from '@/screens/WithdrawalScreen';
 import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
 
 import {AuthContext} from '@/context/auth';
-import {PreloadDataContext} from '@/context/preloadData';
+import {SetupFlowContext} from '@/context/setupFlow';
 import BackButton from '@/components/BackButton';
 import CloseButton from '@/components/CloseButton';
 import {
@@ -135,44 +135,9 @@ const backScreen = [
 ];
 
 const Root = () => {
-  const {authToken, notificationEnabled} = useContext(AuthContext);
-  const {setupStatus} = useContext(PreloadDataContext);
+  const {authToken} = useContext(AuthContext);
+  const {validScreenNames} = useContext(SetupFlowContext);
   const {top} = useSafeAreaInsets();
-
-  const excludeScreenNames = [];
-  if (setupStatus?.isProfileCompleted) {
-    excludeScreenNames.push('user_profile');
-  }
-  if (setupStatus?.isCashbackCurrencyCodeSet) {
-    excludeScreenNames.push('choose_cash_back_type');
-  }
-  if (setupStatus?.isBasicOfferSet) {
-    excludeScreenNames.push('welcome');
-    excludeScreenNames.push('offer_select');
-  }
-  if (setupStatus?.isDataSourceBound) {
-    excludeScreenNames.push('introduction');
-    excludeScreenNames.push('bind_email');
-    excludeScreenNames.push('choose_region');
-    excludeScreenNames.push('data_source_info');
-    excludeScreenNames.push('linked_cards');
-  }
-  if (
-    setupStatus?.isDataSourceBound &&
-    setupStatus?.isCashbackCurrencyCodeSet &&
-    setupStatus?.isBasicOfferSet
-  ) {
-    excludeScreenNames.push('account_setup_done');
-    excludeScreenNames.push('sign_up_reward');
-  }
-
-  if (notificationEnabled) {
-    excludeScreenNames.push('notification_permission');
-  }
-
-  const filteredSetupScreens = setupScreens.filter(
-    screen => !excludeScreenNames.includes(screen.name),
-  );
 
   const headerStyle = {
     ...styles.header,
@@ -218,33 +183,29 @@ const Root = () => {
       ) : (
         // TODO: hide setupScreens so that it cannot be back from authScreens
         <Stack.Navigator mode="modal">
-          {filteredSetupScreens.map((screen, i) => {
-            const {name, component, ...params} = screen;
-            return (
-              <Stack.Screen
-                key={name}
-                name={name}
-                component={component}
-                options={{
-                  headerTransparent: true,
-                  headerTitleStyle: styles.headerTitle,
-                  cardStyle: styles.card,
-                  headerStyle: headerStyle,
-                  headerLeft: props =>
-                    backScreen.includes(name) ? (
-                      <BackButton {...props} />
-                    ) : null,
-                  gestureEnabled: false,
-                }}
-                initialParams={{
-                  next: filteredSetupScreens[i + 1]
-                    ? filteredSetupScreens[i + 1].name
-                    : 'home',
-                  ...params,
-                }}
-              />
-            );
-          })}
+          {setupScreens
+            .filter(setupScreen => validScreenNames[setupScreen.name])
+            .map((screen, i) => {
+              const {name, component} = screen;
+              return (
+                <Stack.Screen
+                  key={name}
+                  name={name}
+                  component={component}
+                  options={{
+                    headerTransparent: true,
+                    headerTitleStyle: styles.headerTitle,
+                    cardStyle: styles.card,
+                    headerStyle: headerStyle,
+                    headerLeft: props =>
+                      backScreen.includes(name) ? (
+                        <BackButton {...props} />
+                      ) : null,
+                    gestureEnabled: false,
+                  }}
+                />
+              );
+            })}
 
           {authScreens.map(screen => (
             <Stack.Screen

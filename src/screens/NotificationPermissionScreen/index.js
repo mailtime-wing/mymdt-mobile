@@ -4,6 +4,7 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {FormattedMessage} from 'react-intl';
 
 import ThemeButton from '@/components/ThemeButton';
+import useSetupFlow from '@/hooks/useSetupFlow';
 
 import {
   Container,
@@ -15,7 +16,9 @@ import {
   UpArrow,
 } from './style';
 
-const NotificationPermissionScreen = ({route, navigation}) => {
+const NotificationPermissionScreen = () => {
+  const {navigateByFlow} = useSetupFlow();
+
   const requestNotificationPermission = () => {
     if (Platform.OS === 'ios') {
       PushNotificationIOS.checkPermissions(e => {
@@ -26,7 +29,7 @@ const NotificationPermissionScreen = ({route, navigation}) => {
         }
       });
     }
-    navigation.navigate(route.params.next);
+    navigateByFlow();
   };
 
   const sendLocalNotification = () => {
@@ -39,7 +42,7 @@ const NotificationPermissionScreen = ({route, navigation}) => {
   };
 
   const handleSkipPress = () => {
-    navigation.navigate(route.params.next);
+    navigateByFlow();
   };
 
   return (

@@ -1,4 +1,16 @@
 import React, {useContext} from 'react';
+import {FormattedMessage} from 'react-intl';
+import {useMutation} from '@apollo/react-hooks';
+
+import {
+  AuthContext,
+  MEASURABLE_REWARD_POINT,
+  MEASURABLE_DATA_TOKEN,
+} from '@/context/auth';
+import ThemeButton from '@/components/ThemeButton';
+import useSetupFlow from '@/hooks/useSetupFlow';
+import {UPDATE_USER_CASHBACK_CURRENCY_CODE_API} from '@/api/data';
+
 import {
   Container,
   ScrollContainer,
@@ -9,16 +21,6 @@ import {
   BoxTitle,
   BoxDetail,
 } from './style';
-import {FormattedMessage} from 'react-intl';
-import {
-  AuthContext,
-  MEASURABLE_REWARD_POINT,
-  MEASURABLE_DATA_TOKEN,
-} from '@/context/auth';
-import {useMutation} from '@apollo/react-hooks';
-import {UPDATE_USER_CASHBACK_CURRENCY_CODE_API} from '@/api/data';
-
-import ThemeButton from '@/components/ThemeButton';
 
 const cashbackTypeList = [
   {
@@ -51,7 +53,8 @@ const CashBackType = ({cashback, handleChoosePress}) => (
   </BoxContainer>
 );
 
-const ChooseCashBackTypeScreen = ({route, navigation}) => {
+const ChooseCashBackTypeScreen = () => {
+  const {navigateByFlow} = useSetupFlow();
   const [updateUserCashbackCurrencyCodeRequest] = useMutation(
     UPDATE_USER_CASHBACK_CURRENCY_CODE_API,
   );
@@ -70,10 +73,10 @@ const ChooseCashBackTypeScreen = ({route, navigation}) => {
         },
       });
       updateCashBackType(cashbackType);
+      navigateByFlow();
     } catch (e) {
       console.warn(`error on saving cashback Type ${cashbackType}`, e);
     }
-    navigation.navigate(route.params.next);
   };
 
   return (
