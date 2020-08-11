@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useContext, useState, useMemo} from 'react';
 import {Graph} from '@dagrejs/graphlib';
 
 import {AuthContext} from '@/context/auth';
@@ -61,50 +61,60 @@ export const SetupFlowProvider = ({children}) => {
   );
 
   /** @type {Object.<string, boolean>} */
-  const invalidScreenNames = {};
-  if (setupStatus?.isProfileCompleted) {
-    invalidScreenNames.user_profile = true;
-  }
-  if (setupStatus?.isCashbackCurrencyCodeSet) {
-    invalidScreenNames.choose_cash_back_type = true;
-  }
-  if (setupStatus?.isBasicOfferSet) {
-    invalidScreenNames.welcome = true;
-    invalidScreenNames.offer_select = true;
-  }
-  if (setupStatus?.isDataSourceBound) {
-    invalidScreenNames.introduction = true;
-    invalidScreenNames.bind_email = true;
-    invalidScreenNames.choose_region = true;
-    invalidScreenNames.data_source_info = true;
-    invalidScreenNames.linked_cards = true;
-  }
-  if (
-    setupStatus?.isDataSourceBound &&
-    setupStatus?.isCashbackCurrencyCodeSet &&
-    setupStatus?.isBasicOfferSet
-  ) {
-    invalidScreenNames.account_setup_done = true;
-    invalidScreenNames.sign_up_reward = true;
-  }
-  if (notificationEnabled) {
-    invalidScreenNames.notification_permission = true;
-  }
+  const invalidScreenNames = useMemo(() => {
+    const result = {};
+    if (setupStatus?.isProfileCompleted) {
+      result.user_profile = true;
+    }
+    if (setupStatus?.isCashbackCurrencyCodeSet) {
+      result.choose_cash_back_type = true;
+    }
+    if (setupStatus?.isBasicOfferSet) {
+      result.welcome = true;
+      result.offer_select = true;
+    }
+    if (setupStatus?.isDataSourceBound) {
+      result.introduction = true;
+      result.bind_email = true;
+      result.choose_region = true;
+      result.data_source_info = true;
+      result.linked_cards = true;
+    }
+    if (
+      setupStatus?.isDataSourceBound &&
+      setupStatus?.isCashbackCurrencyCodeSet &&
+      setupStatus?.isBasicOfferSet
+    ) {
+      result.account_setup_done = true;
+      result.sign_up_reward = true;
+    }
+    if (notificationEnabled) {
+      result.notification_permission = true;
+    }
+    return result;
+  }, [notificationEnabled, setupStatus]);
 
   /** @type {Object.<string, boolean>} */
-  const validScreenNames = {};
-  graph.nodes().forEach(nodeName => {
-    if (!invalidScreenNames[nodeName]) {
-      validScreenNames[nodeName] = true;
-    }
-  });
+  const validScreenNames = useMemo(() => {
+    const result = {};
+    graph.nodes().forEach(nodeName => {
+      if (!invalidScreenNames[nodeName]) {
+        result[nodeName] = true;
+      }
+    });
+    return result;
+  }, [graph, invalidScreenNames]);
+
+  const setupFlowValue = useMemo(
+    () => ({
+      validScreenNames,
+      graph,
+    }),
+    [graph, validScreenNames],
+  );
 
   return (
-    <SetupFlowContext.Provider
-      value={{
-        validScreenNames,
-        graph,
-      }}>
+    <SetupFlowContext.Provider value={setupFlowValue}>
       {children}
     </SetupFlowContext.Provider>
   );

@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, useCallback} from 'react';
 import {
   useRoute,
   useNavigation,
@@ -13,46 +13,52 @@ export default function useSetupFlow() {
   const navigationStateRoutes = useNavigationState(state => state.routes);
   const currentRoute = useRoute();
 
-  const navigateByFlow = (flow = 'next', ...args) => {
-    function getTargetRouteName(nodeName, _flow) {
-      if (graph.hasNode(nodeName)) {
-        const outEdges = graph.outEdges(nodeName);
-        if (outEdges) {
-          const outEdgeLabelToWMap = {};
-          outEdges.forEach(outEdge => {
-            const edgeLabel = graph.edge(outEdge.v, outEdge.w);
-            outEdgeLabelToWMap[edgeLabel] = outEdge.w;
-          });
+  const navigateByFlow = useCallback(
+    (flow = 'next', ...args) => {
+      function getTargetRouteName(nodeName, _flow) {
+        if (graph.hasNode(nodeName)) {
+          const outEdges = graph.outEdges(nodeName);
+          if (outEdges) {
+            const outEdgeLabelToWMap = {};
+            outEdges.forEach(outEdge => {
+              const edgeLabel = graph.edge(outEdge.v, outEdge.w);
+              outEdgeLabelToWMap[edgeLabel] = outEdge.w;
+            });
 
-          const w = outEdgeLabelToWMap[_flow];
-          if (w) {
-            if (validScreenNames[w]) {
-              return w;
+            const w = outEdgeLabelToWMap[_flow];
+            if (w) {
+              if (validScreenNames[w]) {
+                return w;
+              }
+
+              return getTargetRouteName(w, 'next');
             }
-
-            return getTargetRouteName(w, 'next');
           }
         }
       }
-    }
 
-    const targetRouteName = getTargetRouteName(currentRoute.name, flow);
-    navigation.navigate(targetRouteName || 'home', ...args);
-  };
+      const targetRouteName = getTargetRouteName(currentRoute.name, flow);
+      navigation.navigate(targetRouteName || 'home', ...args);
+    },
+    [currentRoute.name, graph, navigation, validScreenNames],
+  );
 
-  const goBackTo = routeName => {
-    const previousRoute = navigationStateRoutes.find(
-      route => route.name === routeName,
-    );
+  const goBackTo = useCallback(
+    routeName => {
+      const previousRoute = navigationStateRoutes.find(
+        route => route.name === routeName,
+      );
 
-    if (
-      previousRoute &&
-      graph.hasNode(routeName) &&
-      validScreenNames[routeName]
-    ) {
-      navigation.navigate({key: previousRoute.key});
-    }
-  };
+      if (
+        previousRoute &&
+        graph.hasNode(routeName) &&
+        validScreenNames[routeName]
+      ) {
+        navigation.navigate({key: previousRoute.key});
+      }
+    },
+    [graph, navigation, navigationStateRoutes, validScreenNames],
+  );
 
   return {navigateByFlow, goBackTo};
 }
