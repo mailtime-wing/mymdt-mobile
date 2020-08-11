@@ -87,7 +87,6 @@ export const AuthProvider = ({children}) => {
     const getToken = async () => {
       let authToken;
       let refreshToken;
-      let newToken;
       try {
         authToken = await AsyncStorage.getItem('authToken');
         refreshToken = await AsyncStorage.getItem('refreshToken');
@@ -101,8 +100,7 @@ export const AuthProvider = ({children}) => {
                   refreshToken: refreshToken,
                 },
               });
-              newToken = data.refreshAccessToken;
-              authContext.updateAuthToken(newToken, refreshToken);
+              authToken = data.refreshAccessToken;
             } catch (e) {
               console.warn('error refreshing token', e);
               dispatch({type: UPDATE_REFRESH_TOKEN_EXPIRED, payload: true});
@@ -112,13 +110,7 @@ export const AuthProvider = ({children}) => {
       } catch (error) {
         console.error('error getting authToken');
       }
-      dispatch({
-        type: UPDATE_AUTH_TOKEN,
-        payload: {
-          authToken: authToken,
-          refreshToken: refreshToken,
-        },
-      });
+      authContext.updateAuthToken(authToken, refreshToken);
     };
     getToken();
   }, [authContext, refreshTokenRequest]);
