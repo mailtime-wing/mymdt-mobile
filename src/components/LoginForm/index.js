@@ -75,9 +75,9 @@ const InternalLoginForm = ({submitButtonText, onSendPress}) => {
 
   const handleSendPress = async () => {
     try {
-      await onSendPress(values);
-      dispatch({type: SEND_OTP});
       setCountdownTime(60);
+      dispatch({type: SEND_OTP});
+      onSendPress(values);
     } catch (e) {}
   };
 

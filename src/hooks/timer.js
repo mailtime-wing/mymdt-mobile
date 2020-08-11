@@ -1,8 +1,9 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 
 function useCountDownTimer(initialCountdownTime) {
   const [countDownTime, setCountDownTime] = useState(initialCountdownTime);
   const [timeLeft, setTimeLeft] = useState(initialCountdownTime);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (countDownTime <= 0) {
@@ -10,6 +11,7 @@ function useCountDownTimer(initialCountdownTime) {
     }
 
     let timeToCount = countDownTime;
+    setTimeLeft(timeToCount); // setTimeLeft > 0 to get the timerStarted state immediately
     let lastTime = Date.now();
     let id = setInterval(() => {
       timeToCount = timeToCount - (Date.now() - lastTime) / 1000;
@@ -29,9 +31,14 @@ function useCountDownTimer(initialCountdownTime) {
         clearInterval(id);
       }
     };
-  }, [countDownTime]);
+  }, [count, countDownTime]);
 
-  return [timeLeft, setCountDownTime];
+  const startCountDown = useCallback(_countDownTime => {
+    setCount(_count => _count + 1);
+    setCountDownTime(_countDownTime);
+  }, []);
+
+  return [timeLeft, startCountDown];
 }
 
 export default useCountDownTimer;
