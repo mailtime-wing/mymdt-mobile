@@ -42,7 +42,7 @@ const reducer = (state, action) => {
 
 const InternalLoginForm = ({submitButtonText, onSendPress}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [timeLeft, setCountdownTime] = useCountDownTimer(0, state.sendCount);
+  const [timeLeft, setCountdownTime] = useCountDownTimer(0);
   const isTimerStarted = timeLeft > 0;
 
   const {

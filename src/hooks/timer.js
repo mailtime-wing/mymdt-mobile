@@ -1,8 +1,9 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 
-function useCountDownTimer(initialCountdownTime, count) {
+function useCountDownTimer(initialCountdownTime) {
   const [countDownTime, setCountDownTime] = useState(initialCountdownTime);
   const [timeLeft, setTimeLeft] = useState(initialCountdownTime);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (countDownTime <= 0) {
@@ -30,9 +31,14 @@ function useCountDownTimer(initialCountdownTime, count) {
         clearInterval(id);
       }
     };
-  }, [countDownTime, count]);
+  }, [count, countDownTime]);
 
-  return [timeLeft, setCountDownTime];
+  const startCountDown = useCallback(_countDownTime => {
+    setCount(_count => _count + 1);
+    setCountDownTime(_countDownTime);
+  }, []);
+
+  return [timeLeft, startCountDown];
 }
 
 export default useCountDownTimer;
