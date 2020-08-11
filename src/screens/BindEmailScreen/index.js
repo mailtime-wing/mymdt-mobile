@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {Formik} from 'formik';
 
@@ -14,17 +14,13 @@ import useMailTimeSdk from '@/hooks/useMailTimeSdk';
 import {Title, Detail, ScrollContainer} from './style';
 
 const BindEmailScreen = ({route, navigation}) => {
-  const [unbindSuccess, setUnbindSuccess] = useState(false);
-  const [clientError, setClientError] = useState('');
   const navigateFromEdit = route?.params?.navigateFromEdit;
   const {
     login,
     reset,
     loading: sdkLoading,
-    error: sdkError,
     loginSuccess,
     loginFail,
-    loginCancel,
   } = useMailTimeSdk();
   const {navigateByFlow} = useSetupFlow();
 
@@ -106,46 +102,11 @@ const BindEmailScreen = ({route, navigation}) => {
             </>
           )}
         </Formik>
-        {loginCancel && (
-          <PopupModal
-            title="Cancelled"
-            detail="Login Cancelled"
-            callback={handlePopupPress}
-          />
-        )}
-        {loginSuccess && (
-          <PopupModal
-            title="Success"
-            detail="Login Success"
-            callback={handlePopupPress}
-          />
-        )}
         {loginFail && (
           <PopupModal
             title="Fail"
             detail="Login Fail"
             callback={handlePopupPress}
-          />
-        )}
-        {!!sdkError && (
-          <PopupModal
-            title="Error occur"
-            detail="Please try again later"
-            callback={handlePopupPress}
-          />
-        )}
-        {unbindSuccess && (
-          <PopupModal
-            title="Success"
-            detail="Unbind Success"
-            callback={() => setUnbindSuccess(false)}
-          />
-        )}
-        {!!clientError && (
-          <PopupModal
-            title="Error"
-            detail={clientError}
-            callback={() => setClientError('')}
           />
         )}
       </ScreenContainer>

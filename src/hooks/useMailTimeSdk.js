@@ -9,19 +9,14 @@ const SDK_LOGIN_READY = 'sdkLoginReady';
 
 const UPDATE_SDK_STATUS = 'updateSdkStatus';
 const UPDATE_SDK_ERROR = 'updateSdkError';
-const UPDATE_EMAIL_BIND_STATUS = 'updateEmailBindStatus';
-const UPDATE_EMAIL_BIND_ERROR = 'updateEmailBindError';
 const STATUS_READY = 'Ready';
 const STATUS_IN_PROCCESS = 'InProccess';
 const STATUS_FAILED = 'Failed';
 const STATUS_SUCCEEDED = 'Succeeded';
-const STATUS_CANCELLED = 'Cancelled';
 
 const initialState = {
   sdkLoginStatus: STATUS_READY,
-  emailBindingStatus: STATUS_READY,
   sdkError: null,
-  emailBindError: null,
 };
 
 const reducer = (state, action) => {
@@ -35,22 +30,10 @@ const reducer = (state, action) => {
         sdkLoginStatus: action.payload,
       };
     }
-    case UPDATE_EMAIL_BIND_STATUS: {
-      return {
-        ...state,
-        emailBindingStatus: action.payload,
-      };
-    }
     case UPDATE_SDK_ERROR: {
       return {
         ...state,
         sdkError: action.payload,
-      };
-    }
-    case UPDATE_EMAIL_BIND_ERROR: {
-      return {
-        ...state,
-        emailBindError: action.payload,
       };
     }
     default:
@@ -73,6 +56,7 @@ export default () => {
       Config.SDK_CLIENT_TYPE,
       '1.0',
     );
+    MailtimeAuth.setAccessGoogleWithAppPassword(false);
   }, []);
 
   const login = async emailAddress => {
@@ -80,10 +64,7 @@ export default () => {
       let sdkToken = '';
       dispatch({type: UPDATE_SDK_STATUS, payload: STATUS_IN_PROCCESS});
       sdkToken = await MailtimeAuth.login(emailAddress);
-      dispatch({
-        type: UPDATE_EMAIL_BIND_STATUS,
-        payload: STATUS_IN_PROCCESS,
-      });
+
       const {data} = await bindEmailsRequest({
         context: {
           headers: {
@@ -95,19 +76,20 @@ export default () => {
           token: sdkToken,
         },
       });
+
       if (data?.bindEmailAccounts?.valids?.length !== 0) {
         dispatch({
-          type: UPDATE_EMAIL_BIND_STATUS,
+          type: UPDATE_SDK_STATUS,
           payload: STATUS_SUCCEEDED,
         });
       } else {
-        dispatch({type: UPDATE_EMAIL_BIND_STATUS, payload: STATUS_FAILED});
+        dispatch({type: UPDATE_SDK_STATUS, payload: STATUS_FAILED});
       }
     } catch (e) {
       const constants = MailtimeAuth.getConstants();
       switch (e.code) {
         case constants.E_CANCELED: {
-          dispatch({type: UPDATE_SDK_STATUS, payload: STATUS_CANCELLED});
+          dispatch({type: SDK_LOGIN_READY});
           break;
         }
         case constants.E_SDK_ERROR: {
@@ -120,8 +102,7 @@ export default () => {
         }
         default:
           dispatch({type: UPDATE_SDK_STATUS, payload: STATUS_FAILED});
-          dispatch({type: UPDATE_EMAIL_BIND_ERROR, payload: e});
-          dispatch({type: UPDATE_EMAIL_BIND_STATUS, payload: STATUS_FAILED});
+          dispatch({type: UPDATE_SDK_ERROR, payload: e});
           break;
       }
     }
@@ -130,12 +111,9 @@ export default () => {
   return {
     login: login,
     reset: () => dispatch({type: SDK_LOGIN_READY}),
-    loading: state.emailBindingStatus === STATUS_IN_PROCCESS,
-    loginSuccess: state.emailBindingStatus === STATUS_SUCCEEDED,
-    loginFail:
-      state.sdkLoginStatus === STATUS_FAILED ||
-      state.emailBindingStatus === STATUS_FAILED,
-    loginCancel: state.sdkLoginStatus === STATUS_CANCELLED,
-    error: state.sdkError || state.emailBindError,
+    loading: state.sdkLoginStatus === STATUS_IN_PROCCESS,
+    loginSuccess: state.sdkLoginStatus === STATUS_SUCCEEDED,
+    loginFail: state.sdkLoginStatus === STATUS_FAILED,
+    error: state.sdkError,
   };
 };
