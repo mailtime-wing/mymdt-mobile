@@ -1,6 +1,6 @@
 import React, {useContext, useLayoutEffect, useEffect, useReducer} from 'react';
-import {TouchableWithoutFeedback, Keyboard} from 'react-native';
-import {FormattedMessage} from 'react-intl';
+import {TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
+import {FormattedMessage, FormattedDate} from 'react-intl';
 import ImagePicker from 'react-native-image-picker';
 import {Formik, useFormikContext} from 'formik';
 import {useMutation, useQuery} from '@apollo/react-hooks';
@@ -13,15 +13,18 @@ import {
   FillIcon,
   Error,
   DateFieldContainer,
-  ScrollContainer,
   FormContainer,
   ProfilePictureContainer,
+  ProfilePictureEditingContainer,
   ProfilePictureText,
   UserIconContainer,
+  Name,
+  MarginTop,
 } from './style';
 
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
 import DateTimePickerInput from '@/components/DateTimePickerInput';
+import ListOption from '@/components/ListOption';
 
 import ModalContainer from '@/components/ModalContainer';
 import EditButton from '@/components/EditButton';
@@ -142,32 +145,74 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
 
   return (
     <FormContainer pointerEvents={formState.isEditing ? 'auto' : 'none'}>
-      <ProfilePictureContainer>
-        <ProfilePictureText>
-          <FormattedMessage id="profile_photo" defaultMessage="profile photo" />
-        </ProfilePictureText>
-        <UserIconContainer onPress={() => handleCameraPress()}>
-          <UserIcon source={values.profilePicture} />
-        </UserIconContainer>
-        <FillIcon source={require('@/assets/filled.png')} />
-      </ProfilePictureContainer>
-
-      <Input label={<FormattedMessage id="your_name" />} required name="name" />
-      <GenderSelector gender={values.gender} setFieldValue={setFieldValue} />
-      <Error>{errors.gender ? errors.gender : ' '}</Error>
-      <DateFieldContainer onPress={handleDatePickerPress}>
-        <DateTimePickerInput
-          label={
-            <FormattedMessage
-              id="date_of_birth"
-              defaultMessage="DATE OF BIRTH"
+      {formState.isEditing ? (
+        <>
+          <ProfilePictureEditingContainer>
+            <ProfilePictureText>
+              <FormattedMessage
+                id="profile_photo"
+                defaultMessage="profile photo"
+              />
+            </ProfilePictureText>
+            <UserIconContainer onPress={() => handleCameraPress()}>
+              <UserIcon source={values.profilePicture} />
+            </UserIconContainer>
+            <FillIcon source={require('@/assets/filled.png')} />
+          </ProfilePictureEditingContainer>
+          <Input
+            label={<FormattedMessage id="your_name" />}
+            required
+            name="name"
+          />
+          <GenderSelector
+            gender={values.gender}
+            setFieldValue={setFieldValue}
+          />
+          <Error>{errors.gender ? errors.gender : ' '}</Error>
+          <DateFieldContainer onPress={handleDatePickerPress}>
+            <DateTimePickerInput
+              label={
+                <FormattedMessage
+                  id="date_of_birth"
+                  defaultMessage="DATE OF BIRTH"
+                />
+              }
+              required
+              name="dob"
+              showDatePicker={formState.showDatePicker}
             />
-          }
-          required
-          name="dob"
-          showDatePicker={formState.showDatePicker}
-        />
-      </DateFieldContainer>
+          </DateFieldContainer>
+        </>
+      ) : (
+        <>
+          <MarginTop />
+          <ProfilePictureContainer>
+            <UserIcon source={values.profilePicture} />
+            <Name>{values.name}</Name>
+          </ProfilePictureContainer>
+          <ListOption
+            key="gender"
+            label={<FormattedMessage id="gender" />}
+            value={
+              genderOptions.find(gender => gender.value === values.gender)
+                ?.label
+            }
+            noIcon
+          />
+          <ListOption
+            key="dob"
+            label={<FormattedMessage id="date_of_birth" />}
+            value={
+              <FormattedDate
+                value={values.dob}
+                year="numeric"
+                month="2-digit"
+              />
+            }
+            noIcon
+          />
+        </>
+      )}
     </FormContainer>
   );
 };
@@ -273,9 +318,13 @@ const UserProfileEditScreen = ({navigation}) => {
   return (
     <TouchableWithoutFeedback onPress={handleSpacePress}>
       <ModalContainer
-        title={<FormattedMessage id="edit_profile" defaultMessage="Profile" />}>
+        title={
+          state.isEditing ? null : (
+            <FormattedMessage id="profile" defaultMessage="Profile" />
+          )
+        }>
         <Container behavior="position">
-          <ScrollContainer
+          <ScrollView
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="always">
             <Formik
@@ -288,7 +337,7 @@ const UserProfileEditScreen = ({navigation}) => {
                 formState={state}
               />
             </Formik>
-          </ScrollContainer>
+          </ScrollView>
         </Container>
       </ModalContainer>
     </TouchableWithoutFeedback>

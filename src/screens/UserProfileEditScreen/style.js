@@ -1,4 +1,5 @@
 import styled from '@emotion/native';
+import {Platform} from 'react-native';
 import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
@@ -23,46 +24,27 @@ export const UserIcon = styled.Image`
   border-radius: 24px;
 `;
 
-export const ProfilePictureContainer = styled.View`
+export const ProfilePictureEditingContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
 `;
 
+export const ProfilePictureContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 24px;
+`;
+
 export const UserIconContainer = styled.TouchableOpacity`
   align-self: flex-end;
 `;
-
-export const GenderText = styled(Text)``;
 
 export const FillIcon = styled.Image`
   position: absolute;
   right: -8;
   bottom: 0;
-`;
-
-export const OptionContainer = styled.TouchableOpacity`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 0;
-`;
-
-export const Input = styled.TextInput`
-  color: black;
-`;
-
-export const EditMode = styled.View``;
-
-export const ButtonContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const Modal = styled.Modal`
-  padding: 0 30px;
 `;
 
 export const DateFieldContainer = styled.TouchableOpacity`
@@ -74,4 +56,14 @@ export const Error = styled(TitleText)`
   color: ${props => props.theme.colors.error.dark};
 `;
 
-export const ScrollContainer = styled.ScrollView``;
+export const Name = styled(Text)`
+  font-size: 18px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.8);
+  ${Platform.OS === 'ios' && 'font-weight: 600;'}
+  margin-left: 24px;
+`;
+
+export const MarginTop = styled.View`
+  margin-top: 48px;
+`;
