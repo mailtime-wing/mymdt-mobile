@@ -8,10 +8,17 @@ import {
   ButtonContainer,
   MarginContainer,
 } from './style';
+import {FormattedMessage} from 'react-intl';
 
 import ThemeButton from '@/components/ThemeButton';
 
-const PopupModal = ({title, detail, callback}) => {
+const PopupModal = ({
+  title,
+  detail,
+  callback,
+  cancelButtonLabel,
+  okButtonLabel,
+}) => {
   const [show, setShow] = useState(true);
 
   const handleCancelPress = () => {
@@ -33,11 +40,19 @@ const PopupModal = ({title, detail, callback}) => {
             <Detail>{detail}</Detail>
             <ButtonContainer>
               <ThemeButton medium reverse onPress={handleCancelPress}>
-                cancel
+                {cancelButtonLabel ? (
+                  cancelButtonLabel
+                ) : (
+                  <FormattedMessage id="cancel" defaultMessage="cancel" />
+                )}
               </ThemeButton>
               <MarginContainer />
               <ThemeButton medium onPress={handleOkPress}>
-                OKAY
+                {okButtonLabel ? (
+                  okButtonLabel
+                ) : (
+                  <FormattedMessage id="okay" defaultMessage="OKAY" />
+                )}
               </ThemeButton>
             </ButtonContainer>
           </ModalView>
