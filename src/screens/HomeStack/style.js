@@ -11,21 +11,24 @@ export const LabelText = styled(Text)`
     props.focused
       ? props.theme.colors.white.normal
       : props.theme.colors.black.light};
-  font-size: 8px;
+  font-size: 10px;
   line-height: 16px;
   font-weight: bold;
   letter-spacing: 1px;
   text-transform: uppercase;
+  margin-top: 8px;
 `;
 
 export const styles = StyleSheet.create({
   tabBarContainer: {
-    height: 88,
+    height: 72,
+    alignItems: 'center',
   },
   tabBar: {
-    height: 60,
-    padding: 8,
-    marginTop: 5,
+    maxWidth: 60,
+    aspectRatio: 1,
+    paddingVertical: 8,
+    marginVertical: 6,
     marginHorizontal: 16,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
@@ -54,9 +57,6 @@ export const styles = StyleSheet.create({
   },
   headerTitle: {
     display: 'none',
-  },
-  header: {
-    height: 80, // will change when rebase to header related commit
   },
   card: {
     backgroundColor: 'white',
