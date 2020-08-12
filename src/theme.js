@@ -1,3 +1,5 @@
+import {Platform} from 'react-native';
+
 const theme = {
   colors: {
     primary: ['#0363EF', '#0036C5'],
@@ -28,6 +30,13 @@ const theme = {
       special: ['#0363EF', '#FFFFFF'],
     },
   },
+  fonts: {
+    body: 'Inter',
+    heading: Platform.OS === 'ios' ? 'Neo Sans Pro' : 'Neo Sans Pro Medium',
+  },
+  fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36],
+  fontWeights: [400, 500, 600, 700],
+  lineHeights: [15, 16, 17, 18, 19, 21, 22, 24, 29, 36, 43],
 };
 
 theme.colors.grey.superLight = theme.colors.grey[0];
@@ -68,5 +77,66 @@ theme.colors.membership.diamond.background = theme.colors.membership.diamond[0];
 theme.colors.membership.diamond.text = theme.colors.membership.diamond[1];
 theme.colors.membership.special.background = theme.colors.membership.special[0];
 theme.colors.membership.special.text = theme.colors.membership.special[1];
+
+theme.fonts.pageTitle = theme.fonts.heading;
+theme.fonts.heading1 = theme.fonts.heading;
+theme.fonts.heading2 = theme.fonts.heading;
+theme.fonts.heading3 = theme.fonts.heading;
+theme.fonts.heading4 = theme.fonts.heading;
+theme.fonts.heading5 = theme.fonts.heading;
+theme.fonts.subTitle1 = theme.fonts.heading;
+theme.fonts.subTitle2 = theme.fonts.heading;
+theme.fonts.body1 = theme.fonts.body;
+theme.fonts.body2 = theme.fonts.body;
+theme.fonts.caption = theme.fonts.body;
+theme.fonts.value = theme.fonts.body;
+theme.fonts.button = theme.fonts.body;
+theme.fonts.label = theme.fonts.body;
+theme.fonts.overline = theme.fonts.body;
+theme.fontSizes.pageTitle = theme.fontSizes[8];
+theme.fontSizes.heading1 = theme.fontSizes[8];
+theme.fontSizes.heading2 = theme.fontSizes[7];
+theme.fontSizes.heading3 = theme.fontSizes[6];
+theme.fontSizes.heading4 = theme.fontSizes[5];
+theme.fontSizes.heading5 = theme.fontSizes[4];
+theme.fontSizes.subTitle1 = theme.fontSizes[4];
+theme.fontSizes.subTitle2 = theme.fontSizes[3];
+theme.fontSizes.body1 = theme.fontSizes[3];
+theme.fontSizes.body2 = theme.fontSizes[2];
+theme.fontSizes.caption = theme.fontSizes[1];
+theme.fontSizes.value = theme.fontSizes[3];
+theme.fontSizes.button = theme.fontSizes[2];
+theme.fontSizes.label = theme.fontSizes[1];
+theme.fontSizes.overline = theme.fontSizes[0];
+theme.fontWeights.pageTitle = theme.fontWeights[1];
+theme.fontWeights.heading1 = theme.fontWeights[1];
+theme.fontWeights.heading2 = theme.fontWeights[1];
+theme.fontWeights.heading3 = theme.fontWeights[1];
+theme.fontWeights.heading4 = theme.fontWeights[1];
+theme.fontWeights.heading5 = theme.fontWeights[1];
+theme.fontWeights.subTitle1 = theme.fontWeights[2];
+theme.fontWeights.subTitle2 = theme.fontWeights[2];
+theme.fontWeights.body1 = theme.fontWeights[0];
+theme.fontWeights.body2 = theme.fontWeights[0];
+theme.fontWeights.caption = theme.fontWeights[0];
+theme.fontWeights.value = theme.fontWeights[2];
+theme.fontWeights.button = theme.fontWeights[2];
+theme.fontWeights.label = theme.fontWeights[3];
+theme.fontWeights.overline = theme.fontWeights[2];
+theme.lineHeights.pageTitle = theme.lineHeights[9];
+theme.lineHeights.heading1 = theme.lineHeights[10];
+theme.lineHeights.heading2 = theme.lineHeights[9];
+theme.lineHeights.heading3 = theme.lineHeights[8];
+theme.lineHeights.heading4 = theme.lineHeights[7];
+theme.lineHeights.heading5 = theme.lineHeights[6];
+theme.lineHeights.subTitle1 = theme.lineHeights[6];
+theme.lineHeights.subTitle2 = theme.lineHeights[4];
+theme.lineHeights.body1 = theme.lineHeights[7];
+theme.lineHeights.body2 = theme.lineHeights[5];
+theme.lineHeights.caption = theme.lineHeights[3];
+theme.lineHeights.value = theme.lineHeights[4];
+theme.lineHeights.button = theme.lineHeights[2];
+theme.lineHeights.label = theme.lineHeights[0];
+theme.lineHeights.overline = theme.lineHeights[1];
 
 export default theme;
