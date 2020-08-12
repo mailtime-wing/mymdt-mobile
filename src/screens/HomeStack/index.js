@@ -3,6 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTheme} from 'emotion-theming';
 import SafeAreaView from 'react-native-safe-area-view';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {Container, LabelText, styles} from './style';
 
@@ -11,10 +12,10 @@ import BonusScreen from '@/screens/BonusScreen';
 import WalletScreen from '@/screens/WalletScreen';
 import RedeemScreen from '@/screens/RedeemScreen';
 
-import BrowseIcon from '@/assets/browse.svg';
+import HomeIcon from '@/assets/home.svg';
 import BonusIcon from '@/assets/bonus.svg';
 import RedeemIcon from '@/assets/redeem.svg';
-import PointIcon from '@/assets/point.svg';
+import WalletIcon from '@/assets/wallet.svg';
 
 const Tab = createBottomTabNavigator();
 const Label = ({focused, id}) => (
@@ -30,6 +31,11 @@ const TabNavigatorContainer = () => {
   const iconWidth = 24;
   const iconHeight = 24;
   const strokeWidth = 2;
+  const {bottom} = useSafeAreaInsets();
+  const tabBarContainerStyle = {
+    ...styles.tabBarContainer,
+    height: bottom ? 89 : styles.tabBarContainer.height,
+  };
 
   return (
     <>
@@ -44,7 +50,7 @@ const TabNavigatorContainer = () => {
           activeBackgroundColor: theme.colors.secondary.normal,
           inactiveBackgroundColor: white,
           labelPosition: 'below-icon',
-          style: styles.tabBarContainer,
+          style: tabBarContainerStyle,
           // tabStyle: [styles.tabBar, styles.tabBarShadow],
           tabStyle: styles.tabBar, // TODO: no tabstyle for active / inactive
         }}>
@@ -52,9 +58,9 @@ const TabNavigatorContainer = () => {
           name="Browse"
           component={BrowseScreen}
           options={{
-            tabBarLabel: ({focused}) => <Label id="browse" focused={focused} />,
+            tabBarLabel: ({focused}) => <Label id="home" focused={focused} />,
             tabBarIcon: ({focused}) => (
-              <BrowseIcon
+              <HomeIcon
                 width={iconWidth}
                 height={iconHeight}
                 strokeWidth={strokeWidth}
@@ -99,7 +105,7 @@ const TabNavigatorContainer = () => {
           options={{
             tabBarLabel: ({focused}) => <Label id="wallet" focused={focused} />,
             tabBarIcon: ({focused}) => (
-              <PointIcon
+              <WalletIcon
                 width={iconWidth}
                 height={iconHeight}
                 strokeWidth={strokeWidth}
