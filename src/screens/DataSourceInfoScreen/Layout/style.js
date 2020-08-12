@@ -44,9 +44,6 @@ export const logoPosition = css`
 `;
 
 export const title = css`
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
   text-align: center;
   margin-bottom: 40px;
 `;
@@ -68,16 +65,11 @@ export const descriptionLineTexts = css`
 `;
 
 export const descriptionLineTitle = theme => css`
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
   margin-bottom: 8px;
   color: ${transparentize(0.2, theme.colors.black.normal)};
 `;
 
 export const descriptionLineCaption = theme => css`
-  font-size: 16px;
-  line-height: 24px;
   color: ${transparentize(0.6, theme.colors.black.normal)};
 `;
 

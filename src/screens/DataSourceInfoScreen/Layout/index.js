@@ -2,8 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import {useTheme} from 'emotion-theming';
 
-import TitleText from '@/components/TitleText';
-import AppText from '@/components/AppText';
+import AppText from '@/components/AppText2';
 import ThemeButton from '@/components/ThemeButton';
 import PhoneIcon from '@/assets/icon_smartphone.svg';
 import ShieldIcon from '@/assets/icon_shield.svg';
@@ -31,8 +30,12 @@ const DescriptionLine = ({title, caption}) => {
     <View style={descriptionLineContainer}>
       <LockIcon />
       <View style={descriptionLineTexts}>
-        <TitleText style={descriptionLineTitle(theme)}>{title}</TitleText>
-        <AppText style={descriptionLineCaption(theme)}>{caption}</AppText>
+        <AppText variant="heading5" style={descriptionLineTitle(theme)}>
+          {title}
+        </AppText>
+        <AppText variant="body1" style={descriptionLineCaption(theme)}>
+          {caption}
+        </AppText>
       </View>
     </View>
   );
@@ -59,7 +62,9 @@ const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
         ))}
         <View style={[whiteCircle, iconShadow]}>{rightIcon}</View>
       </View>
-      <TitleText style={titleStyle}>{title}</TitleText>
+      <AppText variant="heading3" style={titleStyle}>
+        {title}
+      </AppText>
       <View style={descriptionBoxContainer(theme)}>
         {descriptions.map((descriptionLine, i) => [
           <DescriptionLine
