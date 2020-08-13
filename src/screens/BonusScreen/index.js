@@ -1,5 +1,9 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
+
+import {useQuery} from '@apollo/react-hooks';
+import {GET_USER_TASK_GROUPS_AND_REWARD_API} from '@/api/data';
+import {AuthContext} from '@/context/auth';
 
 import {MarginBottom, ScrollContainer, TaskListContainer} from './style';
 
@@ -10,90 +14,59 @@ import NoMoreContent from '@/components/NoMoreContent';
 import DailyCheckIn from '@/components/DailyCheckIn';
 import TaskList from '@/components/TaskList';
 
-const dummyDailyTaskList = [
-  {name: 'Share RewardMe', amount: 100, isTaskCompleted: false},
-];
+const BonusScreen = props => {
+  const {authToken} = useContext(AuthContext);
+  const {data} = useQuery(GET_USER_TASK_GROUPS_AND_REWARD_API, {
+    context: {
+      headers: {
+        authorization: authToken ? `Bearer ${authToken}` : '',
+      },
+    },
+    fetchPolicy: 'network-only',
+  });
 
-const dummyAccountTaskList = [
-  {name: 'PIN setup', amount: 100, isTaskCompleted: true},
-  {name: 'Turn on FaceID', amount: 100, isTaskCompleted: false},
-];
+  const userRewardList = data?.userProfile?.rewards;
 
-const dummyFollowTaskList = [
-  {name: 'Follow Facebook', amount: 100, isTaskCompleted: false},
-  {name: 'Follow Twitter', amount: 100, isTaskCompleted: false},
-  {
-    name: 'Subscribe WeChat',
-    amount: 20,
-    isTaskCompleted: true,
-    claimedDate: new Date(),
-  },
-  {
-    name: 'Follow Weibo',
-    amount: 20,
-    isTaskCompleted: true,
-    claimedDate: new Date(),
-  },
-];
-
-const BonusList = [
-  {
-    title: <FormattedMessage id="bonus_task_title_1" />,
-    detail: <FormattedMessage id="bonus_task_detail_1" />,
-    children: (
-      <DailyCheckIn />
-    ),
-  },
-  {
-    title: <FormattedMessage id="bonus_task_title_2" />,
-    detail: <FormattedMessage id="bonus_task_detail_2" />,
-    icon: require('@/assets/daily_task_icon.png'),
-    children: (
-      <TaskListContainer>
-        <TaskList taskList={dummyDailyTaskList} />
-      </TaskListContainer>
-    ),
-  },
-  {
-    title: <FormattedMessage id="bonus_task_title_3" />,
-    detail: <FormattedMessage id="bonus_task_detail_3" />,
-    icon: require('@/assets/account_security_icon.png'),
-    children: (
-      <TaskListContainer>
-        <TaskList taskList={dummyAccountTaskList} />
-      </TaskListContainer>
-    ),
-  },
-  {
-    title: <FormattedMessage id="bonus_task_title_4" />,
-    detail: <FormattedMessage id="bonus_task_detail_4" />,
-    icon: require('@/assets/follow_us_icon.png'),
-    children: (
-      <TaskListContainer>
-        <TaskList taskList={dummyFollowTaskList} />
-      </TaskListContainer>
-    ),
-  },
-];
-
-const BonusScreen = props => (
-  <LinearGradientBackground>
-    <ScrollContainer>
-      <AccountBar {...props} showCoins />
-      {BonusList.map((bonusTask, index) => (
-        <Fragment key={index}>
-          <BonusBox
-            title={bonusTask.title}
-            detail={bonusTask.detail}
-            icon={bonusTask.icon}
-            children={bonusTask.children}
-          />
-          {index !== BonusList.length - 1 && <MarginBottom />}
-        </Fragment>
-      ))}
-      <NoMoreContent />
-    </ScrollContainer>
-  </LinearGradientBackground>
-);
+  return (
+    <LinearGradientBackground>
+      <ScrollContainer>
+        <AccountBar {...props} />
+        <BonusBox
+          title={<FormattedMessage id="bonus_task_title_1" />}
+          detail={<FormattedMessage id="bonus_task_detail_1" />}
+          children={
+            <DailyCheckIn
+              dayListWithAmount={[10, 20, 30, 40, 50, 50, 50, 50]}
+              currentDay={3}
+              canCheckIn={true}
+            />
+          }
+        />
+        <MarginBottom />
+        {data?.userProfile?.taskGroups.map((taskGroup, index) => (
+          <Fragment key={taskGroup?.name}>
+            <BonusBox
+              title={taskGroup?.name}
+              detail={taskGroup?.description}
+              icon={require('@/assets/daily_task_icon.png')}
+              children={
+                <TaskListContainer>
+                  <TaskList
+                    taskList={taskGroup?.userTasks}
+                    userRewardList={userRewardList}
+                  />
+                </TaskListContainer>
+              }
+            />
+            {index !== data?.userProfile?.taskGroups.length - 1 && (
+              <MarginBottom />
+            )}
+          </Fragment>
+        ))}
+        <NoMoreContent />
+      </ScrollContainer>
+    </LinearGradientBackground>
+  );
+};
 
 export default BonusScreen;
