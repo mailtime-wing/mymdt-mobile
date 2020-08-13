@@ -31,18 +31,8 @@ import MdtGiftCodeIcon from '@/assets/mdt_gift_code.svg';
 
 const styleFlexEnd = {
   justifyContent: 'flex-end',
-  alignItems: 'flex-end',
-  marginBottom: 16,
-};
-
-const mrpTheme = {
-  color: '#21CEDB',
-  borderColor: 'rgba(33, 206, 219, 0.2)',
-};
-
-const mdtTheme = {
-  color: '#0363EF',
-  borderColor: 'rgba(3, 99, 239, 0.2)',
+  alignItems: 'center',
+  marginBottom: 8,
 };
 
 const filterList = [
@@ -59,6 +49,11 @@ const filterList = [
   ['foo@gmail.com', 'bar@gmail.com'],
   ['Mastercard (•••• 1001)', 'ABC Bank (•••• 1234)', 'ABC Bank (•••• 4567)'],
 ];
+
+function ToUsdAmount(amount) {
+  let usdRate = 0.78;
+  return (amount * usdRate).toFixed(3);
+}
 
 const WalletScreen = ({navigation}) => {
   const theme = useTheme()
@@ -79,6 +74,22 @@ const WalletScreen = ({navigation}) => {
     getTransactions();
   }, [getTransactions]);
 
+  const mrpTheme = {
+    color: theme.colors.secondary.normal,
+    backgroundColor: theme.colors.secondary.normal, 
+    borderColor: theme.colors.secondary.border,
+    cardNameColor: theme.colors.nameOnMrpCard,
+    cardBackgroundColor: theme.colors.mrpCard,
+  };
+
+  const mdtTheme = {
+    color: theme.colors.primary.normal,
+    backgroundColor: theme.colors.primary.normal, 
+    borderColor: theme.colors.primary.border,
+    cardNameColor: theme.colors.nameOnMdtCard,
+    cardBackgroundColor: theme.colors.mdtCard,
+  };
+
   const cardList = [
     {
       type: MEASURABLE_REWARD_POINT,
@@ -96,7 +107,7 @@ const WalletScreen = ({navigation}) => {
           style={styleFlexEnd}
         />
       ),
-      theme: {color: mrpTheme.color, borderColor: mrpTheme.borderColor},
+      theme: mrpTheme,
       actionList: [
         {
           name: 'convert',
@@ -122,11 +133,12 @@ const WalletScreen = ({navigation}) => {
           style={styleFlexEnd}
         />
       ),
-      aroundInUsd:
+      aroundInUsd: ToUsdAmount(
         data?.userProfile?.currencyAccounts?.find(
           ca => ca.currencyCode === MEASURABLE_DATA_TOKEN,
-        ).balance || 0 * 0.78,
-      theme: {color: mdtTheme.color, borderColor: mdtTheme.borderColor},
+        ).balance || 0,
+      ),
+      theme: mdtTheme,
       actionList: [
         {name: 'convert', icon: <ConvertIcon fill={mdtTheme.color} />},
         {name: 'withdrawal', icon: <WithdrawalIcon fill={mdtTheme.color} />},

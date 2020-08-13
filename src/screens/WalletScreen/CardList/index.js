@@ -1,9 +1,12 @@
 import React from 'react';
-import {Dimensions} from 'react-native';
+import {Dimensions, View} from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
+import { useTheme } from 'emotion-theming';
 
-import {Card, CardName, AroundInUSD, SliderContainer} from './style';
+import {card, sliderContainer, cardName, usd} from './style';
+
+import AppText from '@/components/AppText2';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -19,20 +22,27 @@ const sliderWidth = viewportWidth;
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 const renderItem = ({item, index}) => {
+  const {cardBackgroundColor, cardNameColor} = item.theme
   return (
-    <Card key={index} background={item.theme.color}>
-      <CardName>{item.title}</CardName>
-      {item.coin}
-      {item.aroundInUsd !== undefined && (
-        <AroundInUSD>≈ ${item.aroundInUsd} USD </AroundInUSD>
-      )}
-    </Card>
+    <View key={index} style={card(cardBackgroundColor)}>
+      <AppText variant="subTitle1" style={cardName(cardNameColor)}>
+        {item.title}
+      </AppText>
+      <View>
+        {item.coin}
+        {item.aroundInUsd !== undefined && (
+          <AppText variant="body2" style={usd}>
+            ≈ ${item.aroundInUsd} USD{' '}
+          </AppText>
+        )}
+      </View>
+    </View>
   );
 };
 
 const CardList = ({cardList, onSnapToItem, onScroll}) => {
   return (
-    <SliderContainer>
+    <View style={sliderContainer}>
       <Carousel
         data={cardList}
         layout="default"
@@ -45,7 +55,7 @@ const CardList = ({cardList, onSnapToItem, onScroll}) => {
         onSnapToItem={onSnapToItem}
         onScroll={onScroll}
       />
-    </SliderContainer>
+    </View>
   );
 };
 

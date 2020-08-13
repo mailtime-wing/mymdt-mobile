@@ -10,6 +10,10 @@ export const darkTheme = {
     // text
     textOfMrp: '#88D9DE',
     textOfMdt: '#9FBDE9',
+    nameOnMrpCard: '#88D9DE',
+    nameOnMdtCard: '#9FBDE9',
+    mrpCard: 'rgba(135, 218, 222, 0.24)',
+    mdtCard: 'rgba(159, 189, 233, 0.24)',
     textOnError: ['#FF7171', 'rgba(255, 113, 113, 0.16)'],
     textOnBackground: [
       'rgba(255, 255, 255, 0.87)',
@@ -66,6 +70,10 @@ export const lightTheme = {
     // text
     textOfMrp: '#1E7884',
     textOfMdt: '#0036C5',
+    nameOnMrpCard: '#FFFFFF',
+    nameOnMdtCard: '#FFFFFF',
+    mrpCard: '#21CEDB',
+    mdtCard: '#0363EF',
     textOnError: ['#D81010', 'rgba(216, 16, 16, 0.6)'],
     textOnBackground: [
       'rgba(0, 0, 0, 0.8)',
