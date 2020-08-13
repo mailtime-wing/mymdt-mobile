@@ -75,7 +75,8 @@ export const SetupFlowProvider = ({children}) => {
     }
     if (setupStatus?.isDataSourceBound) {
       result.introduction = true;
-      result.bind_email = true;
+      result.add_email = true;
+      result.linked_emails = true;
       result.choose_region = true;
       result.data_source_info = true;
       result.linked_cards = true;
