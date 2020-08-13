@@ -8,6 +8,7 @@ import React, {
 import {FormattedMessage} from 'react-intl';
 import {AuthContext} from '@/context/auth';
 import {useMutation, useQuery} from '@apollo/react-hooks';
+import {useTheme} from 'emotion-theming';
 import {
   GET_USER_EMAIL_ACCOUNTS_API,
   UNBIND_EMAIL_ACCOUNTS_API,
@@ -16,11 +17,10 @@ import {
 import {
   Container,
   ButtonContainer,
-  EmailText,
   UnbindButton,
-  UnbindText,
   TitleContainer,
-  TitleText,
+  titleText,
+  removeText,
 } from './style';
 
 import ModalContainer from '@/components/ModalContainer';
@@ -33,6 +33,7 @@ import ConfirmButton from '@/components/ConfirmButton';
 import CloseButton from '@/components/CloseButton';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import AppText from '@/components/AppText2';
 
 const RESET = 'reset';
 const UPDATE_IS_EDITING = 'updateIsEditing';
@@ -94,6 +95,7 @@ const reducer = (state, action) => {
 };
 
 const BindEmailEditScreen = ({navigation}) => {
+  const theme = useTheme();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [emails, setEmails] = useState([{id: null, emailAddress: ''}]);
   const {authToken} = useContext(AuthContext);
@@ -187,26 +189,26 @@ const BindEmailEditScreen = ({navigation}) => {
   return (
     <ModalContainer title={<FormattedMessage id="linked_emails" />}>
       <TitleContainer>
-        <TitleText>
+        <AppText variant="label" style={titleText(theme)}>
           <FormattedMessage id="email" defaultMessage="email" />
-        </TitleText>
+        </AppText>
         {!state.isEditing && (
-          <TitleText>
+          <AppText variant="label" style={titleText(theme)}>
             <FormattedMessage id="data_sharing" defaultMessage="data sharing" />
-          </TitleText>
+          </AppText>
         )}
       </TitleContainer>
       <Container>
         {emails.map((email, index) => (
           <SpecialListOption
             key={email.emailAddress}
-            label={<EmailText>{email.emailAddress}</EmailText>}
+            label={<AppText variant="body1">{email.emailAddress}</AppText>}
             value={
               state.isEditing ? (
                 <UnbindButton onPress={() => handleUnbindPress(email)}>
-                  <UnbindText>
+                  <AppText variant="button" style={removeText(theme)}>
                     <FormattedMessage id="unbind" defaultMessage="unbind" />
-                  </UnbindText>
+                  </AppText>
                 </UnbindButton>
               ) : (
                 <Switch
@@ -218,21 +220,16 @@ const BindEmailEditScreen = ({navigation}) => {
           />
         ))}
       </Container>
-      {state.isEditing && (
-        <ButtonContainer>
-          <ThemeButton
-            onPress={() =>
-              navigation.navigate('emails_binding', {navigateFromEdit: true})
-            }
-            medium
-            width="auto">
-            <FormattedMessage
-              id="add_email_account"
-              defaultMessage="ADD EMAIL"
-            />
-          </ThemeButton>
-        </ButtonContainer>
-      )}
+      <ButtonContainer>
+        <ThemeButton
+          onPress={() =>
+            navigation.navigate('emails_binding', {navigateFromEdit: true})
+          }
+          medium
+          width="auto">
+          <FormattedMessage id="add_email_account" defaultMessage="ADD EMAIL" />
+        </ThemeButton>
+      </ButtonContainer>
       {state.isUnbinding && (
         <PopupModal
           title="Unbind this email"
