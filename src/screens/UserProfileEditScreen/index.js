@@ -33,6 +33,8 @@ import ConfirmButton from '@/components/ConfirmButton';
 import CloseButton from '@/components/CloseButton';
 import Input from '@/components/AppInput';
 
+import phoneNumberSpliter from '@/utils/phoneNumberSpliter';
+
 const RESET_FORM = 'resetForm';
 const UPDATE_IS_CANCELLED = 'updateIsCancelled';
 const UPDATE_IS_CONFIRMED = 'updateIsConfirmed';
@@ -211,6 +213,12 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
             }
             noIcon
           />
+          <ListOption
+            key="phone"
+            label={<FormattedMessage id="telephone" />}
+            value={phoneNumberSpliter(values.phone)}
+            noIcon
+          />
         </>
       )}
     </FormContainer>
@@ -281,6 +289,7 @@ const UserProfileEditScreen = ({navigation}) => {
       gender => gender.value === data?.userProfile?.gender,
     )?.value,
     dob: data?.userProfile?.birthday,
+    phone: data?.userProfile?.phoneNumber,
   };
 
   const validate = values => {
