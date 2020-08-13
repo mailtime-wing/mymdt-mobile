@@ -41,6 +41,10 @@ const reducer = (state, action) => {
   }
 };
 
+// This is the same as the one in Info.plist. Required by mailtime ios sdk
+const GOOGLE_CALLBACK_SCHEME =
+  'com.googleusercontent.apps.861644994731-78ig7abu1kpi2b05ilcsnb34qbmq8a9h';
+
 export default () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {authToken} = useContext(AuthContext);
@@ -50,8 +54,13 @@ export default () => {
   // TODO: move to app startup in future
   useEffect(() => {
     MailtimeAuth.setup(
+      Config.SDK_DEVELOPMENT !== false,
       Config.SDK_APP_KEY,
       Config.SDK_APP_SECRET,
+      GOOGLE_CALLBACK_SCHEME,
+      '',
+    );
+    MailtimeAuth.setupAdditionalConfig(
       'PlayStore',
       Config.SDK_CLIENT_TYPE,
       '1.0',
