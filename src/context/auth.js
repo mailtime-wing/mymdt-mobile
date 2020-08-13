@@ -106,6 +106,9 @@ export const AuthProvider = ({children}) => {
               dispatch({type: UPDATE_REFRESH_TOKEN_EXPIRED, payload: true});
             }
           }
+        } else {
+          authToken = '';
+          refreshToken = '';
         }
       } catch (error) {
         console.error('error getting authToken');
