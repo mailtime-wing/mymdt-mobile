@@ -19,6 +19,7 @@ import MRPCoin from '@/components/MRPCoin';
 import MRPGiftBox from '@/components/MRPGiftBox';
 import ThemeButton from '@/components/ThemeButton';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
+import PopupModal from '@/components/PopupModal';
 import DayList from './DayList';
 import AchievementBadge from './AchievementBadge';
 
@@ -30,13 +31,13 @@ const giftBoxStyle = {
   ],
 };
 
+// TODO: do not control by props, preload user current currency
 const DailyCheckIn = ({converted}) => {
-  const [showCheckInReward, setShowCheckInReward] = useState(false);
   const [daysPresentInBadge, setDaysPresentInBadge] = useState(0);
   const {authToken} = useContext(AuthContext);
   const {localeEnum} = useContext(IntlContext);
 
-  const {data} = useQuery(GET_CHECK_IN_STATUS_API, {
+  const {data, refetch} = useQuery(GET_CHECK_IN_STATUS_API, {
     context: {
       headers: {
         authorization: authToken ? `Bearer ${authToken}` : '',
@@ -44,7 +45,9 @@ const DailyCheckIn = ({converted}) => {
     },
   });
 
-  const [checkIn] = useMutation(CHECK_IN_API);
+  const [checkIn, {data: checkInData, error: checkInError}] = useMutation(
+    CHECK_IN_API,
+  );
 
   const handleCheckInPress = async () => {
     try {
@@ -55,7 +58,6 @@ const DailyCheckIn = ({converted}) => {
           },
         },
       });
-      setShowCheckInReward(true);
     } catch (e) {
       console.error(e);
     }
@@ -103,9 +105,8 @@ const DailyCheckIn = ({converted}) => {
           <FormattedMessage id="check_in" defaultMessage="Check in" />
         )}
       </ThemeButton>
-      {showCheckInReward && (
-        <PopupModalWithLinearGradient
-          callback={() => setShowCheckInReward(false)}>
+      {checkInData && (
+        <PopupModalWithLinearGradient callback={refetch}>
           <MRPGiftBox style={giftBoxStyle} />
           <GotCheckInRewardText color={coinColor}>
             You got a check-in reward!
@@ -129,6 +130,12 @@ const DailyCheckIn = ({converted}) => {
           )}
           <MarginTop />
         </PopupModalWithLinearGradient>
+      )}
+      {checkInError && (
+        <PopupModal
+          title="Something went wrong!"
+          detail="Please try again later"
+        />
       )}
     </Container>
   );
