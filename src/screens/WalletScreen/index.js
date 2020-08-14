@@ -112,6 +112,8 @@ const WalletScreen = ({navigation}) => {
         {
           name: 'convert',
           id: 'converter',
+          from: MEASURABLE_REWARD_POINT,
+          to: MEASURABLE_DATA_TOKEN,
           icon: <ConvertIcon fill={mrpTheme.color} />,
         },
         {name: 'redeem gift', icon: <RedeemGiftIcon fill={mrpTheme.color} />},
@@ -140,8 +142,19 @@ const WalletScreen = ({navigation}) => {
       ),
       theme: mdtTheme,
       actionList: [
-        {name: 'convert', icon: <ConvertIcon fill={mdtTheme.color} />},
-        {name: 'withdrawal', icon: <WithdrawalIcon fill={mdtTheme.color} />},
+        {
+          name: 'convert',
+          id: 'converter',
+          from: MEASURABLE_DATA_TOKEN,
+          to: MEASURABLE_REWARD_POINT,
+          icon: <ConvertIcon fill={mdtTheme.color} />,
+        },
+        {
+          name: 'withdrawal',
+          id: 'withdrawal',
+          icon: <WithdrawalIcon fill={mdtTheme.color} />,
+        },
+
         {name: 'gift code', icon: <MdtGiftCodeIcon fill={mdtTheme.color} />},
       ],
     },
