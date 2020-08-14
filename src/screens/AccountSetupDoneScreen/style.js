@@ -1,31 +1,19 @@
-import styled from '@emotion/native';
-import {Platform} from 'react-native';
-import TitleText from '@/components/TitleText';
+import {css} from '@emotion/native';
 
-export const Container = styled.TouchableOpacity`
+export const container = css`
   padding-left: 24px;
   padding-right: 24px;
   flex: 1;
   justify-content: center;
 `;
 
-export const Title = styled(TitleText)`
-  font-size: 36px;
-  color: ${props => props.theme.colors.secondary.normal};
-  line-height: 36px;
-  letter-spacing: 1px;
-  ${Platform.OS === 'ios' && 'font-weight: bold;'}
+export const titleStyle = theme => css`
+  color: ${theme.colors.secondary.normal};
   margin-bottom: 16px;
-  text-transform: uppercase;
   text-align: center;
 `;
 
-export const Detail = styled(TitleText)`
-  font-size: 18px;
-  color: ${props => props.theme.colors.secondary.normal};
+export const detailStyle = theme => css`
+  color: ${theme.colors.secondary.normal};
   text-align: center;
-`;
-
-export const MarginContainer = styled.View`
-  margin-top: 16px;
 `;

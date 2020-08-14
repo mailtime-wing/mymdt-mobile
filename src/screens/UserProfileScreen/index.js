@@ -8,6 +8,7 @@ import {
 import {FormattedMessage} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
 import {useMutation} from '@apollo/react-hooks';
+import {useTheme} from 'emotion-theming';
 
 import {AuthContext} from '@/context/auth';
 import Input from '@/components/AppInput';
@@ -16,18 +17,19 @@ import useSetupFlow from '@/hooks/useSetupFlow';
 import {UPDATE_USER_PROFILE_API} from '@/api/data';
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
 import DateTimePickerInput from '@/components/DateTimePickerInput';
+import AppText from '@/components/AppText2';
 
 import {
   Container,
   FormContainer,
-  Title,
-  Detail,
-  RequiredText,
-  Error,
   DateFieldContainer,
+  titleStyle,
+  detailStyle,
+  errorStyle,
+  requiredText,
 } from './style';
 
-const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
+const UserProfileForm = ({showDatePicker, handleDatePickerPress, theme}) => {
   const {
     handleSubmit,
     values,
@@ -40,7 +42,9 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
     <FormContainer>
       <Input label={<FormattedMessage id="your_name" />} required name="name" />
       <GenderSelector gender={values.gender} setFieldValue={setFieldValue} />
-      <Error>{errors.gender ? errors.gender : ' '}</Error>
+      <AppText variant="caption" style={errorStyle(theme)}>
+        {errors.gender ? errors.gender : ' '}
+      </AppText>
       <DateFieldContainer onPress={handleDatePickerPress}>
         <DateTimePickerInput
           label={
@@ -72,6 +76,7 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress}) => {
 };
 
 const UserProfileScreen = () => {
+  const theme = useTheme();
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [updateUserProfileRequest] = useMutation(UPDATE_USER_PROFILE_API);
   const {authToken} = useContext(AuthContext);
@@ -127,13 +132,15 @@ const UserProfileScreen = () => {
         keyboardShouldPersistTaps="always">
         <KeyboardAvoidingView behavior="position">
           <Container>
-            <Title>
+            <AppText variant="pageTitle" style={titleStyle(theme)}>
               <FormattedMessage id="let_us_know" />
-            </Title>
-            <Detail>
+            </AppText>
+            <AppText variant="body2" style={detailStyle(theme)}>
               <FormattedMessage id="we_hope_to_provide" />
-            </Detail>
-            <RequiredText>* means required</RequiredText>
+            </AppText>
+            <AppText variant="body2" style={requiredText(theme)}>
+              * means required
+            </AppText>
             <Formik
               initialValues={{
                 name: '',
@@ -146,6 +153,7 @@ const UserProfileScreen = () => {
               <UserProfileForm
                 showDatePicker={showDatePicker}
                 handleDatePickerPress={handleDatePickerPress}
+                theme={theme}
               />
             </Formik>
           </Container>

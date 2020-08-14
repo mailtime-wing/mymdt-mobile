@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import {View, ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useMutation} from '@apollo/react-hooks';
 
@@ -7,19 +8,23 @@ import {
   MEASURABLE_REWARD_POINT,
   MEASURABLE_DATA_TOKEN,
 } from '@/context/auth';
+import {useTheme} from 'emotion-theming';
+
+import AppText from '@/components/AppText2';
 import ThemeButton from '@/components/ThemeButton';
+import ScreenContainer from '@/components/ScreenContainer';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import {UPDATE_USER_CASHBACK_CURRENCY_CODE_API} from '@/api/data';
 
 import {
-  Container,
-  ScrollContainer,
-  Title,
-  Detail,
-  BoxContainer,
-  BoxLevel,
-  BoxTitle,
-  BoxDetail,
+  container,
+  scrollContainer,
+  boxContainer,
+  detail,
+  boxLevel,
+  boxTitle,
+  boxDetail,
+  titleStyle,
 } from './style';
 
 const cashbackTypeList = [
@@ -39,21 +44,28 @@ const cashbackTypeList = [
   },
 ];
 
-const CashBackType = ({cashback, handleChoosePress}) => (
-  <BoxContainer>
-    <BoxLevel>{cashback.level}</BoxLevel>
-    <BoxTitle>{cashback.title}</BoxTitle>
-    <BoxDetail>{cashback.detail}</BoxDetail>
+const CashBackType = ({cashback, handleChoosePress, theme}) => (
+  <View style={boxContainer(theme)}>
+    <AppText variant="label" style={boxLevel(theme)}>
+      {cashback.level}
+    </AppText>
+    <AppText variant="heading3" style={boxTitle}>
+      {cashback.title}
+    </AppText>
+    <AppText variant="body1" style={boxDetail(theme)}>
+      {cashback.detail}
+    </AppText>
     <ThemeButton
       medium
       width="auto"
       onPress={() => handleChoosePress(cashback.type)}>
       <FormattedMessage id="choose_this" defaultMessage="Choose This" />
     </ThemeButton>
-  </BoxContainer>
+  </View>
 );
 
 const ChooseCashBackTypeScreen = () => {
+  const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
   const [updateUserCashbackCurrencyCodeRequest] = useMutation(
     UPDATE_USER_CASHBACK_CURRENCY_CODE_API,
@@ -80,29 +92,30 @@ const ChooseCashBackTypeScreen = () => {
   };
 
   return (
-    <ScrollContainer>
-      <Container>
-        <Title>
+    <ScrollView style={scrollContainer(theme)}>
+      <ScreenContainer style={container}>
+        <AppText variant="pageTitle" style={titleStyle(theme)}>
           <FormattedMessage
             id="choose_cash_back_type"
             defaultMessage="Choose your cashback type"
           />
-        </Title>
-        <Detail>
+        </AppText>
+        <AppText variant="body1" style={detail(theme)}>
           <FormattedMessage
             id="change_cashback_perference_later"
             defaultMessage="RewardMe provides 2 types of cashback. You can change the perference afterwards."
           />
-        </Detail>
+        </AppText>
         {cashbackTypeList.map(cbt => (
           <CashBackType
             key={cbt.type}
             cashback={cbt}
             handleChoosePress={handleChoosePress}
+            theme={theme}
           />
         ))}
-      </Container>
-    </ScrollContainer>
+      </ScreenContainer>
+    </ScrollView>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, {useState, useContext, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {useQuery, useMutation} from '@apollo/react-hooks';
+import {useTheme} from 'emotion-theming';
 
 import {IntlContext} from '@/context/Intl';
 import {AuthContext} from '@/context/auth';
@@ -9,6 +10,7 @@ import OfferList from '@/components/OfferList';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ScreenContainer from '@/components/ScreenContainer';
+import AppText from '@/components/AppText2';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import {
   GET_BASIC_OFFER_API,
@@ -20,13 +22,14 @@ import {
   ScrollContainer,
   Container,
   FixedContainer,
-  Details,
-  Title,
-  HightLightText,
-  BrandsSelectedText,
+  detailStyle,
+  titleStyle,
+  hightLightText,
+  brandSelectedText,
 } from './style';
 
 const OfferSelectScreen = ({route, navigation}) => {
+  const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
   const [selectedOffers, setSelectedOffers] = useState([]);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
@@ -120,29 +123,33 @@ const OfferSelectScreen = ({route, navigation}) => {
     <Container>
       <ScrollContainer>
         <ScreenContainer hasTopBar>
-          <Title>
+          <AppText variant="pageTitle" style={titleStyle(theme)}>
             <FormattedMessage
               id="special_offer"
               defaultMessage="Special Offer"
             />
-          </Title>
-          <Details>
+          </AppText>
+          <AppText variant="body1" style={detailStyle(theme)}>
             <FormattedMessage
               id="select_offer_details"
               defaultMessage="We also provide a special offer for everyone. You can choose your favorite or frequently spend brands. The cashback rate depends on your membership level."
             />
-          </Details>
-          <Details>
+          </AppText>
+          <AppText variant="body1" style={detailStyle(theme)}>
             <FormattedMessage
               id="please_select_brands"
               defaultMessage="Please choose <FilterText>{number_of_offers} brands/services</FilterText> to earn points with each time you spend there."
               values={{
                 number_of_offers: numberOfOffer,
-                FilterText: str => <HightLightText>{str}</HightLightText>,
+                FilterText: str => (
+                  <AppText variant="body1" style={hightLightText(theme)}>
+                    {str}
+                  </AppText>
+                ),
                 // TOFIX: formatting not work in react native
               }}
             />
-          </Details>
+          </AppText>
           <OfferList
             offerList={
               basicOfferApiData.data && basicOfferApiData.data.basicOffers
@@ -155,7 +162,9 @@ const OfferSelectScreen = ({route, navigation}) => {
         </ScreenContainer>
       </ScrollContainer>
       <FixedContainer>
-        <BrandsSelectedText isError={isErrorFromOfferList}>
+        <AppText
+          variant="label"
+          style={brandSelectedText(theme, isErrorFromOfferList)}>
           {isErrorFromOfferList ? (
             <FormattedMessage
               id="more_offers_selected"
@@ -175,7 +184,7 @@ const OfferSelectScreen = ({route, navigation}) => {
               }}
             />
           )}
-        </BrandsSelectedText>
+        </AppText>
         <ThemeButton
           medium
           onPress={handleNextPress}

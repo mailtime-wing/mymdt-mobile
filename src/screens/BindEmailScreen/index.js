@@ -1,7 +1,10 @@
 import React, {useEffect, useLayoutEffect} from 'react';
+import {ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {Formik} from 'formik';
+import {useTheme} from 'emotion-theming';
 
+import AppText from '@/components/AppText2';
 import Input from '@/components/AppInput';
 import ThemeButton from '@/components/ThemeButton';
 import BackButton from '@/components/BackButton';
@@ -11,7 +14,7 @@ import ScreenContainer from '@/components/ScreenContainer';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import useMailTimeSdk from '@/hooks/useMailTimeSdk';
 
-import {Title, Detail, ScrollContainer} from './style';
+import {scrollContainer, detailStyle, title} from './style';
 
 const BindEmailScreen = ({route, navigation}) => {
   const navigateFromEdit = route?.params?.navigateFromEdit;
@@ -23,6 +26,7 @@ const BindEmailScreen = ({route, navigation}) => {
     loginFail,
   } = useMailTimeSdk();
   const {navigateByFlow} = useSetupFlow();
+  const theme = useTheme();
 
   useEffect(() => {
     if (loginSuccess) {
@@ -73,17 +77,17 @@ const BindEmailScreen = ({route, navigation}) => {
   };
 
   return (
-    <ScrollContainer>
+    <ScrollView style={scrollContainer}>
       <ScreenContainer hasTopBar>
-        <Title>
+        <AppText variant="pageTitle" style={title(theme)}>
           <FormattedMessage
             id="bind_email_accounts"
             defaultMessage="BIND EMAILS"
           />
-        </Title>
-        <Detail>
+        </AppText>
+        <AppText variant="body1" style={detailStyle(theme)}>
           <FormattedMessage id="dont_worry" />
-        </Detail>
+        </AppText>
         <Formik
           initialValues={{email: ''}}
           onSubmit={handleConnectPress}
@@ -110,7 +114,7 @@ const BindEmailScreen = ({route, navigation}) => {
           />
         )}
       </ScreenContainer>
-    </ScrollContainer>
+    </ScrollView>
   );
 };
 

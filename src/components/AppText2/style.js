@@ -8,7 +8,6 @@ export const text = (theme, variant) => css`
 
   ${variant === 'pageTitle' &&
     `
-    height: 36px;
     text-transform: uppercase;
   `};
   ${variant === 'button' && 'text-transform: uppercase;'};

@@ -1,7 +1,4 @@
-import styled from '@emotion/native';
-import {Platform} from 'react-native';
-import TitleText from '@/components/TitleText';
-import AppText from '@/components/AppText';
+import styled, {css} from '@emotion/native';
 import ScreenContainer from '@/components/ScreenContainer';
 
 export const Container = styled(ScreenContainer)`
@@ -20,19 +17,14 @@ export const BackgroundImage = styled.Image`
   margin-bottom: 16px;
 `;
 
-export const Title = styled(TitleText)`
-  font-size: 24px;
-  line-height: 29px;
-  ${Platform.OS === 'ios' && 'font-weight: bold;'}
-  color: ${props => props.theme.colors.white.normal};
+export const titleStyle = theme => css`
+  color: ${theme.colors.white.normal};
   text-align: center;
   margin-bottom: 16px;
 `;
 
-export const Detail = styled(AppText)`
-  font-size: 16px;
-  line-height: 24px;
-  color: ${props => props.theme.colors.white.normal};
+export const detailStyle = theme => css`
+  color: ${theme.colors.white.normal};
   text-align: center;
   margin-bottom: 16px;
 `;
