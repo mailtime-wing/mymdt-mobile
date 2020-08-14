@@ -93,6 +93,11 @@ export const GET_USER_MEMBERSHIP_API = gql`
         interestRate
       }
       basicOfferAvailableForEditAt
+      currencyAccounts {
+        id
+        currencyCode
+        balance
+      }
     }
   }
 `;
@@ -270,8 +275,8 @@ export const GET_CONVERSION_RATE_API = gql`
 `;
 
 export const TRANSACTIONS_QUERY = gql`
-  query GetCurrecy($cursor: String, $filter: TransactionFilter){
-    userProfile{
+  query GetCurrecy($cursor: String, $filter: TransactionFilter) {
+    userProfile {
       currencyAccounts {
         id
         currencyCode
