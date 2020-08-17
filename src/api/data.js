@@ -91,6 +91,7 @@ export const GET_USER_MEMBERSHIP_API = gql`
         cashbackAdd
         interestRate
       }
+      basicOfferAvailableForEditAt
     }
   }
 `;
@@ -193,7 +194,7 @@ export const REPORT_MISSING_RECEIPT = gql`
       amount: $amount
     )
   }
-`
+`;
 
 export const GET_USER_TASK_GROUPS_AND_REWARD_API = gql`
   query {
@@ -253,24 +254,16 @@ export const CHECK_IN_API = gql`
   mutation CheckIn {
     checkIn
   }
-`
+`;
 
 export const CURRENCY_CONVERT_API = gql`
-  mutation Convert(
-    $amount: Float!
-    $from: CurrencyCode!
-    $to: CurrencyCode!
-  ) {
-    convert(
-      amount: $amount
-      from: $from
-      to: $to
-    )
+  mutation Convert($amount: Float!, $from: CurrencyCode!, $to: CurrencyCode!) {
+    convert(amount: $amount, from: $from, to: $to)
   }
 `;
 
 export const GET_CONVERSION_RATE_API = gql`
   query ConversionRate($from: CurrencyCode!, $to: CurrencyCode!) {
-    conversionRate(from: $from, to: $to) 
+    conversionRate(from: $from, to: $to)
   }
 `;
