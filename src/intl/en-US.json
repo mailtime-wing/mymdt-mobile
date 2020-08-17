@@ -3,6 +3,7 @@
   "about": "About",
   "language": "Language",
   "greetings": "Hi, {name}",
+  "app_version": "App Version: {version}",
 
   "browse": "Browse",
   "browse_details": "Promtions / Referrals / Share",

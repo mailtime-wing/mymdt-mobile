@@ -3,6 +3,7 @@
   "about": "關於",
   "language": "語言",
   "greetings": "您好, {name}",
+  "app_version": "程式版本: {version}",
 
   "browse": "發現",
   "browse_details": "限時活動 / 任務 / 分享",

@@ -211,7 +211,7 @@ dependencies {
         implementation jscFlavor
     }
 
-    
+    compile project(':react-native-version-number')
 
 }
 
