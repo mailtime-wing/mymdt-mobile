@@ -1,4 +1,5 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
+import {Linking} from 'react-native';
 import {FormattedMessage, FormattedDate} from 'react-intl';
 import {useMutation} from '@apollo/react-hooks';
 import {CLAIM_REWARD_API} from '@/api/data';
@@ -29,6 +30,7 @@ const giftBoxStyle = {
 
 const TaskList = ({taskList, userRewardList}) => {
   const {authToken} = useContext(AuthContext);
+  const [clientError, setClientError] = useState(false);
   const [claimRewardRequest, {data, error}] = useMutation(CLAIM_REWARD_API, {
     context: {
       headers: {
@@ -49,6 +51,17 @@ const TaskList = ({taskList, userRewardList}) => {
     }
   };
 
+  const handleOpenUrl = async url => {
+    if (!url) {
+      setClientError(true);
+      return;
+    }
+    const supported = await Linking.canOpenURL(url);
+    if (supported) {
+      await Linking.openURL(url);
+    }
+  };
+
   return (
     <>
       {taskList.map(task => {
@@ -58,6 +71,7 @@ const TaskList = ({taskList, userRewardList}) => {
         task = {...task, reward: {...relatedReward}};
         const claimedDate = task.reward?.claimed_time;
         const claimed = !!claimedDate;
+        const callbackUrl = task.reward?.callback_url;
 
         return (
           <RowContainer key={task.name}>
@@ -99,7 +113,11 @@ const TaskList = ({taskList, userRewardList}) => {
                     <FormattedMessage id="claim" defaultMessage="Claim" />
                   </ThemeButton>
                 ) : (
-                  <ThemeButton small reverse width="auto">
+                  <ThemeButton
+                    small
+                    reverse
+                    width="auto"
+                    onPress={() => handleOpenUrl(callbackUrl)}>
                     <FormattedMessage id="start" defaultMessage="Start" />
                   </ThemeButton>
                 )}
@@ -114,10 +132,11 @@ const TaskList = ({taskList, userRewardList}) => {
           <MRPGiftBox style={giftBoxStyle} />
         </PopupModalWithLinearGradient>
       )}
-      {error && (
+      {(error || clientError) && (
         <PopupModal
           title="Something went wrong!"
           detail="Please try again later"
+          callback={() => setClientError(false)}
         />
       )}
     </>
