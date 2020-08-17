@@ -1,6 +1,6 @@
 import countryCodeData from '@/constants/countryCode';
 
-export default function phoneNumberSpliter(phone) {
+export default function splitPhoneNumber(phone) {
   let result = phone;
   if (!result) {
     return;

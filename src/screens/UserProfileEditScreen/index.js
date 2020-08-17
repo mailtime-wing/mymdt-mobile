@@ -33,7 +33,7 @@ import ConfirmButton from '@/components/ConfirmButton';
 import CloseButton from '@/components/CloseButton';
 import Input from '@/components/AppInput';
 
-import phoneNumberSpliter from '@/utils/phoneNumberSpliter';
+import splitPhoneNumber from '@/utils/splitPhoneNumber';
 
 const RESET_FORM = 'resetForm';
 const UPDATE_IS_CANCELLED = 'updateIsCancelled';
@@ -216,7 +216,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
           <ListOption
             key="phone"
             label={<FormattedMessage id="telephone" />}
-            value={phoneNumberSpliter(values.phone)}
+            value={splitPhoneNumber(values.phone)}
             noIcon
           />
         </>
