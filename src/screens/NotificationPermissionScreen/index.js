@@ -1,22 +1,24 @@
 import React from 'react';
-import {Platform} from 'react-native';
+import {Platform, ScrollView} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {FormattedMessage} from 'react-intl';
+import {useTheme} from 'emotion-theming';
 
 import ThemeButton from '@/components/ThemeButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
+import AppText from '@/components/AppText2';
 
 import {
   Container,
-  Title,
-  Detail,
   MarginContainer,
-  ScrollContainer,
   NotificationPermission,
   UpArrow,
+  titleStyle,
+  detailStyle,
 } from './style';
 
 const NotificationPermissionScreen = () => {
+  const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
 
   const requestNotificationPermission = () => {
@@ -46,20 +48,20 @@ const NotificationPermissionScreen = () => {
   };
 
   return (
-    <ScrollContainer>
+    <ScrollView>
       <Container>
-        <Title>
+        <AppText variant="pageTitle" style={titleStyle(theme)}>
           <FormattedMessage
             id="want_to_receive_latest_info"
             defaultMessage="Receive Latest Info"
           />
-        </Title>
-        <Detail>
+        </AppText>
+        <AppText variant="body1" style={detailStyle(theme)}>
           <FormattedMessage
             id="turn_on_notifications_to_learn"
             defaultMessage="Turn on notifications to receive news about new rewards, latest promotional events and limited offers."
           />
-        </Detail>
+        </AppText>
         <NotificationPermission
           source={require('@/assets/notification_permission.png')}
         />
@@ -72,7 +74,7 @@ const NotificationPermissionScreen = () => {
           <FormattedMessage id="skip_for_now" />
         </ThemeButton>
       </Container>
-    </ScrollContainer>
+    </ScrollView>
   );
 };
 

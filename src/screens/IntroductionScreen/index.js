@@ -1,12 +1,13 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
+import {useTheme} from 'emotion-theming';
 
 import {
   ScrollContainer,
   Container,
   BackgroundImage,
-  Title,
-  Detail,
+  titleStyle,
+  detailStyle,
 } from './style';
 
 import BindingButton from './BindingButton';
@@ -14,18 +15,22 @@ import ThemeButton from '@/components/ThemeButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import BindingEmailIcon from '@/assets/binding-email.svg';
 import BindingBankAccountIcon from '@/assets/binding-bank-account.svg';
+import AppText from '@/components/AppText2';
 
 const IntroductionScreen = () => {
+  const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
   return (
     <ScrollContainer>
       <Container>
         <BackgroundImage source={require('@/assets/introduce_1.png')} />
-        <Title>Select which way to retrieve your shopping records</Title>
-        <Detail>
+        <AppText variant="heading3" style={titleStyle(theme)}>
+          Select which way to retrieve your shopping records
+        </AppText>
+        <AppText variant="body1" style={detailStyle(theme)}>
           RewardMe needs your shopping transaction records in order to give your
           cash back.
-        </Detail>
+        </AppText>
         <BindingButton
           icon={<BindingEmailIcon />}
           title="Connect with Emails"

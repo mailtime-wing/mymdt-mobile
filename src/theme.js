@@ -36,7 +36,6 @@ const theme = {
   },
   fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36],
   fontWeights: [400, 500, 600, 700],
-  lineHeights: [15, 16, 17, 18, 19, 21, 22, 24, 29, 36, 43],
 };
 
 theme.colors.grey.superLight = theme.colors.grey[0];
@@ -123,20 +122,21 @@ theme.fontWeights.value = theme.fontWeights[2];
 theme.fontWeights.button = theme.fontWeights[2];
 theme.fontWeights.label = theme.fontWeights[3];
 theme.fontWeights.overline = theme.fontWeights[2];
-theme.lineHeights.pageTitle = theme.lineHeights[9];
-theme.lineHeights.heading1 = theme.lineHeights[10];
-theme.lineHeights.heading2 = theme.lineHeights[9];
-theme.lineHeights.heading3 = theme.lineHeights[8];
-theme.lineHeights.heading4 = theme.lineHeights[7];
-theme.lineHeights.heading5 = theme.lineHeights[6];
-theme.lineHeights.subTitle1 = theme.lineHeights[6];
-theme.lineHeights.subTitle2 = theme.lineHeights[4];
-theme.lineHeights.body1 = theme.lineHeights[7];
-theme.lineHeights.body2 = theme.lineHeights[5];
-theme.lineHeights.caption = theme.lineHeights[3];
-theme.lineHeights.value = theme.lineHeights[4];
-theme.lineHeights.button = theme.lineHeights[2];
-theme.lineHeights.label = theme.lineHeights[0];
-theme.lineHeights.overline = theme.lineHeights[1];
+
+theme.lineHeights.pageTitle = theme.fontSizes.pageTitle * 1.25;
+theme.lineHeights.heading1 = theme.fontSizes.heading1 * 1.25;
+theme.lineHeights.heading2 = theme.fontSizes.heading2 * 1.25;
+theme.lineHeights.heading3 = theme.fontSizes.heading3 * 1.25;
+theme.lineHeights.heading4 = theme.fontSizes.heading4 * 1.25;
+theme.lineHeights.heading5 = theme.fontSizes.heading5 * 1.25;
+theme.lineHeights.subTitle1 = theme.fontSizes.subTitle1 * 1.25;
+theme.lineHeights.subTitle2 = theme.fontSizes.subTitle2 * 1.25;
+theme.lineHeights.body1 = theme.fontSizes.body1 * 1.5;
+theme.lineHeights.body2 = theme.fontSizes.body2 * 1.5;
+theme.lineHeights.caption = theme.fontSizes.caption * 1.5;
+theme.lineHeights.value = theme.fontSizes.value * 1.5;
+theme.lineHeights.button = theme.fontSizes.button * 1.5;
+theme.lineHeights.label = theme.fontSizes.label * 1.5;
+theme.lineHeights.overline = theme.fontSizes.overline * 1.5;
 
 export default theme;
