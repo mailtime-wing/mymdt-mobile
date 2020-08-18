@@ -87,7 +87,7 @@ const InternalLoginForm = ({submitButtonText, onSendPress}) => {
         <PhonePrefixContainer>
           <Input
             keyboardType="phone-pad"
-            label={<FormattedMessage id="telephone" />}
+            label={<FormattedMessage id="phone_number" />}
             name="phonePrefix"
           />
         </PhonePrefixContainer>

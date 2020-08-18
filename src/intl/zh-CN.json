@@ -115,6 +115,7 @@
   "email_account": "第{email_count}个邮箱",
   "add_email_account": "添加邮箱",
   "telephone": "电话号码",
+  "phone_number": "电话号码",
   "verification_code": "验证码",
   "your_name": "你的名字",
   "gender": "你的性别",
