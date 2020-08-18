@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   FormattedMessage,
   FormattedTime,
@@ -25,6 +25,7 @@ import {
   converterType,
   numberText,
   inputAccessoryButtonText,
+  Error,
   styles,
 } from './style';
 
@@ -59,10 +60,15 @@ const KeyboardButtons = ({handleConverterOnChange}) => {
   );
 };
 
-const ConverterInput = ({title, name, ...props}) => {
+const ConverterInput = ({title, name, handleError, ...props}) => {
   const intl = useIntl();
-  const [field] = useField(name);
+  const [field, meta] = useField(name);
+  const onError = meta.error;
   // TODO: handle when have error design
+
+  useEffect(() => {
+    handleError(meta.error)
+  }, [onError])
 
   return (
     <>
@@ -147,6 +153,7 @@ const ConvertForm = ({conversionRate, from}) => {
   const {values, setFieldValue, handleSubmit, isValid} = useFormikContext();
   const [isAmountFocus, setIsAmountFocus] = useState(false);
   const [toAmount, setToAmount] = useState(0);
+  const [clientError, setClientError] = useState('');
   const isMrp = from === MEASURABLE_REWARD_POINT;
   const FromAmountText = isMrp ? 'RewardPoint' : 'Measurable Data Token';
   const ToAmountText =
@@ -164,6 +171,10 @@ const ConvertForm = ({conversionRate, from}) => {
     setFieldValue('amount', amount);
   };
 
+  const handleError = useCallback(error => {
+    setClientError(error)
+  })
+
   return (
     <>
       <ConversionRate conversionRate={conversionRate} isMrp={isMrp} />
@@ -180,6 +191,7 @@ const ConvertForm = ({conversionRate, from}) => {
             name="amount"
             inputAccessoryViewID={inputAccessoryViewID}
             editable={true}
+            handleError={handleError}
           />
           <KeyboardButtons handleConverterOnChange={handleConverterOnChange} />
         </ConverterContainer>
@@ -194,6 +206,7 @@ const ConvertForm = ({conversionRate, from}) => {
           </AppText>
         </ConverterContainer>
       </ConvertersContainer>
+      <Error>{clientError && clientError}</Error>
       <ThemeButton onPress={handleSubmit} disabled={!isValid}>
         <FormattedMessage id="convert" defaultMessage="convert" />
       </ThemeButton>

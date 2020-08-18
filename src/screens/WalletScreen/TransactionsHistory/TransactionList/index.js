@@ -11,7 +11,7 @@ import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
 
 const flexEnd = {justifyContent: 'flex-end'};
 
-const TransactionList = ({transactionsHistoryList, cardType}) => {
+const TransactionList = ({transactionsHistoryList, cardType, onLoadMore}) => {
   const renderItem = ({item}) => (
     <TransactionItem
       icon={item.icon}
@@ -39,12 +39,17 @@ const TransactionList = ({transactionsHistoryList, cardType}) => {
     />
   );
 
+  const handleOnEndReached = () => {
+    onLoadMore();
+  };
+
   return (
     <Container>
       <FlatList
         data={transactionsHistoryList}
         renderItem={renderItem}
         keyExtractor={({name, date}, index) => `${name}-${date}-${index}`}
+        onEndReached={handleOnEndReached}
       />
     </Container>
   );

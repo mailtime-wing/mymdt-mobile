@@ -41,11 +41,6 @@ const filterList = [
   {label: 'REDEEM', value: REDEEM},
   {label: 'INTEREST', value: INTEREST},
   {label: 'CHECK_IN', value: CHECK_IN},
-  // 'All',
-  // REWARD,
-  // REDEEM,
-  // INTEREST,
-  // CHECK_IN,
   ['foo@gmail.com', 'bar@gmail.com'],
   ['Mastercard (•••• 1001)', 'ABC Bank (•••• 1234)', 'ABC Bank (•••• 4567)'],
 ];
@@ -61,20 +56,21 @@ const WalletScreen = ({navigation}) => {
   const [showBottomSheet, setShowBottomSheet] = useState(false);
   const [activeFilterIndex, setActiveFilterIndex] = useState(0);
   const {authToken} = useContext(AuthContext);
-  const [getTransactions, { data, loading, fetchMore }] = useLazyQuery(
-    TRANSACTIONS_QUERY, {
+  const [getTransactions, {data, loading, fetchMore}] = useLazyQuery(
+    TRANSACTIONS_QUERY,
+    {
       context: {
         headers: {
           authorization: authToken ? `Bearer ${authToken}` : '',
         },
       },
-      fetchPolicy: "network-only",
-    }
+      fetchPolicy: 'network-only',
+    },
   );
 
   useEffect(() => {
-    getTransactions()
-  }, [])
+    getTransactions();
+  }, [getTransactions]);
 
   const mrpTheme = {
     color: theme.colors.secondary.normal,
@@ -101,7 +97,7 @@ const WalletScreen = ({navigation}) => {
           amount={
             data?.userProfile?.currencyAccounts?.find(
               ca => ca.currencyCode === MEASURABLE_REWARD_POINT,
-            ).balance || 0
+            )?.balance || 0
           }
           size={42}
           fontSize={42}
@@ -129,7 +125,7 @@ const WalletScreen = ({navigation}) => {
           amount={
             data?.userProfile?.currencyAccounts?.find(
               ca => ca.currencyCode === MEASURABLE_DATA_TOKEN,
-            ).balance || 0
+            )?.balance || 0
           }
           size={42}
           fontSize={42}
@@ -140,7 +136,7 @@ const WalletScreen = ({navigation}) => {
       aroundInUsd: ToUsdAmount(
         data?.userProfile?.currencyAccounts?.find(
           ca => ca.currencyCode === MEASURABLE_DATA_TOKEN,
-        ).balance || 0,
+        )?.balance || 0,
       ),
       theme: mdtTheme,
       actionList: [
@@ -163,9 +159,7 @@ const WalletScreen = ({navigation}) => {
   ];
 
   const currentCard = cardList[activeCardIndex];
-  const currentCardData = data?.userProfile?.currencyAccounts?.find(
-    ca => ca.currencyCode === currentCard.type,
-  );
+  const currentCardData = data?.userProfile?.currencyAccounts[0];
   const cardTransactionsHistory = currentCardData?.transactions?.edges.map(
     transaction =>
       (transaction = {
@@ -173,6 +167,16 @@ const WalletScreen = ({navigation}) => {
         icon: <ConvertIcon fill={currentCard.theme.color} />,
       }),
   );
+  const pageInfo = currentCardData?.transactions.pageInfo;
+  let filter = filterList[activeFilterIndex].value;
+
+  useEffect(() => {
+    getTransactions({
+      variables: {
+        currencyCode: currentCard.type || MEASURABLE_REWARD_POINT,
+      },
+    });
+  }, [activeCardIndex, currentCard.type, getTransactions]);
 
   const handleOnSnapToItem = cardIndex => {
     setActiveCardIndex(cardIndex);
@@ -191,14 +195,40 @@ const WalletScreen = ({navigation}) => {
   };
 
   const onApplyPress = () => {
-    let filter = filterList[activeFilterIndex].value;
     if (filter) {
-      getTransactions({variables: {filter: {type: filter}}});
+      getTransactions({
+        variables: {filter: {type: filter}, currencyCode: currentCard.type},
+      });
     } else {
-      getTransactions();
+      getTransactions({variables: {currencyCode: currentCard.type}});
     }
 
     setShowBottomSheet(false);
+  };
+
+  const onLoadMore = () => {
+    if (!pageInfo.hasNextPage) {
+      return;
+    }
+
+    if (filter) {
+      fetchMore({
+        variables: {
+          filter: {
+            type: filter,
+          },
+          currencyCode: currentCard.type,
+          cursor: pageInfo.endCursor,
+        },
+      });
+    } else {
+      fetchMore({
+        variables: {
+          currencyCode: currentCard.type,
+          cursor: pageInfo.endCursor,
+        },
+      });
+    }
   };
 
   if (loading) {
@@ -209,7 +239,11 @@ const WalletScreen = ({navigation}) => {
     <LinearGradientBackground>
       <ScrollContainer>
         <AccountBar navigation={navigation} />
-        <CardList cardList={cardList} onSnapToItem={handleOnSnapToItem} />
+        <CardList
+          cardList={cardList}
+          onSnapToItem={handleOnSnapToItem}
+          activeCardIndex={activeCardIndex}
+        />
         <ActionButtons
           actionList={currentCard.actionList}
           color={currentCard.theme.color}
@@ -224,6 +258,7 @@ const WalletScreen = ({navigation}) => {
           }
           handleFilterPress={handleFilterPress}
           navigation={navigation}
+          onLoadMore={onLoadMore}
         />
       </ScrollContainer>
       {showBottomSheet && (
