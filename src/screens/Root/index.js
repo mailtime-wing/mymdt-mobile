@@ -1,4 +1,5 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
+import {Linking} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer as Container} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -138,6 +139,48 @@ const backScreen = [
   'data_source_info',
 ];
 
+const linkingConfig = {
+  // invitefd://. (go to invite friend page)
+  // secureaccount:// (go to secure account page)
+  // bindemail:// (go to bind email page)
+  // bindbank:// (go to bind bank account page)
+  // internalweb://
+  // externalweb://
+  initialRouteName: 'home',
+  screens: {
+    account_security: {
+      path: 'secureaccount',
+      exact: true,
+    },
+    emails_binding: {
+      path: 'bindemail',
+      exact: true,
+    },
+    // no banks_account_binding and invite_friend screen at this moment
+    // TODO: handle internalweb and externalweb
+
+    // banks_account_binding: {
+    //   path: 'bindbank',
+    //   exact: true
+    // },
+    // invite_friend: {
+    //   path: 'invitefd',
+    //   exact: true
+    // },
+
+    home: {
+      // return to home if the path not match
+      path: '*',
+    },
+  },
+};
+
+const linking = {
+  // e.g. rewardme://secureaccount
+  prefixes: ['rewardme://'],
+  config: linkingConfig,
+};
+
 const Root = () => {
   const {authToken} = useContext(AuthContext);
   const {validScreenNames} = useContext(SetupFlowContext);
@@ -161,8 +204,15 @@ const Root = () => {
     styles.modalCard,
   ];
 
+  useEffect(() => {
+    Linking.addEventListener('url');
+    return () => {
+      Linking.removeEventListener('url');
+    };
+  }, []);
+
   return (
-    <Container>
+    <Container linking={linking}>
       {!authToken ? (
         <Stack.Navigator>
           {screens.map(screen => (

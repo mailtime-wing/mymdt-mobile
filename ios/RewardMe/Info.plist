@@ -52,6 +52,14 @@
 				<string>plaidlink</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>rewardme</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>rewardme</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>16</string>
