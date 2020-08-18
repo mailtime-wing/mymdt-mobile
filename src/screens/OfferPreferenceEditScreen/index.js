@@ -1,5 +1,5 @@
 import React, {useContext, useState, useCallback} from 'react';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {FormattedMessage, FormattedDate} from 'react-intl';
 import {useFocusEffect} from '@react-navigation/native';
 import {AuthContext} from '@/context/auth';
 import {useQuery} from '@apollo/react-hooks';
@@ -23,9 +23,7 @@ import {
 } from './style';
 
 const OfferPreferenceEditScreen = ({navigation}) => {
-  const intl = useIntl();
   const {authToken} = useContext(AuthContext);
-  const [canEdit] = useState(true); // TODO: integrate this once api ready
   const [showModal, setShowModal] = useState(false);
 
   const apiContext = {
@@ -46,6 +44,11 @@ const OfferPreferenceEditScreen = ({navigation}) => {
   const numberOfOffer =
     userMembershipData?.userProfile?.membership?.brandsNumAllowed || 0;
 
+  const canEditDate = new Date(
+    userMembershipData?.userProfile?.basicOfferAvailableForEditAt,
+  );
+  const canEditPreference = new Date() >= canEditDate;
+
   useFocusEffect(
     useCallback(() => {
       refetch();
@@ -53,7 +56,7 @@ const OfferPreferenceEditScreen = ({navigation}) => {
   );
 
   const handleEditPress = () => {
-    if (canEdit) {
+    if (canEditPreference) {
       navigation.navigate('offers_preference', {
         fromOfferPreferenceEditScreen: true,
       });
@@ -117,15 +120,24 @@ const OfferPreferenceEditScreen = ({navigation}) => {
         </Container>
         {showModal && (
           <PopupModal
+            title={
+              <FormattedMessage
+                id="edited_preference_recently"
+                defaultMessage="It seems you’ve edited the preference recently."
+              />
+            }
             detail={
               <FormattedMessage
                 id="edited_in_30_days"
                 values={{
-                  date: intl.formatDate(new Date(), {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                  }),
+                  date: (
+                    <FormattedDate
+                      value={canEditDate}
+                      year="numeric"
+                      month="long"
+                      day="2-digit"
+                    />
+                  ),
                 }}
               />
             }

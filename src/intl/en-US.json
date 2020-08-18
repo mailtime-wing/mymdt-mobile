@@ -172,6 +172,7 @@
   "choose_more_brand_when_upgrade": "You can choose more brands when your membership is upgraded.",
   "your_choices": "Preference",
   "get_reward_from_brands": "Choose your favorite brands with the special cashback rate.",
+  "edited_preference_recently": "It seems you’ve edited the preference recently.",
   "edited_in_30_days": "You have edited the preference in recent 30 days. You can edit the preference after {date}.",
   "edit": "Edit",
 
