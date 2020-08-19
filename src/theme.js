@@ -36,6 +36,7 @@ const theme = {
   },
   fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36],
   fontWeights: [400, 500, 600, 700],
+  lineHeights: {},
 };
 
 theme.colors.grey.superLight = theme.colors.grey[0];
