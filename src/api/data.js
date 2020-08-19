@@ -157,7 +157,6 @@ export const GET_APP_CONFIG_API = gql`
   query {
     appConfig {
       accountSetupTaskID
-      todayCheckinTaskID
       inviteFriendTaskID
     }
   }
@@ -265,5 +264,23 @@ export const CURRENCY_CONVERT_API = gql`
 export const GET_CONVERSION_RATE_API = gql`
   query ConversionRate($from: CurrencyCode!, $to: CurrencyCode!) {
     conversionRate(from: $from, to: $to)
+  }
+`;
+
+export const BIND_BANK_ITEM = gql`
+  mutation BindBankItem(
+    $syncServerItemId: String!
+    $syncServerItemToken: String!
+    $itemName: String!
+    $accounts: [BankAccountInput!]!
+  ) {
+    bindBankItem(
+      data: {
+        syncServerItemId: $syncServerItemId
+        syncServerItemToken: $syncServerItemToken
+        itemName: $itemName
+        accounts: $accounts
+      }
+    )
   }
 `;
