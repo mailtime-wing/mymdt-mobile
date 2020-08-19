@@ -43,7 +43,7 @@ const SettingScreen = ({navigation}) => {
           <FormattedMessage
             id="app_version"
             defaultMessage="App Version: {version}"
-            value={{
+            values={{
               version: `${VersionNumber.appVersion}-${
                 VersionNumber.buildVersion
               }`,
