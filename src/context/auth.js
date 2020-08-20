@@ -1,16 +1,9 @@
-import React, {
-  createContext,
-  useReducer,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import {Platform} from 'react-native';
-import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import React, {createContext, useReducer, useEffect, useMemo} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import jwt_decode from 'jwt-decode';
 import {REFRESH_TOKEN_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
+import useNotification from '@/hooks/useNotification';
 
 import PopupModal from '@/components/PopupModal';
 
@@ -70,18 +63,7 @@ const reducer = (state, action) => {
 export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
-  const [notificationEnabled, setNotificationEnabled] = useState(false);
-
-  useEffect(() => {
-    // check notification permission
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.checkPermissions(e => {
-        if (e.alert) {
-          setNotificationEnabled(true);
-        }
-      });
-    }
-  }, []);
+  const [, , {notificationEnabled}] = useNotification();
 
   useEffect(() => {
     const getToken = async () => {

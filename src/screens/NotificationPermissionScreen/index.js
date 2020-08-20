@@ -1,8 +1,9 @@
 import React from 'react';
-import {Platform, ScrollView} from 'react-native';
-import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import {ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
+
+import useNotification from '@/hooks/useNotification';
 
 import ThemeButton from '@/components/ThemeButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
@@ -17,30 +18,21 @@ import {
   detailStyle,
 } from './style';
 
+const details = {
+  alertBody: 'You notificationEnabled notification!',
+  alertTitle: 'Welcome to MDT!',
+  userInfo: {data: 'userInfo'},
+};
+
 const NotificationPermissionScreen = () => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
+  const [notify, request] = useNotification();
 
   const requestNotificationPermission = () => {
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.checkPermissions(e => {
-        if (e.alert) {
-          sendLocalNotification();
-        } else {
-          PushNotificationIOS.requestPermissions();
-        }
-      });
-    }
+    request();
+    notify(details);
     navigateByFlow();
-  };
-
-  const sendLocalNotification = () => {
-    const details = {
-      alertBody: 'You enabled notification!',
-      alertTitle: 'Welcome to MDT!',
-      userInfo: {data: 'userInfo'},
-    };
-    PushNotificationIOS.presentLocalNotification(details);
   };
 
   const handleSkipPress = () => {

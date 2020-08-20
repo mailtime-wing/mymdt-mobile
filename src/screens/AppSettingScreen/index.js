@@ -5,6 +5,8 @@ import VersionNumber from 'react-native-version-number';
 import {useTheme} from 'emotion-theming';
 import {IntlContext} from '@/context/Intl';
 
+import {AuthContext} from '@/context/auth';
+
 import ModalContainer from '@/components/ModalContainer';
 import ListOption from '@/components/ListOption';
 import SpecialListOption from '@/components/SpecialListOption';
@@ -16,7 +18,13 @@ import {appVersionStyle, container} from './style';
 const SettingScreen = ({navigation}) => {
   const theme = useTheme();
   const {language} = useContext(IntlContext);
+  const {notificationEnabled} = useContext(AuthContext);
   const [push, setPush] = useState(false); // from api later
+  const handlePushToggle = () => {
+    console.log(notificationEnabled);
+    setPush(!push);
+  };
+
   return (
     <ModalContainer
       title={
@@ -37,7 +45,7 @@ const SettingScreen = ({navigation}) => {
         <SpecialListOption
           key="push_notification"
           label={<FormattedMessage id="push_notification" />}
-          value={<Switch value={push} onChange={() => setPush(!push)} />}
+          value={<Switch value={push} onChange={handlePushToggle} />}
         />
         <AppText variant="label" style={appVersionStyle(theme)}>
           <FormattedMessage
