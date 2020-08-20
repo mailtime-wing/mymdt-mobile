@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {View} from 'react-native';
+import {View, Linking} from 'react-native';
 import VersionNumber from 'react-native-version-number';
 import {useTheme} from 'emotion-theming';
 import {IntlContext} from '@/context/Intl';
@@ -12,6 +12,7 @@ import ListOption from '@/components/ListOption';
 import SpecialListOption from '@/components/SpecialListOption';
 import Switch from '@/components/Switch';
 import AppText from '@/components/AppText2';
+import PopupModal from '@/components/PopupModal';
 
 import {appVersionStyle, container} from './style';
 
@@ -20,9 +21,21 @@ const SettingScreen = ({navigation}) => {
   const {language} = useContext(IntlContext);
   const {notificationEnabled} = useContext(AuthContext);
   const [push, setPush] = useState(false); // from api later
+  const [showPopup, setShowPopup] = useState(false);
+
   const handlePushToggle = () => {
-    console.log(notificationEnabled);
-    setPush(!push);
+    if (!notificationEnabled && !push) {
+      setShowPopup(true);
+    } else {
+      setPush(!push);
+    }
+  };
+
+  const handlePopupCallback = cb => {
+    if (cb === 'OK') {
+      Linking.openSettings();
+    }
+    setShowPopup(false);
   };
 
   return (
@@ -59,6 +72,13 @@ const SettingScreen = ({navigation}) => {
           />
         </AppText>
       </View>
+      {showPopup && (
+        <PopupModal
+          title="Notification permission required"
+          detail="Please allow push permission in Settings > Notification"
+          callback={handlePopupCallback}
+        />
+      )}
     </ModalContainer>
   );
 };
