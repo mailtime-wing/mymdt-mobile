@@ -29,6 +29,12 @@ const theme = {
       diamond: ['#DCF3F4', '#417296'],
       special: ['#0363EF', '#FFFFFF'],
     },
+    background: 'FFFFFF',
+    textOnBackground: [
+      'rgba(0, 0, 0, 0.8)',
+      'rgba(0, 0, 0, 0.6)',
+      'rgba(0, 0, 0, 0.4)',
+    ],
   },
   fonts: {
     body: 'Inter',
@@ -77,6 +83,10 @@ theme.colors.membership.diamond.background = theme.colors.membership.diamond[0];
 theme.colors.membership.diamond.text = theme.colors.membership.diamond[1];
 theme.colors.membership.special.background = theme.colors.membership.special[0];
 theme.colors.membership.special.text = theme.colors.membership.special[1];
+
+theme.colors.textOnBackground.highEmphasis = theme.colors.textOnBackground[0];
+theme.colors.textOnBackground.mediumEmphasis = theme.colors.textOnBackground[1];
+theme.colors.textOnBackground.disabled = theme.colors.textOnBackground[2];
 
 theme.fonts.pageTitle = theme.fonts.heading;
 theme.fonts.heading1 = theme.fonts.heading;
