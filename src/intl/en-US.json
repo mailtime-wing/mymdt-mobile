@@ -8,6 +8,16 @@
   "dark": "Dark",
   "light": "Light",
   "system_default": "System default",
+  
+  "valid_until": "Valid until {date}",
+  "cashback_type": "Cashback type",
+  "referral": "Referral",
+  "upgrade_to": "Upgrade to {level}",
+  "complete_tasks_to_upgrade": "Complete all tasks to upgrade your membership",
+  "total_reward_points": "Total RewardPoints",
+  "enjoy_more_after_updrade": "Enjoy more after upgrading membership",
+  "browse_membership_details": "Browse all membership details",
+  "privileges": "Privileges",
 
   "browse": "Browse",
   "browse_details": "Promtions / Referrals / Share",
@@ -102,7 +112,7 @@
   "notification": "Notification",
 
   "join_rewardme": "JOIN REWARDME",
-  "special_offer": "Special offer",
+  "special_offer": "Special offers",
   "select_offer_details": "We also provide a special offer for everyone. You can choose your favorite or frequently spend brands. The cashback rate depends on your membership level.",
   "confirm_select_offer_details": "Once you shop in these {number_of_offers} brands, you will earn cash back.",
   "please_select_brands": "Please choose {number_of_offers} brands/services to earn points with each time you spend there.",
