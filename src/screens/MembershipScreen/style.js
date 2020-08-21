@@ -10,7 +10,6 @@ export const imageStyle = css`
 export const toolsRowContainer = css`
   align-self: flex-end;
   flex-direction: row;
-  background-color: red;
 `;
 
 export const buttons = css`
@@ -47,4 +46,9 @@ export const userRowContainer = css`
   margin-left: 24px;
   margin-right: 24px;
   align-items: center;
+`;
+
+export const progressBar = css`
+  padding-left: 24px;
+  padding-right: 24px;
 `;

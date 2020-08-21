@@ -1,26 +1,20 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import {css} from '@emotion/native';
 
-export const ProgressContainer = styled.View`
+export const container = css`
   padding: 8px 0;
-  margin-top: 24px;
 `;
-export const ProgressDetailContainer = styled.View`
+
+export const detailRowContainer = css`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `;
 
-export const ProgressHeader = styled(Text)`
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+export const progressBar = css`
+  margin-top: 8px;
+  margin-bottom: 8px;
 `;
-export const ProgressNumber = styled(Text)`
-  font-size: 12px;
-  line-height: 15px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+
+export const progressLabelContainer = css`
+  align-self: flex-end;
 `;
