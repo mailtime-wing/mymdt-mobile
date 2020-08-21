@@ -20,6 +20,8 @@ import {
 import BellIcon from '@/assets/icon_bell.svg';
 import SettingIcon from '@/assets/icon_settings.svg';
 import UpgradeSection from './UpgradeSection';
+import ShortcutSection from './ShortcutSection';
+import PrivilegesSection from './PrivilegesSection';
 
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import ScreenContainer from '@/components/ScreenContainer';
@@ -100,7 +102,9 @@ const MembershipScreen = ({ navigation }) => {
             </View>
           </View>
           <View style={sectionsContainer}>
+            <ShortcutSection />
             <UpgradeSection userNextLevel={userNextLevel} />
+            <PrivilegesSection />
           </View>
         </ScreenContainer>
       </ScrollView>

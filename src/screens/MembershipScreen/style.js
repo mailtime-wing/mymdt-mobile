@@ -35,6 +35,7 @@ export const validDate = theme => css`
 
 export const rowContainer = css`
   flex-direction: row;
+  margin-top: 4px;
 `;
 
 export const rightContainer = css`
