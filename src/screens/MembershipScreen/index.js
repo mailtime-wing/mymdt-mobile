@@ -15,9 +15,11 @@ import {
   rowContainer,
   userRowContainer,
   rightContainer,
+  sectionsContainer,
 } from './style';
 import BellIcon from '@/assets/icon_bell.svg';
 import SettingIcon from '@/assets/icon_settings.svg';
+import UpgradeSection from './UpgradeSection';
 
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import ScreenContainer from '@/components/ScreenContainer';
@@ -30,6 +32,9 @@ const MembershipScreen = ({ navigation }) => {
   const { data } = useQueryWithAuth(GET_USER_MEMBERSHIP_API, {
     fetchPolicy: 'network-only',
   });
+
+  const userLevel = data?.userProfile?.membership?.level || 0;
+  const userNextLevel = userLevel + 1;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -67,9 +72,7 @@ const MembershipScreen = ({ navigation }) => {
                 {data?.userProfile?.name}
               </AppText>
               <View style={rowContainer}>
-                <MembershipLevelChip
-                  userLevel={data?.userProfile?.membership?.level || 0}
-                />
+                <MembershipLevelChip userLevel={userLevel} />
                 <AppText variant="caption" style={validDate(theme)}>
                   <FormattedMessage
                     id="valid_until"
@@ -79,8 +82,25 @@ const MembershipScreen = ({ navigation }) => {
                     }}
                   />
                 </AppText>
+                <View style={rowContainer}>
+                  <MembershipLevelChip
+                    userLevel={data?.userProfile?.membership?.level || 0}
+                  />
+                  <AppText variant="caption" style={validDate(theme)}>
+                    <FormattedMessage
+                      id="valid_until"
+                      defaultMessage="Valid until {date}"
+                      values={{
+                        date: <FormattedDate value={new Date()} />,
+                      }}
+                    />
+                  </AppText>
+                </View>
               </View>
             </View>
+          </View>
+          <View style={sectionsContainer}>
+            <UpgradeSection userNextLevel={userNextLevel} />
           </View>
         </ScreenContainer>
       </ScrollView>

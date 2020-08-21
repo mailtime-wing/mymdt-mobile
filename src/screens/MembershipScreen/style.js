@@ -48,7 +48,6 @@ export const userRowContainer = css`
   align-items: center;
 `;
 
-export const progressBar = css`
-  padding-left: 24px;
-  padding-right: 24px;
+export const sectionsContainer = css`
+  padding: 24px;
 `;

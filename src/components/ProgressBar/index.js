@@ -23,7 +23,7 @@ const ProgressBar = ({title, label, progressLabel, progress, style}) => {
           <ProgressBarIOS
             progress={progress}
             progressTintColor={theme.colors.secondary.normal}
-            trackTintColor={theme.colors.black.extremeLight}
+            trackTintColor={theme.colors.background2}
           />
         ) : (
           <ProgressBarAndroid
