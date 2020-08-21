@@ -1,9 +1,10 @@
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef, useCallback} from 'react';
 import {Linking} from 'react-native';
 
 import useFetch from '@/hooks/useFetch';
 import inAppBrowser from '@/utils/inAppBrowser';
-import {useCallback} from 'react';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
+import {BIND_BANK_ITEM} from '@/api/data';
 
 const initialFetchOptions = {
   method: 'POST',
@@ -57,6 +58,8 @@ export default function useBankLogin(
     },
   );
 
+  const [bindBankItem] = useMutationWithAuth(BIND_BANK_ITEM);
+
   const _onConnected = useEventCallback(onConnected);
 
   useEffect(() => {
@@ -73,6 +76,8 @@ export default function useBankLogin(
             case 'connected': {
               const publicToken = urlObj.searchParams.get('public_token');
 
+              inAppBrowser.close();
+
               // {
               //   "accountDetails": [...],
               //   "dataAccessToken": "access-sandbox-f87eac80-3ba2-4a28-9671-d294c80fa008",
@@ -85,8 +90,22 @@ export default function useBankLogin(
                 }),
               });
 
-              inAppBrowser.close();
-              // TODO: call API using data.dataAccessToken
+              await bindBankItem({
+                variables: {
+                  syncServerItemId: data.itemID,
+                  syncServerItemToken: data.itemToken,
+                  itemName: data.itemName,
+                  accounts: data.accountDetails.map(detail => ({
+                    syncServerAccountId: detail.accountID,
+                    accountName: detail.accountName,
+                    accountType: detail.accountType,
+                    accountSubtype: detail.accountSubType,
+                    isValid: detail.isValid,
+                    mask: detail.mask,
+                  })),
+                },
+              });
+
               _onConnected(data);
               break;
             }
@@ -109,7 +128,7 @@ export default function useBankLogin(
     return () => {
       Linking.removeEventListener('url', handler);
     };
-  }, [_onConnected, dataAPIType, fetchAccountDetail]);
+  }, [_onConnected, bindBankItem, dataAPIType, fetchAccountDetail]);
 
   const login = useCallback(async () => {
     try {

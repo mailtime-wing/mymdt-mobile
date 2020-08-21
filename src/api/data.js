@@ -118,6 +118,7 @@ export const GET_USER_OFFER_API = gql`
 export const GET_USER_SETUP_STATUS_API = gql`
   query {
     userProfile {
+      id
       setupStatus {
         isDataSourceBound
         isProfileCompleted
@@ -282,5 +283,31 @@ export const BIND_BANK_ITEM = gql`
         accounts: $accounts
       }
     )
+  }
+`;
+
+export const GET_BANK_ITEMS = gql`
+  query {
+    userProfile {
+      id
+      bankItems {
+        id
+        name
+        bankAccounts {
+          id
+          accountName
+          accountType
+          accountSubtype
+          isValid
+          mask
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_BANK_ACCOUNT_SUBTYPE = gql`
+  mutation UpdateBankAccountSubtype($id: ID!, $subtype: BankAccountSubtype!) {
+    updateBankAccountSubtype(id: $id, subtype: $subtype)
   }
 `;

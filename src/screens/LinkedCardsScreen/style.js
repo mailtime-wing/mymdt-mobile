@@ -1,8 +1,8 @@
 import {css} from '@emotion/native';
-import {transparentize} from 'polished';
 
 export const headerContainer = css`
   margin-horizontal: 24px;
+  margin-bottom: 38px;
 `;
 
 export const footerContainer = css`
@@ -11,30 +11,20 @@ export const footerContainer = css`
 `;
 
 export const title = theme => css`
-  font-size: 36px;
-  line-height: 36px;
-  height: 36px;
-  font-weight: 500;
   color: ${theme.colors.secondary.normal};
   margin-bottom: 24px;
-  text-transform: uppercase;
 `;
 
 export const description = theme => css`
-  font-size: 16px;
-  line-height: 24px;
-  color: ${theme.colors.black.light};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;
 
-export const listHeading = theme => css`
-  margin-top: 40px;
-  height: 40px;
-  line-height: 40px;
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: ${theme.colors.black.superLight};
+export const sectionContainer = theme => css`
+  padding-vertical: 14px;
+  margin-left: 24px;
+  border-bottom-width: 1px;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: ${theme.colors.background};
 `;
 
 export const listItemContainer = css`
@@ -48,15 +38,11 @@ export const listItemInfoContainer = css`
 `;
 
 export const accountName = theme => css`
-  font-size: 16px;
-  line-height: 24px;
-  color: ${transparentize(0.2, theme.colors.black.normal)};
+  color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
 export const accountNo = theme => css`
-  font-size: 12px;
-  line-height: 18px;
-  color: ${theme.colors.black.superLight};
+  color: ${theme.colors.textOnBackground.disabled};
 `;
 
 export const moreButton = css`
