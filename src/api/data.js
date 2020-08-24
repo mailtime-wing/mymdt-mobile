@@ -311,3 +311,11 @@ export const UPDATE_BANK_ACCOUNT_SUBTYPE = gql`
     updateBankAccountSubtype(id: $id, subtype: $subtype)
   }
 `;
+
+export const GET_USER_ID = gql`
+  query {
+    userProfile {
+      id
+    }
+  }
+`;

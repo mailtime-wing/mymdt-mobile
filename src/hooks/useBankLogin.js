@@ -3,8 +3,9 @@ import {Linking} from 'react-native';
 
 import useFetch from '@/hooks/useFetch';
 import inAppBrowser from '@/utils/inAppBrowser';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
-import {BIND_BANK_ITEM} from '@/api/data';
+import {BIND_BANK_ITEM, GET_USER_ID} from '@/api/data';
 
 const initialFetchOptions = {
   method: 'POST',
@@ -58,6 +59,13 @@ export default function useBankLogin(
     },
   );
 
+  const {
+    data: getUserIdData,
+    loading: getUserIdLoading,
+    error: getUserIdError,
+  } = useQueryWithAuth(GET_USER_ID);
+  const userId = getUserIdData?.userProfile?.id;
+
   const [bindBankItem] = useMutationWithAuth(BIND_BANK_ITEM);
 
   const _onConnected = useEventCallback(onConnected);
@@ -74,6 +82,7 @@ export default function useBankLogin(
         if (urlObj.protocol.startsWith('plaidlink')) {
           switch (urlObj.hostname) {
             case 'connected': {
+              setIsLoading(true);
               const publicToken = urlObj.searchParams.get('public_token');
 
               inAppBrowser.close();
@@ -106,6 +115,7 @@ export default function useBankLogin(
                 },
               });
 
+              setIsLoading(false);
               _onConnected(data);
               break;
             }
@@ -119,7 +129,6 @@ export default function useBankLogin(
         }
       } catch (e) {
         setIsError(true);
-      } finally {
         setIsLoading(false);
       }
     };
@@ -139,22 +148,26 @@ export default function useBankLogin(
         body: JSON.stringify({
           dataAPIType,
           countryCode,
-          userID: '111111111',
+          userID: userId,
         }),
       });
 
+      setIsLoading(false);
       await inAppBrowser.open(
         `https://cdn.plaid.com/link/v2/stable/link.html?isWebview=true&token=${linkToken}`,
       );
     } catch (e) {
       setIsError(true);
-    } finally {
-      setIsLoading(false);
     }
-  }, [countryCode, dataAPIType, fetchLinkToken]);
+  }, [countryCode, dataAPIType, fetchLinkToken, userId]);
+
+  const anyLoading = isLoading || getUserIdLoading;
 
   const anyError =
-    isError || isFetchLinkTokenError || isFetchAccountDetailError;
+    isError ||
+    isFetchLinkTokenError ||
+    isFetchAccountDetailError ||
+    !!getUserIdError;
 
-  return [login, {isError: anyError, isLoading}];
+  return [login, {isError: anyError, isLoading: anyLoading}];
 }
