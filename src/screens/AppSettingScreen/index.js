@@ -5,7 +5,7 @@ import VersionNumber from 'react-native-version-number';
 import {useTheme} from 'emotion-theming';
 import {IntlContext} from '@/context/Intl';
 
-import {NotificationContext} from '@/context/ios-notification';
+import {NotificationContext} from '@/context/notification';
 
 import ModalContainer from '@/components/ModalContainer';
 import ListOption from '@/components/ListOption';

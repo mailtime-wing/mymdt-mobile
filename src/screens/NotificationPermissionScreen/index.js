@@ -3,7 +3,7 @@ import {ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
-import {NotificationContext} from '@/context/ios-notification';
+import {NotificationContext} from '@/context/notification';
 
 import ThemeButton from '@/components/ThemeButton';
 import useSetupFlow from '@/hooks/useSetupFlow';

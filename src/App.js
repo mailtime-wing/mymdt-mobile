@@ -9,7 +9,7 @@ import {IntlContainer} from '@/context/Intl';
 import {AuthProvider} from '@/context/auth';
 import {PreloadDataProvider} from '@/context/preloadData';
 import {SetupFlowProvider} from '@/context/setupFlow';
-import {NotificationProvider} from '@/context/ios-notification';
+import {NotificationProvider} from '@/context/notification';
 import NavigationRoot from '@/screens/Root';
 
 function App() {

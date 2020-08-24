@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useState, useMemo} from 'react';
 import {Graph} from '@dagrejs/graphlib';
 
-import {NotificationContext} from '@/context/ios-notification';
+import {NotificationContext} from '@/context/notification';
 import {PreloadDataContext} from '@/context/preloadData';
 
 const setupFlowContextInitialValue = {

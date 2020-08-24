@@ -1,4 +1,10 @@
-import React, {createContext, useReducer, useEffect, useMemo} from 'react';
+import React, {
+  createContext,
+  useReducer,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
 const initialState = {
@@ -6,9 +12,9 @@ const initialState = {
     alert: false,
     badge: false,
     sound: false,
-  }
+  },
   // TODO: handle badge
-}
+};
 export const NotificationContext = createContext(null);
 
 const UPDATE_PERMISSON = 'updatePermission';
@@ -18,33 +24,32 @@ const reducer = (state, action) => {
     case UPDATE_PERMISSON:
       return {
         ...state,
-        permission: action.payload
-      }
+        permission: action.payload,
+      };
     default:
       break;
   }
-}
+};
 
 export const NotificationProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  useEffect(() =>{
-    notificationContext.checkPermission()
-  }, [notificationContext], state)
+  const prevPermission = useRef(state.permission);
 
   const notificationContext = useMemo(
     () => ({
       checkPermission: async () => {
         try {
-          PushNotificationIOS.checkPermissions(p => {
-            if (p) {
-              dispatch({ type: UPDATE_PERMISSON, payload: p });
+          PushNotificationIOS.checkPermissions(permission => {
+            if (prevPermission.current !== permission) {
+              dispatch({type: UPDATE_PERMISSON, payload: permission});
+              prevPermission.current = permission;
             }
-          })
+          });
         } catch (e) {
           console.error('error check permission ios');
         }
       },
-      notify: async (details) => {
+      notify: async details => {
         try {
           PushNotificationIOS.presentLocalNotification(details);
         } catch (e) {
@@ -58,16 +63,18 @@ export const NotificationProvider = ({children}) => {
           console.error('error request permission ios');
         }
       },
-      permission: state.permission
+      permission: state.permission,
     }),
-    [
-      state.permission
-    ]
-  )
+    [state.permission],
+  );
+
+  useEffect(() => {
+    notificationContext.checkPermission();
+  }, [notificationContext]);
 
   return (
     <NotificationContext.Provider value={notificationContext}>
       {children}
     </NotificationContext.Provider>
-  )
-}
+  );
+};
