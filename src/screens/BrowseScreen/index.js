@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {ScrollView} from 'react-native';
-import useNotification from '@/hooks/useNotification';
+import {NotificationContext} from '@/context/ios-notification';
 
 import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
@@ -12,10 +12,10 @@ const details = {
 };
 
 const BrowseScreen = ({...props}) => {
-  const [notify] = useNotification();
+  const {notify} = useContext(NotificationContext)
   useEffect(() => {
     notify(details);
-  }, [notify]);
+  }, []);
 
   return (
     <LinearGradientBackground>

@@ -5,7 +5,7 @@ import VersionNumber from 'react-native-version-number';
 import {useTheme} from 'emotion-theming';
 import {IntlContext} from '@/context/Intl';
 
-import {AuthContext} from '@/context/auth';
+import {NotificationContext} from '@/context/ios-notification';
 
 import ModalContainer from '@/components/ModalContainer';
 import ListOption from '@/components/ListOption';
@@ -19,12 +19,12 @@ import {appVersionStyle, container} from './style';
 const SettingScreen = ({navigation}) => {
   const theme = useTheme();
   const {language} = useContext(IntlContext);
-  const {notificationEnabled} = useContext(AuthContext);
+  const {permission} = useContext(NotificationContext);
   const [push, setPush] = useState(false); // from api later
   const [showPopup, setShowPopup] = useState(false);
 
   const handlePushToggle = () => {
-    if (!notificationEnabled && !push) {
+    if (!permission.alert && !push) {
       setShowPopup(true);
     } else {
       setPush(!push);

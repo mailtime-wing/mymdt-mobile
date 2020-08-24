@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
-import useNotification from '@/hooks/useNotification';
+import {NotificationContext} from '@/context/ios-notification';
 
 import ThemeButton from '@/components/ThemeButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
@@ -19,7 +19,7 @@ import {
 } from './style';
 
 const details = {
-  alertBody: 'You notificationEnabled notification!',
+  alertBody: 'You enabled notification!',
   alertTitle: 'Welcome to MDT!',
   userInfo: {data: 'userInfo'},
 };
@@ -27,7 +27,7 @@ const details = {
 const NotificationPermissionScreen = () => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
-  const [notify, request] = useNotification();
+  const {notify, request} = useContext(NotificationContext);
 
   const requestNotificationPermission = () => {
     request();

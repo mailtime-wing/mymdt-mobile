@@ -3,7 +3,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import jwt_decode from 'jwt-decode';
 import {REFRESH_TOKEN_API} from '@/api/auth';
 import {useMutation} from '@apollo/react-hooks';
-import useNotification from '@/hooks/useNotification';
 
 import PopupModal from '@/components/PopupModal';
 
@@ -63,7 +62,6 @@ const reducer = (state, action) => {
 export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
-  const [, , {notificationEnabled}] = useNotification();
 
   useEffect(() => {
     const getToken = async () => {
@@ -146,13 +144,11 @@ export const AuthProvider = ({children}) => {
       authToken: state.authToken,
       refreshToken: state.refreshToken,
       cashBackType: state.cashBackType,
-      notificationEnabled: notificationEnabled,
     }),
     [
       state.authToken,
       state.refreshToken,
       state.cashBackType,
-      notificationEnabled,
     ],
   );
 
