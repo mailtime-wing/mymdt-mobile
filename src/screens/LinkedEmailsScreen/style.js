@@ -21,7 +21,7 @@ export const HeaderText = styled(Text)`
   font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
 `;
 
 export const CustomeSwitch = styled.Switch`
@@ -40,7 +40,7 @@ export const EmailText = styled(Text)`
 `;
 
 export const UnbindButton = styled.TouchableOpacity`
-  border: 1px solid ${props => props.theme.colors.error.superLight};
+  border: 1px solid ${props => props.theme.colors.errorBackground};
   border-radius: 20px;
   padding: 6px 8px;
   height: auto;
@@ -50,14 +50,14 @@ export const UnbindText = styled.Text`
   font-size: 14px;
   line-height: 17px;
   font-weight: bold;
-  color: ${props => props.theme.colors.error.dark};
+  color: ${props => props.theme.colors.textOnError.normal};
   text-transform: uppercase;
 `;
 
 export const DetailText = styled(Text)`
   font-size: 16px;
   line-height: 24px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
   margin-bottom: 24px;
 `;
 
@@ -65,7 +65,7 @@ export const NoEmailText = styled(TitleText)`
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
   margin-top: 24px;
   margin-bottom: 16px;
   text-align: center;
@@ -95,7 +95,7 @@ export const ButtonContainer = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled(Text)`
-  color: ${props => props.theme.colors.white.normal};
+  color: ${props => props.theme.colors.background1};
   font-size: 14px;
   line-height: 17px;
   text-transform: uppercase;

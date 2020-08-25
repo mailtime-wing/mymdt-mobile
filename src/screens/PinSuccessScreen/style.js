@@ -10,6 +10,6 @@ export const ScrollContainer = styled.ScrollView``;
 export const Detail = styled(Text)`
   font-size: 16px;
   line-height: 24px;
-  color: ${props => props.theme.colors.black.light};
+  color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
   margin-bottom: 500px;
 `;

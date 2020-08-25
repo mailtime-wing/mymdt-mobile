@@ -18,13 +18,13 @@ export const BackgroundImage = styled.Image`
 `;
 
 export const titleStyle = theme => css`
-  color: ${theme.colors.white.normal};
+  color: ${theme.colors.background1};
   text-align: center;
   margin-bottom: 16px;
 `;
 
 export const detailStyle = theme => css`
-  color: ${theme.colors.white.normal};
+  color: ${theme.colors.background1};
   text-align: center;
   margin-bottom: 16px;
 `;

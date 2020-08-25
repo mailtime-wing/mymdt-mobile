@@ -9,7 +9,7 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   flex: 1;
-  background-color: ${props => props.theme.colors.white.normal};
+  background-color: ${props => props.theme.colors.background1};
 `;
 
 const RedeemScreen = () => (

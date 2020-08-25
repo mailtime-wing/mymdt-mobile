@@ -3,7 +3,7 @@ import {Platform} from 'react-native';
 import TitleText from '@/components/TitleText';
 
 export const Title = styled(TitleText)`
-  color: ${props => props.theme.colors.black.normal};
+  color: ${props => props.theme.colors.contrastColor};
   font-size: 20px;
   line-height: 24px;
   text-align: center;
@@ -15,8 +15,8 @@ export const ModalView = styled.View`
   width: 100%;
   height: auto;
   justify-content: center;
-  background-color: ${props => props.theme.colors.white.normal};
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: ${props => props.theme.colors.background1};
+  box-shadow: 0px 4px 10px ${props => props.theme.colors.borderColor};
   border-radius: 24px;
   padding-top: 20px;
   padding-bottom: 50px;
@@ -36,7 +36,7 @@ export const Modal = styled.Modal`
 `;
 
 export const Divider = styled.View`
-  border: 1px solid ${props => props.theme.colors.black.extremeLight};
+  border: 1px solid ${props => props.theme.colors.background2};
 `;
 
 export const ButtonContainers = styled.View`

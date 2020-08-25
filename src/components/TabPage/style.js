@@ -3,7 +3,7 @@ import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
 
 export const Container = styled.View`
-  background-color: ${props => props.theme.colors.white.normal};
+  background-color: ${props => props.theme.colors.background1};
   flex: 1;
 `;
 
@@ -18,6 +18,6 @@ export const Title = styled(TitleText)`
 
 export const SubTitle = styled(Text)`
   font-size: 14px;
-  color: ${props => props.theme.colors.black.normal};
+  color: ${props => props.theme.colors.contrastColor};
   margin-top: 5px;
 `;

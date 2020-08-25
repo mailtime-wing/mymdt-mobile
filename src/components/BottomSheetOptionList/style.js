@@ -7,7 +7,7 @@ export const OptionHeader = styled.TouchableOpacity`
   justify-content: space-between;
   padding: 12px 24px;
   ${props => props.active && 'background: rgba(33, 206, 219, 0.1);'}
-  border: 1px solid ${props => props.theme.colors.black.extremeLight};
+  border: 1px solid ${props => props.theme.colors.background2};
 `;
 
 export const Option = styled.TouchableOpacity`

@@ -16,7 +16,7 @@ export const accountContainer = css`
 
 export const coinChip = theme => css`
   padding: 8px;
-  background-color: ${theme.colors.white.normal};
+  background-color: ${theme.colors.background1};
   border-radius: 24px;
 `;
 

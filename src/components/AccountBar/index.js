@@ -49,7 +49,7 @@ const AccountBar = ({navigation, showCoins}) => {
               amount={645423} // TODO: GET FROM API ONCE API READY
               size={18}
               fontSize={16}
-              color={props => props.theme.colors.secondary.superDark}
+              color={props => props.theme.colors.textOfMrp}
             />
           </View>
           <View style={coinChip(theme)}>
@@ -57,7 +57,7 @@ const AccountBar = ({navigation, showCoins}) => {
               amount={26543} // TODO: GET FROM API ONCE API READY
               size={18}
               fontSize={16}
-              color={props => props.theme.colors.primary.normal}
+              color={props => props.theme.colors.textOfMdt}
             />
           </View>
         </View>

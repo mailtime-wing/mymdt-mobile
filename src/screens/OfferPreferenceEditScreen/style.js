@@ -6,7 +6,7 @@ export const HeaderDetail = styled(Text)`
   line-height: 24px;
   margin-top: 24px;
   margin-bottom: 40px;
-  color: ${props => props.theme.colors.black.light};
+  color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
 `;
 
 export const Detail = styled(Text)`
@@ -14,7 +14,7 @@ export const Detail = styled(Text)`
   line-height: 18px;
   padding-top: 8px;
   padding-bottom: 16px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
   width: 70%;
 `;
 
@@ -45,6 +45,6 @@ export const Container = styled.View`
 `;
 
 export const Divider = styled.View`
-  border: 1px solid ${props => props.theme.colors.black.extremeLight};
+  border: 1px solid ${props => props.theme.colors.background2};
   margin: 16px 0;
 `;

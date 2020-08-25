@@ -41,7 +41,7 @@ export const Details = styled(Text)`
   font-size: 16px;
   line-height: 24px;
   text-align: center;
-  color: ${props => props.theme.colors.black.light};
+  color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
 `;
 
 export const MarginContainer = styled.View`

@@ -23,7 +23,7 @@ export const AlmostEqualSymbol = styled(Text)`
   font-size: 14px;
   line-height: 18px;
   margin: 0 4px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
 `;
 
 export const ConversionRateText = styled(Text)`
@@ -35,7 +35,7 @@ export const ConversionRateText = styled(Text)`
 export const ConversionUpdateDate = styled(Text)`
   font-size: 12px;
   line-height: 18px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
 `;
 
 export const ConvertersContainer = styled.View`
@@ -48,12 +48,12 @@ export const ConverterContainer = styled.View`
   border-radius: 8px;
   padding: 24px;
   border-radius: 24px;
-  border: 1px solid ${props => props.theme.colors.black.extremeLight};
+  border: 1px solid ${props => props.theme.colors.background2};
   background-color: transparent;
   ${props =>
     props.isFocus &&
     `border: 2px solid ${props.theme.colors.secondary.normal};
-    background-color: ${props.theme.colors.blue.light};`};
+    background-color: ${props.theme.colors.inputFocusBackground};`};
 `;
 
 export const ConverterType = styled(TitleText)`
@@ -63,7 +63,7 @@ export const ConverterType = styled(TitleText)`
   color: ${props =>
     props.isFocus
       ? props.theme.colors.secondary.dark
-      : props.theme.colors.black.superLight};
+      : props.theme.colors.textOnBackground.disabled};
   margin-bottom: 8px;
 `;
 
@@ -74,8 +74,8 @@ export const Input = styled.TextInput`
   text-align: right;
   color: ${props =>
     props.editable
-      ? props.theme.colors.black.normal
-      : props.theme.colors.black.superLight};
+      ? props.theme.colors.contrastColor
+      : props.theme.colors.textOnBackground.disabled};
 `;
 
 export const NumberText = styled(Text)`
@@ -85,14 +85,14 @@ export const NumberText = styled(Text)`
   text-align: right;
   color: ${props =>
     props.editable
-      ? props.theme.colors.black.normal
-      : props.theme.colors.black.superLight};
+      ? props.theme.colors.contrastColor
+      : props.theme.colors.textOnBackground.disabled};
 `;
 
 export const Error = styled(Text)`
   font-size: 12px;
   height: 16px;
-  color: ${props => props.theme.colors.error.light};
+  color: ${props => props.theme.colors.textOnError.light};
 `;
 
 export const Margin = styled.View`
@@ -100,7 +100,7 @@ export const Margin = styled.View`
 `;
 
 export const InputAccessoryViewContainer = styled.View`
-  background-color: ${props => props.theme.colors.white.normal};
+  background-color: ${props => props.theme.colors.background1};
   flex-direction: row;
   align-items: center;
 `;
@@ -108,7 +108,7 @@ export const InputAccessoryViewContainer = styled.View`
 export const InputAccessoryButton = styled.TouchableOpacity`
   flex: 1;
   padding: 16px 0;
-  border: 1px solid ${props => props.theme.colors.black.extremeLight};
+  border: 1px solid ${props => props.theme.colors.background2};
 `;
 
 export const InputAccessoryButtonText = styled(Text)`

@@ -5,8 +5,8 @@ import Text from '@/components/AppText';
 export const LabelText = styled(Text)`
   color: ${props =>
     props.focused
-      ? props.theme.colors.white.normal
-      : props.theme.colors.black.light};
+      ? props.theme.colors.background1
+      : props.theme.colors.textOnBackground.mediumEmphasis};
   font-size: 10px;
   line-height: 16px;
   font-weight: bold;

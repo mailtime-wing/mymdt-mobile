@@ -48,7 +48,7 @@ const cardList = [
         amount={16543}
         size={42}
         fontSize={42}
-        color={props => props.theme.colors.white.normal}
+        color={props => props.theme.colors.background1}
         style={styleFlexEnd}
       />
     ),
@@ -72,7 +72,7 @@ const cardList = [
         amount={54321}
         size={42}
         fontSize={42}
-        color={props => props.theme.colors.white.normal}
+        color={props => props.theme.colors.background1}
         style={styleFlexEnd}
       />
     ),

@@ -15,7 +15,7 @@ export const CoinImage = styled.Image`
 
 export const AmountText = styled(Text)`
   color: ${props =>
-    props.color ? props.color : props.theme.colors.black.normal};
+    props.color ? props.color : props.theme.colors.contrastColor};
   font-size: ${props => (props.fontSize ? `${props.fontSize}px` : '16px')};
   font-weight: bold;
 `;

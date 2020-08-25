@@ -13,7 +13,7 @@
  * Usage example:
  *
  * const Description = styled(withAttrs(AppText, {variant: 'body1'}))`
- *   color: ${props => props.theme.colors.black.light};
+ *   color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
  * `;
  */
 import React from 'react';

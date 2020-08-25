@@ -13,7 +13,7 @@ export const ListHeader = styled(Text)`
   line-height: 15px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
   ${Platform.OS === 'ios' && 'font-weight: bold;'}
   padding: 16px 0;
   margin-top: 24px;

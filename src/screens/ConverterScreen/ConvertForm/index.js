@@ -98,7 +98,7 @@ const ConversionRate = ({conversionRate, isMrp}) => (
               amount={1}
               size={16}
               fontSize={16}
-              color={props => props.theme.colors.secondary.superDark}
+              color={props => props.theme.colors.textOfMrp}
             />
             <AlmostEqualSymbol>≈</AlmostEqualSymbol>
             <MDTCoin
@@ -121,7 +121,7 @@ const ConversionRate = ({conversionRate, isMrp}) => (
               amount={conversionRate}
               size={16}
               fontSize={16}
-              color={props => props.theme.colors.secondary.superDark}
+              color={props => props.theme.colors.textOfMrp}
             />
           </>
         )}

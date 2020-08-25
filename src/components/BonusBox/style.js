@@ -5,11 +5,11 @@ export const titleText = () => css`
 `;
 
 export const detailText = theme => css`
-  color: ${theme.colors.black.superLight};
+  color: ${theme.colors.textOnBackground.disabled};
 `;
 
 export const card = theme => css`
-  background: ${theme.colors.white.normal};
+  background: ${theme.colors.background1};
   border-radius: 24px;
 `;
 

@@ -33,7 +33,7 @@ export const Container = styled.View`
 
 export const LoginAndAgree = styled(Text)`
   font-size: 10px;
-  color: ${props => props.theme.colors.black.light};
+  color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
   line-height: 18px;
   margin-top: 11px;
   padding: 0 24px;

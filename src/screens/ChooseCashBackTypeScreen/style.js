@@ -11,17 +11,17 @@ export const scrollContainer = theme => css`
 `;
 
 export const detail = theme => css`
-  color: ${theme.colors.white.normal};
+  color: ${theme.colors.background1};
   margin-bottom: 24px;
 `;
 
 export const titleStyle = theme => css`
-  color: ${theme.colors.white.normal};
+  color: ${theme.colors.background1};
   margin-bottom: 16px;
 `;
 
 export const boxContainer = theme => css`
-  background: ${theme.colors.white.normal};
+  background: ${theme.colors.background1};
   border-radius: 24px;
   padding: 24px;
   margin-bottom: 16px;
@@ -39,6 +39,6 @@ export const boxTitle = css`
 `;
 
 export const boxDetail = theme => css`
-  color: ${theme.colors.black.light};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   margin-bottom: 24px;
 `;

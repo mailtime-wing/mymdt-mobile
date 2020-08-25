@@ -17,7 +17,7 @@ export const GotCheckInRewardText = styled(TitleText)`
   line-height: 24px;
   ${Platform.OS === 'ios' && 'font-weight: 500;'}
   color: ${props =>
-    props.color ? props.color : props.theme.colors.black.normal};
+    props.color ? props.color : props.theme.colors.contrastColor};
   text-align: center;
   margin-bottom: 8px;
 `;
@@ -29,7 +29,7 @@ export const CovertedContainer = styled.View`
 export const ConvertedText = styled(Text)`
   font-size: 14px;
   line-height: 21px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
   text-align: center;
 `;
 

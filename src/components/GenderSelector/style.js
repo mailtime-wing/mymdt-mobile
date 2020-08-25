@@ -16,7 +16,7 @@ export const Gender = styled.TouchableOpacity`
   border: ${props =>
     props.active
       ? props.theme.colors.secondary.normal
-      : props.theme.colors.black.superLight};
+      : props.theme.colors.textOnBackground.disabled};
   border-radius: 34px;
   margin-right: 8px;
 `;
@@ -24,8 +24,8 @@ export const Gender = styled.TouchableOpacity`
 export const GenderText = styled(Text)`
   color: ${props =>
     props.active
-      ? props.theme.colors.white.normal
-      : props.theme.colors.black.normal};
+      ? props.theme.colors.background1
+      : props.theme.colors.contrastColor};
 `;
 
 export const FormInputContainer = styled.View`

@@ -2,7 +2,6 @@ import styled from '@emotion/native';
 import Text from '@/components/AppText';
 import {Platform} from 'react-native';
 
-
 export const ButtonsContainer = styled.View`
   padding: 0 16px;
   flex-direction: row;
@@ -11,7 +10,7 @@ export const ButtonsContainer = styled.View`
 export const ButtonContainer = styled.TouchableOpacity`
   padding: 16px 8px;
   border-radius: 16px;
-  background-color: ${props => props.theme.colors.white.normal};
+  background-color: ${props => props.theme.colors.background1};
   flex: 1;
   margin: 0 8px;
   justify-content: center;
@@ -27,6 +26,6 @@ export const ButtonText = styled(Text)`
   text-transform: uppercase;
   ${Platform.OS === 'ios' && 'font-weight: bold;'}
   color: ${props =>
-    props.color ? props.color : props.theme.colors.black.normal};
+    props.color ? props.color : props.theme.colors.contrastColor};
   margin-top: 8px;
 `;

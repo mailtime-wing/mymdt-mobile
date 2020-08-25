@@ -4,7 +4,7 @@ export const ModalView = styled.View`
   flex: 1;
   width: 90%;
   justify-content: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 10px ${props => props.theme.colors.borderColor};
   border-radius: 24px;
 `;
 

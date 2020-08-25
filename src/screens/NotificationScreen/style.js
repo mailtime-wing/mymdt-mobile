@@ -13,7 +13,7 @@ export const Detail = styled(Text)`
 
 export const Divider = styled.View`
   height: 1px;
-  background-color: ${props => props.theme.colors.black.extremeLight};
+  background-color: ${props => props.theme.colors.background2};
   margin-left: 24px;
 `;
 

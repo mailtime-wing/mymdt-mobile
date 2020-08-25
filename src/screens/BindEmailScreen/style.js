@@ -7,7 +7,7 @@ export const scrollContainer = css`
 `;
 
 export const detailStyle = theme => css`
-  color: ${theme.colors.black.light};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   margin-bottom: 24px;
 `;
 

@@ -19,7 +19,7 @@ export const ListLabel = styled(Text)`
 export const ListValue = styled(Text)`
   font-size: 16px;
   line-height: 24px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
   margin-right: 16px;
 `;
 

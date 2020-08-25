@@ -59,7 +59,7 @@ const DayList = ({
                   size={18}
                   fontSize={16}
                   color={props =>
-                    passedDay ? props.theme.colors.white.normal : coinColor
+                    passedDay ? props.theme.colors.background1 : coinColor
                   }
                 />
               ) : (
@@ -68,7 +68,7 @@ const DayList = ({
                   size={18}
                   fontSize={16}
                   color={props =>
-                    passedDay ? props.theme.colors.white.normal : coinColor
+                    passedDay ? props.theme.colors.background1 : coinColor
                   }
                 />
               )}

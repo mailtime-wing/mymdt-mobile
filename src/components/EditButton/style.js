@@ -28,7 +28,7 @@ export const Container = styled.View`
 export const ButtonText = styled(Text)`
   font-size: 14px;
   letter-spacing: 2px;
-  color: ${props => props.theme.colors.white.normal};
+  color: ${props => props.theme.colors.background1};
   font-weight: bold;
 `;
 

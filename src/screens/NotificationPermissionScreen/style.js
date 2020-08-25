@@ -14,7 +14,7 @@ export const titleStyle = theme => css`
 `;
 
 export const detailStyle = theme => css`
-  color: ${theme.colors.black.light};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   text-align: center;
   margin-top: 16px;
   margin-bottom: 64px;
