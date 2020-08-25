@@ -1,11 +1,11 @@
 import React from 'react';
-import {ButtonContainer, Icon} from './style';
+import {TouchableOpacity, Image} from 'react-native';
 
 const CloseButton = ({navigation, ...props}) => {
   return (
-    <ButtonContainer onPress={() => navigation?.goBack()} {...props}>
-      <Icon source={require('@/assets/close.png')} resizeMode="contain" />
-    </ButtonContainer>
+    <TouchableOpacity onPress={() => navigation?.goBack()} {...props}>
+      <Image source={require('@/assets/close.png')} resizeMode="contain" />
+    </TouchableOpacity>
   );
 };
 

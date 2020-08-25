@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {Linking} from 'react-native';
+import {Linking, Button} from 'react-native';
 import {
   createStackNavigator,
   HeaderStyleInterpolators,
@@ -42,7 +42,6 @@ import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
 import ConverterScreen from '@/screens/ConverterScreen';
 import WithdrawalScreen from '@/screens/WithdrawalScreen';
 import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
-
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
 import BackButton from '@/components/BackButton';
@@ -50,7 +49,6 @@ import CloseButton from '@/components/CloseButton';
 import {
   MARGIN_BETWEEN_STATUS_BAR_AND_TOP_BAR,
   TOP_BAR_HEIGHT,
-  MARGIN_BETWEEN_MODAL_HEAD_AND_TOP_BAR,
 } from '@/constants/layout';
 
 import {styles} from './style';
@@ -111,16 +109,22 @@ const authScreens = [
 ];
 
 const authModalScreens = [
-  {name: 'settings', component: SettingScreen},
   {name: 'notification', component: NotificationScreen},
+  // {name: 'my_referral_code', component: UserProfileEditScreen},
+  // {name: 'enter_invite_code', component: LanguageScreen},
+  {name: 'converter', component: ConverterScreen},
+  {name: 'withdrawal', component: WithdrawalScreen},
+  {name: 'missing_receipt', component: MissingReceiptScreen},
+];
+
+const settingScreens = [
+  {name: 'settingsHome', component: SettingScreen},
   {name: 'edit_profile', component: UserProfileEditScreen},
-  {name: 'my_referral_code', component: UserProfileEditScreen},
   {name: 'offers_preference_edit', component: OfferPreferenceEditScreen},
   {name: 'offers_preference', component: OfferSelectScreen},
   {name: 'emails_binding', component: BindEmailScreen}, // same as add_email in setupScreens (but different navigator)
   {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
   {name: 'account_security', component: AccountSecurityScreen},
-  {name: 'enter_invite_code', component: LanguageScreen},
   {name: 'sign_out', component: SignOutScreen},
   {name: 'app_settings', component: AppSettingScreen},
   {name: 'language', component: LanguageScreen},
@@ -128,9 +132,6 @@ const authModalScreens = [
   {name: 'terms_of_service', component: LanguageScreen},
   {name: 'privacy_policy', component: LanguageScreen},
   {name: 'about_us', component: LanguageScreen},
-  {name: 'converter', component: ConverterScreen},
-  {name: 'withdrawal', component: WithdrawalScreen},
-  {name: 'missing_receipt', component: MissingReceiptScreen},
 ];
 
 const backScreen = [
@@ -184,6 +185,41 @@ const linking = {
   // e.g. rewardme://secureaccount
   prefixes: ['rewardme://'],
   config: linkingConfig,
+};
+
+const SettingStack = createStackNavigator();
+const screenUnderModalOptions = {
+  headerTitle: null,
+  headerStyle: {
+    height: 84,
+  },
+  headerLeftContainerStyle: {
+    paddingLeft: 24,
+  },
+  headerTransparent: true,
+  cardStyle: [styles.card, styles.modalCard],
+  headerStatusBarHeight: 0,
+  headerStyleInterpolator: HeaderStyleInterpolators.forSlideLeft,
+};
+
+const Setting = ({navigation}) => {
+  return (
+    <SettingStack.Navigator
+      screenOptions={{
+        ...screenUnderModalOptions,
+        headerLeft: ({onPress}) => {
+          return onPress ? (
+            <Button onPress={onPress} title="<" />
+          ) : (
+            <CloseButton onPress={() => navigation.goBack()} />
+          );
+        },
+      }}>
+      {settingScreens.map(({name, ...props}) => (
+        <SettingStack.Screen key={name} name={name} {...props} />
+      ))}
+    </SettingStack.Navigator>
+  );
 };
 
 const Main = () => {
@@ -261,11 +297,6 @@ const Main = () => {
 const Root = () => {
   const {authToken} = useContext(AuthContext);
 
-  const modalHeaderStyle = {
-    ...styles.header,
-    height: MARGIN_BETWEEN_MODAL_HEAD_AND_TOP_BAR + TOP_BAR_HEIGHT,
-  };
-
   useEffect(() => {
     Linking.addEventListener('url');
     return () => {
@@ -280,8 +311,7 @@ const Root = () => {
         screenOptions={{
           ...TransitionPresets.ModalPresentationIOS,
           headerTransparent: true,
-          headerTitleStyle: styles.headerTitle,
-          headerStyle: modalHeaderStyle,
+          headerTitle: null,
           cardStyle: [styles.card, styles.modalCard],
           headerLeft: props => <CloseButton {...props} />,
           cardOverlayEnabled: true,
@@ -293,12 +323,20 @@ const Root = () => {
           component={Main}
           options={{headerShown: false}}
         />
+        {authToken && (
+          <RootStack.Screen
+            name="settings"
+            component={Setting}
+            options={{headerShown: false}}
+          />
+        )}
         {authToken &&
           authModalScreens.map(screen => (
             <RootStack.Screen
               key={screen.name}
               name={screen.name}
               component={screen.component}
+              options={screenUnderModalOptions}
             />
           ))}
       </RootStack.Navigator>
