@@ -1,12 +1,15 @@
 import React from 'react';
-import {AccountIcon, UserIconContainer} from './style';
+import {TouchableOpacity, Image} from 'react-native';
+import {container, accountIcon} from './style';
+import {useTheme} from 'emotion-theming';
 
-const UserIcon = ({navigation, source, ...props}) => (
-  <UserIconContainer
-    onPress={() => navigation.navigate('membership')}
-    {...props}>
-    <AccountIcon source={source} />
-  </UserIconContainer>
-);
+const UserIcon = ({source, ...props}) => {
+  const theme = useTheme();
+  return (
+    <TouchableOpacity style={container} {...props}>
+      <Image style={accountIcon(theme)} source={source} />
+    </TouchableOpacity>
+  );
+};
 
 export default UserIcon;
