@@ -735,7 +735,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = TAPWFP66G4;
+				DEVELOPMENT_TEAM = 2ALSZ7K238;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = RewardMeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
