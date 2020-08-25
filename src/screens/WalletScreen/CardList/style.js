@@ -16,7 +16,7 @@ export const Card = styled.View`
 export const CardName = styled(TitleText)`
   font-size: 18px;
   line-height: 22px;
-  color: ${props => props.theme.colors.white.normal};
+  color: ${props => props.theme.colors.background1};
   ${Platform.OS === 'ios' && 'font-weight: 500;'}
 `;
 export const AroundInUSD = styled(Text)`

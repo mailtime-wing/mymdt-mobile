@@ -23,16 +23,16 @@ export const ButtonContainer = styled.View`
 `;
 
 export const UnbindButton = styled.TouchableOpacity`
-  border: 1px solid ${props => props.theme.colors.error.superLight};
+  border: 1px solid ${props => props.theme.colors.errorBackground};
   border-radius: 20px;
   padding: 8px;
   height: auto;
 `;
 
 export const removeText = theme => css`
-  color: ${theme.colors.error.dark};
+  color: ${theme.colors.textOnError.normal};
 `;
 
 export const titleText = theme => css`
-  color: ${theme.colors.black.superLight};
+  color: ${theme.colors.textOnBackground.disabled};
 `;

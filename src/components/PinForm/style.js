@@ -30,7 +30,7 @@ export const Hints = styled(Text)`
 export const Error = styled(Text)`
   font-size: 14px;
   line-height: 21px;
-  color: ${props => props.theme.colors.error.normal};
+  color: ${props => props.theme.colors.textOnError.normal};
   text-align: center;
 `;
 

@@ -30,5 +30,5 @@ export const QuestionMark = styled.TouchableOpacity`
 export const RowValue = styled(Text)`
   font-size: 16px;
   line-height: 24px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
 `;

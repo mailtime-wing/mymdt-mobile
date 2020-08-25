@@ -26,8 +26,8 @@ const Label = ({focused, id}) => (
 
 const HomeStack = () => {
   const theme = useTheme();
-  const white = theme.colors.white.normal;
-  const grey = theme.colors.black.light;
+  const white = theme.colors.background1;
+  const grey = theme.colors.textOnBackground.mediumEmphasis;
   const iconWidth = 24;
   const iconHeight = 24;
   const strokeWidth = 2;

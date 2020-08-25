@@ -8,14 +8,14 @@ export const titleStyle = theme => css`
 `;
 
 export const detailStyle = theme => css`
-  color: ${theme.colors.black.light};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   padding-left: 24px;
   padding-right: 24px;
 `;
 
 export const startAndAgree = theme => css`
   text-align: center;
-  color: ${theme.colors.grey.dark};
+  color: ${theme.colors.textOnBackground.disabled};
   margin-top: 11px;
   padding-left: 24px;
   padding-right: 24px;

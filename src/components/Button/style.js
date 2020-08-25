@@ -5,7 +5,7 @@ export const Container = styled.TouchableOpacity`
   background-color: ${props =>
     props.disabled
       ? props.theme.colors.grey.light
-      : props.theme.colors.black.normal};
+      : props.theme.colors.contrastColor};
   text-transform: uppercase;
   min-height: 33px;
   ${props =>
@@ -17,16 +17,16 @@ export const Container = styled.TouchableOpacity`
   ${props => props.width && `width: ${props.width}; align-self: center;`}
   ${props =>
     props.reverse &&
-    `background-color: ${props.theme.colors.white.normal}; border: 1px solid ${
-      props.theme.colors.black.normal
+    `background-color: ${props.theme.colors.background1}; border: 1px solid ${
+      props.theme.colors.contrastColor
     };`}
 `;
 
 export const ButtonText = styled(Text)`
   color: ${props =>
     props.disabled
-      ? props.theme.colors.black.extremeLight
-      : props.theme.colors.white.normal};
+      ? props.theme.colors.background2
+      : props.theme.colors.background1};
   letter-spacing: 2px;
   font-size: 16px;
   line-height: 19px;
@@ -36,6 +36,6 @@ export const ButtonText = styled(Text)`
 
   color: ${props =>
     props.reverse
-      ? props.theme.colors.black.normal
-      : props.theme.colors.white.normal};
+      ? props.theme.colors.contrastColor
+      : props.theme.colors.background1};
 `;

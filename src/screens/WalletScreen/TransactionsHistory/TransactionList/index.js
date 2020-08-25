@@ -23,7 +23,7 @@ const TransactionList = ({transactionsHistoryList, cardType}) => {
             amount={item.amount}
             size={16}
             fontSize={16}
-            color={props => props.theme.colors.secondary.superDark}
+            color={props => props.theme.colors.textOfMrp}
             style={flexEnd}
           />
         ) : (

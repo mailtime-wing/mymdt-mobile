@@ -3,7 +3,7 @@ import {Platform} from 'react-native';
 import Text from '@/components/AppText';
 
 export const HistoryListContainer = styled.View`
-  background-color: ${props => props.theme.colors.white.normal};
+  background-color: ${props => props.theme.colors.background1};
   border-radius: 24px 24px 0px 0px;
   margin-top: 16px;
 `;

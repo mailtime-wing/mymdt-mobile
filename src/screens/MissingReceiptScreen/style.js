@@ -9,7 +9,7 @@ export const Container = styled.View`
 export const Detail = styled(Text)`
   font-size: 16px;
   line-height: 24px;
-  color: ${props => props.theme.colors.black.light};
+  color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
   margin-bottom: 24px;
 `;
 

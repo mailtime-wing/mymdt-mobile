@@ -66,11 +66,11 @@ export const descriptionLineTexts = css`
 
 export const descriptionLineTitle = theme => css`
   margin-bottom: 8px;
-  color: ${transparentize(0.2, theme.colors.black.normal)};
+  color: ${transparentize(0.2, theme.colors.contrastColor)};
 `;
 
 export const descriptionLineCaption = theme => css`
-  color: ${transparentize(0.6, theme.colors.black.normal)};
+  color: ${transparentize(0.6, theme.colors.contrastColor)};
 `;
 
 export const descriptionLineSeparator = css`

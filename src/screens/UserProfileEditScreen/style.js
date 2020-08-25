@@ -10,7 +10,7 @@ export const FormContainer = styled.View`
 `;
 
 export const ProfilePictureText = styled(Text)`
-  color: ${props => props.theme.colors.black.normal};
+  color: ${props => props.theme.colors.contrastColor};
   font-size: 12px;
   line-height: 15px;
   letter-spacing: 1px;
@@ -53,7 +53,7 @@ export const DateFieldContainer = styled.TouchableOpacity`
 
 export const Error = styled(TitleText)`
   font-size: 12px;
-  color: ${props => props.theme.colors.error.dark};
+  color: ${props => props.theme.colors.textOnError.normal};
 `;
 
 export const Name = styled(Text)`

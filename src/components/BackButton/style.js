@@ -15,7 +15,7 @@ export const ButtonContainer = styled.TouchableOpacity`
   height: 36px;
   padding: 8px;
   height: ${String(TOP_BAR_HEIGHT)}px;
-  border: 1px solid ${props => props.theme.colors.secondary.light};
+  border: 1px solid ${props => props.theme.colors.secondary.border};
   border-radius: 24px;
   background: transparent;
 `;

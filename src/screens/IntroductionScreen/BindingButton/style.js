@@ -8,7 +8,7 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const ButtonView = styled.View`
-  background-color: ${props => props.theme.colors.white.normal};
+  background-color: ${props => props.theme.colors.background1};
   flex-direction: row;
   align-items: center;
   border-radius: 16px;
@@ -22,10 +22,10 @@ export const TextContainer = styled.View`
 
 export const ButtonTitle = styled(TitleText)`
   font-size: 18px;
-  color: ${props => props.theme.colors.black.normal};
+  color: ${props => props.theme.colors.contrastColor};
 `;
 
 export const ButtonCaption = styled(AppText)`
   font-size: 12px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
 `;

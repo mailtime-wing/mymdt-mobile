@@ -13,7 +13,7 @@ const Switch = props => {
       sliderHeight={36}
       buttonOffsetLeft={4}
       buttonOffsetRight={6}
-      buttonColor={theme.colors.white.normal}
+      buttonColor={theme.colors.background1}
       colorSwitchOff={theme.colors.secondary.normal}
       colorSwitchOn={theme.colors.secondary.normal}
       showText={false}

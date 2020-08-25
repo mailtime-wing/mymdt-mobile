@@ -6,7 +6,7 @@ export const ScrollContainer = styled.ScrollView`
 `;
 
 export const detailStyle = theme => css`
-  color: ${theme.colors.black.light};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   margin-bottom: 30px;
 `;
 
@@ -30,12 +30,14 @@ export const FixedContainer = styled.View`
   height: 110px;
   border-width: 1px;
   border-radius: 24px 24px 0px 0px;
-  border-color: rgba(0, 0, 0, 0.2);
+  border-color: ${props => props.theme.colors.borderColor};
   elevation: 1;
 `;
 
 export const brandSelectedText = (theme, isError) => css`
-  color: ${isError ? theme.colors.error.dark : theme.colors.secondary.normal};
+  color: ${isError
+    ? theme.colors.textOnError.normal
+    : theme.colors.secondary.normal};
   margin-top: 16px;
   margin-bottom: 16px;
   max-width: 40%;

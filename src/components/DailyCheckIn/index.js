@@ -70,7 +70,7 @@ const DailyCheckIn = ({converted}) => {
   const todayRewardAmount =
     (todayAndAfterRewards && todayAndAfterRewards[today - 1]) || 0;
   const cashbackCurrencyCode = data?.userProfile?.cashbackCurrencyCode;
-  const coinColor = props => props.theme.colors.secondary.superDark;
+  const coinColor = props => props.theme.colors.textOfMrp;
 
   return (
     <Container>

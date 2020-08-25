@@ -24,7 +24,7 @@ export const Title = styled(withAttrs(AppText, {variant: 'pageTitle'}))`
 `;
 
 export const Description = styled(withAttrs(AppText, {variant: 'body1'}))`
-  color: ${props => props.theme.colors.black.light};
+  color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
 `;
 
 export const Section = styled.View`
@@ -32,7 +32,7 @@ export const Section = styled.View`
 `;
 
 export const SectionText = styled(withAttrs(AppText, {variant: 'label'}))`
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
 `;
 
 export const Item = styled.TouchableOpacity`
@@ -42,7 +42,7 @@ export const Item = styled.TouchableOpacity`
 `;
 
 export const ItemText = styled(withAttrs(AppText, {variant: 'body1'}))`
-  color: ${props => props.theme.colors.black.normal};
+  color: ${props => props.theme.colors.contrastColor};
 `;
 
 export const CountryFlag = styled.Image`

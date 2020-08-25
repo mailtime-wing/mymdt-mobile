@@ -100,7 +100,7 @@ const TaskList = ({taskList, userRewardList}) => {
               amount={task.rewardValue}
               size={16}
               fontSize={16}
-              color={props => props.theme.colors.secondary.superDark}
+              color={props => props.theme.colors.textOfMrp}
               style={claimed && flexEnd}
             />
             {!claimed ? (

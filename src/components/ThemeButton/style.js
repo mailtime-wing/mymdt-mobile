@@ -23,17 +23,17 @@ export const Container = styled.TouchableOpacity`
   ${props => props.width && `width: ${props.width}; align-self: center;`}
   ${props =>
     props.reverse &&
-    `background-color: ${props.theme.colors.white.normal}; border: 1px solid ${
-      props.theme.colors.secondary.light
+    `background-color: ${props.theme.colors.background1}; border: 1px solid ${
+      props.theme.colors.secondary.border
     };`}
     
   ${props =>
     props.reverseBorder &&
-    `border: 1px solid ${props.theme.colors.white.normal};`}
+    `border: 1px solid ${props.theme.colors.background1};`}
 `;
 
 export const ButtonText = styled(Text)`
-  color: ${props => props.theme.colors.white.normal};
+  color: ${props => props.theme.colors.background1};
   letter-spacing: 1.5px;
   font-size: 14px;
   line-height: 19px;
@@ -44,5 +44,5 @@ export const ButtonText = styled(Text)`
   color: ${props =>
     props.reverse
       ? props.theme.colors.secondary.normal
-      : props.theme.colors.white.normal};
+      : props.theme.colors.background1};
 `;

@@ -21,7 +21,7 @@ export const OfferContainer = styled.TouchableOpacity`
     props.selected
       ? `background-color: ${
           props.isError
-            ? props.theme.colors.error.dark
+            ? props.theme.colors.textOnError.normal
             : props.theme.colors.secondary.normal
         };`
       : 'background-color: transparent;'}
@@ -39,7 +39,7 @@ export const CheckBox = styled.View`
   width: 100%;
   height: 100%;
   border-radius: 6px;
-  border: 2px solid ${props => props.theme.colors.black.normal};
+  border: 2px solid ${props => props.theme.colors.contrastColor};
 `;
 
 export const OfferIcon = styled.Image`
@@ -58,6 +58,6 @@ export const OfferName = styled(Text)`
 export const OfferDiscount = styled(Text)`
   font-size: 12px;
   line-height: 18px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
   text-align: center;
 `;

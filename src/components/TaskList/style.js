@@ -20,7 +20,7 @@ export const TaskName = styled(Text)`
 export const ClaimedDate = styled(Text)`
   font-size: 12px;
   line-height: 18px;
-  color: ${props => props.theme.colors.black.superLight};
+  color: ${props => props.theme.colors.textOnBackground.disabled};
 `;
 
 export const MarginLeft = styled.View`

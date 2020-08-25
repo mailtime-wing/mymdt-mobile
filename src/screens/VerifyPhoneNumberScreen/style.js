@@ -35,6 +35,6 @@ export const ResendCode = styled(Text)`
   font-size: 16px;
   line-height: 24px;
   text-decoration: underline;
-  text-decoration-color: ${props => props.theme.colors.secondary.light};
-  color: ${props => props.theme.colors.secondary.light};
+  text-decoration-color: ${props => props.theme.colors.secondary.border};
+  color: ${props => props.theme.colors.secondary.border};
 `;

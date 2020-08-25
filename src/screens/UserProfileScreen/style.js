@@ -16,14 +16,14 @@ export const titleStyle = theme => css`
 `;
 
 export const detailStyle = theme => css`
-  color: ${theme.colors.black.light};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   margin-bottom: 24px;
 `;
 
 export const requiredText = theme => css`
   margin-bottom: 24px;
   margin-bottom: 24px;
-  color: ${theme.colors.black.light};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;
 
 export const DateFieldContainer = styled.TouchableOpacity`
@@ -33,7 +33,7 @@ export const DateFieldContainer = styled.TouchableOpacity`
 export const GenderContainer = styled.View`
   height: 48px;
   width: 80%;
-  border: 1px solid ${props => props.theme.colors.black.normal};
+  border: 1px solid ${props => props.theme.colors.contrastColor};
   flex-direction: row;
 `;
 
@@ -42,9 +42,9 @@ export const Gender = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   background-color: ${props =>
-    props.active ? props.theme.colors.black.normal : 'transparent'};
+    props.active ? props.theme.colors.contrastColor : 'transparent'};
 `;
 
 export const errorStyle = theme => css`
-  color: ${theme.colors.error.light};
+  color: ${theme.colors.textOnError.light};
 `;

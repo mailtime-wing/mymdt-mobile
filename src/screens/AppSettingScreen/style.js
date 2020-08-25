@@ -5,7 +5,7 @@ export const container = css`
 `;
 
 export const appVersionStyle = theme => css`
-  color: ${theme.colors.black.light};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   text-align: center;
   margin-top: 24px;
 `;

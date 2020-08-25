@@ -21,13 +21,13 @@ const ProgressBar = ({title, progressLabel, progress}) => {
       {Platform.OS === 'ios' ? (
         <ProgressBarIOS
           progress={progress}
-          progressTintColor={theme.colors.black.normal}
-          trackTintColor={theme.colors.grey.normal}
+          progressTintColor={theme.colors.contrastColor}
+          // trackTintColor={theme.colors.grey.normal}
         />
       ) : (
         <ProgressBarAndroid
           progress={progress}
-          color={theme.colors.black.normal}
+          color={theme.colors.contrastColor}
         />
       )}
     </ProgressContainer>

@@ -11,7 +11,7 @@ export const BoxBody = styled.Image`
 export const Container = styled.View``;
 
 export const Circle = styled.View`
-  background-color: ${props => props.theme.colors.white.normal};
+  background-color: ${props => props.theme.colors.background1};
   width: 300px;
   height: 300px;
   border-radius: 150px;

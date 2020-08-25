@@ -6,7 +6,7 @@ export const Card = styled.View`
   padding: 8px;
   background-color: transparent;
   width: 80px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid ${props => props.theme.colors.background3};
   border-radius: 16px;
   margin: 0 4px;
   ${props =>
@@ -24,7 +24,7 @@ export const DayNumberTextEnglish = styled(TitleText)`
   margin-top: 4px;
   margin-bottom: 8px;
   ${Platform.OS === 'ios' && 'font-weight: 500;'};
-  color: ${props => props.theme.colors.black.normal};
+  color: ${props => props.theme.colors.contrastColor};
   text-align: center;
   ${props =>
     props.isToday &&
@@ -32,14 +32,14 @@ export const DayNumberTextEnglish = styled(TitleText)`
     `}
   ${props =>
     props.passedDay &&
-    `color: ${props.theme.colors.white.normal};
+    `color: ${props.theme.colors.background1};
     `};
 `;
 
 export const DayTextEnglish = styled(TitleText)`
   font-size: 12px;
   ${Platform.OS === 'ios' && 'font-weight: 500;'};
-  color: ${props => props.theme.colors.black.normal};
+  color: ${props => props.theme.colors.contrastColor};
   text-align: center;
   text-transform: uppercase;
   ${props =>
@@ -48,7 +48,7 @@ export const DayTextEnglish = styled(TitleText)`
     `}
   ${props =>
     props.passedDay &&
-    `color: ${props.theme.colors.white.normal};
+    `color: ${props.theme.colors.background1};
     `};
 `;
 
@@ -56,7 +56,7 @@ export const DayNumberTextChinese = styled(TitleText)`
   font-size: 36px;
   line-height: 36px;
   ${Platform.OS === 'ios' && 'font-weight: 500;'};
-  color: ${props => props.theme.colors.black.normal};
+  color: ${props => props.theme.colors.contrastColor};
   text-align: center;
   ${props =>
     props.isToday &&
@@ -64,7 +64,7 @@ export const DayNumberTextChinese = styled(TitleText)`
     `}
   ${props =>
     props.passedDay &&
-    `color: ${props.theme.colors.white.normal};
+    `color: ${props.theme.colors.background1};
     `};
 `;
 
@@ -73,7 +73,7 @@ export const DayTextChinese = styled(TitleText)`
   margin-top: 4px;
   margin-bottom: 8px;
   ${Platform.OS === 'ios' && 'font-weight: 500;'};
-  color: ${props => props.theme.colors.black.normal};
+  color: ${props => props.theme.colors.contrastColor};
   text-align: center;
   text-transform: uppercase;
   ${props =>
@@ -82,6 +82,6 @@ export const DayTextChinese = styled(TitleText)`
     `}
   ${props =>
     props.passedDay &&
-    `color: ${props.theme.colors.white.normal};
+    `color: ${props.theme.colors.background1};
     `};
 `;
