@@ -5,7 +5,7 @@ import {useTheme} from 'emotion-theming';
 import SafeAreaView from 'react-native-safe-area-view';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {Container, LabelText, styles} from './style';
+import {LabelText, styles} from './style';
 
 import BrowseScreen from '@/screens/BrowseScreen';
 import BonusScreen from '@/screens/BonusScreen';
@@ -24,7 +24,7 @@ const Label = ({focused, id}) => (
   </LabelText>
 );
 
-const TabNavigatorContainer = () => {
+const HomeStack = () => {
   const theme = useTheme();
   const white = theme.colors.white.normal;
   const grey = theme.colors.black.light;
@@ -116,14 +116,6 @@ const TabNavigatorContainer = () => {
         />
       </Tab.Navigator>
     </>
-  );
-};
-
-const HomeStack = props => {
-  return (
-    <Container>
-      <TabNavigatorContainer {...props} />
-    </Container>
   );
 };
 

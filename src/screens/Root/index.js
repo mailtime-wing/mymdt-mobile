@@ -1,7 +1,11 @@
 import React, {useContext, useEffect} from 'react';
 import {Linking} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer as Container} from '@react-navigation/native';
+import {
+  createStackNavigator,
+  HeaderStyleInterpolators,
+  TransitionPresets,
+} from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
@@ -51,7 +55,8 @@ import {
 
 import {styles} from './style';
 
-const Stack = createStackNavigator();
+const RootStack = createStackNavigator();
+const MainStack = createStackNavigator();
 
 const screens = [
   {name: 'onboarding', component: OnboardingScreen},
@@ -181,7 +186,7 @@ const linking = {
   config: linkingConfig,
 };
 
-const Root = () => {
+const Main = () => {
   const {authToken} = useContext(AuthContext);
   const {validScreenNames} = useContext(SetupFlowContext);
   const {top} = useSafeAreaInsets();
@@ -191,18 +196,75 @@ const Root = () => {
     height: top + MARGIN_BETWEEN_STATUS_BAR_AND_TOP_BAR + TOP_BAR_HEIGHT,
   };
 
+  return (
+    <MainStack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTitleStyle: styles.headerTitle,
+        cardStyle: styles.card,
+        headerStyle: headerStyle,
+        gestureEnabled: false,
+        headerStyleInterpolator: HeaderStyleInterpolators.forSlideLeft,
+      }}>
+      {!authToken &&
+        screens.map(screen => (
+          <MainStack.Screen
+            key={screen.name}
+            name={screen.name}
+            component={screen.component}
+            options={{
+              headerLeft: props =>
+                backScreen.includes(screen.name) ? (
+                  <BackButton {...props} />
+                ) : null,
+            }}
+          />
+        ))}
+      {// TODO: hide setupScreens so that it cannot be back from authScreens
+      authToken &&
+        setupScreens
+          .filter(setupScreen => validScreenNames[setupScreen.name])
+          .map((screen, i) => {
+            const {name, component} = screen;
+            return (
+              <MainStack.Screen
+                key={name}
+                name={name}
+                component={component}
+                options={{
+                  headerLeft: props =>
+                    backScreen.includes(name) ? (
+                      <BackButton {...props} />
+                    ) : null,
+                }}
+              />
+            );
+          })}
+      {authToken &&
+        authScreens.map(screen => (
+          <MainStack.Screen
+            key={screen.name}
+            name={screen.name}
+            component={screen.component}
+            options={{
+              headerLeft: props =>
+                backScreen.includes(screen.name) ? (
+                  <BackButton {...props} />
+                ) : null,
+            }}
+          />
+        ))}
+    </MainStack.Navigator>
+  );
+};
+
+const Root = () => {
+  const {authToken} = useContext(AuthContext);
+
   const modalHeaderStyle = {
     ...styles.header,
     height: MARGIN_BETWEEN_MODAL_HEAD_AND_TOP_BAR + TOP_BAR_HEIGHT,
   };
-
-  const modalCardStyle = [
-    {
-      ...styles.card,
-      marginTop: top,
-    },
-    styles.modalCard,
-  ];
 
   useEffect(() => {
     Linking.addEventListener('url');
@@ -212,94 +274,35 @@ const Root = () => {
   }, []);
 
   return (
-    <Container linking={linking}>
-      {!authToken ? (
-        <Stack.Navigator>
-          {screens.map(screen => (
-            <Stack.Screen
+    <NavigationContainer linking={linking}>
+      <RootStack.Navigator
+        mode="modal"
+        screenOptions={{
+          ...TransitionPresets.ModalPresentationIOS,
+          headerTransparent: true,
+          headerTitleStyle: styles.headerTitle,
+          headerStyle: modalHeaderStyle,
+          cardStyle: [styles.card, styles.modalCard],
+          headerLeft: props => <CloseButton {...props} />,
+          cardOverlayEnabled: true,
+          gestureEnabled: true,
+          headerStatusBarHeight: 0,
+        }}>
+        <RootStack.Screen
+          name="Main"
+          component={Main}
+          options={{headerShown: false}}
+        />
+        {authToken &&
+          authModalScreens.map(screen => (
+            <RootStack.Screen
               key={screen.name}
               name={screen.name}
               component={screen.component}
-              options={{
-                headerTransparent: true,
-                headerTitleStyle: styles.headerTitle,
-                cardStyle: styles.card,
-                headerStyle: headerStyle,
-                headerLeft: props =>
-                  backScreen.includes(screen.name) ? (
-                    <BackButton {...props} />
-                  ) : null,
-                gestureEnabled: false,
-              }}
             />
           ))}
-        </Stack.Navigator>
-      ) : (
-        // TODO: hide setupScreens so that it cannot be back from authScreens
-        <Stack.Navigator mode="modal">
-          {setupScreens
-            .filter(setupScreen => validScreenNames[setupScreen.name])
-            .map((screen, i) => {
-              const {name, component} = screen;
-              return (
-                <Stack.Screen
-                  key={name}
-                  name={name}
-                  component={component}
-                  options={{
-                    headerTransparent: true,
-                    headerTitleStyle: styles.headerTitle,
-                    cardStyle: styles.card,
-                    headerStyle: headerStyle,
-                    headerLeft: props =>
-                      backScreen.includes(name) ? (
-                        <BackButton {...props} />
-                      ) : null,
-                    gestureEnabled: false,
-                  }}
-                />
-              );
-            })}
-
-          {authScreens.map(screen => (
-            <Stack.Screen
-              key={screen.name}
-              name={screen.name}
-              component={screen.component}
-              options={{
-                headerTransparent: true,
-                headerTitleStyle: styles.headerTitle,
-                headerStyle: headerStyle,
-                cardStyle: styles.card,
-                headerLeft: props =>
-                  backScreen.includes(screen.name) ? (
-                    <BackButton {...props} />
-                  ) : null,
-                gestureEnabled: false,
-              }}
-            />
-          ))}
-
-          {authModalScreens.map(screen => (
-            <Stack.Screen
-              key={screen.name}
-              name={screen.name}
-              component={screen.component}
-              options={{
-                headerTransparent: true,
-                headerTitleStyle: styles.headerTitle,
-                headerStyle: modalHeaderStyle,
-                cardStyle: modalCardStyle,
-                headerLeft: props => <CloseButton {...props} />,
-                cardOverlayEnabled: true,
-                gestureEnabled: true,
-                headerStatusBarHeight: 0,
-              }}
-            />
-          ))}
-        </Stack.Navigator>
-      )}
-    </Container>
+      </RootStack.Navigator>
+    </NavigationContainer>
   );
 };
 
