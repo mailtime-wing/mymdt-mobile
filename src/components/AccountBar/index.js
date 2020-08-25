@@ -1,15 +1,17 @@
 import React, {useContext} from 'react';
-
+import {View} from 'react-native';
 import {AuthContext} from '@/context/auth';
 import {useQuery} from '@apollo/react-hooks';
 import {GET_USER_MEMBERSHIP_API} from '@/api/data';
+import {useTheme} from 'emotion-theming';
 
 import {
-  Container,
-  AccountContainer,
-  MembershipIconContainer,
-  CoinChip,
-  MarginRight,
+  coninsContainer,
+  accountContainer,
+  coinChip,
+  marginRight,
+  membershipPosition,
+  leftContainer,
 } from './style';
 
 import MembershipLevelChip from '@/components/MembershipLevelChip';
@@ -17,14 +19,9 @@ import UserIcon from '@/components/UserIcon';
 import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
 
-const positionAbsolute = {
-  position: 'absolute',
-  left: 30,
-  top: 24,
-};
-
 const AccountBar = ({navigation, showCoins}) => {
   const {authToken} = useContext(AuthContext);
+  const theme = useTheme();
   const {data} = useQuery(GET_USER_MEMBERSHIP_API, {
     context: {
       headers: {
@@ -34,42 +31,38 @@ const AccountBar = ({navigation, showCoins}) => {
   });
 
   return (
-    <Container>
-      <AccountContainer>
-        <MembershipIconContainer>
-          <UserIcon
-            navigation={navigation}
-            source={require('@/assets/dog_avatar.png')}
-            onPress={() => navigation.navigate('membership')}
-          />
-          <MembershipLevelChip
-            style={positionAbsolute}
-            userLevel={data?.userProfile?.membership?.level || 0}
-          />
-        </MembershipIconContainer>
-        {showCoins && (
-          <>
-            <CoinChip>
-              <MRPCoin
-                amount={645423} // TODO: GET FROM API ONCE API READY
-                size={18}
-                fontSize={16}
-                color={props => props.theme.colors.secondary.superDark}
-              />
-            </CoinChip>
-            <MarginRight />
-            <CoinChip>
-              <MDTCoin
-                amount={26543} // TODO: GET FROM API ONCE API READY
-                size={18}
-                fontSize={16}
-                color={props => props.theme.colors.primary.normal}
-              />
-            </CoinChip>
-          </>
-        )}
-      </AccountContainer>
-    </Container>
+    <View style={accountContainer}>
+      <View style={leftContainer}>
+        <UserIcon
+          source={require('@/assets/dog_avatar.png')}
+          onPress={() => navigation.navigate('membership')}
+        />
+        <MembershipLevelChip
+          style={membershipPosition}
+          userLevel={data?.userProfile?.membership?.level || 0}
+        />
+      </View>
+      {showCoins && (
+        <View style={coninsContainer}>
+          <View style={[coinChip(theme), marginRight]}>
+            <MRPCoin
+              amount={645423} // TODO: GET FROM API ONCE API READY
+              size={18}
+              fontSize={16}
+              color={props => props.theme.colors.secondary.superDark}
+            />
+          </View>
+          <View style={coinChip(theme)}>
+            <MDTCoin
+              amount={26543} // TODO: GET FROM API ONCE API READY
+              size={18}
+              fontSize={16}
+              color={props => props.theme.colors.primary.normal}
+            />
+          </View>
+        </View>
+      )}
+    </View>
   );
 };
 

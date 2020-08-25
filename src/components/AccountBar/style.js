@@ -1,21 +1,10 @@
-import styled from '@emotion/native';
+import {css} from '@emotion/native';
 
-export const AccountIcon = styled.Image`
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  border: 1px solid ${props => props.theme.colors.black.extremeLight};
+export const coninsContainer = css`
+  flex-direction: row;
 `;
 
-export const MembershipIconContainer = styled.TouchableOpacity`
-  flex: 1;
-`;
-
-export const Container = styled.View`
-  justify-content: center;
-`;
-
-export const AccountContainer = styled.View`
+export const accountContainer = css`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -25,12 +14,22 @@ export const AccountContainer = styled.View`
   padding-bottom: 30px;
 `;
 
-export const CoinChip = styled.View`
+export const coinChip = theme => css`
   padding: 8px;
-  background-color: ${props => props.theme.colors.white.normal};
+  background-color: ${theme.colors.white.normal};
   border-radius: 24px;
 `;
 
-export const MarginRight = styled.View`
+export const marginRight = css`
   margin-right: 8px;
+`;
+
+export const membershipPosition = css`
+  position: absolute;
+  left: 30;
+  bottom: 0;
+`;
+
+export const leftContainer = css`
+  flex: 1;
 `;

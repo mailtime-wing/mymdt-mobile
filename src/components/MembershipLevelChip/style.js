@@ -1,20 +1,13 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import {css} from '@emotion/native';
 
-export const LevelChip = styled.View`
+export const levelChip = backgroundColor => css`
   padding: 0 8px;
   border-radius: 34px;
   height: 16px;
-  background: ${props => props.background};
+  background: ${backgroundColor};
   width: auto;
-  align-self: center;
 `;
 
-export const LevelText = styled(Text)`
-  color: ${props => props.color};
-  font-size: 12px;
-  line-height: 15px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+export const levelText = textColor => css`
+  color: ${textColor};
 `;
