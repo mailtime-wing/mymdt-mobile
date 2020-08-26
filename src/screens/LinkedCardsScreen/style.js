@@ -24,7 +24,7 @@ export const sectionContainer = theme => css`
   margin-left: 24px;
   border-bottom-width: 1px;
   border-color: rgba(0, 0, 0, 0.1);
-  background-color: ${theme.colors.background};
+  background-color: ${theme.colors.background1};
 `;
 
 export const listItemContainer = css`

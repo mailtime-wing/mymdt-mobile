@@ -46,10 +46,6 @@ import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
 import BackButton from '@/components/BackButton';
 import CloseButton from '@/components/CloseButton';
-import {
-  MARGIN_BETWEEN_STATUS_BAR_AND_TOP_BAR,
-  TOP_BAR_HEIGHT,
-} from '@/constants/layout';
 
 import {styles} from './style';
 
@@ -57,7 +53,11 @@ const RootStack = createStackNavigator();
 const MainStack = createStackNavigator();
 
 const screens = [
-  {name: 'onboarding', component: OnboardingScreen},
+  {
+    name: 'onboarding',
+    component: OnboardingScreen,
+    options: {headerShown: false},
+  },
   {name: 'sign_in', component: SignInScreen},
   {name: 'sign_up', component: SignUpScreen},
   {name: 'loading', component: LoadingScreen},
@@ -65,9 +65,17 @@ const screens = [
 
 const setupScreens = [
   // 1st step: update user profile
-  {name: 'user_profile', component: UserProfileScreen},
+  {
+    name: 'user_profile',
+    component: UserProfileScreen,
+    appBarShown: false,
+  },
   // 2nd step: choose cashback type
-  {name: 'choose_cash_back_type', component: ChooseCashBackTypeScreen},
+  {
+    name: 'choose_cash_back_type',
+    component: ChooseCashBackTypeScreen,
+    options: {headerShown: false},
+  },
   // 3rd step: select offers
   {name: 'welcome', component: WelcomeScreen},
   {name: 'offer_select', component: OfferSelectScreen},
@@ -75,6 +83,7 @@ const setupScreens = [
   {
     name: 'introduction',
     component: IntroductionScreen,
+    options: {headerShown: false},
   },
   {
     name: 'add_email',
@@ -95,12 +104,25 @@ const setupScreens = [
   {
     name: 'linked_cards',
     component: LinkedCardsScreen,
+    options: {headerShown: false},
   },
   // 5th step: turn on notification
-  {name: 'notification_permission', component: NotificationPermissionScreen},
+  {
+    name: 'notification_permission',
+    component: NotificationPermissionScreen,
+    options: {headerShown: false},
+  },
   // 6th step: setup done and gain reward
-  {name: 'account_setup_done', component: AccountSetupDoneScreen},
-  {name: 'sign_up_reward', component: SignUpRewardScreen},
+  {
+    name: 'account_setup_done',
+    component: AccountSetupDoneScreen,
+    options: {headerShown: false},
+  },
+  {
+    name: 'sign_up_reward',
+    component: SignUpRewardScreen,
+    options: {headerShown: false},
+  },
 ];
 
 const authScreens = [
@@ -191,14 +213,16 @@ const SettingStack = createStackNavigator();
 const screenUnderModalOptions = {
   headerTitle: null,
   headerStyle: {
-    height: 84,
+    height: 68,
+    // TODO: use value from theme
+    backgroundColor: 'white',
+    shadowOffset: {x: 0, y: 0},
   },
   headerLeftContainerStyle: {
     paddingLeft: 24,
   },
-  headerTransparent: true,
   cardStyle: [styles.card, styles.modalCard],
-  headerStatusBarHeight: 0,
+  headerStatusBarHeight: 16,
   headerStyleInterpolator: HeaderStyleInterpolators.forSlideLeft,
 };
 
@@ -229,67 +253,75 @@ const Main = () => {
 
   const headerStyle = {
     ...styles.header,
-    height: top + MARGIN_BETWEEN_STATUS_BAR_AND_TOP_BAR + TOP_BAR_HEIGHT,
+    height: top + 64,
   };
 
   return (
     <MainStack.Navigator
+      headerMode="screen"
       screenOptions={{
-        headerTransparent: true,
+        // headerTransparent: true,
         headerTitleStyle: styles.headerTitle,
         cardStyle: styles.card,
-        headerStyle: headerStyle,
         gestureEnabled: false,
-        headerStyleInterpolator: HeaderStyleInterpolators.forSlideLeft,
+        headerStyle,
+        headerStatusBarHeight: top,
+        headerLeftContainerStyle: {
+          paddingLeft: 24,
+        },
       }}>
       {!authToken &&
-        screens.map(screen => (
+        screens.map(({name, appBarShown, options, ...screenProps}) => (
           <MainStack.Screen
-            key={screen.name}
-            name={screen.name}
-            component={screen.component}
+            key={name}
+            name={name}
+            {...screenProps}
             options={{
               headerLeft: props =>
-                backScreen.includes(screen.name) ? (
-                  <BackButton {...props} />
-                ) : null,
+                appBarShown === false ? null : <BackButton {...props} />,
+              headerStyle: {
+                ...headerStyle,
+                ...(appBarShown === false && {height: top}),
+              },
+              ...options,
             }}
           />
         ))}
-      {// TODO: hide setupScreens so that it cannot be back from authScreens
-      authToken &&
-        setupScreens
-          .filter(setupScreen => validScreenNames[setupScreen.name])
-          .map((screen, i) => {
-            const {name, component} = screen;
-            return (
-              <MainStack.Screen
-                key={name}
-                name={name}
-                component={component}
-                options={{
-                  headerLeft: props =>
-                    backScreen.includes(name) ? (
-                      <BackButton {...props} />
-                    ) : null,
-                }}
-              />
-            );
-          })}
-      {authToken &&
-        authScreens.map(screen => (
-          <MainStack.Screen
-            key={screen.name}
-            name={screen.name}
-            component={screen.component}
-            options={{
-              headerLeft: props =>
-                backScreen.includes(screen.name) ? (
-                  <BackButton {...props} />
-                ) : null,
-            }}
-          />
-        ))}
+      {authToken
+        ? setupScreens
+            .filter(setupScreen => validScreenNames[setupScreen.name])
+            .map(({name, appBarShown, options, ...screenProps}) => {
+              return (
+                <MainStack.Screen
+                  key={name}
+                  name={name}
+                  {...screenProps}
+                  options={{
+                    headerLeft: props =>
+                      appBarShown === false ? null : <BackButton {...props} />,
+                    headerStyle: {
+                      ...headerStyle,
+                      ...(appBarShown === false && {height: top}),
+                    },
+                    ...options,
+                  }}
+                />
+              );
+            })
+        : null}
+      {authToken
+        ? authScreens.map(({name, options, ...screenProps}) => (
+            <MainStack.Screen
+              key={name}
+              name={name}
+              {...screenProps}
+              options={{
+                headerLeft: props =>
+                  backScreen.includes(name) ? <BackButton {...props} /> : null,
+              }}
+            />
+          ))
+        : null}
     </MainStack.Navigator>
   );
 };
@@ -308,11 +340,11 @@ const Root = () => {
     <NavigationContainer linking={linking}>
       <RootStack.Navigator
         mode="modal"
+        headerMode="screen"
         screenOptions={{
           ...TransitionPresets.ModalPresentationIOS,
-          headerTransparent: true,
           headerTitle: null,
-          cardStyle: [styles.card, styles.modalCard],
+          cardStyle: [styles.card],
           headerLeft: props => <CloseButton {...props} />,
           cardOverlayEnabled: true,
           gestureEnabled: true,
@@ -323,22 +355,26 @@ const Root = () => {
           component={Main}
           options={{headerShown: false}}
         />
-        {authToken && (
+        {authToken ? (
           <RootStack.Screen
             name="settings"
             component={Setting}
             options={{headerShown: false}}
           />
-        )}
-        {authToken &&
-          authModalScreens.map(screen => (
-            <RootStack.Screen
-              key={screen.name}
-              name={screen.name}
-              component={screen.component}
-              options={screenUnderModalOptions}
-            />
-          ))}
+        ) : null}
+        {authToken
+          ? authModalScreens.map(({name, options, ...screenProps}) => (
+              <RootStack.Screen
+                key={name}
+                name={name}
+                {...screenProps}
+                options={{
+                  ...screenUnderModalOptions,
+                  ...options,
+                }}
+              />
+            ))
+          : null}
       </RootStack.Navigator>
     </NavigationContainer>
   );
