@@ -14,8 +14,9 @@ const Switch = props => {
       buttonOffsetLeft={4}
       buttonOffsetRight={6}
       buttonColor={theme.colors.background1}
-      colorSwitchOff={theme.colors.secondary.normal}
+      colorSwitchOff={theme.colors.background3}
       colorSwitchOn={theme.colors.secondary.normal}
+      borderColor="transparent"
       showText={false}
       value={props.value}
       {...props}
