@@ -126,8 +126,12 @@ const setupScreens = [
 ];
 
 const authScreens = [
-  {name: 'home', component: HomeStack},
-  {name: 'membership', component: MembershipScreen},
+  {name: 'home', component: HomeStack, options: {headerShown: false}},
+  {
+    name: 'membership',
+    component: MembershipScreen,
+    options: {headerTransparent: true},
+  },
 ];
 
 const authModalScreens = [
@@ -154,17 +158,6 @@ const settingScreens = [
   {name: 'terms_of_service', component: LanguageScreen},
   {name: 'privacy_policy', component: LanguageScreen},
   {name: 'about_us', component: LanguageScreen},
-];
-
-const backScreen = [
-  'sign_in',
-  'sign_up',
-  'welcome',
-  'offer_select',
-  'add_email',
-  'membership',
-  'choose_region',
-  'data_source_info',
 ];
 
 const linkingConfig = {
@@ -221,7 +214,7 @@ const screenUnderModalOptions = {
   headerLeftContainerStyle: {
     paddingLeft: 24,
   },
-  cardStyle: [styles.card, styles.modalCard],
+  cardStyle: [styles.card],
   headerStatusBarHeight: 16,
   headerStyleInterpolator: HeaderStyleInterpolators.forSlideLeft,
 };
@@ -316,8 +309,8 @@ const Main = () => {
               name={name}
               {...screenProps}
               options={{
-                headerLeft: props =>
-                  backScreen.includes(name) ? <BackButton {...props} /> : null,
+                headerLeft: BackButton,
+                ...options,
               }}
             />
           ))

@@ -11,8 +11,4 @@ export const styles = StyleSheet.create({
   card: {
     backgroundColor: 'white',
   },
-  modalCard: {
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-  },
 });

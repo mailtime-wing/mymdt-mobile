@@ -24,6 +24,5 @@ export const Card = styled.Image`
 export const RowContainer = styled.View`
   align-self: flex-end;
   flex-direction: row;
-  margin-top: 64px;
   margin-right: 32px;
 `;

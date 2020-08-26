@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 
 import {
   ScrollContainer,
@@ -9,28 +9,35 @@ import {
 } from './style';
 
 import LinearGradientBackground from '@/components/LinearGradientBackground';
+import ScreenContainer from '@/components/ScreenContainer';
 
 import BellIcon from '@/assets/icon_bell.svg';
 import SettingIcon from '@/assets/icon_settings.svg';
 
-const MembershipScreen = props => {
-  const RightSideButtons = () => (
-    <RowContainer>
-      <NotificationBell
-        onPress={() => props.navigation.navigate('notification')}>
-        <BellIcon />
-      </NotificationBell>
-      <SettingButton onPress={() => props.navigation.navigate('settings')}>
-        <SettingIcon />
-      </SettingButton>
-    </RowContainer>
-  );
+const MembershipScreen = ({navigation}) => {
+  useLayoutEffect(() => {
+    const RightSideButtons = () => (
+      <RowContainer>
+        <NotificationBell onPress={() => navigation.navigate('notification')}>
+          <BellIcon />
+        </NotificationBell>
+        <SettingButton onPress={() => navigation.navigate('settings')}>
+          <SettingIcon />
+        </SettingButton>
+      </RowContainer>
+    );
+
+    navigation.setOptions({
+      headerRight: RightSideButtons,
+    });
+  }, [navigation]);
 
   return (
     <LinearGradientBackground>
       <ScrollContainer>
-        <RightSideButtons />
-        <Card source={require('@/assets/RewardMeCard.png')} />
+        <ScreenContainer hasTopBar headerTransparent>
+          <Card source={require('@/assets/RewardMeCard.png')} />
+        </ScreenContainer>
       </ScrollContainer>
     </LinearGradientBackground>
   );
