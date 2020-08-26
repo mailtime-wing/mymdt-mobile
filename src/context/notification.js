@@ -36,14 +36,7 @@ const reducer = (state, action) => {
 export const NotificationProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const appState = useRef(AppState.currentState);
-
-  useEffect(() => {
-    notificationContext.checkPermission();
-    AppState.addEventListener('change', handleAppStateChange);
-    return () => {
-      AppState.removeEventListener('change', handleAppStateChange);
-    };
-  }, [handleAppStateChange, notificationContext]);
+  const initialRender = useRef(false);
 
   const notificationContext = useMemo(
     () => ({
@@ -76,6 +69,17 @@ export const NotificationProvider = ({children}) => {
     }),
     [state.permission],
   );
+
+  useEffect(() => {
+    if (!initialRender.current) {
+      notificationContext.checkPermission();
+      initialRender.current = true;
+    }
+    AppState.addEventListener('change', handleAppStateChange);
+    return () => {
+      AppState.removeEventListener('change', handleAppStateChange);
+    };
+  }, [handleAppStateChange, notificationContext]);
 
   const handleAppStateChange = useCallback(
     nextAppState => {
