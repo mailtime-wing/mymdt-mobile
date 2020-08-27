@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {Linking, Button} from 'react-native';
+import {Linking} from 'react-native';
 import {
   createStackNavigator,
   HeaderStyleInterpolators,
@@ -46,6 +46,7 @@ import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
 import BackButton from '@/components/BackButton';
 import CloseIconButton from '@/components/CloseIconButton';
+import BackIconButton from '@/components/BackIconButton';
 
 import {styles} from './style';
 
@@ -226,7 +227,7 @@ const Setting = ({navigation}) => {
         ...screenUnderModalOptions,
         headerLeft: ({onPress}) => {
           return onPress ? (
-            <Button onPress={onPress} title="<" />
+            <BackIconButton onPress={onPress} />
           ) : (
             <CloseIconButton onPress={() => navigation.goBack()} />
           );

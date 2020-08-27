@@ -1,16 +1,16 @@
 import React from 'react';
 
 import IconButton from '@/components/IconButton';
-import CloseIcon from '@/assets/icon_x.svg';
+import BackIcon from '@/assets/icon_chevron-left.svg';
 
-const CloseIconButton = props => (
+const BackIconButton = props => (
   <IconButton
     variant="outlined"
     sizeVariant="small"
     color="black"
-    svgIcon={CloseIcon}
+    svgIcon={BackIcon}
     {...props}
   />
 );
 
-export default CloseIconButton;
+export default BackIconButton;
