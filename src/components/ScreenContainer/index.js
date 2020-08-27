@@ -1,6 +1,8 @@
 import React from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import {APP_BAR_HEIGHT} from '@/constants/layout';
+
 import {Container} from './style';
 
 // TODO: maybe this can be replaced by using `cardStyle` on screen component?
@@ -14,8 +16,7 @@ function ScreenContainer({
   const {top} = useSafeAreaInsets();
   const marginTop = headerTransparent
     ? hasTopBar
-      ? // TODO: replace 64 with constant
-        top + 64
+      ? top + APP_BAR_HEIGHT
       : top
     : hasTopBar
     ? 14

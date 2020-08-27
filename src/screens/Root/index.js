@@ -42,11 +42,13 @@ import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
 import ConverterScreen from '@/screens/ConverterScreen';
 import WithdrawalScreen from '@/screens/WithdrawalScreen';
 import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
+
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
 import BackButton from '@/components/BackButton';
 import CloseIconButton from '@/components/CloseIconButton';
 import BackIconButton from '@/components/BackIconButton';
+import {APP_BAR_HEIGHT} from '@/constants/layout';
 
 import {styles} from './style';
 
@@ -207,13 +209,16 @@ const SettingStack = createStackNavigator();
 const screenUnderModalOptions = {
   headerTitle: null,
   headerStyle: {
-    height: 68,
+    height: APP_BAR_HEIGHT,
     // TODO: use value from theme
     backgroundColor: 'white',
     shadowOffset: {x: 0, y: 0},
   },
   headerLeftContainerStyle: {
     paddingLeft: 24,
+  },
+  headerRightContainerStyle: {
+    paddingRight: 24,
   },
   cardStyle: [styles.card],
   headerStatusBarHeight: 16,
@@ -247,7 +252,7 @@ const Main = () => {
 
   const headerStyle = {
     ...styles.header,
-    height: top + 64,
+    height: top + APP_BAR_HEIGHT,
   };
 
   return (
