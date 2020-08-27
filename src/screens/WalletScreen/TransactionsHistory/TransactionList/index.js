@@ -11,7 +11,7 @@ import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
 
 const flexEnd = {justifyContent: 'flex-end'};
 
-const TransactionList = ({transactionsHistoryList, cardType, onLoadMore}) => {
+const TransactionList = ({transactionsHistoryList, cardType, ...props}) => {
   const renderItem = ({item}) => (
     <TransactionItem
       icon={item.icon}
@@ -31,7 +31,7 @@ const TransactionList = ({transactionsHistoryList, cardType, onLoadMore}) => {
             amount={item.node.amount}
             size={16}
             fontSize={16}
-            color={props => props.theme.colors.primary.dark}
+            color={props => props.theme.colors.textOfMdt}
             style={flexEnd}
           />
         )
@@ -39,17 +39,14 @@ const TransactionList = ({transactionsHistoryList, cardType, onLoadMore}) => {
     />
   );
 
-  const handleOnEndReached = () => {
-    onLoadMore();
-  };
-
   return (
     <Container>
       <FlatList
         data={transactionsHistoryList}
         renderItem={renderItem}
-        keyExtractor={({name, date}, index) => `${name}-${date}-${index}`}
-        onEndReached={handleOnEndReached}
+        keyExtractor={item => item.node.id}
+        onEndReachedThreshold={0.1}
+        {...props}
       />
     </Container>
   );

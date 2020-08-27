@@ -1,12 +1,11 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
+import {VirtualizedList} from 'react-native';
 import {AuthContext} from '@/context/auth';
 import {useLazyQuery} from '@apollo/react-hooks';
 import {TRANSACTIONS_QUERY} from '@/api/data';
 import {REWARD, REDEEM, INTEREST, CHECK_IN} from '@/constants/transactionsType';
 import { useTheme } from 'emotion-theming';
-
-import {ScrollContainer} from './style';
 
 import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
@@ -168,7 +167,7 @@ const WalletScreen = ({navigation}) => {
       }),
   );
   const pageInfo = currentCardData?.transactions.pageInfo;
-  let filter = filterList[activeFilterIndex].value;
+  const filter = filterList[activeFilterIndex].value;
 
   useEffect(() => {
     getTransactions({
@@ -195,72 +194,91 @@ const WalletScreen = ({navigation}) => {
   };
 
   const onApplyPress = () => {
-    if (filter) {
-      getTransactions({
-        variables: {filter: {type: filter}, currencyCode: currentCard.type},
-      });
-    } else {
-      getTransactions({variables: {currencyCode: currentCard.type}});
-    }
+    getTransactions({
+      variables: {
+        ...(filter && {
+          filter: {
+            type: filter,
+          },
+        }),
+        currencyCode: currentCard.type,
+      },
+    });
 
     setShowBottomSheet(false);
   };
 
   const onLoadMore = () => {
-    if (!pageInfo.hasNextPage) {
+    if (!pageInfo?.hasNextPage) {
       return;
     }
 
-    if (filter) {
-      fetchMore({
-        variables: {
-          filter: {
-            type: filter,
-          },
-          currencyCode: currentCard.type,
-          cursor: pageInfo.endCursor,
+    fetchMore({
+      ...(filter && {
+        filter: {
+          type: filter,
         },
-      });
-    } else {
-      fetchMore({
-        variables: {
-          currencyCode: currentCard.type,
-          cursor: pageInfo.endCursor,
-        },
-      });
-    }
-  };
+      }),
+      variables: {
+        currencyCode: currentCard.type,
+        cursor: pageInfo.endCursor,
+      },
+      updateQuery: (previousResult, {fetchMoreResult}) => {
+        if (
+          !fetchMoreResult?.userProfile?.currencyAccounts?.[0]?.transactions
+            ?.edges?.length
+        ) {
+          return previousResult;
+        }
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+        const newData = JSON.parse(JSON.stringify(fetchMoreResult));
+
+        newData.userProfile.currencyAccounts[0].transactions.edges = [
+          ...previousResult.userProfile.currencyAccounts[0].transactions.edges,
+          ...fetchMoreResult.userProfile.currencyAccounts[0].transactions.edges,
+        ];
+
+        return newData;
+      },
+    });
+  };
 
   return (
     <LinearGradientBackground>
-      <ScrollContainer>
-        <AccountBar navigation={navigation} />
-        <CardList
-          cardList={cardList}
-          onSnapToItem={handleOnSnapToItem}
-          activeCardIndex={activeCardIndex}
-        />
-        <ActionButtons
-          actionList={currentCard.actionList}
-          color={currentCard.theme.color}
-          navigation={navigation}
-        />
-        <TransactionsHistory
-          transactionsHistoryList={cardTransactionsHistory}
-          currentTheme={currentCard.theme}
-          cardType={currentCard.type}
-          currentFilter={
-            <FormattedMessage id="filter" defaultMessage="FILTER" />
-          }
-          handleFilterPress={handleFilterPress}
-          navigation={navigation}
-          onLoadMore={onLoadMore}
-        />
-      </ScrollContainer>
+      <VirtualizedList
+        getItemCount={() => 0}
+        ListHeaderComponent={
+          <>
+            {/* TODO: improve loading */}
+            {loading && <LoadingSpinner />}
+            <AccountBar navigation={navigation} />
+            <CardList
+              cardList={cardList}
+              onSnapToItem={handleOnSnapToItem}
+              activeCardIndex={activeCardIndex}
+            />
+            <ActionButtons
+              actionList={currentCard.actionList}
+              color={currentCard.theme.color}
+              navigation={navigation}
+            />
+          </>
+        }
+        ListFooterComponent={
+          <TransactionsHistory
+            transactionsHistoryList={cardTransactionsHistory}
+            currentTheme={currentCard.theme}
+            cardType={currentCard.type}
+            currentFilter={
+              <FormattedMessage id="filter" defaultMessage="FILTER" />
+            }
+            handleFilterPress={handleFilterPress}
+            navigation={navigation}
+            // FlatList props
+            onEndReached={onLoadMore}
+          />
+        }
+      />
       {showBottomSheet && (
         <TransactionBottomSheet
           title={<FormattedMessage id="filter_by" defaultMessage="Filter by" />}
