@@ -47,6 +47,7 @@ export const UNBIND_EMAIL_ACCOUNTS_API = gql`
 export const GET_USER_EMAIL_ACCOUNTS_API = gql`
   query {
     userProfile {
+      id
       emailAccounts {
         id
         emailAddress
@@ -82,6 +83,7 @@ export const GET_USER_MEMBERSHIP_API = gql`
   query {
     userProfile {
       name
+      id
       membership {
         id
         name
@@ -105,6 +107,7 @@ export const GET_USER_MEMBERSHIP_API = gql`
 export const GET_USER_OFFER_API = gql`
   query {
     userProfile {
+      id
       offers {
         id
         type
@@ -144,6 +147,7 @@ export const UPDATE_USER_CASHBACK_CURRENCY_CODE_API = gql`
 export const GET_USER_REWARDS_API = gql`
   query {
     userProfile {
+      id
       rewards {
         id
         name
@@ -172,6 +176,7 @@ export const GET_APP_CONFIG_API = gql`
 export const GET_USER_PROFILE_API = gql`
   query {
     userProfile {
+      id
       name
       gender
       birthday
@@ -205,6 +210,7 @@ export const REPORT_MISSING_RECEIPT = gql`
 export const GET_USER_TASK_GROUPS_AND_REWARD_API = gql`
   query {
     userProfile {
+      id
       taskGroups {
         id
         name
@@ -246,6 +252,7 @@ export const CLAIM_REWARD_API = gql`
 export const GET_CHECK_IN_STATUS_API = gql`
   query {
     userProfile {
+      id
       checkInStatus {
         today
         hasCheckedInToday
@@ -281,6 +288,7 @@ export const TRANSACTIONS_QUERY = gql`
     $currencyCode: CurrencyCode
   ) {
     userProfile {
+      id
       locale
       currencyAccounts(currencyCode: $currencyCode) {
         id
