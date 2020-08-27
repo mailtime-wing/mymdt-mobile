@@ -13,15 +13,17 @@ import SpecialListOption from '@/components/SpecialListOption';
 import Switch from '@/components/Switch';
 import AppText from '@/components/AppText2';
 import PopupModal from '@/components/PopupModal';
+import BottomSheet from '@/components/BottomSheet';
 
 import {appVersionStyle, container} from './style';
 
-const SettingScreen = ({navigation}) => {
+const SettingScreen = () => {
   const theme = useTheme();
-  const {language} = useContext(IntlContext);
+  const {languageList, language, saveLanguage} = useContext(IntlContext);
   const {checkPermissions} = useContext(NotificationContext);
   const [push, setPush] = useState(false); // from api later
   const [showPopup, setShowPopup] = useState(false);
+  const [showLanguageBottomSheet, setShowLanguageBottomSheet] = useState(false);
 
   const handlePushToggle = async () => {
     const permissions = await checkPermissions();
@@ -37,6 +39,14 @@ const SettingScreen = ({navigation}) => {
       Linking.openSettings();
     }
     setShowPopup(false);
+  }
+
+  const handleLanguageOptionPress = index => {
+    saveLanguage(languageList[index]);
+  };
+
+  const handleLanguageBottomSheetLayoutPress = () => {
+    setShowLanguageBottomSheet(false);
   };
 
   return (
@@ -48,8 +58,8 @@ const SettingScreen = ({navigation}) => {
         <ListOption
           key="language"
           label={<FormattedMessage id="language" />}
-          value={language}
-          onPress={() => navigation.navigate('language')}
+          value={language.label}
+          onPress={() => setShowLanguageBottomSheet(true)}
         />
         <ListOption
           key="currency"
@@ -72,6 +82,17 @@ const SettingScreen = ({navigation}) => {
             }}
           />
         </AppText>
+        {showLanguageBottomSheet && (
+          <BottomSheet
+            list={languageList}
+            header={
+              <FormattedMessage id="language" defaultMessage="Language" />
+            }
+            optionActiveIndex={languageList.indexOf(language)}
+            onPress={handleLanguageOptionPress}
+            onLayoutPress={handleLanguageBottomSheetLayoutPress}
+          />
+        )}
       </View>
       {showPopup && (
         <PopupModal

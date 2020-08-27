@@ -28,7 +28,6 @@ import DataSourceInfoScreen from '@/screens/DataSourceInfoScreen';
 import LinkedCardsScreen from '@/screens/LinkedCardsScreen';
 import LinkedEmailsScreen from '@/screens/LinkedEmailsScreen';
 
-import LanguageScreen from '@/screens/LanguageScreen';
 import SignOutScreen from '@/screens/SignOutScreen';
 import NotificationScreen from '@/screens/NotificationScreen';
 import UserProfileEditScreen from '@/screens/UserProfileEditScreen';
@@ -140,7 +139,7 @@ const authScreens = [
 const authModalScreens = [
   {name: 'notification', component: NotificationScreen},
   // {name: 'my_referral_code', component: UserProfileEditScreen},
-  // {name: 'enter_invite_code', component: LanguageScreen},
+  // {name: 'enter_invite_code', component: AppSettingScreen},
   {name: 'converter', component: ConverterScreen},
   {name: 'withdrawal', component: WithdrawalScreen},
   {name: 'missing_receipt', component: MissingReceiptScreen},
@@ -156,11 +155,10 @@ const settingScreens = [
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'sign_out', component: SignOutScreen},
   {name: 'app_settings', component: AppSettingScreen},
-  {name: 'language', component: LanguageScreen},
-  {name: 'faq_and_support', component: LanguageScreen},
-  {name: 'terms_of_service', component: LanguageScreen},
-  {name: 'privacy_policy', component: LanguageScreen},
-  {name: 'about_us', component: LanguageScreen},
+  {name: 'faq_and_support', component: AppSettingScreen},
+  {name: 'terms_of_service', component: AppSettingScreen},
+  {name: 'privacy_policy', component: AppSettingScreen},
+  {name: 'about_us', component: AppSettingScreen},
 ];
 
 const linkingConfig = {

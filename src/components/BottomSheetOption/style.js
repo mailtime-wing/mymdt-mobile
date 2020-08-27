@@ -1,29 +1,24 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import {css} from '@emotion/native';
 
-export const Option = styled.TouchableOpacity`
+export const option = (theme, active) => css`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 12px 24px;
-  ${props => props.active && 'background: rgba(33, 206, 219, 0.1);'}
+  ${active && `background: ${theme.colors.secondary.border};`}
 `;
 
-export const ListLabel = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
-  color: rgba(0, 0, 0, 0.8);
-  ${props => props.active && `color: ${props.theme.colors.secondary.dark};`}
+export const listLabel = (theme, active) => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
+  ${active && `color: ${theme.colors.secondary.dark};`}
 `;
 
-export const ListValue = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
+export const listValue = theme => css`
+  color: ${theme.colors.textOnBackground.disabled};
   margin-right: 16px;
 `;
 
-export const RightSide = styled.View`
+export const rightSide = css`
   flex-direction: row;
   align-items: center;
 `;
