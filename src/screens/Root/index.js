@@ -253,7 +253,6 @@ const Main = () => {
     <MainStack.Navigator
       headerMode="screen"
       screenOptions={{
-        // headerTransparent: true,
         headerTitleStyle: styles.headerTitle,
         cardStyle: styles.card,
         gestureEnabled: false,

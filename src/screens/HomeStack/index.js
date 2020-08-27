@@ -2,7 +2,6 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTheme} from 'emotion-theming';
-import SafeAreaView from 'react-native-safe-area-view';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {LabelText, styles} from './style';
@@ -38,84 +37,79 @@ const HomeStack = () => {
   };
 
   return (
-    <>
-      <SafeAreaView
-        style={[styles.safeAreaViewContainer, styles.safeAreaView]}
+    <Tab.Navigator
+      initialRouteName="Browse"
+      tabBarOptions={{
+        activeTintColor: white,
+        inactiveTintColor: grey,
+        activeBackgroundColor: theme.colors.secondary.normal,
+        inactiveBackgroundColor: white,
+        labelPosition: 'below-icon',
+        style: tabBarContainerStyle,
+        // tabStyle: [styles.tabBar, styles.tabBarShadow],
+        tabStyle: styles.tabBar, // TODO: no tabstyle for active / inactive
+      }}>
+      <Tab.Screen
+        name="Browse"
+        component={BrowseScreen}
+        options={{
+          tabBarLabel: ({focused}) => <Label id="home" focused={focused} />,
+          tabBarIcon: ({focused}) => (
+            <HomeIcon
+              width={iconWidth}
+              height={iconHeight}
+              strokeWidth={strokeWidth}
+              stroke={focused ? white : grey}
+            />
+          ),
+        }}
       />
-      <Tab.Navigator
-        initialRouteName="Browse"
-        tabBarOptions={{
-          activeTintColor: white,
-          inactiveTintColor: grey,
-          activeBackgroundColor: theme.colors.secondary.normal,
-          inactiveBackgroundColor: white,
-          labelPosition: 'below-icon',
-          style: tabBarContainerStyle,
-          // tabStyle: [styles.tabBar, styles.tabBarShadow],
-          tabStyle: styles.tabBar, // TODO: no tabstyle for active / inactive
-        }}>
-        <Tab.Screen
-          name="Browse"
-          component={BrowseScreen}
-          options={{
-            tabBarLabel: ({focused}) => <Label id="home" focused={focused} />,
-            tabBarIcon: ({focused}) => (
-              <HomeIcon
-                width={iconWidth}
-                height={iconHeight}
-                strokeWidth={strokeWidth}
-                stroke={focused ? white : grey}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Bonus"
-          component={BonusScreen}
-          options={{
-            tabBarLabel: ({focused}) => <Label id="bonus" focused={focused} />,
-            tabBarIcon: ({focused}) => (
-              <BonusIcon
-                width={iconWidth}
-                height={iconHeight}
-                strokeWidth={strokeWidth}
-                stroke={focused ? white : grey}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Redeem"
-          component={RedeemScreen}
-          options={{
-            tabBarLabel: ({focused}) => <Label id="redeem" focused={focused} />,
-            tabBarIcon: ({focused}) => (
-              <RedeemIcon
-                width={iconWidth}
-                height={iconHeight}
-                strokeWidth={strokeWidth}
-                stroke={focused ? white : grey}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="wallet"
-          component={WalletScreen}
-          options={{
-            tabBarLabel: ({focused}) => <Label id="wallet" focused={focused} />,
-            tabBarIcon: ({focused}) => (
-              <WalletIcon
-                width={iconWidth}
-                height={iconHeight}
-                strokeWidth={strokeWidth}
-                stroke={focused ? white : grey}
-              />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </>
+      <Tab.Screen
+        name="Bonus"
+        component={BonusScreen}
+        options={{
+          tabBarLabel: ({focused}) => <Label id="bonus" focused={focused} />,
+          tabBarIcon: ({focused}) => (
+            <BonusIcon
+              width={iconWidth}
+              height={iconHeight}
+              strokeWidth={strokeWidth}
+              stroke={focused ? white : grey}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Redeem"
+        component={RedeemScreen}
+        options={{
+          tabBarLabel: ({focused}) => <Label id="redeem" focused={focused} />,
+          tabBarIcon: ({focused}) => (
+            <RedeemIcon
+              width={iconWidth}
+              height={iconHeight}
+              strokeWidth={strokeWidth}
+              stroke={focused ? white : grey}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="wallet"
+        component={WalletScreen}
+        options={{
+          tabBarLabel: ({focused}) => <Label id="wallet" focused={focused} />,
+          tabBarIcon: ({focused}) => (
+            <WalletIcon
+              width={iconWidth}
+              height={iconHeight}
+              strokeWidth={strokeWidth}
+              stroke={focused ? white : grey}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 

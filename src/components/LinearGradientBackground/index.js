@@ -1,12 +1,13 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {styles} from './style';
+import SafeAreaView from 'react-native-safe-area-view';
+import {styles, safeAreaStyle} from './style';
 
 const LinearGradientBackground = ({children, style}) => (
   <LinearGradient
     colors={['#FDFBF2', '#E2FAFF']}
     style={[styles.linearGradient, style]}>
-    {children}
+    <SafeAreaView style={safeAreaStyle}>{children}</SafeAreaView>
   </LinearGradient>
 );
 

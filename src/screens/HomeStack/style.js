@@ -43,14 +43,6 @@ export const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
   },
-  safeAreaView: {
-    backgroundColor: '#FDFBF2',
-  },
-  safeAreaViewContainer: {
-    flex: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   headerTitle: {
     display: 'none',
   },
