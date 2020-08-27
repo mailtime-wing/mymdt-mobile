@@ -3,30 +3,36 @@ import React, {
   useReducer,
   useEffect,
   useMemo,
-  useRef,
   useCallback,
 } from 'react';
-import {AppState} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
-const initialState = {
-  permission: {
-    alert: false,
-    badge: false,
-    sound: false,
-  },
-  // TODO: handle badge
+const INITIAL_PERMISSIONS = {
+  alert: false,
+  badge: false,
+  sound: false,
 };
-export const NotificationContext = createContext(null);
+
+const initialContextValue = {
+  permissions: INITIAL_PERMISSIONS,
+  checkPermissions: () => Promise.resolve(INITIAL_PERMISSIONS),
+  notify: () => {},
+  request: () => Promise.resolve(),
+};
+export const NotificationContext = createContext(initialContextValue);
 
 const UPDATE_PERMISSION = 'updatePermission';
+const initialState = {
+  permissions: INITIAL_PERMISSIONS,
+  // TODO: handle badge
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
     case UPDATE_PERMISSION:
       return {
         ...state,
-        permission: action.payload,
+        permissions: action.payload,
       };
     default:
       break;
@@ -35,65 +41,56 @@ const reducer = (state, action) => {
 
 export const NotificationProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const appState = useRef(AppState.currentState);
-  const initialRender = useRef(false);
+
+  const checkPermissions = useCallback(async () => {
+    try {
+      const permissions = await new Promise(resolve =>
+        PushNotificationIOS.checkPermissions(resolve),
+      );
+
+      if (!permissions) {
+        dispatch({type: UPDATE_PERMISSION, payload: initialState.permissions});
+        return initialState.permissions;
+      }
+
+      dispatch({type: UPDATE_PERMISSION, payload: permissions});
+      return permissions;
+    } catch (e) {
+      console.error('error check permission ios');
+      dispatch({type: UPDATE_PERMISSION, payload: initialState.permissions});
+      return initialState.permission;
+    }
+  }, []);
+
+  const notify = useCallback(details => {
+    try {
+      PushNotificationIOS.presentLocalNotification(details);
+    } catch (e) {
+      console.error('error send local noti ios');
+    }
+  }, []);
+
+  const request = useCallback(async () => {
+    try {
+      await PushNotificationIOS.requestPermissions();
+    } catch (e) {
+      console.error('error request permission ios');
+    }
+  }, []);
 
   const notificationContext = useMemo(
     () => ({
-      checkPermission: async () => {
-        try {
-          PushNotificationIOS.checkPermissions(permission => {
-            if (permission) {
-              dispatch({type: UPDATE_PERMISSION, payload: permission});
-            }
-          });
-        } catch (e) {
-          console.error('error check permission ios');
-        }
-      },
-      notify: async details => {
-        try {
-          PushNotificationIOS.presentLocalNotification(details);
-        } catch (e) {
-          console.error('error send local noti ios');
-        }
-      },
-      request: async () => {
-        try {
-          PushNotificationIOS.requestPermissions();
-        } catch (e) {
-          console.error('error request permission ios');
-        }
-      },
-      permission: state.permission,
+      checkPermissions,
+      notify,
+      request,
+      permissions: state.permissions,
     }),
-    [state.permission],
+    [checkPermissions, notify, request, state.permissions],
   );
 
   useEffect(() => {
-    if (!initialRender.current) {
-      notificationContext.checkPermission();
-      initialRender.current = true;
-    }
-    AppState.addEventListener('change', handleAppStateChange);
-    return () => {
-      AppState.removeEventListener('change', handleAppStateChange);
-    };
-  }, [handleAppStateChange, notificationContext]);
-
-  const handleAppStateChange = useCallback(
-    nextAppState => {
-      if (
-        appState.current.match(/inactive|background/) &&
-        nextAppState === 'active'
-      ) {
-        notificationContext.checkPermission();
-      }
-
-      appState.current = nextAppState;
-    },
-    [notificationContext],
-  );
+    checkPermissions();
+  }, [checkPermissions]);
 
   return (
     <NotificationContext.Provider value={notificationContext}>

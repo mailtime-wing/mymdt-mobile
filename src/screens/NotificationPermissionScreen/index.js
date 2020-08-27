@@ -29,8 +29,8 @@ const NotificationPermissionScreen = () => {
   const {navigateByFlow} = useSetupFlow();
   const {notify, request} = useContext(NotificationContext);
 
-  const requestNotificationPermission = () => {
-    request();
+  const requestNotificationPermission = async () => {
+    await request();
     notify(details);
     navigateByFlow();
   };

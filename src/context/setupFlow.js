@@ -11,7 +11,7 @@ const setupFlowContextInitialValue = {
 export const SetupFlowContext = createContext(setupFlowContextInitialValue);
 
 export const SetupFlowProvider = ({children}) => {
-  const {permission} = useContext(NotificationContext);
+  const {permissions} = useContext(NotificationContext);
   const {setupStatus} = useContext(PreloadDataContext);
   const [graph] = useState(new Graph());
 
@@ -89,11 +89,11 @@ export const SetupFlowProvider = ({children}) => {
       result.account_setup_done = true;
       result.sign_up_reward = true;
     }
-    if (permission.alert) {
+    if (permissions.alert) {
       result.notification_permission = true;
     }
     return result;
-  }, [permission, setupStatus]);
+  }, [permissions, setupStatus]);
 
   /** @type {Object.<string, boolean>} */
   const validScreenNames = useMemo(() => {

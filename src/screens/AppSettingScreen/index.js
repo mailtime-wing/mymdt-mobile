@@ -19,15 +19,16 @@ import {appVersionStyle, container} from './style';
 const SettingScreen = ({navigation}) => {
   const theme = useTheme();
   const {language} = useContext(IntlContext);
-  const {permission} = useContext(NotificationContext);
+  const {checkPermissions} = useContext(NotificationContext);
   const [push, setPush] = useState(false); // from api later
   const [showPopup, setShowPopup] = useState(false);
 
-  const handlePushToggle = () => {
-    if (!permission.alert && !push) {
+  const handlePushToggle = async () => {
+    const permissions = await checkPermissions();
+    if (!permissions.alert && !push) {
       setShowPopup(true);
     } else {
-      setPush(!push);
+      setPush(_push => !_push);
     }
   };
 
