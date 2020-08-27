@@ -38,14 +38,18 @@ const translations = {
 };
 
 const IntlContainer = props => {
-  const [language, setLanguage] = useState(languageList[0].value); // default is english
-  const [translation, setTranslation] = useState(translations[language]);
+  const [language, setLanguage] = useState(languageList[0]); // default is english
+  const locale = language.value;
+  const [translation, setTranslation] = useState(translations[locale]);
 
-  const saveLanguage = async value => {
+  const saveLanguage = async newLanguage => {
     try {
-      await AsyncStorage.setItem(LANGUAGE_STORAGE_KEY, value);
-      setLanguage(value);
-      setTranslation(translations[value]);
+      await AsyncStorage.setItem(
+        LANGUAGE_STORAGE_KEY,
+        JSON.stringify(newLanguage),
+      );
+      setLanguage(newLanguage);
+      setTranslation(translations[newLanguage.value]);
     } catch (error) {
       console.error(error);
     }
@@ -53,10 +57,10 @@ const IntlContainer = props => {
 
   const loadLanguage = async () => {
     try {
-      const data = await AsyncStorage.getItem('language');
+      const data = JSON.parse(await AsyncStorage.getItem('language'));
       if (data !== null) {
         setLanguage(data);
-        setTranslation(translations[data]);
+        setTranslation(translations[data.value]);
       }
     } catch (error) {
       console.error(error);
@@ -70,14 +74,14 @@ const IntlContainer = props => {
   return (
     <IntlContext.Provider
       value={{
-        language: languageList.find(lang => lang.value === language).label,
+        language: languageList.find(lang => lang.value === locale),
         languageList: languageList,
-        localeEnum: Object.keys(locales).find(key => locales[key] === language),
+        localeEnum: Object.keys(locales).find(key => locales[key] === locale),
         saveLanguage: saveLanguage,
         loadLanguage: loadLanguage,
       }}>
       <IntlProvider
-        locale={language}
+        locale={locale}
         messages={translation}
         defaultLocale={locales.EN_US}
         textComponent={Text}>

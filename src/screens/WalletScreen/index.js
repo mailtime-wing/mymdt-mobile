@@ -7,7 +7,7 @@ import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
-import BottomSheet from '@/components/BottomSheet';
+import TransactionBottomSheet from '@/components/TransactionBottomSheet';
 
 import CardList from './CardList';
 import ActionButtons from './ActionButtons';
@@ -183,7 +183,7 @@ const WalletScreen = ({navigation}) => {
         />
       </ScrollContainer>
       {showBottomSheet && (
-        <BottomSheet
+        <TransactionBottomSheet
           title={<FormattedMessage id="filter_by" defaultMessage="Filter by" />}
           items={filterList}
           activeOptionIndex={activeFilterIndex}
