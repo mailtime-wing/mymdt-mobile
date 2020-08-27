@@ -9,6 +9,7 @@ import {IntlContainer} from '@/context/Intl';
 import {AuthProvider} from '@/context/auth';
 import {PreloadDataProvider} from '@/context/preloadData';
 import {SetupFlowProvider} from '@/context/setupFlow';
+import {NotificationProvider} from '@/context/notification';
 import NavigationRoot from '@/screens/Root';
 
 function App() {
@@ -18,11 +19,13 @@ function App() {
         <ThemeProvider theme={theme}>
           <IntlContainer>
             <AuthProvider>
-              <PreloadDataProvider>
-                <SetupFlowProvider>
-                  <NavigationRoot />
-                </SetupFlowProvider>
-              </PreloadDataProvider>
+              <NotificationProvider>
+                <PreloadDataProvider>
+                  <SetupFlowProvider>
+                    <NavigationRoot />
+                  </SetupFlowProvider>
+                </PreloadDataProvider>
+              </NotificationProvider>
             </AuthProvider>
           </IntlContainer>
         </ThemeProvider>

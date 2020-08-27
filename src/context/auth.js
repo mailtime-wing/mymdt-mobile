@@ -1,12 +1,4 @@
-import React, {
-  createContext,
-  useReducer,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import {Platform} from 'react-native';
-import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import React, {createContext, useReducer, useEffect, useMemo} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import jwt_decode from 'jwt-decode';
 import {REFRESH_TOKEN_API} from '@/api/auth';
@@ -70,18 +62,6 @@ const reducer = (state, action) => {
 export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
-  const [notificationEnabled, setNotificationEnabled] = useState(false);
-
-  useEffect(() => {
-    // check notification permission
-    if (Platform.OS === 'ios') {
-      PushNotificationIOS.checkPermissions(e => {
-        if (e.alert) {
-          setNotificationEnabled(true);
-        }
-      });
-    }
-  }, []);
 
   useEffect(() => {
     const getToken = async () => {
@@ -164,13 +144,11 @@ export const AuthProvider = ({children}) => {
       authToken: state.authToken,
       refreshToken: state.refreshToken,
       cashBackType: state.cashBackType,
-      notificationEnabled: notificationEnabled,
     }),
     [
       state.authToken,
       state.refreshToken,
       state.cashBackType,
-      notificationEnabled,
     ],
   );
 

@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useState, useMemo} from 'react';
 import {Graph} from '@dagrejs/graphlib';
 
-import {AuthContext} from '@/context/auth';
+import {NotificationContext} from '@/context/notification';
 import {PreloadDataContext} from '@/context/preloadData';
 
 const setupFlowContextInitialValue = {
@@ -11,7 +11,7 @@ const setupFlowContextInitialValue = {
 export const SetupFlowContext = createContext(setupFlowContextInitialValue);
 
 export const SetupFlowProvider = ({children}) => {
-  const {notificationEnabled} = useContext(AuthContext);
+  const {permissions} = useContext(NotificationContext);
   const {setupStatus} = useContext(PreloadDataContext);
   const [graph] = useState(new Graph());
 
@@ -89,11 +89,11 @@ export const SetupFlowProvider = ({children}) => {
       result.account_setup_done = true;
       result.sign_up_reward = true;
     }
-    if (notificationEnabled) {
+    if (permissions.alert) {
       result.notification_permission = true;
     }
     return result;
-  }, [notificationEnabled, setupStatus]);
+  }, [permissions, setupStatus]);
 
   /** @type {Object.<string, boolean>} */
   const validScreenNames = useMemo(() => {
