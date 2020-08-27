@@ -3,7 +3,7 @@ import React from 'react';
 import IconButton from '@/components/IconButton';
 import CloseIcon from '@/assets/icon_x.svg';
 
-const CloseButton = props => (
+const CloseIconButton = props => (
   <IconButton
     variant="outlined"
     sizeVariant="normal"
@@ -13,4 +13,4 @@ const CloseButton = props => (
   />
 );
 
-export default CloseButton;
+export default CloseIconButton;

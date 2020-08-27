@@ -30,7 +30,7 @@ import ModalContainer from '@/components/ModalContainer';
 import EditButton from '@/components/EditButton';
 import CancelButton from '@/components/CancelButton';
 import ConfirmButton from '@/components/ConfirmButton';
-import CloseButton from '@/components/CloseButton';
+import CloseIconButton from '@/components/CloseIconButton';
 import Input from '@/components/AppInput';
 
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
@@ -318,7 +318,7 @@ const UserProfileEditScreen = ({navigation}) => {
       });
     } else {
       navigation.setOptions({
-        headerLeft: props => <CloseButton {...props} />,
+        headerLeft: props => <CloseIconButton {...props} />,
         headerRight: () => <EditButton onPress={handleEditPress} />,
       });
     }

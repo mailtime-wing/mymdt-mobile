@@ -45,7 +45,7 @@ import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
 import BackButton from '@/components/BackButton';
-import CloseButton from '@/components/CloseButton';
+import CloseIconButton from '@/components/CloseIconButton';
 
 import {styles} from './style';
 
@@ -228,7 +228,7 @@ const Setting = ({navigation}) => {
           return onPress ? (
             <Button onPress={onPress} title="<" />
           ) : (
-            <CloseButton onPress={() => navigation.goBack()} />
+            <CloseIconButton onPress={() => navigation.goBack()} />
           );
         },
       }}>
@@ -337,7 +337,7 @@ const Root = () => {
           ...TransitionPresets.ModalPresentationIOS,
           headerTitle: null,
           cardStyle: [styles.card],
-          headerLeft: props => <CloseButton {...props} />,
+          headerLeft: props => <CloseIconButton {...props} />,
           cardOverlayEnabled: true,
           gestureEnabled: true,
           headerStatusBarHeight: 0,

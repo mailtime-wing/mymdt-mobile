@@ -30,7 +30,7 @@ import Switch from '@/components/Switch';
 import EditButton from '@/components/EditButton';
 import CancelButton from '@/components/CancelButton';
 import ConfirmButton from '@/components/ConfirmButton';
-import CloseButton from '@/components/CloseButton';
+import CloseIconButton from '@/components/CloseIconButton';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import AppText from '@/components/AppText2';
@@ -132,7 +132,7 @@ const BindEmailEditScreen = ({navigation}) => {
       });
     } else {
       navigation.setOptions({
-        headerLeft: props => <CloseButton {...props} />,
+        headerLeft: props => <CloseIconButton {...props} />,
         headerRight: () => <EditButton onPress={handleEditPress} />,
       });
     }
