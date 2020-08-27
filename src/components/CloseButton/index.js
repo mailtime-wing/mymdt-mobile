@@ -1,12 +1,16 @@
 import React from 'react';
-import {TouchableOpacity, Image} from 'react-native';
 
-const CloseButton = ({navigation, ...props}) => {
-  return (
-    <TouchableOpacity onPress={() => navigation?.goBack()} {...props}>
-      <Image source={require('@/assets/close.png')} resizeMode="contain" />
-    </TouchableOpacity>
-  );
-};
+import IconButton from '@/components/IconButton';
+import CloseIcon from '@/assets/icon_x.svg';
+
+const CloseButton = props => (
+  <IconButton
+    variant="outlined"
+    sizeVariant="normal"
+    color="black"
+    svgIcon={CloseIcon}
+    {...props}
+  />
+);
 
 export default CloseButton;
