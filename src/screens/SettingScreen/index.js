@@ -1,12 +1,17 @@
 import React from 'react';
+import {View, ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
-import {ScrollContainer, Container, ListHeader} from './style';
+import {listHeader, container} from './style';
 
 import ListOption from '@/components/ListOption';
 import ModalContainer from '@/components/ModalContainer';
+import AppText from '@/components/AppText2';
+import {useTheme} from 'emotion-theming';
 
 const SettingScreen = ({navigation}) => {
+  const theme = useTheme();
+
   const accountSettingList = [
     {id: 'edit_profile'},
     {id: 'offers_preference_edit'},
@@ -24,13 +29,13 @@ const SettingScreen = ({navigation}) => {
   ];
 
   return (
-    <ScrollContainer>
+    <ScrollView>
       <ModalContainer
         title={<FormattedMessage id="settings" defaultMessage="Settings" />}>
-        <Container>
-          <ListHeader>
+        <View style={container}>
+          <AppText variant="label" style={listHeader(theme)}>
             <FormattedMessage id="account" defaultMessage="Account" />
-          </ListHeader>
+          </AppText>
           {accountSettingList.map(as => (
             <ListOption
               key={as.id}
@@ -38,12 +43,12 @@ const SettingScreen = ({navigation}) => {
               onPress={() => navigation.navigate(as.id)}
             />
           ))}
-          <ListHeader>
+          <AppText variant="label" style={listHeader(theme)}>
             <FormattedMessage
               id="settings_and_support"
               defaultMessage="Settings & Support"
             />
-          </ListHeader>
+          </AppText>
           {generalSettingList.map(gs => (
             <ListOption
               key={gs.id}
@@ -51,9 +56,9 @@ const SettingScreen = ({navigation}) => {
               onPress={() => navigation.navigate(gs.id)}
             />
           ))}
-        </Container>
+        </View>
       </ModalContainer>
-    </ScrollContainer>
+    </ScrollView>
   );
 };
 

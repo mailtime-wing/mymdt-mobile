@@ -7,6 +7,7 @@ import {
 } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useTheme} from 'emotion-theming';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import OfferSelectScreen from '@/screens/OfferSelectScreen';
@@ -224,10 +225,18 @@ const screenUnderModalOptions = {
 };
 
 const Setting = ({navigation}) => {
+  const theme = useTheme();
+
+  const settingCardStyle = {
+    ...screenUnderModalOptions.cardStyle,
+    backgroundColor: theme.colors.background1,
+  };
+
   return (
     <SettingStack.Navigator
       screenOptions={{
         ...screenUnderModalOptions,
+        cardStyle: settingCardStyle,
         headerLeft: ({onPress}) => {
           return onPress ? (
             <BackIconButton onPress={onPress} />
@@ -244,6 +253,7 @@ const Setting = ({navigation}) => {
 };
 
 const Main = () => {
+  const theme = useTheme();
   const {authToken} = useContext(AuthContext);
   const {validScreenNames} = useContext(SetupFlowContext);
   const {top} = useSafeAreaInsets();
@@ -253,14 +263,19 @@ const Main = () => {
     height: top + APP_BAR_HEIGHT,
   };
 
+  const cardStyle = {
+    ...styles.card,
+    backgroundColor: theme.colors.background1,
+  };
+
   return (
     <MainStack.Navigator
       headerMode="screen"
       screenOptions={{
         headerTitleStyle: styles.headerTitle,
-        cardStyle: styles.card,
+        cardStyle: cardStyle,
+        headerStyle: headerStyle,
         gestureEnabled: false,
-        headerStyle,
         headerStatusBarHeight: top,
         headerLeftContainerStyle: {
           paddingLeft: 24,

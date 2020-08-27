@@ -8,7 +8,9 @@ export const styles = StyleSheet.create({
   headerTitle: {
     display: 'none',
   },
-  card: {
-    backgroundColor: 'white',
+  card: {},
+  modalCard: {
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
   },
 });

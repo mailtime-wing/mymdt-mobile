@@ -1,20 +1,11 @@
-import styled from '@emotion/native';
-import {Platform} from 'react-native';
-import Text from '@/components/AppText';
+import {css} from '@emotion/native';
 
-export const Container = styled.View`
-  padding: 0 24px;
-`;
-
-export const ScrollContainer = styled.ScrollView``;
-
-export const ListHeader = styled(Text)`
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
-  ${Platform.OS === 'ios' && 'font-weight: bold;'}
+export const listHeader = theme => css`
+  color: ${theme.colors.textOnBackground.disabled};
   padding: 16px 0;
   margin-top: 24px;
+`;
+
+export const container = css`
+  padding: 0 24px;
 `;
