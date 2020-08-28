@@ -30,7 +30,7 @@ const SettingScreen = () => {
   );
   const {themeList, themeMode, changeThemeMode} = useContext(ThemeContext);
   const activeThemeIndex = themeList.indexOf(
-    themeList.find(t => t.label === themeMode),
+    themeList.find(t => t.value === themeMode),
   );
 
   const handlePushToggle = async () => {
@@ -58,7 +58,6 @@ const SettingScreen = () => {
   };
 
   const handleThemeModeOptionPress = index => {
-    console.log(index);
     changeThemeMode(themeList[index].value);
   };
 
@@ -91,7 +90,7 @@ const SettingScreen = () => {
         <ListOption
           key="Theme"
           label={<FormattedMessage id="theme" />}
-          value={themeMode}
+          value={themeList.find(t => t.value === themeMode).label}
           onPress={() => setShowThemeModeBottomSheet(true)}
         />
         <AppText variant="label" style={appVersionStyle(theme)}>
