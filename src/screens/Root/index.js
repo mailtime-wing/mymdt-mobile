@@ -209,8 +209,6 @@ const screenUnderModalOptions = {
   headerTitle: null,
   headerStyle: {
     height: APP_BAR_HEIGHT,
-    // TODO: use value from theme
-    backgroundColor: 'white',
     shadowOffset: {x: 0, y: 0},
   },
   headerLeftContainerStyle: {
@@ -232,11 +230,17 @@ const Setting = ({navigation}) => {
     backgroundColor: theme.colors.background1,
   };
 
+  const settingHeaderStyle = {
+    ...screenUnderModalOptions.headerStyle,
+    backgroundColor: theme.colors.background1,
+  };
+
   return (
     <SettingStack.Navigator
       screenOptions={{
         ...screenUnderModalOptions,
         cardStyle: settingCardStyle,
+        headerStyle: settingHeaderStyle,
         headerLeft: ({onPress}) => {
           return onPress ? (
             <BackIconButton onPress={onPress} />
