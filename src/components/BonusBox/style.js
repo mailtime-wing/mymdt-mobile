@@ -1,7 +1,7 @@
 import {css} from '@emotion/native';
 
-export const titleText = () => css`
-  color: rgba(0, 0, 0, 0.8);
+export const titleText = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
 export const detailText = theme => css`

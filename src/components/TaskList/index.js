@@ -8,9 +8,9 @@ import {AuthContext} from '@/context/auth';
 import {
   Container,
   RowContainer,
-  TaskName,
-  ClaimedDate,
   MarginLeft,
+  taskName,
+  claimedDateStyle,
 } from './style';
 
 import MRPCoin from '@/components/MRPCoin';
@@ -18,6 +18,8 @@ import ThemeButton from '@/components/ThemeButton';
 import PopupModal from '@/components/PopupModal';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
 import MRPGiftBox from '@/components/MRPGiftBox';
+import AppText from '@/components/AppText2';
+import {useTheme} from 'emotion-theming';
 
 const flexEnd = {justifyContent: 'flex-end'};
 const giftBoxStyle = {
@@ -29,6 +31,7 @@ const giftBoxStyle = {
 };
 
 const TaskList = ({taskList, userRewardList}) => {
+  const theme = useTheme();
   const {authToken} = useContext(AuthContext);
   const [clientError, setClientError] = useState(false);
   const [claimRewardRequest, {data, error}] = useMutation(CLAIM_REWARD_API, {
@@ -76,9 +79,11 @@ const TaskList = ({taskList, userRewardList}) => {
         return (
           <RowContainer key={task.name}>
             <Container>
-              <TaskName>{task.name}</TaskName>
+              <AppText variant="body1" style={taskName(theme)}>
+                {task.name}
+              </AppText>
               {claimedDate && (
-                <ClaimedDate>
+                <AppText variant="caption" style={claimedDateStyle(theme)}>
                   <FormattedMessage
                     id="claimed_on"
                     defaultMessage="Claimed on {date}"
@@ -93,7 +98,7 @@ const TaskList = ({taskList, userRewardList}) => {
                       ),
                     }}
                   />
-                </ClaimedDate>
+                </AppText>
               )}
             </Container>
             <MRPCoin
