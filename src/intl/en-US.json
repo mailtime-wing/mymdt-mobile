@@ -4,6 +4,10 @@
   "language": "Language",
   "greetings": "Hi, {name}",
   "app_version": "App Version: {version}",
+  "theme": "Theme",
+  "dark": "Dark",
+  "light": "Light",
+  "system_default": "System default",
 
   "browse": "Browse",
   "browse_details": "Promtions / Referrals / Share",

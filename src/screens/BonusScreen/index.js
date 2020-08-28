@@ -30,7 +30,7 @@ const BonusScreen = props => {
   return (
     <LinearGradientBackground>
       <ScrollContainer>
-        <AccountBar {...props} />
+        <AccountBar {...props} showCoins />
         <BonusBox
           title={<FormattedMessage id="bonus_task_title_1" />}
           detail={<FormattedMessage id="bonus_task_detail_1" />}

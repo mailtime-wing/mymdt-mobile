@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
   tabBarContainer: {
     height: 72,
     alignItems: 'center',
+    borderTopWidth: 1,
   },
   tabBar: {
     maxWidth: 60,
@@ -46,9 +47,7 @@ export const styles = StyleSheet.create({
   headerTitle: {
     display: 'none',
   },
-  card: {
-    backgroundColor: 'white',
-  },
+  card: {},
   modalCard: {
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,

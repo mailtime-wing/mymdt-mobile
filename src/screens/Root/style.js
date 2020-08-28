@@ -8,7 +8,5 @@ export const styles = StyleSheet.create({
   headerTitle: {
     display: 'none',
   },
-  card: {
-    backgroundColor: 'white',
-  },
+  card: {},
 });

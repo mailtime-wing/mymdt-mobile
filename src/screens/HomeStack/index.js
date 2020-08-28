@@ -34,6 +34,8 @@ const HomeStack = () => {
   const tabBarContainerStyle = {
     ...styles.tabBarContainer,
     height: bottom ? 89 : styles.tabBarContainer.height,
+    backgroundColor: theme.colors.background1,
+    borderTopColor: theme.colors.background2,
   };
 
   return (

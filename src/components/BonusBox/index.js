@@ -20,7 +20,7 @@ const BonusBox = ({title, detail, icon, children}) => {
         {icon && <Image source={icon} style={iconStyle} />}
         <View style={headerRightContainer}>
           {!!title && (
-            <AppText variant="heading3" style={titleText}>
+            <AppText variant="heading3" style={titleText(theme)}>
               {title}
             </AppText>
           )}

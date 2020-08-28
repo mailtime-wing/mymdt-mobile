@@ -2,7 +2,7 @@ import React from 'react';
 import Switches from 'react-native-switches';
 import {useTheme} from 'emotion-theming';
 
-const Switch = props => {
+const Switch = ({value, ...props}) => {
   const theme = useTheme();
 
   return (
@@ -13,12 +13,14 @@ const Switch = props => {
       sliderHeight={36}
       buttonOffsetLeft={4}
       buttonOffsetRight={6}
-      buttonColor={theme.colors.background1}
-      colorSwitchOff={theme.colors.background3}
-      colorSwitchOn={theme.colors.secondary.normal}
+      buttonColor={
+        value ? theme.colors.toggleOn.button : theme.colors.toggleOff.button
+      }
+      colorSwitchOff={theme.colors.toggleOff.track}
+      colorSwitchOn={theme.colors.toggleOn.track}
       borderColor="transparent"
       showText={false}
-      value={props.value}
+      value={value}
       {...props}
     />
   );

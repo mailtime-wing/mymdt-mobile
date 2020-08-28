@@ -4,6 +4,10 @@
   "language": "语言",
   "greetings": "您好, {name}",
   "app_version": "程式版本: {version}",
+  "theme": "主题",
+  "dark": "夜间模式",
+  "light": "日间模式",
+  "system_default": "系统默认",
 
   "browse": "发现",
   "browse_details": "限时活动 / 任务 / 分享",

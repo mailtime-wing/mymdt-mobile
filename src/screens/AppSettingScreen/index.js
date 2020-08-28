@@ -4,6 +4,7 @@ import {View, Linking} from 'react-native';
 import VersionNumber from 'react-native-version-number';
 import {useTheme} from 'emotion-theming';
 import {IntlContext} from '@/context/Intl';
+import {ThemeContext} from '@/context/theme';
 
 import {NotificationContext} from '@/context/notification';
 
@@ -24,6 +25,13 @@ const SettingScreen = () => {
   const [push, setPush] = useState(false); // from api later
   const [showPopup, setShowPopup] = useState(false);
   const [showLanguageBottomSheet, setShowLanguageBottomSheet] = useState(false);
+  const [showThemeModeBottomSheet, setShowThemeModeBottomSheet] = useState(
+    false,
+  );
+  const {themeList, themeMode, changeThemeMode} = useContext(ThemeContext);
+  const activeThemeIndex = themeList.indexOf(
+    themeList.find(t => t.value === themeMode),
+  );
 
   const handlePushToggle = async () => {
     const permissions = await checkPermissions();
@@ -39,7 +47,7 @@ const SettingScreen = () => {
       Linking.openSettings();
     }
     setShowPopup(false);
-  }
+  };
 
   const handleLanguageOptionPress = index => {
     saveLanguage(languageList[index]);
@@ -47,6 +55,14 @@ const SettingScreen = () => {
 
   const handleLanguageBottomSheetLayoutPress = () => {
     setShowLanguageBottomSheet(false);
+  };
+
+  const handleThemeModeOptionPress = index => {
+    changeThemeMode(themeList[index].value);
+  };
+
+  const handleThemeModeBottomSheetLayoutPress = () => {
+    setShowThemeModeBottomSheet(false);
   };
 
   return (
@@ -71,6 +87,12 @@ const SettingScreen = () => {
           label={<FormattedMessage id="push_notification" />}
           value={<Switch value={push} onChange={handlePushToggle} />}
         />
+        <ListOption
+          key="Theme"
+          label={<FormattedMessage id="theme" />}
+          value={themeList.find(t => t.value === themeMode).label}
+          onPress={() => setShowThemeModeBottomSheet(true)}
+        />
         <AppText variant="label" style={appVersionStyle(theme)}>
           <FormattedMessage
             id="app_version"
@@ -91,6 +113,15 @@ const SettingScreen = () => {
             optionActiveIndex={languageList.indexOf(language)}
             onPress={handleLanguageOptionPress}
             onLayoutPress={handleLanguageBottomSheetLayoutPress}
+          />
+        )}
+        {showThemeModeBottomSheet && (
+          <BottomSheet
+            list={themeList}
+            header={<FormattedMessage id="theme" defaultMessage="Theme" />}
+            optionActiveIndex={activeThemeIndex}
+            onPress={handleThemeModeOptionPress}
+            onLayoutPress={handleThemeModeBottomSheetLayoutPress}
           />
         )}
       </View>

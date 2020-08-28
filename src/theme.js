@@ -1,15 +1,71 @@
 import {Platform} from 'react-native';
 
-const theme = {
+export const darkTheme = {
+  colors: {
+    // main theme
+    primary: ['#9FBDE9', '#9FBDE9', 'rgba(159, 189, 233, 0.2)'],
+    secondary: ['#88D9DE', '#88D9DE', '#88D9DE', 'rgba(136, 217, 222, 0.2)'],
+    contrastColor: '#FFFFFF',
+
+    // text
+    textOfMrp: '#88D9DE',
+    textOfMdt: '#9FBDE9',
+    textOnError: ['#FF7171', 'rgba(255, 113, 113, 0.16)'],
+    textOnBackground: [
+      'rgba(255, 255, 255, 0.87)',
+      'rgba(255, 255, 255, 0.6)',
+      'rgba(255, 255, 255, 0.38)',
+    ],
+
+    // background
+    background: [
+      '#121212',
+      'rgba(255, 255, 255, 0.12)',
+      'rgba(255, 255, 255, 0.2)',
+    ],
+    inputFocusBackground: 'rgba(159, 189, 233, 0.2)',
+    errorBackground: 'rgba(255, 113, 113, 0.2)',
+
+    // membership
+    membership: {
+      basic: ['#121212', 'rgba(255, 255, 255, 0.87)'],
+      silver: ['#A4A4A4', '#121212'],
+      gold: ['#CEBE85', '#121212'],
+      platinum: ['#ADB8CF', '#121212'],
+      diamond: ['#D0DCE6', '#121212'],
+      special: ['#9FBDE9', '#121212'],
+    },
+
+    // others
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    contrastBorderColor: 'rgba(18, 18, 18, 0.2)',
+
+    linearGradientBackground: ['#121212', '#121212'],
+    tabScreenStatusBar: '#121212',
+    toggleOn: ['#88D9DE', 'rgba(136, 217, 222, 0.38)'],
+    toggleOff: ['rgba(255, 255, 255, 0.6)', 'rgba(255, 255, 255, 0.38)'],
+
+    alert: '#FFD542',
+  },
+  fonts: {
+    body: 'Inter',
+    heading: Platform.OS === 'ios' ? 'Neo Sans Pro' : 'Neo Sans Pro Medium',
+  },
+  fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36],
+  fontWeights: [400, 500, 600, 700],
+  lineHeights: {},
+};
+
+export const lightTheme = {
   colors: {
     // main theme
     primary: ['#0363EF', '#0036C5', 'rgba(3, 99, 239, 0.05)'],
     secondary: ['#21CEDB', '#ABEBEE', '#00BACE', 'rgba(33, 206, 219, 0.2)'],
-    contrastColor: ['#000000'],
+    contrastColor: '#000000',
 
     // text
-    textOfMrp: ['#1E7884'],
-    textOfMdt: ['#0036C5'],
+    textOfMrp: '#1E7884',
+    textOfMdt: '#0036C5',
     textOnError: ['#D81010', 'rgba(216, 16, 16, 0.6)'],
     textOnBackground: [
       'rgba(0, 0, 0, 0.8)',
@@ -19,8 +75,8 @@ const theme = {
 
     // background
     background: ['#FFFFFF', 'rgba(0, 0, 0, 0.05)', 'rgba(0, 0, 0, 0.1)'],
-    inputFocusBackground: ['rgba(3, 99, 239, 0.05)'],
-    errorBackground: ['rgba(216, 16, 16, 0.1)'],
+    inputFocusBackground: 'rgba(3, 99, 239, 0.05)',
+    errorBackground: 'rgba(216, 16, 16, 0.1)',
 
     // membership
     membership: {
@@ -33,8 +89,13 @@ const theme = {
     },
 
     // others
-    borderColor: ['rgba(0, 0, 0, 0.2)'],
-    contrastBorderColor: ['rgba(255, 255, 255, 0.2)'],
+    borderColor: 'rgba(0, 0, 0, 0.2)',
+    contrastBorderColor: 'rgba(255, 255, 255, 0.2)',
+
+    linearGradientBackground: ['#FDFBF2', '#E2FAFF'],
+    tabScreenStatusBar: '#FDFBF2',
+    toggleOn: ['#FFFFFF', '#21CEDB'],
+    toggleOff: ['rgba(255, 255, 255, 0.87)', 'rgba(0, 0, 0, 0.1)'],
 
     alert: '#FFD542',
   },
@@ -48,116 +109,237 @@ const theme = {
 };
 
 // main theme
-theme.colors.primary.normal = theme.colors.primary[0];
-theme.colors.primary.dark = theme.colors.primary[1];
-theme.colors.primary.border = theme.colors.primary[2];
+lightTheme.colors.primary.normal = lightTheme.colors.primary[0];
+lightTheme.colors.primary.dark = lightTheme.colors.primary[1];
+lightTheme.colors.primary.border = lightTheme.colors.primary[2];
 
-theme.colors.secondary.normal = theme.colors.secondary[0];
-theme.colors.secondary.light = theme.colors.secondary[1];
-theme.colors.secondary.dark = theme.colors.secondary[2];
-theme.colors.secondary.border = theme.colors.secondary[3];
-
-theme.colors.contrastColor = theme.colors.contrastColor[0];
+lightTheme.colors.secondary.normal = lightTheme.colors.secondary[0];
+lightTheme.colors.secondary.light = lightTheme.colors.secondary[1];
+lightTheme.colors.secondary.dark = lightTheme.colors.secondary[2];
+lightTheme.colors.secondary.border = lightTheme.colors.secondary[3];
 
 // text
-theme.colors.textOfMrp = theme.colors.textOfMrp[0];
-theme.colors.textOfMdt = theme.colors.textOfMdt[0];
 
-theme.colors.textOnError.normal = theme.colors.textOnError[0];
-theme.colors.textOnError.light = theme.colors.textOnError[1];
+lightTheme.colors.textOnError.normal = lightTheme.colors.textOnError[0];
+lightTheme.colors.textOnError.light = lightTheme.colors.textOnError[1];
 
-theme.colors.textOnBackground.highEmphasis = theme.colors.textOnBackground[0];
-theme.colors.textOnBackground.mediumEmphasis = theme.colors.textOnBackground[1];
-theme.colors.textOnBackground.disabled = theme.colors.textOnBackground[2];
+lightTheme.colors.textOnBackground.highEmphasis =
+  lightTheme.colors.textOnBackground[0];
+lightTheme.colors.textOnBackground.mediumEmphasis =
+  lightTheme.colors.textOnBackground[1];
+lightTheme.colors.textOnBackground.disabled =
+  lightTheme.colors.textOnBackground[2];
 
 // background
-theme.colors.background1 = theme.colors.background[0];
-theme.colors.background2 = theme.colors.background[1];
-theme.colors.background3 = theme.colors.background[2];
-
-theme.colors.inputFocusBackground = theme.colors.inputFocusBackground[0];
-
-theme.colors.errorBackground = theme.colors.errorBackground[0];
+lightTheme.colors.background1 = lightTheme.colors.background[0];
+lightTheme.colors.background2 = lightTheme.colors.background[1];
+lightTheme.colors.background3 = lightTheme.colors.background[2];
 
 // membership
-theme.colors.membership.basic.background = theme.colors.membership.basic[0];
-theme.colors.membership.basic.text = theme.colors.membership.basic[1];
-theme.colors.membership.silver.background = theme.colors.membership.silver[0];
-theme.colors.membership.silver.text = theme.colors.membership.silver[1];
-theme.colors.membership.gold.background = theme.colors.membership.gold[0];
-theme.colors.membership.gold.text = theme.colors.membership.gold[1];
-theme.colors.membership.platinum.background =
-  theme.colors.membership.platinum[0];
-theme.colors.membership.platinum.text = theme.colors.membership.platinum[1];
-theme.colors.membership.diamond.background = theme.colors.membership.diamond[0];
-theme.colors.membership.diamond.text = theme.colors.membership.diamond[1];
-theme.colors.membership.special.background = theme.colors.membership.special[0];
-theme.colors.membership.special.text = theme.colors.membership.special[1];
+lightTheme.colors.membership.basic.background =
+  lightTheme.colors.membership.basic[0];
+lightTheme.colors.membership.basic.text = lightTheme.colors.membership.basic[1];
+lightTheme.colors.membership.silver.background =
+  lightTheme.colors.membership.silver[0];
+lightTheme.colors.membership.silver.text =
+  lightTheme.colors.membership.silver[1];
+lightTheme.colors.membership.gold.background =
+  lightTheme.colors.membership.gold[0];
+lightTheme.colors.membership.gold.text = lightTheme.colors.membership.gold[1];
+lightTheme.colors.membership.platinum.background =
+  lightTheme.colors.membership.platinum[0];
+lightTheme.colors.membership.platinum.text =
+  lightTheme.colors.membership.platinum[1];
+lightTheme.colors.membership.diamond.background =
+  lightTheme.colors.membership.diamond[0];
+lightTheme.colors.membership.diamond.text =
+  lightTheme.colors.membership.diamond[1];
+lightTheme.colors.membership.special.background =
+  lightTheme.colors.membership.special[0];
+lightTheme.colors.membership.special.text =
+  lightTheme.colors.membership.special[1];
 
 // others
-theme.colors.borderColor = theme.colors.borderColor[0];
-theme.colors.contrastBorderColor = theme.colors.contrastBorderColor[0];
+lightTheme.colors.toggleOn.button = lightTheme.colors.toggleOn[0];
+lightTheme.colors.toggleOn.track = lightTheme.colors.toggleOn[1];
+lightTheme.colors.toggleOff.button = lightTheme.colors.toggleOff[0];
+lightTheme.colors.toggleOff.track = lightTheme.colors.toggleOff[1];
 
-theme.fonts.pageTitle = theme.fonts.heading;
-theme.fonts.heading1 = theme.fonts.heading;
-theme.fonts.heading2 = theme.fonts.heading;
-theme.fonts.heading3 = theme.fonts.heading;
-theme.fonts.heading4 = theme.fonts.heading;
-theme.fonts.heading5 = theme.fonts.heading;
-theme.fonts.subTitle1 = theme.fonts.heading;
-theme.fonts.subTitle2 = theme.fonts.heading;
-theme.fonts.body1 = theme.fonts.body;
-theme.fonts.body2 = theme.fonts.body;
-theme.fonts.caption = theme.fonts.body;
-theme.fonts.value = theme.fonts.body;
-theme.fonts.button = theme.fonts.body;
-theme.fonts.label = theme.fonts.body;
-theme.fonts.overline = theme.fonts.body;
-theme.fontSizes.pageTitle = theme.fontSizes[8];
-theme.fontSizes.heading1 = theme.fontSizes[8];
-theme.fontSizes.heading2 = theme.fontSizes[7];
-theme.fontSizes.heading3 = theme.fontSizes[6];
-theme.fontSizes.heading4 = theme.fontSizes[5];
-theme.fontSizes.heading5 = theme.fontSizes[4];
-theme.fontSizes.subTitle1 = theme.fontSizes[4];
-theme.fontSizes.subTitle2 = theme.fontSizes[3];
-theme.fontSizes.body1 = theme.fontSizes[3];
-theme.fontSizes.body2 = theme.fontSizes[2];
-theme.fontSizes.caption = theme.fontSizes[1];
-theme.fontSizes.value = theme.fontSizes[3];
-theme.fontSizes.button = theme.fontSizes[2];
-theme.fontSizes.label = theme.fontSizes[1];
-theme.fontSizes.overline = theme.fontSizes[0];
-theme.fontWeights.pageTitle = theme.fontWeights[1];
-theme.fontWeights.heading1 = theme.fontWeights[1];
-theme.fontWeights.heading2 = theme.fontWeights[1];
-theme.fontWeights.heading3 = theme.fontWeights[1];
-theme.fontWeights.heading4 = theme.fontWeights[1];
-theme.fontWeights.heading5 = theme.fontWeights[1];
-theme.fontWeights.subTitle1 = theme.fontWeights[2];
-theme.fontWeights.subTitle2 = theme.fontWeights[2];
-theme.fontWeights.body1 = theme.fontWeights[0];
-theme.fontWeights.body2 = theme.fontWeights[0];
-theme.fontWeights.caption = theme.fontWeights[0];
-theme.fontWeights.value = theme.fontWeights[2];
-theme.fontWeights.button = theme.fontWeights[2];
-theme.fontWeights.label = theme.fontWeights[3];
-theme.fontWeights.overline = theme.fontWeights[2];
+lightTheme.fonts.pageTitle = lightTheme.fonts.heading;
+lightTheme.fonts.heading1 = lightTheme.fonts.heading;
+lightTheme.fonts.heading2 = lightTheme.fonts.heading;
+lightTheme.fonts.heading3 = lightTheme.fonts.heading;
+lightTheme.fonts.heading4 = lightTheme.fonts.heading;
+lightTheme.fonts.heading5 = lightTheme.fonts.heading;
+lightTheme.fonts.subTitle1 = lightTheme.fonts.heading;
+lightTheme.fonts.subTitle2 = lightTheme.fonts.heading;
+lightTheme.fonts.body1 = lightTheme.fonts.body;
+lightTheme.fonts.body2 = lightTheme.fonts.body;
+lightTheme.fonts.caption = lightTheme.fonts.body;
+lightTheme.fonts.value = lightTheme.fonts.body;
+lightTheme.fonts.button = lightTheme.fonts.body;
+lightTheme.fonts.label = lightTheme.fonts.body;
+lightTheme.fonts.overline = lightTheme.fonts.body;
+lightTheme.fontSizes.pageTitle = lightTheme.fontSizes[8];
+lightTheme.fontSizes.heading1 = lightTheme.fontSizes[8];
+lightTheme.fontSizes.heading2 = lightTheme.fontSizes[7];
+lightTheme.fontSizes.heading3 = lightTheme.fontSizes[6];
+lightTheme.fontSizes.heading4 = lightTheme.fontSizes[5];
+lightTheme.fontSizes.heading5 = lightTheme.fontSizes[4];
+lightTheme.fontSizes.subTitle1 = lightTheme.fontSizes[4];
+lightTheme.fontSizes.subTitle2 = lightTheme.fontSizes[3];
+lightTheme.fontSizes.body1 = lightTheme.fontSizes[3];
+lightTheme.fontSizes.body2 = lightTheme.fontSizes[2];
+lightTheme.fontSizes.caption = lightTheme.fontSizes[1];
+lightTheme.fontSizes.value = lightTheme.fontSizes[3];
+lightTheme.fontSizes.button = lightTheme.fontSizes[2];
+lightTheme.fontSizes.label = lightTheme.fontSizes[1];
+lightTheme.fontSizes.overline = lightTheme.fontSizes[0];
+lightTheme.fontWeights.pageTitle = lightTheme.fontWeights[1];
+lightTheme.fontWeights.heading1 = lightTheme.fontWeights[1];
+lightTheme.fontWeights.heading2 = lightTheme.fontWeights[1];
+lightTheme.fontWeights.heading3 = lightTheme.fontWeights[1];
+lightTheme.fontWeights.heading4 = lightTheme.fontWeights[1];
+lightTheme.fontWeights.heading5 = lightTheme.fontWeights[1];
+lightTheme.fontWeights.subTitle1 = lightTheme.fontWeights[2];
+lightTheme.fontWeights.subTitle2 = lightTheme.fontWeights[2];
+lightTheme.fontWeights.body1 = lightTheme.fontWeights[0];
+lightTheme.fontWeights.body2 = lightTheme.fontWeights[0];
+lightTheme.fontWeights.caption = lightTheme.fontWeights[0];
+lightTheme.fontWeights.value = lightTheme.fontWeights[2];
+lightTheme.fontWeights.button = lightTheme.fontWeights[2];
+lightTheme.fontWeights.label = lightTheme.fontWeights[3];
+lightTheme.fontWeights.overline = lightTheme.fontWeights[2];
 
-theme.lineHeights.pageTitle = theme.fontSizes.pageTitle * 1.25;
-theme.lineHeights.heading1 = theme.fontSizes.heading1 * 1.25;
-theme.lineHeights.heading2 = theme.fontSizes.heading2 * 1.25;
-theme.lineHeights.heading3 = theme.fontSizes.heading3 * 1.25;
-theme.lineHeights.heading4 = theme.fontSizes.heading4 * 1.25;
-theme.lineHeights.heading5 = theme.fontSizes.heading5 * 1.25;
-theme.lineHeights.subTitle1 = theme.fontSizes.subTitle1 * 1.25;
-theme.lineHeights.subTitle2 = theme.fontSizes.subTitle2 * 1.25;
-theme.lineHeights.body1 = theme.fontSizes.body1 * 1.5;
-theme.lineHeights.body2 = theme.fontSizes.body2 * 1.5;
-theme.lineHeights.caption = theme.fontSizes.caption * 1.5;
-theme.lineHeights.value = theme.fontSizes.value * 1.5;
-theme.lineHeights.button = theme.fontSizes.button * 1.5;
-theme.lineHeights.label = theme.fontSizes.label * 1.5;
-theme.lineHeights.overline = theme.fontSizes.overline * 1.5;
+lightTheme.lineHeights.pageTitle = lightTheme.fontSizes.pageTitle * 1.25;
+lightTheme.lineHeights.heading1 = lightTheme.fontSizes.heading1 * 1.25;
+lightTheme.lineHeights.heading2 = lightTheme.fontSizes.heading2 * 1.25;
+lightTheme.lineHeights.heading3 = lightTheme.fontSizes.heading3 * 1.25;
+lightTheme.lineHeights.heading4 = lightTheme.fontSizes.heading4 * 1.25;
+lightTheme.lineHeights.heading5 = lightTheme.fontSizes.heading5 * 1.25;
+lightTheme.lineHeights.subTitle1 = lightTheme.fontSizes.subTitle1 * 1.25;
+lightTheme.lineHeights.subTitle2 = lightTheme.fontSizes.subTitle2 * 1.25;
+lightTheme.lineHeights.body1 = lightTheme.fontSizes.body1 * 1.5;
+lightTheme.lineHeights.body2 = lightTheme.fontSizes.body2 * 1.5;
+lightTheme.lineHeights.caption = lightTheme.fontSizes.caption * 1.5;
+lightTheme.lineHeights.value = lightTheme.fontSizes.value * 1.5;
+lightTheme.lineHeights.button = lightTheme.fontSizes.button * 1.5;
+lightTheme.lineHeights.label = lightTheme.fontSizes.label * 1.5;
+lightTheme.lineHeights.overline = lightTheme.fontSizes.overline * 1.5;
 
-export default theme;
+// main theme
+darkTheme.colors.primary.normal = darkTheme.colors.primary[0];
+darkTheme.colors.primary.dark = darkTheme.colors.primary[1];
+darkTheme.colors.primary.border = darkTheme.colors.primary[2];
+
+darkTheme.colors.secondary.normal = darkTheme.colors.secondary[0];
+darkTheme.colors.secondary.light = darkTheme.colors.secondary[1];
+darkTheme.colors.secondary.dark = darkTheme.colors.secondary[2];
+darkTheme.colors.secondary.border = darkTheme.colors.secondary[3];
+
+// text
+darkTheme.colors.textOnError.normal = darkTheme.colors.textOnError[0];
+darkTheme.colors.textOnError.light = darkTheme.colors.textOnError[1];
+
+darkTheme.colors.textOnBackground.highEmphasis =
+  darkTheme.colors.textOnBackground[0];
+darkTheme.colors.textOnBackground.mediumEmphasis =
+  darkTheme.colors.textOnBackground[1];
+darkTheme.colors.textOnBackground.disabled =
+  darkTheme.colors.textOnBackground[2];
+
+// background
+darkTheme.colors.background1 = darkTheme.colors.background[0];
+darkTheme.colors.background2 = darkTheme.colors.background[1];
+darkTheme.colors.background3 = darkTheme.colors.background[2];
+
+// membership
+darkTheme.colors.membership.basic.background =
+  darkTheme.colors.membership.basic[0];
+darkTheme.colors.membership.basic.text = darkTheme.colors.membership.basic[1];
+darkTheme.colors.membership.silver.background =
+  darkTheme.colors.membership.silver[0];
+darkTheme.colors.membership.silver.text = darkTheme.colors.membership.silver[1];
+darkTheme.colors.membership.gold.background =
+  darkTheme.colors.membership.gold[0];
+darkTheme.colors.membership.gold.text = darkTheme.colors.membership.gold[1];
+darkTheme.colors.membership.platinum.background =
+  darkTheme.colors.membership.platinum[0];
+darkTheme.colors.membership.platinum.text =
+  darkTheme.colors.membership.platinum[1];
+darkTheme.colors.membership.diamond.background =
+  darkTheme.colors.membership.diamond[0];
+darkTheme.colors.membership.diamond.text =
+  darkTheme.colors.membership.diamond[1];
+darkTheme.colors.membership.special.background =
+  darkTheme.colors.membership.special[0];
+darkTheme.colors.membership.special.text =
+  darkTheme.colors.membership.special[1];
+
+// others
+darkTheme.colors.toggleOn.button = darkTheme.colors.toggleOn[0];
+darkTheme.colors.toggleOn.track = darkTheme.colors.toggleOn[1];
+darkTheme.colors.toggleOff.button = darkTheme.colors.toggleOff[0];
+darkTheme.colors.toggleOff.track = darkTheme.colors.toggleOff[1];
+
+darkTheme.fonts.pageTitle = darkTheme.fonts.heading;
+darkTheme.fonts.heading1 = darkTheme.fonts.heading;
+darkTheme.fonts.heading2 = darkTheme.fonts.heading;
+darkTheme.fonts.heading3 = darkTheme.fonts.heading;
+darkTheme.fonts.heading4 = darkTheme.fonts.heading;
+darkTheme.fonts.heading5 = darkTheme.fonts.heading;
+darkTheme.fonts.subTitle1 = darkTheme.fonts.heading;
+darkTheme.fonts.subTitle2 = darkTheme.fonts.heading;
+darkTheme.fonts.body1 = darkTheme.fonts.body;
+darkTheme.fonts.body2 = darkTheme.fonts.body;
+darkTheme.fonts.caption = darkTheme.fonts.body;
+darkTheme.fonts.value = darkTheme.fonts.body;
+darkTheme.fonts.button = darkTheme.fonts.body;
+darkTheme.fonts.label = darkTheme.fonts.body;
+darkTheme.fonts.overline = darkTheme.fonts.body;
+darkTheme.fontSizes.pageTitle = darkTheme.fontSizes[8];
+darkTheme.fontSizes.heading1 = darkTheme.fontSizes[8];
+darkTheme.fontSizes.heading2 = darkTheme.fontSizes[7];
+darkTheme.fontSizes.heading3 = darkTheme.fontSizes[6];
+darkTheme.fontSizes.heading4 = darkTheme.fontSizes[5];
+darkTheme.fontSizes.heading5 = darkTheme.fontSizes[4];
+darkTheme.fontSizes.subTitle1 = darkTheme.fontSizes[4];
+darkTheme.fontSizes.subTitle2 = darkTheme.fontSizes[3];
+darkTheme.fontSizes.body1 = darkTheme.fontSizes[3];
+darkTheme.fontSizes.body2 = darkTheme.fontSizes[2];
+darkTheme.fontSizes.caption = darkTheme.fontSizes[1];
+darkTheme.fontSizes.value = darkTheme.fontSizes[3];
+darkTheme.fontSizes.button = darkTheme.fontSizes[2];
+darkTheme.fontSizes.label = darkTheme.fontSizes[1];
+darkTheme.fontSizes.overline = darkTheme.fontSizes[0];
+darkTheme.fontWeights.pageTitle = darkTheme.fontWeights[1];
+darkTheme.fontWeights.heading1 = darkTheme.fontWeights[1];
+darkTheme.fontWeights.heading2 = darkTheme.fontWeights[1];
+darkTheme.fontWeights.heading3 = darkTheme.fontWeights[1];
+darkTheme.fontWeights.heading4 = darkTheme.fontWeights[1];
+darkTheme.fontWeights.heading5 = darkTheme.fontWeights[1];
+darkTheme.fontWeights.subTitle1 = darkTheme.fontWeights[2];
+darkTheme.fontWeights.subTitle2 = darkTheme.fontWeights[2];
+darkTheme.fontWeights.body1 = darkTheme.fontWeights[0];
+darkTheme.fontWeights.body2 = darkTheme.fontWeights[0];
+darkTheme.fontWeights.caption = darkTheme.fontWeights[0];
+darkTheme.fontWeights.value = darkTheme.fontWeights[2];
+darkTheme.fontWeights.button = darkTheme.fontWeights[2];
+darkTheme.fontWeights.label = darkTheme.fontWeights[3];
+darkTheme.fontWeights.overline = darkTheme.fontWeights[2];
+
+darkTheme.lineHeights.pageTitle = darkTheme.fontSizes.pageTitle * 1.25;
+darkTheme.lineHeights.heading1 = darkTheme.fontSizes.heading1 * 1.25;
+darkTheme.lineHeights.heading2 = darkTheme.fontSizes.heading2 * 1.25;
+darkTheme.lineHeights.heading3 = darkTheme.fontSizes.heading3 * 1.25;
+darkTheme.lineHeights.heading4 = darkTheme.fontSizes.heading4 * 1.25;
+darkTheme.lineHeights.heading5 = darkTheme.fontSizes.heading5 * 1.25;
+darkTheme.lineHeights.subTitle1 = darkTheme.fontSizes.subTitle1 * 1.25;
+darkTheme.lineHeights.subTitle2 = darkTheme.fontSizes.subTitle2 * 1.25;
+darkTheme.lineHeights.body1 = darkTheme.fontSizes.body1 * 1.5;
+darkTheme.lineHeights.body2 = darkTheme.fontSizes.body2 * 1.5;
+darkTheme.lineHeights.caption = darkTheme.fontSizes.caption * 1.5;
+darkTheme.lineHeights.value = darkTheme.fontSizes.value * 1.5;
+darkTheme.lineHeights.button = darkTheme.fontSizes.button * 1.5;
+darkTheme.lineHeights.label = darkTheme.fontSizes.label * 1.5;
+darkTheme.lineHeights.overline = darkTheme.fontSizes.overline * 1.5;

@@ -1,7 +1,5 @@
-import styled from '@emotion/native';
-import {Platform, StyleSheet} from 'react-native';
-import Text from '@/components/AppText';
-import TitleText from '@/components/TitleText';
+import styled, {css} from '@emotion/native';
+import {StyleSheet} from 'react-native';
 
 export const RowContainer = styled.View`
   flex-direction: row;
@@ -19,23 +17,17 @@ export const ConversionRateRightContainer = styled.View`
   align-items: center;
 `;
 
-export const AlmostEqualSymbol = styled(Text)`
-  font-size: 14px;
-  line-height: 18px;
+export const almostEqualSymbol = theme => css`
   margin: 0 4px;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
+  color: ${theme.colors.textOnBackground.disabled};
 `;
 
-export const ConversionRateText = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
-  color: rgba(0, 0, 0, 0.8);
+export const conversionRateText = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
-export const ConversionUpdateDate = styled(Text)`
-  font-size: 12px;
-  line-height: 18px;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
+export const conversionUpdateDate = theme => css`
+  color: ${theme.colors.textOnBackground.disabled};
 `;
 
 export const ConvertersContainer = styled.View`
@@ -56,14 +48,10 @@ export const ConverterContainer = styled.View`
     background-color: ${props.theme.colors.inputFocusBackground};`};
 `;
 
-export const ConverterType = styled(TitleText)`
-  font-size: 16px;
-  line-height: 19px;
-  ${Platform.OS === 'ios' && 'font-weight: 500;'};
-  color: ${props =>
-    props.isFocus
-      ? props.theme.colors.secondary.dark
-      : props.theme.colors.textOnBackground.disabled};
+export const converterType = (theme, isFocus) => css`
+  color: ${isFocus
+    ? theme.colors.secondary.dark
+    : theme.colors.textOnBackground.disabled};
   margin-bottom: 8px;
 `;
 
@@ -78,21 +66,10 @@ export const Input = styled.TextInput`
       : props.theme.colors.textOnBackground.disabled};
 `;
 
-export const NumberText = styled(Text)`
-  font-size: 36px;
-  line-height: 44px;
+export const numberText = theme => css`
   flex: 1;
   text-align: right;
-  color: ${props =>
-    props.editable
-      ? props.theme.colors.contrastColor
-      : props.theme.colors.textOnBackground.disabled};
-`;
-
-export const Error = styled(Text)`
-  font-size: 12px;
-  height: 16px;
-  color: ${props => props.theme.colors.textOnError.light};
+  color: ${theme.colors.textOnBackground.disabled};
 `;
 
 export const Margin = styled.View`
@@ -111,14 +88,9 @@ export const InputAccessoryButton = styled.TouchableOpacity`
   border: 1px solid ${props => props.theme.colors.background2};
 `;
 
-export const InputAccessoryButtonText = styled(Text)`
-  font-size: 14px;
-  line-height: 17px;
-  ${Platform.OS === 'ios' && 'font-weight: 600;'};
+export const inputAccessoryButtonText = theme => css`
+  color: ${theme.colors.secondary.dark};
   text-align: center;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: ${props => props.theme.colors.secondary.dark};
 `;
 
 export const styles = StyleSheet.create({
