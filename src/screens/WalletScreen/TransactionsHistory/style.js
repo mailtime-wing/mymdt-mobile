@@ -14,7 +14,7 @@ export const HistoryListHeader = styled.View`
   justify-content: space-between;
   padding: 24px 24px 16px 24px;
   border-bottom-width: 1px;
-  border-color: rgba(0, 0, 0, 0.05);
+  border-color: ${props => props.theme.colors.background2};
   elevation: 1;
   margin-bottom: 8px;
 `;

@@ -343,6 +343,17 @@ const Main = () => {
 
 const Root = () => {
   const {authToken} = useContext(AuthContext);
+  const theme = useTheme();
+
+  const rootCardStyle = {
+    ...screenUnderModalOptions.cardStyle,
+    backgroundColor: theme.colors.background1,
+  };
+
+  const rootHeaderStyle = {
+    ...screenUnderModalOptions.headerStyle,
+    backgroundColor: theme.colors.background1,
+  };
 
   useEffect(() => {
     Linking.addEventListener('url');
@@ -386,6 +397,8 @@ const Root = () => {
                 options={{
                   ...screenUnderModalOptions,
                   ...options,
+                  headerStyle: rootHeaderStyle,
+                  cardStyle: rootCardStyle,
                 }}
               />
             ))

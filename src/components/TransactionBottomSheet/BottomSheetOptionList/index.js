@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
+import {useTheme} from 'emotion-theming';
 import {
   Option,
   OptionHeader,
-  HeaderLabel,
-  Label,
   RightSide,
   OptionsContainer,
+  headerLabelStyle,
+  labelStyle,
 } from './style';
+
+import AppText from '@/components/AppText2';
 
 import ChevronUpIcon from '@/assets/chevron_up.svg';
 import ChevronDownIcon from '@/assets/chevron_down.svg';
@@ -19,8 +22,10 @@ const BottomSheetOptionList = ({
   currentActive,
   onItemPress,
 }) => {
+  const theme = useTheme();
   const [isExpand, setIsExpand] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(null);
+  const headerActive = activeItemIndex !== null;
   const handleOptionHeaderPress = () => {
     setIsExpand(!isExpand);
   };
@@ -38,10 +43,10 @@ const BottomSheetOptionList = ({
 
   return (
     <>
-      <OptionHeader
-        active={activeItemIndex !== null}
-        onPress={handleOptionHeaderPress}>
-        <HeaderLabel active={activeItemIndex !== null}>{title}</HeaderLabel>
+      <OptionHeader active={headerActive} onPress={handleOptionHeaderPress}>
+        <AppText variant="body1" style={headerLabelStyle(theme, headerActive)}>
+          {title}
+        </AppText>
         <RightSide>
           {isExpand ? <ChevronUpIcon /> : <ChevronDownIcon />}
         </RightSide>
@@ -55,9 +60,24 @@ const BottomSheetOptionList = ({
                 active={optionActive}
                 onPress={() => handleOptionPress(index)}>
                 <RightSide>
-                  {optionActive ? <ActiveRadioIcon /> : <RadioIcon />}
+                  {optionActive ? (
+                    <ActiveRadioIcon
+                      stroke={theme.colors.secondary.normal}
+                      fill={theme.colors.secondary.normal}
+                      strokeWidth="2"
+                    />
+                  ) : (
+                    <RadioIcon
+                      stroke={theme.colors.textOnBackground.highEmphasis}
+                      strokeWidth="2"
+                    />
+                  )}
                 </RightSide>
-                <Label active={optionActive}>{option}</Label>
+                <AppText
+                  variant="body1"
+                  style={labelStyle(theme, optionActive)}>
+                  {option}
+                </AppText>
               </Option>
             );
           })}

@@ -1,5 +1,4 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import styled, {css} from '@emotion/native';
 
 export const Container = styled.View`
   padding: 0 24px;
@@ -17,18 +16,18 @@ export const RowHeaderContainer = styled.View`
   align-items: center;
 `;
 
-export const RowHeader = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
-  color: rgba(0, 0, 0, 0.8);
-`;
-
 export const QuestionMark = styled.TouchableOpacity`
   margin-left: 4px;
 `;
 
-export const RowValue = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
+export const rowHeader = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
+`;
+
+export const rowValue = theme => css`
+  color: ${theme.colors.textOnBackground.disabled};
+`;
+
+export const formContainer = css`
+  margin-bottom: 40px;
 `;

@@ -1,19 +1,37 @@
 import React from 'react';
 import {FormattedDate} from 'react-intl';
 
-import {TransactionContainer, RowContainer, Name, Date} from './style';
+import AppText from '@/components/AppText2';
 
-const TransactionItem = ({icon, name, date, coin}) => (
-  <RowContainer>
-    {icon}
-    <TransactionContainer>
-      <Name>{name}</Name>
-      <Date>
-        <FormattedDate value={date} year="numeric" month="long" day="2-digit" />
-      </Date>
-    </TransactionContainer>
-    {coin}
-  </RowContainer>
-);
+import {
+  TransactionContainer,
+  RowContainer,
+  nameStyle,
+  dateStyle,
+} from './style';
+import {useTheme} from 'emotion-theming';
+
+const TransactionItem = ({icon, name, date, coin}) => {
+  const theme = useTheme();
+  return (
+    <RowContainer>
+      {icon}
+      <TransactionContainer>
+        <AppText variant="body1" style={nameStyle(theme)}>
+          {name}
+        </AppText>
+        <AppText variant="caption" style={dateStyle(theme)}>
+          <FormattedDate
+            value={date}
+            year="numeric"
+            month="long"
+            day="2-digit"
+          />
+        </AppText>
+      </TransactionContainer>
+      {coin}
+    </RowContainer>
+  );
+};
 
 export default TransactionItem;

@@ -6,90 +6,104 @@ import {
   Platform,
   ScrollView,
   Image,
+  View,
 } from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
+import {useTheme} from 'emotion-theming';
 
 import {
   Container,
   RowContainer,
-  RowHeader,
   RowHeaderContainer,
-  RowValue,
   QuestionMark,
+  rowHeader,
+  rowValue,
+  formContainer,
 } from './style';
 
 import ModalContainer from '@/components/ModalContainer';
 import ThemeButton from '@/components/ThemeButton';
 import Input from '@/components/AppInput';
+import AppText from '@/components/AppText2';
 
 const textAlignRight = {textAlign: 'right'};
 
 const Form = () => {
+  const theme = useTheme();
   const intl = useIntl();
   const {values, handleSubmit, isValid} = useFormikContext();
 
   return (
     <>
-      <Input
-        label={<FormattedMessage id="address" defaultMessage="Address" />}
-        name="address"
-        keyboardType="email-address"
-      />
-      <Input
-        label={<FormattedMessage id="amount" defaultMessage="amount" />}
-        name="amount"
-        keyboardType="numeric"
-        remark={
-          <FormattedMessage
-            id="minimum_withdrawal"
-            values={{
-              amount: 500,
-            }}
-          />
-        }
-        textStyle={textAlignRight}
-      />
-      <RowContainer>
-        <RowHeaderContainer>
-          <RowHeader>
+      <View style={formContainer}>
+        <Input
+          label={<FormattedMessage id="address" defaultMessage="Address" />}
+          name="address"
+          keyboardType="email-address"
+        />
+        <Input
+          label={<FormattedMessage id="amount" defaultMessage="amount" />}
+          name="amount"
+          keyboardType="numeric"
+          remark={
             <FormattedMessage
-              id="transaction_fee"
-              defaultMessage="Transaction Fee"
+              id="minimum_withdrawal"
+              values={{
+                amount: 500,
+              }}
             />
-          </RowHeader>
-          <QuestionMark>
-            <Image source={require('@/assets/icon_help_circle.png')} />
-          </QuestionMark>
-        </RowHeaderContainer>
-        <RowValue>55.00 MDT</RowValue>
-      </RowContainer>
-      <RowContainer>
-        <RowHeaderContainer>
-          <RowHeader>
-            <FormattedMessage id="final_amount" defaultMessage="Final Amount" />
-          </RowHeader>
-        </RowHeaderContainer>
-        <RowValue>- MDT</RowValue>
-      </RowContainer>
-      <Input
-        label={<FormattedMessage id="note" defaultMessage="note" />}
-        name="note"
-        remark={
-          <FormattedMessage
-            id="number_of_characters"
-            values={{
-              length: values.note.length,
-              limit: 140,
-            }}
-          />
-        }
-        remarkStyle={textAlignRight}
-        placeholder={intl.formatMessage({
-          id: 'optional',
-          defaultMessage: intl.messages.optional,
-        })}
-      />
+          }
+          textStyle={textAlignRight}
+        />
+        <RowContainer>
+          <RowHeaderContainer>
+            <AppText variant="body1" style={rowHeader(theme)}>
+              <FormattedMessage
+                id="transaction_fee"
+                defaultMessage="Transaction Fee"
+              />
+            </AppText>
+            <QuestionMark>
+              <Image source={require('@/assets/icon_help_circle.png')} />
+            </QuestionMark>
+          </RowHeaderContainer>
+          <AppText variant="body1" style={rowValue(theme)}>
+            55.00 MDT
+          </AppText>
+        </RowContainer>
+        <RowContainer>
+          <RowHeaderContainer>
+            <AppText variant="body1" style={rowHeader(theme)}>
+              <FormattedMessage
+                id="final_amount"
+                defaultMessage="Final Amount"
+              />
+            </AppText>
+          </RowHeaderContainer>
+          <AppText variant="body1" style={rowValue(theme)}>
+            - MDT
+          </AppText>
+        </RowContainer>
+        <Input
+          label={<FormattedMessage id="note" defaultMessage="note" />}
+          name="note"
+          remark={
+            <FormattedMessage
+              id="number_of_characters"
+              values={{
+                length: values.note.length,
+                limit: 140,
+              }}
+            />
+          }
+          remarkStyle={textAlignRight}
+          placeholder={intl.formatMessage({
+            id: 'optional',
+            defaultMessage: intl.messages.optional,
+          })}
+        />
+      </View>
       <ThemeButton onPress={handleSubmit} title="Submit" disabled={!isValid}>
         <FormattedMessage id="withdraw" defaultMessage="withdraw" />
       </ThemeButton>
@@ -121,11 +135,15 @@ const WithdrawalScreen = () => {
     const errors = {};
 
     if (!values.address) {
-      errors.address = <FormattedMessage id="required" defaultMessage="Required" />
+      errors.address = (
+        <FormattedMessage id="required" defaultMessage="Required" />
+      );
     }
 
     if (!values.amount) {
-      errors.amount = <FormattedMessage id="required" defaultMessage="Required" />
+      errors.amount = (
+        <FormattedMessage id="required" defaultMessage="Required" />
+      );
     }
 
     if (values.note.length > 140) {

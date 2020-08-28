@@ -11,49 +11,53 @@ import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
 
 import {
   RowContainer,
-  ConversionRateText,
-  ConversionUpdateDate,
   ConversionRateLeftContainer,
   ConversionRateRightContainer,
-  AlmostEqualSymbol,
   ConvertersContainer,
   ConverterContainer,
-  ConverterType,
   Input,
   Margin,
   InputAccessoryViewContainer,
   InputAccessoryButton,
-  InputAccessoryButtonText,
-  NumberText,
-  // Error,
+  almostEqualSymbol,
+  conversionRateText,
+  conversionUpdateDate,
+  converterType,
+  numberText,
+  inputAccessoryButtonText,
   styles,
 } from './style';
 
 import ThemeButton from '@/components/ThemeButton';
 import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
+import AppText from '@/components/AppText2';
 
 import ConvertIcon from '@/assets/convert.svg';
+import {useTheme} from 'emotion-theming';
 
 const inputAccessoryViewID = 'converterButtons';
 
 // TODO: handle Convert all press, merge transaction api commit later
-const KeyboardButtons = ({handleConverterOnChange}) => (
-  <InputAccessoryView nativeID={inputAccessoryViewID}>
-    <InputAccessoryViewContainer>
-      <InputAccessoryButton onPress={() => handleConverterOnChange(0)}>
-        <InputAccessoryButtonText>
-          <FormattedMessage id="clear" defaultMessage="clear" />
-        </InputAccessoryButtonText>
-      </InputAccessoryButton>
-      <InputAccessoryButton onPress={() => handleConverterOnChange(20)}>
-        <InputAccessoryButtonText>
-          <FormattedMessage id="convert_all" defaultMessage="Convert all" />
-        </InputAccessoryButtonText>
-      </InputAccessoryButton>
-    </InputAccessoryViewContainer>
-  </InputAccessoryView>
-);
+const KeyboardButtons = ({handleConverterOnChange}) => {
+  const theme = useTheme();
+  return (
+    <InputAccessoryView nativeID={inputAccessoryViewID}>
+      <InputAccessoryViewContainer>
+        <InputAccessoryButton onPress={() => handleConverterOnChange(0)}>
+          <AppText variant="button" style={inputAccessoryButtonText(theme)}>
+            <FormattedMessage id="clear" defaultMessage="clear" />
+          </AppText>
+        </InputAccessoryButton>
+        <InputAccessoryButton onPress={() => handleConverterOnChange(20)}>
+          <AppText variant="button" style={inputAccessoryButtonText(theme)}>
+            <FormattedMessage id="convert_all" defaultMessage="Convert all" />
+          </AppText>
+        </InputAccessoryButton>
+      </InputAccessoryViewContainer>
+    </InputAccessoryView>
+  );
+};
 
 const ConverterInput = ({title, name, ...props}) => {
   const intl = useIntl();
@@ -71,66 +75,75 @@ const ConverterInput = ({title, name, ...props}) => {
   );
 };
 
-const ConversionRate = ({conversionRate, isMrp}) => (
-  <>
-    <RowContainer>
-      <ConversionRateLeftContainer>
-        <ConversionRateText>
-          <FormattedMessage
-            id="conversion_rate"
-            defaultMessage="Conversion Rate"
-          />
-        </ConversionRateText>
-        <ConversionUpdateDate>
-          <FormattedMessage
-            id="lastupdate_at"
-            defaultMessage="Last update at {time}"
-            values={{
-              time: <FormattedTime value={new Date()} />,
-            }}
-          />
-        </ConversionUpdateDate>
-      </ConversionRateLeftContainer>
-      <ConversionRateRightContainer>
-        {isMrp ? (
-          <>
-            <MRPCoin
-              amount={1}
-              size={16}
-              fontSize={16}
-              color={props => props.theme.colors.textOfMrp}
+const ConversionRate = ({conversionRate, isMrp}) => {
+  const theme = useTheme();
+
+  return (
+    <>
+      <RowContainer>
+        <ConversionRateLeftContainer>
+          <AppText variant="body1" style={conversionRateText(theme)}>
+            <FormattedMessage
+              id="conversion_rate"
+              defaultMessage="Conversion Rate"
             />
-            <AlmostEqualSymbol>≈</AlmostEqualSymbol>
-            <MDTCoin
-              amount={conversionRate}
-              size={16}
-              fontSize={16}
-              color={props => props.theme.colors.primary.dark}
+          </AppText>
+          <AppText variant="caption" style={conversionUpdateDate(theme)}>
+            <FormattedMessage
+              id="lastupdate_at"
+              defaultMessage="Last update at {time}"
+              values={{
+                time: <FormattedTime value={new Date()} />,
+              }}
             />
-          </>
-        ) : (
-          <>
-            <MDTCoin
-              amount={1}
-              size={16}
-              fontSize={16}
-              color={props => props.theme.colors.primary.dark}
-            />
-            <AlmostEqualSymbol>≈</AlmostEqualSymbol>
-            <MRPCoin
-              amount={conversionRate}
-              size={16}
-              fontSize={16}
-              color={props => props.theme.colors.textOfMrp}
-            />
-          </>
-        )}
-      </ConversionRateRightContainer>
-    </RowContainer>
-  </>
-);
+          </AppText>
+        </ConversionRateLeftContainer>
+        <ConversionRateRightContainer>
+          {isMrp ? (
+            <>
+              <MRPCoin
+                amount={1}
+                size={16}
+                fontSize={16}
+                color={props => props.theme.colors.textOfMrp}
+              />
+              <AppText variant="body2" style={almostEqualSymbol(theme)}>
+                ≈
+              </AppText>
+              <MDTCoin
+                amount={conversionRate}
+                size={16}
+                fontSize={16}
+                color={props => props.theme.colors.primary.dark}
+              />
+            </>
+          ) : (
+            <>
+              <MDTCoin
+                amount={1}
+                size={16}
+                fontSize={16}
+                color={props => props.theme.colors.primary.dark}
+              />
+              <AppText variant="body2" style={almostEqualSymbol(theme)}>
+                ≈
+              </AppText>
+              <MRPCoin
+                amount={conversionRate}
+                size={16}
+                fontSize={16}
+                color={props => props.theme.colors.textOfMrp}
+              />
+            </>
+          )}
+        </ConversionRateRightContainer>
+      </RowContainer>
+    </>
+  );
+};
 
 const ConvertForm = ({conversionRate, from}) => {
+  const theme = useTheme();
   const {values, setFieldValue, handleSubmit, isValid} = useFormikContext();
   const [isAmountFocus, setIsAmountFocus] = useState(false);
   const [toAmount, setToAmount] = useState(0);
@@ -159,9 +172,9 @@ const ConvertForm = ({conversionRate, from}) => {
           onBlur={handleOnBlur}
           onFocus={() => setIsAmountFocus(true)}
           isFocus={isAmountFocus}>
-          <ConverterType isFocus={isAmountFocus}>
+          <AppText variant="value" style={converterType(theme, isAmountFocus)}>
             {FromAmountText}
-          </ConverterType>
+          </AppText>
           <ConverterInput
             keyboardType="numeric"
             name="amount"
@@ -173,10 +186,12 @@ const ConvertForm = ({conversionRate, from}) => {
         <Margin />
         <ConvertIcon fill="#21CEDB" style={styles.convertIcon} />
         <ConverterContainer isFocus={false}>
-          <ConverterType>{ToAmountText}</ConverterType>
-          <NumberText>
+          <AppText variant="value" style={converterType(theme)}>
+            {ToAmountText}
+          </AppText>
+          <AppText variant="heading1" style={numberText(theme)}>
             <FormattedNumber value={toAmount} />
-          </NumberText>
+          </AppText>
         </ConverterContainer>
       </ConvertersContainer>
       <ThemeButton onPress={handleSubmit} disabled={!isValid}>

@@ -1,5 +1,4 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import styled, {css} from '@emotion/native';
 
 export const RowContainer = styled.View`
   flex-direction: row;
@@ -8,8 +7,6 @@ export const RowContainer = styled.View`
   align-items: center;
 `;
 
-export const RowText = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
-  color: rgba(0, 0, 0, 0.8);
+export const rowTextStyle = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
 `;
