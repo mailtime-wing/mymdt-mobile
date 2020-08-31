@@ -1,5 +1,9 @@
-import styled from '@emotion/native';
+import {css} from '@emotion/native';
 
-export const Container = styled.View`
+export const container = css`
   padding-bottom: 24px;
+`;
+
+export const safeAreaStyle = css`
+  flex: 1;
 `;

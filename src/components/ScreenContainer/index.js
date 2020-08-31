@@ -1,9 +1,10 @@
 import React from 'react';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {View} from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import {APP_BAR_HEIGHT} from '@/constants/layout';
 
-import {Container} from './style';
+import {container, safeAreaStyle} from './style';
 
 // TODO: maybe this can be replaced by using `cardStyle` on screen component?
 function ScreenContainer({
@@ -13,19 +14,23 @@ function ScreenContainer({
   style,
   ...props
 }) {
-  const {top} = useSafeAreaInsets();
   const marginTop = headerTransparent
     ? hasTopBar
-      ? top + APP_BAR_HEIGHT
-      : top
+      ? APP_BAR_HEIGHT
+      : 0
     : hasTopBar
     ? 14
-    : top + 24;
+    : 24;
 
   return (
-    <Container style={[{marginTop}, style]} hasTopBar={hasTopBar} {...props}>
-      {children}
-    </Container>
+    <SafeAreaView style={safeAreaStyle}>
+      <View
+        style={[container, {marginTop}, style]}
+        hasTopBar={hasTopBar}
+        {...props}>
+        {children}
+      </View>
+    </SafeAreaView>
   );
 }
 
