@@ -281,6 +281,18 @@ export const GET_CONVERSION_RATE_API = gql`
   }
 `;
 
+export const GET_CURRENCY_BALANCE_API = gql`
+  query GetCurrecy($currencyCode: CurrencyCode) {
+    userProfile {
+      currencyAccounts(currencyCode: $currencyCode) {
+        id
+        currencyCode
+        balance
+      }
+    }
+  }
+`;
+
 export const TRANSACTIONS_QUERY = gql`
   query GetCurrecy(
     $cursor: String

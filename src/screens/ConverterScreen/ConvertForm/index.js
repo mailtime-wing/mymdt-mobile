@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, useContext} from 'react';
 import {
   FormattedMessage,
   FormattedTime,
@@ -8,6 +8,10 @@ import {
 import {InputAccessoryView} from 'react-native';
 import {useFormikContext, useField} from 'formik';
 import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
+import {useTheme} from 'emotion-theming';
+import {GET_CURRENCY_BALANCE_API} from '@/api/data';
+import {useLazyQuery} from '@apollo/react-hooks';
+import {AuthContext} from '@/context/auth';
 
 import {
   RowContainer,
@@ -33,15 +37,40 @@ import ThemeButton from '@/components/ThemeButton';
 import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
 import AppText from '@/components/AppText2';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 import ConvertIcon from '@/assets/convert.svg';
-import {useTheme} from 'emotion-theming';
 
 const inputAccessoryViewID = 'converterButtons';
 
-// TODO: handle Convert all press, merge transaction api commit later
-const KeyboardButtons = ({handleConverterOnChange}) => {
+const KeyboardButtons = ({handleConverterOnChange, from}) => {
   const theme = useTheme();
+  const {authToken} = useContext(AuthContext);
+  const [getBalance, {data, loading}] = useLazyQuery(GET_CURRENCY_BALANCE_API, {
+    context: {
+      headers: {
+        authorization: authToken ? `Bearer ${authToken}` : '',
+      },
+    },
+    fetchPolicy: 'network-only',
+  });
+
+  useEffect(() => {
+    if (data) {
+      handleConverterOnChange(
+        data?.userProfile?.currencyAccounts[0]?.balance || 0,
+      );
+    }
+  }, [data, handleConverterOnChange]);
+
+  const handleConvertAllPress = () => {
+    getBalance({
+      variables: {
+        currencyCode: from,
+      },
+    });
+  };
+
   return (
     <InputAccessoryView nativeID={inputAccessoryViewID}>
       <InputAccessoryViewContainer>
@@ -50,10 +79,14 @@ const KeyboardButtons = ({handleConverterOnChange}) => {
             <FormattedMessage id="clear" defaultMessage="clear" />
           </AppText>
         </InputAccessoryButton>
-        <InputAccessoryButton onPress={() => handleConverterOnChange(20)}>
-          <AppText variant="button" style={inputAccessoryButtonText(theme)}>
-            <FormattedMessage id="convert_all" defaultMessage="Convert all" />
-          </AppText>
+        <InputAccessoryButton onPress={handleConvertAllPress}>
+          {loading ? (
+            <LoadingSpinner />
+          ) : (
+            <AppText variant="button" style={inputAccessoryButtonText(theme)}>
+              <FormattedMessage id="convert_all" defaultMessage="Convert all" />
+            </AppText>
+          )}
         </InputAccessoryButton>
       </InputAccessoryViewContainer>
     </InputAccessoryView>
@@ -193,7 +226,10 @@ const ConvertForm = ({conversionRate, from}) => {
             editable={true}
             handleError={handleError}
           />
-          <KeyboardButtons handleConverterOnChange={handleConverterOnChange} />
+          <KeyboardButtons
+            handleConverterOnChange={handleConverterOnChange}
+            from={from}
+          />
         </ConverterContainer>
         <Margin />
         <ConvertIcon fill="#21CEDB" style={styles.convertIcon} />
