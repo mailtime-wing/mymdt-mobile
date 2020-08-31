@@ -25,7 +25,7 @@ import {
   converterType,
   numberText,
   inputAccessoryButtonText,
-  Error,
+  errorText,
   styles,
 } from './style';
 
@@ -67,8 +67,8 @@ const ConverterInput = ({title, name, handleError, ...props}) => {
   // TODO: handle when have error design
 
   useEffect(() => {
-    handleError(meta.error)
-  }, [onError])
+    handleError(meta.error);
+  }, [handleError, meta.error, onError]);
 
   return (
     <>
@@ -111,7 +111,7 @@ const ConversionRate = ({conversionRate, isMrp}) => {
                 amount={1}
                 size={16}
                 fontSize={16}
-                color={props => props.theme.colors.textOfMrp}
+                color={theme.colors.textOfMrp}
               />
               <AppText variant="body2" style={almostEqualSymbol(theme)}>
                 ≈
@@ -120,7 +120,7 @@ const ConversionRate = ({conversionRate, isMrp}) => {
                 amount={conversionRate}
                 size={16}
                 fontSize={16}
-                color={props => props.theme.colors.primary.dark}
+                color={theme.colors.textOfMdt}
               />
             </>
           ) : (
@@ -129,7 +129,7 @@ const ConversionRate = ({conversionRate, isMrp}) => {
                 amount={1}
                 size={16}
                 fontSize={16}
-                color={props => props.theme.colors.primary.dark}
+                color={theme.colors.textOfMdt}
               />
               <AppText variant="body2" style={almostEqualSymbol(theme)}>
                 ≈
@@ -138,7 +138,7 @@ const ConversionRate = ({conversionRate, isMrp}) => {
                 amount={conversionRate}
                 size={16}
                 fontSize={16}
-                color={props => props.theme.colors.textOfMrp}
+                color={theme.colors.textOfMrp}
               />
             </>
           )}
@@ -172,8 +172,8 @@ const ConvertForm = ({conversionRate, from}) => {
   };
 
   const handleError = useCallback(error => {
-    setClientError(error)
-  })
+    setClientError(error);
+  }, []);
 
   return (
     <>
@@ -206,7 +206,11 @@ const ConvertForm = ({conversionRate, from}) => {
           </AppText>
         </ConverterContainer>
       </ConvertersContainer>
-      <Error>{clientError && clientError}</Error>
+      {!!clientError && (
+        <AppText variant="label" style={errorText(theme)}>
+          {clientError}
+        </AppText>
+      )}
       <ThemeButton onPress={handleSubmit} disabled={!isValid}>
         <FormattedMessage id="convert" defaultMessage="convert" />
       </ThemeButton>

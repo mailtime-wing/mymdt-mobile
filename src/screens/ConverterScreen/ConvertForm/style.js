@@ -93,6 +93,10 @@ export const inputAccessoryButtonText = theme => css`
   text-align: center;
 `;
 
+export const errorText = theme => css`
+  color: ${theme.colors.textOnError.light};
+`;
+
 export const styles = StyleSheet.create({
   convertIcon: {
     position: 'absolute',

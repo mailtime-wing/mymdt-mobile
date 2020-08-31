@@ -5,7 +5,7 @@ import {AuthContext} from '@/context/auth';
 import {useLazyQuery} from '@apollo/react-hooks';
 import {TRANSACTIONS_QUERY} from '@/api/data';
 import {REWARD, REDEEM, INTEREST, CHECK_IN} from '@/constants/transactionsType';
-import { useTheme } from 'emotion-theming';
+import {useTheme} from 'emotion-theming';
 
 import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
@@ -50,7 +50,7 @@ function ToUsdAmount(amount) {
 }
 
 const WalletScreen = ({navigation}) => {
-  const theme = useTheme()
+  const theme = useTheme();
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const [showBottomSheet, setShowBottomSheet] = useState(false);
   const [activeFilterIndex, setActiveFilterIndex] = useState(0);
@@ -73,7 +73,7 @@ const WalletScreen = ({navigation}) => {
 
   const mrpTheme = {
     color: theme.colors.secondary.normal,
-    backgroundColor: theme.colors.secondary.normal, 
+    backgroundColor: theme.colors.secondary.normal,
     borderColor: theme.colors.secondary.border,
     cardNameColor: theme.colors.nameOnMrpCard,
     cardBackgroundColor: theme.colors.mrpCard,
@@ -81,7 +81,7 @@ const WalletScreen = ({navigation}) => {
 
   const mdtTheme = {
     color: theme.colors.primary.normal,
-    backgroundColor: theme.colors.primary.normal, 
+    backgroundColor: theme.colors.primary.normal,
     borderColor: theme.colors.primary.border,
     cardNameColor: theme.colors.nameOnMdtCard,
     cardBackgroundColor: theme.colors.mdtCard,
@@ -100,7 +100,7 @@ const WalletScreen = ({navigation}) => {
           }
           size={42}
           fontSize={42}
-          color={theme.colors.background1}
+          color={theme.colors.mrpCardValue}
           style={styleFlexEnd}
         />
       ),
@@ -128,7 +128,7 @@ const WalletScreen = ({navigation}) => {
           }
           size={42}
           fontSize={42}
-          color={theme.colors.background1}
+          color={theme.colors.mdtCardValue}
           style={styleFlexEnd}
         />
       ),
