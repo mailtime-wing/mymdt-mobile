@@ -1,9 +1,9 @@
-import React, { useLayoutEffect } from 'react';
-import { View, TouchableOpacity, ScrollView, Image } from 'react-native';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import React, {useLayoutEffect} from 'react';
+import {View, TouchableOpacity, ScrollView, Image} from 'react-native';
+import {FormattedDate, FormattedMessage} from 'react-intl';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
-import { GET_USER_MEMBERSHIP_API } from '@/api/data';
-import { useTheme } from 'emotion-theming';
+import {GET_USER_MEMBERSHIP_API} from '@/api/data';
+import {useTheme} from 'emotion-theming';
 
 import {
   toolsRowContainer,
@@ -29,9 +29,9 @@ import MembershipLevelChip from '@/components/MembershipLevelChip';
 import UserIcon from '@/components/UserIcon';
 import AppText from '@/components/AppText2';
 
-const MembershipScreen = ({ navigation }) => {
+const MembershipScreen = ({navigation}) => {
   const theme = useTheme();
-  const { data } = useQueryWithAuth(GET_USER_MEMBERSHIP_API, {
+  const {data} = useQueryWithAuth(GET_USER_MEMBERSHIP_API, {
     fetchPolicy: 'network-only',
   });
 
@@ -39,25 +39,25 @@ const MembershipScreen = ({ navigation }) => {
   const userNextLevel = userLevel + 1;
 
   useLayoutEffect(() => {
+    const RightSideButtons = () => (
+      <View style={toolsRowContainer}>
+        <TouchableOpacity
+          style={buttons}
+          onPress={() => navigation.navigate('notification')}>
+          <BellIcon />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={buttons}
+          onPress={() => navigation.navigate('settings')}>
+          <SettingIcon />
+        </TouchableOpacity>
+      </View>
+    );
+
     navigation.setOptions({
       headerRight: () => <RightSideButtons />,
     });
-  });
-
-  const RightSideButtons = () => (
-    <View style={toolsRowContainer}>
-      <TouchableOpacity
-        style={buttons}
-        onPress={() => navigation.navigate('notification')}>
-        <BellIcon />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={buttons}
-        onPress={() => navigation.navigate('settings')}>
-        <SettingIcon />
-      </TouchableOpacity>
-    </View>
-  );
+  }, [navigation]);
 
   return (
     <LinearGradientBackground>
@@ -84,20 +84,6 @@ const MembershipScreen = ({ navigation }) => {
                     }}
                   />
                 </AppText>
-                <View style={rowContainer}>
-                  <MembershipLevelChip
-                    userLevel={data?.userProfile?.membership?.level || 0}
-                  />
-                  <AppText variant="caption" style={validDate(theme)}>
-                    <FormattedMessage
-                      id="valid_until"
-                      defaultMessage="Valid until {date}"
-                      values={{
-                        date: <FormattedDate value={new Date()} />,
-                      }}
-                    />
-                  </AppText>
-                </View>
               </View>
             </View>
           </View>

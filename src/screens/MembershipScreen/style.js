@@ -1,21 +1,24 @@
 import {css} from '@emotion/native';
+import {APP_BAR_HEIGHT} from '@/constants/layout';
 
 export const imageStyle = css`
   margin-left: auto;
   margin-right: auto;
   border-radius: 12px;
+  margin-top: 24px;
   margin-bottom: 24px;
 `;
 
 export const toolsRowContainer = css`
-  align-self: flex-end;
   flex-direction: row;
+  align-items: center;
+  height: ${String(APP_BAR_HEIGHT)}px;
 `;
 
 export const buttons = css`
-  width: 36px;
+  width: 40px;
   aspect-ration: 1;
-  padding: 7px;
+  padding: 9px;
   margin-right: 16px;
 `;
 
