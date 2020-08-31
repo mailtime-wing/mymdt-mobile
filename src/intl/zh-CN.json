@@ -8,6 +8,16 @@
   "dark": "夜间模式",
   "light": "日间模式",
   "system_default": "系统默认",
+  
+  "valid_until": "Valid until {date}",
+  "cashback_type": "Cashback type",
+  "referral": "Referral",
+  "upgrade_to": "Upgrade to {level}",
+  "complete_tasks_to_upgrade": "Complete all tasks to upgrade your membership",
+  "total_reward_points": "Total RewardPoints",
+  "enjoy_more_after_updrade": "Enjoy more after upgrading membership",
+  "browse_membership_details": "Browse all membership details",
+  "privileges": "Privileges",
 
   "browse": "发现",
   "browse_details": "限时活动 / 任务 / 分享",

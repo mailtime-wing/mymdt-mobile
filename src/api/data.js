@@ -81,6 +81,7 @@ export const UPDATE_BASIC_OFFER_API = gql`
 export const GET_USER_MEMBERSHIP_API = gql`
   query {
     userProfile {
+      name
       membership {
         id
         name

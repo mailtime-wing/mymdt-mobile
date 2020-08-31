@@ -34,7 +34,6 @@ const AccountBar = ({navigation, showCoins}) => {
     <View style={accountContainer}>
       <View style={leftContainer}>
         <UserIcon
-          source={require('@/assets/dog_avatar.png')}
           onPress={() => navigation.navigate('membership')}
         />
         <MembershipLevelChip
