@@ -7,7 +7,7 @@ export const Container = styled(ScreenContainer)`
 `;
 
 export const ScrollContainer = styled.ScrollView`
-  background: ${props => props.theme.colors.secondary.normal};
+  background: ${props => props.theme.colors.themeBackground};
   padding-left: 24px;
   padding-right: 24px;
 `;
@@ -18,13 +18,13 @@ export const BackgroundImage = styled.Image`
 `;
 
 export const titleStyle = theme => css`
-  color: ${theme.colors.background1};
+  color: ${theme.colors.textOnThemeBackground.highEmphasis};
   text-align: center;
   margin-bottom: 16px;
 `;
 
 export const detailStyle = theme => css`
-  color: ${theme.colors.background1};
+  color: ${theme.colors.textOnThemeBackground.mediumEmphasis};
   text-align: center;
   margin-bottom: 16px;
 `;

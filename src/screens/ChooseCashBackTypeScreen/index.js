@@ -11,7 +11,7 @@ import {
 import {useTheme} from 'emotion-theming';
 
 import AppText from '@/components/AppText2';
-import ThemeButton from '@/components/ThemeButton';
+import TextButton from '@/components/TextButton';
 import ScreenContainer from '@/components/ScreenContainer';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import {UPDATE_USER_CASHBACK_CURRENCY_CODE_API} from '@/api/data';
@@ -44,23 +44,29 @@ const cashbackTypeList = [
   },
 ];
 
+const buttonStyle = {
+  width: 'auto',
+  alignSelf: 'center',
+};
+
 const CashBackType = ({cashback, handleChoosePress, theme}) => (
   <View style={boxContainer(theme)}>
     <AppText variant="label" style={boxLevel(theme)}>
       {cashback.level}
     </AppText>
-    <AppText variant="heading3" style={boxTitle}>
+    <AppText variant="heading3" style={boxTitle(theme)}>
       {cashback.title}
     </AppText>
     <AppText variant="body1" style={boxDetail(theme)}>
       {cashback.detail}
     </AppText>
-    <ThemeButton
-      medium
-      width="auto"
-      onPress={() => handleChoosePress(cashback.type)}>
-      <FormattedMessage id="choose_this" defaultMessage="Choose This" />
-    </ThemeButton>
+    <TextButton
+      variant="filled"
+      sizeVariant="normal"
+      text={<FormattedMessage id="choose_this" defaultMessage="Choose This" />}
+      style={buttonStyle}
+      onPress={() => handleChoosePress(cashback.type)}
+    />
   </View>
 );
 
