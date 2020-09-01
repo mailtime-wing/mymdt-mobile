@@ -15,7 +15,7 @@ import useSetupFlow from '@/hooks/useSetupFlow';
 import BindingEmailIcon from '@/assets/binding-email.svg';
 import BindingBankAccountIcon from '@/assets/binding-bank-account.svg';
 import AppText from '@/components/AppText2';
-import TextButton from '@/components/TextButton';
+import AppButton from '@/components/AppButton';
 
 const IntroductionScreen = () => {
   const theme = useTheme();
@@ -43,7 +43,7 @@ const IntroductionScreen = () => {
           caption="Powered by Plaid and CrediGO"
           onPress={() => navigateByFlow('card_flow')}
         />
-        <TextButton
+        <AppButton
           variant="contrast_outlined"
           sizeVariant="normal"
           text={

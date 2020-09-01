@@ -4,7 +4,9 @@ import {NotificationContext} from '@/context/notification';
 
 import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
-import TextButton from '@/components/TextButton';
+import AppButton from '@/components/AppButton';
+
+import HomeIcon from '@/assets/home.svg';
 
 const details = {
   alertBody: 'test for enable notification!',
@@ -31,76 +33,100 @@ const BrowseScreen = ({...props}) => {
         {
           /*for test*/
           <>
-            <TextButton
+            <AppButton
               variant="filled"
-              text="Compact Filled Button"
+              text="Compact Filled Primary"
               sizeVariant="compact"
+              colorVariant="primary"
+              svgIcon={HomeIcon}
               style={marginForTest}
             />
-            <TextButton
+            <AppButton
               variant="filled"
-              text="Normal Filled Button"
+              text="Normal Filled Secondary"
               sizeVariant="normal"
+              colorVariant="secondary"
+              svgIcon={HomeIcon}
               style={marginForTest}
             />
-            <TextButton
+            <AppButton
               variant="filled"
-              text="Large Filled Button"
+              text="Large Filled Alert"
               sizeVariant="large"
+              colorVariant="alert"
+              svgIcon={HomeIcon}
               style={marginForTest}
             />
-            <TextButton
+            <AppButton
+              variant="filled"
+              text="Large Filled Contrast"
+              sizeVariant="large"
+              colorVariant="contrast"
+              svgIcon={HomeIcon}
+              style={marginForTest}
+            />
+            <AppButton
               variant="outlined"
-              text="Compact Outlined Button"
+              text="Compact Outlined Primary"
               sizeVariant="compact"
+              colorVariant="primary"
+              svgIcon={HomeIcon}
               style={marginForTest}
             />
-            <TextButton
+            <AppButton
               variant="outlined"
-              text="Normal Outlined Button"
+              text="Normal Outlined Secondary"
               sizeVariant="normal"
+              colorVariant="secondary"
+              svgIcon={HomeIcon}
               style={marginForTest}
             />
-            <TextButton
+            <AppButton
               variant="outlined"
-              text="Large Outlined Button"
+              text="Large Outlined Alert"
               sizeVariant="large"
+              colorVariant="alert"
+              svgIcon={HomeIcon}
               style={marginForTest}
             />
-            <TextButton
-              variant="contrast_outlined"
-              text="Compact Contrast Outlined Button"
+            <AppButton
+              variant="outlined"
+              text="Large Outlined Contrast"
+              sizeVariant="large"
+              colorVariant="contrast"
+              svgIcon={HomeIcon}
+              style={marginForTest}
+            />
+            <AppButton
+              variant="transparent"
+              text="Compact Transparent Primary"
               sizeVariant="compact"
+              colorVariant="primary"
+              svgIcon={HomeIcon}
               style={marginForTest}
             />
-            <TextButton
-              variant="contrast_outlined"
-              text="Normal Contrast Outlined Button"
-              sizeVariant="normal"
-              style={marginForTest}
-            />
-            <TextButton
-              variant="contrast_outlined"
-              text="Large Contrast Outlined Button"
-              sizeVariant="large"
-              style={marginForTest}
-            />
-            <TextButton
+            <AppButton
               variant="transparent"
-              text="Compact Transparent Button"
+              text="Compact Transparent Secondary"
               sizeVariant="compact"
+              colorVariant="secondary"
+              svgIcon={HomeIcon}
               style={marginForTest}
             />
-            <TextButton
+            <AppButton
               variant="transparent"
-              text="Normal Transparent Button"
+              text="Normal Transparent Alert"
               sizeVariant="normal"
+              colorVariant="alert"
+              svgIcon={HomeIcon}
               style={marginForTest}
             />
-            <TextButton
+            <AppButton
               variant="transparent"
-              text="Large Transparent Button"
+              text="Large Transparent Contrast"
               sizeVariant="large"
+              colorVariant="contrast"
+              svgIcon={HomeIcon}
               style={marginForTest}
             />
           </>
