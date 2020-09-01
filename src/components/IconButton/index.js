@@ -6,9 +6,9 @@ import {container, icon} from './style';
 
 /**
  * @typedef {Object} Props
- * @property {string} color "yrd" Form submit callback function
- * @property {'filled'|'outlined'|'transparent'} variant "yrd" Form submit callback function
- * @property {'small'|'normal'} sizeVariant "yrd" Form submit callback function
+ * @property {string} color
+ * @property {'filled'|'outlined'|'transparent'} variant
+ * @property {'small'|'normal'} sizeVariant
  */
 
 /**

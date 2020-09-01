@@ -8,8 +8,8 @@ import {container, textButton} from './style';
 
 /**
  * @typedef {Object} Props
- * @property {'filled'|'outlined'|'transparent'|'contrast_outlined'} variant "yrd" Form submit callback function
- * @property {'compact'|'normal'|'large'} sizeVariant "yrd" Form submit callback function
+ * @property {'filled'|'outlined'|'transparent'|'contrast_outlined'} variant
+ * @property {'compact'|'normal'|'large'} sizeVariant
  */
 
 /**
