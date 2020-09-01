@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback, useContext} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   FormattedMessage,
   FormattedTime,
@@ -10,8 +10,7 @@ import {useFormikContext, useField} from 'formik';
 import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
 import {useTheme} from 'emotion-theming';
 import {GET_CURRENCY_BALANCE_API} from '@/api/data';
-import {useLazyQuery} from '@apollo/react-hooks';
-import {AuthContext} from '@/context/auth';
+import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
 
 import {
   RowContainer,
@@ -45,15 +44,12 @@ const inputAccessoryViewID = 'converterButtons';
 
 const KeyboardButtons = ({handleConverterOnChange, from}) => {
   const theme = useTheme();
-  const {authToken} = useContext(AuthContext);
-  const [getBalance, {data, loading}] = useLazyQuery(GET_CURRENCY_BALANCE_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
+  const [getBalance, {data, loading}] = useLazyQueryWithAuth(
+    GET_CURRENCY_BALANCE_API,
+    {
+      fetchPolicy: 'network-only',
     },
-    fetchPolicy: 'network-only',
-  });
+  );
 
   useEffect(() => {
     if (data) {
@@ -200,9 +196,12 @@ const ConvertForm = ({conversionRate, from}) => {
     setIsAmountFocus(false);
   };
 
-  const handleConverterOnChange = amount => {
-    setFieldValue('amount', amount);
-  };
+  const handleConverterOnChange = useCallback(
+    amount => {
+      setFieldValue('amount', amount);
+    },
+    [setFieldValue],
+  );
 
   const handleError = useCallback(error => {
     setClientError(error);
