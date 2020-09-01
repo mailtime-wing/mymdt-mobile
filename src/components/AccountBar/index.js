@@ -18,6 +18,10 @@ import MembershipLevelChip from '@/components/MembershipLevelChip';
 import UserIcon from '@/components/UserIcon';
 import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
+import {
+  MEASURABLE_DATA_TOKEN,
+  MEASURABLE_REWARD_POINT,
+} from '@/constants/currency';
 
 const AccountBar = ({navigation, showCoins}) => {
   const {authToken} = useContext(AuthContext);
@@ -45,7 +49,11 @@ const AccountBar = ({navigation, showCoins}) => {
         <View style={coninsContainer}>
           <View style={[coinChip(theme), marginRight]}>
             <MRPCoin
-              amount={645423} // TODO: GET FROM API ONCE API READY
+              amount={
+                data?.userProfile?.currencyAccounts.find(
+                  ca => ca.currencyCode === MEASURABLE_REWARD_POINT,
+                ).balance || 0
+              }
               size={18}
               fontSize={16}
               color={props => props.theme.colors.textOfMrp}
@@ -53,7 +61,11 @@ const AccountBar = ({navigation, showCoins}) => {
           </View>
           <View style={coinChip(theme)}>
             <MDTCoin
-              amount={26543} // TODO: GET FROM API ONCE API READY
+              amount={
+                data?.userProfile?.currencyAccounts.find(
+                  ca => ca.currencyCode === MEASURABLE_DATA_TOKEN,
+                ).balance || 0
+              }
               size={18}
               fontSize={16}
               color={props => props.theme.colors.textOfMdt}

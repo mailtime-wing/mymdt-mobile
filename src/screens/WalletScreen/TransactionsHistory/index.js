@@ -40,9 +40,7 @@ const TransactionsHistory = ({
           textStyle={`color: ${currentTheme.color}`}
           buttonStyle={`borderColor: ${currentTheme.borderColor}`}
           reverse
-          small
-          onPress={() => navigation.navigate('missing_receipt')}
-        >
+          small>
           <FormattedMessage
             id="missing_receipt"
             defaultMessage="missing receipt"

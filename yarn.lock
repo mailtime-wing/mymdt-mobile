@@ -2,7 +2,25 @@
 # yarn lockfile v1
 
 
-"@apollo/client@^3.0.0-beta.23", "@apollo/client@^3.0.0-beta.44":
+"@apollo/client@3.1.0-pre.1":
+  version "3.1.0-pre.1"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.1.0-pre.1.tgz#a91119e9eff552839e7829318777bf0ddfee2519"
+  integrity sha512-Ahy2r8twlnBi1Nk6K+0eWj01REWTFsqUWpRB0CwbdG5YiYUc7fKTpv44uIc05ZvPr5G/3SJ4o/mQtseZEBl6/Q==
+  dependencies:
+    "@types/zen-observable" "^0.8.0"
+    "@wry/context" "^0.5.2"
+    "@wry/equality" "^0.2.0"
+    fast-json-stable-stringify "^2.0.0"
+    graphql-tag "^2.10.4"
+    hoist-non-react-statics "^3.3.2"
+    optimism "^0.12.1"
+    prop-types "^15.7.2"
+    symbol-observable "^1.2.0"
+    ts-invariant "^0.4.4"
+    tslib "^1.10.0"
+    zen-observable "^0.8.14"
+
+"@apollo/client@^3.0.0-beta.23":
   version "3.0.0-beta.44"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.0.0-beta.44.tgz#79c6083dc2fe81725ad64398bc78e641ed1c1d84"
   integrity sha512-udNiabIYs9WLHWvj2j6tlsaWPNhgMZsHrZyBTKOh+69fLpmZZ4Vv4mepWq/3WCzyHoWa3n3FPi/ajNljkO/Olg==
@@ -1533,7 +1551,7 @@
     "@types/node" ">=6"
     tslib "^1.9.3"
 
-"@wry/context@^0.5.0":
+"@wry/context@^0.5.0", "@wry/context@^0.5.2":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@wry/context/-/context-0.5.2.tgz#f2a5d5ab9227343aa74c81e06533c1ef84598ec7"
   integrity sha512-B/JLuRZ/vbEKHRUiGj6xiMojST1kHhu4WcreLfNN7q9DqQFrb97cWgf/kiYsPSUCAMVN0HzfFc8XjJdzgZzfjw==
@@ -1544,6 +1562,13 @@
   version "0.1.11"
   resolved "https://registry.yarnpkg.com/@wry/equality/-/equality-0.1.11.tgz#35cb156e4a96695aa81a9ecc4d03787bc17f1790"
   integrity sha512-mwEVBDUVODlsQQ5dfuLUS5/Tf7jqUKyhKYHmVi4fPB6bDMOfWvUPJmKgS1Z7Za/sOI3vzWt4+O7yCiL/70MogA==
+  dependencies:
+    tslib "^1.9.3"
+
+"@wry/equality@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@wry/equality/-/equality-0.2.0.tgz#a312d1b6a682d0909904c2bcd355b02303104fb7"
+  integrity sha512-Y4d+WH6hs+KZJUC8YKLYGarjGekBrhslDbf/R20oV+AakHPINSitHfDRQz3EGcEWc1luXYNUvMhawWtZVWNGvQ==
   dependencies:
     tslib "^1.9.3"
 
@@ -3825,6 +3850,11 @@ graphql-tag@^2.10.2, graphql-tag@^2.4.2:
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.10.3.tgz#ea1baba5eb8fc6339e4c4cf049dabe522b0edf03"
   integrity sha512-4FOv3ZKfA4WdOKJeHdz6B3F/vxBLSgmBcGeAFPf4n1F64ltJUvOOerNj0rsJxONQGdhUMynQIvd6LzB+1J5oKA==
 
+graphql-tag@^2.10.4:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.11.0.tgz#1deb53a01c46a7eb401d6cb59dec86fa1cccbffd"
+  integrity sha512-VmsD5pJqWJnQZMUeRwrDhfgoyqcfwEkvtpANqcoUG8/tOLkwNgU9mzub/Mc78OJMhHjx7gfAMTxzdG43VGg3bA==
+
 graphql@^14.0.0, graphql@^14.6.0:
   version "14.6.0"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.6.0.tgz#57822297111e874ea12f5cd4419616930cd83e49"
@@ -5869,6 +5899,13 @@ optimism@^0.11.5:
   integrity sha512-twCHmBb64DYzEZ8A3O+TLCuF/RmZPBhXPQYv4agoiALRLlW9SidMzd7lwUP9mL0jOZhzhnBmb8ajqA00ECo/7g==
   dependencies:
     "@wry/context" "^0.5.0"
+
+optimism@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/optimism/-/optimism-0.12.1.tgz#933f9467b9aef0e601655adb9638f893e486ad02"
+  integrity sha512-t8I7HM1dw0SECitBYAqFOVHoBAHEQBTeKjIL9y9ImHzAVkdyPK4ifTgM4VJRDtTUY4r/u5Eqxs4XcGPHaoPkeQ==
+  dependencies:
+    "@wry/context" "^0.5.2"
 
 optionator@^0.8.1, optionator@^0.8.3:
   version "0.8.3"

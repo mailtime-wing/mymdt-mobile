@@ -60,6 +60,9 @@ const ConverterScreen = ({navigation, route}) => {
 
   const validate = values => {
     const errors = {};
+    if(values.amount <= 0) {
+      errors.amount = 'must more than 0'
+    }
     // TODO: handle if amount is not enough / return meaningful error from backend
     // errors.amount = 'Do not have enough amount'
 
