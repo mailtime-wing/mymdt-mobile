@@ -34,35 +34,31 @@ const BonusScreen = props => {
         <BonusBox
           title={<FormattedMessage id="bonus_task_title_1" />}
           detail={<FormattedMessage id="bonus_task_detail_1" />}
-          children={
-            <DailyCheckIn
-              dayListWithAmount={[10, 20, 30, 40, 50, 50, 50, 50]}
-              currentDay={3}
-              canCheckIn={true}
-            />
-          }
+          children={<DailyCheckIn />}
         />
         <MarginBottom />
-        {data?.userProfile?.taskGroups.map((taskGroup, index) => (
-          <Fragment key={taskGroup?.name}>
-            <BonusBox
-              title={taskGroup?.name}
-              detail={taskGroup?.description}
-              icon={require('@/assets/daily_task_icon.png')}
-              children={
-                <TaskListContainer>
-                  <TaskList
-                    taskList={taskGroup?.userTasks}
-                    userRewardList={userRewardList}
-                  />
-                </TaskListContainer>
-              }
-            />
-            {index !== data?.userProfile?.taskGroups.length - 1 && (
-              <MarginBottom />
-            )}
-          </Fragment>
-        ))}
+        {data?.userProfile?.taskGroups.map(
+          ({name, description, userTasks}, index) => (
+            <Fragment key={name}>
+              <BonusBox
+                title={name}
+                detail={description}
+                icon={require('@/assets/daily_task_icon.png')}
+                children={
+                  <TaskListContainer>
+                    <TaskList
+                      taskList={userTasks}
+                      userRewardList={userRewardList}
+                    />
+                  </TaskListContainer>
+                }
+              />
+              {index !== data?.userProfile?.taskGroups.length - 1 && (
+                <MarginBottom />
+              )}
+            </Fragment>
+          ),
+        )}
         <NoMoreContent />
       </ScrollContainer>
     </LinearGradientBackground>

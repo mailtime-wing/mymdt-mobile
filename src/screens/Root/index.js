@@ -156,6 +156,11 @@ const settingScreens = [
   {name: 'offers_preference', component: OfferSelectScreen},
   {name: 'emails_binding', component: BindEmailScreen}, // same as add_email in setupScreens (but different navigator)
   {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
+  {
+    name: 'linked_cards',
+    component: LinkedCardsScreen,
+    options: {headerShown: false},
+  },
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'sign_out', component: SignOutScreen},
   {name: 'app_settings', component: AppSettingScreen},
@@ -186,30 +191,32 @@ const linkingConfig = {
   // externalweb://
   initialRouteName: 'home',
   screens: {
-    account_security: {
-      path: 'secureaccount',
-      exact: true,
+    settings: {
+      screens: {
+        account_security: {
+          path: 'secureaccount',
+          exact: true,
+        },
+        emails_binding: {
+          path: 'bindemail',
+          exact: true,
+        },
+        linked_cards: {
+          path: 'bindbank',
+          exact: true,
+        },
+        invite_friend: {
+          path: 'invitefd',
+          exact: true,
+        },
+      },
     },
-    emails_binding: {
-      path: 'bindemail',
-      exact: true,
-    },
-    // no banks_account_binding and invite_friend screen at this moment
-    // TODO: handle internalweb and externalweb
-
-    // banks_account_binding: {
-    //   path: 'bindbank',
-    //   exact: true
-    // },
-    // invite_friend: {
-    //   path: 'invitefd',
-    //   exact: true
-    // },
-
     home: {
       // return to home if the path not match
       path: '*',
     },
+    // no banks_account_binding and invite_friend screen at this moment
+    // TODO: handle internalweb and externalweb
   },
 };
 
