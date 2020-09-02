@@ -11,11 +11,11 @@ import {
 } from './style';
 
 import BindingButton from './BindingButton';
-import ThemeButton from '@/components/ThemeButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import BindingEmailIcon from '@/assets/binding-email.svg';
 import BindingBankAccountIcon from '@/assets/binding-bank-account.svg';
 import AppText from '@/components/AppText2';
+import AppButton from '@/components/AppButton';
 
 const IntroductionScreen = () => {
   const theme = useTheme();
@@ -43,12 +43,15 @@ const IntroductionScreen = () => {
           caption="Powered by Plaid and CrediGO"
           onPress={() => navigateByFlow('card_flow')}
         />
-        <ThemeButton
-          reverseBorder
-          width="100%"
-          onPress={() => navigateByFlow('skip')}>
-          <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
-        </ThemeButton>
+        <AppButton
+          variant="outlined"
+          sizeVariant="normal"
+          colorVariant="contrast"
+          text={
+            <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
+          }
+          onPress={() => navigateByFlow('skip')}
+        />
       </Container>
     </ScrollContainer>
   );

@@ -5,18 +5,18 @@ export const container = css`
 `;
 
 export const scrollContainer = theme => css`
-  background: ${theme.colors.secondary.normal};
+  background: ${theme.colors.themeBackground};
   padding-left: 24px;
   padding-right: 24px;
 `;
 
 export const detail = theme => css`
-  color: ${theme.colors.background1};
+  color: ${theme.colors.textOnThemeBackground.mediumEmphasis};
   margin-bottom: 24px;
 `;
 
 export const titleStyle = theme => css`
-  color: ${theme.colors.background1};
+  color: ${theme.colors.textOnThemeBackground.highEmphasis};
   margin-bottom: 16px;
 `;
 
@@ -33,7 +33,8 @@ export const boxLevel = theme => css`
   text-align: center;
 `;
 
-export const boxTitle = css`
+export const boxTitle = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
   margin-bottom: 16px;
   text-align: center;
 `;

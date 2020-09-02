@@ -22,6 +22,10 @@ export const darkTheme = {
       'rgba(255, 255, 255, 0.6)',
       'rgba(255, 255, 255, 0.38)',
     ],
+    textOnThemeBackground: [
+      'rgba(255, 255, 255, 0.87)',
+      'rgba(255, 255, 255, 0.6)',
+    ],
 
     // background
     background: [
@@ -31,6 +35,7 @@ export const darkTheme = {
     ],
     inputFocusBackground: 'rgba(159, 189, 233, 0.2)',
     errorBackground: 'rgba(255, 113, 113, 0.2)',
+    themeBackground: '#121212',
 
     // membership
     membership: {
@@ -42,14 +47,19 @@ export const darkTheme = {
       special: ['#9FBDE9', '#121212'],
     },
 
+    // button
+    buttonContrastBorderColor: 'rgba(136, 217, 222, 0.2)',
+    buttonContrastTextColor: '#88D9DE',
+
+    toggleOn: ['#88D9DE', 'rgba(136, 217, 222, 0.38)'],
+    toggleOff: ['rgba(255, 255, 255, 0.6)', 'rgba(255, 255, 255, 0.38)'],
+
     // others
     borderColor: 'rgba(255, 255, 255, 0.2)',
     contrastBorderColor: 'rgba(18, 18, 18, 0.2)',
 
     linearGradientBackground: ['#121212', '#121212'],
     tabScreenStatusBar: '#121212',
-    toggleOn: ['#88D9DE', 'rgba(136, 217, 222, 0.38)'],
-    toggleOff: ['rgba(255, 255, 255, 0.6)', 'rgba(255, 255, 255, 0.38)'],
 
     alert: '#FFD542',
   },
@@ -84,11 +94,13 @@ export const lightTheme = {
       'rgba(0, 0, 0, 0.6)',
       'rgba(0, 0, 0, 0.4)',
     ],
+    textOnThemeBackground: ['#FFFFFF', '#FFFFFF'],
 
     // background
     background: ['#FFFFFF', 'rgba(0, 0, 0, 0.05)', 'rgba(0, 0, 0, 0.1)'],
     inputFocusBackground: 'rgba(3, 99, 239, 0.05)',
     errorBackground: 'rgba(216, 16, 16, 0.1)',
+    themeBackground: '#21CEDB',
 
     // membership
     membership: {
@@ -100,14 +112,19 @@ export const lightTheme = {
       special: ['#0363EF', '#FFFFFF'],
     },
 
+    // button
+    buttonContrastBorderColor: 'rgba(255, 255, 255, 0.4)',
+    buttonContrastTextColor: '#FFFFFF',
+
+    toggleOn: ['#FFFFFF', '#21CEDB'],
+    toggleOff: ['rgba(255, 255, 255, 0.87)', 'rgba(0, 0, 0, 0.1)'],
+
     // others
     borderColor: 'rgba(0, 0, 0, 0.2)',
     contrastBorderColor: 'rgba(255, 255, 255, 0.2)',
 
     linearGradientBackground: ['#FDFBF2', '#E2FAFF'],
     tabScreenStatusBar: '#FDFBF2',
-    toggleOn: ['#FFFFFF', '#21CEDB'],
-    toggleOff: ['rgba(255, 255, 255, 0.87)', 'rgba(0, 0, 0, 0.1)'],
 
     alert: '#FFD542',
   },
@@ -131,7 +148,6 @@ lightTheme.colors.secondary.dark = lightTheme.colors.secondary[2];
 lightTheme.colors.secondary.border = lightTheme.colors.secondary[3];
 
 // text
-
 lightTheme.colors.textOnError.normal = lightTheme.colors.textOnError[0];
 lightTheme.colors.textOnError.light = lightTheme.colors.textOnError[1];
 
@@ -141,6 +157,10 @@ lightTheme.colors.textOnBackground.mediumEmphasis =
   lightTheme.colors.textOnBackground[1];
 lightTheme.colors.textOnBackground.disabled =
   lightTheme.colors.textOnBackground[2];
+lightTheme.colors.textOnThemeBackground.highEmphasis =
+  lightTheme.colors.textOnThemeBackground[0];
+lightTheme.colors.textOnThemeBackground.mediumEmphasis =
+  lightTheme.colors.textOnThemeBackground[1];
 
 // background
 lightTheme.colors.background1 = lightTheme.colors.background[0];
@@ -259,6 +279,10 @@ darkTheme.colors.textOnBackground.mediumEmphasis =
   darkTheme.colors.textOnBackground[1];
 darkTheme.colors.textOnBackground.disabled =
   darkTheme.colors.textOnBackground[2];
+darkTheme.colors.textOnThemeBackground.highEmphasis =
+  darkTheme.colors.textOnThemeBackground[0];
+darkTheme.colors.textOnThemeBackground.mediumEmphasis =
+  darkTheme.colors.textOnThemeBackground[1];
 
 // background
 darkTheme.colors.background1 = darkTheme.colors.background[0];
