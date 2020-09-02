@@ -10,7 +10,8 @@ export const text = (theme, variant) => css`
     `
     text-transform: uppercase;
   `};
-  ${variant === 'button' && 'text-transform: uppercase;'};
+  ${variant === 'button' &&
+    'text-transform: uppercase; letter-spacing: 1.5px;'};
   ${variant === 'label' && 'text-transform: uppercase;'};
   ${variant === 'overline' && 'text-transform: uppercase;'};
 `;

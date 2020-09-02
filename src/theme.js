@@ -33,6 +33,12 @@ export const darkTheme = {
       'rgba(255, 255, 255, 0.12)',
       'rgba(255, 255, 255, 0.2)',
     ],
+    elevatedBackground: [
+      'background-color: #1E1E1E;',
+      'background-color: #232323;',
+      'background-color: #2C2C2C;',
+      'background-color: #363636;',
+    ],
     inputFocusBackground: 'rgba(159, 189, 233, 0.2)',
     errorBackground: 'rgba(255, 113, 113, 0.2)',
     themeBackground: '#121212',
@@ -98,6 +104,12 @@ export const lightTheme = {
 
     // background
     background: ['#FFFFFF', 'rgba(0, 0, 0, 0.05)', 'rgba(0, 0, 0, 0.1)'],
+    elevatedBackground: [
+      'background-color: #FFFFFF;',
+      'background-color: #FFFFFF; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);',
+      'background-color: #FFFFFF; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);',
+      'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);',
+    ],
     inputFocusBackground: 'rgba(3, 99, 239, 0.05)',
     errorBackground: 'rgba(216, 16, 16, 0.1)',
     themeBackground: '#21CEDB',
@@ -166,6 +178,10 @@ lightTheme.colors.textOnThemeBackground.mediumEmphasis =
 lightTheme.colors.background1 = lightTheme.colors.background[0];
 lightTheme.colors.background2 = lightTheme.colors.background[1];
 lightTheme.colors.background3 = lightTheme.colors.background[2];
+lightTheme.colors.elevatedBackground1 = lightTheme.colors.elevatedBackground[0];
+lightTheme.colors.elevatedBackground2 = lightTheme.colors.elevatedBackground[1];
+lightTheme.colors.elevatedBackground3 = lightTheme.colors.elevatedBackground[2];
+lightTheme.colors.elevatedBackground4 = lightTheme.colors.elevatedBackground[3];
 
 // membership
 lightTheme.colors.membership.basic.background =
@@ -288,6 +304,10 @@ darkTheme.colors.textOnThemeBackground.mediumEmphasis =
 darkTheme.colors.background1 = darkTheme.colors.background[0];
 darkTheme.colors.background2 = darkTheme.colors.background[1];
 darkTheme.colors.background3 = darkTheme.colors.background[2];
+darkTheme.colors.elevatedBackground1 = darkTheme.colors.elevatedBackground[0];
+darkTheme.colors.elevatedBackground2 = darkTheme.colors.elevatedBackground[1];
+darkTheme.colors.elevatedBackground3 = darkTheme.colors.elevatedBackground[2];
+darkTheme.colors.elevatedBackground4 = darkTheme.colors.elevatedBackground[3];
 
 // membership
 darkTheme.colors.membership.basic.background =

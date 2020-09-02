@@ -1,6 +1,8 @@
 import React, {useEffect, useContext} from 'react';
-import {ScrollView} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import {NotificationContext} from '@/context/notification';
+import {useTheme} from 'emotion-theming';
+import {css} from '@emotion/native';
 
 import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
@@ -16,11 +18,15 @@ const details = {
 
 const marginForTest = {
   marginBottom: 20,
-  // width: '60%',
-  // alignSelf: 'center'
+};
+
+const testStyle = {
+  margin: 24,
+  padding: 24,
 };
 
 const BrowseScreen = ({...props}) => {
+  const theme = useTheme();
   const {notify} = useContext(NotificationContext);
   useEffect(() => {
     notify(details);
@@ -33,102 +39,137 @@ const BrowseScreen = ({...props}) => {
         {
           /*for test*/
           <>
-            <AppButton
-              variant="filled"
-              text="Compact Filled Primary"
-              sizeVariant="compact"
-              colorVariant="primary"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="filled"
-              text="Normal Filled Secondary"
-              sizeVariant="normal"
-              colorVariant="secondary"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="filled"
-              text="Large Filled Alert"
-              sizeVariant="large"
-              colorVariant="alert"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="filled"
-              text="Large Filled Contrast"
-              sizeVariant="large"
-              colorVariant="contrast"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="outlined"
-              text="Compact Outlined Primary"
-              sizeVariant="compact"
-              colorVariant="primary"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="outlined"
-              text="Normal Outlined Secondary"
-              sizeVariant="normal"
-              colorVariant="secondary"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="outlined"
-              text="Large Outlined Alert"
-              sizeVariant="large"
-              colorVariant="alert"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="outlined"
-              text="Large Outlined Contrast"
-              sizeVariant="large"
-              colorVariant="contrast"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="transparent"
-              text="Compact Transparent Primary"
-              sizeVariant="compact"
-              colorVariant="primary"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="transparent"
-              text="Compact Transparent Secondary"
-              sizeVariant="compact"
-              colorVariant="secondary"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="transparent"
-              text="Normal Transparent Alert"
-              sizeVariant="normal"
-              colorVariant="alert"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
-            <AppButton
-              variant="transparent"
-              text="Large Transparent Contrast"
-              sizeVariant="large"
-              colorVariant="contrast"
-              svgIcon={HomeIcon}
-              style={marginForTest}
-            />
+            <View
+              style={[
+                css`
+                  ${theme.colors.elevatedBackground1}
+                `,
+                testStyle,
+              ]}>
+              <AppButton
+                variant="filled"
+                text="Compact Filled Primary"
+                sizeVariant="compact"
+                colorVariant="primary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+              <AppButton
+                variant="filled"
+                text="Normal Filled Secondary"
+                sizeVariant="normal"
+                colorVariant="secondary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+              <AppButton
+                variant="filled"
+                text="Large Filled Alert"
+                sizeVariant="large"
+                colorVariant="secondary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+                // disabled={true}
+              />
+              <AppButton
+                variant="filled"
+                text="Large Filled Alert"
+                sizeVariant="large"
+                colorVariant="alert"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+              <AppButton
+                variant="filled"
+                text="Large Filled Contrast"
+                sizeVariant="large"
+                colorVariant="contrast"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+            </View>
+
+            <View
+              style={[
+                css`
+                  ${theme.colors.elevatedBackground2}
+                `,
+                testStyle,
+              ]}>
+              <AppButton
+                variant="outlined"
+                text="Compact Outlined Primary"
+                sizeVariant="compact"
+                colorVariant="primary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+              <AppButton
+                variant="outlined"
+                text="Normal Outlined Secondary"
+                sizeVariant="normal"
+                colorVariant="secondary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+              <AppButton
+                variant="outlined"
+                text="Large Outlined Alert"
+                sizeVariant="large"
+                colorVariant="alert"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+              <AppButton
+                variant="outlined"
+                text="Large Outlined Contrast"
+                sizeVariant="large"
+                colorVariant="contrast"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+            </View>
+
+            <View
+              style={[
+                css`
+                  ${theme.colors.elevatedBackground3}
+                `,
+                testStyle,
+              ]}>
+              <AppButton
+                variant="transparent"
+                text="Compact Transparent Primary"
+                sizeVariant="compact"
+                colorVariant="primary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+              <AppButton
+                variant="transparent"
+                text="Compact Transparent Secondary"
+                sizeVariant="compact"
+                colorVariant="secondary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+              <AppButton
+                variant="transparent"
+                text="Normal Transparent Alert"
+                sizeVariant="normal"
+                colorVariant="alert"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+              <AppButton
+                variant="transparent"
+                text="Large Transparent Contrast"
+                sizeVariant="large"
+                colorVariant="contrast"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+              />
+            </View>
           </>
         }
       </ScrollView>
