@@ -87,6 +87,15 @@ const BrowseScreen = ({...props}) => {
                 svgIcon={HomeIcon}
                 style={marginForTest}
               />
+              <AppButton
+                variant="filled"
+                text="Normal Filled Disabled Secondary"
+                sizeVariant="normal"
+                colorVariant="secondary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+                disabled
+              />
             </View>
 
             <View

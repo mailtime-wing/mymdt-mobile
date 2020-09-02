@@ -23,6 +23,7 @@ const AppButton = ({
   colorVariant,
   text,
   svgIcon: SvgIcon,
+  disabled,
   style,
   ...props
 }) => {
@@ -31,9 +32,10 @@ const AppButton = ({
   return (
     <TouchableOpacity
       style={[
-        container(theme, variant, sizeVariant, colorVariant, props.disabled),
+        container(theme, variant, sizeVariant, colorVariant, disabled),
         style,
       ]}
+      disabled={disabled}
       {...props}>
       {SvgIcon && <SvgIcon {...icon(theme, variant, colorVariant)} />}
       <AppText
@@ -43,6 +45,10 @@ const AppButton = ({
       </AppText>
     </TouchableOpacity>
   );
+};
+
+AppButton.defaultProps = {
+  disabled: false,
 };
 
 export default AppButton;

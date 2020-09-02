@@ -13,6 +13,8 @@ export const container = (
   align-items: center;
   width: 100%;
   flex-direction: row;
+  ${disabled && 'opacity: 0.4;'}
+
   ${variant === 'filled' &&
     `
     ${colorVariant === 'primary' &&
