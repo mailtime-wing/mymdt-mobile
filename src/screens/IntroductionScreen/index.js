@@ -44,8 +44,9 @@ const IntroductionScreen = () => {
           onPress={() => navigateByFlow('card_flow')}
         />
         <AppButton
-          variant="contrast_outlined"
+          variant="outlined"
           sizeVariant="normal"
+          colorVariant="contrast"
           text={
             <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
           }
