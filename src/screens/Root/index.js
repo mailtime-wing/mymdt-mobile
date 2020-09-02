@@ -40,6 +40,7 @@ import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
 import LinkedCardsSettingScreen from '@/screens/LinkedCardsSettingScreen';
 import ChooseRegionSettingScreen from '@/screens/ChooseRegionSettingScreen';
 import DataSourceInfoSettingScreen from '@/screens/DataSourceInfoSettingScreen';
+import ReferralScreen from '@/screens/ReferralScreen';
 
 // wallet page
 import ConverterScreen from '@/screens/ConverterScreen';
@@ -158,9 +159,10 @@ const settingScreens = [
   {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
   {
     name: 'linked_cards',
-    component: LinkedCardsScreen,
+    component: LinkedCardsSettingScreen,
     options: {headerShown: false},
   },
+  {name: 'referral', component: ReferralScreen},
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'sign_out', component: SignOutScreen},
   {name: 'app_settings', component: AppSettingScreen},
@@ -189,6 +191,8 @@ const linkingConfig = {
   // bindbank:// (go to bind bank account page)
   // internalweb://
   // externalweb://
+
+  // TODO: handle internalweb and externalweb
   initialRouteName: 'home',
   screens: {
     settings: {
@@ -205,7 +209,7 @@ const linkingConfig = {
           path: 'bindbank',
           exact: true,
         },
-        invite_friend: {
+        referral: {
           path: 'invitefd',
           exact: true,
         },
@@ -215,8 +219,6 @@ const linkingConfig = {
       // return to home if the path not match
       path: '*',
     },
-    // no banks_account_binding and invite_friend screen at this moment
-    // TODO: handle internalweb and externalweb
   },
 };
 
