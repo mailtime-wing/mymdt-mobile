@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Image} from 'react-native';
-import {container, accountIcon} from './style';
+import {container, accountIcon, styles} from './style';
 import {useTheme} from 'emotion-theming';
 
 const UserIcon = ({
@@ -11,7 +11,10 @@ const UserIcon = ({
   const theme = useTheme();
   return (
     <TouchableOpacity style={container} {...props}>
-      <Image style={[accountIcon(theme), style]} source={source} />
+      <Image
+        style={[accountIcon(theme), styles(theme).accountIcon2, style]}
+        source={source}
+      />
     </TouchableOpacity>
   );
 };
