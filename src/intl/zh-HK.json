@@ -12,7 +12,7 @@
   "valid_until": "Valid until {date}",
   "cashback_type": "Cashback type",
   "referral": "Referral",
-  "upgrade_to": "Upgrade to {level}",
+  "upgrade_to": "Upgrade to {nextLevel}",
   "complete_tasks_to_upgrade": "Complete all tasks to upgrade your membership",
   "total_reward_points": "Total RewardPoints",
   "enjoy_more_after_updrade": "Enjoy more after upgrading membership",

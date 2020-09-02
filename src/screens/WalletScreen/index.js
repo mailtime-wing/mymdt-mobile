@@ -167,7 +167,7 @@ const WalletScreen = ({navigation}) => {
       }),
   );
   const pageInfo = currentCardData?.transactions.pageInfo;
-  const filter = filterList[activeFilterIndex].value;
+  const filter = activeFilterIndex ? filterList[activeFilterIndex].value : null;
 
   useEffect(() => {
     getTransactions({

@@ -17,9 +17,10 @@ import ThemeButton from '@/components/ThemeButton';
 const TransactionBottomSheet = ({
   title,
   items,
+  activeOptionIndex,
   onLayoutPress,
   onItemPress,
-  activeOptionIndex,
+  onApplyPress,
 }) => {
   const [show] = useState(true);
 
@@ -27,7 +28,9 @@ const TransactionBottomSheet = ({
     onItemPress(null);
   };
 
-  const handleApplyPress = () => {};
+  const handleApplyPress = () => {
+    onApplyPress();
+  };
 
   return (
     <CenteredView>
@@ -52,7 +55,7 @@ const TransactionBottomSheet = ({
                     active={activeOptionIndex === index}
                     key={item}
                     onPress={() => onItemPress(index)}
-                    label={item}
+                    label={item.label}
                   />
                 );
               }
