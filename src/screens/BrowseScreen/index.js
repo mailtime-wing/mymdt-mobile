@@ -42,7 +42,7 @@ const BrowseScreen = ({...props}) => {
             <View
               style={[
                 css`
-                  ${theme.colors.elevationShadowOrBackground1}
+                  ${theme.colors.elevatedBackground1}
                 `,
                 testStyle,
               ]}>
@@ -92,7 +92,7 @@ const BrowseScreen = ({...props}) => {
             <View
               style={[
                 css`
-                  ${theme.colors.elevationShadowOrBackground2}
+                  ${theme.colors.elevatedBackground2}
                 `,
                 testStyle,
               ]}>
@@ -133,7 +133,7 @@ const BrowseScreen = ({...props}) => {
             <View
               style={[
                 css`
-                  ${theme.colors.elevationShadowOrBackground3}
+                  ${theme.colors.elevatedBackground3}
                 `,
                 testStyle,
               ]}>

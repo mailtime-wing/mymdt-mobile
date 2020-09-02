@@ -33,7 +33,7 @@ export const darkTheme = {
       'rgba(255, 255, 255, 0.12)',
       'rgba(255, 255, 255, 0.2)',
     ],
-    elevationShadowOrBackground: [
+    elevatedBackground: [
       'background-color: #1E1E1E;',
       'background-color: #232323;',
       'background-color: #2C2C2C;',
@@ -104,7 +104,7 @@ export const lightTheme = {
 
     // background
     background: ['#FFFFFF', 'rgba(0, 0, 0, 0.05)', 'rgba(0, 0, 0, 0.1)'],
-    elevationShadowOrBackground: [
+    elevatedBackground: [
       'background-color: #FFFFFF;',
       'background-color: #FFFFFF; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);',
       'background-color: #FFFFFF; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);',
@@ -178,14 +178,10 @@ lightTheme.colors.textOnThemeBackground.mediumEmphasis =
 lightTheme.colors.background1 = lightTheme.colors.background[0];
 lightTheme.colors.background2 = lightTheme.colors.background[1];
 lightTheme.colors.background3 = lightTheme.colors.background[2];
-lightTheme.colors.elevationShadowOrBackground1 =
-  lightTheme.colors.elevationShadowOrBackground[0];
-lightTheme.colors.elevationShadowOrBackground2 =
-  lightTheme.colors.elevationShadowOrBackground[1];
-lightTheme.colors.elevationShadowOrBackground3 =
-  lightTheme.colors.elevationShadowOrBackground[2];
-lightTheme.colors.elevationShadowOrBackground4 =
-  lightTheme.colors.elevationShadowOrBackground[3];
+lightTheme.colors.elevatedBackground1 = lightTheme.colors.elevatedBackground[0];
+lightTheme.colors.elevatedBackground2 = lightTheme.colors.elevatedBackground[1];
+lightTheme.colors.elevatedBackground3 = lightTheme.colors.elevatedBackground[2];
+lightTheme.colors.elevatedBackground4 = lightTheme.colors.elevatedBackground[3];
 
 // membership
 lightTheme.colors.membership.basic.background =
@@ -308,14 +304,10 @@ darkTheme.colors.textOnThemeBackground.mediumEmphasis =
 darkTheme.colors.background1 = darkTheme.colors.background[0];
 darkTheme.colors.background2 = darkTheme.colors.background[1];
 darkTheme.colors.background3 = darkTheme.colors.background[2];
-darkTheme.colors.elevationShadowOrBackground1 =
-  darkTheme.colors.elevationShadowOrBackground[0];
-darkTheme.colors.elevationShadowOrBackground2 =
-  darkTheme.colors.elevationShadowOrBackground[1];
-darkTheme.colors.elevationShadowOrBackground3 =
-  darkTheme.colors.elevationShadowOrBackground[2];
-darkTheme.colors.elevationShadowOrBackground4 =
-  darkTheme.colors.elevationShadowOrBackground[3];
+darkTheme.colors.elevatedBackground1 = darkTheme.colors.elevatedBackground[0];
+darkTheme.colors.elevatedBackground2 = darkTheme.colors.elevatedBackground[1];
+darkTheme.colors.elevatedBackground3 = darkTheme.colors.elevatedBackground[2];
+darkTheme.colors.elevatedBackground4 = darkTheme.colors.elevatedBackground[3];
 
 // membership
 darkTheme.colors.membership.basic.background =
