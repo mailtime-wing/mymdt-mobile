@@ -66,6 +66,15 @@ const BrowseScreen = ({...props}) => {
                 variant="filled"
                 text="Large Filled Alert"
                 sizeVariant="large"
+                colorVariant="secondary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+                // disabled={true}
+              />
+              <AppButton
+                variant="filled"
+                text="Large Filled Alert"
+                sizeVariant="large"
                 colorVariant="alert"
                 svgIcon={HomeIcon}
                 style={marginForTest}

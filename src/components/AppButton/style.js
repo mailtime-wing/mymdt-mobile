@@ -1,22 +1,35 @@
 import {css} from '@emotion/native';
 import {transparentize} from 'polished';
 
-export const container = (theme, variant, sizeVariant, colorVariant) => css`
+export const container = (
+  theme,
+  variant,
+  sizeVariant,
+  colorVariant,
+  disabled,
+) => css`
   border-radius: 28px;
   justify-content: center;
   align-items: center;
   width: 100%;
   flex-direction: row;
-
   ${variant === 'filled' &&
     `
     ${colorVariant === 'primary' &&
       `
-      background-color: ${theme.colors.primary.normal};
+    background-color: ${theme.colors.primary.normal};
     `}
     ${colorVariant === 'secondary' &&
+      /* apply box-shadow only when
+      1. colorVariant === 'secondary'
+      2. sizeVariant === 'large'
+      3. button enabled
+    */
       `
-      background-color: ${theme.colors.secondary.normal};
+    background-color: ${theme.colors.secondary.normal};
+    ${!disabled &&
+      sizeVariant === 'large' &&
+      'box-shadow: 0px 4px 8px rgba(33, 206, 219, 0.2);'}
     `}
     ${colorVariant === 'alert' &&
       `

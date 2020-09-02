@@ -30,7 +30,10 @@ const AppButton = ({
 
   return (
     <TouchableOpacity
-      style={[container(theme, variant, sizeVariant, colorVariant), style]}
+      style={[
+        container(theme, variant, sizeVariant, colorVariant, props.disabled),
+        style,
+      ]}
       {...props}>
       {SvgIcon && <SvgIcon {...icon(theme, variant, colorVariant)} />}
       <AppText
