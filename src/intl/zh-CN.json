@@ -207,7 +207,7 @@
   "error_code_305": "用戶已存在。",
 
   "please_input_valid_email": "Please input valid email",
-  "linkedBankAccounts": "Linked bank accounts",
+  "linkedBankAccounts": "Linked Bank Accounts",
   "done": "Done",
   "itMayTakeSomeTimeToAnalyze": "It may take some time to analyze your shopping e-receipts. We will notify you once it’s done.",
   "unknownCardType": "Unknown card type",
@@ -215,5 +215,8 @@
   "VISA": "VISA",
   "MASTER": "Mastercard",
   "DISCOVER": "Discover",
-  "AE": "American Express"
+  "AE": "American Express",
+  "confirm_to_remove": "Confirm to remove {name}?",
+  "you_will_not_get_any_data_rewards_from": "You will not get any data rewards from {name}.",
+  "add_new_card": "Add New Card"
 }

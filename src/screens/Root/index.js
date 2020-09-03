@@ -37,6 +37,9 @@ import SettingScreen from '@/screens/SettingScreen';
 import AppSettingScreen from '@/screens/AppSettingScreen';
 import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
 import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
+import LinkedCardsSettingScreen from '@/screens/LinkedCardsSettingScreen';
+import ChooseRegionSettingScreen from '@/screens/ChooseRegionSettingScreen';
+import DataSourceInfoSettingScreen from '@/screens/DataSourceInfoSettingScreen';
 
 // wallet page
 import ConverterScreen from '@/screens/ConverterScreen';
@@ -160,6 +163,18 @@ const settingScreens = [
   {name: 'terms_of_service', component: AppSettingScreen},
   {name: 'privacy_policy', component: AppSettingScreen},
   {name: 'about_us', component: AppSettingScreen},
+  {
+    name: 'linked_cards_setting',
+    component: LinkedCardsSettingScreen,
+  },
+  {
+    name: 'choose_region_setting',
+    component: ChooseRegionSettingScreen,
+  },
+  {
+    name: 'data_source_info_setting',
+    component: DataSourceInfoSettingScreen,
+  },
 ];
 
 const linkingConfig = {

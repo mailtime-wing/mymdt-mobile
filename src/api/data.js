@@ -346,6 +346,12 @@ export const BIND_BANK_ITEM = gql`
   }
 `;
 
+export const UNBIND_BANK_ITEM = gql`
+  mutation UnbindBankItem($id: ID!) {
+    unbindBankItem(id: $id)
+  }
+`;
+
 export const GET_BANK_ITEMS = gql`
   query {
     userProfile {

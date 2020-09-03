@@ -11,12 +11,12 @@ const ModalContainer = ({title, children, style, ...props}) => {
 
   return (
     <View style={[container, style]} {...props}>
-      <>
+      {title && (
         <AppText variant="heading1" style={titleStyle(theme)}>
           {title}
         </AppText>
-        {children}
-      </>
+      )}
+      {children}
     </View>
   );
 };

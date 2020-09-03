@@ -5,8 +5,7 @@ export const footerContainer = css`
   margin-vertical: 40px;
 `;
 
-export const moreButton = css`
-  margin-top: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+export const addNewCardButton = css`
+  width: auto;
+  align-self: center;
 `;

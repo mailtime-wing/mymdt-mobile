@@ -16,6 +16,10 @@ const SettingScreen = ({navigation}) => {
     {id: 'edit_profile'},
     {id: 'offers_preference_edit'},
     {id: 'emails_binding_edit'},
+    {
+      id: 'linked_cards_setting',
+      messageId: 'linkedBankAccounts',
+    },
     {id: 'account_security'},
     {id: 'sign_out'},
   ];
@@ -39,8 +43,8 @@ const SettingScreen = ({navigation}) => {
           {accountSettingList.map(as => (
             <ListOption
               key={as.id}
-              label={<FormattedMessage id={as.id} />}
-              onPress={() => navigation.navigate(as.id)}
+              label={<FormattedMessage id={as.messageId || as.id} />}
+              onPress={() => navigation.navigate(as.id, as.params)}
             />
           ))}
           <AppText variant="label" style={listHeader(theme)}>
