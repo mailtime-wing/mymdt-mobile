@@ -1,9 +1,5 @@
 import {css} from '@emotion/native';
 
-export const sectionContainer = theme => css`
-  background-color: ${theme.colors.background1};
-`;
-
 export const upperSectionContainer = css`
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;

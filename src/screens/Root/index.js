@@ -8,6 +8,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from 'emotion-theming';
+import {css} from '@emotion/native';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import OfferSelectScreen from '@/screens/OfferSelectScreen';
@@ -244,15 +245,23 @@ const screenUnderModalOptions = {
 const Setting = ({navigation}) => {
   const theme = useTheme();
 
-  const settingCardStyle = {
-    ...screenUnderModalOptions.cardStyle,
-    backgroundColor: theme.colors.background1,
-  };
+  const settingCardStyle = [
+    css`
+      ${theme.colors.elevatedBackground1}
+    `,
+    {
+      ...screenUnderModalOptions.cardStyle,
+    },
+  ];
 
-  const settingHeaderStyle = {
-    ...screenUnderModalOptions.headerStyle,
-    backgroundColor: theme.colors.background1,
-  };
+  const settingHeaderStyle = [
+    css`
+      ${theme.colors.elevatedBackground1}
+    `,
+    {
+      ...screenUnderModalOptions.headerStyle,
+    },
+  ];
 
   return (
     <SettingStack.Navigator

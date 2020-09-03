@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import {useTheme} from 'emotion-theming';
+import {css} from '@emotion/native';
 
 import {
   sectionContainer,
@@ -27,7 +28,7 @@ const privilegeList = [
 const PrivilegesSection = () => {
   const theme = useTheme();
   return (
-    <View style={sectionContainer(theme)}>
+    <View style={[css`${theme.colors.elevatedBackground1}`, sectionContainer]}>
       <AppText variant="heading5" style={header(theme)}>
         <FormattedMessage id="privileges" />
       </AppText>

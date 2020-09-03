@@ -2,11 +2,11 @@ import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 import {useTheme} from 'emotion-theming';
+import {css} from '@emotion/native';
 
 import {
   progressTitleStyle,
   progressLabelStyle,
-  sectionContainer,
   upperSectionContainer,
   lowerSectionContainer,
   sectionTitle,
@@ -44,7 +44,7 @@ const UpgradeSection = ({userNextLevel}) => {
 
   return (
     <>
-      <View style={[sectionContainer(theme), upperSectionContainer]}>
+      <View style={[css`${theme.colors.elevatedBackground1}`, upperSectionContainer]}>
         <AppText variant="heading5" style={sectionTitle(theme)}>
           <FormattedMessage
             id="upgrade_to"
@@ -113,7 +113,7 @@ const UpgradeSection = ({userNextLevel}) => {
         </View>
       </View>
       <TouchableOpacity
-        style={[sectionContainer(theme), lowerSectionContainer(theme)]}>
+        style={[css`${theme.colors.elevatedBackground1}`, lowerSectionContainer(theme)]}>
         <AppText variant="caption" style={[browseMembership(theme)]}>
           <FormattedMessage id="browse_membership_details" />
         </AppText>
