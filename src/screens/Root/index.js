@@ -157,11 +157,6 @@ const settingScreens = [
   {name: 'offers_preference', component: OfferSelectScreen},
   {name: 'emails_binding', component: BindEmailScreen}, // same as add_email in setupScreens (but different navigator)
   {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
-  {
-    name: 'linked_cards',
-    component: LinkedCardsSettingScreen,
-    options: {headerShown: false},
-  },
   {name: 'referral', component: ReferralScreen},
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'sign_out', component: SignOutScreen},
@@ -205,7 +200,7 @@ const linkingConfig = {
           path: 'bindemail',
           exact: true,
         },
-        linked_cards: {
+        linked_cards_setting: {
           path: 'bindbank',
           exact: true,
         },
