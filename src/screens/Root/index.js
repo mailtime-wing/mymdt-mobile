@@ -40,6 +40,7 @@ import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
 import LinkedCardsSettingScreen from '@/screens/LinkedCardsSettingScreen';
 import ChooseRegionSettingScreen from '@/screens/ChooseRegionSettingScreen';
 import DataSourceInfoSettingScreen from '@/screens/DataSourceInfoSettingScreen';
+import ReferralScreen from '@/screens/ReferralScreen';
 
 // wallet page
 import ConverterScreen from '@/screens/ConverterScreen';
@@ -156,6 +157,7 @@ const settingScreens = [
   {name: 'offers_preference', component: OfferSelectScreen},
   {name: 'emails_binding', component: BindEmailScreen}, // same as add_email in setupScreens (but different navigator)
   {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
+  {name: 'referral', component: ReferralScreen},
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'sign_out', component: SignOutScreen},
   {name: 'app_settings', component: AppSettingScreen},
@@ -184,28 +186,30 @@ const linkingConfig = {
   // bindbank:// (go to bind bank account page)
   // internalweb://
   // externalweb://
+
+  // TODO: handle internalweb and externalweb
   initialRouteName: 'home',
   screens: {
-    account_security: {
-      path: 'secureaccount',
-      exact: true,
+    settings: {
+      screens: {
+        account_security: {
+          path: 'secureaccount',
+          exact: true,
+        },
+        emails_binding: {
+          path: 'bindemail',
+          exact: true,
+        },
+        linked_cards_setting: {
+          path: 'bindbank',
+          exact: true,
+        },
+        referral: {
+          path: 'invitefd',
+          exact: true,
+        },
+      },
     },
-    emails_binding: {
-      path: 'bindemail',
-      exact: true,
-    },
-    // no banks_account_binding and invite_friend screen at this moment
-    // TODO: handle internalweb and externalweb
-
-    // banks_account_binding: {
-    //   path: 'bindbank',
-    //   exact: true
-    // },
-    // invite_friend: {
-    //   path: 'invitefd',
-    //   exact: true
-    // },
-
     home: {
       // return to home if the path not match
       path: '*',

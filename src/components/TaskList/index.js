@@ -74,7 +74,7 @@ const TaskList = ({taskList, userRewardList}) => {
         task = {...task, reward: {...relatedReward}};
         const claimedDate = task.reward?.claimed_time;
         const claimed = !!claimedDate;
-        const callbackUrl = task.reward?.callback_url;
+        const callbackUrl = task.taskUrl;
 
         return (
           <RowContainer key={task.name}>
