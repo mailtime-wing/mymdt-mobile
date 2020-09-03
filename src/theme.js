@@ -48,7 +48,11 @@ export const darkTheme = {
 
     // membership
     membership: {
-      basic: ['#121212', 'rgba(255, 255, 255, 0.87)'],
+      basic: [
+        '#121212',
+        'rgba(255, 255, 255, 0.87)',
+        'rgba(255, 255, 255, 0.08)',
+      ],
       silver: ['#A4A4A4', '#121212'],
       gold: ['#CEBE85', '#121212'],
       platinum: ['#ADB8CF', '#121212'],
@@ -125,7 +129,7 @@ export const lightTheme = {
 
     // membership
     membership: {
-      basic: ['#000000', '#FFFFFF'],
+      basic: ['#000000', '#FFFFFF', '#000000'],
       silver: ['#EAEAEA', '#707070'],
       gold: ['#FFDC22', '#8F722E'],
       platinum: ['#DFE3EB', '#466C8E'],
@@ -199,6 +203,8 @@ lightTheme.colors.elevatedBackground4 = lightTheme.colors.elevatedBackground[3];
 lightTheme.colors.membership.basic.background =
   lightTheme.colors.membership.basic[0];
 lightTheme.colors.membership.basic.text = lightTheme.colors.membership.basic[1];
+lightTheme.colors.membership.basic.border =
+  lightTheme.colors.membership.basic[2];
 lightTheme.colors.membership.silver.background =
   lightTheme.colors.membership.silver[0];
 lightTheme.colors.membership.silver.text =
@@ -326,6 +332,7 @@ darkTheme.colors.elevatedBackground4 = darkTheme.colors.elevatedBackground[3];
 darkTheme.colors.membership.basic.background =
   darkTheme.colors.membership.basic[0];
 darkTheme.colors.membership.basic.text = darkTheme.colors.membership.basic[1];
+darkTheme.colors.membership.basic.border = darkTheme.colors.membership.basic[2];
 darkTheme.colors.membership.silver.background =
   darkTheme.colors.membership.silver[0];
 darkTheme.colors.membership.silver.text = darkTheme.colors.membership.silver[1];
