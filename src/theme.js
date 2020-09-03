@@ -16,7 +16,10 @@ export const darkTheme = {
     mdtCard: 'rgba(159, 189, 233, 0.24)',
     mrpCardValue: 'rgba(255, 255, 255, 0.87)',
     mdtCardValue: 'rgba(255, 255, 255, 0.87)',
-    textOnError: ['#FF7171', 'rgba(255, 113, 113, 0.16)'],
+    textOnError: [
+      '#FF7171',
+      'rgba(255, 113, 113, 0.7), rgba(255, 113, 113, 0.16)',
+    ],
     textOnBackground: [
       'rgba(255, 255, 255, 0.87)',
       'rgba(255, 255, 255, 0.6)',
@@ -96,7 +99,11 @@ export const lightTheme = {
     mdtCard: '#0363EF',
     mrpCardValue: '#FFFFFF',
     mdtCardValue: '#FFFFFF',
-    textOnError: ['#D81010', 'rgba(216, 16, 16, 0.6)'],
+    textOnError: [
+      '#D81010',
+      'rgba(216, 16, 16, 0.6)',
+      'rgba(216, 16, 16, 0.1)',
+    ],
     textOnBackground: [
       'rgba(0, 0, 0, 0.8)',
       'rgba(0, 0, 0, 0.6)',
@@ -166,6 +173,7 @@ lightTheme.colors.secondary.border = lightTheme.colors.secondary[3];
 // text
 lightTheme.colors.textOnError.normal = lightTheme.colors.textOnError[0];
 lightTheme.colors.textOnError.light = lightTheme.colors.textOnError[1];
+lightTheme.colors.textOnError.superLight = lightTheme.colors.textOnError[2];
 
 lightTheme.colors.textOnBackground.highEmphasis =
   lightTheme.colors.textOnBackground[0];
@@ -292,6 +300,7 @@ darkTheme.colors.secondary.border = darkTheme.colors.secondary[3];
 // text
 darkTheme.colors.textOnError.normal = darkTheme.colors.textOnError[0];
 darkTheme.colors.textOnError.light = darkTheme.colors.textOnError[1];
+darkTheme.colors.textOnError.superLight = darkTheme.colors.textOnError[2];
 
 darkTheme.colors.textOnBackground.highEmphasis =
   darkTheme.colors.textOnBackground[0];

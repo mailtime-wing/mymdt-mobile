@@ -94,7 +94,7 @@ export const inputAccessoryButtonText = theme => css`
 `;
 
 export const errorText = theme => css`
-  color: ${theme.colors.textOnError.light};
+  color: ${theme.colors.textOnError.superLight};
 `;
 
 export const styles = StyleSheet.create({

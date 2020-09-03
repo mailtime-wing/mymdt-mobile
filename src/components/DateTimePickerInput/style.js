@@ -50,5 +50,5 @@ export const Remark = styled(Text)`
 export const Error = styled(Text)`
   font-size: 12px;
   height: 16px;
-  color: ${props => props.theme.colors.textOnError.light};
+  color: ${props => props.theme.colors.textOnError.superLight};
 `;

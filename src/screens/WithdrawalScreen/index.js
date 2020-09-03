@@ -97,7 +97,7 @@ const Form = () => {
               }}
             />
           }
-          remarkStyle={textAlignRight}
+          remarkOuterStyle={textAlignRight}
           placeholder={intl.formatMessage({
             id: 'optional',
             defaultMessage: intl.messages.optional,

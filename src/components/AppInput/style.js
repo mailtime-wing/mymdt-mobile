@@ -1,5 +1,4 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import styled, {css} from '@emotion/native';
 
 export const TextInput = styled.TextInput`
   padding: 14px 16px;
@@ -31,28 +30,16 @@ export const Container = styled.View`
   min-width: 65%;
 `;
 
-export const Label = styled(Text)`
-  color: ${props => props.theme.colors.contrastColor};
-  ${props => props.isFocus && `color: ${props.theme.colors.secondary.normal};`};
-  ${props =>
-    props.isError && `color: ${props.theme.colors.textOnError.normal};`};
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: 1px;
-  font-weight: bold;
-  width: 150%;
-  height: 16px;
-  text-transform: uppercase;
+export const labelStyle = (theme, isFocus, isError) => css`
+  color: ${theme.colors.contrastColor};
+  ${isFocus && `color: ${theme.colors.secondary.normal};`};
+  ${isError && `color: ${theme.colors.textOnError.normal};`};
 `;
 
-export const Remark = styled(Text)`
-  font-size: 12px;
-  line-height: 15px;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
+export const remarkStyle = theme => css`
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;
 
-export const Error = styled(Text)`
-  font-size: 12px;
-  height: 16px;
-  color: ${props => props.theme.colors.textOnError.light};
+export const errorStyle = theme => css`
+  color: ${theme.colors.textOnError.light};
 `;

@@ -1,18 +1,19 @@
 import React, {useState, useRef} from 'react';
-import {Dimensions} from 'react-native';
+import {Dimensions, ScrollView} from 'react-native';
+import {useTheme} from 'emotion-theming';
 import {
   Container,
   ContentContainer,
   ButtonContainer,
   ColorBackground,
-  Header,
-  Details,
   SwiperContainer,
   MarginContainer,
-  ScrollContainer,
+  headerStyle,
+  detailStyle,
   styles,
 } from './style';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
+import AppText from '@/components/AppText2';
 import {FormattedMessage} from 'react-intl';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 
@@ -29,19 +30,24 @@ const itemHorizontalMargin = wp(0);
 const sliderWidth = viewportWidth;
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
-const renderItem = ({item, index}) => {
-  return (
-    <ContentContainer>
-      <ColorBackground backgroundColor="#DFF7FF" />
-      <Header>{item.header}</Header>
-      <Details>{item.detail}</Details>
-    </ContentContainer>
-  );
-};
-
 const CardSection = () => {
+  const theme = useTheme();
   const [activeIndex, setActiveIndex] = useState(0);
   const refCarousel = useRef(null);
+
+  const renderItem = ({item: {header, detail}, index}) => {
+    return (
+      <ContentContainer>
+        <ColorBackground backgroundColor="#DFF7FF" />
+        <AppText variant="heading3" style={headerStyle(theme)}>
+          {header}
+        </AppText>
+        <AppText variant="body1" style={detailStyle(theme)}>
+          {detail}
+        </AppText>
+      </ContentContainer>
+    );
+  };
 
   const data = [
     {
@@ -92,23 +98,33 @@ const CardSection = () => {
 };
 
 const OnboardingScreen = ({navigation}) => (
-  <ScrollContainer>
+  <ScrollView>
     <Container>
       <CardSection />
       <ButtonContainer>
-        <ThemeButton onPress={() => navigation.navigate('sign_up')}>
-          <FormattedMessage id="join_rewardme" defaultMessage="JOIN REWARDME" />
-        </ThemeButton>
+        <AppButton
+          onPress={() => navigation.navigate('sign_up')}
+          text={
+            <FormattedMessage
+              id="join_rewardme"
+              defaultMessage="JOIN REWARDME"
+            />
+          }
+          variant="filled"
+          sizeVariant="large"
+          colorVariant="secondary"
+        />
         <MarginContainer />
-        <ThemeButton
-          reverse
-          medium
-          onPress={() => navigation.navigate('sign_in')}>
-          <FormattedMessage id="sign_in" defaultMessage="Sign In" />
-        </ThemeButton>
+        <AppButton
+          onPress={() => navigation.navigate('sign_in')}
+          text={<FormattedMessage id="sign_in" defaultMessage="Sign In" />}
+          variant="outlined"
+          sizeVariant="normal"
+          colorVariant="secondary"
+        />
       </ButtonContainer>
     </Container>
-  </ScrollContainer>
+  </ScrollView>
 );
 
 export default OnboardingScreen;

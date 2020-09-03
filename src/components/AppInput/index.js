@@ -3,19 +3,21 @@ import {useTheme} from 'emotion-theming';
 import {
   Container,
   TextInput,
-  Label,
-  Remark,
-  Error,
   TextInputContainer,
+  errorStyle,
+  remarkStyle,
+  labelStyle,
 } from './style';
 import {useField} from 'formik';
+
+import AppText from '@/components/AppText2';
 
 const Input = ({
   label,
   required,
   remark,
   readOnly,
-  remarkStyle,
+  remarkOuterStyle,
   textStyle,
   placeholder,
   additionalStringToValue,
@@ -37,14 +39,14 @@ const Input = ({
 
   return (
     <Container>
-      <Label
-        isError={isError}
-        isFocus={isFocus}
+      <AppText
+        variant="label"
+        style={labelStyle(theme, isFocus, isError)}
         numberOfLines={1}
         ellipsizeMode="clip">
         {label}
         {required && '*'}
-      </Label>
+      </AppText>
       <TextInputContainer
         isError={isError}
         isFocus={isFocus}
@@ -62,12 +64,20 @@ const Input = ({
           style={textStyle}
         />
       </TextInputContainer>
-      {remark && <Remark style={remarkStyle}>{remark}</Remark>}
-      {
-        <Error numberOfLines={1} ellipsizeMode="clip">
-          {isError ? meta.error : ' '}
-        </Error>
-      }
+      {remark && (
+        <AppText
+          variant="caption"
+          style={[remarkStyle(theme), remarkOuterStyle]}>
+          {remark}
+        </AppText>
+      )}
+      <AppText
+        variant="caption"
+        style={errorStyle(theme)}
+        numberOfLines={1}
+        ellipsizeMode="clip">
+        {isError ? meta.error : ' '}
+      </AppText>
     </Container>
   );
 };

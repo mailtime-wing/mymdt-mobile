@@ -1,14 +1,10 @@
-import styled from '@emotion/native';
-import {StyleSheet, Platform} from 'react-native';
-import Text from '@/components/AppText';
-import TitleText from '@/components/TitleText';
+import styled, {css} from '@emotion/native';
+import {StyleSheet} from 'react-native';
 
 export const Container = styled.View`
   padding-top: 76px;
   padding-bottom: 24px;
 `;
-
-export const ScrollContainer = styled.ScrollView``;
 
 export const ContentContainer = styled.View`
   padding-left: 24px;
@@ -28,20 +24,16 @@ export const ColorBackground = styled.View`
   margin-right: 16px;
 `;
 
-export const Header = styled(TitleText)`
-  font-size: 24px;
+export const headerStyle = theme => css`
   margin-top: 40px;
-  line-height: 29px;
   margin-bottom: 10px;
+  color: ${theme.colors.secondary.normal};
   text-align: center;
-  ${Platform.OS === 'ios' && 'font-weight: bold;'}
 `;
 
-export const Details = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
+export const detailStyle = theme => css`
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   text-align: center;
-  color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
 `;
 
 export const MarginContainer = styled.View`
