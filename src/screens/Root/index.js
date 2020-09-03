@@ -49,7 +49,7 @@ import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
 
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
-import BackButton from '@/components/BackButton';
+import BackAppButton from '@/components/BackAppButton';
 import CloseIconButton from '@/components/CloseIconButton';
 import BackIconButton from '@/components/BackIconButton';
 import {APP_BAR_HEIGHT} from '@/constants/layout';
@@ -313,7 +313,7 @@ const Main = () => {
             {...screenProps}
             options={{
               headerLeft: props =>
-                appBarShown === false ? null : <BackButton {...props} />,
+                appBarShown === false ? null : <BackAppButton {...props} />,
               headerStyle: {
                 ...headerStyle,
                 ...(appBarShown === false && {height: top}),
@@ -333,7 +333,9 @@ const Main = () => {
                   {...screenProps}
                   options={{
                     headerLeft: props =>
-                      appBarShown === false ? null : <BackButton {...props} />,
+                      appBarShown === false ? null : (
+                        <BackAppButton {...props} />
+                      ),
                     headerStyle: {
                       ...headerStyle,
                       ...(appBarShown === false && {height: top}),
@@ -351,7 +353,7 @@ const Main = () => {
               name={name}
               {...screenProps}
               options={{
-                headerLeft: BackButton,
+                headerLeft: BackAppButton,
                 ...options,
               }}
             />

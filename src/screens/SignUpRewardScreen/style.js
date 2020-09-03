@@ -1,4 +1,4 @@
-import styled from '@emotion/native';
+import styled, {css} from '@emotion/native';
 import {Animated, StyleSheet} from 'react-native';
 import Text from '@/components/AppText';
 import TitleText from '@/components/TitleText';
@@ -90,6 +90,11 @@ export const RewardAmount = styled(Text)`
   font-weight: bold;
   color: rgba(0, 0, 0, 0.8);
   margin-left: 8px;
+`;
+
+export const buttonContainer = css`
+  width: 90%;
+  align-self: center;
 `;
 
 export const styles = StyleSheet.create({
