@@ -5,6 +5,7 @@ import {FormattedMessage} from 'react-intl';
 import ModalContainer from '@/components/ModalContainer';
 import LinkedCreditCardsSectionList from '@/components/LinkedCreditCardsSectionList';
 import BackIconButton from '@/components/BackIconButton';
+import CloseIconButton from '@/components/CloseIconButton';
 import EditAppButton from '@/components/EditAppButton';
 import ConfirmAppButton from '@/components/ConfirmAppButton';
 import CancelAppButton from '@/components/CancelAppButton';
@@ -43,7 +44,13 @@ const LinkedCardsSettingScreen = ({navigation}) => {
       });
     } else {
       navigation.setOptions({
-        headerLeft: ({onPress}) => <BackIconButton onPress={onPress} />,
+        headerLeft: ({onPress}) => {
+          return onPress ? (
+            <BackIconButton onPress={onPress} />
+          ) : (
+            <CloseIconButton onPress={() => navigation.goBack()} />
+          );
+        },
         headerRight: () => <EditAppButton onPress={() => setIsEditing(true)} />,
       });
     }
