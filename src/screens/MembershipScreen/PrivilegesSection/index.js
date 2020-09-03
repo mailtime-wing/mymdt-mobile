@@ -9,41 +9,86 @@ import {
   privilege,
   privilegeDetail,
   privilegeDetailContainer,
+  highlight,
+  claimButton,
 } from './style';
-import HeartIcon from '@/assets/heart_circle_fill.svg';
-import MoneyIcon from '@/assets/money_circle_fill.svg';
-import GiftIcon from '@/assets/gift_circle_fill.svg';
+import HeartIcon from '@/assets/heart_icon.svg';
+import DollarSignIcon from '@/assets/dollar_sign_icon.svg';
+import GiftIcon from '@/assets/gift_icon.svg';
 
 import AppText from '@/components/AppText2';
-import ThemeButton from '@/components/ThemeButton';
-import {FormattedMessage} from 'react-intl';
-
-const privilegeList = [
-  {name: 'Special offers from 3 brands', icon: <HeartIcon />},
-  {name: 'Additional 2% cashback', icon: <MoneyIcon />},
-  {name: 'Netflix one-month subscription', icon: <GiftIcon />, claim: true},
-  {name: 'Birthday gift', icon: <GiftIcon />, claim: true},
-];
+import AppIcon from '@/components/AppIcon';
+import AppButton from '@/components/AppButton';
+import {FormattedMessage, FormattedNumber} from 'react-intl';
 
 const PrivilegesSection = () => {
   const theme = useTheme();
+  const privilegeList = [
+    {
+      name: (
+        <FormattedMessage
+          id="special_offers_from_brands"
+          values={{
+            number_of_brands: (
+              <AppText variant="body2" style={highlight(theme)}>
+                3
+              </AppText>
+            ),
+          }}
+        />
+      ),
+      icon: HeartIcon,
+    },
+    {
+      name: (
+        <FormattedMessage
+          id="additional_percentage_cashback"
+          values={{
+            percentage: (
+              <AppText variant="body2" style={highlight(theme)}>
+                <FormattedNumber value={0.02} style="percent" />
+              </AppText>
+            ),
+          }}
+        />
+      ),
+      icon: DollarSignIcon,
+    },
+    {name: 'Netflix one-month subscription', icon: GiftIcon, claim: true},
+    {name: 'Birthday gift', icon: GiftIcon, claim: true},
+  ];
   return (
-    <View style={[css`${theme.colors.elevatedBackground1}`, sectionContainer]}>
+    <View
+      style={[
+        css`
+          ${theme.colors.elevatedBackground1}
+        `,
+        sectionContainer,
+      ]}>
       <AppText variant="heading5" style={header(theme)}>
         <FormattedMessage id="privileges" />
       </AppText>
-      {privilegeList.map(p => (
-        <View key={p.name} style={privilege}>
-          {p.icon}
+      {privilegeList.map(({name, icon, claim}) => (
+        <View key={name} style={privilege}>
+          <AppIcon
+            color={theme.colors.background1}
+            backgroundColor={theme.colors.secondary.normal}
+            sizeVariant="small"
+            svgIcon={icon}
+          />
           <View style={privilegeDetailContainer}>
             <AppText variant="body2" style={privilegeDetail(theme)}>
-              {p.name}
+              {name}
             </AppText>
           </View>
-          {p.claim && (
-            <ThemeButton small>
-              <FormattedMessage id="claim" />
-            </ThemeButton>
+          {claim && (
+            <AppButton
+              variant="filled"
+              sizeVariant="compact"
+              colorVariant="secondary"
+              text={<FormattedMessage id="claim" />}
+              style={claimButton}
+            />
           )}
         </View>
       ))}

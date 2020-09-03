@@ -9,8 +9,8 @@ export const sectionContainer = css`
   margin-bottom: 16px;
 `;
 
-export const name = theme => css`
-  color: ${theme.colors.textOnBackground.disabled};
+export const nameStyle = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
   margin-top: 8px;
 `;
 

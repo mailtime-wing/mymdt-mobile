@@ -16,6 +16,7 @@ import {
   giftsContainer,
   giftContainer,
   giftName,
+  giftNameContainer,
   rowContainer,
 } from './style';
 import ArrowIcon from '@/assets/list_arrow.svg';
@@ -44,7 +45,13 @@ const UpgradeSection = ({userNextLevel}) => {
 
   return (
     <>
-      <View style={[css`${theme.colors.elevatedBackground1}`, upperSectionContainer]}>
+      <View
+        style={[
+          css`
+            ${theme.colors.elevatedBackground1}
+          `,
+          upperSectionContainer,
+        ]}>
         <AppText variant="heading5" style={sectionTitle(theme)}>
           <FormattedMessage
             id="upgrade_to"
@@ -102,18 +109,25 @@ const UpgradeSection = ({userNextLevel}) => {
           <FormattedMessage id="enjoy_more_after_updrade" />
         </AppText>
         <View style={giftsContainer}>
-          {giftList.map(gift => (
+          {giftList.map(({name}) => (
             <TouchableOpacity style={giftContainer}>
               <GiftIcon />
-              <AppText variant="caption" style={giftName(theme)}>
-                {gift.name}
-              </AppText>
+              <View style={giftNameContainer}>
+                <AppText variant="caption" style={giftName(theme)}>
+                  {name}
+                </AppText>
+              </View>
             </TouchableOpacity>
           ))}
         </View>
       </View>
       <TouchableOpacity
-        style={[css`${theme.colors.elevatedBackground1}`, lowerSectionContainer(theme)]}>
+        style={[
+          css`
+            ${theme.colors.elevatedBackground1}
+          `,
+          lowerSectionContainer(theme),
+        ]}>
         <AppText variant="caption" style={[browseMembership(theme)]}>
           <FormattedMessage id="browse_membership_details" />
         </AppText>

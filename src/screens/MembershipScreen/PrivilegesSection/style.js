@@ -23,7 +23,15 @@ export const privilegeDetail = theme => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;
 
+export const highlight = theme => css`
+  color: ${theme.colors.secondary.normal};
+`;
+
 export const privilegeDetailContainer = css`
   flex: 2;
   margin-left: 8px;
+`;
+
+export const claimButton = css`
+  width: auto;
 `;
