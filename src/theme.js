@@ -67,6 +67,8 @@ export const darkTheme = {
     linearGradientBackground: ['#121212', '#121212'],
     tabScreenStatusBar: '#121212',
 
+    system_theme: '#121212',
+
     alert: '#FFD542',
   },
   fonts: {
@@ -137,6 +139,8 @@ export const lightTheme = {
 
     linearGradientBackground: ['#FDFBF2', '#E2FAFF'],
     tabScreenStatusBar: '#FDFBF2',
+
+    system_theme: '#F4F4F4',
 
     alert: '#FFD542',
   },

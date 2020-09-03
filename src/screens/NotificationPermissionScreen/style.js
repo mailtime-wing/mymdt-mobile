@@ -24,11 +24,11 @@ export const MarginContainer = styled.View`
   margin-top: 16px;
 `;
 
-export const NotificationPermission = styled.Image`
+export const notificationPermission = css`
   align-self: center;
 `;
 
-export const UpArrow = styled.Image`
+export const arrowUp = css`
   margin-left: 60%;
   margin-top: 8px;
   margin-bottom: 72px;

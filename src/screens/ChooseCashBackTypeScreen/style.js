@@ -20,8 +20,7 @@ export const titleStyle = theme => css`
   margin-bottom: 16px;
 `;
 
-export const boxContainer = theme => css`
-  background: ${theme.colors.background1};
+export const boxContainer = css`
   border-radius: 24px;
   padding: 24px;
   margin-bottom: 16px;

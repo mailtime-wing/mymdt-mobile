@@ -59,8 +59,9 @@ export const ThemeProvider = ({children}) => {
       changeThemeMode: changeThemeMode,
       themeList: themeList,
       themeMode: themeMode,
+      isDark: isDarkMode,
     }),
-    [changeThemeMode, themeMode],
+    [changeThemeMode, themeMode, isDarkMode],
   );
 
   return (

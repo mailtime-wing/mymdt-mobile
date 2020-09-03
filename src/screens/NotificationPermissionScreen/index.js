@@ -1,19 +1,22 @@
 import React, {useContext} from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, Image} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
 import {NotificationContext} from '@/context/notification';
+import {ThemeContext} from '@/context/theme';
 
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import AppText from '@/components/AppText2';
+
+import ArrowUpIcon from '@/assets/arrow_up_icon.svg';
 
 import {
   Container,
   MarginContainer,
-  NotificationPermission,
-  UpArrow,
+  notificationPermission,
+  arrowUp,
   titleStyle,
   detailStyle,
 } from './style';
@@ -28,6 +31,10 @@ const NotificationPermissionScreen = () => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
   const {notify, request} = useContext(NotificationContext);
+  const {isDark} = useContext(ThemeContext);
+  const imageSource = isDark
+    ? require('@/assets/notification_permission_dark.png')
+    : require('@/assets/notification_permission.png');
 
   const requestNotificationPermission = async () => {
     await request();
@@ -54,17 +61,23 @@ const NotificationPermissionScreen = () => {
             defaultMessage="Turn on notifications to receive news about new rewards, latest promotional events and limited offers."
           />
         </AppText>
-        <NotificationPermission
-          source={require('@/assets/notification_permission.png')}
+        <Image source={imageSource} style={notificationPermission} />
+        <ArrowUpIcon style={arrowUp} fill={theme.colors.secondary.normal} />
+        <AppButton
+          onPress={requestNotificationPermission}
+          text={<FormattedMessage id="sure" />}
+          variant="filled"
+          sizeVariant="large"
+          colorVariant="secondary"
         />
-        <UpArrow source={require('@/assets/arrow_up.png')} />
-        <ThemeButton onPress={requestNotificationPermission}>
-          <FormattedMessage id="sure" />
-        </ThemeButton>
         <MarginContainer />
-        <ThemeButton reverse medium onPress={handleSkipPress}>
-          <FormattedMessage id="skip_for_now" />
-        </ThemeButton>
+        <AppButton
+          onPress={handleSkipPress}
+          text={<FormattedMessage id="skip_for_now" />}
+          variant="outlined"
+          sizeVariant="normal"
+          colorVariant="secondary"
+        />
       </Container>
     </ScrollView>
   );

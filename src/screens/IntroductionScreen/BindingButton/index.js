@@ -7,17 +7,21 @@ import {
   ButtonTitle,
   ButtonCaption,
 } from './style';
+import {useTheme} from 'emotion-theming';
 
-const BindingButton = ({icon, title, caption, ...props}) => (
-  <Button {...props}>
-    <ButtonView>
-      {icon}
-      <TextContainer>
-        <ButtonTitle>{title}</ButtonTitle>
-        <ButtonCaption>{caption}</ButtonCaption>
-      </TextContainer>
-    </ButtonView>
-  </Button>
-);
+const BindingButton = ({icon, title, caption, ...props}) => {
+  const theme = useTheme();
+  return (
+    <Button {...props}>
+      <ButtonView style={theme.colors.elevatedBackground1}>
+        {icon}
+        <TextContainer>
+          <ButtonTitle>{title}</ButtonTitle>
+          <ButtonCaption>{caption}</ButtonCaption>
+        </TextContainer>
+      </ButtonView>
+    </Button>
+  );
+};
 
 export default BindingButton;

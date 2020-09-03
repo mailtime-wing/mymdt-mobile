@@ -1,32 +1,42 @@
 import React, {useEffect} from 'react';
 import {View} from 'react-native';
+import {useTheme} from 'emotion-theming';
 import {
   OffersContainer,
   OfferContainer,
   Tick,
   OfferIcon,
-  OfferName,
-  OfferDiscount,
   CheckBox,
   StateContainer,
+  offerNameStyle,
+  offerDiscountStyle,
 } from './style';
 
-const Offer = ({name, logo, cashbackRate, selected, error, ...props}) => (
-  <OfferContainer selected={selected} error={error} {...props}>
-    <OfferIcon source={{uri: logo}} />
-    <OfferName>{name}</OfferName>
-    <OfferDiscount>Up to {cashbackRate}% cashback</OfferDiscount>
-    {!props.disabled && (
-      <StateContainer>
-        {selected ? (
-          <Tick source={require('@/assets/tick.png')} />
-        ) : (
-          <CheckBox />
-        )}
-      </StateContainer>
-    )}
-  </OfferContainer>
-);
+import AppText from '@/components/AppText2';
+
+const Offer = ({name, logo, cashbackRate, selected, error, ...props}) => {
+  const theme = useTheme();
+  return (
+    <OfferContainer selected={selected} error={error} {...props}>
+      <OfferIcon source={{uri: logo}} />
+      <AppText variant="subTitle1" style={offerNameStyle(theme)}>
+        {name}
+      </AppText>
+      <AppText variant="caption" style={offerDiscountStyle(theme)}>
+        Up to {cashbackRate}% cashback
+      </AppText>
+      {!props.disabled && (
+        <StateContainer>
+          {selected ? (
+            <Tick source={require('@/assets/tick.png')} />
+          ) : (
+            <CheckBox />
+          )}
+        </StateContainer>
+      )}
+    </OfferContainer>
+  );
+};
 
 const OfferList = ({
   offerList,

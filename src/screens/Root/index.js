@@ -284,6 +284,7 @@ const Main = () => {
   const headerStyle = {
     ...styles.header,
     height: top + APP_BAR_HEIGHT,
+    backgroundColor: theme.colors.background1,
   };
 
   const cardStyle = {

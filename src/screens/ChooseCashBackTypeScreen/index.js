@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {View, ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useMutation} from '@apollo/react-hooks';
+import {css} from '@emotion/native';
 
 import {
   AuthContext,
@@ -50,7 +51,13 @@ const buttonStyle = {
 };
 
 const CashBackType = ({cashback, handleChoosePress, theme}) => (
-  <View style={boxContainer(theme)}>
+  <View
+    style={[
+      css`
+        ${theme.colors.elevatedBackground1}
+      `,
+      boxContainer,
+    ]}>
     <AppText variant="label" style={boxLevel(theme)}>
       {cashback.level}
     </AppText>
