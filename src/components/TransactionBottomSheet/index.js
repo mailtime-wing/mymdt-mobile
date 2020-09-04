@@ -1,18 +1,22 @@
 import React, {useState} from 'react';
+import {View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
+import {useTheme} from 'emotion-theming';
+import {css} from '@emotion/native';
 import {
-  Title,
   Modal,
   CenteredView,
-  ModalView,
   Divider,
   MarginTop,
   ButtonContainers,
+  modal,
+  titleStyle,
 } from './style';
 
 import BottomSheetOption from '@/components/BottomSheetOption';
 import BottomSheetOptionList from './BottomSheetOptionList';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
+import AppText from '@/components/AppText2';
 
 const TransactionBottomSheet = ({
   title,
@@ -22,6 +26,7 @@ const TransactionBottomSheet = ({
   onItemPress,
   onApplyPress,
 }) => {
+  const theme = useTheme();
   const [show] = useState(true);
 
   const handleResetPress = () => {
@@ -36,8 +41,16 @@ const TransactionBottomSheet = ({
     <CenteredView>
       <Modal transparent={true} visible={show}>
         <CenteredView onPress={onLayoutPress}>
-          <ModalView>
-            <Title>{title}</Title>
+          <View
+            style={[
+              css`
+                ${theme.colors.elevatedBackground2}
+              `,
+              modal,
+            ]}>
+            <AppText variant="heading4" style={titleStyle(theme)}>
+              {title}
+            </AppText>
             <Divider />
             {items.map((item, index) => {
               if (Array.isArray(item)) {
@@ -63,17 +76,23 @@ const TransactionBottomSheet = ({
             <Divider />
             <MarginTop />
             <ButtonContainers>
-              <ThemeButton medium reverse onPress={handleResetPress}>
-                <FormattedMessage id="reset" defaultMessage="Reset" />
-              </ThemeButton>
-              <ThemeButton
-                medium
+              <AppButton
+                onPress={handleResetPress}
+                text={<FormattedMessage id="reset" defaultMessage="Reset" />}
+                variant="outlined"
+                sizeVariant="normal"
+                colorVariant="secondary"
+              />
+              <AppButton
                 disabled={activeOptionIndex === null}
-                onPress={handleApplyPress}>
-                <FormattedMessage id="apply" defaultMessage="Apply" />
-              </ThemeButton>
+                onPress={handleApplyPress}
+                text={<FormattedMessage id="apply" defaultMessage="Apply" />}
+                variant="filled"
+                sizeVariant="normal"
+                colorVariant="secondary"
+              />
             </ButtonContainers>
-          </ModalView>
+          </View>
         </CenteredView>
       </Modal>
     </CenteredView>

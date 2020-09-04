@@ -8,22 +8,25 @@ import MRPCoin from '@/components/MRPCoin';
 import TransactionItem from './TransactionItem';
 
 import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
+import {useTheme} from 'emotion-theming';
 
 const flexEnd = {justifyContent: 'flex-end'};
 
 const TransactionList = ({transactionsHistoryList, cardType, ...props}) => {
+  const theme = useTheme();
   const renderItem = ({item}) => (
     <TransactionItem
       icon={item.icon}
       name={item.node.title}
       date={item.node.transactionTime}
+      cardType={cardType}
       coin={
         cardType === MEASURABLE_REWARD_POINT ? (
           <MRPCoin
             amount={item.node.amount}
             size={16}
             fontSize={16}
-            color={props => props.theme.colors.textOfMrp}
+            color={theme.colors.textOfMrp}
             style={flexEnd}
           />
         ) : (
@@ -31,7 +34,7 @@ const TransactionList = ({transactionsHistoryList, cardType, ...props}) => {
             amount={item.node.amount}
             size={16}
             fontSize={16}
-            color={props => props.theme.colors.textOfMdt}
+            color={theme.colors.textOfMdt}
             style={flexEnd}
           />
         )

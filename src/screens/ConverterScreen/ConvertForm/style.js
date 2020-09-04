@@ -1,5 +1,4 @@
 import styled, {css} from '@emotion/native';
-import {StyleSheet} from 'react-native';
 
 export const RowContainer = styled.View`
   flex-direction: row;
@@ -97,10 +96,7 @@ export const errorText = theme => css`
   color: ${theme.colors.textOnError.superLight};
 `;
 
-export const styles = StyleSheet.create({
-  convertIcon: {
-    position: 'absolute',
-    alignSelf: 'center',
-    zIndex: 1,
-  },
-});
+export const convertIcon = css`
+  position: absolute;
+  align-self: center;
+`;

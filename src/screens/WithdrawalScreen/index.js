@@ -23,7 +23,7 @@ import {
 } from './style';
 
 import ModalContainer from '@/components/ModalContainer';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import Input from '@/components/AppInput';
 import AppText from '@/components/AppText2';
 
@@ -104,9 +104,15 @@ const Form = () => {
           })}
         />
       </View>
-      <ThemeButton onPress={handleSubmit} title="Submit" disabled={!isValid}>
-        <FormattedMessage id="withdraw" defaultMessage="withdraw" />
-      </ThemeButton>
+      <AppButton
+        onPress={handleSubmit}
+        title="Submit"
+        disabled={!isValid}
+        text={<FormattedMessage id="withdraw" defaultMessage="withdraw" />}
+        variant="filled"
+        sizeVariant="large"
+        colorVariant="secondary"
+      />
     </>
   );
 };

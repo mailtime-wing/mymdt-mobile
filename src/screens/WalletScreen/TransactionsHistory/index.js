@@ -1,16 +1,16 @@
 import React from 'react';
+import {View} from 'react-native';
+
+import {useTheme} from 'emotion-theming';
+import {css} from '@emotion/native';
 import {FormattedMessage} from 'react-intl';
 
-import {
-  HistoryListContainer,
-  HistoryListHeader,
-  FilterButton,
-  FilterText,
-} from './style';
+import {historyListHeader, historyListContainer} from './style';
 
 import FilterIcon from '@/assets/filter.svg';
 
-import ThemeButton from '@/components/ThemeButton';
+import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
+import AppButton from '@/components/AppButton';
 import TransactionList from './TransactionList';
 
 const TransactionsHistory = ({
@@ -19,39 +19,52 @@ const TransactionsHistory = ({
   currentFilter,
   handleFilterPress,
   navigation,
+  cardType,
   ...props
 }) => {
+  const theme = useTheme();
   return (
-    <HistoryListContainer>
-      <HistoryListHeader>
-        <FilterButton
+    <View
+      style={[
+        css`
+          ${theme.colors.elevatedBackground1}
+        `,
+        historyListContainer,
+      ]}>
+      <View style={historyListHeader(theme)}>
+        <AppButton
           onPress={handleFilterPress}
-          borderColor={currentTheme.borderColor}>
-          <FilterIcon stroke={currentTheme.color} strokeWidth={2} />
-          <FilterText
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            color={currentTheme.color}>
-            {currentFilter}
-          </FilterText>
-        </FilterButton>
-        <ThemeButton
+          text={currentFilter}
+          variant="outlined"
+          sizeVariant="normal"
+          colorVariant={
+            cardType === MEASURABLE_REWARD_POINT ? 'secondary' : 'primary'
+          }
+          svgIcon={FilterIcon}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        />
+        <AppButton
           onPress={() => navigation.navigate('missing_receipt')}
-          textStyle={`color: ${currentTheme.color}`}
-          buttonStyle={`borderColor: ${currentTheme.borderColor}`}
-          reverse
-          small>
-          <FormattedMessage
-            id="missing_receipt"
-            defaultMessage="missing receipt"
-          />
-        </ThemeButton>
-      </HistoryListHeader>
+          text={
+            <FormattedMessage
+              id="missing_receipt"
+              defaultMessage="missing receipt"
+            />
+          }
+          variant="outlined"
+          sizeVariant="compact"
+          colorVariant={
+            cardType === MEASURABLE_REWARD_POINT ? 'secondary' : 'primary'
+          }
+        />
+      </View>
       <TransactionList
         transactionsHistoryList={transactionsHistoryList}
+        cardType={cardType}
         {...props}
       />
-    </HistoryListContainer>
+    </View>
   );
 };
 

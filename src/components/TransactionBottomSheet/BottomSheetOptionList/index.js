@@ -48,7 +48,14 @@ const BottomSheetOptionList = ({
           {title}
         </AppText>
         <RightSide>
-          {isExpand ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          {isExpand ? (
+            <ChevronUpIcon stroke={theme.colors.borderColor} strokeWidth="2" />
+          ) : (
+            <ChevronDownIcon
+              stroke={theme.colors.borderColor}
+              strokeWidth="2"
+            />
+          )}
         </RightSide>
       </OptionHeader>
       <OptionsContainer expand={isExpand}>

@@ -42,6 +42,10 @@ export const darkTheme = {
       'background-color: #2C2C2C;',
       'background-color: #363636;',
     ],
+    elevatedThemeBackground: [
+      'background-color: #232323;',
+      'background-color: #232323;',
+    ],
     inputFocusBackground: 'rgba(159, 189, 233, 0.2)',
     errorBackground: 'rgba(255, 113, 113, 0.2)',
     themeBackground: '#121212',
@@ -123,6 +127,10 @@ export const lightTheme = {
       'background-color: #FFFFFF; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);',
       'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);',
     ],
+    elevatedThemeBackground: [
+      'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(11, 142, 157, 0.1);',
+      'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(3, 99, 239, 0.1);',
+    ],
     inputFocusBackground: 'rgba(3, 99, 239, 0.05)',
     errorBackground: 'rgba(216, 16, 16, 0.1)',
     themeBackground: '#21CEDB',
@@ -198,6 +206,10 @@ lightTheme.colors.elevatedBackground1 = lightTheme.colors.elevatedBackground[0];
 lightTheme.colors.elevatedBackground2 = lightTheme.colors.elevatedBackground[1];
 lightTheme.colors.elevatedBackground3 = lightTheme.colors.elevatedBackground[2];
 lightTheme.colors.elevatedBackground4 = lightTheme.colors.elevatedBackground[3];
+lightTheme.colors.elevatedThemeBackground.mrp =
+  lightTheme.colors.elevatedThemeBackground[0];
+lightTheme.colors.elevatedThemeBackground.mdt =
+  lightTheme.colors.elevatedThemeBackground[1];
 
 // membership
 lightTheme.colors.membership.basic.background =
@@ -327,6 +339,10 @@ darkTheme.colors.elevatedBackground1 = darkTheme.colors.elevatedBackground[0];
 darkTheme.colors.elevatedBackground2 = darkTheme.colors.elevatedBackground[1];
 darkTheme.colors.elevatedBackground3 = darkTheme.colors.elevatedBackground[2];
 darkTheme.colors.elevatedBackground4 = darkTheme.colors.elevatedBackground[3];
+darkTheme.colors.elevatedThemeBackground.mrp =
+  darkTheme.colors.elevatedThemeBackground[0];
+darkTheme.colors.elevatedThemeBackground.mdt =
+  darkTheme.colors.elevatedThemeBackground[1];
 
 // membership
 darkTheme.colors.membership.basic.background =
