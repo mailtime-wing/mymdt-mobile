@@ -7,13 +7,22 @@ import {css} from '@emotion/native';
 import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import AppButton from '@/components/AppButton';
+import AppIcon from '@/components/AppIcon';
 
 import HomeIcon from '@/assets/home.svg';
+import HeartIcon from '@/assets/heart_icon.svg';
 
 const details = {
   alertBody: 'test for enable notification!',
   alertTitle: 'Welcome to Home page',
   userInfo: {data: 'userInfo'},
+};
+
+const rowForTest = {
+  flexDirection: 'row',
+  paddingBottom: 24,
+  justifyContent: 'space-between',
+  alignItems: 'center',
 };
 
 const marginForTest = {
@@ -46,6 +55,26 @@ const BrowseScreen = ({...props}) => {
                 `,
                 testStyle,
               ]}>
+              <View style={rowForTest}>
+                <AppIcon
+                  sizeVariant="small"
+                  color={theme.colors.background1}
+                  backgroundColor={theme.colors.secondary.normal}
+                  svgIcon={HeartIcon}
+                />
+                <AppIcon
+                  sizeVariant="normal"
+                  color={theme.colors.background1}
+                  backgroundColor={theme.colors.secondary.normal}
+                  svgIcon={HeartIcon}
+                />
+                <AppIcon
+                  sizeVariant="large"
+                  color={theme.colors.background1}
+                  backgroundColor={theme.colors.secondary.normal}
+                  svgIcon={HeartIcon}
+                />
+              </View>
               <AppButton
                 variant="filled"
                 text="Compact Filled Primary"
