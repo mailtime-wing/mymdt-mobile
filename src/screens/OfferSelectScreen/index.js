@@ -5,7 +5,7 @@ import {useTheme} from 'emotion-theming';
 
 import {IntlContext} from '@/context/Intl';
 import {AuthContext} from '@/context/auth';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import OfferList from '@/components/OfferList';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -185,12 +185,14 @@ const OfferSelectScreen = ({route, navigation}) => {
             />
           )}
         </AppText>
-        <ThemeButton
-          medium
+        <AppButton
           onPress={handleNextPress}
-          disabled={isErrorFromOfferList}>
-          <FormattedMessage id="confirm" defaultMessage="confirm" />
-        </ThemeButton>
+          disabled={isErrorFromOfferList}
+          text={<FormattedMessage id="confirm" defaultMessage="confirm" />}
+          variant="filled"
+          sizeVariant="normal"
+          colorVariant="secondary"
+        />
       </FixedContainer>
       {!!showConfirmPopup && (
         <PopupModal

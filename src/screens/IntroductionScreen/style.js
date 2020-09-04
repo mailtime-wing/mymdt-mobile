@@ -28,3 +28,7 @@ export const detailStyle = theme => css`
   text-align: center;
   margin-bottom: 16px;
 `;
+
+export const button = css`
+  width: 100%;
+`;

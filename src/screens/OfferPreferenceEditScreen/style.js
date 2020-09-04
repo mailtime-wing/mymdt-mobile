@@ -1,35 +1,24 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import styled, {css} from '@emotion/native';
 
-export const HeaderDetail = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
+export const headerDetailStyle = theme => css`
   margin-top: 24px;
   margin-bottom: 40px;
-  color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;
 
-export const Detail = styled(Text)`
-  font-size: 12px;
-  line-height: 18px;
+export const detailStyle = theme => css`
   padding-top: 8px;
   padding-bottom: 16px;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   width: 70%;
 `;
 
-export const Header = styled(Text)`
-  font-size: 16px;
-  line-height: 21px;
-  font-weight: bold;
-  letter-spacing: 1px;
+export const headerStyle = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
-export const NumberOfBrand = styled(Text)`
-  font-size: 16px;
-  line-height: 19px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+export const numberOfBrandStyle = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
 export const RowContainer = styled.View`

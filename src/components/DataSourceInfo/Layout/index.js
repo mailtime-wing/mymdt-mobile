@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {useTheme} from 'emotion-theming';
 
 import AppText from '@/components/AppText2';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import PhoneIcon from '@/assets/icon_smartphone.svg';
 import ShieldIcon from '@/assets/icon_shield.svg';
 import LockIcon from '@/assets/icon_lock-with-check.svg';
@@ -23,6 +23,7 @@ import {
   descriptionLineCaption,
   descriptionLineSeparator,
 } from './style';
+import {FormattedMessage} from 'react-intl';
 
 const DescriptionLine = ({title, caption}) => {
   const theme = useTheme();
@@ -77,7 +78,13 @@ const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
           ),
         ])}
       </View>
-      <ThemeButton onPress={onContinuePress}>Continue</ThemeButton>
+      <AppButton
+        onPress={onContinuePress}
+        text={<FormattedMessage id="continue" defaultMessage="Continue" />}
+        variant="filled"
+        sizeVariant="large"
+        colorVariant="secondary"
+      />
     </View>
   );
 };

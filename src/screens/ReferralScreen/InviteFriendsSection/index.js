@@ -4,7 +4,7 @@ import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 import Clipboard from '@react-native-community/clipboard';
 
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import ProgressBar from '@/components/ProgressBar';
 import AppText from '@/components/AppText2';
 import {
@@ -63,9 +63,13 @@ const InviteFriendSection = ({referralCode}) => {
             />
           </View>
         </View>
-        <ThemeButton medium onPress={copyToClipboard}>
-          COPY
-        </ThemeButton>
+        <AppButton
+          onPress={copyToClipboard}
+          text="COPY"
+          variant="filled"
+          sizeVariant="normal"
+          colorVariant="secondary"
+        />
       </View>
     </>
   );

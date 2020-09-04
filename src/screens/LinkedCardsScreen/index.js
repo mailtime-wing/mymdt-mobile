@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
 import ScreenContainer from '@/components/ScreenContainer';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import LinkedCreditCardsSectionList from '@/components/LinkedCreditCardsSectionList';
 import useSetupFlow from '@/hooks/useSetupFlow';
 
@@ -11,12 +11,21 @@ import {footerContainer, moreButton} from './style';
 
 const ListFooter = ({onDonePress, onMorePress}) => (
   <View style={footerContainer}>
-    <ThemeButton onPress={onDonePress}>
-      <FormattedMessage id="done" defaultMessage="Done" />
-    </ThemeButton>
-    <ThemeButton buttonStyle={moreButton} reverse onPress={onMorePress}>
-      <FormattedMessage id="connect_more" />
-    </ThemeButton>
+    <AppButton
+      onPress={onDonePress}
+      text={<FormattedMessage id="done" defaultMessage="Done" />}
+      variant="filled"
+      sizeVariant="large"
+      colorVariant="secondary"
+    />
+    <AppButton
+      onPress={onMorePress}
+      text={<FormattedMessage id="connect_more" />}
+      variant="outlined"
+      sizeVariant="normal"
+      colorVariant="secondary"
+      style={moreButton}
+    />
   </View>
 );
 

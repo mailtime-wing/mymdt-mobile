@@ -36,3 +36,7 @@ export const removeText = theme => css`
 export const titleText = theme => css`
   color: ${theme.colors.textOnBackground.disabled};
 `;
+
+export const addEmailButton = css`
+  align-self: center;
+`;

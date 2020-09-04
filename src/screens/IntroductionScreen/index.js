@@ -8,6 +8,7 @@ import {
   BackgroundImage,
   titleStyle,
   detailStyle,
+  button,
 } from './style';
 
 import BindingButton from './BindingButton';
@@ -51,6 +52,7 @@ const IntroductionScreen = () => {
             <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
           }
           onPress={() => navigateByFlow('skip')}
+          style={button}
         />
       </Container>
     </ScrollContainer>

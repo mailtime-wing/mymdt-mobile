@@ -9,7 +9,7 @@ import {IntlContext} from '@/context/Intl';
 import useCountDownTimer from '@/hooks/timer';
 
 import Input from '@/components/Input';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import {
   Container,
   Title,
@@ -84,9 +84,14 @@ const VerifyPhoneNumberForm = ({phone}) => {
           error={touched.verificationCode && errors.verificationCode}
         />
       </VerificationContainer>
-      <ThemeButton onPress={handleSubmit} disabled={!isValid}>
-        <FormattedMessage id="submit" defaultMessage="SUBMIT" />
-      </ThemeButton>
+      <AppButton
+        onPress={handleSubmit}
+        disabled={!isValid}
+        text={<FormattedMessage id="submit" defaultMessage="SUBMIT" />}
+        variant="filled"
+        sizeVariant="large"
+        colorVariant="secondary"
+      />
     </View>
   );
 };

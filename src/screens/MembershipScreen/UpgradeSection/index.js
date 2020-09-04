@@ -24,7 +24,7 @@ import GiftIcon from '@/assets/rewardme_gift.svg';
 import AppText from '@/components/AppText2';
 import ProgressBar from '@/components/ProgressBar';
 import MRPCoin from '@/components/MRPCoin';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 
 const giftList = [
   {
@@ -101,9 +101,12 @@ const UpgradeSection = ({userNextLevel}) => {
           progress={14565 / 20000}
         />
         {canUpgrade && (
-          <ThemeButton medium width="auto">
-            <FormattedMessage id="upgrade_now" />
-          </ThemeButton>
+          <AppButton
+            variant="filled"
+            sizeVariant="normal"
+            colorVariant="secondary"
+            text={<FormattedMessage id="upgrade_now" />}
+          />
         )}
         <AppText variant="body2" style={[sectionDetail(theme), marginTop]}>
           <FormattedMessage id="enjoy_more_after_updrade" />

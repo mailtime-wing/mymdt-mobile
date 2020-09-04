@@ -6,23 +6,26 @@ import {useQuery} from '@apollo/react-hooks';
 import {GET_USER_OFFER_API, GET_USER_MEMBERSHIP_API} from '@/api/data';
 
 import ModalContaienr from '@/components/ModalContainer';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import OfferList from '@/components/OfferList';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import AppText from '@/components/AppText2';
 
 import {
-  Detail,
-  HeaderDetail,
-  Header,
-  NumberOfBrand,
   RowContainer,
   ScrollContainer,
   Container,
   Divider,
+  headerDetailStyle,
+  detailStyle,
+  headerStyle,
+  numberOfBrandStyle,
 } from './style';
+import {useTheme} from 'emotion-theming';
 
 const OfferPreferenceEditScreen = ({navigation}) => {
+  const theme = useTheme();
   const {authToken} = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
 
@@ -76,42 +79,49 @@ const OfferPreferenceEditScreen = ({navigation}) => {
           <FormattedMessage id="special_offer" defaultMessage="Special Offer" />
         }>
         <Container>
-          <HeaderDetail>
+          <AppText variant="body1" style={headerDetailStyle(theme)}>
             <FormattedMessage
               id="edit_preference_in_30_days"
               defaultMessage="You can edit your favorite brand preference once in 30 days. You will receive cashback based on your membership level."
             />
-          </HeaderDetail>
+          </AppText>
           <RowContainer>
-            <Header>
+            <AppText variant="subTitle2" style={headerStyle(theme)}>
               <FormattedMessage
                 id="max_choices"
                 defaultMessage="Maximum choices"
               />
-            </Header>
-            <NumberOfBrand>{numberOfOffer} Brands</NumberOfBrand>
+            </AppText>
+            <AppText variant="body1" style={numberOfBrandStyle(theme)}>
+              {numberOfOffer} Brands
+            </AppText>
           </RowContainer>
-          <Detail>
+          <AppText variant="caption" style={detailStyle(theme)}>
             <FormattedMessage
               id="choose_more_brand_when_upgrade"
               defaultMessage="You can choose more brands when your membership is upgraded."
             />
-          </Detail>
+          </AppText>
+
           <Divider />
           <RowContainer>
-            <Header>
+            <AppText variant="subTitle2" style={headerStyle(theme)}>
               <FormattedMessage id="your_choices" defaultMessage="Preference" />
-            </Header>
-            <ThemeButton small onPress={handleEditPress}>
-              <FormattedMessage id="edit" defaultMessage="edit" />
-            </ThemeButton>
+            </AppText>
+            <AppButton
+              onPress={handleEditPress}
+              text={<FormattedMessage id="edit" defaultMessage="edit" />}
+              variant="filled"
+              sizeVariant="compact"
+              colorVariant="secondary"
+            />
           </RowContainer>
-          <Detail>
+          <AppText variant="caption" style={detailStyle(theme)}>
             <FormattedMessage
               id="get_reward_from_brands"
               defaultMessage="Choose your favorite brands with the special cashback rate."
             />
-          </Detail>
+          </AppText>
           {loading ? (
             <LoadingSpinner />
           ) : (

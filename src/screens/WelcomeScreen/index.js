@@ -4,7 +4,7 @@ import {FormattedMessage} from 'react-intl';
 import AutoScrolling from 'react-native-auto-scrolling';
 import {useTheme} from 'emotion-theming';
 
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
 import ScreenContainer from '@/components/ScreenContainer';
 import useSetupFlow from '@/hooks/useSetupFlow';
@@ -40,11 +40,15 @@ const WelcomeScreen = () => {
           </AutoScrolling>
         </AppIconGridImageContainer>
         <PaddingContainer>
-          <ThemeButton onPress={() => navigateByFlow()}>
-            <FormattedMessage id="next" defaultMessage="Next" />
-          </ThemeButton>
+          <AppButton
+            onPress={() => navigateByFlow()}
+            text={<FormattedMessage id="next" defaultMessage="Next" />}
+            variant="filled"
+            sizeVariant="large"
+            colorVariant="secondary"
+          />
         </PaddingContainer>
-        <AppText variant="overline" style={startAndAgree(theme)}>
+        <AppText variant="caption" style={startAndAgree(theme)}>
           <FormattedMessage
             id="setting_up_agree_terms_and_policy"
             defaultMessage="By setting up the account, you agree with RewardMe’s Terms of Service and Privacy Policy."
