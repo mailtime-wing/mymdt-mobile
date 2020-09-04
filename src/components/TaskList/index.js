@@ -14,7 +14,7 @@ import {
 } from './style';
 
 import MRPCoin from '@/components/MRPCoin';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import PopupModal from '@/components/PopupModal';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
 import MRPGiftBox from '@/components/MRPGiftBox';
@@ -111,20 +111,25 @@ const TaskList = ({taskList, userRewardList}) => {
             {!claimed ? (
               <MarginLeft>
                 {task.isTaskCompleted ? (
-                  <ThemeButton
-                    small
-                    width="auto"
-                    onPress={() => handleClaimPress(task.reward?.id)}>
-                    <FormattedMessage id="claim" defaultMessage="Claim" />
-                  </ThemeButton>
+                  <AppButton
+                    onPress={() => handleClaimPress(task.reward?.id)}
+                    text={
+                      <FormattedMessage id="claim" defaultMessage="Claim" />
+                    }
+                    variant="filled"
+                    sizeVariant="compact"
+                    colorVariant="secondary"
+                  />
                 ) : (
-                  <ThemeButton
-                    small
-                    reverse
-                    width="auto"
-                    onPress={() => handleOpenUrl(callbackUrl)}>
-                    <FormattedMessage id="start" defaultMessage="Start" />
-                  </ThemeButton>
+                  <AppButton
+                    onPress={() => handleOpenUrl(callbackUrl)}
+                    text={
+                      <FormattedMessage id="start" defaultMessage="Start" />
+                    }
+                    variant="outlined"
+                    sizeVariant="compact"
+                    colorVariant="secondary"
+                  />
                 )}
               </MarginLeft>
             ) : null}

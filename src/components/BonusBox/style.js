@@ -8,8 +8,7 @@ export const detailText = theme => css`
   color: ${theme.colors.textOnBackground.disabled};
 `;
 
-export const card = theme => css`
-  background: ${theme.colors.background1};
+export const card = css`
   border-radius: 24px;
 `;
 

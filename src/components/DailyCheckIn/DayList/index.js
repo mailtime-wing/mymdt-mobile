@@ -23,7 +23,7 @@ const DayList = ({
   isEnglish,
   coinColor,
 }) => {
-  return (
+  return ( // TODO: special handle dark mode style for daily check in 
     <>
       {todayAndAfterRewards &&
         todayAndAfterRewards.map((amount, index) => {
