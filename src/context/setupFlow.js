@@ -11,7 +11,9 @@ const setupFlowContextInitialValue = {
 export const SetupFlowContext = createContext(setupFlowContextInitialValue);
 
 export const SetupFlowProvider = ({children}) => {
-  const {permissions} = useContext(NotificationContext);
+  const {
+    state: {permissions},
+  } = useContext(NotificationContext);
   const {setupStatus} = useContext(PreloadDataContext);
   const [graph] = useState(new Graph());
 

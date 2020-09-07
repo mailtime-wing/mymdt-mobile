@@ -4,8 +4,15 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
+  useContext,
 } from 'react';
+import {Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import {getUniqueId} from 'react-native-device-info';
+
+import {AuthContext} from '@/context/auth';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
+import {REGISTER_DEVICE} from '@/api/auth';
 
 const INITIAL_PERMISSIONS = {
   alert: false,
@@ -13,19 +20,22 @@ const INITIAL_PERMISSIONS = {
   sound: false,
 };
 
-const initialContextValue = {
+const UPDATE_PERMISSION = 'updatePermission';
+const UPDATE_DEVICE_TOKEN = 'updateDeviceToken';
+const initialState = {
   permissions: INITIAL_PERMISSIONS,
+  // TODO: handle badge
+  deviceId: getUniqueId(),
+  deviceToken: '',
+};
+
+const initialContextValue = {
+  state: initialState,
   checkPermissions: () => Promise.resolve(INITIAL_PERMISSIONS),
   notify: () => {},
   request: () => Promise.resolve(),
 };
 export const NotificationContext = createContext(initialContextValue);
-
-const UPDATE_PERMISSION = 'updatePermission';
-const initialState = {
-  permissions: INITIAL_PERMISSIONS,
-  // TODO: handle badge
-};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -34,6 +44,11 @@ const reducer = (state, action) => {
         ...state,
         permissions: action.payload,
       };
+    case UPDATE_DEVICE_TOKEN:
+      return {
+        ...state,
+        deviceToken: action.payload,
+      };
     default:
       break;
   }
@@ -41,6 +56,8 @@ const reducer = (state, action) => {
 
 export const NotificationProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const {authToken} = useContext(AuthContext);
+  const [registerDevice] = useMutationWithAuth(REGISTER_DEVICE);
 
   const checkPermissions = useCallback(async () => {
     try {
@@ -83,14 +100,46 @@ export const NotificationProvider = ({children}) => {
       checkPermissions,
       notify,
       request,
-      permissions: state.permissions,
+      state,
     }),
-    [checkPermissions, notify, request, state.permissions],
+    [checkPermissions, notify, request, state],
   );
 
   useEffect(() => {
     checkPermissions();
   }, [checkPermissions]);
+
+  useEffect(() => {
+    const handler = deviceToken => {
+      dispatch({type: UPDATE_DEVICE_TOKEN, payload: deviceToken});
+    };
+
+    PushNotificationIOS.addEventListener('register', handler);
+    return () => {
+      PushNotificationIOS.removeEventListener('register', handler);
+    };
+  }, []);
+
+  useEffect(() => {
+    const _registerDevice = async () => {
+      try {
+        const platform = Platform.OS === 'ios' ? 'apns' : '';
+        await registerDevice({
+          variables: {
+            deviceId: state.deviceId,
+            platform,
+            pushToken: state.deviceToken,
+          },
+        });
+      } catch (e) {
+        // TODO: what to do if it fails?
+      }
+    };
+
+    if (state.deviceToken && authToken) {
+      _registerDevice();
+    }
+  }, [authToken, registerDevice, state.deviceId, state.deviceToken]);
 
   return (
     <NotificationContext.Provider value={notificationContext}>

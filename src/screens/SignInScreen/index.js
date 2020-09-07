@@ -4,6 +4,7 @@ import {FormattedMessage} from 'react-intl';
 
 import {AuthContext} from '@/context/auth';
 import {IntlContext} from '@/context/Intl';
+import {NotificationContext} from '@/context/notification';
 import {GET_OTP_API, LOGIN_API} from '@/api/auth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 import PopupModal from '@/components/PopupModal';
@@ -52,6 +53,9 @@ const renderClientError = errorCode => {
 const SigninScreen = () => {
   const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken} = useContext(AuthContext);
+  const {
+    state: {deviceId},
+  } = useContext(NotificationContext);
   const [
     otpRequest,
     {error: otpRequestError},
@@ -88,6 +92,7 @@ const SigninScreen = () => {
         variables: {
           phoneNumber: completePhoneNumber,
           otp: values.verificationCode,
+          deviceId,
         },
       });
       updateAuthToken(data.login.accessToken, data.login.refreshToken);
