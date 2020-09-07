@@ -6,7 +6,7 @@ import {useTheme} from 'emotion-theming';
 
 import AppText from '@/components/AppText2';
 import Input from '@/components/AppInput';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import BackButton from '@/components/BackButton';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -100,9 +100,16 @@ const BindEmailScreen = ({route, navigation}) => {
                 name="email"
                 keyboardType="email-address"
               />
-              <ThemeButton disabled={!isValid} onPress={handleSubmit}>
-                <FormattedMessage id="connect" defaultMessage="Connect" />
-              </ThemeButton>
+              <AppButton
+                onPress={handleSubmit}
+                disabled={!isValid}
+                text={
+                  <FormattedMessage id="connect" defaultMessage="Connect" />
+                }
+                variant="filled"
+                sizeVariant="large"
+                colorVariant="secondary"
+              />
             </>
           )}
         </Formik>

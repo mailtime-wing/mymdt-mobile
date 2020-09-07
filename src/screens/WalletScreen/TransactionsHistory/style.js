@@ -1,38 +1,17 @@
-import styled from '@emotion/native';
-import {Platform} from 'react-native';
-import Text from '@/components/AppText';
+import {css} from '@emotion/native';
 
-export const HistoryListContainer = styled.View`
-  background-color: ${props => props.theme.colors.background1};
+export const historyListContainer = css`
   border-radius: 24px 24px 0px 0px;
   margin-top: 16px;
 `;
 
-export const HistoryListHeader = styled.View`
+export const historyListHeader = theme => css`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 24px 24px 16px 24px;
   border-bottom-width: 1px;
-  border-color: ${props => props.theme.colors.background2};
+  border-color: ${theme.colors.background2};
   elevation: 1;
   margin-bottom: 8px;
-`;
-
-export const FilterButton = styled.TouchableOpacity`
-  flex-direction: row;
-  margin-right: 8px;
-  padding: 12px;
-  border-radius: 42px;
-  border: 1px solid ${props => props.borderColor};
-`;
-
-export const FilterText = styled(Text)`
-  font-size: 14px;
-  line-height: 17px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: ${props => props.color && props.color};
-  ${Platform.OS === 'ios' && 'font-weight: bold;'}
-  margin-left: 8px;
 `;

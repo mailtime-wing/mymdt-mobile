@@ -1,4 +1,4 @@
-import styled from '@emotion/native';
+import styled, {css} from '@emotion/native';
 import Text from '@/components/AppText';
 import {Platform} from 'react-native';
 
@@ -28,4 +28,14 @@ export const ButtonText = styled(Text)`
   color: ${props =>
     props.color ? props.color : props.theme.colors.contrastColor};
   margin-top: 8px;
+`;
+
+export const buttonContainer = css`
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-radius: 16px;
+  flex: 1;
+  margin: 0 8px;
+  justify-content: center;
+  align-items: center;
 `;

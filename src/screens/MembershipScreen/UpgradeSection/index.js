@@ -2,11 +2,11 @@ import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 import {useTheme} from 'emotion-theming';
+import {css} from '@emotion/native';
 
 import {
   progressTitleStyle,
   progressLabelStyle,
-  sectionContainer,
   upperSectionContainer,
   lowerSectionContainer,
   sectionTitle,
@@ -16,6 +16,7 @@ import {
   giftsContainer,
   giftContainer,
   giftName,
+  giftNameContainer,
   rowContainer,
 } from './style';
 import ArrowIcon from '@/assets/list_arrow.svg';
@@ -23,7 +24,7 @@ import GiftIcon from '@/assets/rewardme_gift.svg';
 import AppText from '@/components/AppText2';
 import ProgressBar from '@/components/ProgressBar';
 import MRPCoin from '@/components/MRPCoin';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 
 const giftList = [
   {
@@ -44,7 +45,13 @@ const UpgradeSection = ({userNextLevel}) => {
 
   return (
     <>
-      <View style={[sectionContainer(theme), upperSectionContainer]}>
+      <View
+        style={[
+          css`
+            ${theme.colors.elevatedBackground1}
+          `,
+          upperSectionContainer,
+        ]}>
         <AppText variant="heading5" style={sectionTitle(theme)}>
           <FormattedMessage
             id="upgrade_to"
@@ -94,26 +101,36 @@ const UpgradeSection = ({userNextLevel}) => {
           progress={14565 / 20000}
         />
         {canUpgrade && (
-          <ThemeButton medium width="auto">
-            <FormattedMessage id="upgrade_now" />
-          </ThemeButton>
+          <AppButton
+            variant="filled"
+            sizeVariant="normal"
+            colorVariant="secondary"
+            text={<FormattedMessage id="upgrade_now" />}
+          />
         )}
         <AppText variant="body2" style={[sectionDetail(theme), marginTop]}>
           <FormattedMessage id="enjoy_more_after_updrade" />
         </AppText>
         <View style={giftsContainer}>
-          {giftList.map(gift => (
+          {giftList.map(({name}) => (
             <TouchableOpacity style={giftContainer}>
               <GiftIcon />
-              <AppText variant="caption" style={giftName(theme)}>
-                {gift.name}
-              </AppText>
+              <View style={giftNameContainer}>
+                <AppText variant="caption" style={giftName(theme)}>
+                  {name}
+                </AppText>
+              </View>
             </TouchableOpacity>
           ))}
         </View>
       </View>
       <TouchableOpacity
-        style={[sectionContainer(theme), lowerSectionContainer(theme)]}>
+        style={[
+          css`
+            ${theme.colors.elevatedBackground1}
+          `,
+          lowerSectionContainer(theme),
+        ]}>
         <AppText variant="caption" style={[browseMembership(theme)]}>
           <FormattedMessage id="browse_membership_details" />
         </AppText>

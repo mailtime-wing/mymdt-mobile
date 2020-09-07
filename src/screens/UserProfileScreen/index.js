@@ -12,7 +12,7 @@ import {useTheme} from 'emotion-theming';
 
 import {AuthContext} from '@/context/auth';
 import Input from '@/components/AppInput';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import {UPDATE_USER_PROFILE_API} from '@/api/data';
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
@@ -68,9 +68,15 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress, theme}) => {
         }
         name="referralCode"
       />
-      <ThemeButton onPress={handleSubmit} title="Submit" disabled={!isValid}>
-        <FormattedMessage id="submit" defaultMessage="submit" />
-      </ThemeButton>
+      <AppButton
+        onPress={handleSubmit}
+        title="Submit"
+        disabled={!isValid}
+        text={<FormattedMessage id="submit" defaultMessage="submit" />}
+        variant="filled"
+        sizeVariant="large"
+        colorVariant="secondary"
+      />
     </FormContainer>
   );
 };

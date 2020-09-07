@@ -29,16 +29,18 @@ import {
   numberText,
   inputAccessoryButtonText,
   errorText,
-  styles,
+  convertIcon,
 } from './style';
 
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
 import AppText from '@/components/AppText2';
 import LoadingSpinner from '@/components/LoadingSpinner';
+// import AppIcon from '@/components/AppIcon';
 
-import ConvertIcon from '@/assets/convert.svg';
+// import ConvertIcon from '@/assets/convert_icon.svg';
+import ConvertIcon2 from '@/assets/convert.svg';
 
 const inputAccessoryViewID = 'converterButtons';
 
@@ -231,7 +233,20 @@ const ConvertForm = ({conversionRate, from}) => {
           />
         </ConverterContainer>
         <Margin />
-        <ConvertIcon fill="#21CEDB" style={styles.convertIcon} />
+        {
+          /* <AppIcon
+          color={theme.colors.background1}
+          backgroundColor={isMrp ? theme.colors.secondary.normal : theme.colors.primary.normal}
+          sizeVariant='small'
+          svgIcon={ConvertIcon}
+          style={convertIcon}
+        /> */
+          // TODO: fix background color not work when use appIcon
+        }
+        <ConvertIcon2
+          fill={theme.colors.secondary.normal}
+          style={convertIcon}
+        />
         <ConverterContainer isFocus={false}>
           <AppText variant="value" style={converterType(theme)}>
             {ToAmountText}
@@ -246,9 +261,14 @@ const ConvertForm = ({conversionRate, from}) => {
           {clientError}
         </AppText>
       )}
-      <ThemeButton onPress={handleSubmit} disabled={!isValid}>
-        <FormattedMessage id="convert" defaultMessage="convert" />
-      </ThemeButton>
+      <AppButton
+        onPress={handleSubmit}
+        disabled={!isValid}
+        text={<FormattedMessage id="convert" defaultMessage="convert" />}
+        variant="filled"
+        sizeVariant="large"
+        colorVariant="secondary"
+      />
     </>
   );
 };

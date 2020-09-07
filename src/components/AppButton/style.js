@@ -11,7 +11,6 @@ export const container = (
   border-radius: 28px;
   justify-content: center;
   align-items: center;
-  width: 100%;
   flex-direction: row;
   ${disabled && 'opacity: 0.4;'}
 

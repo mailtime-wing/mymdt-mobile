@@ -46,5 +46,5 @@ export const Gender = styled.TouchableOpacity`
 `;
 
 export const errorStyle = theme => css`
-  color: ${theme.colors.textOnError.light};
+  color: ${theme.colors.textOnError.superLight};
 `;

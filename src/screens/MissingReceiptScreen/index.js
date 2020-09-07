@@ -22,7 +22,7 @@ import {
 } from './style';
 
 import ModalContainer from '@/components/ModalContainer';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import Input from '@/components/AppInput';
 import DateTimePickerInput from '@/components/DateTimePickerInput';
 
@@ -82,9 +82,15 @@ const Form = ({showDatePicker, handleDatePickerPress}) => {
           <Input name="amount" keyboardType="numeric" />
         </AmountContainer>
       </AmountCurrencyContainer>
-      <ThemeButton onPress={handleSubmit} title="Submit" disabled={!isValid}>
-        <FormattedMessage id="submit" defaultMessage="submit" />
-      </ThemeButton>
+      <AppButton
+        onPress={handleSubmit}
+        title="Submit"
+        disabled={!isValid}
+        text={<FormattedMessage id="submit" defaultMessage="submit" />}
+        variant="filled"
+        sizeVariant="large"
+        colorVariant="secondary"
+      />
     </>
   );
 };

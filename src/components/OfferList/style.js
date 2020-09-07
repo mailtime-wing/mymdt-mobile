@@ -1,5 +1,4 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import styled, {css} from '@emotion/native';
 
 export const OffersContainer = styled.View`
   flex-direction: row;
@@ -47,17 +46,13 @@ export const OfferIcon = styled.Image`
   height: 80px;
 `;
 
-export const OfferName = styled(Text)`
-  font-size: 18px;
-  line-height: 22px;
-  font-weight: 500;
+export const offerNameStyle = theme => css`
   margin-top: 8px;
   margin-bottom: 4px;
+  color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
-export const OfferDiscount = styled(Text)`
-  font-size: 12px;
-  line-height: 18px;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
+export const offerDiscountStyle = theme => css`
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   text-align: center;
 `;

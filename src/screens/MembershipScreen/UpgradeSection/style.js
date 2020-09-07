@@ -1,9 +1,5 @@
 import {css} from '@emotion/native';
 
-export const sectionContainer = theme => css`
-  background-color: ${theme.colors.background1};
-`;
-
 export const upperSectionContainer = css`
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
@@ -60,17 +56,23 @@ export const giftContainer = css`
   border: 1px solid rgba(33, 206, 219, 0.16);
   border-radius: 16px;
   padding-top: 16px;
-  padding-bottom: 8px;
+  padding-bottom: 4px;
   justify-content: center;
   align-items: center;
   max-width: 32%;
-  min-height: 120px;
+  height: 120px;
 `;
 
 export const giftName = theme => css`
   color: ${theme.colors.secondary.dark};
   text-align: center;
-  margin-top: 8px;
+`;
+
+export const giftNameContainer = css`
+  height: 36px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
 `;
 
 export const rowContainer = css`

@@ -8,7 +8,6 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const ButtonView = styled.View`
-  background-color: ${props => props.theme.colors.background1};
   flex-direction: row;
   align-items: center;
   border-radius: 16px;

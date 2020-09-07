@@ -6,7 +6,8 @@ import {useMutation, useQuery} from '@apollo/react-hooks';
 import {AuthContext} from '@/context/auth';
 import ModalContainer from '@/components/ModalContainer';
 import SpecialListOption from '@/components/SpecialListOption';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
+import AppText from '@/components/AppText2';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import useSetupFlow from '@/hooks/useSetupFlow';
@@ -14,23 +15,21 @@ import {
   GET_USER_EMAIL_ACCOUNTS_API,
   UNBIND_EMAIL_ACCOUNTS_API,
 } from '@/api/data';
-import PlusIcon from '@/assets/icon_plus.svg';
 
 import {
   Container,
   MarginTop,
-  EmailText,
-  UnbindButton,
-  UnbindText,
   HeaderContainer,
-  HeaderText,
-  DetailText,
-  NoEmailText,
   NoEmailContainer,
   Image,
-  ButtonText,
-  ButtonContainer,
+  unbindButtonContainer,
+  emailStyle,
+  detailStyle,
+  noEmailStyle,
+  headerStyle,
+  title,
 } from './style';
+import {useTheme} from 'emotion-theming';
 
 // const RESET = 'reset';
 // const UPDATE_IS_EDITING = 'updateIsEditing';
@@ -92,6 +91,7 @@ const reducer = (state, action) => {
 };
 
 const LinkedEmailsScreen = ({navigation, route}) => {
+  const theme = useTheme();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [emails, setEmails] = useState([{id: null, emailAddress: ''}]);
   const {authToken} = useContext(AuthContext);
@@ -120,7 +120,7 @@ const LinkedEmailsScreen = ({navigation, route}) => {
   }, [data]);
 
   useEffect(() => {
-    if (route.params.loginSuccess) {
+    if (route?.params?.loginSuccess) {
       refetch();
     }
   }, [refetch, route]);
@@ -165,31 +165,40 @@ const LinkedEmailsScreen = ({navigation, route}) => {
 
   return (
     <ScrollView>
-      <ModalContainer
-        title={
+      <ModalContainer>
+        <AppText variant="pageTitle" style={title(theme)}>
           <FormattedMessage id="linked_emails" defaultMessage="linked emails" />
-        }>
+        </AppText>
         <Container>
-          <DetailText>
+          <AppText variant="body1" style={detailStyle(theme)}>
             <FormattedMessage id="linked_emails_detail" />
-          </DetailText>
+          </AppText>
           <HeaderContainer>
-            <HeaderText>
+            <AppText variant="label" style={headerStyle(theme)}>
               <FormattedMessage id="email" defaultMessage="email" />
-            </HeaderText>
+            </AppText>
           </HeaderContainer>
           {emails.length > 0 ? (
             emails.map((email, index) => (
               <>
                 <SpecialListOption
                   key={email.emailAddress}
-                  label={<EmailText>{email.emailAddress}</EmailText>}
+                  label={
+                    <AppText variant="body1" style={emailStyle(theme)}>
+                      {email.emailAddress}
+                    </AppText>
+                  }
                   value={
-                    <UnbindButton onPress={() => handleUnbindPress(email)}>
-                      <UnbindText>
+                    <AppButton
+                      style={unbindButtonContainer}
+                      onPress={() => handleUnbindPress(email)}
+                      text={
                         <FormattedMessage id="remove" defaultMessage="remove" />
-                      </UnbindText>
-                    </UnbindButton>
+                      }
+                      variant="outlined"
+                      sizeVariant="compact"
+                      colorVariant="alert"
+                    />
                   }
                 />
                 <MarginTop />
@@ -198,29 +207,32 @@ const LinkedEmailsScreen = ({navigation, route}) => {
           ) : (
             <NoEmailContainer>
               <Image source={require('@/assets/no_email_added.png')} />
-              <NoEmailText>No email added</NoEmailText>
+              <AppText variant="heading3" style={noEmailStyle(theme)}>
+                No email added
+              </AppText>
             </NoEmailContainer>
           )}
-          {/* TODO: align layout between email and card <ButtonContainer
-            onPress={() =>
-              navigation.navigate('add_email', {navigateFromEdit: true})
-            }>
-            <PlusIcon />
-            <ButtonText>
-              <FormattedMessage
-                id="add_email_account"
-                defaultMessage="ADD EMAIL"
-              />
-            </ButtonText>
-          </ButtonContainer> */}
           <MarginTop value={80} />
-          <ThemeButton onPress={handleFinishPress}>
-            <FormattedMessage id="finish" defaultMessage="finish" />
-          </ThemeButton>
+          <AppButton
+            onPress={handleFinishPress}
+            text={<FormattedMessage id="finish" defaultMessage="finish" />}
+            variant="filled"
+            sizeVariant="large"
+            colorVariant="secondary"
+          />
           <MarginTop value={16} />
-          <ThemeButton reverse small onPress={handleOtherLinkMethodPress}>
-            <FormattedMessage id="connect_more" defaultMessage="Connect more" />
-          </ThemeButton>
+          <AppButton
+            onPress={handleOtherLinkMethodPress}
+            text={
+              <FormattedMessage
+                id="connect_more"
+                defaultMessage="Connect more"
+              />
+            }
+            variant="outlined"
+            sizeVariant="normal"
+            colorVariant="secondary"
+          />
         </Container>
 
         {state.isUnbinding && (

@@ -1,14 +1,9 @@
-import styled from '@emotion/native';
-import {Platform} from 'react-native';
-import TitleText from '@/components/TitleText';
+import styled, {css} from '@emotion/native';
 
-export const Title = styled(TitleText)`
-  color: ${props => props.theme.colors.contrastColor};
-  font-size: 20px;
-  line-height: 24px;
+export const titleStyle = theme => css`
+  color: ${theme.colors.contrastColor};
   text-align: center;
   padding-bottom: 12px;
-  ${Platform.OS === 'ios' && 'font-weight: 500;'}
 `;
 
 export const ModalView = styled.View`
@@ -47,4 +42,13 @@ export const ButtonContainers = styled.View`
 
 export const MarginTop = styled.View`
   margin-top: 24px;
+`;
+
+export const modal = css`
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  border-radius: 24px;
+  padding-top: 20px;
+  padding-bottom: 50px;
 `;

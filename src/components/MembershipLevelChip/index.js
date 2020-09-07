@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import {levelChip, levelText} from './style';
+import {levelChip, levelText, border} from './style';
 import membershipLevel from '@/enum/membershipLevel';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
@@ -14,6 +14,7 @@ const MembershipLevelChip = ({userLevel, style}) => {
       level: membershipLevel.BASIC,
       backgroundColor: theme.colors.membership.basic.background,
       textColor: theme.colors.membership.basic.text,
+      borderColor: theme.colors.membership.basic.border,
     },
     {
       level: membershipLevel.SILVER,
@@ -45,9 +46,15 @@ const MembershipLevelChip = ({userLevel, style}) => {
   const currentLevel = levels.find(level => level.level === userLevel);
   const backgroundColor = currentLevel.backgroundColor;
   const textColor = currentLevel.textColor;
+  const borderColor = currentLevel.borderColor;
 
   return (
-    <View style={[levelChip(backgroundColor), style]}>
+    <View
+      style={[
+        levelChip(backgroundColor),
+        !!borderColor && border(borderColor),
+        style,
+      ]}>
       <AppText variant="label" style={levelText(textColor)}>
         <FormattedMessage id={`membership_level_${currentLevel.level}`} />
       </AppText>

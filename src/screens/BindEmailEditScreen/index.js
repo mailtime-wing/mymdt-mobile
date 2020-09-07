@@ -21,11 +21,12 @@ import {
   TitleContainer,
   titleText,
   removeText,
+  addEmailButton,
 } from './style';
 
 import ModalContainer from '@/components/ModalContainer';
 import SpecialListOption from '@/components/SpecialListOption';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import Switch from '@/components/Switch';
 import EditButton from '@/components/EditButton';
 import CancelButton from '@/components/CancelButton';
@@ -221,14 +222,21 @@ const BindEmailEditScreen = ({navigation}) => {
         ))}
       </Container>
       <ButtonContainer>
-        <ThemeButton
+        <AppButton
           onPress={() =>
             navigation.navigate('emails_binding', {navigateFromEdit: true})
           }
-          medium
-          width="auto">
-          <FormattedMessage id="add_email_account" defaultMessage="ADD EMAIL" />
-        </ThemeButton>
+          text={
+            <FormattedMessage
+              id="add_email_account"
+              defaultMessage="ADD EMAIL"
+            />
+          }
+          variant="filled"
+          sizeVariant="normal"
+          colorVariant="secondary"
+          style={addEmailButton}
+        />
       </ButtonContainer>
       {state.isUnbinding && (
         <PopupModal

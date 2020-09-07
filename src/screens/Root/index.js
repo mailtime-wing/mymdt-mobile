@@ -8,6 +8,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from 'emotion-theming';
+import {css} from '@emotion/native';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import OfferSelectScreen from '@/screens/OfferSelectScreen';
@@ -49,7 +50,7 @@ import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
 
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
-import BackButton from '@/components/BackButton';
+import BackAppButton from '@/components/BackAppButton';
 import CloseIconButton from '@/components/CloseIconButton';
 import BackIconButton from '@/components/BackIconButton';
 import {APP_BAR_HEIGHT} from '@/constants/layout';
@@ -244,15 +245,23 @@ const screenUnderModalOptions = {
 const Setting = ({navigation}) => {
   const theme = useTheme();
 
-  const settingCardStyle = {
-    ...screenUnderModalOptions.cardStyle,
-    backgroundColor: theme.colors.background1,
-  };
+  const settingCardStyle = [
+    css`
+      ${theme.colors.elevatedBackground1}
+    `,
+    {
+      ...screenUnderModalOptions.cardStyle,
+    },
+  ];
 
-  const settingHeaderStyle = {
-    ...screenUnderModalOptions.headerStyle,
-    backgroundColor: theme.colors.background1,
-  };
+  const settingHeaderStyle = [
+    css`
+      ${theme.colors.elevatedBackground1}
+    `,
+    {
+      ...screenUnderModalOptions.headerStyle,
+    },
+  ];
 
   return (
     <SettingStack.Navigator
@@ -284,6 +293,7 @@ const Main = () => {
   const headerStyle = {
     ...styles.header,
     height: top + APP_BAR_HEIGHT,
+    backgroundColor: theme.colors.background1,
   };
 
   const cardStyle = {
@@ -312,7 +322,7 @@ const Main = () => {
             {...screenProps}
             options={{
               headerLeft: props =>
-                appBarShown === false ? null : <BackButton {...props} />,
+                appBarShown === false ? null : <BackAppButton {...props} />,
               headerStyle: {
                 ...headerStyle,
                 ...(appBarShown === false && {height: top}),
@@ -332,7 +342,9 @@ const Main = () => {
                   {...screenProps}
                   options={{
                     headerLeft: props =>
-                      appBarShown === false ? null : <BackButton {...props} />,
+                      appBarShown === false ? null : (
+                        <BackAppButton {...props} />
+                      ),
                     headerStyle: {
                       ...headerStyle,
                       ...(appBarShown === false && {height: top}),
@@ -350,7 +362,7 @@ const Main = () => {
               name={name}
               {...screenProps}
               options={{
-                headerLeft: BackButton,
+                headerLeft: BackAppButton,
                 ...options,
               }}
             />

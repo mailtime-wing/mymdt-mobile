@@ -23,10 +23,10 @@ import {
   MEASURABLE_DATA_TOKEN,
 } from '@/constants/currency';
 
-import ConvertIcon from '@/assets/convert.svg';
-import RedeemGiftIcon from '@/assets/redeem_gift.svg';
-import WithdrawalIcon from '@/assets/withdrawal.svg';
-import MdtGiftCodeIcon from '@/assets/mdt_gift_code.svg';
+import ConvertIcon from '@/assets/convert_icon.svg';
+import GiftIcon from '@/assets/gift_icon.svg';
+import WithdrawalIcon from '@/assets/withdraw_icon.svg';
+import MyMdtIcon from '@/assets/mymdt_icon.svg';
 
 const styleFlexEnd = {
   justifyContent: 'flex-end',
@@ -77,6 +77,7 @@ const WalletScreen = ({navigation}) => {
     borderColor: theme.colors.secondary.border,
     cardNameColor: theme.colors.nameOnMrpCard,
     cardBackgroundColor: theme.colors.mrpCard,
+    buttonsStyle: theme.colors.elevatedThemeBackground.mrp,
   };
 
   const mdtTheme = {
@@ -85,6 +86,7 @@ const WalletScreen = ({navigation}) => {
     borderColor: theme.colors.primary.border,
     cardNameColor: theme.colors.nameOnMdtCard,
     cardBackgroundColor: theme.colors.mdtCard,
+    buttonsStyle: theme.colors.elevatedThemeBackground.mdt,
   };
 
   const cardList = [
@@ -111,10 +113,12 @@ const WalletScreen = ({navigation}) => {
           id: 'converter',
           from: MEASURABLE_REWARD_POINT,
           to: MEASURABLE_DATA_TOKEN,
-          icon: <ConvertIcon fill={mrpTheme.color} />,
+          icon: ConvertIcon,
+          color: mrpTheme.color,
         },
-        {name: 'redeem gift', icon: <RedeemGiftIcon fill={mrpTheme.color} />},
+        {name: 'redeem gift', icon: GiftIcon, color: mrpTheme.color},
       ],
+      buttonsStyle: mrpTheme.buttonsStyle,
     },
     {
       type: MEASURABLE_DATA_TOKEN,
@@ -144,16 +148,18 @@ const WalletScreen = ({navigation}) => {
           id: 'converter',
           from: MEASURABLE_DATA_TOKEN,
           to: MEASURABLE_REWARD_POINT,
-          icon: <ConvertIcon fill={mdtTheme.color} />,
+          icon: ConvertIcon,
+          color: mdtTheme.color,
         },
         {
           name: 'withdrawal',
           id: 'withdrawal',
-          icon: <WithdrawalIcon fill={mdtTheme.color} />,
+          icon: WithdrawalIcon,
+          color: mdtTheme.color,
         },
-
-        {name: 'gift code', icon: <MdtGiftCodeIcon fill={mdtTheme.color} />},
+        {name: 'gift code', icon: MyMdtIcon, color: mdtTheme.color},
       ],
+      buttonsStyle: mdtTheme.buttonsStyle,
     },
   ];
 
@@ -163,7 +169,7 @@ const WalletScreen = ({navigation}) => {
     transaction =>
       (transaction = {
         ...transaction,
-        icon: <ConvertIcon fill={currentCard.theme.color} />,
+        icon: ConvertIcon,
       }),
   );
   const pageInfo = currentCardData?.transactions.pageInfo;
@@ -259,6 +265,7 @@ const WalletScreen = ({navigation}) => {
             />
             <ActionButtons
               actionList={currentCard.actionList}
+              buttonsStyle={currentCard.buttonsStyle}
               color={currentCard.theme.color}
               navigation={navigation}
             />

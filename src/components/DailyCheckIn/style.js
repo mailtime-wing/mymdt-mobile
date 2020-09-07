@@ -1,4 +1,4 @@
-import styled from '@emotion/native';
+import styled, {css} from '@emotion/native';
 import {Platform} from 'react-native';
 import TitleText from '@/components/TitleText';
 import Text from '@/components/AppText';
@@ -39,4 +39,9 @@ export const MarginTop = styled.View`
 
 export const MarginLeft = styled.View`
   margin-left: 24px;
+`;
+
+export const checkInButton = css`
+  width: 30%;
+  align-self: center;
 `;

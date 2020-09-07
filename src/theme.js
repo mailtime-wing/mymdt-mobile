@@ -16,7 +16,10 @@ export const darkTheme = {
     mdtCard: 'rgba(159, 189, 233, 0.24)',
     mrpCardValue: 'rgba(255, 255, 255, 0.87)',
     mdtCardValue: 'rgba(255, 255, 255, 0.87)',
-    textOnError: ['#FF7171', 'rgba(255, 113, 113, 0.16)'],
+    textOnError: [
+      '#FF7171',
+      'rgba(255, 113, 113, 0.7), rgba(255, 113, 113, 0.16)',
+    ],
     textOnBackground: [
       'rgba(255, 255, 255, 0.87)',
       'rgba(255, 255, 255, 0.6)',
@@ -39,13 +42,21 @@ export const darkTheme = {
       'background-color: #2C2C2C;',
       'background-color: #363636;',
     ],
+    elevatedThemeBackground: [
+      'background-color: #232323;',
+      'background-color: #232323;',
+    ],
     inputFocusBackground: 'rgba(159, 189, 233, 0.2)',
     errorBackground: 'rgba(255, 113, 113, 0.2)',
     themeBackground: '#121212',
 
     // membership
     membership: {
-      basic: ['#121212', 'rgba(255, 255, 255, 0.87)'],
+      basic: [
+        '#121212',
+        'rgba(255, 255, 255, 0.87)',
+        'rgba(255, 255, 255, 0.08)',
+      ],
       silver: ['#A4A4A4', '#121212'],
       gold: ['#CEBE85', '#121212'],
       platinum: ['#ADB8CF', '#121212'],
@@ -66,6 +77,8 @@ export const darkTheme = {
 
     linearGradientBackground: ['#121212', '#121212'],
     tabScreenStatusBar: '#121212',
+
+    system_theme: '#121212',
 
     alert: '#FFD542',
   },
@@ -94,7 +107,11 @@ export const lightTheme = {
     mdtCard: '#0363EF',
     mrpCardValue: '#FFFFFF',
     mdtCardValue: '#FFFFFF',
-    textOnError: ['#D81010', 'rgba(216, 16, 16, 0.6)'],
+    textOnError: [
+      '#D81010',
+      'rgba(216, 16, 16, 0.6)',
+      'rgba(216, 16, 16, 0.1)',
+    ],
     textOnBackground: [
       'rgba(0, 0, 0, 0.8)',
       'rgba(0, 0, 0, 0.6)',
@@ -110,13 +127,17 @@ export const lightTheme = {
       'background-color: #FFFFFF; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);',
       'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);',
     ],
+    elevatedThemeBackground: [
+      'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(11, 142, 157, 0.1);',
+      'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(3, 99, 239, 0.1);',
+    ],
     inputFocusBackground: 'rgba(3, 99, 239, 0.05)',
     errorBackground: 'rgba(216, 16, 16, 0.1)',
     themeBackground: '#21CEDB',
 
     // membership
     membership: {
-      basic: ['#000000', '#FFFFFF'],
+      basic: ['#000000', '#FFFFFF', '#000000'],
       silver: ['#EAEAEA', '#707070'],
       gold: ['#FFDC22', '#8F722E'],
       platinum: ['#DFE3EB', '#466C8E'],
@@ -137,6 +158,8 @@ export const lightTheme = {
 
     linearGradientBackground: ['#FDFBF2', '#E2FAFF'],
     tabScreenStatusBar: '#FDFBF2',
+
+    system_theme: '#F4F4F4',
 
     alert: '#FFD542',
   },
@@ -162,6 +185,7 @@ lightTheme.colors.secondary.border = lightTheme.colors.secondary[3];
 // text
 lightTheme.colors.textOnError.normal = lightTheme.colors.textOnError[0];
 lightTheme.colors.textOnError.light = lightTheme.colors.textOnError[1];
+lightTheme.colors.textOnError.superLight = lightTheme.colors.textOnError[2];
 
 lightTheme.colors.textOnBackground.highEmphasis =
   lightTheme.colors.textOnBackground[0];
@@ -182,11 +206,17 @@ lightTheme.colors.elevatedBackground1 = lightTheme.colors.elevatedBackground[0];
 lightTheme.colors.elevatedBackground2 = lightTheme.colors.elevatedBackground[1];
 lightTheme.colors.elevatedBackground3 = lightTheme.colors.elevatedBackground[2];
 lightTheme.colors.elevatedBackground4 = lightTheme.colors.elevatedBackground[3];
+lightTheme.colors.elevatedThemeBackground.mrp =
+  lightTheme.colors.elevatedThemeBackground[0];
+lightTheme.colors.elevatedThemeBackground.mdt =
+  lightTheme.colors.elevatedThemeBackground[1];
 
 // membership
 lightTheme.colors.membership.basic.background =
   lightTheme.colors.membership.basic[0];
 lightTheme.colors.membership.basic.text = lightTheme.colors.membership.basic[1];
+lightTheme.colors.membership.basic.border =
+  lightTheme.colors.membership.basic[2];
 lightTheme.colors.membership.silver.background =
   lightTheme.colors.membership.silver[0];
 lightTheme.colors.membership.silver.text =
@@ -288,6 +318,7 @@ darkTheme.colors.secondary.border = darkTheme.colors.secondary[3];
 // text
 darkTheme.colors.textOnError.normal = darkTheme.colors.textOnError[0];
 darkTheme.colors.textOnError.light = darkTheme.colors.textOnError[1];
+darkTheme.colors.textOnError.superLight = darkTheme.colors.textOnError[2];
 
 darkTheme.colors.textOnBackground.highEmphasis =
   darkTheme.colors.textOnBackground[0];
@@ -308,11 +339,16 @@ darkTheme.colors.elevatedBackground1 = darkTheme.colors.elevatedBackground[0];
 darkTheme.colors.elevatedBackground2 = darkTheme.colors.elevatedBackground[1];
 darkTheme.colors.elevatedBackground3 = darkTheme.colors.elevatedBackground[2];
 darkTheme.colors.elevatedBackground4 = darkTheme.colors.elevatedBackground[3];
+darkTheme.colors.elevatedThemeBackground.mrp =
+  darkTheme.colors.elevatedThemeBackground[0];
+darkTheme.colors.elevatedThemeBackground.mdt =
+  darkTheme.colors.elevatedThemeBackground[1];
 
 // membership
 darkTheme.colors.membership.basic.background =
   darkTheme.colors.membership.basic[0];
 darkTheme.colors.membership.basic.text = darkTheme.colors.membership.basic[1];
+darkTheme.colors.membership.basic.border = darkTheme.colors.membership.basic[2];
 darkTheme.colors.membership.silver.background =
   darkTheme.colors.membership.silver[0];
 darkTheme.colors.membership.silver.text = darkTheme.colors.membership.silver[1];

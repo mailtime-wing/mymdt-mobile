@@ -1,7 +1,4 @@
-import styled from '@emotion/native';
-import {Platform} from 'react-native';
-import Text from '@/components/AppText';
-import TitleText from '@/components/TitleText';
+import styled, {css} from '@emotion/native';
 
 export const Container = styled.View`
   padding-left: 24px;
@@ -16,12 +13,14 @@ export const HeaderContainer = styled.View`
   align-items: center;
 `;
 
-export const HeaderText = styled(Text)`
-  font-weight: bold;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
+export const title = theme => css`
+  color: ${theme.colors.secondary.normal};
+  margin-bottom: 24px;
+  margin-left: 24px;
+`;
+
+export const headerStyle = theme => css`
+  color: ${theme.colors.textOnBackground.disabled};
 `;
 
 export const CustomeSwitch = styled.Switch`
@@ -33,39 +32,21 @@ export const MarginTop = styled.View`
   ${props => `margin-top: ${props.value || 8}px;`}
 `;
 
-export const EmailText = styled(Text)`
-  font-size: 16px;
-  line-height: 16px;
-  letter-spacing: 0.75px;
+export const emailStyle = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
-export const UnbindButton = styled.TouchableOpacity`
-  border: 1px solid ${props => props.theme.colors.errorBackground};
-  border-radius: 20px;
-  padding: 6px 8px;
-  height: auto;
+export const unbindButtonContainer = css`
+  width: auto;
 `;
 
-export const UnbindText = styled.Text`
-  font-size: 14px;
-  line-height: 17px;
-  font-weight: bold;
-  color: ${props => props.theme.colors.textOnError.normal};
-  text-transform: uppercase;
-`;
-
-export const DetailText = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
+export const detailStyle = theme => css`
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   margin-bottom: 24px;
 `;
 
-export const NoEmailText = styled(TitleText)`
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
-  color: ${props => props.theme.colors.textOnBackground.disabled};
+export const noEmailStyle = theme => css`
+  color: ${theme.colors.textOnBackground.disabled};
   margin-top: 24px;
   margin-bottom: 16px;
   text-align: center;
@@ -92,13 +73,4 @@ export const ButtonContainer = styled.TouchableOpacity`
   flex-direction: row;
   width: auto;
   align-self: center;
-`;
-
-export const ButtonText = styled(Text)`
-  color: ${props => props.theme.colors.background1};
-  font-size: 14px;
-  line-height: 17px;
-  text-transform: uppercase;
-  ${Platform.OS === 'ios' && 'font-weight: bold;'};
-  margin-left: 8px;
 `;

@@ -1,24 +1,26 @@
 import React, {useEffect, useReducer} from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import CarrierInfo from 'react-native-carrier-info';
 import {FormattedMessage} from 'react-intl';
-
+import {useTheme} from 'emotion-theming';
 import {Formik, useFormikContext} from 'formik';
 import useCountDownTimer from '@/hooks/timer';
 
 import Input from '@/components/AppInput';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
+import AppText from '@/components/AppText2';
 
 import {
   Container,
-  Title,
   VerificationContainer,
-  LoginAndAgree,
   Error,
   PhoneSectionContainer,
   PhonePrefixContainer,
   PhoneContainer,
   VerificationCodeContainer,
+  sendButtonContainer,
+  titleStyle,
+  termsStyle,
 } from './style';
 import countryCodeData from '@/constants/countryCode';
 
@@ -108,29 +110,39 @@ const InternalLoginForm = ({submitButtonText, onSendPress}) => {
             name="verificationCode"
           />
         </VerificationCodeContainer>
-        <ThemeButton
-          medium
+        <AppButton
+          onPress={handleSendPress}
+          text={
+            <>
+              {state.sendCount > 0 ? (
+                <FormattedMessage
+                  id="resend_verification_code"
+                  defaultMessage="SEND"
+                />
+              ) : (
+                <FormattedMessage
+                  id="send_verification_code"
+                  defaultMessage="RESEND"
+                />
+              )}
+              {isTimerStarted && ' ' + timeLeft}
+            </>
+          }
           disabled={isTimerStarted || !!errors.phone}
-          onPress={handleSendPress}>
-          <Text>
-            {state.sendCount > 0 ? (
-              <FormattedMessage
-                id="resend_verification_code"
-                defaultMessage="SEND"
-              />
-            ) : (
-              <FormattedMessage
-                id="send_verification_code"
-                defaultMessage="RESEND"
-              />
-            )}
-            {isTimerStarted && ' ' + timeLeft}
-          </Text>
-        </ThemeButton>
+          variant="filled"
+          sizeVariant="normal"
+          colorVariant="secondary"
+          style={sendButtonContainer}
+        />
       </VerificationContainer>
-      <ThemeButton onPress={handleSubmit} disabled={!isValid}>
-        {submitButtonText}
-      </ThemeButton>
+      <AppButton
+        onPress={handleSubmit}
+        text={submitButtonText}
+        disabled={!isValid}
+        variant="filled"
+        sizeVariant="large"
+        colorVariant="secondary"
+      />
     </View>
   );
 };
@@ -174,9 +186,15 @@ const LoginForm = ({
   onSendPress,
   onSubmit,
 }) => {
+  const theme = useTheme();
+
   return (
     <Container>
-      {title && <Title>{title}</Title>}
+      {title && (
+        <AppText variant="pageTitle" style={titleStyle(theme)}>
+          {title}
+        </AppText>
+      )}
       <Formik
         initialValues={{
           phone: '',
@@ -190,7 +208,11 @@ const LoginForm = ({
           onSendPress={onSendPress}
         />
       </Formik>
-      {description && <LoginAndAgree>{description}</LoginAndAgree>}
+      {description && (
+        <AppText variant="caption" style={termsStyle(theme)}>
+          {description}
+        </AppText>
+      )}
     </Container>
   );
 };

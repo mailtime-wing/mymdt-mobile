@@ -26,6 +26,7 @@ export const icon = (sizeVariant, color) => css`
   ${`
     fill: ${color};
     stroke: ${color};
+    stroke-width: 2px;
   `}
   ${sizeVariant === 'small' &&
     `

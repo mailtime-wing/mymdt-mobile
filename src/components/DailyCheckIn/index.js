@@ -13,11 +13,12 @@ import {
   ConvertedText,
   MarginTop,
   MarginLeft,
+  checkInButton,
 } from './style';
 
 import MRPCoin from '@/components/MRPCoin';
 import MRPGiftBox from '@/components/MRPGiftBox';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
 import PopupModal from '@/components/PopupModal';
 import DayList from './DayList';
@@ -94,17 +95,21 @@ const DailyCheckIn = ({converted}) => {
         />
         <MarginLeft />
       </HorizontalScrollContainer>
-      <ThemeButton
-        medium
-        width="auto"
+      <AppButton
+        onPress={handleCheckInPress}
+        text={
+          checkedInToday ? (
+            <FormattedMessage id="checked_in" defaultMessage="Checked in" />
+          ) : (
+            <FormattedMessage id="check_in" defaultMessage="Check in" />
+          )
+        }
         disabled={checkedInToday}
-        onPress={handleCheckInPress}>
-        {checkedInToday ? (
-          <FormattedMessage id="checked_in" defaultMessage="Checked in" />
-        ) : (
-          <FormattedMessage id="check_in" defaultMessage="Check in" />
-        )}
-      </ThemeButton>
+        variant="filled"
+        sizeVariant="normal"
+        colorVariant="secondary"
+        style={checkInButton}
+      />
       {checkInData && (
         <PopupModalWithLinearGradient callback={refetch}>
           <MRPGiftBox style={giftBoxStyle} />

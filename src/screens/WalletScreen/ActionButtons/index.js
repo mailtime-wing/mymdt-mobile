@@ -1,23 +1,39 @@
 import React from 'react';
+import {TouchableOpacity} from 'react-native';
+import {css} from '@emotion/native';
+import {useTheme} from 'emotion-theming';
+import AppIcon from '@/components/AppIcon';
 
-import {ButtonsContainer, ButtonContainer, ButtonText} from './style';
+import {ButtonsContainer, ButtonText, buttonContainer} from './style';
 
-const ActionButtons = ({actionList, color, navigation}) => {
+const ActionButtons = ({actionList, color, buttonsStyle, navigation}) => {
+  const theme = useTheme();
   return (
     <ButtonsContainer>
       {actionList.length > 0 &&
         actionList.map((action, index) => (
-          <ButtonContainer
+          <TouchableOpacity
             key={index}
             onPress={() =>
               navigation.navigate(action.id, {
                 from: action.from,
                 to: action.to,
               })
-            }>
-            {action.icon}
+            }
+            style={[
+              css`
+                ${buttonsStyle}
+              `,
+              buttonContainer,
+            ]}>
+            <AppIcon
+              color={theme.colors.background1}
+              backgroundColor={color}
+              sizeVariant="small"
+              svgIcon={action.icon}
+            />
             <ButtonText color={color}>{action.name}</ButtonText>
-          </ButtonContainer>
+          </TouchableOpacity>
         ))}
     </ButtonsContainer>
   );

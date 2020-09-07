@@ -5,7 +5,7 @@ import {FormattedMessage} from 'react-intl';
 import {AuthContext, MEASURABLE_REWARD_POINT} from '@/context/auth';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import MDTGiftBox from '@/components/MDTGiftBox';
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
 
 import {
@@ -19,6 +19,7 @@ import {
   RewardAmount,
   TextContainer,
   ContinueButton,
+  buttonContainer,
 } from './style';
 
 const AnimatedText = props => {
@@ -150,9 +151,14 @@ const SignUpRewardScreen = ({route}) => {
       </Container>
       <ContinueButton>
         {isOpened && (
-          <ThemeButton onPress={handleContinuePress} width="90%">
-            <FormattedMessage id="continue" default="continue" />
-          </ThemeButton>
+          <AppButton
+            onPress={handleContinuePress}
+            text={<FormattedMessage id="continue" default="continue" />}
+            variant="filled"
+            sizeVariant="large"
+            colorVariant="secondary"
+            style={buttonContainer}
+          />
         )}
       </ContinueButton>
     </LinearGradientBackground>
