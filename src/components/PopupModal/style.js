@@ -1,31 +1,13 @@
-import styled from '@emotion/native';
-import {Platform} from 'react-native';
-import Text from '@/components/AppText';
-import TitleText from '@/components/TitleText';
+import styled, {css} from '@emotion/native';
 
-export const Title = styled(TitleText)`
-  color: ${props => props.theme.colors.contrastColor};
-  font-size: 24px;
-  line-height: 29px;
-  ${Platform.OS === 'ios' && 'font-weight: bold;'}
+export const titleStyle = theme => css`
+  color: ${theme.colors.contrastColor};
 `;
 
-export const Detail = styled(Text)`
-  color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
-  font-size: 16px;
-  line-height: 24px;
+export const detailStyle = theme => css`
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   margin-top: 8px;
   margin-bottom: 24px;
-`;
-
-export const ModalView = styled.View`
-  height: auto;
-  width: 90%;
-  justify-content: center;
-  background-color: ${props => props.theme.colors.background1};
-  box-shadow: 0px 4px 10px ${props => props.theme.colors.borderColor};
-  border-radius: 24px;
-  padding: 24px;
 `;
 
 export const CenteredView = styled.View`
@@ -35,14 +17,18 @@ export const CenteredView = styled.View`
   background-color: #00000044;
 `;
 
-export const Modal = styled.Modal``;
-
-export const ButtonContainer = styled.View`
+export const buttonsContainer = css`
   flex-direction: row;
-  justify-items: space-between;
   align-self: center;
 `;
 
-export const MarginContainer = styled.View`
+export const marginRight = css`
   margin-right: 8px;
+`;
+
+export const modalView = css`
+  width: 90%;
+  justify-content: center;
+  border-radius: 24px;
+  padding: 24px;
 `;

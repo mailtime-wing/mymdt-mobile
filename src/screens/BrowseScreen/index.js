@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {View, ScrollView} from 'react-native';
 import {NotificationContext} from '@/context/notification';
 import {useTheme} from 'emotion-theming';
@@ -8,6 +8,9 @@ import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import AppButton from '@/components/AppButton';
 import AppIcon from '@/components/AppIcon';
+import PopupModal from '@/components/PopupModal';
+import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
+import MRPGiftBox from '@/components/MRPGiftBox';
 
 import HomeIcon from '@/assets/home.svg';
 import HeartIcon from '@/assets/heart_icon.svg';
@@ -36,6 +39,8 @@ const testStyle = {
 
 const BrowseScreen = ({...props}) => {
   const theme = useTheme();
+  const [show, setShow] = useState(false);
+  const [showLinearGradient, setShowLinearGradient] = useState(false);
   const {notify} = useContext(NotificationContext);
   useEffect(() => {
     notify(details);
@@ -98,7 +103,6 @@ const BrowseScreen = ({...props}) => {
                 colorVariant="secondary"
                 svgIcon={HomeIcon}
                 style={marginForTest}
-                // disabled={true}
               />
               <AppButton
                 variant="filled"
@@ -107,6 +111,7 @@ const BrowseScreen = ({...props}) => {
                 colorVariant="alert"
                 svgIcon={HomeIcon}
                 style={marginForTest}
+                onPress={() => setShow(true)}
               />
               <AppButton
                 variant="filled"
@@ -115,6 +120,7 @@ const BrowseScreen = ({...props}) => {
                 colorVariant="contrast"
                 svgIcon={HomeIcon}
                 style={marginForTest}
+                onPress={() => setShowLinearGradient(true)}
               />
               <AppButton
                 variant="filled"
@@ -207,6 +213,19 @@ const BrowseScreen = ({...props}) => {
                 svgIcon={HomeIcon}
                 style={marginForTest}
               />
+              {show && (
+                <PopupModal
+                  title="Test"
+                  detail="This is Pop Up Modal"
+                  callback={() => setShow(false)}
+                />
+              )}
+              {showLinearGradient && (
+                <PopupModalWithLinearGradient
+                  callback={() => setShowLinearGradient(false)}>
+                  {<MRPGiftBox />}
+                </PopupModalWithLinearGradient>
+              )}
             </View>
           </>
         }
