@@ -98,15 +98,7 @@ const BrowseScreen = ({...props}) => {
               />
               <AppButton
                 variant="filled"
-                text="Large Filled Alert"
-                sizeVariant="large"
-                colorVariant="secondary"
-                svgIcon={HomeIcon}
-                style={marginForTest}
-              />
-              <AppButton
-                variant="filled"
-                text="Large Filled Alert"
+                text="Click to open pop up"
                 sizeVariant="large"
                 colorVariant="alert"
                 svgIcon={HomeIcon}
@@ -115,7 +107,7 @@ const BrowseScreen = ({...props}) => {
               />
               <AppButton
                 variant="filled"
-                text="Large Filled Contrast"
+                text="Click to get reward"
                 sizeVariant="large"
                 colorVariant="contrast"
                 svgIcon={HomeIcon}

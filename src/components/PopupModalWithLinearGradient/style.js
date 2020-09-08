@@ -1,12 +1,4 @@
-import styled from '@emotion/native';
-
-export const ModalView = styled.View`
-  flex: 1;
-  width: 90%;
-  justify-content: center;
-  box-shadow: 0px 4px 10px ${props => props.theme.colors.borderColor};
-  border-radius: 24px;
-`;
+import styled, {css} from '@emotion/native';
 
 export const CenteredView = styled.View`
   flex: 1;
@@ -15,8 +7,22 @@ export const CenteredView = styled.View`
   background-color: #00000044;
 `;
 
-export const Modal = styled.Modal``;
+export const modalView = css`
+  width: 90%;
+  border-radius: 24px;
+`;
 
-export const Container = styled.View`
-  padding: 24px 48px;
+export const button = css`
+  margin-top: 16px;
+  align-self: center;
+`;
+
+export const linearGradientStyle = css`
+  padding: 24px 40px;
+  border-radius: 24px;
+  align-items: center;
+`;
+
+export const container = css`
+  padding: 24px 40px;
 `;

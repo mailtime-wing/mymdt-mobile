@@ -8,10 +8,12 @@ export const BoxBody = styled.Image`
   bottom: -20;
 `;
 
-export const Container = styled.View``;
+export const Container = styled.View`
+  padding: 24px;
+`;
 
 export const Circle = styled.View`
-  background-color: ${props => props.theme.colors.background1};
+  background-color: ${props => props.theme.colors.rewardCircleBackground};
   width: 300px;
   height: 300px;
   border-radius: 150px;
