@@ -44,7 +44,7 @@ const Input = ({
         style={labelStyle(theme, isFocus, isError)}
         numberOfLines={1}
         ellipsizeMode="clip">
-        {label}
+        {label ? label : ' '}
         {required && '*'}
       </AppText>
       <TextInputContainer
