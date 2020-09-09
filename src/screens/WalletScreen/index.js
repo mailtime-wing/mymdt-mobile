@@ -25,7 +25,7 @@ import {
 
 import ConvertIcon from '@/assets/convert_icon.svg';
 import GiftIcon from '@/assets/gift_icon.svg';
-import WithdrawalIcon from '@/assets/withdraw_icon.svg';
+// import WithdrawalIcon from '@/assets/withdraw_icon.svg';
 import MyMdtIcon from '@/assets/mymdt_icon.svg';
 
 const styleFlexEnd = {
@@ -151,12 +151,12 @@ const WalletScreen = ({navigation}) => {
           icon: ConvertIcon,
           color: mdtTheme.color,
         },
-        {
-          name: 'withdrawal',
-          id: 'withdrawal',
-          icon: WithdrawalIcon,
-          color: mdtTheme.color,
-        },
+        // {
+        //   name: 'withdrawal',
+        //   id: 'withdrawal',
+        //   icon: WithdrawalIcon,
+        //   color: mdtTheme.color,
+        // },
         {name: 'gift code', icon: MyMdtIcon, color: mdtTheme.color},
       ],
       buttonsStyle: mdtTheme.buttonsStyle,
