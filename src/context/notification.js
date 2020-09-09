@@ -106,8 +106,15 @@ export const NotificationProvider = ({children}) => {
   );
 
   useEffect(() => {
-    checkPermissions();
-  }, [checkPermissions]);
+    const initPermissions = async () => {
+      const permissions = await checkPermissions();
+      if (permissions.alert) {
+        request();
+      }
+    };
+
+    initPermissions();
+  }, [checkPermissions, request]);
 
   useEffect(() => {
     const handler = deviceToken => {
