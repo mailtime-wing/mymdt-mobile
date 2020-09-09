@@ -1,26 +1,37 @@
 import React, {useState} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import {FormattedMessage} from 'react-intl';
 
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import ModalContainer from '@/components/ModalContainer';
 import ListOption from '@/components/ListOption';
 import SpecialListOption from '@/components/SpecialListOption';
 import Switch from '@/components/Switch';
+import {GET_USER_SECURITY_SETTINGS} from '@/api/data';
 
 import {Container} from './style';
 
 const AccountSecurityScreen = ({navigation}) => {
-  const [isPinToggled, setIsPinToggled] = useState(false); // from api later
   const [isFaceIdToggled, setIsFaceIdToggled] = useState(false); // from api later
+  const {data, refetch} = useQueryWithAuth(GET_USER_SECURITY_SETTINGS, {
+    fetchPolicy: 'network-only',
+  });
+  const isPinSet = data?.userProfile?.isPasscodeSet;
+
+  useFocusEffect(() => {
+    refetch();
+  }, [navigation]);
+
+  const handleSetPinToggle = async () => {
+    if (!isPinSet) {
+      navigation.navigate('setup_pin');
+    }
+  };
 
   const switchOptions = [
     {
       label: <FormattedMessage id="pin" />,
-      value: (
-        <Switch
-          value={isPinToggled}
-          onChange={() => setIsPinToggled(!isPinToggled)}
-        />
-      ),
+      value: <Switch value={isPinSet} onChange={handleSetPinToggle} />,
     },
     {
       label: <FormattedMessage id="face_id_or_touch_id" />,
@@ -53,7 +64,7 @@ const AccountSecurityScreen = ({navigation}) => {
       <Container>
         {switchOptions.map(row => (
           <SpecialListOption
-            key={row.value}
+            key={row.label}
             label={row.label}
             value={row.value}
           />
