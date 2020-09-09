@@ -82,7 +82,6 @@ export const SetupFlowProvider = ({children}) => {
       result.linked_cards = true;
     }
     if (
-      setupStatus?.isDataSourceBound &&
       setupStatus?.isCashbackCurrencyCodeSet &&
       setupStatus?.isBasicOfferSet
     ) {
