@@ -6,5 +6,5 @@ export const container = css`
 
 export const titleStyle = theme => css`
   color: ${theme.colors.secondary.normal};
-  padding-left: 24px;
+  padding-horizontal: 24px;
 `;
