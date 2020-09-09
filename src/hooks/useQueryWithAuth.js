@@ -24,6 +24,7 @@ export default function useQueryWithAuth(query, options = {}) {
       },
       ..._context,
     },
+    skip: !authToken,
     ..._options,
   });
 }
