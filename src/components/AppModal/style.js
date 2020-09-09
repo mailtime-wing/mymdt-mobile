@@ -8,7 +8,7 @@ export const centered = css`
   padding-horizontal: 24px;
 `;
 
-export const modalContainer = theme => css`
+export const modalBody = theme => css`
   width: 100%;
   justify-content: center;
   background-color: ${theme.colors.background1};

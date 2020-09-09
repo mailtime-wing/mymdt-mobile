@@ -36,7 +36,7 @@ const PopupModal = ({
   return (
     <AppModal
       transparent
-      style={[
+      modalBodyStyle={[
         css`
           ${theme.colors.elevatedBackground4}
         `,

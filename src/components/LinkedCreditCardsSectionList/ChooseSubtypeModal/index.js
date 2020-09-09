@@ -61,7 +61,7 @@ const subtypes = [
 const ChooseSubtypeModal = ({mask, onSelect, onClosePress, ...props}) => {
   const theme = useTheme();
   return (
-    <AppModal transparent style={modalPadding} {...props}>
+    <AppModal transparent modalBodyStyle={modalPadding} {...props}>
       <View style={modalHeader}>
         <AppText variant="heading3" style={modalHeading(theme)}>
           <FormattedMessage
