@@ -4,12 +4,12 @@ import {useTheme} from 'emotion-theming';
 
 import {centered, modalContainer} from './style';
 
-const AppModal = ({children, ...props}) => {
+const AppModal = ({children, style, ...props}) => {
   const theme = useTheme();
   return (
     <Modal transparent {...props}>
       <View style={centered}>
-        <View style={modalContainer(theme)}>{children}</View>
+        <View style={[modalContainer(theme), style]}>{children}</View>
       </View>
     </Modal>
   );

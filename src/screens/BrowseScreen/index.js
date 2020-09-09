@@ -205,19 +205,18 @@ const BrowseScreen = ({...props}) => {
                 svgIcon={HomeIcon}
                 style={marginForTest}
               />
-              {show && (
-                <PopupModal
-                  title="Test"
-                  detail="This is Pop Up Modal"
-                  callback={() => setShow(false)}
-                />
-              )}
-              {showLinearGradient && (
-                <PopupModalWithLinearGradient
-                  callback={() => setShowLinearGradient(false)}>
-                  {<MRPGiftBox />}
-                </PopupModalWithLinearGradient>
-              )}
+              <PopupModal
+                visible={show}
+                title="Test"
+                detail="This is Pop Up Modal"
+                callback={() => setShow(false)}
+              />
+
+              <PopupModalWithLinearGradient
+                visible={showLinearGradient}
+                callback={() => setShowLinearGradient(false)}>
+                {<MRPGiftBox />}
+              </PopupModalWithLinearGradient>
             </View>
           </>
         }

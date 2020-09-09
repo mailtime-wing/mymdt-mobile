@@ -136,12 +136,12 @@ const DailyCheckIn = ({converted}) => {
           <MarginTop />
         </PopupModalWithLinearGradient>
       )}
-      {checkInError && (
-        <PopupModal
-          title="Something went wrong!"
-          detail="Please try again later"
-        />
-      )}
+      <PopupModal
+        visible={!!checkInError}
+        title="Something went wrong!"
+        detail="Please try again later"
+        callback={() => refetch()}
+      />
     </Container>
   );
 };

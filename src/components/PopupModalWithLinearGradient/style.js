@@ -1,11 +1,4 @@
-import styled, {css} from '@emotion/native';
-
-export const CenteredView = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: #00000044;
-`;
+import {css} from '@emotion/native';
 
 export const modalView = css`
   width: 90%;
@@ -18,11 +11,11 @@ export const button = css`
 `;
 
 export const linearGradientStyle = css`
-  padding: 24px 40px;
+  padding: 24px;
   border-radius: 24px;
   align-items: center;
 `;
 
-export const container = css`
-  padding: 24px 40px;
+export const modalPadding = css`
+  padding: 24px;
 `;
