@@ -5,7 +5,7 @@ import {
   HeaderStyleInterpolators,
   TransitionPresets,
 } from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, getStateFromPath} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from 'emotion-theming';
 import {css} from '@emotion/native';
@@ -222,6 +222,13 @@ const linking = {
   // e.g. rewardme://secureaccount
   prefixes: ['rewardme://'],
   config: linkingConfig,
+  getStateFromPath(path, config) {
+    // ignore url from bank sync server
+    if (path.startsWith('planto')) {
+      return null;
+    }
+    return getStateFromPath(path, config);
+  },
 };
 
 const SettingStack = createStackNavigator();

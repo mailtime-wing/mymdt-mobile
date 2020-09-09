@@ -3,6 +3,7 @@ import {FormattedMessage} from 'react-intl';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
 import useFetch from '@/hooks/useFetch';
+import bankSyncServerDataAPIType from '@/enum/bankSyncServerDataAPIType';
 
 import {
   SectionList,
@@ -21,7 +22,10 @@ const initialFetchOptions = {
 };
 
 // TODO: support other providers
-const supportedDataAPIType = ['PLAID'];
+const supportedDataAPIType = [
+  bankSyncServerDataAPIType.PLAID,
+  bankSyncServerDataAPIType.PLANTO,
+];
 
 const ChooseRegionScreen = ({onItemPress}) => {
   const [, {data: fetchedData, isError, isLoading}] = useFetch(

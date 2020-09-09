@@ -76,3 +76,7 @@ export const descriptionLineCaption = theme => css`
 export const descriptionLineSeparator = css`
   margin-vertical: 12px;
 `;
+
+export const button = css`
+  align-self: stretch;
+`;

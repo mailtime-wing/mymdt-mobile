@@ -220,5 +220,11 @@
   "AE": "American Express",
   "confirm_to_remove": "Confirm to remove {name}?",
   "you_will_not_get_any_data_rewards_from": "You will not get any data rewards from {name}.",
-  "add_new_card": "Add New Card"
+  "add_new_card": "Add New Card",
+  "we_partner_with_plaid": "We partner with Plaid to securely link your card",
+  "we_partner_with_planto": "We partner with Planto to securely link your card",
+  "secure": "secure",
+  "private": "Private",
+  "transfer_of_your_information": "Transfer of your information is encrypted end-to-end",
+  "your_credentials_will_never_be": "Your credentials will never be made accessible to RewardMe"
 }

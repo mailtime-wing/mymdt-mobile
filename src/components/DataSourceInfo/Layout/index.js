@@ -22,6 +22,7 @@ import {
   descriptionLineTitle,
   descriptionLineCaption,
   descriptionLineSeparator,
+  button,
 } from './style';
 import {FormattedMessage} from 'react-intl';
 
@@ -79,6 +80,7 @@ const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
         ])}
       </View>
       <AppButton
+        style={button}
         onPress={onContinuePress}
         text={<FormattedMessage id="continue" defaultMessage="Continue" />}
         variant="filled"
