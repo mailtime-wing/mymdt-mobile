@@ -26,6 +26,12 @@ export const UPDATE_USER_PROFILE_EDIT_API = gql`
   }
 `;
 
+export const BIND_EMAIL_ACCOUNT_API = gql`
+  mutation BindEmailAccount($email: String!, $token: String!) {
+    bindEmailAccount(emailAddress: $email, token: $token)
+  }
+`;
+
 export const BIND_EMAIL_ACCOUNTS_API = gql`
   mutation BindEmailAccounts($email: String!, $token: String!) {
     bindEmailAccounts(data: {emailAddress: $email, token: $token}) {

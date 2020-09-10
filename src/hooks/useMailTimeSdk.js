@@ -1,9 +1,9 @@
-import {useReducer, useEffect, useContext} from 'react';
+import {useReducer, useEffect} from 'react';
 import Config from 'react-native-config';
 import MailtimeAuth from 'react-native-mailtime-sdk';
-import {useMutation} from '@apollo/react-hooks';
-import {BIND_EMAIL_ACCOUNTS_API} from '@/api/data';
-import {AuthContext} from '@/context/auth';
+
+import {BIND_EMAIL_ACCOUNT_API} from '@/api/data';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 const SDK_LOGIN_READY = 'sdkLoginReady';
 
@@ -47,8 +47,7 @@ const GOOGLE_CALLBACK_SCHEME =
 
 export default () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const {authToken} = useContext(AuthContext);
-  const [bindEmailsRequest] = useMutation(BIND_EMAIL_ACCOUNTS_API);
+  const [bindEmailRequest] = useMutationWithAuth(BIND_EMAIL_ACCOUNT_API);
 
   // setup for mailtime sdk
   // TODO: move to app startup in future
@@ -70,30 +69,26 @@ export default () => {
 
   const login = async emailAddress => {
     try {
-      let sdkToken = '';
       dispatch({type: UPDATE_SDK_STATUS, payload: STATUS_IN_PROCCESS});
-      sdkToken = await MailtimeAuth.login(emailAddress);
+      const sdkToken = await MailtimeAuth.login(emailAddress);
 
-      const {data} = await bindEmailsRequest({
-        context: {
-          headers: {
-            authorization: authToken ? `Bearer ${authToken}` : '',
-          },
-        },
+      const {data} = await bindEmailRequest({
         variables: {
           email: emailAddress,
           token: sdkToken,
         },
       });
 
-      if (data?.bindEmailAccounts?.valids?.length !== 0) {
-        dispatch({
-          type: UPDATE_SDK_STATUS,
-          payload: STATUS_SUCCEEDED,
-        });
-      } else {
+      if (!data?.bindEmailAccount) {
         dispatch({type: UPDATE_SDK_STATUS, payload: STATUS_FAILED});
+        return;
       }
+
+      dispatch({
+        type: UPDATE_SDK_STATUS,
+        payload: STATUS_SUCCEEDED,
+      });
+      return;
     } catch (e) {
       const constants = MailtimeAuth.getConstants();
       switch (e.code) {

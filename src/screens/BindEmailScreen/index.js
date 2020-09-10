@@ -13,6 +13,8 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import ScreenContainer from '@/components/ScreenContainer';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import useMailTimeSdk from '@/hooks/useMailTimeSdk';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import {GET_USER_EMAIL_ACCOUNTS_API} from '@/api/data';
 
 import {scrollContainer, detailStyle, title} from './style';
 
@@ -25,6 +27,14 @@ const BindEmailScreen = ({route, navigation}) => {
     loginSuccess,
     loginFail,
   } = useMailTimeSdk();
+  // TODO: handle error
+  const {data, loading: fetchLoading} = useQueryWithAuth(
+    GET_USER_EMAIL_ACCOUNTS_API,
+    {
+      fetchPolicy: 'network-only',
+    },
+  );
+
   const {navigateByFlow} = useSetupFlow();
   const theme = useTheme();
 
@@ -50,7 +60,7 @@ const BindEmailScreen = ({route, navigation}) => {
     }
   }, [navigation, navigateFromEdit]);
 
-  if (sdkLoading) {
+  if (sdkLoading || fetchLoading) {
     return <LoadingSpinner />;
   }
 
@@ -64,7 +74,7 @@ const BindEmailScreen = ({route, navigation}) => {
     }
 
     const emailRegex = /[^@]+@[^\.]+\..+/;
-    if (!emailRegex.test(values.email)) {
+    if (!errors.email && !emailRegex.test(values.email)) {
       errors.email = (
         <FormattedMessage
           id="please_input_valid_email"
@@ -73,6 +83,19 @@ const BindEmailScreen = ({route, navigation}) => {
       );
     }
 
+    if (
+      !errors.email &&
+      data?.userProfile?.emailAccounts?.some(
+        emailAccount => emailAccount.emailAddress === values.email,
+      )
+    ) {
+      errors.email = (
+        <FormattedMessage
+          id="this_email_is_already_bound"
+          defaultMessage="This email is already bound to an account"
+        />
+      );
+    }
     return errors;
   };
 
