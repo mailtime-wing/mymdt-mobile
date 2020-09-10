@@ -9,11 +9,11 @@ import {LabelText, styles} from './style';
 import BrowseScreen from '@/screens/BrowseScreen';
 import BonusScreen from '@/screens/BonusScreen';
 import WalletScreen from '@/screens/WalletScreen';
-import RedeemScreen from '@/screens/RedeemScreen';
+// import RedeemScreen from '@/screens/RedeemScreen';
 
 import HomeIcon from '@/assets/home.svg';
 import BonusIcon from '@/assets/bonus.svg';
-import RedeemIcon from '@/assets/redeem.svg';
+// import RedeemIcon from '@/assets/redeem.svg';
 import WalletIcon from '@/assets/wallet.svg';
 
 const Tab = createBottomTabNavigator();
@@ -81,6 +81,7 @@ const HomeStack = () => {
           ),
         }}
       />
+      {/* currently disable
       <Tab.Screen
         name="Redeem"
         component={RedeemScreen}
@@ -95,7 +96,7 @@ const HomeStack = () => {
             />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="wallet"
         component={WalletScreen}
