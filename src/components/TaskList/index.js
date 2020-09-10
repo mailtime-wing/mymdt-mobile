@@ -1,9 +1,8 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {Linking} from 'react-native';
 import {FormattedMessage, FormattedDate} from 'react-intl';
-import {useMutation} from '@apollo/react-hooks';
+import useMutationWithReset from '@/hooks/useMutationWithReset';
 import {CLAIM_REWARD_API} from '@/api/data';
-import {AuthContext} from '@/context/auth';
 
 import {
   Container,
@@ -30,17 +29,19 @@ const giftBoxStyle = {
   ],
 };
 
-const TaskList = ({taskList, userRewardList}) => {
+const TaskList = ({taskList, userRewardList, onClaimPress}) => {
   const theme = useTheme();
-  const {authToken} = useContext(AuthContext);
   const [clientError, setClientError] = useState(false);
-  const [claimRewardRequest, {data, error}] = useMutation(CLAIM_REWARD_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-  });
+  const [claimRewardRequest, {data, error}, reset] = useMutationWithReset(
+    CLAIM_REWARD_API,
+    {},
+    {withAuth: true},
+  );
+
+  const handleRewardGotPress = () => {
+    reset();
+    onClaimPress();
+  };
 
   const handleClaimPress = async rewardId => {
     try {
@@ -49,6 +50,7 @@ const TaskList = ({taskList, userRewardList}) => {
           id: rewardId,
         },
       });
+      onClaimPress();
     } catch (e) {
       console.error(e);
     }
@@ -136,12 +138,14 @@ const TaskList = ({taskList, userRewardList}) => {
           </RowContainer>
         );
       })}
-      {data && (
+      {
         // TODO: add reward message after preload the user current currency
-        <PopupModalWithLinearGradient>
+        <PopupModalWithLinearGradient
+          visible={!!data}
+          callback={handleRewardGotPress}>
           <MRPGiftBox style={giftBoxStyle} />
         </PopupModalWithLinearGradient>
-      )}
+      }
       {(error || clientError) && (
         <PopupModal
           title="Something went wrong!"

@@ -4,7 +4,6 @@ import {FormattedMessage} from 'react-intl';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 import {GET_CHECK_IN_STATUS_API, CHECK_IN_API} from '@/api/data';
-import {AuthContext} from '@/context/auth';
 import {IntlContext} from '@/context/Intl';
 
 import {
@@ -39,7 +38,6 @@ const giftBoxStyle = {
 const DailyCheckIn = ({converted}) => {
   const theme = useTheme();
   const [daysPresentInBadge, setDaysPresentInBadge] = useState(0);
-  const {authToken} = useContext(AuthContext);
   const {localeEnum} = useContext(IntlContext);
 
   const {data, refetch} = useQueryWithAuth(GET_CHECK_IN_STATUS_API);
@@ -48,17 +46,11 @@ const DailyCheckIn = ({converted}) => {
     checkIn,
     {data: checkInData, error: checkInError},
     reset,
-  ] = useMutationWithReset(CHECK_IN_API);
+  ] = useMutationWithReset(CHECK_IN_API, {}, {withAuth: true});
 
   const handleCheckInPress = async () => {
     try {
-      await checkIn({
-        context: {
-          headers: {
-            authorization: authToken ? `Bearer ${authToken}` : '',
-          },
-        },
-      });
+      await checkIn();
     } catch (e) {
       console.error(e);
     }
