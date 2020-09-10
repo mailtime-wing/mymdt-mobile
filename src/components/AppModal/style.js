@@ -8,11 +8,10 @@ export const centered = css`
   padding-horizontal: 24px;
 `;
 
-export const modalContainer = theme => css`
+export const modalBody = theme => css`
   width: 100%;
   justify-content: center;
   background-color: ${theme.colors.background1};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 24px;
-  padding: 24px;
 `;

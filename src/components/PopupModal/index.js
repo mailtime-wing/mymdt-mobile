@@ -1,16 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {View} from 'react-native';
+import {css} from '@emotion/native';
 import {
-  Title,
-  Detail,
-  Modal,
-  CenteredView,
-  ModalView,
-  ButtonContainer,
-  MarginContainer,
+  titleStyle,
+  detailStyle,
+  buttonsContainer,
+  marginRight,
+  modalPadding,
 } from './style';
 import {FormattedMessage} from 'react-intl';
 
-import ThemeButton from '@/components/ThemeButton';
+import AppButton from '@/components/AppButton';
+import AppText from '@/components/AppText2';
+import AppModal from '@/components/AppModal';
+import {useTheme} from 'emotion-theming';
 
 const PopupModal = ({
   title,
@@ -18,47 +21,64 @@ const PopupModal = ({
   callback,
   cancelButtonLabel,
   okButtonLabel,
+  ...props
 }) => {
-  const [show, setShow] = useState(true);
+  const theme = useTheme();
 
   const handleCancelPress = () => {
-    setShow(false);
     !!callback && callback('CANCEL');
   };
 
   const handleOkPress = () => {
-    setShow(false);
     !!callback && callback('OK');
   };
 
   return (
-    <CenteredView>
-      <Modal transparent={true} visible={show}>
-        <CenteredView>
-          <ModalView>
-            <Title>{title}</Title>
-            <Detail>{detail}</Detail>
-            <ButtonContainer>
-              <ThemeButton medium reverse onPress={handleCancelPress}>
-                {cancelButtonLabel ? (
-                  cancelButtonLabel
-                ) : (
-                  <FormattedMessage id="cancel" defaultMessage="cancel" />
-                )}
-              </ThemeButton>
-              <MarginContainer />
-              <ThemeButton medium onPress={handleOkPress}>
-                {okButtonLabel ? (
-                  okButtonLabel
-                ) : (
-                  <FormattedMessage id="okay" defaultMessage="OKAY" />
-                )}
-              </ThemeButton>
-            </ButtonContainer>
-          </ModalView>
-        </CenteredView>
-      </Modal>
-    </CenteredView>
+    <AppModal
+      transparent
+      modalBodyStyle={[
+        css`
+          ${theme.colors.elevatedBackground4}
+        `,
+        modalPadding,
+      ]}
+      {...props}>
+      <AppText variant="heading3" style={titleStyle(theme)}>
+        {title}
+      </AppText>
+      <AppText variant="body1" style={detailStyle(theme)}>
+        {detail}
+      </AppText>
+      <View style={buttonsContainer}>
+        <AppButton
+          onPress={handleCancelPress}
+          text={
+            cancelButtonLabel ? (
+              cancelButtonLabel
+            ) : (
+              <FormattedMessage id="cancel" defaultMessage="cancel" />
+            )
+          }
+          variant="outlined"
+          sizeVariant="normal"
+          colorVariant="secondary"
+          style={marginRight}
+        />
+        <AppButton
+          onPress={handleOkPress}
+          text={
+            okButtonLabel ? (
+              okButtonLabel
+            ) : (
+              <FormattedMessage id="okay" defaultMessage="OKAY" />
+            )
+          }
+          variant="filled"
+          sizeVariant="normal"
+          colorVariant="secondary"
+        />
+      </View>
+    </AppModal>
   );
 };
 

@@ -123,8 +123,8 @@ const GiftBoxOpen = ({coinIconSource, style}) => (
         destX={26}
         destY={-153}
         source={coinIconSource}
-        enableShadow
-        longShadow
+        // enableShadow
+        // longShadow
       />
       <AnimatedMove
         width={60}
@@ -133,7 +133,7 @@ const GiftBoxOpen = ({coinIconSource, style}) => (
         destX={147}
         destY={-91}
         source={coinIconSource}
-        enableShadow
+        // enableShadow
       />
       <AnimatedBox source={require('@/assets/gift_box_head.png')} />
       <BoxBody source={require('@/assets/gift_box_body.png')} />

@@ -1,39 +1,69 @@
-import React, {useState} from 'react';
-import {Modal, CenteredView, ModalView, Container} from './style';
+import React, {useContext} from 'react';
+import {View} from 'react-native';
+import {useTheme} from 'emotion-theming';
+import {css} from '@emotion/native';
 
-import ThemeButton from '@/components/ThemeButton';
-import LinearGradientBackground from '@/components/LinearGradientBackground';
+import {button, linearGradientStyle, modalPadding} from './style';
 
-const linearGradientStyle = {
-  borderRadius: 24,
-  flex: 0,
-};
+import {ThemeContext} from '@/context/theme';
+import AppButton from '@/components/AppButton';
+import LinearGradient from 'react-native-linear-gradient';
+import AppModal from '@/components/AppModal';
+import {FormattedMessage} from 'react-intl';
 
-const PopupModalWithLinearGradient = ({children, callback, style}) => {
-  const [show, setShow] = useState(true);
+const PopupModalWithLinearGradient = ({
+  children,
+  callback,
+  style,
+  ...props
+}) => {
+  const theme = useTheme();
+  const {isDark} = useContext(ThemeContext);
 
   const handleOkPress = () => {
-    setShow(false);
     !!callback && callback('OK');
   };
 
   return (
-    <CenteredView>
-      <Modal transparent={true} visible={show}>
-        <CenteredView>
-          <ModalView>
-            <LinearGradientBackground style={linearGradientStyle}>
-              <Container>
-                {children}
-                <ThemeButton medium width="auto" onPress={handleOkPress}>
-                  OKAY
-                </ThemeButton>
-              </Container>
-            </LinearGradientBackground>
-          </ModalView>
-        </CenteredView>
-      </Modal>
-    </CenteredView>
+    <AppModal
+      transparent
+      {...props}
+      modalBodyStyle={
+        isDark && [
+          css`
+            ${theme.colors.elevatedBackground4}
+          `,
+          modalPadding,
+        ]
+      }>
+      {isDark ? (
+        <View>
+          {children}
+          <AppButton
+            onPress={handleOkPress}
+            text={<FormattedMessage id="okay" defaultMessage="okay" />}
+            variant="filled"
+            sizeVariant="normal"
+            colorVariant="secondary"
+            style={button}
+          />
+        </View>
+      ) : (
+        <LinearGradient
+          colors={theme.colors.linearGradientBackground}
+          style={linearGradientStyle}>
+          {children}
+          <AppButton
+            onPress={handleOkPress}
+            text={<FormattedMessage id="okay" defaultMessage="okay" />}
+            variant="filled"
+            sizeVariant="normal"
+            colorVariant="secondary"
+            style={button}
+          />
+        </LinearGradient>
+      )}
+    </AppModal>
   );
 };
 

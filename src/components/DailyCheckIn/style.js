@@ -42,6 +42,5 @@ export const MarginLeft = styled.View`
 `;
 
 export const checkInButton = css`
-  width: 30%;
   align-self: center;
 `;

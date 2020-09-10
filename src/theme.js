@@ -81,6 +81,8 @@ export const darkTheme = {
     system_theme: '#121212',
 
     alert: '#FFD542',
+
+    rewardCircleBackground: '#464646',
   },
   fonts: {
     body: 'Inter',
@@ -162,6 +164,8 @@ export const lightTheme = {
     system_theme: '#F4F4F4',
 
     alert: '#FFD542',
+
+    rewardCircleBackground: '#FFFFFF',
   },
   fonts: {
     body: 'Inter',

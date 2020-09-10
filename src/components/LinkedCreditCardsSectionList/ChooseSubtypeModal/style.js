@@ -39,3 +39,7 @@ export const subtypeItemIcon = css`
 export const subtypeItemLabel = theme => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;
+
+export const modalPadding = css`
+  padding: 24px;
+`;

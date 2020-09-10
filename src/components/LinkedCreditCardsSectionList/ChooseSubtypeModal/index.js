@@ -15,6 +15,7 @@ import {
   subtypeItemContainer,
   subtypeItemIcon,
   subtypeItemLabel,
+  modalPadding,
 } from './style';
 
 import VisaIcon from '@/assets/icon_visa.svg';
@@ -60,7 +61,7 @@ const subtypes = [
 const ChooseSubtypeModal = ({mask, onSelect, onClosePress, ...props}) => {
   const theme = useTheme();
   return (
-    <AppModal transparent {...props}>
+    <AppModal transparent modalBodyStyle={modalPadding} {...props}>
       <View style={modalHeader}>
         <AppText variant="heading3" style={modalHeading(theme)}>
           <FormattedMessage
