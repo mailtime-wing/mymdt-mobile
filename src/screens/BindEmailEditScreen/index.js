@@ -1,17 +1,9 @@
-import React, {
-  useState,
-  useEffect,
-  useLayoutEffect,
-  useReducer,
-  useContext,
-} from 'react';
+import React, {useState, useEffect, useLayoutEffect, useReducer} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {AuthContext} from '@/context/auth';
-import {useMutation, useQuery} from '@apollo/react-hooks';
 import {useTheme} from 'emotion-theming';
 import {
   GET_USER_EMAIL_ACCOUNTS_API,
-  UNBIND_EMAIL_ACCOUNTS_API,
+  UNBIND_EMAIL_ACCOUNT_API,
 } from '@/api/data';
 
 import {
@@ -35,6 +27,8 @@ import CloseIconButton from '@/components/CloseIconButton';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import AppText from '@/components/AppText2';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 const RESET = 'reset';
 const UPDATE_IS_EDITING = 'updateIsEditing';
@@ -99,22 +93,16 @@ const BindEmailEditScreen = ({navigation}) => {
   const theme = useTheme();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [emails, setEmails] = useState([{id: null, emailAddress: ''}]);
-  const {authToken} = useContext(AuthContext);
-  const apiContext = {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-  };
-  const {data, loading, refetch} = useQuery(
+  const {data, loading, refetch} = useQueryWithAuth(
     GET_USER_EMAIL_ACCOUNTS_API,
-    apiContext,
+    {
+      fetchPolicy: 'cache-and-network',
+    },
   );
-  const [unbindEmailRequest, {loading: unbindEmailLoading}] = useMutation(
-    UNBIND_EMAIL_ACCOUNTS_API,
-    apiContext,
-  );
+  const [
+    unbindEmailRequest,
+    {loading: unbindEmailLoading},
+  ] = useMutationWithAuth(UNBIND_EMAIL_ACCOUNT_API);
 
   useEffect(() => {
     dispatch({type: RESET});
@@ -167,7 +155,7 @@ const BindEmailEditScreen = ({navigation}) => {
     try {
       await unbindEmailRequest({
         variables: {
-          ids: [state.unbindingEmail?.id],
+          id: state.unbindingEmail?.id,
         },
       });
       dispatch({type: UPDATE_IS_EMAIL_UNBIND_CANCELLED}); // = reset

@@ -44,6 +44,12 @@ export const BIND_EMAIL_ACCOUNTS_API = gql`
   }
 `;
 
+export const UNBIND_EMAIL_ACCOUNT_API = gql`
+  mutation UnbindEmailAccount($id: ID!) {
+    unbindEmailAccount(id: $id)
+  }
+`;
+
 export const UNBIND_EMAIL_ACCOUNTS_API = gql`
   mutation UnbindEmailAccounts($ids: [ID!]!) {
     unbindEmailAccounts(ids: $ids)
