@@ -199,7 +199,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
               genderOptions.find(gender => gender.value === values.gender)
                 ?.label
             }
-            noIcon
+            noArrow
           />
           <ListOption
             key="dob"
@@ -211,13 +211,13 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
                 month="2-digit"
               />
             }
-            noIcon
+            noArrow
           />
           <ListOption
             key="phone"
             label={<FormattedMessage id="telephone" />}
             value={splitPhoneNumber(values.phone)}
-            noIcon
+            noArrow
           />
         </>
       )}
