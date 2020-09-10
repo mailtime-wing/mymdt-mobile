@@ -37,29 +37,6 @@ const AccountSecurityScreen = ({navigation}) => {
     }
   };
 
-  const switchOptions = [
-    {
-      label: <FormattedMessage id="face_id_or_touch_id" />,
-      value: (
-        <Switch
-          value={isFaceIdToggled}
-          onChange={() => setIsFaceIdToggled(!isFaceIdToggled)}
-        />
-      ),
-    },
-  ];
-
-  const options = [
-    {
-      label: <FormattedMessage id="forget_pin" />,
-      onPress: () => navigation.navigate('forget_pin'),
-    },
-    {
-      label: <FormattedMessage id="change_phone_number" />,
-      onPress: () => navigation.navigate('language'),
-    },
-  ];
-
   return (
     <ModalContainer title={<FormattedMessage id="account_security" />}>
       <View style={container}>
@@ -80,20 +57,25 @@ const AccountSecurityScreen = ({navigation}) => {
             )
           }
         />
-        {switchOptions.map(row => (
-          <SpecialListOption
-            key={row.label}
-            label={row.label}
-            value={row.value}
-          />
-        ))}
-        {options.map((option, index) => (
-          <ListOption
-            key={option.label}
-            label={option.label}
-            onPress={option.onPress}
-          />
-        ))}
+        <SpecialListOption
+          label={<FormattedMessage id="face_id_or_touch_id" />}
+          value={
+            <Switch
+              value={isFaceIdToggled}
+              onChange={() => setIsFaceIdToggled(!isFaceIdToggled)}
+            />
+          }
+        />
+        <ListOption
+          key="forget_pin"
+          label={<FormattedMessage id="forget_pin" />}
+          onPress={() => navigation.navigate('forget_pin')}
+        />
+        <ListOption
+          key="change_phone_number"
+          label={<FormattedMessage id="change_phone_number" />}
+          onPress={() => navigation.navigate('change_phone_number')}
+        />
       </View>
     </ModalContainer>
   );
