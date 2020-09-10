@@ -1,5 +1,6 @@
 import {useState, useRef, useCallback} from 'react';
 import {useMutation} from '@apollo/react-hooks';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 /**
  * @typedef {import('graphql').DocumentNode} DocumentNode
@@ -9,13 +10,21 @@ import {useMutation} from '@apollo/react-hooks';
  * @typedef {import('@apollo/react-common').MutationResult} MutationResult
  *
  * @param  {DocumentNode} mutation
- * @param  {MutationHookOptions=} options
+ * @param  {MutationHookOptions} options
+ * @param  {{withAuth: Boolean}} config
  *
  * @returns {[(options?: MutationFunctionOptions) => Promise<ExecutionResult>, MutationResult, () => void]}
  */
-export default function useMutationWithReset(mutation, options) {
+export default function useMutationWithReset(
+  mutation,
+  options,
+  {withAuth = false} = {},
+) {
   const [, setRenderToggle] = useState(false);
-  const [mutate, result] = useMutation(mutation, options);
+
+  const _useMutation = withAuth ? useMutationWithAuth : useMutation;
+  const [mutate, result] = _useMutation(mutation, options);
+
   const internalResult = useRef(result);
   const latestResult = useRef(result);
   const reset = useCallback(() => {

@@ -1,6 +1,5 @@
-import React, {useReducer, useEffect, useContext, useCallback} from 'react';
+import React, {useReducer, useEffect, useCallback} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {AuthContext} from '@/context/auth';
 
 import PinForm from '@/components/PinForm';
 import ModalContainer from '@/components/ModalContainer';
@@ -56,16 +55,10 @@ const reducer = (state, action) => {
 const SetupPinScreen = ({navigation}) => {
   const intl = useIntl();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const {authToken} = useContext(AuthContext);
   const [setupPinRequest, {error}, reset] = useMutationWithReset(
     SETUP_PIN_API,
-    {
-      context: {
-        headers: {
-          authorization: authToken ? `Bearer ${authToken}` : '',
-        },
-      },
-    },
+    {},
+    {withAuth: true},
   );
 
   useEffect(() => {
