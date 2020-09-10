@@ -1,31 +1,31 @@
-import React, {useContext, useLayoutEffect, useEffect, useReducer} from 'react';
+import React, { useContext, useLayoutEffect, useEffect, useReducer } from 'react';
 import {
-  TouchableWithoutFeedback,
+  View,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
 } from 'react-native';
-import {FormattedMessage, FormattedDate} from 'react-intl';
+import { FormattedMessage, FormattedDate } from 'react-intl';
 import ImagePicker from 'react-native-image-picker';
-import {Formik, useFormikContext} from 'formik';
-import {useMutation, useQuery} from '@apollo/client';
-import {UPDATE_USER_PROFILE_EDIT_API, GET_USER_PROFILE_API} from '@/api/data';
-import {AuthContext} from '@/context/auth';
+import { Formik, useFormikContext } from 'formik';
+import { useMutation, useQuery } from '@apollo/client';
+import { UPDATE_USER_PROFILE_EDIT_API, GET_USER_PROFILE_API } from '@/api/data';
+import { AuthContext } from '@/context/auth';
 
 import {
-  Container,
   FillIcon,
-  Error,
-  DateFieldContainer,
-  FormContainer,
-  ProfilePictureContainer,
-  ProfilePictureEditingContainer,
-  ProfilePictureText,
-  Name,
-  MarginTop,
+  errorStyle,
+  formContainer,
+  nameStyle,
+  dateFieldContainer,
+  profilePictureText,
+  profilePictureContainer,
+  editingStyle,
+  marginTop,
 } from './style';
 
-import GenderSelector, {genderOptions} from '@/components/GenderSelector';
+import GenderSelector, { genderOptions } from '@/components/GenderSelector';
 import DateTimePickerInput from '@/components/DateTimePickerInput';
 import ListOption from '@/components/ListOption';
 
@@ -36,8 +36,10 @@ import ConfirmButton from '@/components/ConfirmButton';
 import CloseIconButton from '@/components/CloseIconButton';
 import Input from '@/components/AppInput';
 import AppAvator from '@/components/AppAvator';
+import AppText from '@/components/AppText2';
 
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
+import { useTheme } from 'emotion-theming';
 
 const RESET_FORM = 'resetForm';
 const UPDATE_IS_CANCELLED = 'updateIsCancelled';
@@ -106,14 +108,15 @@ const reducer = (state, action) => {
 
 const cameraOptions = {
   title: 'CHANGE PROFILE PHOTO',
-  customButtons: [{name: 'REMOVE', title: 'Remove Current Photo'}],
+  customButtons: [{ name: 'REMOVE', title: 'Remove Current Photo' }],
   storageOptions: {
     skipBackup: true,
     path: 'images',
   },
 };
 
-const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
+const UserProfileEditForm = ({ handleDatePickerPress, formState }) => {
+  const theme = useTheme();
   const {
     setFieldValue,
     values,
@@ -141,7 +144,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
       } else if (response.customButton) {
         setFieldValue('profilePicture', null);
       } else {
-        const source = {uri: response.uri};
+        const source = { uri: response.uri };
         if (source) {
           setFieldValue('profilePicture', source);
         }
@@ -150,16 +153,18 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
   };
 
   return (
-    <FormContainer pointerEvents={formState.isEditing ? 'auto' : 'none'}>
+    <View
+      style={formContainer}
+      pointerEvents={formState.isEditing ? 'auto' : 'none'}>
       {formState.isEditing ? (
         <>
-          <ProfilePictureEditingContainer>
-            <ProfilePictureText>
+          <View style={[profilePictureContainer, editingStyle]}>
+            <AppText variant="label" style={profilePictureText(theme)}>
               <FormattedMessage
                 id="profile_photo"
                 defaultMessage="profile photo"
               />
-            </ProfilePictureText>
+            </AppText>
             <TouchableOpacity onPress={() => handleCameraPress()}>
               <AppAvator
                 variant="image"
@@ -168,7 +173,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
               />
             </TouchableOpacity>
             <FillIcon source={require('@/assets/filled.png')} />
-          </ProfilePictureEditingContainer>
+          </View>
           <Input
             label={<FormattedMessage id="your_name" />}
             required
@@ -178,8 +183,12 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
             gender={values.gender}
             setFieldValue={setFieldValue}
           />
-          <Error>{errors.gender ? errors.gender : ' '}</Error>
-          <DateFieldContainer onPress={handleDatePickerPress}>
+          <AppText variant="caption" style={errorStyle(theme)}>
+            {errors.gender ? errors.gender : ' '}
+          </AppText>
+          <TouchableOpacity
+            style={dateFieldContainer}
+            onPress={handleDatePickerPress}>
             <DateTimePickerInput
               label={
                 <FormattedMessage
@@ -191,57 +200,58 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
               name="dob"
               showDatePicker={formState.showDatePicker}
             />
-          </DateFieldContainer>
+          </TouchableOpacity>
         </>
       ) : (
-        <>
-          <MarginTop />
-          <ProfilePictureContainer>
-            <AppAvator
-              variant="image"
-              sizeVariant="normal"
-              imageSrc={values.profilePicture}
-            />
-            <Name>{values.name}</Name>
-          </ProfilePictureContainer>
-          <ListOption
-            key="gender"
-            label={<FormattedMessage id="gender" />}
-            value={
-              genderOptions.find(gender => gender.value === values.gender)
-                ?.label
-            }
-            noArrow
-          />
-          <ListOption
-            key="dob"
-            label={<FormattedMessage id="date_of_birth" />}
-            value={
-              <FormattedDate
-                value={values.dob}
-                year="numeric"
-                month="2-digit"
+          <>
+            <View style={[profilePictureContainer, marginTop]}>
+              <AppAvator
+                variant="image"
+                sizeVariant="normal"
+                imageSrc={values.profilePicture}
               />
-            }
-            noArrow
-          />
-          <ListOption
-            key="phone"
-            label={<FormattedMessage id="telephone" />}
-            value={splitPhoneNumber(values.phone)}
-            noArrow
-          />
-        </>
-      )}
-    </FormContainer>
+              <AppText variant="subTitle1" style={nameStyle(theme)}>
+                {values.name}
+              </AppText>
+            </View>
+            <ListOption
+              key="gender"
+              label={<FormattedMessage id="gender" />}
+              value={
+                genderOptions.find(gender => gender.value === values.gender)
+                  ?.label
+              }
+              noArrow
+            />
+            <ListOption
+              key="dob"
+              label={<FormattedMessage id="date_of_birth" />}
+              value={
+                <FormattedDate
+                  value={values.dob}
+                  year="numeric"
+                  month="2-digit"
+                />
+              }
+              noArrow
+            />
+            <ListOption
+              key="phone"
+              label={<FormattedMessage id="telephone" />}
+              value={splitPhoneNumber(values.phone)}
+              noArrow
+            />
+          </>
+        )}
+    </View>
   );
 };
 
-const UserProfileEditScreen = ({navigation}) => {
-  const {authToken} = useContext(AuthContext);
+const UserProfileEditScreen = ({ navigation }) => {
+  const { authToken } = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [updateUserProfileRequest] = useMutation(UPDATE_USER_PROFILE_EDIT_API);
-  const {data, refetch} = useQuery(GET_USER_PROFILE_API, {
+  const { data, refetch } = useQuery(GET_USER_PROFILE_API, {
     context: {
       headers: {
         authorization: authToken ? `Bearer ${authToken}` : '',
@@ -251,25 +261,25 @@ const UserProfileEditScreen = ({navigation}) => {
   });
 
   const handleDatePickerPress = () => {
-    dispatch({type: UPDATE_SHOW_DATE_PICKER, payload: !state.showDatePicker});
+    dispatch({ type: UPDATE_SHOW_DATE_PICKER, payload: !state.showDatePicker });
   };
 
   const handleSpacePress = () => {
-    dispatch({type: UPDATE_SHOW_DATE_PICKER, payload: false});
+    dispatch({ type: UPDATE_SHOW_DATE_PICKER, payload: false });
     Keyboard.dismiss();
   };
 
   const handleEditPress = () => {
-    dispatch({type: UPDATE_IS_EDITING});
+    dispatch({ type: UPDATE_IS_EDITING });
   };
 
   const handleConfirmPress = () => {
-    dispatch({type: UPDATE_IS_CONFIRMED});
+    dispatch({ type: UPDATE_IS_CONFIRMED });
   };
 
   const handleCancelPress = () => {
     Keyboard.dismiss();
-    dispatch({type: UPDATE_IS_CANCELLED});
+    dispatch({ type: UPDATE_IS_CANCELLED });
   };
 
   const handleSubmitPress = async values => {
@@ -289,7 +299,7 @@ const UserProfileEditScreen = ({navigation}) => {
     } catch (e) {
       console.error('Error in updating user profile edit screen', e);
     }
-    dispatch({type: RESET_FORM});
+    dispatch({ type: RESET_FORM });
     Keyboard.dismiss();
     refetch();
   };
@@ -305,7 +315,7 @@ const UserProfileEditScreen = ({navigation}) => {
   };
 
   const validate = values => {
-    dispatch({type: UPDATE_IS_VALUE_CHANGED});
+    dispatch({ type: UPDATE_IS_VALUE_CHANGED });
     const errors = {};
 
     if (!values.name) {
@@ -344,7 +354,7 @@ const UserProfileEditScreen = ({navigation}) => {
             <FormattedMessage id="profile" defaultMessage="Profile" />
           )
         }>
-        <Container behavior="position">
+        <View behavior="position">
           <ScrollView
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="always">
@@ -359,7 +369,7 @@ const UserProfileEditScreen = ({navigation}) => {
               />
             </Formik>
           </ScrollView>
-        </Container>
+        </View>
       </ModalContainer>
     </TouchableWithoutFeedback>
   );
