@@ -1,32 +1,37 @@
 import React from 'react';
-import {Option, RightSide, Margin, listLabel, listValue} from './style';
+import {View, TouchableOpacity} from 'react-native';
+import {
+  listLabel,
+  listValue,
+  marginRight,
+  option,
+  valueContainer,
+} from './style';
 import {useTheme} from 'emotion-theming';
 
 import ArrowIcon from '@/assets/list_arrow.svg';
 
 import AppText from '@/components/AppText2';
 
-const ListOption = ({label, value, noIcon, ...props}) => {
+const ListOption = ({label, value, icon, noArrow, ...props}) => {
   const theme = useTheme();
   return (
-    <Option {...props}>
+    <TouchableOpacity style={option} {...props}>
       <AppText variant="body1" style={listLabel(theme)}>
         {label}
       </AppText>
-      <RightSide>
+      <View style={valueContainer}>
         {value && (
-          <AppText variant="body1" style={listValue(theme)}>
+          <AppText variant="body1" style={[listValue(theme), marginRight]}>
             {value}
           </AppText>
         )}
-        {noIcon ? null : (
-          <>
-            <Margin />
-            <ArrowIcon stroke={theme.colors.borderColor} strokeWidth={2} />
-          </>
+        {icon && <View style={marginRight}>{icon}</View>}
+        {noArrow ? null : (
+          <ArrowIcon stroke={theme.colors.borderColor} strokeWidth={2} />
         )}
-      </RightSide>
-    </Option>
+      </View>
+    </TouchableOpacity>
   );
 };
 

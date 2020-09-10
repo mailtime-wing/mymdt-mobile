@@ -36,7 +36,12 @@ import UserProfileEditScreen from '@/screens/UserProfileEditScreen';
 import BindEmailEditScreen from '@/screens/BindEmailEditScreen';
 import SettingScreen from '@/screens/SettingScreen';
 import AppSettingScreen from '@/screens/AppSettingScreen';
+
 import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
+import ChangePinScreen from '@/screens/ChangePinScreen';
+import SetupPinScreen from '@/screens/SetupPinScreen';
+import PinSuccessScreen from '@/screens/PinSuccessScreen';
+
 import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
 import LinkedCardsSettingScreen from '@/screens/LinkedCardsSettingScreen';
 import ChooseRegionSettingScreen from '@/screens/ChooseRegionSettingScreen';
@@ -160,6 +165,9 @@ const settingScreens = [
   {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
   {name: 'referral', component: ReferralScreen},
   {name: 'account_security', component: AccountSecurityScreen},
+  {name: 'change_pin', component: ChangePinScreen},
+  {name: 'setup_pin', component: SetupPinScreen},
+  {name: 'pin_success', component: PinSuccessScreen},
   {name: 'sign_out', component: SignOutScreen},
   {name: 'app_settings', component: AppSettingScreen},
   {name: 'faq_and_support', component: AppSettingScreen},

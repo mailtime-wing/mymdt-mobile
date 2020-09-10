@@ -1,71 +1,82 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import {FormattedMessage} from 'react-intl';
+import {View} from 'react-native';
+import {useTheme} from 'emotion-theming';
 
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import ModalContainer from '@/components/ModalContainer';
 import ListOption from '@/components/ListOption';
 import SpecialListOption from '@/components/SpecialListOption';
 import Switch from '@/components/Switch';
+import {GET_USER_SECURITY_SETTINGS} from '@/api/data';
 
-import {Container} from './style';
+import TickIcon from '@/assets/tick.svg';
+
+import {container, tickButton} from './style';
 
 const AccountSecurityScreen = ({navigation}) => {
-  const [isPinToggled, setIsPinToggled] = useState(false); // from api later
+  const theme = useTheme();
   const [isFaceIdToggled, setIsFaceIdToggled] = useState(false); // from api later
+  const {data, refetch} = useQueryWithAuth(GET_USER_SECURITY_SETTINGS, {
+    fetchPolicy: 'network-only',
+  });
+  const isPinSet = data?.userProfile?.isPasscodeSet;
 
-  const switchOptions = [
-    {
-      label: <FormattedMessage id="pin" />,
-      value: (
-        <Switch
-          value={isPinToggled}
-          onChange={() => setIsPinToggled(!isPinToggled)}
-        />
-      ),
-    },
-    {
-      label: <FormattedMessage id="face_id_or_touch_id" />,
-      value: (
-        <Switch
-          value={isFaceIdToggled}
-          onChange={() => setIsFaceIdToggled(!isFaceIdToggled)}
-        />
-      ),
-    },
-  ];
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
 
-  const options = [
-    {
-      label: <FormattedMessage id="forget_pin" />,
-      onPress: () => navigation.navigate('forget_pin'),
-    },
-    {
-      label: <FormattedMessage id="change_pin" />,
-      onPress: () => navigation.navigate('change_pin'),
-    },
-    {
-      label: <FormattedMessage id="change_phone_number" />,
-      onPress: () => navigation.navigate('language'),
-    },
-  ];
+  const handlePinPress = () => {
+    if (!isPinSet) {
+      navigation.navigate('setup_pin');
+    } else {
+      navigation.navigate('change_pin');
+    }
+  };
 
   return (
     <ModalContainer title={<FormattedMessage id="account_security" />}>
-      <Container>
-        {switchOptions.map(row => (
-          <SpecialListOption
-            key={row.value}
-            label={row.label}
-            value={row.value}
-          />
-        ))}
-        {options.map((option, index) => (
-          <ListOption
-            key={option.label}
-            label={option.label}
-            onPress={option.onPress}
-          />
-        ))}
-      </Container>
+      <View style={container}>
+        <ListOption
+          key="pin"
+          label={<FormattedMessage id="pin" />}
+          onPress={handlePinPress}
+          icon={
+            isPinSet && (
+              <View style={tickButton(theme)}>
+                <TickIcon
+                  stroke={theme.colors.background1}
+                  strokeWidth="2"
+                  width="12"
+                  height="10"
+                />
+              </View>
+            )
+          }
+        />
+        <SpecialListOption
+          label={<FormattedMessage id="face_id_or_touch_id" />}
+          value={
+            <Switch
+              value={isFaceIdToggled}
+              onChange={() => setIsFaceIdToggled(!isFaceIdToggled)}
+            />
+          }
+        />
+        <ListOption
+          key="forget_pin"
+          label={<FormattedMessage id="forget_pin" />}
+          onPress={() => navigation.navigate('forget_pin')}
+        />
+        <ListOption
+          key="change_phone_number"
+          label={<FormattedMessage id="change_phone_number" />}
+          onPress={() => navigation.navigate('change_phone_number')}
+        />
+      </View>
     </ModalContainer>
   );
 };

@@ -2,9 +2,21 @@ import React, {useState, useRef, useEffect} from 'react';
 import {View, Keyboard} from 'react-native';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 
-import {Container, Title, Error, Hints, styles} from './style';
+import {
+  Title,
+  hintStyle,
+  container,
+  pinDot,
+  pinMask,
+  pinMaskError,
+  errorStyle,
+} from './style';
+
+import AppText from '@/components/AppText2';
+import {useTheme} from 'emotion-theming';
 
 const PinForm = ({title, hints, error, onFulfill}) => {
+  const theme = useTheme();
   const pinInput = useRef(null);
   const [pinCode, setPinCode] = useState('');
   const codeLength = 6;
@@ -20,14 +32,16 @@ const PinForm = ({title, hints, error, onFulfill}) => {
   }, [onFulfill]);
 
   return (
-    <Container>
+    <>
       {title && <Title>{title}</Title>}
-      {hints && <Hints>{hints}</Hints>}
-      <View style={styles.container}>
+      <AppText variant="body1" style={hintStyle(theme)}>
+        {hints}
+      </AppText>
+      <View style={container}>
         <SmoothPinCodeInput
           ref={pinInput}
-          placeholder={<View style={styles.pinDot} />}
-          mask={<View style={[styles.pinMask, error && styles.pinMaskError]} />}
+          placeholder={<View style={pinDot(theme)} />}
+          mask={<View style={[pinMask(theme), error && pinMaskError(theme)]} />}
           maskDelay={200}
           codeLength={codeLength}
           password={true}
@@ -41,8 +55,12 @@ const PinForm = ({title, hints, error, onFulfill}) => {
           keyboardType="number-pad"
         />
       </View>
-      {error && <Error>{error}</Error>}
-    </Container>
+      {error && (
+        <AppText variant="body2" style={errorStyle(theme)}>
+          {error}
+        </AppText>
+      )}
+    </>
   );
 };
 

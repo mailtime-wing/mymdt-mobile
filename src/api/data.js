@@ -385,3 +385,13 @@ export const GET_USER_ID = gql`
     }
   }
 `;
+
+export const GET_USER_SECURITY_SETTINGS = gql`
+  query {
+    userProfile {
+      id
+      isPasscodeSet
+      isTwofaEnabled
+    }
+  }
+`;

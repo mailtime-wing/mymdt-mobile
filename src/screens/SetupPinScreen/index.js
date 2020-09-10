@@ -3,19 +3,17 @@ import {FormattedMessage, useIntl} from 'react-intl';
 
 import PinForm from '@/components/PinForm';
 import ModalContainer from '@/components/ModalContainer';
-import {CHANGE_PIN_API} from '@/api/auth';
+import {SETUP_PIN_API} from '@/api/auth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 
 const NEXT_STEP = 'nextStep';
 const PREVIOUS_STEP = 'previousStep';
 const RESET = 'reset';
-const SAVE_OLD_PIN = 'saveOldPin';
 const SAVE_NEW_PIN = 'saveNewPin';
 const SAVE_NEW_CONFIRMED_PIN = 'saveNewConfirmedPin';
 
 const initialState = {
   step: 1,
-  oldPin: '',
   newPin: '',
   newConfirmedPin: '',
 };
@@ -37,12 +35,6 @@ const reducer = (state, action) => {
     case RESET: {
       return initialState;
     }
-    case SAVE_OLD_PIN: {
-      return {
-        ...state,
-        oldPin: action.payload,
-      };
-    }
     case SAVE_NEW_PIN: {
       return {
         ...state,
@@ -60,17 +52,17 @@ const reducer = (state, action) => {
   }
 };
 
-const ChangePinScreen = ({navigation}) => {
+const SetupPinScreen = ({navigation}) => {
   const intl = useIntl();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [changePinRequest, {error}, reset] = useMutationWithReset(
-    CHANGE_PIN_API,
+  const [setupPinRequest, {error}, reset] = useMutationWithReset(
+    SETUP_PIN_API,
     {},
     {withAuth: true},
   );
 
   useEffect(() => {
-    if (state.oldPin && state.newPin && state.newConfirmedPin) {
+    if (state.newPin && state.newConfirmedPin) {
       handleSubmit();
     }
   }, [handleSubmit, state]);
@@ -84,11 +76,6 @@ const ChangePinScreen = ({navigation}) => {
     }
   }, [error, reset]);
 
-  const handleOldPinOnFulfill = pin => {
-    dispatch({type: SAVE_OLD_PIN, payload: pin});
-    dispatch({type: NEXT_STEP});
-  };
-
   const handleNewPinOnFulfill = pin => {
     dispatch({type: SAVE_NEW_PIN, payload: pin});
     dispatch({type: NEXT_STEP});
@@ -100,11 +87,10 @@ const ChangePinScreen = ({navigation}) => {
 
   const handleSubmit = useCallback(async () => {
     try {
-      const {data} = await changePinRequest({
+      const {data} = await setupPinRequest({
         variables: {
-          oldPin: state.oldPin,
-          newPin: state.newPin,
-          newConfirmedPin: state.newConfirmedPin,
+          pin: state.newPin,
+          confirmedPin: state.newConfirmedPin,
         },
       });
 
@@ -117,38 +103,22 @@ const ChangePinScreen = ({navigation}) => {
             },
             {
               action: intl.formatMessage({
-                id: 'pin_action_changed',
-                defaultMessage: intl.messages.pin_action_changed,
+                id: 'pin_action_setup',
+                defaultMessage: intl.messages.pin_action_setup,
               }),
             },
           ),
         });
       }
     } catch (e) {}
-  }, [
-    changePinRequest,
-    intl,
-    navigation,
-    state.newConfirmedPin,
-    state.newPin,
-    state.oldPin,
-  ]);
+  }, [intl, navigation, setupPinRequest, state.newConfirmedPin, state.newPin]);
 
   const steps = [
     {
       hints: (
         <FormattedMessage
-          id="enter_old_pin"
-          defaultMessage="Enter the old PIN"
-        />
-      ),
-      onFulfill: handleOldPinOnFulfill,
-    },
-    {
-      hints: (
-        <FormattedMessage
-          id="enter_new_pin"
-          defaultMessage="Enter the new PIN"
+          id="enter_6_digit_pin"
+          defaultMessage="Enter 6-digit PIN"
         />
       ),
       onFulfill: handleNewPinOnFulfill,
@@ -174,7 +144,7 @@ const ChangePinScreen = ({navigation}) => {
 
   return (
     <ModalContainer
-      title={<FormattedMessage id="change_pin" defaultMessage="Change Pin" />}>
+      title={<FormattedMessage id="set_up_pin" defaultMessage="Set Up Pin" />}>
       <PinForm
         hints={currentStep.hints}
         onFulfill={currentStep.onFulfill}
@@ -185,4 +155,4 @@ const ChangePinScreen = ({navigation}) => {
   );
 };
 
-export default ChangePinScreen;
+export default SetupPinScreen;
