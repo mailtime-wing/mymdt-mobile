@@ -68,8 +68,8 @@ const PrivilegesSection = () => {
       <AppText variant="heading5" style={header(theme)}>
         <FormattedMessage id="privileges" />
       </AppText>
-      {privilegeList.map(({name, icon, claim}) => (
-        <View key={name} style={privilege}>
+      {privilegeList.map(({name, icon, claim}, i) => (
+        <View key={i} style={privilege}>
           <AppIcon
             color={theme.colors.background1}
             backgroundColor={theme.colors.secondary.normal}
