@@ -1,42 +1,25 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import {css} from '@emotion/native';
 
-export const GenderContainer = styled.View`
-  height: 32px;
-  width: 85%;
-  flex-direction: row;
-`;
-
-export const Gender = styled.TouchableOpacity`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: ${props =>
-    props.active ? props.theme.colors.secondary.normal : 'transparent'};
-  border: ${props =>
-    props.active
-      ? props.theme.colors.secondary.normal
-      : props.theme.colors.textOnBackground.disabled};
+export const optionButton = (theme, active) => css`
+  padding: 5.5px 12px;
+  background-color: ${active ? theme.colors.secondary.normal : 'transparent'};
+  border: ${active
+    ? theme.colors.secondary.normal
+    : theme.colors.textOnBackground.disabled};
   border-radius: 34px;
   margin-right: 8px;
 `;
 
-export const GenderText = styled(Text)`
-  color: ${props =>
-    props.active
-      ? props.theme.colors.background1
-      : props.theme.colors.contrastColor};
+export const optionsContainer = css`
+  height: 32px;
+  flex-direction: row;
 `;
 
-export const FormInputContainer = styled.View`
-  margin-bottom: 24px;
-`;
-
-export const GenderLabel = styled(Text)`
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: 1px;
-  font-weight: bold;
+export const labelStyle = theme => css`
   margin-bottom: 8px;
-  text-transform: uppercase;
+  color: ${theme.colors.contrastColor};
+`;
+
+export const genderStyle = (theme, active) => css`
+  color: ${active ? theme.colors.background1 : theme.colors.contrastColor};
 `;
