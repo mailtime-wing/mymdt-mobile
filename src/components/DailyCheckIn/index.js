@@ -5,37 +5,18 @@ import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 import {GET_CHECK_IN_STATUS_API, CHECK_IN_API} from '@/api/data';
 import {IntlContext} from '@/context/Intl';
+import {MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 
-import {
-  convertedText,
-  gotRewardText,
-  margin,
-  dayList,
-  container,
-  checkInButton,
-  convertedContainer,
-} from './style';
+import {margin, dayList, container, checkInButton} from './style';
 
-import MRPCoin from '@/components/MRPCoin';
-import MRPGiftBox from '@/components/MRPGiftBox';
 import AppButton from '@/components/AppButton';
-import AppText from '@/components/AppText2';
-import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
+import RewardGotPopup from '@/components/RewardGotPopup';
 import PopupModal from '@/components/PopupModal';
 import DayList from './DayList';
 import AchievementBadge from './AchievementBadge';
 import {useTheme} from 'emotion-theming';
 
-const giftBoxStyle = {
-  transform: [
-    {
-      scale: 0.75,
-    },
-  ],
-};
-
-// TODO: do not control by props, preload user current currency
-const DailyCheckIn = ({converted}) => {
+const DailyCheckIn = () => {
   const theme = useTheme();
   const [daysPresentInBadge, setDaysPresentInBadge] = useState(0);
   const {localeEnum} = useContext(IntlContext);
@@ -63,6 +44,7 @@ const DailyCheckIn = ({converted}) => {
   const todayRewardAmount =
     (todayAndAfterRewards && todayAndAfterRewards[today - 1]) || 0;
   const cashbackCurrencyCode = data?.userProfile?.cashbackCurrencyCode;
+  const convert = cashbackCurrencyCode === MEASURABLE_DATA_TOKEN;
   const coinColor = theme.colors.textOfMrp;
 
   const handleRewardGotPress = () => {
@@ -108,33 +90,13 @@ const DailyCheckIn = ({converted}) => {
         colorVariant="secondary"
         style={checkInButton}
       />
-      <PopupModalWithLinearGradient
+      <RewardGotPopup
         visible={!!checkInData}
-        callback={handleRewardGotPress}>
-        <MRPGiftBox style={giftBoxStyle} />
-        <AppText variant="heading4" style={gotRewardText(theme, coinColor)}>
-          You got a check-in reward!
-        </AppText>
-        <MRPCoin
-          amount={todayRewardAmount}
-          size={28}
-          fontSize={24}
-          color={coinColor}
-        />
-        {converted && (
-          <View style={convertedContainer}>
-            <AppText variant="body2" style={convertedText(theme)}>
-              Converted from
-            </AppText>
-            <MRPCoin
-              amount={todayRewardAmount}
-              size={16}
-              fontSize={16}
-              color={coinColor}
-            />
-          </View>
-        )}
-      </PopupModalWithLinearGradient>
+        onOkPress={handleRewardGotPress}
+        rewardName={<FormattedMessage id="reward_type_check_in" />}
+        rewardAmount={todayRewardAmount}
+        convert={convert}
+      />
       <PopupModal
         visible={!!checkInError}
         title="Something went wrong!"

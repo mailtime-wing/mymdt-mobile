@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import {Linking} from 'react-native';
 import {FormattedMessage, FormattedDate} from 'react-intl';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
-import {CLAIM_REWARD_API} from '@/api/data';
+import {CLAIM_REWARD_API, GET_CURRENCY_CODE} from '@/api/data';
+import {MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 
 import {
   Container,
@@ -15,28 +17,25 @@ import {
 import MRPCoin from '@/components/MRPCoin';
 import AppButton from '@/components/AppButton';
 import PopupModal from '@/components/PopupModal';
-import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
-import MRPGiftBox from '@/components/MRPGiftBox';
+import RewardGotPopup from '@/components/RewardGotPopup';
 import AppText from '@/components/AppText2';
 import {useTheme} from 'emotion-theming';
 
 const flexEnd = {justifyContent: 'flex-end'};
-const giftBoxStyle = {
-  transform: [
-    {
-      scale: 0.75,
-    },
-  ],
-};
 
 const TaskList = ({taskList, userRewardList, onClaimPress}) => {
   const theme = useTheme();
   const [clientError, setClientError] = useState(false);
+  const {data: currencyCodeData} = useQueryWithAuth(GET_CURRENCY_CODE);
   const [claimRewardRequest, {data, error}, reset] = useMutationWithReset(
     CLAIM_REWARD_API,
     {},
     {withAuth: true},
   );
+
+  const cashbackCurrencyCode =
+    currencyCodeData?.userProfile?.cashbackCurrencyCode;
+  const convert = cashbackCurrencyCode === MEASURABLE_DATA_TOKEN;
 
   const handleRewardGotPress = () => {
     reset();
@@ -135,17 +134,16 @@ const TaskList = ({taskList, userRewardList, onClaimPress}) => {
                 )}
               </MarginLeft>
             ) : null}
+            <RewardGotPopup
+              visible={!!data}
+              onOkPress={handleRewardGotPress}
+              rewardName={<FormattedMessage id="reward_type_bonus_task" />}
+              rewardAmount={task.rewardValue}
+              convert={convert}
+            />
           </RowContainer>
         );
       })}
-      {
-        // TODO: add reward message after preload the user current currency
-        <PopupModalWithLinearGradient
-          visible={!!data}
-          callback={handleRewardGotPress}>
-          <MRPGiftBox style={giftBoxStyle} />
-        </PopupModalWithLinearGradient>
-      }
       {(error || clientError) && (
         <PopupModal
           title="Something went wrong!"
