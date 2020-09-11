@@ -26,8 +26,8 @@ export const requiredText = theme => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;
 
-export const DateFieldContainer = styled.TouchableOpacity`
-  margin-top: 24px;
+export const dateContainer = css`
+  margin-bottom: 24px;
 `;
 
 export const GenderContainer = styled.View`

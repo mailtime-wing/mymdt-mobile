@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useEffect, useReducer } from 'react';
+import React, {useLayoutEffect, useEffect, useReducer} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -6,12 +6,12 @@ import {
   Keyboard,
   ScrollView,
 } from 'react-native';
-import { FormattedMessage, FormattedDate } from 'react-intl';
+import {FormattedMessage, FormattedDate} from 'react-intl';
 import ImagePicker from 'react-native-image-picker';
-import { Formik, useFormikContext } from 'formik';
-import { useMutation, useQuery } from '@apollo/client';
-import { UPDATE_USER_PROFILE_EDIT_API, GET_USER_PROFILE_API } from '@/api/data';
-import { AuthContext } from '@/context/auth';
+import {Formik, useFormikContext} from 'formik';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
+import {UPDATE_USER_PROFILE_EDIT_API, GET_USER_PROFILE_API} from '@/api/data';
 
 import {
   FillIcon,
@@ -25,7 +25,7 @@ import {
   marginTop,
 } from './style';
 
-import GenderSelector, { genderOptions } from '@/components/GenderSelector';
+import GenderSelector, {genderOptions} from '@/components/GenderSelector';
 import DateTimePickerInput from '@/components/DateTimePickerInput';
 import ListOption from '@/components/ListOption';
 
@@ -39,7 +39,7 @@ import AppAvator from '@/components/AppAvator';
 import AppText from '@/components/AppText2';
 
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
-import { useTheme } from 'emotion-theming';
+import {useTheme} from 'emotion-theming';
 
 const RESET_FORM = 'resetForm';
 const UPDATE_IS_CANCELLED = 'updateIsCancelled';
@@ -108,14 +108,14 @@ const reducer = (state, action) => {
 
 const cameraOptions = {
   title: 'CHANGE PROFILE PHOTO',
-  customButtons: [{ name: 'REMOVE', title: 'Remove Current Photo' }],
+  customButtons: [{name: 'REMOVE', title: 'Remove Current Photo'}],
   storageOptions: {
     skipBackup: true,
     path: 'images',
   },
 };
 
-const UserProfileEditForm = ({ handleDatePickerPress, formState }) => {
+const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
   const theme = useTheme();
   const {
     setFieldValue,
@@ -144,7 +144,7 @@ const UserProfileEditForm = ({ handleDatePickerPress, formState }) => {
       } else if (response.customButton) {
         setFieldValue('profilePicture', null);
       } else {
-        const source = { uri: response.uri };
+        const source = {uri: response.uri};
         if (source) {
           setFieldValue('profilePicture', source);
         }
@@ -186,100 +186,94 @@ const UserProfileEditForm = ({ handleDatePickerPress, formState }) => {
           <AppText variant="caption" style={errorStyle(theme)}>
             {errors.gender ? errors.gender : ' '}
           </AppText>
-          <TouchableOpacity
+          <DateTimePickerInput
             style={dateFieldContainer}
-            onPress={handleDatePickerPress}>
-            <DateTimePickerInput
-              label={
-                <FormattedMessage
-                  id="date_of_birth"
-                  defaultMessage="DATE OF BIRTH"
-                />
-              }
-              required
-              name="dob"
-              showDatePicker={formState.showDatePicker}
-            />
-          </TouchableOpacity>
+            onPress={handleDatePickerPress}
+            label={
+              <FormattedMessage
+                id="date_of_birth"
+                defaultMessage="DATE OF BIRTH"
+              />
+            }
+            required
+            name="dob"
+            showDatePicker={formState.showDatePicker}
+          />
         </>
       ) : (
-          <>
-            <View style={[profilePictureContainer, marginTop]}>
-              <AppAvator
-                variant="image"
-                sizeVariant="normal"
-                imageSrc={values.profilePicture}
+        <>
+          <View style={[profilePictureContainer, marginTop]}>
+            <AppAvator
+              variant="image"
+              sizeVariant="normal"
+              imageSrc={values.profilePicture}
+            />
+            <AppText variant="subTitle1" style={nameStyle(theme)}>
+              {values.name}
+            </AppText>
+          </View>
+          <ListOption
+            key="gender"
+            label={<FormattedMessage id="gender" />}
+            value={
+              genderOptions.find(gender => gender.value === values.gender)
+                ?.label
+            }
+            noArrow
+          />
+          <ListOption
+            key="dob"
+            label={<FormattedMessage id="date_of_birth" />}
+            value={
+              <FormattedDate
+                value={values.dob}
+                year="numeric"
+                month="2-digit"
               />
-              <AppText variant="subTitle1" style={nameStyle(theme)}>
-                {values.name}
-              </AppText>
-            </View>
-            <ListOption
-              key="gender"
-              label={<FormattedMessage id="gender" />}
-              value={
-                genderOptions.find(gender => gender.value === values.gender)
-                  ?.label
-              }
-              noArrow
-            />
-            <ListOption
-              key="dob"
-              label={<FormattedMessage id="date_of_birth" />}
-              value={
-                <FormattedDate
-                  value={values.dob}
-                  year="numeric"
-                  month="2-digit"
-                />
-              }
-              noArrow
-            />
-            <ListOption
-              key="phone"
-              label={<FormattedMessage id="telephone" />}
-              value={splitPhoneNumber(values.phone)}
-              noArrow
-            />
-          </>
-        )}
+            }
+            noArrow
+          />
+          <ListOption
+            key="phone"
+            label={<FormattedMessage id="telephone" />}
+            value={splitPhoneNumber(values.phone)}
+            noArrow
+          />
+        </>
+      )}
     </View>
   );
 };
 
-const UserProfileEditScreen = ({ navigation }) => {
-  const { authToken } = useContext(AuthContext);
+const UserProfileEditScreen = ({navigation}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [updateUserProfileRequest] = useMutation(UPDATE_USER_PROFILE_EDIT_API);
-  const { data, refetch } = useQuery(GET_USER_PROFILE_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
+  const [updateUserProfileRequest] = useMutationWithAuth(
+    UPDATE_USER_PROFILE_EDIT_API,
+  );
+  const {data, refetch} = useQueryWithAuth(GET_USER_PROFILE_API, {
     fetchPolicy: 'network-only',
   });
 
   const handleDatePickerPress = () => {
-    dispatch({ type: UPDATE_SHOW_DATE_PICKER, payload: !state.showDatePicker });
+    dispatch({type: UPDATE_SHOW_DATE_PICKER, payload: !state.showDatePicker});
   };
 
   const handleSpacePress = () => {
-    dispatch({ type: UPDATE_SHOW_DATE_PICKER, payload: false });
+    dispatch({type: UPDATE_SHOW_DATE_PICKER, payload: false});
     Keyboard.dismiss();
   };
 
   const handleEditPress = () => {
-    dispatch({ type: UPDATE_IS_EDITING });
+    dispatch({type: UPDATE_IS_EDITING});
   };
 
   const handleConfirmPress = () => {
-    dispatch({ type: UPDATE_IS_CONFIRMED });
+    dispatch({type: UPDATE_IS_CONFIRMED});
   };
 
   const handleCancelPress = () => {
     Keyboard.dismiss();
-    dispatch({ type: UPDATE_IS_CANCELLED });
+    dispatch({type: UPDATE_IS_CANCELLED});
   };
 
   const handleSubmitPress = async values => {
@@ -290,16 +284,11 @@ const UserProfileEditScreen = ({ navigation }) => {
           gender: values.gender,
           dateOfBirth: values.dob,
         },
-        context: {
-          headers: {
-            authorization: authToken ? `Bearer ${authToken}` : '',
-          },
-        },
       });
     } catch (e) {
       console.error('Error in updating user profile edit screen', e);
     }
-    dispatch({ type: RESET_FORM });
+    dispatch({type: RESET_FORM});
     Keyboard.dismiss();
     refetch();
   };
@@ -315,7 +304,7 @@ const UserProfileEditScreen = ({ navigation }) => {
   };
 
   const validate = values => {
-    dispatch({ type: UPDATE_IS_VALUE_CHANGED });
+    dispatch({type: UPDATE_IS_VALUE_CHANGED});
     const errors = {};
 
     if (!values.name) {
