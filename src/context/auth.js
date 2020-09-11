@@ -1,4 +1,10 @@
-import React, {createContext, useReducer, useEffect, useMemo} from 'react';
+import React, {
+  createContext,
+  useReducer,
+  useEffect,
+  useMemo,
+  useCallback,
+} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import jwt_decode from 'jwt-decode';
 import {REFRESH_TOKEN_API} from '@/api/auth';
@@ -6,7 +12,16 @@ import {useMutation} from '@apollo/react-hooks';
 
 import PopupModal from '@/components/PopupModal';
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext({
+  refreshAccessToken: () => {},
+  refreshTokenMutationResult: {},
+  updateAuthToken: () => {},
+  updateCashBackType: () => {},
+  signOut: () => {},
+  authToken: '',
+  refreshToken: '',
+  cashBackType: '',
+});
 
 const UPDATE_AUTH_TOKEN = 'updateAuthToken';
 const UPDATE_REFRESH_TOKEN_EXPIRED = 'updateRefreshTokenExpired';
@@ -63,10 +78,53 @@ export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
 
+  const updateAuthToken = useCallback(async (authToken, refreshToken) => {
+    authToken = authToken || '';
+    refreshToken = refreshToken || '';
+    try {
+      await AsyncStorage.setItem('authToken', authToken);
+      await AsyncStorage.setItem('refreshToken', refreshToken);
+    } catch (error) {
+      console.error('error saving authToken', error);
+    }
+
+    dispatch({
+      type: UPDATE_AUTH_TOKEN,
+      payload: {
+        authToken: authToken,
+        refreshToken: refreshToken,
+      },
+    });
+  }, []);
+
+  const refreshAccessToken = useCallback(async () => {
+    try {
+      const {data} = await refreshTokenRequest({
+        variables: {
+          refreshToken: state.refreshToken,
+        },
+      });
+      await updateAuthToken(data.refreshAccessToken, state.refreshToken);
+      return data.refreshAccessToken;
+    } catch (e) {
+      dispatch({type: UPDATE_REFRESH_TOKEN_EXPIRED, payload: true});
+    }
+  }, [refreshTokenRequest, state.refreshToken, updateAuthToken]);
+
+  const signOut = useCallback(async () => {
+    try {
+      await AsyncStorage.removeItem('authToken');
+      await AsyncStorage.removeItem('refreshToken');
+    } catch (e) {
+      console.error('error removing authToken', e);
+    }
+    dispatch({type: SIGN_OUT});
+  }, []);
+
   useEffect(() => {
     const getToken = async () => {
-      let authToken;
-      let refreshToken;
+      let authToken = '';
+      let refreshToken = '';
       try {
         authToken = await AsyncStorage.getItem('authToken');
         refreshToken = await AsyncStorage.getItem('refreshToken');
@@ -82,92 +140,72 @@ export const AuthProvider = ({children}) => {
               });
               authToken = data.refreshAccessToken;
             } catch (e) {
-              console.warn('error refreshing token', e);
               dispatch({type: UPDATE_REFRESH_TOKEN_EXPIRED, payload: true});
             }
           }
-        } else {
-          authToken = '';
-          refreshToken = '';
         }
       } catch (error) {
-        console.error('error getting authToken');
+        console.error('error getting authToken', error);
       }
-      authContext.updateAuthToken(authToken, refreshToken);
+      updateAuthToken(authToken, refreshToken);
     };
     getToken();
-  }, [authContext, refreshTokenRequest]);
+  }, [refreshTokenRequest, updateAuthToken]);
 
-  const handlePopupPress = pressed => {
-    if (pressed) {
-      dispatch({type: SIGN_OUT});
-    }
-  };
+  const handlePopupPress = useCallback(
+    pressed => {
+      if (pressed) {
+        signOut();
+      }
+    },
+    [signOut],
+  );
 
   const authContext = useMemo(
     () => ({
-      updateAuthToken: async (authToken, refreshToken) => {
-        try {
-          await AsyncStorage.setItem('authToken', authToken);
-          await AsyncStorage.setItem('refreshToken', refreshToken);
-        } catch (error) {
-          console.error('error saving authToken');
-        }
-        dispatch({
-          type: UPDATE_AUTH_TOKEN,
-          payload: {
-            authToken: authToken,
-            refreshToken: refreshToken,
-          },
-        });
-      },
+      refreshAccessToken,
+      updateAuthToken,
       updateCashBackType: async cashBackType => {
         try {
           await AsyncStorage.setItem('cashBackType', cashBackType);
         } catch (error) {
-          console.error('error saving cash back type');
+          console.error('error saving cash back type', error);
         }
         dispatch({
           type: UPDATE_CASH_BACK_TYPE,
           payload: cashBackType,
         });
       },
-      signOut: async () => {
-        try {
-          await AsyncStorage.removeItem('authToken');
-          await AsyncStorage.removeItem('refreshToken');
-        } catch (error) {
-          console.error('error when sign out');
-        }
-        dispatch({type: SIGN_OUT});
-      },
+      signOut,
       authToken: state.authToken,
       refreshToken: state.refreshToken,
       cashBackType: state.cashBackType,
     }),
     [
+      refreshAccessToken,
+      updateAuthToken,
+      signOut,
       state.authToken,
       state.refreshToken,
       state.cashBackType,
     ],
   );
 
-  if (state.isRefreshTokenExpired) {
-    return (
-      <PopupModal
-        title="Token Expired"
-        detail="Please login again"
-        callback={handlePopupPress}
-      />
-    );
-  }
-
   if (state.isLoading) {
     return null;
   }
 
   return (
-    <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authContext}>
+      {children}
+      {state.isRefreshTokenExpired && (
+        <PopupModal
+          title="Token Expired"
+          detail="Please login again"
+          callback={handlePopupPress}
+        />
+      )}
+    </AuthContext.Provider>
   );
 };
 
