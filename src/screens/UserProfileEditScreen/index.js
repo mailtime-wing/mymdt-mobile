@@ -191,11 +191,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
         <>
           <MarginTop />
           <ProfilePictureContainer>
-            <UserIcon
-              sizeVariant="normal"
-              source={values.profilePicture}
-              onPress={() => console.log('123')}
-            />
+            <UserIcon sizeVariant="normal" source={values.profilePicture} />
             <Name>{values.name}</Name>
           </ProfilePictureContainer>
           <ListOption
