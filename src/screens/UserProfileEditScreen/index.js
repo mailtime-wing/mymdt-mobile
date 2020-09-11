@@ -9,7 +9,6 @@ import {AuthContext} from '@/context/auth';
 
 import {
   Container,
-  UserIcon,
   FillIcon,
   Error,
   DateFieldContainer,
@@ -17,7 +16,6 @@ import {
   ProfilePictureContainer,
   ProfilePictureEditingContainer,
   ProfilePictureText,
-  UserIconContainer,
   Name,
   MarginTop,
 } from './style';
@@ -32,6 +30,7 @@ import CancelButton from '@/components/CancelButton';
 import ConfirmButton from '@/components/ConfirmButton';
 import CloseIconButton from '@/components/CloseIconButton';
 import Input from '@/components/AppInput';
+import UserIcon from '@/components/UserIcon';
 
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
 
@@ -156,9 +155,12 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
                 defaultMessage="profile photo"
               />
             </ProfilePictureText>
-            <UserIconContainer onPress={() => handleCameraPress()}>
-              <UserIcon source={values.profilePicture} />
-            </UserIconContainer>
+            <UserIcon
+              sizeVariant="normal"
+              variant="navigator"
+              source={values.profilePicture}
+              onPress={() => handleCameraPress()}
+            />
             <FillIcon source={require('@/assets/filled.png')} />
           </ProfilePictureEditingContainer>
           <Input
@@ -189,7 +191,11 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
         <>
           <MarginTop />
           <ProfilePictureContainer>
-            <UserIcon source={values.profilePicture} />
+            <UserIcon
+              sizeVariant="normal"
+              source={values.profilePicture}
+              onPress={() => console.log('123')}
+            />
             <Name>{values.name}</Name>
           </ProfilePictureContainer>
           <ListOption

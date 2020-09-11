@@ -9,7 +9,6 @@ import {
   toolsRowContainer,
   buttons,
   imageStyle,
-  bigAccountIcon,
   validDate,
   name,
   rowContainer,
@@ -68,7 +67,7 @@ const MembershipScreen = ({navigation}) => {
             source={require('@/assets/RewardMeCard.png')}
           />
           <View style={userRowContainer}>
-            <UserIcon style={bigAccountIcon} />
+            <UserIcon sizeVariant="normal" />
             <View style={rightContainer}>
               <AppText variant="heading5" style={name(theme)}>
                 {data?.userProfile?.name}

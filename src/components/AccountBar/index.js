@@ -37,7 +37,10 @@ const AccountBar = ({navigation, showCoins}) => {
   return (
     <View style={accountContainer}>
       <View style={leftContainer}>
-        <UserIcon onPress={() => navigation.navigate('membership')} />
+        <UserIcon
+          onPress={() => navigation.navigate('membership')}
+          variant="navigator"
+        />
         <MembershipLevelChip
           style={membershipPosition}
           userLevel={data?.userProfile?.membership?.level || 0}
