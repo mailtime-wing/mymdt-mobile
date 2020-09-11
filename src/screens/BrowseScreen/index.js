@@ -11,9 +11,11 @@ import AppIcon from '@/components/AppIcon';
 import PopupModal from '@/components/PopupModal';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
 import MRPGiftBox from '@/components/MRPGiftBox';
+import RewardGotPopup from '@/components/RewardGotPopup';
 
 import HomeIcon from '@/assets/home.svg';
 import HeartIcon from '@/assets/heart_icon.svg';
+import {FormattedMessage} from 'react-intl';
 
 const details = {
   alertBody: 'test for enable notification!',
@@ -41,6 +43,7 @@ const BrowseScreen = ({...props}) => {
   const theme = useTheme();
   const [show, setShow] = useState(false);
   const [showLinearGradient, setShowLinearGradient] = useState(false);
+  const [showReward, setShowReward] = useState(false);
   const {notify} = useContext(NotificationContext);
   useEffect(() => {
     notify(details);
@@ -90,11 +93,12 @@ const BrowseScreen = ({...props}) => {
               />
               <AppButton
                 variant="filled"
-                text="Normal Filled Secondary"
+                text="Click to get reward"
                 sizeVariant="normal"
                 colorVariant="secondary"
                 svgIcon={HomeIcon}
                 style={marginForTest}
+                onPress={() => setShowReward(true)}
               />
               <AppButton
                 variant="filled"
@@ -107,7 +111,7 @@ const BrowseScreen = ({...props}) => {
               />
               <AppButton
                 variant="filled"
-                text="Click to get reward"
+                text="Click to open linear-gradient"
                 sizeVariant="large"
                 colorVariant="contrast"
                 svgIcon={HomeIcon}
@@ -211,12 +215,18 @@ const BrowseScreen = ({...props}) => {
                 detail="This is Pop Up Modal"
                 callback={() => setShow(false)}
               />
-
               <PopupModalWithLinearGradient
                 visible={showLinearGradient}
                 callback={() => setShowLinearGradient(false)}>
                 {<MRPGiftBox />}
               </PopupModalWithLinearGradient>
+              <RewardGotPopup
+                visible={showReward}
+                onOkPress={() => setShowReward(false)}
+                rewardName={<FormattedMessage id="reward_type_check_in" />}
+                rewardAmount={20}
+                convert={true}
+              />
             </View>
           </>
         }

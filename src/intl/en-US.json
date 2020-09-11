@@ -39,6 +39,11 @@
   "checked_in": "Checked In",
   "claim": "Claim",
   "claimed_on": "Claimed on {date}",
+  "you_got_reward": "You got a {reward_type}!",
+  "reward_type_default": "reward",
+  "reward_type_check_in": "check-in reward",
+  "reward_type_bonus_task": "bonus task reward",
+  "converted_from": "Converted from",
 
   "wallet": "Wallet",
   "convert": "Convert",
