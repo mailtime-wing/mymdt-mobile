@@ -4,6 +4,8 @@ import GiftBoxOpen from '@/components/GiftBoxOpen';
 
 const coinIconSource = require('@/assets/mdt_coin.png');
 
-const MDTGiftBox = () => <GiftBoxOpen coinIconSource={coinIconSource} />;
+const MDTGiftBox = props => (
+  <GiftBoxOpen coinIconSource={coinIconSource} {...props} />
+);
 
 export default MDTGiftBox;

@@ -1,9 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {Linking} from 'react-native';
 import {FormattedMessage, FormattedDate} from 'react-intl';
-import {useMutation} from '@apollo/react-hooks';
-import {CLAIM_REWARD_API} from '@/api/data';
-import {AuthContext} from '@/context/auth';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useMutationWithReset from '@/hooks/useMutationWithReset';
+import {CLAIM_REWARD_API, GET_CURRENCY_CODE} from '@/api/data';
+import {MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 
 import {
   Container,
@@ -16,31 +17,30 @@ import {
 import MRPCoin from '@/components/MRPCoin';
 import AppButton from '@/components/AppButton';
 import PopupModal from '@/components/PopupModal';
-import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
-import MRPGiftBox from '@/components/MRPGiftBox';
+import RewardGotPopup from '@/components/RewardGotPopup';
 import AppText from '@/components/AppText2';
 import {useTheme} from 'emotion-theming';
 
 const flexEnd = {justifyContent: 'flex-end'};
-const giftBoxStyle = {
-  transform: [
-    {
-      scale: 0.75,
-    },
-  ],
-};
 
-const TaskList = ({taskList, userRewardList}) => {
+const TaskList = ({taskList, userRewardList, onClaimPress}) => {
   const theme = useTheme();
-  const {authToken} = useContext(AuthContext);
   const [clientError, setClientError] = useState(false);
-  const [claimRewardRequest, {data, error}] = useMutation(CLAIM_REWARD_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-  });
+  const {data: currencyCodeData} = useQueryWithAuth(GET_CURRENCY_CODE);
+  const [claimRewardRequest, {data, error}, reset] = useMutationWithReset(
+    CLAIM_REWARD_API,
+    {},
+    {withAuth: true},
+  );
+
+  const cashbackCurrencyCode =
+    currencyCodeData?.userProfile?.cashbackCurrencyCode;
+  const convert = cashbackCurrencyCode === MEASURABLE_DATA_TOKEN;
+
+  const handleRewardGotPress = () => {
+    reset();
+    onClaimPress();
+  };
 
   const handleClaimPress = async rewardId => {
     try {
@@ -49,6 +49,7 @@ const TaskList = ({taskList, userRewardList}) => {
           id: rewardId,
         },
       });
+      onClaimPress();
     } catch (e) {
       console.error(e);
     }
@@ -133,15 +134,16 @@ const TaskList = ({taskList, userRewardList}) => {
                 )}
               </MarginLeft>
             ) : null}
+            <RewardGotPopup
+              visible={!!data}
+              onOkPress={handleRewardGotPress}
+              rewardName={<FormattedMessage id="reward_type_bonus_task" />}
+              rewardAmount={task.rewardValue}
+              convert={convert}
+            />
           </RowContainer>
         );
       })}
-      {data && (
-        // TODO: add reward message after preload the user current currency
-        <PopupModalWithLinearGradient>
-          <MRPGiftBox style={giftBoxStyle} />
-        </PopupModalWithLinearGradient>
-      )}
       {(error || clientError) && (
         <PopupModal
           title="Something went wrong!"

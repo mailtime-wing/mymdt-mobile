@@ -395,3 +395,12 @@ export const GET_USER_SECURITY_SETTINGS = gql`
     }
   }
 `;
+
+export const GET_CURRENCY_CODE = gql`
+  query {
+    userProfile {
+      id
+      cashbackCurrencyCode
+    }
+  }
+`;

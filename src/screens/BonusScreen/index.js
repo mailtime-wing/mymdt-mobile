@@ -1,9 +1,8 @@
-import React, {Fragment, useContext} from 'react';
+import React, {Fragment} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import {useQuery} from '@apollo/react-hooks';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {GET_USER_TASK_GROUPS_AND_REWARD_API} from '@/api/data';
-import {AuthContext} from '@/context/auth';
 
 import {MarginBottom, ScrollContainer, TaskListContainer} from './style';
 
@@ -15,17 +14,13 @@ import DailyCheckIn from '@/components/DailyCheckIn';
 import TaskList from '@/components/TaskList';
 
 const BonusScreen = props => {
-  const {authToken} = useContext(AuthContext);
-  const {data} = useQuery(GET_USER_TASK_GROUPS_AND_REWARD_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-    fetchPolicy: 'network-only',
-  });
+  const {data, refetch} = useQueryWithAuth(GET_USER_TASK_GROUPS_AND_REWARD_API);
 
   const userRewardList = data?.userProfile?.rewards;
+
+  const handleOnClaimPress = () => {
+    refetch();
+  };
 
   return (
     <LinearGradientBackground>
@@ -49,6 +44,7 @@ const BonusScreen = props => {
                     <TaskList
                       taskList={userTasks}
                       userRewardList={userRewardList}
+                      onClaimPress={handleOnClaimPress}
                     />
                   </TaskListContainer>
                 }
