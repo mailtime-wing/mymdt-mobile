@@ -8,6 +8,7 @@ import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import AppButton from '@/components/AppButton';
 import AppIcon from '@/components/AppIcon';
+import AppImage from '@/components/AppImage';
 import PopupModal from '@/components/PopupModal';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
 import MRPGiftBox from '@/components/MRPGiftBox';
@@ -63,6 +64,20 @@ const BrowseScreen = ({...props}) => {
                 `,
                 testStyle,
               ]}>
+              <View style={rowForTest}>
+                <AppImage
+                  sizeVariant="small"
+                  imageSrc={require('@/assets/dog_avatar.png')}
+                />
+                <AppImage
+                  sizeVariant="normal"
+                  imageSrc={require('@/assets/dog_avatar.png')}
+                />
+                <AppImage
+                  sizeVariant="large"
+                  imageSrc={require('@/assets/dog_avatar.png')}
+                />
+              </View>
               <View style={rowForTest}>
                 <AppIcon
                   sizeVariant="small"
