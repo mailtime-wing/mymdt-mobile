@@ -1,10 +1,10 @@
 import {useState, useRef, useCallback} from 'react';
-import {useMutation} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/client';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 /**
  * @typedef {import('graphql').DocumentNode} DocumentNode
- * @typedef {import('@apollo/react-hooks').MutationHookOptions} MutationHookOptions
+ * @typedef {import('@apollo/client').MutationHookOptions} MutationHookOptions
  * @typedef {import('@apollo/react-common').MutationFunctionOptions} MutationFunctionOptions
  * @typedef {import('@apollo/react-common').ExecutionResult ExecutionResult}
  * @typedef {import('@apollo/react-common').MutationResult} MutationResult

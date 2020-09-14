@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
-import {useQuery} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/client';
 import {GET_USER_SETUP_STATUS_API, GET_APP_CONFIG_API} from '@/api/data';
 
 import SplashScreen from '@/screens/SplashScreen';

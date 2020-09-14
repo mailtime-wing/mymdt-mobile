@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View} from 'react-native';
 import {AuthContext} from '@/context/auth';
-import {useQuery} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/client';
 import {GET_USER_MEMBERSHIP_API} from '@/api/data';
 import {useTheme} from 'emotion-theming';
 
@@ -37,9 +37,7 @@ const AccountBar = ({navigation, showCoins}) => {
   return (
     <View style={accountContainer}>
       <View style={leftContainer}>
-        <UserIcon
-          onPress={() => navigation.navigate('membership')}
-        />
+        <UserIcon onPress={() => navigation.navigate('membership')} />
         <MembershipLevelChip
           style={membershipPosition}
           userLevel={data?.userProfile?.membership?.level || 0}

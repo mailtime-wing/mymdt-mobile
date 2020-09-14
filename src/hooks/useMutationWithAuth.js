@@ -1,12 +1,12 @@
 import {useCallback, useContext, useReducer, useMemo} from 'react';
-import {useMutation} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/client';
 
 import {AuthContext} from '@/context/auth';
 
 /**
  * @typedef {import('graphql').DocumentNode} DocumentNode
- * @typedef {import('@apollo/react-hooks').MutationHookOptions} MutationHookOptions
- * @typedef {import('@apollo/react-hooks').MutationTuple<any, any>} MutationTuple
+ * @typedef {import('@apollo/client').MutationHookOptions} MutationHookOptions
+ * @typedef {import('@apollo/client').MutationTuple<any, any>} MutationTuple
  * @typedef {import('@apollo/react-common').MutationFunctionOptions<any, Record<string, any>>} MutationFunctionOptions
  */
 

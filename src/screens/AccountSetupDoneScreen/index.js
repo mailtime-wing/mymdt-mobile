@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {TouchableOpacity} from 'react-native';
-import {useQuery} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/client';
 import {useTheme} from 'emotion-theming';
 
 import LoadingSpinner from '@/components/LoadingSpinner';

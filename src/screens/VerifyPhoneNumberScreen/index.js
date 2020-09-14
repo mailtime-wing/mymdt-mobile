@@ -3,7 +3,7 @@ import {View, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {AuthContext} from '@/context/auth';
 import {GET_OTP_API, REGISTER_API} from '@/api/auth';
-import {useMutation} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/client';
 import {Formik, useFormikContext} from 'formik';
 import {IntlContext} from '@/context/Intl';
 import useCountDownTimer from '@/hooks/timer';

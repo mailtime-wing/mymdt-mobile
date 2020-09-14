@@ -1,11 +1,11 @@
 import {useContext} from 'react';
-import {useLazyQuery} from '@apollo/react-hooks';
+import {useLazyQuery} from '@apollo/client';
 
 import {AuthContext} from '@/context/auth';
 
 /**
  * @typedef {import('graphql').DocumentNode} DocumentNode
- * @typedef {import('@apollo/react-hooks').LazyQueryHookOptions} LazyQueryHookOptions
+ * @typedef {import('@apollo/client').LazyQueryHookOptions} LazyQueryHookOptions
  *
  * @param  {DocumentNode} query
  * @param  {QueryHookOptions} options

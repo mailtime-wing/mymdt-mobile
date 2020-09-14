@@ -3,7 +3,7 @@ import {TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
 import {FormattedMessage, FormattedDate} from 'react-intl';
 import ImagePicker from 'react-native-image-picker';
 import {Formik, useFormikContext} from 'formik';
-import {useMutation, useQuery} from '@apollo/react-hooks';
+import {useMutation, useQuery} from '@apollo/client';
 import {UPDATE_USER_PROFILE_EDIT_API, GET_USER_PROFILE_API} from '@/api/data';
 import {AuthContext} from '@/context/auth';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {ApolloProvider} from '@apollo/react-hooks';
+import {ApolloProvider} from '@apollo/client';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import client from '@/api/client';

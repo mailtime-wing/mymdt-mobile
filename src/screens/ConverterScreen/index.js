@@ -3,7 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import {KeyboardAvoidingView, ScrollView} from 'react-native';
 import {Formik} from 'formik';
 import {AuthContext} from '@/context/auth';
-import {useQuery, useMutation} from '@apollo/react-hooks';
+import {useQuery, useMutation} from '@apollo/client';
 import {GET_CONVERSION_RATE_API, CURRENCY_CONVERT_API} from '@/api/data';
 
 import {Container, Detail} from './style';
@@ -60,8 +60,8 @@ const ConverterScreen = ({navigation, route}) => {
 
   const validate = values => {
     const errors = {};
-    if(values.amount <= 0) {
-      errors.amount = 'must more than 0'
+    if (values.amount <= 0) {
+      errors.amount = 'must more than 0';
     }
     // TODO: handle if amount is not enough / return meaningful error from backend
     // errors.amount = 'Do not have enough amount'

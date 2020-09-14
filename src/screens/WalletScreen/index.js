@@ -2,7 +2,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {VirtualizedList} from 'react-native';
 import {AuthContext} from '@/context/auth';
-import {useLazyQuery} from '@apollo/react-hooks';
+import {useLazyQuery} from '@apollo/client';
 import {TRANSACTIONS_QUERY} from '@/api/data';
 import {REWARD, REDEEM, INTEREST, CHECK_IN} from '@/constants/transactionsType';
 import {useTheme} from 'emotion-theming';

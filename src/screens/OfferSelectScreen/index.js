@@ -1,6 +1,6 @@
 import React, {useState, useContext, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {useQuery, useMutation} from '@apollo/react-hooks';
+import {useQuery, useMutation} from '@apollo/client';
 import {useTheme} from 'emotion-theming';
 
 import {IntlContext} from '@/context/Intl';

@@ -8,7 +8,7 @@ import React, {
 import AsyncStorage from '@react-native-community/async-storage';
 import jwt_decode from 'jwt-decode';
 import {REFRESH_TOKEN_API} from '@/api/auth';
-import {useMutation} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/client';
 
 import PopupModal from '@/components/PopupModal';
 

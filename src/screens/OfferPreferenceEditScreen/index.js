@@ -2,7 +2,7 @@ import React, {useContext, useState, useCallback} from 'react';
 import {FormattedMessage, FormattedDate} from 'react-intl';
 import {useFocusEffect} from '@react-navigation/native';
 import {AuthContext} from '@/context/auth';
-import {useQuery} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/client';
 import {GET_USER_OFFER_API, GET_USER_MEMBERSHIP_API} from '@/api/data';
 
 import ModalContaienr from '@/components/ModalContainer';

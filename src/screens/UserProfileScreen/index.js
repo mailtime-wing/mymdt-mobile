@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
-import {useMutation} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/client';
 import {useTheme} from 'emotion-theming';
 
 import {AuthContext} from '@/context/auth';

@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useReducer, useContext} from 'react';
 import {ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
-import {useMutation, useQuery} from '@apollo/react-hooks';
+import {useMutation, useQuery} from '@apollo/client';
 
 import {AuthContext} from '@/context/auth';
 import ModalContainer from '@/components/ModalContainer';

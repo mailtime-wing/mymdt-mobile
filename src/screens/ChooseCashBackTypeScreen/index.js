@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
-import {useMutation} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/client';
 import {css} from '@emotion/native';
 
 import {

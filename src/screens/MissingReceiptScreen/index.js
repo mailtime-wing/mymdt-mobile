@@ -10,7 +10,7 @@ import {
 import {FormattedMessage} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
 import {AuthContext} from '@/context/auth';
-import {useMutation} from '@apollo/react-hooks';
+import {useMutation} from '@apollo/client';
 import {REPORT_MISSING_RECEIPT} from '@/api/data';
 
 import {

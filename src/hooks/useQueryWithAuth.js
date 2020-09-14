@@ -1,11 +1,11 @@
 import {useContext} from 'react';
-import {useQuery} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/client';
 
 import {AuthContext} from '@/context/auth';
 
 /**
  * @typedef {import('graphql').DocumentNode} DocumentNode
- * @typedef {import('@apollo/react-hooks').QueryHookOptions} QueryHookOptions
+ * @typedef {import('@apollo/client').QueryHookOptions} QueryHookOptions
  *
  * @param  {DocumentNode} query
  * @param  {QueryHookOptions} options
