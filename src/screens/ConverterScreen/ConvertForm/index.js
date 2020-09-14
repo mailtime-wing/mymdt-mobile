@@ -91,11 +91,27 @@ const KeyboardButtons = ({handleConverterOnChange, from}) => {
   );
 };
 
-const ConverterInput = ({title, name, handleError, ...props}) => {
+const ConverterInput = ({
+  title,
+  name,
+  handleError,
+  setFieldValue,
+  ...props
+}) => {
   const intl = useIntl();
   const [field, meta] = useField(name);
   const onError = meta.error;
   // TODO: handle when have error design
+
+  const handleChange = text => {
+    let result = text;
+
+    if (isNaN(text)) {
+      result = Number(text.split(',').join(''));
+    }
+
+    setFieldValue('amount', result);
+  };
 
   useEffect(() => {
     handleError(meta.error);
@@ -105,7 +121,7 @@ const ConverterInput = ({title, name, handleError, ...props}) => {
     <>
       <Input
         value={intl.formatNumber(field.value)}
-        onChangeText={field.onChange(name)}
+        onChangeText={handleChange}
         {...props}
       />
     </>
@@ -226,6 +242,7 @@ const ConvertForm = ({conversionRate, from}) => {
             inputAccessoryViewID={inputAccessoryViewID}
             editable={true}
             handleError={handleError}
+            setFieldValue={setFieldValue}
           />
           <KeyboardButtons
             handleConverterOnChange={handleConverterOnChange}
@@ -234,13 +251,13 @@ const ConvertForm = ({conversionRate, from}) => {
         </ConverterContainer>
         <Margin />
         {
-          /* <AppIcon
-          color={theme.colors.background1}
-          backgroundColor={isMrp ? theme.colors.secondary.normal : theme.colors.primary.normal}
-          sizeVariant='small'
-          svgIcon={ConvertIcon}
-          style={convertIcon}
-        /> */
+          // <AppIcon
+          //   color={theme.colors.background1}
+          //   backgroundColor={isMrp ? theme.colors.secondary.normal : theme.colors.primary.normal}
+          //   sizeVariant='small'
+          //   svgIcon={ConvertIcon}
+          //   style={convertIcon}
+          // />
           // TODO: fix background color not work when use appIcon
         }
         <ConvertIcon2
@@ -251,7 +268,10 @@ const ConvertForm = ({conversionRate, from}) => {
           <AppText variant="value" style={converterType(theme)}>
             {ToAmountText}
           </AppText>
-          <AppText variant="heading1" style={numberText(theme)}>
+          <AppText
+            variant="heading1"
+            style={numberText(theme)}
+            numberOfLines={1}>
             <FormattedNumber value={toAmount} />
           </AppText>
         </ConverterContainer>
