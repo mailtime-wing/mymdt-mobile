@@ -1,5 +1,10 @@
 import React, {useContext, useLayoutEffect, useEffect, useReducer} from 'react';
-import {TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
+import {
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+  Keyboard,
+  ScrollView,
+} from 'react-native';
 import {FormattedMessage, FormattedDate} from 'react-intl';
 import ImagePicker from 'react-native-image-picker';
 import {Formik, useFormikContext} from 'formik';
@@ -30,7 +35,7 @@ import CancelButton from '@/components/CancelButton';
 import ConfirmButton from '@/components/ConfirmButton';
 import CloseIconButton from '@/components/CloseIconButton';
 import Input from '@/components/AppInput';
-import UserIcon from '@/components/UserIcon';
+import AppAvator from '@/components/AppAvator';
 
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
 
@@ -155,12 +160,13 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
                 defaultMessage="profile photo"
               />
             </ProfilePictureText>
-            <UserIcon
-              sizeVariant="normal"
-              variant="navigator"
-              source={values.profilePicture}
-              onPress={() => handleCameraPress()}
-            />
+            <TouchableOpacity onPress={() => handleCameraPress()}>
+              <AppAvator
+                variant="image"
+                sizeVariant="normal"
+                imageSrc={values.profilePicture}
+              />
+            </TouchableOpacity>
             <FillIcon source={require('@/assets/filled.png')} />
           </ProfilePictureEditingContainer>
           <Input
@@ -191,7 +197,11 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
         <>
           <MarginTop />
           <ProfilePictureContainer>
-            <UserIcon sizeVariant="normal" source={values.profilePicture} />
+            <AppAvator
+              variant="image"
+              sizeVariant="normal"
+              imageSrc={values.profilePicture}
+            />
             <Name>{values.name}</Name>
           </ProfilePictureContainer>
           <ListOption
@@ -285,7 +295,7 @@ const UserProfileEditScreen = ({navigation}) => {
   };
 
   const initialValues = {
-    profilePicture: require('@/assets/zt-mask.jpg'),
+    profilePicture: require('@/assets/dog_avatar.png'),
     name: data?.userProfile?.name,
     gender: genderOptions.find(
       gender => gender.value === data?.userProfile?.gender,
