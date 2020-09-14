@@ -2,7 +2,7 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {container, styles} from './style';
 import {useTheme} from 'emotion-theming';
-import AppImage from '@/components/AppImage';
+import AppAvator from '@/components/AppAvator';
 
 /**
  * @typedef {Object} Props
@@ -21,7 +21,7 @@ const UserIcon = ({source, style, variant, sizeVariant, ...props}) => {
   if (variant === 'navigator') {
     return (
       <TouchableOpacity style={container} {...props}>
-        <AppImage
+        <AppAvator
           sizeVariant={sizeVariant}
           style={[styles(theme).accountIcon, style]}
           imageSrc={source}
@@ -31,7 +31,7 @@ const UserIcon = ({source, style, variant, sizeVariant, ...props}) => {
   }
 
   return (
-    <AppImage
+    <AppAvator
       sizeVariant={sizeVariant}
       style={[styles(theme).accountIcon, style]}
       imageSrc={source}

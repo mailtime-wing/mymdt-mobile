@@ -83,12 +83,27 @@ export const darkTheme = {
     alert: '#FFD542',
 
     rewardCircleBackground: '#464646',
+
+    avatarsInitials: [
+      '#F19898',
+      '#F4C395',
+      '#F4C395',
+      '#D1E6A4',
+      '#A0D79C',
+      '#8EDAC8',
+      '#93CAD1',
+      '#8EB2DD',
+      '#A59BDF',
+      '#BE99CF',
+      '#DFA4C0',
+      '#B89D97',
+    ],
   },
   fonts: {
     body: 'Inter',
     heading: Platform.OS === 'ios' ? 'Neo Sans Pro' : 'Neo Sans Pro Medium',
   },
-  fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36],
+  fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36, 48],
   fontWeights: [400, 500, 600, 700],
   lineHeights: {},
 };
@@ -166,12 +181,27 @@ export const lightTheme = {
     alert: '#FFD542',
 
     rewardCircleBackground: '#FFFFFF',
+
+    avatarsInitials: [
+      '#F15454',
+      '#F88E2D',
+      '#FDCC1E',
+      '#9CD81C',
+      '#42C936',
+      '#26D6AB',
+      '#1CD1EA',
+      '#328BF4',
+      '#7766E2',
+      '#AD41E0',
+      '#EC4696',
+      '#8B5F55',
+    ],
   },
   fonts: {
     body: 'Inter',
     heading: Platform.OS === 'ios' ? 'Neo Sans Pro' : 'Neo Sans Pro Medium',
   },
-  fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36],
+  fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36, 48],
   fontWeights: [400, 500, 600, 700],
   lineHeights: {},
 };
@@ -262,6 +292,9 @@ lightTheme.fonts.value = lightTheme.fonts.body;
 lightTheme.fonts.button = lightTheme.fonts.body;
 lightTheme.fonts.label = lightTheme.fonts.body;
 lightTheme.fonts.overline = lightTheme.fonts.body;
+lightTheme.fonts.initials1 = lightTheme.fonts.body;
+lightTheme.fonts.initials2 = lightTheme.fonts.body;
+lightTheme.fonts.initials3 = lightTheme.fonts.body;
 lightTheme.fontSizes.pageTitle = lightTheme.fontSizes[8];
 lightTheme.fontSizes.heading1 = lightTheme.fontSizes[8];
 lightTheme.fontSizes.heading2 = lightTheme.fontSizes[7];
@@ -277,6 +310,9 @@ lightTheme.fontSizes.value = lightTheme.fontSizes[3];
 lightTheme.fontSizes.button = lightTheme.fontSizes[2];
 lightTheme.fontSizes.label = lightTheme.fontSizes[1];
 lightTheme.fontSizes.overline = lightTheme.fontSizes[0];
+lightTheme.fontSizes.initials1 = lightTheme.fontSizes[6];
+lightTheme.fontSizes.initials2 = lightTheme.fontSizes[8];
+lightTheme.fontSizes.initials3 = lightTheme.fontSizes[9];
 lightTheme.fontWeights.pageTitle = lightTheme.fontWeights[1];
 lightTheme.fontWeights.heading1 = lightTheme.fontWeights[1];
 lightTheme.fontWeights.heading2 = lightTheme.fontWeights[1];
@@ -292,6 +328,9 @@ lightTheme.fontWeights.value = lightTheme.fontWeights[2];
 lightTheme.fontWeights.button = lightTheme.fontWeights[2];
 lightTheme.fontWeights.label = lightTheme.fontWeights[3];
 lightTheme.fontWeights.overline = lightTheme.fontWeights[2];
+lightTheme.fontWeights.initials1 = lightTheme.fontWeights[2];
+lightTheme.fontWeights.initials2 = lightTheme.fontWeights[2];
+lightTheme.fontWeights.initials3 = lightTheme.fontWeights[2];
 
 lightTheme.lineHeights.pageTitle = lightTheme.fontSizes.pageTitle * 1.25;
 lightTheme.lineHeights.heading1 = lightTheme.fontSizes.heading1 * 1.25;
@@ -308,6 +347,9 @@ lightTheme.lineHeights.value = lightTheme.fontSizes.value * 1.5;
 lightTheme.lineHeights.button = lightTheme.fontSizes.button * 1.5;
 lightTheme.lineHeights.label = lightTheme.fontSizes.label * 1.5;
 lightTheme.lineHeights.overline = lightTheme.fontSizes.overline * 1.5;
+lightTheme.lineHeights.initials1 = lightTheme.fontSizes.initials1 * 1.5;
+lightTheme.lineHeights.initials2 = lightTheme.fontSizes.initials2 * 1.5;
+lightTheme.lineHeights.initials3 = lightTheme.fontSizes.initials3 * 1.5;
 
 // main theme
 darkTheme.colors.primary.normal = darkTheme.colors.primary[0];
@@ -393,6 +435,9 @@ darkTheme.fonts.value = darkTheme.fonts.body;
 darkTheme.fonts.button = darkTheme.fonts.body;
 darkTheme.fonts.label = darkTheme.fonts.body;
 darkTheme.fonts.overline = darkTheme.fonts.body;
+darkTheme.fonts.initials1 = darkTheme.fonts.body;
+darkTheme.fonts.initials2 = darkTheme.fonts.body;
+darkTheme.fonts.initials3 = darkTheme.fonts.body;
 darkTheme.fontSizes.pageTitle = darkTheme.fontSizes[8];
 darkTheme.fontSizes.heading1 = darkTheme.fontSizes[8];
 darkTheme.fontSizes.heading2 = darkTheme.fontSizes[7];
@@ -408,6 +453,9 @@ darkTheme.fontSizes.value = darkTheme.fontSizes[3];
 darkTheme.fontSizes.button = darkTheme.fontSizes[2];
 darkTheme.fontSizes.label = darkTheme.fontSizes[1];
 darkTheme.fontSizes.overline = darkTheme.fontSizes[0];
+darkTheme.fontSizes.initials1 = darkTheme.fontSizes[6];
+darkTheme.fontSizes.initials2 = darkTheme.fontSizes[8];
+darkTheme.fontSizes.initials3 = darkTheme.fontSizes[9];
 darkTheme.fontWeights.pageTitle = darkTheme.fontWeights[1];
 darkTheme.fontWeights.heading1 = darkTheme.fontWeights[1];
 darkTheme.fontWeights.heading2 = darkTheme.fontWeights[1];
@@ -423,6 +471,9 @@ darkTheme.fontWeights.value = darkTheme.fontWeights[2];
 darkTheme.fontWeights.button = darkTheme.fontWeights[2];
 darkTheme.fontWeights.label = darkTheme.fontWeights[3];
 darkTheme.fontWeights.overline = darkTheme.fontWeights[2];
+darkTheme.fontWeights.initials1 = darkTheme.fontWeights[2];
+darkTheme.fontWeights.initials2 = darkTheme.fontWeights[2];
+darkTheme.fontWeights.initials3 = darkTheme.fontWeights[2];
 
 darkTheme.lineHeights.pageTitle = darkTheme.fontSizes.pageTitle * 1.25;
 darkTheme.lineHeights.heading1 = darkTheme.fontSizes.heading1 * 1.25;
@@ -439,3 +490,6 @@ darkTheme.lineHeights.value = darkTheme.fontSizes.value * 1.5;
 darkTheme.lineHeights.button = darkTheme.fontSizes.button * 1.5;
 darkTheme.lineHeights.label = darkTheme.fontSizes.label * 1.5;
 darkTheme.lineHeights.overline = darkTheme.fontSizes.overline * 1.5;
+darkTheme.lineHeights.initials1 = darkTheme.fontSizes.initials1 * 1.5;
+darkTheme.lineHeights.initials2 = darkTheme.fontSizes.initials2 * 1.5;
+darkTheme.lineHeights.initials3 = darkTheme.fontSizes.initials3 * 1.5;

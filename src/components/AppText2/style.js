@@ -14,4 +14,7 @@ export const text = (theme, variant) => css`
     'text-transform: uppercase; letter-spacing: 1.5px;'};
   ${variant === 'label' && 'text-transform: uppercase;'};
   ${variant === 'overline' && 'text-transform: uppercase;'};
+  ${variant === 'initials1' && 'text-transform: uppercase;'};
+  ${variant === 'initials2' && 'text-transform: uppercase;'};
+  ${variant === 'initials3' && 'text-transform: uppercase;'};
 `;
