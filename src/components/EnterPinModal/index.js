@@ -25,7 +25,7 @@ import {
   styles,
 } from './style';
 
-const EnterPinModal = ({callback, ...props}) => {
+const EnterPinModal = ({onSuccess, callback, ...props}) => {
   const theme = useTheme();
   const navigation = useNavigation();
   const codeLength = 6;
@@ -49,9 +49,10 @@ const EnterPinModal = ({callback, ...props}) => {
 
   useEffect(() => {
     if (data) {
+      onSuccess && onSuccess(pin);
       handleXIconPress();
     }
-  }, [data, handleXIconPress]);
+  }, [data, handleXIconPress, onSuccess, pin]);
 
   useEffect(() => {
     if (error) {
@@ -63,7 +64,7 @@ const EnterPinModal = ({callback, ...props}) => {
 
   const handleForgotPinPress = () => {
     handleXIconPress();
-    navigation.navigate('settings', {screen: 'account_security'});
+    navigation.navigate('settings', {screen: 'forget_pin'});
   };
 
   const handleOnFulill = useCallback(
@@ -121,6 +122,7 @@ const EnterPinModal = ({callback, ...props}) => {
             codeLength={codeLength}
             password={true}
             value={pin}
+            autoFocus
             onTextChange={code => setPin(code)}
             onFulfill={handleOnFulill}
             editable={pin.length < codeLength}

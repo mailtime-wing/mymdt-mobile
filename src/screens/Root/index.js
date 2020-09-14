@@ -38,6 +38,9 @@ import SettingScreen from '@/screens/SettingScreen';
 import AppSettingScreen from '@/screens/AppSettingScreen';
 
 import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
+import VerifyPhoneNumberScreen from '@/screens/VerifyPhoneNumberScreen';
+import ChangePhoneNumberScreen from '@/screens/ChangePhoneNumberScreen';
+import PhoneSuccessScreen from '@/screens/PhoneSuccessScreen';
 import ChangePinScreen from '@/screens/ChangePinScreen';
 import SetupPinScreen from '@/screens/SetupPinScreen';
 import ForgetPinScreen from '@/screens/ForgetPinScreen';
@@ -168,6 +171,9 @@ const settingScreens = [
   {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
   {name: 'referral', component: ReferralScreen},
   {name: 'account_security', component: AccountSecurityScreen},
+  {name: 'verify_phone_number', component: VerifyPhoneNumberScreen},
+  {name: 'change_phone_number', component: ChangePhoneNumberScreen},
+  {name: 'phone_success', component: PhoneSuccessScreen},
   {name: 'change_pin', component: ChangePinScreen},
   {name: 'setup_pin', component: SetupPinScreen},
   {name: 'forget_pin', component: ForgetPinScreen},

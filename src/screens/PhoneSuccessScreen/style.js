@@ -6,5 +6,5 @@ export const detailStyle = theme => css`
 `;
 
 export const container = css`
-  padding-horizontal: 24px;
+  padding: 0 24px;
 `;

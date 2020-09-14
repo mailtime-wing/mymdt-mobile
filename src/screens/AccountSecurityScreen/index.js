@@ -9,6 +9,7 @@ import ModalContainer from '@/components/ModalContainer';
 import ListOption from '@/components/ListOption';
 import SpecialListOption from '@/components/SpecialListOption';
 import Switch from '@/components/Switch';
+import EnterPinModal from '@/components/EnterPinModal';
 import {GET_USER_SECURITY_SETTINGS} from '@/api/data';
 
 import TickIcon from '@/assets/tick.svg';
@@ -18,6 +19,7 @@ import {container, tickButton} from './style';
 const AccountSecurityScreen = ({navigation}) => {
   const theme = useTheme();
   const [isFaceIdToggled, setIsFaceIdToggled] = useState(false); // from api later
+  const [showEnterPinModal, setShowEnterPinModal] = useState(false);
   const {data, refetch} = useQueryWithAuth(GET_USER_SECURITY_SETTINGS, {
     fetchPolicy: 'network-only',
   });
@@ -35,6 +37,10 @@ const AccountSecurityScreen = ({navigation}) => {
     } else {
       navigation.navigate('change_pin');
     }
+  };
+
+  const handleChangePhoneNumberPress = () => {
+    setShowEnterPinModal(true);
   };
 
   return (
@@ -74,7 +80,16 @@ const AccountSecurityScreen = ({navigation}) => {
         <ListOption
           key="change_phone_number"
           label={<FormattedMessage id="change_phone_number" />}
-          onPress={() => navigation.navigate('change_phone_number')}
+          onPress={handleChangePhoneNumberPress}
+        />
+        <EnterPinModal
+          visible={showEnterPinModal}
+          callback={() => setShowEnterPinModal(false)}
+          onSuccess={pin =>
+            navigation.navigate('verify_phone_number', {
+              pin: pin,
+            })
+          }
         />
       </View>
     </ModalContainer>

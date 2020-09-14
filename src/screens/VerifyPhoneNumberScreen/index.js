@@ -1,160 +1,44 @@
-import React, {useContext} from 'react';
-import {View, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
-import {AuthContext} from '@/context/auth';
-import {GET_OTP_API, REGISTER_API} from '@/api/auth';
-import {useMutation} from '@apollo/client';
-import {Formik, useFormikContext} from 'formik';
-import {IntlContext} from '@/context/Intl';
-import useCountDownTimer from '@/hooks/timer';
 
-import Input from '@/components/Input';
+import {useTheme} from 'emotion-theming';
+import ModalContainer from '@/components/ModalContainer';
+import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
-import {
-  Container,
-  Title,
-  VerificationContainer,
-  VerifyDetail,
-  ResendCodeButton,
-  ResendCode,
-} from './style';
 
-const REGISTER = 'REGISTER';
+import {detailStyle, container} from './style';
 
-const VerifyPhoneNumberForm = ({phone}) => {
-  const {localeEnum} = useContext(IntlContext);
-  const [otpRequest] = useMutation(GET_OTP_API);
-  const {
-    values,
-    handleChange,
-    handleSubmit,
-    errors,
-    isValid,
-    touched,
-  } = useFormikContext();
-  const [timeLeft, setCountdownTime] = useCountDownTimer(60);
-  const isTimerStarted = timeLeft > 0;
-
-  const handleSendPress = async () => {
-    try {
-      await otpRequest({
-        variables: {
-          phoneNumber: phone,
-          locale: localeEnum,
-          action: REGISTER,
-        },
-      });
-      setCountdownTime(60);
-    } catch (e) {
-      // console.error(`error on otpRequest with ${state.formType}: ${e}`);
-    }
-  };
-
+const VerifyPhoneNumberScreen = ({navigation, route}) => {
+  const {pin} = route.params;
+  const theme = useTheme();
   return (
-    <View>
-      <VerifyDetail>
+    <ModalContainer
+      title={
         <FormattedMessage
-          id="we_have_sent_otp"
-          defaultMessage="We have sent you the verification code to {phone_number}. Didn’t receive the code?"
-          values={{
-            phone_number: phone,
-          }}
+          id="change_phone_number"
+          defaultMessage="Change Phone Number"
         />
-      </VerifyDetail>
-      <ResendCodeButton disabled={isTimerStarted} onPress={handleSendPress}>
-        <ResendCode>
-          <FormattedMessage
-            id="resend_the_code"
-            defaultMessage="Resend the Code"
-          />
-          {isTimerStarted && ' ' + timeLeft}
-        </ResendCode>
-      </ResendCodeButton>
-      <VerificationContainer>
-        <Input
-          keyboardType="number-pad"
-          onChangeText={handleChange('verificationCode')}
-          value={values.verificationCode}
-          label={
-            <FormattedMessage
-              id="verification_code"
-              defaultMessage="VERIFICATION CODE"
-            />
+      }>
+      <View style={container}>
+        <AppText variant="body1" style={detailStyle(theme)}>
+          <FormattedMessage id="change_phone_number_detail" />
+        </AppText>
+        <AppButton
+          onPress={() =>
+            navigation.navigate('verify_identity', {
+              nextScreen: 'change_phone_number',
+              otpActionKey: 'VERIFY_PHONE_NUMBER',
+              pin: pin,
+            })
           }
-          error={touched.verificationCode && errors.verificationCode}
+          text={<FormattedMessage id="next" defaultMessage="Next" />}
+          variant="filled"
+          sizeVariant="large"
+          colorVariant="secondary"
         />
-      </VerificationContainer>
-      <AppButton
-        onPress={handleSubmit}
-        disabled={!isValid}
-        text={<FormattedMessage id="submit" defaultMessage="SUBMIT" />}
-        variant="filled"
-        sizeVariant="large"
-        colorVariant="secondary"
-      />
-    </View>
-  );
-};
-
-const VerifyPhoneNumberScreen = ({route, navigation}) => {
-  const {phone, selectedOffers} = route.params;
-  const {localeEnum} = useContext(IntlContext);
-  const {updateAuthToken} = useContext(AuthContext);
-  const [registerRequest] = useMutation(REGISTER_API);
-
-  const handleSubmitPress = async values => {
-    try {
-      const {data} = await registerRequest({
-        variables: {
-          phoneNumber: phone,
-          otp: values.verificationCode,
-          subscribedOfferIds: selectedOffers.map(offer => offer.id),
-          locale: localeEnum,
-        },
-      });
-      await updateAuthToken(
-        data.register.accessToken,
-        data.register.refreshToken,
-      );
-      navigation.navigate('user_profile');
-    } catch (e) {
-      console.error('error in handleSubmitPress: ', e);
-    }
-  };
-
-  const validate = values => {
-    const errors = {};
-
-    if (!values.verificationCode) {
-      errors.verificationCode = 'OTP Required';
-    }
-
-    if (values.verificationCode.length !== 6) {
-      errors.verificationCode = 'OTP is a 6 digit number';
-    }
-
-    return errors;
-  };
-
-  return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <Container>
-        <Title>
-          <FormattedMessage
-            id="verify_phone_number"
-            defaultMessage="Verify phone number"
-          />
-        </Title>
-        <Formik
-          initialValues={{
-            verificationCode: '',
-          }}
-          onSubmit={values => handleSubmitPress(values)}
-          validate={values => validate(values)}>
-          <VerifyPhoneNumberForm phone={phone} />
-        </Formik>
-      </Container>
-    </TouchableWithoutFeedback>
+      </View>
+    </ModalContainer>
   );
 };
 
