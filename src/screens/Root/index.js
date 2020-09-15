@@ -40,6 +40,9 @@ import AppSettingScreen from '@/screens/AppSettingScreen';
 import AccountSecurityScreen from '@/screens/AccountSecurityScreen';
 import ChangePinScreen from '@/screens/ChangePinScreen';
 import SetupPinScreen from '@/screens/SetupPinScreen';
+import ForgetPinScreen from '@/screens/ForgetPinScreen';
+import VerifyIdentityScreen from '@/screens/VerifyIdentityScreen';
+import ResetPinScreen from '@/screens/ResetPinScreen';
 import PinSuccessScreen from '@/screens/PinSuccessScreen';
 
 import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
@@ -167,6 +170,9 @@ const settingScreens = [
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'change_pin', component: ChangePinScreen},
   {name: 'setup_pin', component: SetupPinScreen},
+  {name: 'forget_pin', component: ForgetPinScreen},
+  {name: 'verify_identity', component: VerifyIdentityScreen},
+  {name: 'reset_pin', component: ResetPinScreen},
   {name: 'pin_success', component: PinSuccessScreen},
   {name: 'sign_out', component: SignOutScreen},
   {name: 'app_settings', component: AppSettingScreen},

@@ -1,24 +1,38 @@
 import React, {useEffect} from 'react';
-import {Keyboard} from 'react-native';
+import {useNavigationState} from '@react-navigation/native';
+import {Keyboard, ScrollView, View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
+import {useTheme} from 'emotion-theming';
 
 import ModalContainer from '@/components/ModalContainer';
 import AppButton from '@/components/AppButton';
+import AppText from '@/components/AppText2';
 
-import {ScrollContainer, Container, Detail} from './style';
+import {container, detailStyle} from './style';
 
 const PinSuccessScreen = ({navigation, route}) => {
+  const theme = useTheme();
+  const navigationStateRoutes = useNavigationState(state => state.routes);
+
   useEffect(() => {
     Keyboard.dismiss();
   }, []);
+
   return (
-    <ModalContainer
-      title={<FormattedMessage id="success" defaultMessage="success" />}>
-      <ScrollContainer>
-        <Container>
-          <Detail>{route?.params?.pin_action}</Detail>
+    <ScrollView>
+      <ModalContainer
+        title={<FormattedMessage id="success" defaultMessage="success" />}>
+        <View style={container}>
+          <AppText variant="body1" style={detailStyle(theme)}>
+            {route?.params?.pin_action}
+          </AppText>
           <AppButton
-            onPress={() => navigation.pop(2)}
+            onPress={() => {
+              const accountSecurityRoute = navigationStateRoutes.find(
+                _route => _route.name === 'account_security',
+              );
+              navigation.navigate({key: accountSecurityRoute.key});
+            }}
             text={
               <FormattedMessage
                 id="back_to_account_security"
@@ -29,9 +43,9 @@ const PinSuccessScreen = ({navigation, route}) => {
             sizeVariant="large"
             colorVariant="secondary"
           />
-        </Container>
-      </ScrollContainer>
-    </ModalContainer>
+        </View>
+      </ModalContainer>
+    </ScrollView>
   );
 };
 

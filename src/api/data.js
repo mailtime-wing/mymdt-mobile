@@ -416,3 +416,12 @@ export const GET_CURRENCY_CODE = gql`
     }
   }
 `;
+
+export const GET_USER_PHONE_NUMBER = gql`
+  query {
+    userProfile {
+      id
+      phoneNumber
+    }
+  }
+`;

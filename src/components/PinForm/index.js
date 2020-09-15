@@ -3,7 +3,6 @@ import {View, Keyboard} from 'react-native';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 
 import {
-  Title,
   hintStyle,
   container,
   pinDot,
@@ -15,7 +14,7 @@ import {
 import AppText from '@/components/AppText2';
 import {useTheme} from 'emotion-theming';
 
-const PinForm = ({title, hints, error, onFulfill}) => {
+const PinForm = ({hints, error, onFulfill}) => {
   const theme = useTheme();
   const pinInput = useRef(null);
   const [pinCode, setPinCode] = useState('');
@@ -33,7 +32,6 @@ const PinForm = ({title, hints, error, onFulfill}) => {
 
   return (
     <>
-      {title && <Title>{title}</Title>}
       <AppText variant="body1" style={hintStyle(theme)}>
         {hints}
       </AppText>
