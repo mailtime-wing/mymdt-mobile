@@ -18,7 +18,8 @@ export const darkTheme = {
     mdtCardValue: 'rgba(255, 255, 255, 0.87)',
     textOnError: [
       '#FF7171',
-      'rgba(255, 113, 113, 0.7), rgba(255, 113, 113, 0.16)',
+      'rgba(255, 113, 113, 0.7)',
+      'rgba(255, 113, 113, 0.16)',
     ],
     textOnBackground: [
       'rgba(255, 255, 255, 0.87)',
