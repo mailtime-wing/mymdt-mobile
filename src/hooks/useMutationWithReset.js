@@ -2,12 +2,30 @@ import {useState, useRef, useCallback} from 'react';
 import {useMutation} from '@apollo/client';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
+function shallowEqual(object1, object2) {
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  for (let key of keys1) {
+    if (object1[key] !== object2[key]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 /**
  * @typedef {import('graphql').DocumentNode} DocumentNode
  * @typedef {import('@apollo/client').MutationHookOptions} MutationHookOptions
- * @typedef {import('@apollo/react-common').MutationFunctionOptions} MutationFunctionOptions
- * @typedef {import('@apollo/react-common').ExecutionResult ExecutionResult}
- * @typedef {import('@apollo/react-common').MutationResult} MutationResult
+ * @typedef {import('@apollo/client').MutationFunctionOptions} MutationFunctionOptions
+ * @typedef {import('@apollo/client').ExecutionResult ExecutionResult}
+ * @typedef {import('@apollo/client').MutationResult} MutationResult
  *
  * @param  {DocumentNode} mutation
  * @param  {MutationHookOptions} options
@@ -32,7 +50,7 @@ export default function useMutationWithReset(
     setRenderToggle(toggle => !toggle);
   }, []);
 
-  if (result !== latestResult.current) {
+  if (!shallowEqual(result, latestResult.current)) {
     internalResult.current = result;
     latestResult.current = result;
   }
