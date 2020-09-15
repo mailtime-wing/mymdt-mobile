@@ -22,11 +22,6 @@ export const buttons = css`
   margin-right: 16px;
 `;
 
-export const bigAccountIcon = css`
-  height: 56px;
-  border-radius: 28px;
-`;
-
 export const name = theme => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;

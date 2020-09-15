@@ -9,7 +9,6 @@ import {
   toolsRowContainer,
   buttons,
   imageStyle,
-  bigAccountIcon,
   validDate,
   name,
   rowContainer,
@@ -26,7 +25,8 @@ import PrivilegesSection from './PrivilegesSection';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import ScreenContainer from '@/components/ScreenContainer';
 import MembershipLevelChip from '@/components/MembershipLevelChip';
-import UserIcon from '@/components/UserIcon';
+import AppAvator from '@/components/AppAvator';
+
 import AppText from '@/components/AppText2';
 
 const MembershipScreen = ({navigation}) => {
@@ -68,7 +68,11 @@ const MembershipScreen = ({navigation}) => {
             source={require('@/assets/RewardMeCard.png')}
           />
           <View style={userRowContainer}>
-            <UserIcon style={bigAccountIcon} />
+            <AppAvator
+              variant="image"
+              sizeVariant="normal"
+              imageSrc={require('@/assets/dog_avatar.png')}
+            />
             <View style={rightContainer}>
               <AppText variant="heading5" style={name(theme)}>
                 {data?.userProfile?.name}

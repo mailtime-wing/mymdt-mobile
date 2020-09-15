@@ -8,6 +8,7 @@ import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import AppButton from '@/components/AppButton';
 import AppIcon from '@/components/AppIcon';
+import AppAvator from '@/components/AppAvator';
 import PopupModal from '@/components/PopupModal';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
 import MRPGiftBox from '@/components/MRPGiftBox';
@@ -56,6 +57,83 @@ const BrowseScreen = ({...props}) => {
         {
           /*for test*/
           <>
+            <View
+              style={[
+                css`
+                  ${theme.colors.elevatedBackground1}
+                `,
+                testStyle,
+              ]}>
+              <View style={rowForTest}>
+                <AppAvator
+                  variant="default"
+                  sizeVariant="small"
+                  imageSrc={require('@/assets/dog_avatar.png')}
+                />
+                <AppAvator
+                  variant="default"
+                  sizeVariant="normal"
+                  imageSrc={require('@/assets/dog_avatar.png')}
+                />
+                <AppAvator
+                  variant="default"
+                  sizeVariant="large"
+                  imageSrc={require('@/assets/dog_avatar.png')}
+                />
+              </View>
+              <View style={rowForTest}>
+                <AppAvator
+                  variant="initials"
+                  sizeVariant="small"
+                  name="Alice"
+                />
+                <AppAvator
+                  variant="initials"
+                  sizeVariant="normal"
+                  name="Boris"
+                />
+                <AppAvator
+                  variant="initials"
+                  sizeVariant="large"
+                  name="Charlie"
+                />
+              </View>
+              <View style={rowForTest}>
+                <AppAvator
+                  variant="icons"
+                  sizeVariant="small"
+                  imageSrc={require('@/assets/star.png')}
+                />
+                <AppAvator
+                  variant="icons"
+                  sizeVariant="normal"
+                  imageSrc={require('@/assets/star.png')}
+                />
+                <AppAvator
+                  variant="icons"
+                  sizeVariant="large"
+                  imageSrc={require('@/assets/star.png')}
+                />
+              </View>
+              <View style={rowForTest}>
+                <AppAvator
+                  variant="image"
+                  sizeVariant="small"
+                  imageSrc={require('@/assets/dog_avatar.png')}
+                />
+                <AppAvator
+                  variant="image"
+                  sizeVariant="normal"
+                  imageSrc={require('@/assets/dog_avatar.png')}
+                />
+                <AppAvator
+                  variant="image"
+                  sizeVariant="large"
+                  imageSrc={require('@/assets/dog_avatar.png')}
+                />
+              </View>
+            </View>
+
             <View
               style={[
                 css`

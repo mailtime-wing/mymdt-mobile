@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import {AuthContext} from '@/context/auth';
 import {useQuery} from '@apollo/client';
 import {GET_USER_MEMBERSHIP_API} from '@/api/data';
@@ -15,7 +15,7 @@ import {
 } from './style';
 
 import MembershipLevelChip from '@/components/MembershipLevelChip';
-import UserIcon from '@/components/UserIcon';
+import AppAvator from '@/components/AppAvator';
 import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
 import {
@@ -37,7 +37,13 @@ const AccountBar = ({navigation, showCoins}) => {
   return (
     <View style={accountContainer}>
       <View style={leftContainer}>
-        <UserIcon onPress={() => navigation.navigate('membership')} />
+        <TouchableOpacity onPress={() => navigation.navigate('membership')}>
+          <AppAvator
+            variant="image"
+            sizeVariant="small"
+            imageSrc={require('@/assets/dog_avatar.png')}
+          />
+        </TouchableOpacity>
         <MembershipLevelChip
           style={membershipPosition}
           userLevel={data?.userProfile?.membership?.level || 0}

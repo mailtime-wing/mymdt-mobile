@@ -18,12 +18,6 @@ export const ProfilePictureText = styled(Text)`
   text-transform: uppercase;
 `;
 
-export const UserIcon = styled.Image`
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-`;
-
 export const ProfilePictureEditingContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -35,10 +29,6 @@ export const ProfilePictureContainer = styled.View`
   flex-direction: row;
   align-items: center;
   margin-bottom: 24px;
-`;
-
-export const UserIconContainer = styled.TouchableOpacity`
-  align-self: flex-end;
 `;
 
 export const FillIcon = styled.Image`
