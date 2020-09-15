@@ -7,20 +7,7 @@ import RefreshAccessTokenErrorLink from './RefreshAccessTokenErrorLink';
 import authLink from './authLink';
 
 const client = new ApolloClient({
-  cache: new InMemoryCache({
-    typePolicies: {
-      TransactionConnection: {
-        fields: {
-          edges: {
-            // merge(existing, incoming, { mergeObjects }) {
-            //   return mergeObjects(existing, incoming);
-            // },
-            merge: true,
-          },
-        },
-      },
-    },
-  }),
+  cache: new InMemoryCache(),
   link: new RefreshAccessTokenErrorLink().concat(
     authLink.concat(
       new HttpLink({
