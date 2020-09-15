@@ -1,8 +1,6 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {VirtualizedList} from 'react-native';
-import {AuthContext} from '@/context/auth';
-import {useLazyQuery} from '@apollo/client';
 import {TRANSACTIONS_QUERY} from '@/api/data';
 import {REWARD, REDEEM, INTEREST, CHECK_IN} from '@/constants/transactionsType';
 import {useTheme} from 'emotion-theming';
@@ -13,6 +11,7 @@ import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
 import TransactionBottomSheet from '@/components/TransactionBottomSheet';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
 
 import CardList from './CardList';
 import ActionButtons from './ActionButtons';
@@ -54,15 +53,9 @@ const WalletScreen = ({navigation}) => {
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const [showBottomSheet, setShowBottomSheet] = useState(false);
   const [activeFilterIndex, setActiveFilterIndex] = useState(0);
-  const {authToken} = useContext(AuthContext);
-  const [getTransactions, {data, loading, fetchMore}] = useLazyQuery(
+  const [getTransactions, {data, loading, fetchMore}] = useLazyQueryWithAuth(
     TRANSACTIONS_QUERY,
     {
-      context: {
-        headers: {
-          authorization: authToken ? `Bearer ${authToken}` : '',
-        },
-      },
       fetchPolicy: 'network-only',
     },
   );

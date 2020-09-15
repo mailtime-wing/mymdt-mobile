@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import {
   TouchableWithoutFeedback,
   Keyboard,
@@ -7,13 +7,12 @@ import {
 } from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
-import {useMutation} from '@apollo/client';
 import {useTheme} from 'emotion-theming';
 
-import {AuthContext} from '@/context/auth';
 import Input from '@/components/AppInput';
 import AppButton from '@/components/AppButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {UPDATE_USER_PROFILE_API} from '@/api/data';
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
 import DateTimePickerInput from '@/components/DateTimePickerInput';
@@ -81,8 +80,9 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress, theme}) => {
 const UserProfileScreen = () => {
   const theme = useTheme();
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [updateUserProfileRequest] = useMutation(UPDATE_USER_PROFILE_API);
-  const {authToken} = useContext(AuthContext);
+  const [updateUserProfileRequest] = useMutationWithAuth(
+    UPDATE_USER_PROFILE_API,
+  );
   const {navigateByFlow} = useSetupFlow();
 
   const handleDatePickerPress = () => {
@@ -102,11 +102,6 @@ const UserProfileScreen = () => {
           gender: values.gender,
           dateOfBirth: values.dob.toISOString(),
           referralCode: values.referralCode,
-        },
-        context: {
-          headers: {
-            authorization: authToken ? `Bearer ${authToken}` : '',
-          },
         },
       });
       navigateByFlow();

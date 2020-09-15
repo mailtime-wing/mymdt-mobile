@@ -1,9 +1,8 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
-import {AuthContext} from '@/context/auth';
-import {useQuery} from '@apollo/client';
 import {GET_USER_MEMBERSHIP_API} from '@/api/data';
 import {useTheme} from 'emotion-theming';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 
 import {
   coninsContainer,
@@ -24,15 +23,8 @@ import {
 } from '@/constants/currency';
 
 const AccountBar = ({navigation, showCoins}) => {
-  const {authToken} = useContext(AuthContext);
   const theme = useTheme();
-  const {data} = useQuery(GET_USER_MEMBERSHIP_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-  });
+  const {data} = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
 
   return (
     <View style={accountContainer}>

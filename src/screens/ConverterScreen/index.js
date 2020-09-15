@@ -1,11 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {View, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {Formik} from 'formik';
 import {useTheme} from 'emotion-theming';
-import {AuthContext} from '@/context/auth';
-import {useQuery, useMutation} from '@apollo/client';
 import {GET_CONVERSION_RATE_API, CURRENCY_CONVERT_API} from '@/api/data';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 import {detailStyle, container} from './style';
 
@@ -17,14 +17,8 @@ const ConverterScreen = ({navigation, route}) => {
   const theme = useTheme();
   const from = route.params.from;
   const to = route.params.to;
-  const {authToken} = useContext(AuthContext);
-  const [convert] = useMutation(CURRENCY_CONVERT_API);
-  const {data} = useQuery(GET_CONVERSION_RATE_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
+  const [convert] = useMutationWithAuth(CURRENCY_CONVERT_API);
+  const {data} = useQueryWithAuth(GET_CONVERSION_RATE_API, {
     variables: {
       from: from,
       to: to,
@@ -40,11 +34,6 @@ const ConverterScreen = ({navigation, route}) => {
           from: values.from,
           to: values.to,
           amount: values.amount,
-        },
-        context: {
-          headers: {
-            authorization: authToken ? `Bearer ${authToken}` : '',
-          },
         },
       });
 

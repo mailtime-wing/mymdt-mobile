@@ -1,9 +1,6 @@
-import React, {useState, useEffect, useReducer, useContext} from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import {ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
-import {useMutation, useQuery} from '@apollo/client';
-
-import {AuthContext} from '@/context/auth';
 import ModalContainer from '@/components/ModalContainer';
 import SpecialListOption from '@/components/SpecialListOption';
 import AppButton from '@/components/AppButton';
@@ -11,6 +8,8 @@ import AppText from '@/components/AppText2';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import useSetupFlow from '@/hooks/useSetupFlow';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {
   GET_USER_EMAIL_ACCOUNTS_API,
   UNBIND_EMAIL_ACCOUNTS_API,
@@ -94,23 +93,14 @@ const LinkedEmailsScreen = ({navigation, route}) => {
   const theme = useTheme();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [emails, setEmails] = useState([{id: null, emailAddress: ''}]);
-  const {authToken} = useContext(AuthContext);
   const {navigateByFlow, goBackTo} = useSetupFlow();
-  const apiContext = {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-  };
-  const {data, loading, refetch} = useQuery(
+  const {data, loading, refetch} = useQueryWithAuth(
     GET_USER_EMAIL_ACCOUNTS_API,
-    apiContext,
   );
-  const [unbindEmailRequest, {loading: unbindEmailLoading}] = useMutation(
-    UNBIND_EMAIL_ACCOUNTS_API,
-    apiContext,
-  );
+  const [
+    unbindEmailRequest,
+    {loading: unbindEmailLoading},
+  ] = useMutationWithAuth(UNBIND_EMAIL_ACCOUNTS_API);
 
   useEffect(() => {
     if (data) {

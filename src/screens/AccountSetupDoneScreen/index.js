@@ -1,13 +1,12 @@
 import React, {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {TouchableOpacity} from 'react-native';
-import {useQuery} from '@apollo/client';
 import {useTheme} from 'emotion-theming';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
 import AppText from '@/components/AppText2';
 import useSetupFlow from '@/hooks/useSetupFlow';
-import {AuthContext} from '@/context/auth';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {PreloadDataContext} from '@/context/preloadData';
 import {GET_USER_REWARDS_API} from '@/api/data';
 
@@ -15,20 +14,13 @@ import {titleStyle, detailStyle, container} from './style';
 
 const AccountSetupDoneScreen = () => {
   const theme = useTheme();
-  const {authToken} = useContext(AuthContext);
   const {appConfig} = useContext(PreloadDataContext);
   const {navigateByFlow} = useSetupFlow();
 
-  const {data: userRewardsApiData, loading: loadingUserRewards} = useQuery(
-    GET_USER_REWARDS_API,
-    {
-      context: {
-        headers: {
-          authorization: authToken ? `Bearer ${authToken}` : '',
-        },
-      },
-    },
-  );
+  const {
+    data: userRewardsApiData,
+    loading: loadingUserRewards,
+  } = useQueryWithAuth(GET_USER_REWARDS_API);
 
   const accountSetupReward = userRewardsApiData?.userProfile?.rewards?.find(
     reward => reward.task_id === appConfig.accountSetupTaskID,

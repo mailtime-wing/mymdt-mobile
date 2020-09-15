@@ -1,10 +1,9 @@
 import React, {useState, useContext, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {useQuery, useMutation} from '@apollo/client';
+import {useQuery} from '@apollo/client';
 import {useTheme} from 'emotion-theming';
 
 import {IntlContext} from '@/context/Intl';
-import {AuthContext} from '@/context/auth';
 import AppButton from '@/components/AppButton';
 import OfferList from '@/components/OfferList';
 import PopupModal from '@/components/PopupModal';
@@ -12,6 +11,8 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import ScreenContainer from '@/components/ScreenContainer';
 import AppText from '@/components/AppText2';
 import useSetupFlow from '@/hooks/useSetupFlow';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {
   GET_BASIC_OFFER_API,
   GET_USER_MEMBERSHIP_API,
@@ -35,18 +36,11 @@ const OfferSelectScreen = ({route, navigation}) => {
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [isErrorFromOfferList, setIsErrorFromOfferList] = useState(false);
   const {localeEnum} = useContext(IntlContext);
-  const {authToken} = useContext(AuthContext);
   const basicOfferApiData = useQuery(GET_BASIC_OFFER_API, {
     variables: {locale: localeEnum},
   });
-  const userMembershipApiData = useQuery(GET_USER_MEMBERSHIP_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-  });
-  const [updateBasicOfferRequest] = useMutation(UPDATE_BASIC_OFFER_API);
+  const userMembershipApiData = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
+  const [updateBasicOfferRequest] = useMutationWithAuth(UPDATE_BASIC_OFFER_API);
   const numberOfOffer =
     userMembershipApiData.data &&
     userMembershipApiData.data.userProfile.membership.brandsNumAllowed;
@@ -86,11 +80,6 @@ const OfferSelectScreen = ({route, navigation}) => {
       await updateBasicOfferRequest({
         variables: {
           ids: selectedOffers.map(selectedOffer => selectedOffer.id),
-        },
-        context: {
-          headers: {
-            authorization: authToken ? `Bearer ${authToken}` : '',
-          },
         },
       });
 

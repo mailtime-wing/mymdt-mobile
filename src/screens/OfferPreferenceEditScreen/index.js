@@ -1,8 +1,6 @@
-import React, {useContext, useState, useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 import {FormattedMessage, FormattedDate} from 'react-intl';
 import {useFocusEffect} from '@react-navigation/native';
-import {AuthContext} from '@/context/auth';
-import {useQuery} from '@apollo/client';
 import {GET_USER_OFFER_API, GET_USER_MEMBERSHIP_API} from '@/api/data';
 
 import ModalContaienr from '@/components/ModalContainer';
@@ -11,6 +9,7 @@ import OfferList from '@/components/OfferList';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import AppText from '@/components/AppText2';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 
 import {
   RowContainer,
@@ -26,23 +25,15 @@ import {useTheme} from 'emotion-theming';
 
 const OfferPreferenceEditScreen = ({navigation}) => {
   const theme = useTheme();
-  const {authToken} = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
 
-  const apiContext = {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
-  };
-  const {data, loading, refetch} = useQuery(GET_USER_OFFER_API, apiContext, {
+  const {data, loading, refetch} = useQueryWithAuth(GET_USER_OFFER_API, {
     fetchPolicy: 'network-only',
   });
-  const {data: userMembershipData, loading: userMembershipLoading} = useQuery(
-    GET_USER_MEMBERSHIP_API,
-    apiContext,
-  );
+  const {
+    data: userMembershipData,
+    loading: userMembershipLoading,
+  } = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
 
   const numberOfOffer =
     userMembershipData?.userProfile?.membership?.brandsNumAllowed || 0;

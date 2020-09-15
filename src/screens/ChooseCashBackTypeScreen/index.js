@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import {View, ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
-import {useMutation} from '@apollo/client';
 import {css} from '@emotion/native';
 
 import {
@@ -15,6 +14,7 @@ import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 import ScreenContainer from '@/components/ScreenContainer';
 import useSetupFlow from '@/hooks/useSetupFlow';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {UPDATE_USER_CASHBACK_CURRENCY_CODE_API} from '@/api/data';
 
 import {
@@ -81,21 +81,16 @@ const CashBackType = ({cashback, handleChoosePress, theme}) => (
 const ChooseCashBackTypeScreen = () => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
-  const [updateUserCashbackCurrencyCodeRequest] = useMutation(
+  const [updateUserCashbackCurrencyCodeRequest] = useMutationWithAuth(
     UPDATE_USER_CASHBACK_CURRENCY_CODE_API,
   );
-  const {authToken, updateCashBackType} = useContext(AuthContext);
+  const {updateCashBackType} = useContext(AuthContext);
 
   const handleChoosePress = async cashbackType => {
     try {
       await updateUserCashbackCurrencyCodeRequest({
         variables: {
           code: cashbackType,
-        },
-        context: {
-          headers: {
-            authorization: authToken ? `Bearer ${authToken}` : '',
-          },
         },
       });
       updateCashBackType(cashbackType);

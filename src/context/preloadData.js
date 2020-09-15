@@ -10,6 +10,7 @@ import {GET_USER_SETUP_STATUS_API, GET_APP_CONFIG_API} from '@/api/data';
 
 import SplashScreen from '@/screens/SplashScreen';
 import {AuthContext} from '@/context/auth';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 
 const preloadDataContextInitialValue = {
   setupStatus: {
@@ -26,22 +27,12 @@ export const PreloadDataProvider = ({children}) => {
   const {authToken} = useContext(AuthContext);
   const authTokenRef = useRef(authToken);
 
-  const skip = !authToken;
-  const context = {
-    headers: {
-      authorization: authToken ? `Bearer ${authToken}` : '',
-    },
-  };
-
   const {
     data: userSetupStatusApiData,
     refetch: setupStatusRefetch,
     startPolling: setupStatusStartPolling,
     stopPolling: setupStatusStopPolling,
-  } = useQuery(GET_USER_SETUP_STATUS_API, {
-    skip,
-    context,
-  });
+  } = useQueryWithAuth(GET_USER_SETUP_STATUS_API);
 
   const {
     data: appConfigApiData,
