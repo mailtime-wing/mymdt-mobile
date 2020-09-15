@@ -13,6 +13,7 @@ import PopupModal from '@/components/PopupModal';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
 import MRPGiftBox from '@/components/MRPGiftBox';
 import RewardGotPopup from '@/components/RewardGotPopup';
+import EnterPinModal from '@/components/EnterPinModal';
 
 import HomeIcon from '@/assets/home.svg';
 import HeartIcon from '@/assets/heart_icon.svg';
@@ -45,6 +46,7 @@ const BrowseScreen = ({...props}) => {
   const [show, setShow] = useState(false);
   const [showLinearGradient, setShowLinearGradient] = useState(false);
   const [showReward, setShowReward] = useState(false);
+  const [showPin, setShowPin] = useState(false);
   const {notify} = useContext(NotificationContext);
   useEffect(() => {
     notify(details);
@@ -163,11 +165,12 @@ const BrowseScreen = ({...props}) => {
               </View>
               <AppButton
                 variant="filled"
-                text="Compact Filled Primary"
+                text="Verfiy your pin"
                 sizeVariant="compact"
                 colorVariant="primary"
                 svgIcon={HomeIcon}
                 style={marginForTest}
+                onPress={() => setShowPin(true)}
               />
               <AppButton
                 variant="filled"
@@ -286,6 +289,10 @@ const BrowseScreen = ({...props}) => {
                 colorVariant="contrast"
                 svgIcon={HomeIcon}
                 style={marginForTest}
+              />
+              <EnterPinModal
+                visible={showPin}
+                callback={() => setShowPin(false)}
               />
               <PopupModal
                 visible={show}

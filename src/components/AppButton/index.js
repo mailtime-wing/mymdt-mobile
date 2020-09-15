@@ -37,7 +37,7 @@ const AppButton = ({
       ]}
       disabled={disabled}
       {...props}>
-      {SvgIcon && <SvgIcon {...icon(theme, variant, colorVariant)} />}
+      {SvgIcon && <SvgIcon {...icon(theme, variant, colorVariant, !!text)} />}
       <AppText
         variant="button"
         style={textButton(theme, variant, colorVariant)}>

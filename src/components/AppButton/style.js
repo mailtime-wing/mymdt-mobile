@@ -129,8 +129,8 @@ export const textButton = (theme, variant, colorVariant) => css`
     `}
 `;
 
-export const icon = (theme, variant, colorVariant) => css`
-  margin-right: 8px;
+export const icon = (theme, variant, colorVariant, haveText) => css`
+  ${haveText && 'margin-right: 8px;'}
   width: 18px;
   height: 18px;
 
