@@ -1,7 +1,4 @@
-import {useContext} from 'react';
-import {useLazyQuery} from '@apollo/client';
-
-import {AuthContext} from '@/context/auth';
+import {useLazyQuery, useApolloClient} from '@apollo/client';
 
 /**
  * @typedef {import('graphql').DocumentNode} DocumentNode
@@ -12,16 +9,14 @@ import {AuthContext} from '@/context/auth';
  *
  */
 export default function useLazyQueryWithAuth(query, options = {}) {
-  const {authToken} = useContext(AuthContext);
+  const client = useApolloClient();
   const {context, ..._options} = options;
   const {headers, ..._context} = context || {};
 
   return useLazyQuery(query, {
     context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-        ...headers,
-      },
+      client,
+      auth: true,
       ..._context,
     },
     ..._options,

@@ -54,6 +54,7 @@ export default class RefreshAccessTokenErrorLink extends ApolloLink {
 
             this.resolvePendingRequests(true);
             this.isRefreshing = false;
+            console.info('token refreshed');
             return true;
           } catch (error) {
             this.resolvePendingRequests(false);
