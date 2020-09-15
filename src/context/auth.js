@@ -6,8 +6,9 @@ import React, {
   useCallback,
 } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import {useApolloClient, useQuery} from '@apollo/client';
 import jwt_decode from 'jwt-decode';
-import {REFRESH_TOKEN_API} from '@/api/auth';
+import {AUTH_TOKENS, REFRESH_TOKEN_API} from '@/api/auth';
 import {useMutation} from '@apollo/client';
 
 import PopupModal from '@/components/PopupModal';
@@ -23,50 +24,21 @@ export const AuthContext = createContext({
   cashBackType: '',
 });
 
-const UPDATE_AUTH_TOKEN = 'updateAuthToken';
-const UPDATE_REFRESH_TOKEN_EXPIRED = 'updateRefreshTokenExpired';
 const UPDATE_CASH_BACK_TYPE = 'updateCashBackType';
-const SIGN_OUT = 'signOut';
 
 export const MEASURABLE_REWARD_POINT = 'MRP';
 export const MEASURABLE_DATA_TOKEN = 'MDT';
 
 const initialState = {
-  isLoading: true,
-  authToken: null,
-  refreshToken: null,
-  isRefreshTokenExpired: null,
   cashBackType: MEASURABLE_REWARD_POINT, // discuss before to set reward point as default cash back type
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case UPDATE_AUTH_TOKEN: {
-      return {
-        ...state,
-        isLoading: false,
-        authToken: action.payload.authToken,
-        refreshToken: action.payload.refreshToken,
-      };
-    }
-    case UPDATE_REFRESH_TOKEN_EXPIRED: {
-      return {
-        ...state,
-        isRefreshTokenExpired: action.payload,
-      };
-    }
     case UPDATE_CASH_BACK_TYPE: {
       return {
         ...state,
         cashBackType: action.payload,
-      };
-    }
-    case SIGN_OUT: {
-      return {
-        ...state,
-        authToken: null,
-        refreshToken: null,
-        isRefreshTokenExpired: null,
       };
     }
     default:
@@ -76,51 +48,38 @@ const reducer = (state, action) => {
 
 export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const client = useApolloClient();
+  const {data: authData} = useQuery(AUTH_TOKENS);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
 
-  const updateAuthToken = useCallback(async (authToken, refreshToken) => {
-    authToken = authToken || '';
-    refreshToken = refreshToken || '';
-    try {
-      await AsyncStorage.setItem('authToken', authToken);
-      await AsyncStorage.setItem('refreshToken', refreshToken);
-    } catch (error) {
-      console.error('error saving authToken', error);
-    }
-
-    dispatch({
-      type: UPDATE_AUTH_TOKEN,
-      payload: {
-        authToken: authToken,
-        refreshToken: refreshToken,
-      },
-    });
-  }, []);
-
-  const refreshAccessToken = useCallback(async () => {
-    try {
-      const {data} = await refreshTokenRequest({
-        variables: {
-          refreshToken: state.refreshToken,
+  const updateAuthToken = useCallback(
+    (authToken, refreshToken) => {
+      authToken = authToken || '';
+      refreshToken = refreshToken || '';
+      client.writeQuery({
+        query: AUTH_TOKENS,
+        data: {
+          tokensInitialized: true,
+          accessToken: authToken,
+          refreshToken: refreshToken,
         },
       });
-      await updateAuthToken(data.refreshAccessToken, state.refreshToken);
-      return data.refreshAccessToken;
-    } catch (e) {
-      dispatch({type: UPDATE_REFRESH_TOKEN_EXPIRED, payload: true});
-    }
-  }, [refreshTokenRequest, state.refreshToken, updateAuthToken]);
+    },
+    [client],
+  );
 
-  const signOut = useCallback(async () => {
-    try {
-      await AsyncStorage.removeItem('authToken');
-      await AsyncStorage.removeItem('refreshToken');
-    } catch (e) {
-      console.error('error removing authToken', e);
-    }
-    dispatch({type: SIGN_OUT});
-  }, []);
+  const signOut = useCallback(() => {
+    client.writeQuery({
+      query: AUTH_TOKENS,
+      data: {
+        accessToken: '',
+        refreshToken: '',
+        isRefreshTokenExpired: false,
+      },
+    });
+  }, [client]);
 
+  // Initialize tokens from AsyncStorage. If token is expired, try to refresh it
   useEffect(() => {
     const getToken = async () => {
       let authToken = '';
@@ -140,7 +99,7 @@ export const AuthProvider = ({children}) => {
               });
               authToken = data.refreshAccessToken;
             } catch (e) {
-              dispatch({type: UPDATE_REFRESH_TOKEN_EXPIRED, payload: true});
+              signOut();
             }
           }
         }
@@ -150,7 +109,37 @@ export const AuthProvider = ({children}) => {
       updateAuthToken(authToken, refreshToken);
     };
     getToken();
-  }, [refreshTokenRequest, updateAuthToken]);
+  }, [refreshTokenRequest, signOut, updateAuthToken]);
+
+  // whenever tokens change (after initialization), update the AsyncStorage
+  useEffect(() => {
+    const updateStorageForTokens = async () => {
+      try {
+        await AsyncStorage.setItem('authToken', authData.accessToken);
+        await AsyncStorage.setItem('refreshToken', authData.refreshToken);
+      } catch (e) {
+        console.error('failed to update storage for tokens', e);
+      }
+    };
+
+    if (authData.tokensInitialized) {
+      updateStorageForTokens();
+    }
+  }, [authData.accessToken, authData.refreshToken, authData.tokensInitialized]);
+
+  const refreshAccessToken = useCallback(async () => {
+    try {
+      const {data} = await refreshTokenRequest({
+        variables: {
+          refreshToken: authData.refreshToken,
+        },
+      });
+      await updateAuthToken(data.refreshAccessToken, authData.refreshToken);
+      return data.refreshAccessToken;
+    } catch (e) {
+      signOut();
+    }
+  }, [refreshTokenRequest, authData.refreshToken, updateAuthToken, signOut]);
 
   const handlePopupPress = useCallback(
     pressed => {
@@ -177,28 +166,28 @@ export const AuthProvider = ({children}) => {
         });
       },
       signOut,
-      authToken: state.authToken,
-      refreshToken: state.refreshToken,
+      authToken: authData.accessToken,
+      refreshToken: authData.refreshToken,
       cashBackType: state.cashBackType,
     }),
     [
       refreshAccessToken,
       updateAuthToken,
       signOut,
-      state.authToken,
-      state.refreshToken,
+      authData.accessToken,
+      authData.refreshToken,
       state.cashBackType,
     ],
   );
 
-  if (state.isLoading) {
+  if (!authData.tokensInitialized) {
     return null;
   }
 
   return (
     <AuthContext.Provider value={authContext}>
       {children}
-      {state.isRefreshTokenExpired && (
+      {authData.isRefreshTokenExpired && (
         <PopupModal
           title="Token Expired"
           detail="Please login again"

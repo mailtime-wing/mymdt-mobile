@@ -1,5 +1,14 @@
 import {gql} from 'apollo-boost';
 
+export const AUTH_TOKENS = gql`
+  query AuthTokens {
+    tokensInitialized @client
+    accessToken @client
+    refreshToken @client
+    isRefreshTokenExpired @client
+  }
+`;
+
 export const GET_OTP_API = gql`
   mutation RequestOtpCode(
     $phoneNumber: String!
@@ -38,22 +47,34 @@ export const SETUP_PIN_API = gql`
   mutation SetupPin($pin: String!, $confirmedPin: String!) {
     setupPin(pin: $pin, confirmedPin: $confirmedPin)
   }
-`
+`;
 
 export const CHANGE_PIN_API = gql`
-  mutation ChangePin($oldPin: String!, $newPin: String!, $newConfirmedPin: String!) {
-    changePin(oldPin: $oldPin, newPin: $newPin, newConfirmedPin: $newConfirmedPin)
+  mutation ChangePin(
+    $oldPin: String!
+    $newPin: String!
+    $newConfirmedPin: String!
+  ) {
+    changePin(
+      oldPin: $oldPin
+      newPin: $newPin
+      newConfirmedPin: $newConfirmedPin
+    )
   }
-`
+`;
 
 export const RESET_PIN_API = gql`
-  mutation ResetPin($otp: String!, $newPin: String!, $newConfirmedPin: String!) {
+  mutation ResetPin(
+    $otp: String!
+    $newPin: String!
+    $newConfirmedPin: String!
+  ) {
     resetPin(otp: $otp, newPin: $newPin, newConfirmedPin: $newConfirmedPin)
   }
-`
+`;
 
 export const VERIFY_PIN_API = gql`
   mutation VerifyPin($pin: String!) {
     verifyPin(pin: $pin)
   }
-`
+`;

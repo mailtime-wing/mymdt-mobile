@@ -2,7 +2,7 @@ import React from 'react';
 import {ApolloProvider} from '@apollo/client';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import client from '@/api/client';
+import client from '@/apollo/client';
 import {ThemeProvider} from '@/context/theme';
 import {IntlContainer} from '@/context/Intl';
 import {AuthProvider} from '@/context/auth';

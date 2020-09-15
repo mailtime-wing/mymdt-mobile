@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import {useQuery} from '@apollo/client';
+import {useQuery, useApolloClient} from '@apollo/client';
 
 import {AuthContext} from '@/context/auth';
 
@@ -13,15 +13,14 @@ import {AuthContext} from '@/context/auth';
  */
 export default function useQueryWithAuth(query, options = {}) {
   const {authToken} = useContext(AuthContext);
+  const client = useApolloClient();
   const {context, ..._options} = options;
   const {headers, ..._context} = context || {};
 
   return useQuery(query, {
     context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-        ...headers,
-      },
+      client,
+      auth: true,
       ..._context,
     },
     skip: !authToken,
