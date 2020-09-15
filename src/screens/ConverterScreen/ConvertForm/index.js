@@ -104,6 +104,7 @@ const ConverterInput = ({
   // TODO: handle when have error design
 
   const handleChange = text => {
+    // TODO: handle other symbol in the future e.g. "1.000.000"
     let result = text;
 
     if (isNaN(text)) {
