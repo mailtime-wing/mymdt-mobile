@@ -1,28 +1,28 @@
-import React, {useContext, useLayoutEffect, useEffect, useReducer} from 'react';
+import React, {useLayoutEffect, useEffect, useReducer} from 'react';
 import {
-  TouchableWithoutFeedback,
+  View,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
 } from 'react-native';
 import {FormattedMessage, FormattedDate} from 'react-intl';
 import ImagePicker from 'react-native-image-picker';
 import {Formik, useFormikContext} from 'formik';
-import {useMutation, useQuery} from '@apollo/client';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {UPDATE_USER_PROFILE_EDIT_API, GET_USER_PROFILE_API} from '@/api/data';
-import {AuthContext} from '@/context/auth';
 
 import {
-  Container,
   FillIcon,
-  Error,
-  DateFieldContainer,
-  FormContainer,
-  ProfilePictureContainer,
-  ProfilePictureEditingContainer,
-  ProfilePictureText,
-  Name,
-  MarginTop,
+  errorStyle,
+  formContainer,
+  nameStyle,
+  dateFieldContainer,
+  profilePictureText,
+  profilePictureContainer,
+  editingStyle,
+  marginTop,
 } from './style';
 
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
@@ -36,8 +36,10 @@ import ConfirmButton from '@/components/ConfirmButton';
 import CloseIconButton from '@/components/CloseIconButton';
 import Input from '@/components/AppInput';
 import AppAvator from '@/components/AppAvator';
+import AppText from '@/components/AppText2';
 
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
+import {useTheme} from 'emotion-theming';
 
 const RESET_FORM = 'resetForm';
 const UPDATE_IS_CANCELLED = 'updateIsCancelled';
@@ -114,6 +116,7 @@ const cameraOptions = {
 };
 
 const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
+  const theme = useTheme();
   const {
     setFieldValue,
     values,
@@ -150,16 +153,18 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
   };
 
   return (
-    <FormContainer pointerEvents={formState.isEditing ? 'auto' : 'none'}>
+    <View
+      style={formContainer}
+      pointerEvents={formState.isEditing ? 'auto' : 'none'}>
       {formState.isEditing ? (
         <>
-          <ProfilePictureEditingContainer>
-            <ProfilePictureText>
+          <View style={[profilePictureContainer, editingStyle]}>
+            <AppText variant="label" style={profilePictureText(theme)}>
               <FormattedMessage
                 id="profile_photo"
                 defaultMessage="profile photo"
               />
-            </ProfilePictureText>
+            </AppText>
             <TouchableOpacity onPress={() => handleCameraPress()}>
               <AppAvator
                 variant="image"
@@ -168,7 +173,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
               />
             </TouchableOpacity>
             <FillIcon source={require('@/assets/filled.png')} />
-          </ProfilePictureEditingContainer>
+          </View>
           <Input
             label={<FormattedMessage id="your_name" />}
             required
@@ -178,32 +183,35 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
             gender={values.gender}
             setFieldValue={setFieldValue}
           />
-          <Error>{errors.gender ? errors.gender : ' '}</Error>
-          <DateFieldContainer onPress={handleDatePickerPress}>
-            <DateTimePickerInput
-              label={
-                <FormattedMessage
-                  id="date_of_birth"
-                  defaultMessage="DATE OF BIRTH"
-                />
-              }
-              required
-              name="dob"
-              showDatePicker={formState.showDatePicker}
-            />
-          </DateFieldContainer>
+          <AppText variant="caption" style={errorStyle(theme)}>
+            {errors.gender ? errors.gender : ' '}
+          </AppText>
+          <DateTimePickerInput
+            style={dateFieldContainer}
+            onPress={handleDatePickerPress}
+            label={
+              <FormattedMessage
+                id="date_of_birth"
+                defaultMessage="DATE OF BIRTH"
+              />
+            }
+            required
+            name="dob"
+            showDatePicker={formState.showDatePicker}
+          />
         </>
       ) : (
         <>
-          <MarginTop />
-          <ProfilePictureContainer>
+          <View style={[profilePictureContainer, marginTop]}>
             <AppAvator
               variant="image"
               sizeVariant="normal"
               imageSrc={values.profilePicture}
             />
-            <Name>{values.name}</Name>
-          </ProfilePictureContainer>
+            <AppText variant="subTitle1" style={nameStyle(theme)}>
+              {values.name}
+            </AppText>
+          </View>
           <ListOption
             key="gender"
             label={<FormattedMessage id="gender" />}
@@ -233,20 +241,16 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
           />
         </>
       )}
-    </FormContainer>
+    </View>
   );
 };
 
 const UserProfileEditScreen = ({navigation}) => {
-  const {authToken} = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [updateUserProfileRequest] = useMutation(UPDATE_USER_PROFILE_EDIT_API);
-  const {data, refetch} = useQuery(GET_USER_PROFILE_API, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    },
+  const [updateUserProfileRequest] = useMutationWithAuth(
+    UPDATE_USER_PROFILE_EDIT_API,
+  );
+  const {data, refetch} = useQueryWithAuth(GET_USER_PROFILE_API, {
     fetchPolicy: 'network-only',
   });
 
@@ -279,11 +283,6 @@ const UserProfileEditScreen = ({navigation}) => {
           name: values.name,
           gender: values.gender,
           dateOfBirth: values.dob,
-        },
-        context: {
-          headers: {
-            authorization: authToken ? `Bearer ${authToken}` : '',
-          },
         },
       });
     } catch (e) {
@@ -344,7 +343,7 @@ const UserProfileEditScreen = ({navigation}) => {
             <FormattedMessage id="profile" defaultMessage="Profile" />
           )
         }>
-        <Container behavior="position">
+        <View behavior="position">
           <ScrollView
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="always">
@@ -359,7 +358,7 @@ const UserProfileEditScreen = ({navigation}) => {
               />
             </Formik>
           </ScrollView>
-        </Container>
+        </View>
       </ModalContainer>
     </TouchableWithoutFeedback>
   );

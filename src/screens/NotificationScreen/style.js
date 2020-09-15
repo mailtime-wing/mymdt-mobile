@@ -1,28 +1,21 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import {css} from '@emotion/native';
 
-export const ScrollContainer = styled.ScrollView``;
-
-export const Detail = styled(Text)`
-  font-size: 14px;
-  line-height: 17px;
-  margin-top: 16px;
-  margin-bottom: 16px;
+export const detailStyle = theme => css`
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   text-align: left;
 `;
 
-export const Divider = styled.View`
+export const subjectStyle = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
+`;
+
+export const container = css`
+  padding-vertical: 16px;
+  padding-horizontal: 24px;
+`;
+
+export const divider = theme => css`
   height: 1px;
-  background-color: ${props => props.theme.colors.background2};
+  background-color: ${theme.colors.background2};
   margin-left: 24px;
-`;
-
-export const NotificationContainer = styled.TouchableOpacity`
-  padding: 16px 24px;
-`;
-
-export const Subject = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: bold;
 `;

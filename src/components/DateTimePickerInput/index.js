@@ -1,14 +1,11 @@
 import React from 'react';
+import {View, TouchableOpacity} from 'react-native';
 import {useIntl} from 'react-intl';
-import {
-  Container,
-  TextInput,
-  Label,
-  Remark,
-  Error,
-  TextInputContainer,
-} from './style';
+import {useTheme} from 'emotion-theming';
+import {TextInput, labelStyle, inputContainer} from './style';
 import {useField, useFormikContext} from 'formik';
+
+import AppText from '@/components/AppText2';
 
 import DateTimeSelector from './DateTimeSelector';
 
@@ -16,10 +13,11 @@ const DateTimePickerInput = ({
   name,
   label,
   required,
-  remark,
   showDatePicker,
+  style,
   ...props
 }) => {
+  const theme = useTheme();
   const intl = useIntl();
   const [field, meta] = useField(name);
   const isError = meta.error;
@@ -38,16 +36,16 @@ const DateTimePickerInput = ({
   };
 
   return (
-    <Container>
-      <Label
-        isError={isError}
-        isFocus={showDatePicker}
+    <TouchableOpacity style={style} {...props}>
+      <AppText
+        variant="label"
+        style={labelStyle(theme, showDatePicker, isError)}
         numberOfLines={1}
         ellipsizeMode="clip">
-        {label}
+        {label ? label : ' '}
         {required && '*'}
-      </Label>
-      <TextInputContainer isError={isError} isFocus={showDatePicker}>
+      </AppText>
+      <View style={inputContainer(theme, showDatePicker, isError)}>
         <TextInput
           isError={isError}
           onChangeText={field.onChange(name)}
@@ -56,17 +54,11 @@ const DateTimePickerInput = ({
           placeholder="DD/MM/YYYY"
           {...props}
         />
-      </TextInputContainer>
-      {remark && <Remark>{remark}</Remark>}
-      {
-        <Error numberOfLines={1} ellipsizeMode="clip">
-          {isError ? meta.error : ' '}
-        </Error>
-      }
+      </View>
       {showDatePicker && (
         <DateTimeSelector date={field.value} onChange={handleDateChange} />
       )}
-    </Container>
+    </TouchableOpacity>
   );
 };
 

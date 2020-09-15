@@ -1,28 +1,30 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import {
+  View,
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  TouchableOpacity,
 } from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
-import {AuthContext} from '@/context/auth';
-import {useMutation} from '@apollo/client';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {REPORT_MISSING_RECEIPT} from '@/api/data';
+import {useTheme} from 'emotion-theming';
 
 import {
-  Container,
-  Detail,
-  AmountCurrencyContainer,
-  CurrencyContainer,
-  AmountContainer,
+  detailStyle,
+  dateContainer,
+  container,
+  amountCurrencyContainer,
+  currencyContainer,
+  amountContainer,
 } from './style';
 
 import ModalContainer from '@/components/ModalContainer';
 import AppButton from '@/components/AppButton';
+import AppText from '@/components/AppText2';
 import Input from '@/components/AppInput';
 import DateTimePickerInput from '@/components/DateTimePickerInput';
 
@@ -55,33 +57,33 @@ const Form = ({showDatePicker, handleDatePickerPress}) => {
         name="senderEmail"
         keyboardType="email-address"
       />
-      <TouchableOpacity onPress={handleDatePickerPress}>
-        <DateTimePickerInput
-          label={
-            <FormattedMessage id="receipt_date" defaultMessage="Receipt Date" />
-          }
-          required
-          name="receiptDate"
-          showDatePicker={showDatePicker}
-        />
-      </TouchableOpacity>
+      <DateTimePickerInput
+        onPress={handleDatePickerPress}
+        style={dateContainer}
+        label={
+          <FormattedMessage id="receipt_date" defaultMessage="Receipt Date" />
+        }
+        required
+        name="receiptDate"
+        showDatePicker={showDatePicker}
+      />
       <Input
         label={
           <FormattedMessage id="order_number" defaultMessage="Order Number" />
         }
         name="orderNumber"
       />
-      <AmountCurrencyContainer>
-        <CurrencyContainer>
+      <View style={amountCurrencyContainer}>
+        <View style={currencyContainer}>
           <Input
             label={<FormattedMessage id="amount" defaultMessage="amount" />}
             name="currencyCode"
           />
-        </CurrencyContainer>
-        <AmountContainer>
+        </View>
+        <View style={amountContainer}>
           <Input name="amount" keyboardType="numeric" />
-        </AmountContainer>
-      </AmountCurrencyContainer>
+        </View>
+      </View>
       <AppButton
         onPress={handleSubmit}
         title="Submit"
@@ -96,9 +98,9 @@ const Form = ({showDatePicker, handleDatePickerPress}) => {
 };
 
 const MissingReceiptScreen = ({navigation}) => {
+  const theme = useTheme();
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const {authToken} = useContext(AuthContext);
-  const [reportMissingReceipt] = useMutation(REPORT_MISSING_RECEIPT);
+  const [reportMissingReceipt] = useMutationWithAuth(REPORT_MISSING_RECEIPT);
 
   const handleDatePickerPress = () => {
     setShowDatePicker(!showDatePicker);
@@ -120,11 +122,6 @@ const MissingReceiptScreen = ({navigation}) => {
           orderNumber: values.orderNumber,
           currencyCode: values.currencyCode,
           amount: values.amount,
-        },
-        context: {
-          headers: {
-            authorization: authToken ? `Bearer ${authToken}` : '',
-          },
         },
       });
 
@@ -187,14 +184,16 @@ const MissingReceiptScreen = ({navigation}) => {
                 defaultMessage="ProfileMissing Receipt"
               />
             }>
-            <Container>
-              <Detail>
+            <View style={container}>
+              <AppText variant="body1" style={detailStyle(theme)}>
                 <FormattedMessage
                   id="missing_receipt_detail"
                   defaultMessage="Please provide the detail of the missing email receipt as much as possible."
                 />
-              </Detail>
-              <Detail>* required</Detail>
+              </AppText>
+              <AppText variant="body1" style={detailStyle(theme)}>
+                * required
+              </AppText>
               <Formik
                 initialValues={initialValues}
                 onSubmit={values => handleSubmitPress(values)}
@@ -204,7 +203,7 @@ const MissingReceiptScreen = ({navigation}) => {
                   handleDatePickerPress={handleDatePickerPress}
                 />
               </Formik>
-            </Container>
+            </View>
           </ModalContainer>
         </TouchableWithoutFeedback>
       </ScrollView>

@@ -1,8 +1,11 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
-import {GenderContainer, Gender, GenderText, GenderLabel} from './style';
+import {optionButton, genderStyle, labelStyle, optionsContainer} from './style';
+
+import AppText from '@/components/AppText2';
+import {useTheme} from 'emotion-theming';
 
 export const genderOptions = [
   {label: 'Male', value: 'M'},
@@ -12,21 +15,28 @@ export const genderOptions = [
 ];
 
 const GenderOption = ({label, value, setFieldValue, gender}) => {
+  const theme = useTheme();
   const active = gender === value;
   return (
-    <Gender active={active} onPress={() => setFieldValue('gender', value)}>
-      <GenderText active={active}>{label}</GenderText>
-    </Gender>
+    <TouchableOpacity
+      style={optionButton(theme, active)}
+      onPress={() => setFieldValue('gender', value)}>
+      <AppText variant="body2" style={genderStyle(theme, active)}>
+        {label}
+      </AppText>
+    </TouchableOpacity>
   );
 };
 
-const GenderSelector = ({gender, setFieldValue}) => {
+const GenderSelector = ({gender, setFieldValue, optionsContainerStyle}) => {
+  const theme = useTheme();
+
   return (
     <View>
-      <GenderLabel>
+      <AppText variant="label" style={labelStyle(theme)}>
         <FormattedMessage id="gender" defaultMessage="gender" />*
-      </GenderLabel>
-      <GenderContainer>
+      </AppText>
+      <View style={[optionsContainer, optionsContainerStyle]}>
         {genderOptions.map(g => (
           <GenderOption
             key={g.value}
@@ -36,7 +46,7 @@ const GenderSelector = ({gender, setFieldValue}) => {
             gender={gender}
           />
         ))}
-      </GenderContainer>
+      </View>
     </View>
   );
 };

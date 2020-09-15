@@ -1,28 +1,29 @@
-import styled from '@emotion/native';
-import Text from '@/components/AppText';
+import {css} from '@emotion/native';
 
-export const Container = styled.View`
-  padding: 0 24px;
+export const container = css`
+  padding-horizontal: 24px;
   padding-bottom: 24px;
 `;
 
-export const Detail = styled(Text)`
-  font-size: 16px;
-  line-height: 24px;
-  color: ${props => props.theme.colors.textOnBackground.mediumEmphasis};
+export const detailStyle = theme => css`
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
   margin-bottom: 24px;
 `;
 
-export const AmountCurrencyContainer = styled.View`
+export const dateContainer = css`
+  margin-bottom: 24px;
+`;
+
+export const amountCurrencyContainer = css`
   flex-direction: row;
   align-items: center;
 `;
 
-export const CurrencyContainer = styled.View`
+export const currencyContainer = css`
   margin-right: 8px;
   flex: 1;
 `;
 
-export const AmountContainer = styled.View`
+export const amountContainer = css`
   flex: 2;
 `;

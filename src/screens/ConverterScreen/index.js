@@ -1,17 +1,20 @@
 import React, {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {KeyboardAvoidingView, ScrollView} from 'react-native';
+import {View, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {Formik} from 'formik';
+import {useTheme} from 'emotion-theming';
 import {AuthContext} from '@/context/auth';
 import {useQuery, useMutation} from '@apollo/client';
 import {GET_CONVERSION_RATE_API, CURRENCY_CONVERT_API} from '@/api/data';
 
-import {Container, Detail} from './style';
+import {detailStyle, container} from './style';
 
 import ModalContainer from '@/components/ModalContainer';
+import AppText from '@/components/AppText2';
 import ConvertForm from './ConvertForm';
 
 const ConverterScreen = ({navigation, route}) => {
+  const theme = useTheme();
   const from = route.params.from;
   const to = route.params.to;
   const {authToken} = useContext(AuthContext);
@@ -76,13 +79,13 @@ const ConverterScreen = ({navigation, route}) => {
           title={
             <FormattedMessage id="converter" defaultMessage="Converter" />
           }>
-          <Container>
-            <Detail>
+          <View style={container}>
+            <AppText variant="body1" style={detailStyle(theme)}>
               <FormattedMessage
                 id="converter_detail"
                 defaultMessage="converter_detail"
               />
-            </Detail>
+            </AppText>
             <Formik
               initialValues={{
                 amount: 0,
@@ -93,7 +96,7 @@ const ConverterScreen = ({navigation, route}) => {
               validate={validate}>
               <ConvertForm conversionRate={conversionRate} from={from} />
             </Formik>
-          </Container>
+          </View>
         </ModalContainer>
       </KeyboardAvoidingView>
     </ScrollView>

@@ -113,7 +113,7 @@ const UpgradeSection = ({userNextLevel}) => {
         </AppText>
         <View style={giftsContainer}>
           {giftList.map(({name}) => (
-            <TouchableOpacity style={giftContainer}>
+            <TouchableOpacity key={name} style={giftContainer}>
               <GiftIcon />
               <View style={giftNameContainer}>
                 <AppText variant="caption" style={giftName(theme)}>

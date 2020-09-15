@@ -22,11 +22,11 @@ import AppText from '@/components/AppText2';
 import {
   Container,
   FormContainer,
-  DateFieldContainer,
   titleStyle,
   detailStyle,
   errorStyle,
   requiredText,
+  dateContainer,
 } from './style';
 
 const UserProfileForm = ({showDatePicker, handleDatePickerPress, theme}) => {
@@ -45,19 +45,16 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress, theme}) => {
       <AppText variant="caption" style={errorStyle(theme)}>
         {errors.gender ? errors.gender : ' '}
       </AppText>
-      <DateFieldContainer onPress={handleDatePickerPress}>
-        <DateTimePickerInput
-          label={
-            <FormattedMessage
-              id="date_of_birth"
-              defaultMessage="DATE OF BIRTH"
-            />
-          }
-          required
-          name="dob"
-          showDatePicker={showDatePicker}
-        />
-      </DateFieldContainer>
+      <DateTimePickerInput
+        onPress={handleDatePickerPress}
+        style={dateContainer}
+        label={
+          <FormattedMessage id="date_of_birth" defaultMessage="DATE OF BIRTH" />
+        }
+        required
+        name="dob"
+        showDatePicker={showDatePicker}
+      />
       <Input
         label={<FormattedMessage id="referral_code" />}
         remark={
