@@ -56,6 +56,8 @@ import ConverterScreen from '@/screens/ConverterScreen';
 import WithdrawalScreen from '@/screens/WithdrawalScreen';
 import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
 
+import MembershipDetailScreen from '@/screens/MembershipDetailScreen';
+
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
 import BackAppButton from '@/components/BackAppButton';
@@ -157,6 +159,11 @@ const authModalScreens = [
   {name: 'converter', component: ConverterScreen},
   {name: 'withdrawal', component: WithdrawalScreen},
   {name: 'missing_receipt', component: MissingReceiptScreen},
+  {
+    name: 'membership_detail',
+    component: MembershipDetailScreen,
+    options: {themeStyle: true},
+  },
 ];
 
 const settingScreens = [
@@ -407,6 +414,16 @@ const Root = () => {
     backgroundColor: theme.colors.background1,
   };
 
+  const themeCardStyle = {
+    ...screenUnderModalOptions.cardStyle,
+    backgroundColor: theme.colors.themeBackground,
+  };
+
+  const themeHeaderStyle = {
+    ...screenUnderModalOptions.headerStyle,
+    backgroundColor: theme.colors.themeBackground,
+  };
+
   useEffect(() => {
     Linking.addEventListener('url');
     return () => {
@@ -449,8 +466,12 @@ const Root = () => {
                 options={{
                   ...screenUnderModalOptions,
                   ...options,
-                  headerStyle: rootHeaderStyle,
-                  cardStyle: rootCardStyle,
+                  headerStyle: options?.themeStyle
+                    ? themeHeaderStyle
+                    : rootHeaderStyle,
+                  cardStyle: options?.themeStyle
+                    ? themeCardStyle
+                    : rootCardStyle,
                 }}
               />
             ))

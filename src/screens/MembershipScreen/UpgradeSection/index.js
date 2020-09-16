@@ -38,7 +38,7 @@ const giftList = [
   },
 ];
 
-const UpgradeSection = ({userNextLevel}) => {
+const UpgradeSection = ({userNextLevel, navigation}) => {
   const theme = useTheme();
   const canUpgrade = false; // from api later
   // TODO: handle update ui when have api
@@ -125,6 +125,7 @@ const UpgradeSection = ({userNextLevel}) => {
         </View>
       </View>
       <TouchableOpacity
+        onPress={() => navigation.navigate('membership_detail')}
         style={[
           css`
             ${theme.colors.elevatedBackground1}

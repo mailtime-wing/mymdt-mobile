@@ -65,7 +65,7 @@ const MembershipScreen = ({navigation}) => {
         <ScreenContainer hasTopBar headerTransparent>
           <Image
             style={imageStyle}
-            source={require('@/assets/RewardMeCard.png')}
+            source={require('@/assets/basic_membership_card.png')}
           />
           <View style={userRowContainer}>
             <AppAvator
@@ -93,7 +93,10 @@ const MembershipScreen = ({navigation}) => {
           </View>
           <View style={sectionsContainer}>
             <ShortcutSection />
-            <UpgradeSection userNextLevel={userNextLevel} />
+            <UpgradeSection
+              userNextLevel={userNextLevel}
+              navigation={navigation}
+            />
             <PrivilegesSection />
           </View>
         </ScreenContainer>

@@ -12,6 +12,9 @@
   "valid_until": "Valid until {date}",
   "cashback_type": "Cashback type",
   "referral": "Referral",
+  "membership_program": "Membership program",
+  "current": "Current",
+  "upgrade": "Upgrade",
   "upgrade_to": "Upgrade to {nextLevel}",
   "upgrade_now": "Upgrade now",
   "complete_tasks_to_upgrade": "Complete all tasks to upgrade your membership",
@@ -19,6 +22,7 @@
   "enjoy_more_after_updrade": "Enjoy more after upgrading membership",
   "browse_membership_details": "Browse all membership details",
   "privileges": "Privileges",
+  "requirements": "Requirements",
   "special_offers_from_brands": "Special offers from {number_of_brands} brands",
   "additional_percentage_cashback": "Additional {percentage} cashback",
 
