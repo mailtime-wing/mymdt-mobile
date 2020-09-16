@@ -2,4 +2,5 @@
 export default {
   PLAID: 'PLAID',
   PLANTO: 'PLANTO',
+  CREDIGO: 'CREDIGO',
 };

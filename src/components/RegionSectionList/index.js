@@ -25,6 +25,7 @@ const initialFetchOptions = {
 const supportedDataAPIType = [
   bankSyncServerDataAPIType.PLAID,
   bankSyncServerDataAPIType.PLANTO,
+  bankSyncServerDataAPIType.CREDIGO,
 ];
 
 const ChooseRegionScreen = ({onItemPress}) => {

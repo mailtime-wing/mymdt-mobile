@@ -238,7 +238,7 @@ const linking = {
   config: linkingConfig,
   getStateFromPath(path, config) {
     // ignore url from bank sync server
-    if (path.startsWith('planto')) {
+    if (path.startsWith('planto') || path.startsWith('credigo')) {
       return null;
     }
     return getStateFromPath(path, config);

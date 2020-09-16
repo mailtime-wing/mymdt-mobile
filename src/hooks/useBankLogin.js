@@ -97,6 +97,13 @@ export default function useBankLogin(
           flow = bankSyncServerDataAPITypeEnum.PLANTO;
         }
 
+        if (
+          urlObj.protocol.startsWith('rewardme') &&
+          urlObj.hostname === 'credigo'
+        ) {
+          flow = bankSyncServerDataAPITypeEnum.CREDIGO;
+        }
+
         if (flow) {
           setIsLoading(true);
 
@@ -107,6 +114,9 @@ export default function useBankLogin(
               break;
             case bankSyncServerDataAPITypeEnum.PLANTO:
               publicToken = urlObj.searchParams.get('accessToken');
+              break;
+            case bankSyncServerDataAPITypeEnum.CREDIGO:
+              publicToken = urlObj.searchParams.get('public_token');
               break;
           }
 
