@@ -37,6 +37,7 @@ export const ConvertersContainer = styled.View`
 export const ConverterContainer = styled.View`
   flex: 1;
   border-radius: 8px;
+  height: 120px;
   padding: 24px;
   border-radius: 24px;
   border: 1px solid ${props => props.theme.colors.background2};
