@@ -74,6 +74,7 @@ export default function useBankLogin(
   const _onConnected = useEventCallback(onConnected);
 
   useEffect(() => {
+    let mounted = true;
     /**
      *
      * @param {{url: String}} event
@@ -135,6 +136,10 @@ export default function useBankLogin(
             }),
           });
 
+          if (!mounted) {
+            return;
+          }
+
           if (!data.accountDetails?.length) {
             // TODO: use error code to distinguish?
             throw new Error('No credit card info');
@@ -156,6 +161,10 @@ export default function useBankLogin(
             },
           });
 
+          if (!mounted) {
+            return;
+          }
+
           setIsLoading(false);
           _onConnected(data);
         }
@@ -167,6 +176,7 @@ export default function useBankLogin(
 
     Linking.addEventListener('url', handler);
     return () => {
+      mounted = false;
       Linking.removeEventListener('url', handler);
     };
   }, [_onConnected, bindBankItem, dataAPIType, fetchAccountDetail, userId]);
