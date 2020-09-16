@@ -36,7 +36,7 @@ const MembershipCard = ({userLevel, style}) => {
   return (
     <Image
       source={
-        levelCardList.find(levelCard => userLevel === levelCard.level).cardSrc
+        levelCardList.find(levelCard => userLevel === levelCard.level)?.cardSrc
       }
       style={[image, style]}
     />
