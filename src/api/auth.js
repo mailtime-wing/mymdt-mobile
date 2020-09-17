@@ -78,3 +78,17 @@ export const VERIFY_PIN_API = gql`
     verifyPin(pin: $pin)
   }
 `;
+
+export const CHANGE_PHONE_NUMBER_API = gql`
+  mutation ChangePhoneNumber(
+    $oldPhoneOtp: String!
+    $newPhoneOtp: String!
+    $pin: String!
+  ) {
+    changePhoneNumber(
+      oldPhoneOtp: $oldPhoneOtp
+      newPhoneOtp: $newPhoneOtp
+      pin: $pin
+    )
+  }
+`;

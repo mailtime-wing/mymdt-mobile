@@ -19,7 +19,12 @@ const ForgetPinScreen = ({navigation}) => {
           <FormattedMessage id="forget_pin_detail" />
         </AppText>
         <AppButton
-          onPress={() => navigation.navigate('verify_identity')}
+          onPress={() =>
+            navigation.navigate('verify_identity', {
+              nextScreen: 'reset_pin',
+              otpActionKey: 'RESET_PIN',
+            })
+          }
           text={<FormattedMessage id="next" defaultMessage="Next" />}
           variant="filled"
           sizeVariant="large"

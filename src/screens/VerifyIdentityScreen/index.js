@@ -69,10 +69,11 @@ const validate = values => {
   return errors;
 };
 
-const VerifyIdentityScreen = ({navigation}) => {
+const VerifyIdentityScreen = ({navigation, route}) => {
   const theme = useTheme();
+  const {nextScreen, otpActionKey, pin} = route.params;
   const {localeEnum} = useContext(IntlContext);
-  const [otpRequest] = useMutationWithReset(GET_OTP_API);
+  const [otpRequest] = useMutationWithReset(GET_OTP_API, {}, {withAuth: true});
 
   const {data} = useQueryWithAuth(GET_USER_PHONE_NUMBER);
   const [timeLeft, setCountdownTime] = useCountDownTimer(0);
@@ -86,10 +87,10 @@ const VerifyIdentityScreen = ({navigation}) => {
       variables: {
         phoneNumber: phoneNubmer,
         locale: localeEnum,
-        action: 'RESET_PIN',
+        action: otpActionKey,
       },
     });
-  }, [localeEnum, otpRequest, phoneNubmer, setCountdownTime]);
+  }, [localeEnum, otpActionKey, otpRequest, phoneNubmer, setCountdownTime]);
 
   useEffect(() => {
     if (phoneNubmer) {
@@ -98,7 +99,10 @@ const VerifyIdentityScreen = ({navigation}) => {
   }, [handleSendPress, phoneNubmer]);
 
   const handleSubmitPress = values => {
-    navigation.navigate('reset_pin', {otp: values.verificationCode});
+    navigation.navigate(nextScreen, {
+      otp: values.verificationCode,
+      pin: pin,
+    });
   };
 
   return (
