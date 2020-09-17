@@ -73,7 +73,7 @@ const VerifyIdentityScreen = ({navigation, route}) => {
   const theme = useTheme();
   const {nextScreen, otpActionKey, pin} = route.params;
   const {localeEnum} = useContext(IntlContext);
-  const [otpRequest] = useMutationWithReset(GET_OTP_API);
+  const [otpRequest] = useMutationWithReset(GET_OTP_API, {}, {withAuth: true});
 
   const {data} = useQueryWithAuth(GET_USER_PHONE_NUMBER);
   const [timeLeft, setCountdownTime] = useCountDownTimer(0);
@@ -83,6 +83,7 @@ const VerifyIdentityScreen = ({navigation, route}) => {
 
   const handleSendPress = useCallback(() => {
     setCountdownTime(60);
+    console.log('otpRequest');
     otpRequest({
       variables: {
         phoneNumber: phoneNubmer,

@@ -48,7 +48,7 @@ const ChangePhoneNumberScreen = ({navigation, route}) => {
     otpRequest,
     {error: otpRequestError},
     otpRequestReset,
-  ] = useMutationWithReset(GET_OTP_API);
+  ] = useMutationWithReset(GET_OTP_API, {}, {withAuth: true});
   const [
     changePhoneNumberRequest,
     {error},
