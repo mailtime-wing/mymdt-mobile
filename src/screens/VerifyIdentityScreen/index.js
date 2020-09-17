@@ -83,7 +83,6 @@ const VerifyIdentityScreen = ({navigation, route}) => {
 
   const handleSendPress = useCallback(() => {
     setCountdownTime(60);
-    console.log('otpRequest');
     otpRequest({
       variables: {
         phoneNumber: phoneNubmer,
