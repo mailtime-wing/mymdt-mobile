@@ -5,9 +5,8 @@ import {
   FormattedNumber,
   useIntl,
 } from 'react-intl';
-import {InputAccessoryView} from 'react-native';
+import {InputAccessoryView, TouchableOpacity} from 'react-native';
 import {useFormikContext, useField} from 'formik';
-import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
 import {useTheme} from 'emotion-theming';
 import {GET_CURRENCY_BALANCE_API} from '@/api/data';
 import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
@@ -37,10 +36,8 @@ import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
 import AppText from '@/components/AppText2';
 import LoadingSpinner from '@/components/LoadingSpinner';
-// import AppIcon from '@/components/AppIcon';
 
-// import ConvertIcon from '@/assets/convert_icon.svg';
-import ConvertIcon2 from '@/assets/convert.svg';
+import ConvertIcon from '@/assets/convert.svg';
 
 const inputAccessoryViewID = 'converterButtons';
 
@@ -129,7 +126,7 @@ const ConverterInput = ({
   );
 };
 
-const ConversionRate = ({conversionRate, isMrp}) => {
+const ConversionRate = ({conversionRate, convertFromMrp}) => {
   const theme = useTheme();
 
   return (
@@ -153,7 +150,7 @@ const ConversionRate = ({conversionRate, isMrp}) => {
           </AppText>
         </ConversionRateLeftContainer>
         <ConversionRateRightContainer>
-          {isMrp ? (
+          {convertFromMrp ? (
             <>
               <MRPCoin
                 amount={1}
@@ -196,16 +193,21 @@ const ConversionRate = ({conversionRate, isMrp}) => {
   );
 };
 
-const ConvertForm = ({conversionRate, from}) => {
+const ConvertForm = ({
+  conversionRate,
+  convertVariables,
+  changeConvertCurrency,
+  ...props
+}) => {
   const theme = useTheme();
   const {values, setFieldValue, handleSubmit, isValid} = useFormikContext();
   const [isAmountFocus, setIsAmountFocus] = useState(false);
   const [toAmount, setToAmount] = useState(0);
   const [clientError, setClientError] = useState('');
-  const isMrp = from === MEASURABLE_REWARD_POINT;
-  const FromAmountText = isMrp ? 'RewardPoint' : 'Measurable Data Token';
-  const ToAmountText =
-    FromAmountText === 'RewardPoint' ? 'Measurable Data Token' : 'RewardPoint';
+  const label = {
+    MRP: 'RewardPoint',
+    MDT: 'Measurable Data Token',
+  };
 
   useEffect(() => {
     setToAmount(values.amount * conversionRate);
@@ -228,14 +230,14 @@ const ConvertForm = ({conversionRate, from}) => {
 
   return (
     <>
-      <ConversionRate conversionRate={conversionRate} isMrp={isMrp} />
+      <ConversionRate conversionRate={conversionRate} {...props} />
       <ConvertersContainer>
         <ConverterContainer
           onBlur={handleOnBlur}
           onFocus={() => setIsAmountFocus(true)}
           isFocus={isAmountFocus}>
           <AppText variant="value" style={converterType(theme, isAmountFocus)}>
-            {FromAmountText}
+            {label[convertVariables.from]}
           </AppText>
           <ConverterInput
             keyboardType="numeric"
@@ -247,27 +249,16 @@ const ConvertForm = ({conversionRate, from}) => {
           />
           <KeyboardButtons
             handleConverterOnChange={handleConverterOnChange}
-            from={from}
+            from={convertVariables.from}
           />
         </ConverterContainer>
         <Margin />
-        {
-          // <AppIcon
-          //   color={theme.colors.background1}
-          //   backgroundColor={isMrp ? theme.colors.secondary.normal : theme.colors.primary.normal}
-          //   sizeVariant='small'
-          //   svgIcon={ConvertIcon}
-          //   style={convertIcon}
-          // />
-          // TODO: fix background color not work when use appIcon
-        }
-        <ConvertIcon2
-          fill={theme.colors.secondary.normal}
-          style={convertIcon}
-        />
+        <TouchableOpacity onPress={changeConvertCurrency} style={convertIcon}>
+          <ConvertIcon fill={theme.colors.secondary.normal} />
+        </TouchableOpacity>
         <ConverterContainer isFocus={false}>
           <AppText variant="value" style={converterType(theme)}>
-            {ToAmountText}
+            {label[convertVariables.to]}
           </AppText>
           <AppText
             variant="heading1"
