@@ -28,6 +28,7 @@ const ProgressBar = ({title, label, progressLabel, progress, style}) => {
         ) : (
           <ProgressBarAndroid
             styleAttr="Horizontal"
+            indeterminate={false}
             progress={progress}
             color={theme.colors.secondary.normal}
           />

@@ -5,7 +5,7 @@ import {
   FormattedNumber,
   useIntl,
 } from 'react-intl';
-import {InputAccessoryView, TouchableOpacity} from 'react-native';
+import {InputAccessoryView, TouchableOpacity, Platform} from 'react-native';
 import {useFormikContext, useField} from 'formik';
 import {useTheme} from 'emotion-theming';
 import {GET_CURRENCY_BALANCE_API} from '@/api/data';
@@ -66,7 +66,7 @@ const KeyboardButtons = ({handleConverterOnChange, from}) => {
     });
   };
 
-  return (
+  return Platform.OS === 'ios' ? (
     <InputAccessoryView nativeID={inputAccessoryViewID}>
       <InputAccessoryViewContainer>
         <InputAccessoryButton onPress={() => handleConverterOnChange(0)}>
@@ -85,7 +85,7 @@ const KeyboardButtons = ({handleConverterOnChange, from}) => {
         </InputAccessoryButton>
       </InputAccessoryViewContainer>
     </InputAccessoryView>
-  );
+  ) : null;
 };
 
 const ConverterInput = ({

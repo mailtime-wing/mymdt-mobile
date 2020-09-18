@@ -54,6 +54,8 @@ const reducer = (state, action) => {
   }
 };
 
+const IOS = Platform.OS === 'ios';
+
 export const NotificationProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {authToken} = useContext(AuthContext);
@@ -61,9 +63,12 @@ export const NotificationProvider = ({children}) => {
 
   const checkPermissions = useCallback(async () => {
     try {
-      const permissions = await new Promise(resolve =>
-        PushNotificationIOS.checkPermissions(resolve),
-      );
+      let permissions;
+      if (IOS) {
+        permissions = await new Promise(resolve =>
+          PushNotificationIOS.checkPermissions(resolve),
+        );
+      }
 
       if (!permissions) {
         dispatch({type: UPDATE_PERMISSION, payload: initialState.permissions});
@@ -81,7 +86,9 @@ export const NotificationProvider = ({children}) => {
 
   const notify = useCallback(details => {
     try {
-      PushNotificationIOS.presentLocalNotification(details);
+      if (IOS) {
+        PushNotificationIOS.presentLocalNotification(details);
+      }
     } catch (e) {
       console.error('error send local noti ios');
     }
@@ -89,7 +96,9 @@ export const NotificationProvider = ({children}) => {
 
   const request = useCallback(async () => {
     try {
-      await PushNotificationIOS.requestPermissions();
+      if (IOS) {
+        await PushNotificationIOS.requestPermissions();
+      }
     } catch (e) {
       console.error('error request permission ios');
     }
