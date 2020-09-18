@@ -16,7 +16,7 @@ export const detail = theme => css`
 `;
 
 export const titleStyle = theme => css`
-  color: ${theme.colors.textOnThemeBackground.highEmphasis};
+  color: ${theme.colors.buttonContrastTextColor};
   margin-bottom: 16px;
 `;
 

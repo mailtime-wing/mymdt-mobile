@@ -2,7 +2,6 @@ import React from 'react';
 import {Dimensions, View} from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
-import { useTheme } from 'emotion-theming';
 
 import {card, sliderContainer, cardName, usd} from './style';
 
@@ -22,7 +21,7 @@ const sliderWidth = viewportWidth;
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 const renderItem = ({item, index}) => {
-  const {cardBackgroundColor, cardNameColor} = item.theme
+  const {cardBackgroundColor, cardNameColor} = item.theme;
   return (
     <View key={index} style={card(cardBackgroundColor)}>
       <AppText variant="subTitle1" style={cardName(cardNameColor)}>

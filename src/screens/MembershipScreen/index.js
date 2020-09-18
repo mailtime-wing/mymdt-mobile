@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {View, TouchableOpacity, ScrollView, Image} from 'react-native';
+import {View, TouchableOpacity, ScrollView} from 'react-native';
 import {FormattedDate, FormattedMessage} from 'react-intl';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {GET_USER_MEMBERSHIP_API} from '@/api/data';
@@ -25,6 +25,7 @@ import PrivilegesSection from './PrivilegesSection';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import ScreenContainer from '@/components/ScreenContainer';
 import MembershipLevelChip from '@/components/MembershipLevelChip';
+import MembershipCard from '@/components/MembershipCard';
 import AppAvator from '@/components/AppAvator';
 
 import AppText from '@/components/AppText2';
@@ -63,10 +64,7 @@ const MembershipScreen = ({navigation}) => {
     <LinearGradientBackground>
       <ScrollView>
         <ScreenContainer hasTopBar headerTransparent>
-          <Image
-            style={imageStyle}
-            source={require('@/assets/RewardMeCard.png')}
-          />
+          <MembershipCard userLevel={userLevel} style={imageStyle} />
           <View style={userRowContainer}>
             <AppAvator
               variant="image"
@@ -93,7 +91,10 @@ const MembershipScreen = ({navigation}) => {
           </View>
           <View style={sectionsContainer}>
             <ShortcutSection />
-            <UpgradeSection userNextLevel={userNextLevel} />
+            <UpgradeSection
+              userNextLevel={userNextLevel}
+              navigation={navigation}
+            />
             <PrivilegesSection />
           </View>
         </ScreenContainer>

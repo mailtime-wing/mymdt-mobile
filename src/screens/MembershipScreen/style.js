@@ -2,9 +2,6 @@ import {css} from '@emotion/native';
 import {APP_BAR_HEIGHT} from '@/constants/layout';
 
 export const imageStyle = css`
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 12px;
   margin-top: 24px;
   margin-bottom: 24px;
 `;
