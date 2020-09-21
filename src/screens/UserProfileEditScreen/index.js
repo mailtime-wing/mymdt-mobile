@@ -198,6 +198,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
             required
             name="dob"
             showDatePicker={formState.showDatePicker}
+            onDismiss={handleDatePickerPress}
           />
         </>
       ) : (
