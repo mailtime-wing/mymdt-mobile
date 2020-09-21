@@ -20,8 +20,18 @@ export const GET_OTP_API = gql`
 `;
 
 export const REGISTER_API = gql`
-  mutation Register($phoneNumber: String!, $otp: String!, $locale: Locale!) {
-    register(phoneNumber: $phoneNumber, otp: $otp, locale: $locale) {
+  mutation Register(
+    $phoneNumber: String!
+    $otp: String!
+    $locale: Locale!
+    $deviceId: String
+  ) {
+    register(
+      phoneNumber: $phoneNumber
+      otp: $otp
+      locale: $locale
+      deviceId: $deviceId
+    ) {
       accessToken
       refreshToken
     }
@@ -29,8 +39,8 @@ export const REGISTER_API = gql`
 `;
 
 export const LOGIN_API = gql`
-  mutation Login($phoneNumber: String!, $otp: String!) {
-    login(phoneNumber: $phoneNumber, otp: $otp) {
+  mutation Login($phoneNumber: String!, $otp: String!, $deviceId: String!) {
+    login(phoneNumber: $phoneNumber, otp: $otp, deviceId: $deviceId) {
       accessToken
       refreshToken
     }
@@ -89,6 +99,20 @@ export const CHANGE_PHONE_NUMBER_API = gql`
       oldPhoneOtp: $oldPhoneOtp
       newPhoneOtp: $newPhoneOtp
       pin: $pin
+    )
+  }
+`;
+
+export const REGISTER_DEVICE = gql`
+  mutation RegisterDevice(
+    $deviceId: String!
+    $platform: String!
+    $pushToken: String!
+  ) {
+    registerDevice(
+      deviceId: $deviceId
+      platform: $platform
+      pushToken: $pushToken
     )
   }
 `;
