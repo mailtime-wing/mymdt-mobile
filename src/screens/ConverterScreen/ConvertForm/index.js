@@ -126,7 +126,11 @@ const ConverterInput = ({
   );
 };
 
-const ConversionRate = ({conversionRate, convertFromMrp}) => {
+const ConversionRate = ({
+  conversionRate,
+  isConvertFromMrpToMdt,
+  isConvertFromMdtToMrp,
+}) => {
   const theme = useTheme();
 
   return (
@@ -150,7 +154,7 @@ const ConversionRate = ({conversionRate, convertFromMrp}) => {
           </AppText>
         </ConversionRateLeftContainer>
         <ConversionRateRightContainer>
-          {convertFromMrp ? (
+          {isConvertFromMrpToMdt && (
             <>
               <MRPCoin
                 amount={1}
@@ -168,7 +172,9 @@ const ConversionRate = ({conversionRate, convertFromMrp}) => {
                 color={theme.colors.textOfMdt}
               />
             </>
-          ) : (
+          )}
+
+          {isConvertFromMdtToMrp && (
             <>
               <MDTCoin
                 amount={1}
@@ -195,7 +201,8 @@ const ConversionRate = ({conversionRate, convertFromMrp}) => {
 
 const ConvertForm = ({
   conversionRate,
-  convertVariables,
+  from,
+  to,
   changeConvertCurrency,
   ...props
 }) => {
@@ -237,7 +244,7 @@ const ConvertForm = ({
           onFocus={() => setIsAmountFocus(true)}
           isFocus={isAmountFocus}>
           <AppText variant="value" style={converterType(theme, isAmountFocus)}>
-            {label[convertVariables.from]}
+            {label[from]}
           </AppText>
           <ConverterInput
             keyboardType="numeric"
@@ -249,7 +256,7 @@ const ConvertForm = ({
           />
           <KeyboardButtons
             handleConverterOnChange={handleConverterOnChange}
-            from={convertVariables.from}
+            from={from}
           />
         </ConverterContainer>
         <Margin />
@@ -258,7 +265,7 @@ const ConvertForm = ({
         </TouchableOpacity>
         <ConverterContainer isFocus={false}>
           <AppText variant="value" style={converterType(theme)}>
-            {label[convertVariables.to]}
+            {label[to]}
           </AppText>
           <AppText
             variant="heading1"

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {View, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {Formik} from 'formik';
@@ -17,38 +17,32 @@ import ModalContainer from '@/components/ModalContainer';
 import AppText from '@/components/AppText2';
 import ConvertForm from './ConvertForm';
 
-const fromMrpToMdt = {
-  from: MEASURABLE_REWARD_POINT,
-  to: MEASURABLE_DATA_TOKEN,
-};
-
-const fromMdtToMrp = {
-  from: MEASURABLE_DATA_TOKEN,
-  to: MEASURABLE_REWARD_POINT,
-};
-
 const ConverterScreen = ({navigation, route}) => {
   const theme = useTheme();
-  const {isMrp} = route.params;
-  const [convertFromMrp, setConvertFromMrp] = useState(isMrp);
-  const [convertVariables, setConvertVariables] = useState({});
+  const {initialFrom, initialTo} = route.params;
+  const [from, setFrom] = useState(initialFrom);
+  const [to, setTo] = useState(initialTo);
+  const isConvertFromMrpToMdt =
+    from === MEASURABLE_REWARD_POINT && to === MEASURABLE_DATA_TOKEN;
+  const isConvertFromMdtToMrp =
+    from === MEASURABLE_DATA_TOKEN && to === MEASURABLE_REWARD_POINT;
 
-  useEffect(() => {
-    if (convertFromMrp) {
-      setConvertVariables(fromMrpToMdt);
-    } else {
-      setConvertVariables(fromMdtToMrp);
+  const handleChangeConvertCurrency = useCallback(() => {
+    if (isConvertFromMrpToMdt) {
+      setFrom(MEASURABLE_DATA_TOKEN);
+      setTo(MEASURABLE_REWARD_POINT);
     }
-  }, [convertFromMrp]);
 
-  const handleChangeConvertCurrency = () => {
-    setConvertFromMrp(currency => !currency);
-  };
+    if (isConvertFromMdtToMrp) {
+      setFrom(MEASURABLE_REWARD_POINT);
+      setTo(MEASURABLE_DATA_TOKEN);
+    }
+  }, [isConvertFromMrpToMdt, isConvertFromMdtToMrp]);
 
   const [convert] = useMutationWithAuth(CURRENCY_CONVERT_API);
   const {data} = useQueryWithAuth(GET_CONVERSION_RATE_API, {
-    skip: !convertVariables.from || !convertVariables.to,
-    variables: convertVariables,
+    skip: !from || !to,
+    variables: {from: from, to: to},
     fetchPolicy: 'network-only',
   });
 
@@ -58,7 +52,8 @@ const ConverterScreen = ({navigation, route}) => {
     try {
       const result = await convert({
         variables: {
-          ...convertVariables,
+          from: from,
+          to: to,
           amount: values.amount,
         },
       });
@@ -109,9 +104,11 @@ const ConverterScreen = ({navigation, route}) => {
               validate={validate}>
               <ConvertForm
                 conversionRate={conversionRate}
-                convertVariables={convertVariables}
-                convertFromMrp={convertFromMrp}
                 changeConvertCurrency={handleChangeConvertCurrency}
+                isConvertFromMrpToMdt={isConvertFromMrpToMdt}
+                isConvertFromMdtToMrp={isConvertFromMdtToMrp}
+                from={from}
+                to={to}
               />
             </Formik>
           </View>

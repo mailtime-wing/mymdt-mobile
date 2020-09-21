@@ -16,7 +16,8 @@ const ActionButtons = ({actionList, color, buttonsStyle, navigation}) => {
             key={index}
             onPress={() =>
               navigation.navigate(action.id, {
-                isMrp: action.isMrp,
+                initialFrom: action.initialFrom,
+                initialTo: action.initialTo,
               })
             }
             style={[
