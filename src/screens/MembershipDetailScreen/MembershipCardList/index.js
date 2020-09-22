@@ -58,7 +58,7 @@ const MembershipCardList = ({cardList, onScroll}) => {
           {current ? (
             <FormattedMessage id="current" defaultMessage="Current" />
           ) : next ? (
-            <FormattedMessage id="next" defaultMessage="Next" />
+            <FormattedMessage id="button.next" defaultMessage="Next" />
           ) : (
             ' '
           )}
@@ -96,7 +96,9 @@ const MembershipCardList = ({cardList, onScroll}) => {
         ))}
         {next && (
           <AppButton
-            text={<FormattedMessage id="upgrade" defaultMessage="Upgrade" />}
+            text={
+              <FormattedMessage id="button.upgrade" defaultMessage="Upgrade" />
+            }
             variant="filled"
             sizeVariant="normal"
             colorVariant="secondary"

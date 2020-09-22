@@ -71,7 +71,7 @@ const KeyboardButtons = ({handleConverterOnChange, from}) => {
       <InputAccessoryViewContainer>
         <InputAccessoryButton onPress={() => handleConverterOnChange(0)}>
           <AppText variant="button" style={inputAccessoryButtonText(theme)}>
-            <FormattedMessage id="clear" defaultMessage="clear" />
+            <FormattedMessage id="button.clear" defaultMessage="clear" />
           </AppText>
         </InputAccessoryButton>
         <InputAccessoryButton onPress={handleConvertAllPress}>
@@ -79,7 +79,10 @@ const KeyboardButtons = ({handleConverterOnChange, from}) => {
             <LoadingSpinner />
           ) : (
             <AppText variant="button" style={inputAccessoryButtonText(theme)}>
-              <FormattedMessage id="convert_all" defaultMessage="Convert all" />
+              <FormattedMessage
+                id="button.convert_all"
+                defaultMessage="Convert all"
+              />
             </AppText>
           )}
         </InputAccessoryButton>
@@ -285,7 +288,7 @@ const ConvertForm = ({
       <AppButton
         onPress={handleSubmit}
         disabled={!isValid}
-        text={<FormattedMessage id="convert" defaultMessage="convert" />}
+        text={<FormattedMessage id="button.convert" defaultMessage="convert" />}
         variant="filled"
         sizeVariant="large"
         colorVariant="secondary"

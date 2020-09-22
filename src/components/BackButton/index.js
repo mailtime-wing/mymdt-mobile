@@ -8,7 +8,7 @@ const BackButton = ({navigation, ...props}) => {
       <Container>
         <BackArrowIcon source={require('@/assets/arrow-left.png')} />
         <ButtonText>
-          <FormattedMessage id="back" defaultMessage="back" />
+          <FormattedMessage id="button.back" defaultMessage="back" />
         </ButtonText>
       </Container>
     </ButtonContainer>

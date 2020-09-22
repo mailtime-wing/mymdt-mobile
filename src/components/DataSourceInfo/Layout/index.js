@@ -82,7 +82,9 @@ const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
       <AppButton
         style={button}
         onPress={onContinuePress}
-        text={<FormattedMessage id="continue" defaultMessage="Continue" />}
+        text={
+          <FormattedMessage id="button.continue" defaultMessage="Continue" />
+        }
         variant="filled"
         sizeVariant="large"
         colorVariant="secondary"

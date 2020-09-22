@@ -79,9 +79,12 @@ const DailyCheckIn = () => {
         onPress={handleCheckInPress}
         text={
           checkedInToday ? (
-            <FormattedMessage id="checked_in" defaultMessage="Checked in" />
+            <FormattedMessage
+              id="button.checked_in"
+              defaultMessage="Checked in"
+            />
           ) : (
-            <FormattedMessage id="check_in" defaultMessage="Check in" />
+            <FormattedMessage id="button.check_in" defaultMessage="Check in" />
           )
         }
         disabled={checkedInToday}

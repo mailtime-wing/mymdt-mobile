@@ -196,7 +196,10 @@ const BindEmailEditScreen = ({navigation}) => {
               state.isEditing ? (
                 <UnbindButton onPress={() => handleUnbindPress(email)}>
                   <AppText variant="button" style={removeText(theme)}>
-                    <FormattedMessage id="unbind" defaultMessage="unbind" />
+                    <FormattedMessage
+                      id="button.unbind"
+                      defaultMessage="unbind"
+                    />
                   </AppText>
                 </UnbindButton>
               ) : (

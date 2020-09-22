@@ -153,7 +153,7 @@ const SignUpRewardScreen = ({route}) => {
         {isOpened && (
           <AppButton
             onPress={handleContinuePress}
-            text={<FormattedMessage id="continue" default="continue" />}
+            text={<FormattedMessage id="button.continue" default="continue" />}
             variant="filled"
             sizeVariant="large"
             colorVariant="secondary"

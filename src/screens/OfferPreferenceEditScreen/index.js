@@ -101,7 +101,7 @@ const OfferPreferenceEditScreen = ({navigation}) => {
             </AppText>
             <AppButton
               onPress={handleEditPress}
-              text={<FormattedMessage id="edit" defaultMessage="edit" />}
+              text={<FormattedMessage id="button.edit" defaultMessage="edit" />}
               variant="filled"
               sizeVariant="compact"
               colorVariant="secondary"

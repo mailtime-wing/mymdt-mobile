@@ -115,7 +115,10 @@ const TaskList = ({taskList, userRewardList, onClaimPress}) => {
                   <AppButton
                     onPress={() => handleClaimPress(task.reward?.id)}
                     text={
-                      <FormattedMessage id="claim" defaultMessage="Claim" />
+                      <FormattedMessage
+                        id="button.claim"
+                        defaultMessage="Claim"
+                      />
                     }
                     variant="filled"
                     sizeVariant="compact"
@@ -125,7 +128,10 @@ const TaskList = ({taskList, userRewardList, onClaimPress}) => {
                   <AppButton
                     onPress={() => handleOpenUrl(callbackUrl)}
                     text={
-                      <FormattedMessage id="start" defaultMessage="Start" />
+                      <FormattedMessage
+                        id="button.start"
+                        defaultMessage="Start"
+                      />
                     }
                     variant="outlined"
                     sizeVariant="compact"

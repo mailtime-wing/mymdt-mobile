@@ -41,7 +41,7 @@ const AccountSetupDoneScreen = () => {
   return (
     <TouchableOpacity style={container} activeOpacity={1} onPress={handlePress}>
       <AppText variant="heading1" style={titleStyle(theme)}>
-        <FormattedMessage id="success" defaultMessage="SUCCESS" />
+        <FormattedMessage id="button.success" defaultMessage="SUCCESS" />
       </AppText>
       <AppText variant="heading5" style={detailStyle(theme)}>
         <FormattedMessage

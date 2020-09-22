@@ -13,14 +13,14 @@ const ListFooter = ({onDonePress, onMorePress}) => (
   <View style={footerContainer}>
     <AppButton
       onPress={onDonePress}
-      text={<FormattedMessage id="done" defaultMessage="Done" />}
+      text={<FormattedMessage id="button.done" defaultMessage="Done" />}
       variant="filled"
       sizeVariant="large"
       colorVariant="secondary"
     />
     <AppButton
       onPress={onMorePress}
-      text={<FormattedMessage id="connect_more" />}
+      text={<FormattedMessage id="button.connect_more" />}
       variant="outlined"
       sizeVariant="normal"
       colorVariant="secondary"

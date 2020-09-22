@@ -108,7 +108,7 @@ const ChangePhoneNumberScreen = ({navigation, route}) => {
         <LoginForm
           title={<FormattedMessage id="change_phone_number" />}
           submitButtonText={
-            <FormattedMessage id="submit" defaultMessage="Submit" />
+            <FormattedMessage id="button.submit" defaultMessage="Submit" />
           }
           onSendPress={handleSendPress}
           onSubmit={handleSubmitPress}

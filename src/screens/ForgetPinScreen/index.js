@@ -25,7 +25,7 @@ const ForgetPinScreen = ({navigation}) => {
               otpActionKey: 'RESET_PIN',
             })
           }
-          text={<FormattedMessage id="next" defaultMessage="Next" />}
+          text={<FormattedMessage id="button.next" defaultMessage="Next" />}
           variant="filled"
           sizeVariant="large"
           colorVariant="secondary"

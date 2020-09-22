@@ -49,7 +49,10 @@ const IntroductionScreen = () => {
           sizeVariant="normal"
           colorVariant="contrast"
           text={
-            <FormattedMessage id="skip_for_now" defaultMessage="Skip for now" />
+            <FormattedMessage
+              id="button.skip_for_now"
+              defaultMessage="Skip for now"
+            />
           }
           onPress={() => navigateByFlow('skip')}
           style={button}

@@ -10,7 +10,7 @@ const ConfirmAppButton = props => (
     sizeVariant="normal"
     colorVariant="secondary"
     svgIcon={CheckIcon}
-    text={<FormattedMessage id="confirm" defaultMessage="Confirm" />}
+    text={<FormattedMessage id="button.confirm" defaultMessage="Confirm" />}
     {...props}
   />
 );

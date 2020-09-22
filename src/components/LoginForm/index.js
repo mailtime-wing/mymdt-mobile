@@ -116,12 +116,12 @@ const InternalLoginForm = ({submitButtonText, onSendPress}) => {
             <>
               {state.sendCount > 0 ? (
                 <FormattedMessage
-                  id="resend_verification_code"
+                  id="button.resend_verification_code"
                   defaultMessage="SEND"
                 />
               ) : (
                 <FormattedMessage
-                  id="send_verification_code"
+                  id="button.send_verification_code"
                   defaultMessage="RESEND"
                 />
               )}
@@ -153,24 +153,26 @@ const validate = values => {
 
   if (!dialCodeRegex.test(values.phonePrefix)) {
     errors.phonePrefix = (
-      <FormattedMessage id="required" defaultMessage="Required" />
+      <FormattedMessage id="error.required" defaultMessage="Required" />
     );
   }
 
   if (!values.phone) {
-    errors.phone = <FormattedMessage id="required" defaultMessage="Required" />;
+    errors.phone = (
+      <FormattedMessage id="error.required" defaultMessage="Required" />
+    );
   }
 
   if (!values.verificationCode) {
     errors.verificationCode = (
-      <FormattedMessage id="required" defaultMessage="Required" />
+      <FormattedMessage id="error.required" defaultMessage="Required" />
     );
   }
 
   if (!!values.verificationCode && values.verificationCode.length !== 6) {
     errors.verificationCode = (
       <FormattedMessage
-        id="invalid_otp"
+        id="error.invalid_otp"
         defaultMessage="OTP is a 6 digit number"
       />
     );
