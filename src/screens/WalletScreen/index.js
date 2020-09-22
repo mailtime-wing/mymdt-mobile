@@ -104,8 +104,8 @@ const WalletScreen = ({navigation}) => {
         {
           name: 'convert',
           id: 'converter',
-          from: MEASURABLE_REWARD_POINT,
-          to: MEASURABLE_DATA_TOKEN,
+          initialFrom: MEASURABLE_REWARD_POINT,
+          initialTo: MEASURABLE_DATA_TOKEN,
           icon: ConvertIcon,
           color: mrpTheme.color,
         },
@@ -139,8 +139,8 @@ const WalletScreen = ({navigation}) => {
         {
           name: 'convert',
           id: 'converter',
-          from: MEASURABLE_DATA_TOKEN,
-          to: MEASURABLE_REWARD_POINT,
+          initialFrom: MEASURABLE_DATA_TOKEN,
+          initialTo: MEASURABLE_REWARD_POINT,
           icon: ConvertIcon,
           color: mdtTheme.color,
         },
