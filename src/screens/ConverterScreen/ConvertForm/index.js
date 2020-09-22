@@ -66,26 +66,31 @@ const KeyboardButtons = ({handleConverterOnChange, from}) => {
     });
   };
 
-  return Platform.OS === 'ios' ? (
-    <InputAccessoryView nativeID={inputAccessoryViewID}>
-      <InputAccessoryViewContainer>
-        <InputAccessoryButton onPress={() => handleConverterOnChange(0)}>
-          <AppText variant="button" style={inputAccessoryButtonText(theme)}>
-            <FormattedMessage id="clear" defaultMessage="clear" />
-          </AppText>
-        </InputAccessoryButton>
-        <InputAccessoryButton onPress={handleConvertAllPress}>
-          {loading ? (
-            <LoadingSpinner />
-          ) : (
+  return (
+    Platform.OS === 'ios' && (
+      <InputAccessoryView nativeID={inputAccessoryViewID}>
+        <InputAccessoryViewContainer>
+          <InputAccessoryButton onPress={() => handleConverterOnChange(0)}>
             <AppText variant="button" style={inputAccessoryButtonText(theme)}>
-              <FormattedMessage id="convert_all" defaultMessage="Convert all" />
+              <FormattedMessage id="clear" defaultMessage="clear" />
             </AppText>
-          )}
-        </InputAccessoryButton>
-      </InputAccessoryViewContainer>
-    </InputAccessoryView>
-  ) : null;
+          </InputAccessoryButton>
+          <InputAccessoryButton onPress={handleConvertAllPress}>
+            {loading ? (
+              <LoadingSpinner />
+            ) : (
+              <AppText variant="button" style={inputAccessoryButtonText(theme)}>
+                <FormattedMessage
+                  id="convert_all"
+                  defaultMessage="Convert all"
+                />
+              </AppText>
+            )}
+          </InputAccessoryButton>
+        </InputAccessoryViewContainer>
+      </InputAccessoryView>
+    )
+  );
 };
 
 const ConverterInput = ({
