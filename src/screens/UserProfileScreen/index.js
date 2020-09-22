@@ -53,6 +53,7 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress, theme}) => {
         required
         name="dob"
         showDatePicker={showDatePicker}
+        onDismiss={handleDatePickerPress}
       />
       <Input
         label={<FormattedMessage id="referral_code" />}

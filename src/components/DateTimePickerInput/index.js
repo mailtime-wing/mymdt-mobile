@@ -15,6 +15,7 @@ const DateTimePickerInput = ({
   required,
   showDatePicker,
   style,
+  onDismiss,
   ...props
 }) => {
   const theme = useTheme();
@@ -24,6 +25,10 @@ const DateTimePickerInput = ({
   const {setFieldValue} = useFormikContext();
 
   const handleDateChange = date => {
+    if (!date) {
+      return;
+    }
+
     setFieldValue(name, date);
   };
 
@@ -52,11 +57,16 @@ const DateTimePickerInput = ({
           value={changeDateFormat(field.value)}
           pointerEvents="none"
           placeholder="DD/MM/YYYY"
+          editable={false}
           {...props}
         />
       </View>
       {showDatePicker && (
-        <DateTimeSelector date={field.value} onChange={handleDateChange} />
+        <DateTimeSelector
+          date={field.value}
+          onChange={handleDateChange}
+          onDismiss={onDismiss} // For Android event press
+        />
       )}
     </TouchableOpacity>
   );

@@ -5,7 +5,7 @@ import {
   FormattedNumber,
   useIntl,
 } from 'react-intl';
-import {InputAccessoryView, TouchableOpacity} from 'react-native';
+import {InputAccessoryView, TouchableOpacity, Platform} from 'react-native';
 import {useFormikContext, useField} from 'formik';
 import {useTheme} from 'emotion-theming';
 import {GET_CURRENCY_BALANCE_API} from '@/api/data';
@@ -254,10 +254,12 @@ const ConvertForm = ({
             handleError={handleError}
             setFieldValue={setFieldValue}
           />
-          <KeyboardButtons
-            handleConverterOnChange={handleConverterOnChange}
-            from={from}
-          />
+          {Platform.OS === 'ios' && (
+            <KeyboardButtons
+              handleConverterOnChange={handleConverterOnChange}
+              from={from}
+            />
+          )}
         </ConverterContainer>
         <Margin />
         <TouchableOpacity onPress={changeConvertCurrency} style={convertIcon}>

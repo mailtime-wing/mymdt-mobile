@@ -66,6 +66,7 @@ const Form = ({showDatePicker, handleDatePickerPress}) => {
         required
         name="receiptDate"
         showDatePicker={showDatePicker}
+        onDismiss={handleDatePickerPress}
       />
       <Input
         label={
