@@ -67,29 +67,24 @@ const KeyboardButtons = ({handleConverterOnChange, from}) => {
   };
 
   return (
-    Platform.OS === 'ios' && (
-      <InputAccessoryView nativeID={inputAccessoryViewID}>
-        <InputAccessoryViewContainer>
-          <InputAccessoryButton onPress={() => handleConverterOnChange(0)}>
+    <InputAccessoryView nativeID={inputAccessoryViewID}>
+      <InputAccessoryViewContainer>
+        <InputAccessoryButton onPress={() => handleConverterOnChange(0)}>
+          <AppText variant="button" style={inputAccessoryButtonText(theme)}>
+            <FormattedMessage id="clear" defaultMessage="clear" />
+          </AppText>
+        </InputAccessoryButton>
+        <InputAccessoryButton onPress={handleConvertAllPress}>
+          {loading ? (
+            <LoadingSpinner />
+          ) : (
             <AppText variant="button" style={inputAccessoryButtonText(theme)}>
-              <FormattedMessage id="clear" defaultMessage="clear" />
+              <FormattedMessage id="convert_all" defaultMessage="Convert all" />
             </AppText>
-          </InputAccessoryButton>
-          <InputAccessoryButton onPress={handleConvertAllPress}>
-            {loading ? (
-              <LoadingSpinner />
-            ) : (
-              <AppText variant="button" style={inputAccessoryButtonText(theme)}>
-                <FormattedMessage
-                  id="convert_all"
-                  defaultMessage="Convert all"
-                />
-              </AppText>
-            )}
-          </InputAccessoryButton>
-        </InputAccessoryViewContainer>
-      </InputAccessoryView>
-    )
+          )}
+        </InputAccessoryButton>
+      </InputAccessoryViewContainer>
+    </InputAccessoryView>
   );
 };
 
@@ -259,10 +254,12 @@ const ConvertForm = ({
             handleError={handleError}
             setFieldValue={setFieldValue}
           />
-          <KeyboardButtons
-            handleConverterOnChange={handleConverterOnChange}
-            from={from}
-          />
+          {Platform.OS === 'ios' && (
+            <KeyboardButtons
+              handleConverterOnChange={handleConverterOnChange}
+              from={from}
+            />
+          )}
         </ConverterContainer>
         <Margin />
         <TouchableOpacity onPress={changeConvertCurrency} style={convertIcon}>
