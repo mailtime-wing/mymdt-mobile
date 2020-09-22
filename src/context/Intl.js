@@ -37,6 +37,21 @@ const translations = {
   },
 };
 
+function flattenMessages(nestedMessages, prefix = '') {
+  return Object.keys(nestedMessages).reduce((messages, key) => {
+    let value = nestedMessages[key];
+    let prefixedKey = prefix ? `${prefix}.${key}` : key;
+
+    if (typeof value === 'string') {
+      messages[prefixedKey] = value;
+    } else {
+      Object.assign(messages, flattenMessages(value, prefixedKey));
+    }
+
+    return messages;
+  }, {});
+}
+
 const IntlContainer = props => {
   const [language, setLanguage] = useState(languageList[0]); // default is english
   const locale = language.value;
@@ -82,7 +97,7 @@ const IntlContainer = props => {
       }}>
       <IntlProvider
         locale={locale}
-        messages={translation}
+        messages={flattenMessages(translation)}
         defaultLocale={locales.EN_US}
         textComponent={Text}>
         {props.children}

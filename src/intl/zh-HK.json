@@ -224,14 +224,6 @@
   "required": "請填寫",
   "invalid_otp": "驗證碼為6位數字",
 
-  "login_or_register_fail": "登入或注册失敗",
-  "change_phone_number_fail": "Change Phone Number fail",
-  "error_code_100": "系統錯誤，請稍後再試。",
-  "error_code_201": "用戶已存在，請登入。",
-  "error_code_202": "驗證碼錯誤。",
-  "error_code_203": "驗證碼錯誤。",
-  "error_code_305": "用戶已存在。",
-
   "please_input_valid_email": "Please input valid email",
   "linkedBankAccounts": "Linked Bank Accounts",
   "done": "Done",
@@ -252,5 +244,15 @@
   "transfer_of_your_information": "Transfer of your information is encrypted end-to-end",
   "your_credentials_will_never_be": "Your credentials will never be made accessible to RewardMe",
   "this_email_is_already_bound": "該郵箱已綁定帳號。",
-  "we_partner_with_credigo": "We partner with CrediGO to securely link your card"
+  "we_partner_with_credigo": "We partner with CrediGO to securely link your card",
+
+  "error": {
+    "login_or_register_fail": "登入或注册失敗",
+    "change_phone_number_fail": "Change Phone Number fail",
+    "error_code_100": "系統錯誤，請稍後再試。",
+    "error_code_201": "用戶已存在，請登入。",
+    "error_code_202": "驗證碼錯誤。",
+    "error_code_203": "驗證碼錯誤。",
+    "error_code_305": "用戶已存在。"
+  }
 }
