@@ -72,6 +72,11 @@ export const darkTheme = {
     toggleOn: ['#88D9DE', 'rgba(136, 217, 222, 0.38)'],
     toggleOff: ['rgba(255, 255, 255, 0.6)', 'rgba(255, 255, 255, 0.38)'],
 
+    // logo
+    logo: {
+      plaid: 'rgba(255, 255, 255, 0.87)',
+    },
+
     // others
     borderColor: 'rgba(255, 255, 255, 0.2)',
     contrastBorderColor: 'rgba(18, 18, 18, 0.2)',
@@ -169,6 +174,11 @@ export const lightTheme = {
 
     toggleOn: ['#FFFFFF', '#21CEDB'],
     toggleOff: ['rgba(255, 255, 255, 0.87)', 'rgba(0, 0, 0, 0.1)'],
+
+    // logo
+    logo: {
+      plaid: '#111111',
+    },
 
     // others
     borderColor: 'rgba(0, 0, 0, 0.2)',
