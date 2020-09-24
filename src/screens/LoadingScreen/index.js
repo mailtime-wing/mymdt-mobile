@@ -34,7 +34,7 @@ const LoadingScreen = ({navigation, route}) => {
                 refreshToken: refreshToken,
               })
             }>
-            <FormattedMessage id="next" />
+            <FormattedMessage id="button.next" />
           </Button>
         </>
       )}

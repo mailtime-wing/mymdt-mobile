@@ -270,7 +270,7 @@ const WalletScreen = ({navigation}) => {
             currentTheme={currentCard.theme}
             cardType={currentCard.type}
             currentFilter={
-              <FormattedMessage id="filter" defaultMessage="FILTER" />
+              <FormattedMessage id="button.filter" defaultMessage="FILTER" />
             }
             handleFilterPress={handleFilterPress}
             navigation={navigation}

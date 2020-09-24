@@ -65,7 +65,7 @@ const NotificationPermissionScreen = () => {
         <ArrowUpIcon style={arrowUp} fill={theme.colors.secondary.normal} />
         <AppButton
           onPress={requestNotificationPermission}
-          text={<FormattedMessage id="sure" />}
+          text={<FormattedMessage id="button.sure" />}
           variant="filled"
           sizeVariant="large"
           colorVariant="secondary"
@@ -73,7 +73,7 @@ const NotificationPermissionScreen = () => {
         <MarginContainer />
         <AppButton
           onPress={handleSkipPress}
-          text={<FormattedMessage id="skip_for_now" />}
+          text={<FormattedMessage id="button.skip_for_now" />}
           variant="outlined"
           sizeVariant="normal"
           colorVariant="secondary"

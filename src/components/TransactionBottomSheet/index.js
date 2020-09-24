@@ -78,7 +78,9 @@ const TransactionBottomSheet = ({
             <ButtonContainers>
               <AppButton
                 onPress={handleResetPress}
-                text={<FormattedMessage id="reset" defaultMessage="Reset" />}
+                text={
+                  <FormattedMessage id="button.reset" defaultMessage="Reset" />
+                }
                 variant="outlined"
                 sizeVariant="normal"
                 colorVariant="secondary"
@@ -86,7 +88,9 @@ const TransactionBottomSheet = ({
               <AppButton
                 disabled={activeOptionIndex === null}
                 onPress={handleApplyPress}
-                text={<FormattedMessage id="apply" defaultMessage="Apply" />}
+                text={
+                  <FormattedMessage id="button.apply" defaultMessage="Apply" />
+                }
                 variant="filled"
                 sizeVariant="normal"
                 colorVariant="secondary"

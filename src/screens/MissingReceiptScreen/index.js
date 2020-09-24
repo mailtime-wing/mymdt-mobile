@@ -89,7 +89,7 @@ const Form = ({showDatePicker, handleDatePickerPress}) => {
         onPress={handleSubmit}
         title="Submit"
         disabled={!isValid}
-        text={<FormattedMessage id="submit" defaultMessage="submit" />}
+        text={<FormattedMessage id="button.submit" defaultMessage="submit" />}
         variant="filled"
         sizeVariant="large"
         colorVariant="secondary"
@@ -148,25 +148,25 @@ const MissingReceiptScreen = ({navigation}) => {
 
     if (!values.email) {
       errors.email = (
-        <FormattedMessage id="required" defaultMessage="Required" />
+        <FormattedMessage id="error.required" defaultMessage="Required" />
       );
     }
 
     if (!values.receiptTitle) {
       errors.receiptTitle = (
-        <FormattedMessage id="required" defaultMessage="Required" />
+        <FormattedMessage id="error.required" defaultMessage="Required" />
       );
     }
 
     if (!values.senderEmail) {
       errors.senderEmail = (
-        <FormattedMessage id="required" defaultMessage="Required" />
+        <FormattedMessage id="error.required" defaultMessage="Required" />
       );
     }
 
     if (!values.receiptDate) {
       errors.receiptDate = (
-        <FormattedMessage id="required" defaultMessage="Required" />
+        <FormattedMessage id="error.required" defaultMessage="Required" />
       );
     }
 

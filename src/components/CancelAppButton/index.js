@@ -10,7 +10,7 @@ const CancelAppButton = props => (
     sizeVariant="normal"
     colorVariant="secondary"
     svgIcon={XIcon}
-    text={<FormattedMessage id="cancel" defaultMessage="Cancel" />}
+    text={<FormattedMessage id="button.cancel" defaultMessage="Cancel" />}
     {...props}
   />
 );

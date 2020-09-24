@@ -133,7 +133,7 @@ const SetupPinScreen = ({navigation}) => {
       onFulfill: handleVerifyPinOnFinish,
       error: error && (
         <FormattedMessage
-          id="pin_verification_fail"
+          id="error.pin_verification_fail"
           defaultMessage="Verification failed. Please enter a new pin again."
         />
       ),

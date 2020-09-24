@@ -56,7 +56,7 @@ const PopupModal = ({
             cancelButtonLabel ? (
               cancelButtonLabel
             ) : (
-              <FormattedMessage id="cancel" defaultMessage="cancel" />
+              <FormattedMessage id="button.cancel" defaultMessage="cancel" />
             )
           }
           variant="outlined"
@@ -70,7 +70,7 @@ const PopupModal = ({
             okButtonLabel ? (
               okButtonLabel
             ) : (
-              <FormattedMessage id="okay" defaultMessage="OKAY" />
+              <FormattedMessage id="button.okay" defaultMessage="OKAY" />
             )
           }
           variant="filled"

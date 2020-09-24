@@ -20,28 +20,28 @@ const renderClientError = errorCode => {
     case errorCodeEnum['202']:
       return (
         <FormattedMessage
-          id="error_code_202"
+          id="error.error_code_202"
           defaultMessage="Verification Code invalid."
         />
       );
     case errorCodeEnum['203']:
       return (
         <FormattedMessage
-          id="error_code_203"
+          id="error.error_code_203"
           defaultMessage="Verification Code invalid."
         />
       );
     case errorCodeEnum['305']:
       return (
         <FormattedMessage
-          id="error_code_305"
+          id="error.error_code_305"
           defaultMessage="User already exist."
         />
       );
     default:
       return (
         <FormattedMessage
-          id="error_code_100"
+          id="error.error_code_100"
           defaultMessage="System Error, Please try again later."
         />
       );
@@ -120,13 +120,15 @@ const SignUpScreen = ({navigation}) => {
         <PopupModal
           title={
             <FormattedMessage
-              id="login_or_register_fail"
+              id="error.login_or_register_fail"
               defaultMessage="Login or register fail"
             />
           }
           detail={clientError}
           callback={reset}
-          okButtonLabel={<FormattedMessage id="login" defaultMessage="login" />}
+          okButtonLabel={
+            <FormattedMessage id="button.login" defaultMessage="login" />
+          }
         />
       )}
     </ScrollView>

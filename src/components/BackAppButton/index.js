@@ -10,7 +10,7 @@ const BackAppButton = props => (
     sizeVariant="normal"
     colorVariant="secondary"
     svgIcon={ArrowLeftIcon}
-    text={<FormattedMessage id="back" defaultMessage="back" />}
+    text={<FormattedMessage id="button.back" defaultMessage="back" />}
     {...props}
   />
 );

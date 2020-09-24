@@ -27,8 +27,8 @@ const BonusScreen = props => {
       <ScrollContainer>
         <AccountBar showCoins {...props} />
         <BonusBox
-          title={<FormattedMessage id="bonus_task_title_1" />}
-          detail={<FormattedMessage id="bonus_task_detail_1" />}
+          title={<FormattedMessage id="check_in_task" />}
+          detail={<FormattedMessage id="check_in_task_detail" />}
           children={<DailyCheckIn />}
         />
         <MarginBottom />

@@ -18,32 +18,24 @@ const renderClientError = errorCode => {
   }
 
   switch (errorCode) {
-    // case errorCodeEnum['200']:
-    // case errorCodeEnum['301']:
-    //   return (
-    //     <FormattedMessage
-    //       id="error_code_301"
-    //       defaultMessage="User not exist."
-    //     />
-    //   );
     case errorCodeEnum['202']:
       return (
         <FormattedMessage
-          id="error_code_202"
+          id="error.error_code_202"
           defaultMessage="Verification Code invalid."
         />
       );
     case errorCodeEnum['203']:
       return (
         <FormattedMessage
-          id="error_code_203"
+          id="error.error_code_203"
           defaultMessage="Verification Code invalid."
         />
       );
     default:
       return (
         <FormattedMessage
-          id="error_code_100"
+          id="error.error_code_100"
           defaultMessage="System Error, Please try again later."
         />
       );
@@ -121,7 +113,7 @@ const SigninScreen = () => {
         <PopupModal
           title={
             <FormattedMessage
-              id="login_or_register_fail"
+              id="error.login_or_register_fail"
               defaultMessage="Login or register fail"
             />
           }

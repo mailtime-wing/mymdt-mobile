@@ -86,7 +86,7 @@ const PrivilegesSection = () => {
               variant="filled"
               sizeVariant="compact"
               colorVariant="secondary"
-              text={<FormattedMessage id="claim" />}
+              text={<FormattedMessage id="button.claim" />}
               style={claimButton}
             />
           )}

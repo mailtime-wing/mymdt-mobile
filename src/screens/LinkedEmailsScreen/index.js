@@ -183,7 +183,10 @@ const LinkedEmailsScreen = ({navigation, route}) => {
                       style={unbindButtonContainer}
                       onPress={() => handleUnbindPress(email)}
                       text={
-                        <FormattedMessage id="remove" defaultMessage="remove" />
+                        <FormattedMessage
+                          id="button.remove"
+                          defaultMessage="remove"
+                        />
                       }
                       variant="outlined"
                       sizeVariant="compact"
@@ -205,7 +208,9 @@ const LinkedEmailsScreen = ({navigation, route}) => {
           <MarginTop value={80} />
           <AppButton
             onPress={handleFinishPress}
-            text={<FormattedMessage id="finish" defaultMessage="finish" />}
+            text={
+              <FormattedMessage id="button.finish" defaultMessage="finish" />
+            }
             variant="filled"
             sizeVariant="large"
             colorVariant="secondary"
@@ -215,7 +220,7 @@ const LinkedEmailsScreen = ({navigation, route}) => {
             onPress={handleOtherLinkMethodPress}
             text={
               <FormattedMessage
-                id="connect_more"
+                id="button.connect_more"
                 defaultMessage="Connect more"
               />
             }

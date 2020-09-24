@@ -69,7 +69,7 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress, theme}) => {
         onPress={handleSubmit}
         title="Submit"
         disabled={!isValid}
-        text={<FormattedMessage id="submit" defaultMessage="submit" />}
+        text={<FormattedMessage id="button.submit" defaultMessage="submit" />}
         variant="filled"
         sizeVariant="large"
         colorVariant="secondary"

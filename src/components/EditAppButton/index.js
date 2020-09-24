@@ -10,7 +10,7 @@ const EditAppButton = props => (
     sizeVariant="normal"
     colorVariant="secondary"
     svgIcon={EditIcon}
-    text={<FormattedMessage id="edit" defaultMessage="edit" />}
+    text={<FormattedMessage id="button.edit" defaultMessage="edit" />}
     {...props}
   />
 );

@@ -129,7 +129,7 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
         sizeVariant="compact"
         colorVariant="alert"
         onPress={() => setSelectedBankItem(bankItem)}
-        text={<FormattedMessage id="remove" defaultMessage="remove" />}
+        text={<FormattedMessage id="button.remove" defaultMessage="remove" />}
         disabled={!enableRemove}
         style={sectionRemoveButton(enableRemove)}
       />

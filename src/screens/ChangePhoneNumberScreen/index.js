@@ -19,21 +19,21 @@ const renderClientError = errorCode => {
     case errorCodeEnum['202']:
       return (
         <FormattedMessage
-          id="error_code_202"
+          id="error.error_code_202"
           defaultMessage="Verification Code invalid."
         />
       );
     case errorCodeEnum['203']:
       return (
         <FormattedMessage
-          id="error_code_203"
+          id="error.error_code_203"
           defaultMessage="Verification Code invalid."
         />
       );
     default:
       return (
         <FormattedMessage
-          id="error_code_100"
+          id="error.error_code_100"
           defaultMessage="System Error, Please try again later."
         />
       );
@@ -108,7 +108,7 @@ const ChangePhoneNumberScreen = ({navigation, route}) => {
         <LoginForm
           title={<FormattedMessage id="change_phone_number" />}
           submitButtonText={
-            <FormattedMessage id="submit" defaultMessage="Submit" />
+            <FormattedMessage id="button.submit" defaultMessage="Submit" />
           }
           onSendPress={handleSendPress}
           onSubmit={handleSubmitPress}
@@ -118,7 +118,7 @@ const ChangePhoneNumberScreen = ({navigation, route}) => {
         <PopupModal
           title={
             <FormattedMessage
-              id="change_phone_number_fail"
+              id="error.change_phone_number_fail"
               defaultMessage="Change phone number fail"
             />
           }

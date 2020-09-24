@@ -71,7 +71,12 @@ const CashBackType = ({cashback, handleChoosePress, theme}) => (
       variant="filled"
       sizeVariant="normal"
       colorVariant="secondary"
-      text={<FormattedMessage id="choose_this" defaultMessage="Choose This" />}
+      text={
+        <FormattedMessage
+          id="button.choose_this"
+          defaultMessage="Choose This"
+        />
+      }
       style={buttonStyle}
       onPress={() => handleChoosePress(cashback.type)}
     />

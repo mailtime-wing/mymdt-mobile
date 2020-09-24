@@ -21,7 +21,9 @@ const PinSuccessScreen = ({navigation, route}) => {
   return (
     <ScrollView>
       <ModalContainer
-        title={<FormattedMessage id="success" defaultMessage="success" />}>
+        title={
+          <FormattedMessage id="button.success" defaultMessage="success" />
+        }>
         <View style={container}>
           <AppText variant="body1" style={detailStyle(theme)}>
             {route?.params?.pin_action}

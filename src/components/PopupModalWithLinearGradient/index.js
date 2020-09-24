@@ -41,7 +41,7 @@ const PopupModalWithLinearGradient = ({
           {children}
           <AppButton
             onPress={handleOkPress}
-            text={<FormattedMessage id="okay" defaultMessage="okay" />}
+            text={<FormattedMessage id="button.okay" defaultMessage="okay" />}
             variant="filled"
             sizeVariant="normal"
             colorVariant="secondary"
@@ -55,7 +55,7 @@ const PopupModalWithLinearGradient = ({
           {children}
           <AppButton
             onPress={handleOkPress}
-            text={<FormattedMessage id="okay" defaultMessage="okay" />}
+            text={<FormattedMessage id="button.okay" defaultMessage="okay" />}
             variant="filled"
             sizeVariant="normal"
             colorVariant="secondary"

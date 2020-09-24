@@ -69,7 +69,7 @@ const BindEmailScreen = ({route, navigation}) => {
 
     if (!values.email) {
       errors.email = (
-        <FormattedMessage id="required" defaultMessage="Required" />
+        <FormattedMessage id="error.required" defaultMessage="Required" />
       );
     }
 
@@ -77,7 +77,7 @@ const BindEmailScreen = ({route, navigation}) => {
     if (!errors.email && !emailRegex.test(values.email)) {
       errors.email = (
         <FormattedMessage
-          id="please_input_valid_email"
+          id="error.please_input_valid_email"
           defaultMessage="Please input valid email"
         />
       );
@@ -127,7 +127,10 @@ const BindEmailScreen = ({route, navigation}) => {
                 onPress={handleSubmit}
                 disabled={!isValid}
                 text={
-                  <FormattedMessage id="connect" defaultMessage="Connect" />
+                  <FormattedMessage
+                    id="button.connect"
+                    defaultMessage="Connect"
+                  />
                 }
                 variant="filled"
                 sizeVariant="large"

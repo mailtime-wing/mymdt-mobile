@@ -108,7 +108,9 @@ const Form = () => {
         onPress={handleSubmit}
         title="Submit"
         disabled={!isValid}
-        text={<FormattedMessage id="withdraw" defaultMessage="withdraw" />}
+        text={
+          <FormattedMessage id="button.withdraw" defaultMessage="withdraw" />
+        }
         variant="filled"
         sizeVariant="large"
         colorVariant="secondary"
@@ -142,13 +144,13 @@ const WithdrawalScreen = () => {
 
     if (!values.address) {
       errors.address = (
-        <FormattedMessage id="required" defaultMessage="Required" />
+        <FormattedMessage id="error.required" defaultMessage="Required" />
       );
     }
 
     if (!values.amount) {
       errors.amount = (
-        <FormattedMessage id="required" defaultMessage="Required" />
+        <FormattedMessage id="error.required" defaultMessage="Required" />
       );
     }
 

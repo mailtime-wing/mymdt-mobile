@@ -177,7 +177,9 @@ const OfferSelectScreen = ({route, navigation}) => {
         <AppButton
           onPress={handleNextPress}
           disabled={isErrorFromOfferList}
-          text={<FormattedMessage id="confirm" defaultMessage="confirm" />}
+          text={
+            <FormattedMessage id="button.confirm" defaultMessage="confirm" />
+          }
           variant="filled"
           sizeVariant="normal"
           colorVariant="secondary"
