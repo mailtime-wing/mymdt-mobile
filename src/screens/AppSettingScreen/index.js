@@ -35,7 +35,7 @@ const SettingScreen = () => {
   );
 
   const {data} = useQueryWithAuth(IS_NOTIFICATION_ENABLED);
-  const [updateMutation] = useMutationWithAuth(UPDATE_NOTIFICATION);
+  const [updateNotification] = useMutationWithAuth(UPDATE_NOTIFICATION);
 
   const isNotificationEnabled =
     data?.userProfile?.isNotificationEnabled || false;
@@ -54,7 +54,7 @@ const SettingScreen = () => {
       return;
     }
 
-    updateMutation({
+    updateNotification({
       variables: {
         enabled: !isNotificationEnabled,
       },

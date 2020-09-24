@@ -1,4 +1,5 @@
 import React, {createContext, useContext, useState, useMemo} from 'react';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {Graph} from '@dagrejs/graphlib';
 
 import {NotificationContext} from '@/context/notification';
@@ -90,11 +91,15 @@ export const SetupFlowProvider = ({children}) => {
       result.account_setup_done = true;
       result.sign_up_reward = true;
     }
-    if (permissions.alert) {
+    if (
+      permissions.authorizationStatus !==
+      PushNotificationIOS.AuthorizationStatus
+        ?.UNAuthorizationStatusNotDetermined
+    ) {
       result.notification_permission = true;
     }
     return result;
-  }, [permissions, setupStatus]);
+  }, [permissions.authorizationStatus, setupStatus]);
 
   /** @type {Object.<string, boolean>} */
   const validScreenNames = useMemo(() => {

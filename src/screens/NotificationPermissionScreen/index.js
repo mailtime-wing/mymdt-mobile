@@ -5,10 +5,11 @@ import {useTheme} from 'emotion-theming';
 
 import {NotificationContext} from '@/context/notification';
 import {ThemeContext} from '@/context/theme';
-
 import AppButton from '@/components/AppButton';
-import useSetupFlow from '@/hooks/useSetupFlow';
 import AppText from '@/components/AppText2';
+import useSetupFlow from '@/hooks/useSetupFlow';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
+import {UPDATE_NOTIFICATION} from '@/api/data';
 
 import ArrowUpIcon from '@/assets/arrow_up_icon.svg';
 
@@ -21,24 +22,27 @@ import {
   detailStyle,
 } from './style';
 
-const details = {
-  alertBody: 'You enabled notification!',
-  alertTitle: 'Welcome to MDT!',
-  userInfo: {data: 'userInfo'},
-};
-
 const NotificationPermissionScreen = () => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
-  const {notify, request} = useContext(NotificationContext);
+  const {request} = useContext(NotificationContext);
   const {isDark} = useContext(ThemeContext);
+  const [updateNotification] = useMutationWithAuth(UPDATE_NOTIFICATION);
+
   const imageSource = isDark
     ? require('@/assets/notification_permission_dark.png')
     : require('@/assets/notification_permission.png');
 
   const requestNotificationPermission = async () => {
-    await request();
-    notify(details);
+    try {
+      const permissions = await request();
+      updateNotification({
+        variables: {
+          enabled: permissions.alert,
+        },
+      });
+    } catch (error) {}
+
     navigateByFlow();
   };
 

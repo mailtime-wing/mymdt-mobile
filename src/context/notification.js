@@ -18,6 +18,10 @@ const INITIAL_PERMISSIONS = {
   alert: false,
   badge: false,
   sound: false,
+  // TODO: check again after https://github.com/react-native-community/push-notification-ios/pull/185 is merged
+  authorizationStatus:
+    PushNotificationIOS.AuthorizationStatus
+      ?.UNAuthorizationStatusNotDetermined || 0,
 };
 
 const UPDATE_PERMISSION = 'updatePermission';
