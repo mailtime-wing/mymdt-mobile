@@ -21,11 +21,11 @@ export const sectionContainer = theme => css`
   padding-bottom: 11px;
   margin-horizontal: 24px;
   border-bottom-width: 1px;
-  border-color: rgba(0, 0, 0, 0.1);
-  background-color: ${theme.colors.background1};
+  border-color: ${theme.colors.background3};
 `;
 
-export const sectionTitle = css`
+export const sectionTitle = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
   flex: 1;
 `;
 

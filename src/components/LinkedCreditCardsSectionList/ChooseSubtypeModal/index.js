@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Image, TouchableOpacity} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
+import {css} from '@emotion/native';
 
 import AppModal from '@/components/AppModal';
 import AppText from '@/components/AppText2';
@@ -61,7 +62,15 @@ const subtypes = [
 const ChooseSubtypeModal = ({mask, onSelect, onClosePress, ...props}) => {
   const theme = useTheme();
   return (
-    <AppModal transparent modalBodyStyle={modalPadding} {...props}>
+    <AppModal
+      transparent
+      modalBodyStyle={[
+        css`
+          ${theme.colors.elevatedBackground4}
+        `,
+        modalPadding,
+      ]}
+      {...props}>
       <View style={modalHeader}>
         <AppText variant="heading3" style={modalHeading(theme)}>
           <FormattedMessage

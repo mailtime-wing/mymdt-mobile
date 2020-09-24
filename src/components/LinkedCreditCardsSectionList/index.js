@@ -3,6 +3,7 @@ import {View, TouchableOpacity, SectionList} from 'react-native';
 import {useTheme} from 'emotion-theming';
 import {FormattedMessage} from 'react-intl';
 import {useFocusEffect} from '@react-navigation/native';
+import {Svg, Path, Rect} from 'react-native-svg';
 
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
@@ -15,7 +16,6 @@ import {
   UNBIND_BANK_ITEM,
 } from '@/api/data';
 import accountSubtypeEnum from '@/enum/accountSubtype';
-import UnknownCardLogo from '@/assets/icon_unknown_card.svg';
 import VisaIcon from '@/assets/icon_visa.svg';
 import MasterIcon from '@/assets/icon_mastercard.svg';
 import DiscoverIcon from '@/assets/icon_discover.svg';
@@ -36,8 +36,42 @@ import {
   accountNo,
 } from './style';
 
+const UnknownCard = () => {
+  const theme = useTheme();
+  return (
+    <Svg
+      width="56"
+      height="40"
+      viewBox="0 0 48 34"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <Rect
+        width="48"
+        height="34"
+        rx="4"
+        fill={theme.colors.unknownCard.background}
+        fill-opacity="0.05"
+      />
+      <Path
+        d="M22.5625 20.6733H25V20.5114C25.0341 18.5511 25.5966 17.6733 27.0455 16.7784C28.571 15.858 29.5085 14.5625 29.5085 12.6449C29.5085 9.875 27.4119 8 24.2841 8C21.4119 8 19.1108 9.67898 19 12.7472H21.5909C21.6932 10.9403 22.9801 10.1477 24.2841 10.1477C25.733 10.1477 26.9091 11.1108 26.9091 12.6193C26.9091 13.8892 26.1165 14.7841 25.1023 15.4148C23.517 16.3864 22.5795 17.3494 22.5625 20.5114V20.6733ZM23.8494 25.8551C24.7784 25.8551 25.554 25.0966 25.554 24.1506C25.554 23.2216 24.7784 22.4545 23.8494 22.4545C22.9119 22.4545 22.1449 23.2216 22.1449 24.1506C22.1449 25.0966 22.9119 25.8551 23.8494 25.8551Z"
+        fill={theme.colors.unknownCard.color}
+        fill-opacity="0.4"
+      />
+      <Rect
+        x="0.5"
+        y="0.5"
+        width="47"
+        height="33"
+        rx="3.5"
+        stroke={theme.colors.unknownCard.border}
+        stroke-opacity="0.05"
+      />
+    </Svg>
+  );
+};
+
 const componentToSubtypeMap = {
-  [accountSubtypeEnum.UNKNOWN]: UnknownCardLogo,
+  [accountSubtypeEnum.UNKNOWN]: UnknownCard,
   [accountSubtypeEnum.VISA]: VisaIcon,
   [accountSubtypeEnum.MASTER]: MasterIcon,
   [accountSubtypeEnum.DISCOVER]: DiscoverIcon,
@@ -98,7 +132,7 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
   useFocusEffect(fetchBankItems);
 
   const renderItem = ({item}) => {
-    const Icon = componentToSubtypeMap[item.accountSubtype] || UnknownCardLogo;
+    const Icon = componentToSubtypeMap[item.accountSubtype] || UnknownCard;
     return (
       <TouchableOpacity
         style={listItemContainer}
@@ -121,7 +155,7 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
 
   const renderSectionHeader = ({section: bankItem}) => (
     <View key={`${enableRemove}`} style={sectionContainer(theme)}>
-      <AppText variant="subTitle2" style={sectionTitle}>
+      <AppText variant="subTitle2" style={sectionTitle(theme)}>
         {bankItem.name}
       </AppText>
       <AppButton
