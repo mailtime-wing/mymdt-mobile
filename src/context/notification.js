@@ -97,10 +97,12 @@ export const NotificationProvider = ({children}) => {
   const request = useCallback(async () => {
     try {
       if (IOS) {
-        await PushNotificationIOS.requestPermissions();
+        return await PushNotificationIOS.requestPermissions();
       }
+      return {};
     } catch (e) {
       console.error('error request permission ios');
+      return {};
     }
   }, []);
 

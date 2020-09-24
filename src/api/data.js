@@ -425,3 +425,23 @@ export const GET_USER_PHONE_NUMBER = gql`
     }
   }
 `;
+
+export const IS_NOTIFICATION_ENABLED = gql`
+  query {
+    userProfile {
+      id
+      isNotificationEnabled
+    }
+  }
+`;
+
+export const UPDATE_NOTIFICATION = gql`
+  mutation UpdateNotification($enabled: Boolean!) {
+    updateNotification(enabled: $enabled) {
+      user {
+        id
+        isNotificationEnabled
+      }
+    }
+  }
+`;
