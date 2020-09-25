@@ -109,9 +109,19 @@ export default function useBankLogin(
           setIsLoading(true);
 
           let publicToken = '';
+          let institutionId = '';
+          let accountPayload = [];
           switch (flow) {
             case bankSyncServerDataAPITypeEnum.PLAID:
               publicToken = urlObj.searchParams.get('public_token');
+              institutionId = urlObj.searchParams.get('institution_id');
+              const accounts = JSON.parse(urlObj.searchParams.get('accounts'));
+              if (Array.isArray(accounts)) {
+                accountPayload = accounts.map(account => ({
+                  mask: account.meta?.number,
+                  name: account.meta?.name,
+                }));
+              }
               break;
             case bankSyncServerDataAPITypeEnum.PLANTO:
               publicToken = urlObj.searchParams.get('accessToken');
@@ -130,9 +140,11 @@ export default function useBankLogin(
           // }
           const data = await fetchAccountDetail({
             body: JSON.stringify({
-              userID: userId,
+              userId,
               publicToken,
               dataAPIType,
+              institutionId,
+              accountPayload,
             }),
           });
 
@@ -190,13 +202,14 @@ export default function useBankLogin(
           dataAPIType,
           countryCode,
           language: intl.locale,
-          userID: userId,
+          userId,
         }),
       });
 
       setIsLoading(false);
       await inAppBrowser.open(authLink);
     } catch (e) {
+      setIsLoading(false);
       setIsError(true);
     }
   }, [countryCode, dataAPIType, fetchAuthLink, intl.locale, userId]);
