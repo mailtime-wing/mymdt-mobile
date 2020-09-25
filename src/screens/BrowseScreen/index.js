@@ -1,6 +1,5 @@
-import React, {useEffect, useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {View, ScrollView} from 'react-native';
-import {NotificationContext} from '@/context/notification';
 import {useTheme} from 'emotion-theming';
 import {css} from '@emotion/native';
 
@@ -18,12 +17,6 @@ import EnterPinModal from '@/components/EnterPinModal';
 import HomeIcon from '@/assets/home.svg';
 import HeartIcon from '@/assets/heart_icon.svg';
 import {FormattedMessage} from 'react-intl';
-
-const details = {
-  alertBody: 'test for enable notification!',
-  alertTitle: 'Welcome to Home page',
-  userInfo: {data: 'userInfo'},
-};
 
 const rowForTest = {
   flexDirection: 'row',
@@ -47,10 +40,6 @@ const BrowseScreen = ({...props}) => {
   const [showLinearGradient, setShowLinearGradient] = useState(false);
   const [showReward, setShowReward] = useState(false);
   const [showPin, setShowPin] = useState(false);
-  const {notify} = useContext(NotificationContext);
-  useEffect(() => {
-    notify(details);
-  }, [notify]);
 
   return (
     <LinearGradientBackground>
