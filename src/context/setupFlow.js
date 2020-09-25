@@ -93,8 +93,7 @@ export const SetupFlowProvider = ({children}) => {
     }
     if (
       permissions.authorizationStatus !==
-      PushNotificationIOS.AuthorizationStatus
-        ?.UNAuthorizationStatusNotDetermined
+      PushNotificationIOS.AuthorizationStatus.UNAuthorizationStatusNotDetermined
     ) {
       result.notification_permission = true;
     }

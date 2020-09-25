@@ -1167,6 +1167,12 @@
   dependencies:
     invariant "^2.2.4"
 
+"@react-native-community/push-notification-ios@https://github.com/chochihim/push-notification-ios.git#f5e3e904dfd259a1a1a5bf8ca6b4bfaa67da9e26":
+  version "1.5.0"
+  resolved "https://github.com/chochihim/push-notification-ios.git#f5e3e904dfd259a1a1a5bf8ca6b4bfaa67da9e26"
+  dependencies:
+    invariant "^2.2.4"
+
 "@react-navigation/bottom-tabs@^5.0.7":
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.3.3.tgz#fc232218da9cd1334d3d639814dbd27fffed8989"

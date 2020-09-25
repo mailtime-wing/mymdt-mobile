@@ -20,7 +20,7 @@
     "@react-native-community/masked-view": "^0.1.6",
     "@react-native-community/progress-bar-android": "^1.0.3",
     "@react-native-community/progress-view": "^1.0.3",
-    "@react-native-community/push-notification-ios": "^1.5.0",
+    "@react-native-community/push-notification-ios": "https://github.com/chochihim/push-notification-ios.git#f5e3e904dfd259a1a1a5bf8ca6b4bfaa67da9e26",
     "@react-navigation/bottom-tabs": "^5.0.7",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.0.3",

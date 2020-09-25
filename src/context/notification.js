@@ -20,8 +20,7 @@ const INITIAL_PERMISSIONS = {
   sound: false,
   // TODO: check again after https://github.com/react-native-community/push-notification-ios/pull/185 is merged
   authorizationStatus:
-    PushNotificationIOS.AuthorizationStatus
-      ?.UNAuthorizationStatusNotDetermined || 0,
+    PushNotificationIOS.AuthorizationStatus.UNAuthorizationStatusNotDetermined,
 };
 
 const UPDATE_PERMISSION = 'updatePermission';
@@ -123,7 +122,12 @@ export const NotificationProvider = ({children}) => {
   useEffect(() => {
     const initPermissions = async () => {
       const permissions = await checkPermissions();
-      if (permissions.alert) {
+      // always request to trigger `register` event for device token
+      if (
+        permissions.authorizationStatus !==
+        PushNotificationIOS.AuthorizationStatus
+          .UNAuthorizationStatusNotDetermined
+      ) {
         request();
       }
     };
