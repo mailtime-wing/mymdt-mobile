@@ -23,9 +23,9 @@ import {
 } from '@/constants/currency';
 
 import ConvertIcon from '@/assets/convert_icon.svg';
-import GiftIcon from '@/assets/gift_icon.svg';
+// import GiftIcon from '@/assets/gift_icon.svg';
 // import WithdrawalIcon from '@/assets/withdraw_icon.svg';
-import MyMdtIcon from '@/assets/mymdt_icon.svg';
+// import MyMdtIcon from '@/assets/mymdt_icon.svg';
 
 const styleFlexEnd = {
   justifyContent: 'flex-end',
@@ -109,7 +109,7 @@ const WalletScreen = ({navigation}) => {
           icon: ConvertIcon,
           color: mrpTheme.color,
         },
-        {name: 'redeem gift', icon: GiftIcon, color: mrpTheme.color},
+        // {name: 'redeem gift', icon: GiftIcon, color: mrpTheme.color},
       ],
       buttonsStyle: mrpTheme.buttonsStyle,
     },
@@ -150,7 +150,7 @@ const WalletScreen = ({navigation}) => {
         //   icon: WithdrawalIcon,
         //   color: mdtTheme.color,
         // },
-        {name: 'gift code', icon: MyMdtIcon, color: mdtTheme.color},
+        // {name: 'gift code', icon: MyMdtIcon, color: mdtTheme.color},
       ],
       buttonsStyle: mdtTheme.buttonsStyle,
     },

@@ -1160,13 +1160,6 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/progress-view/-/progress-view-1.0.3.tgz#6aaafd2d885771de6ef3a15e04f988af824dfa8b"
   integrity sha512-zpOop2VvkPHtomWtKbs62hhUhxzzpZsuo8tybxwaF6J+qY77rvYG9esDMOb0twXpa0i1jD+8nGyoiMS/Rx8Vtg==
 
-"@react-native-community/push-notification-ios@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/push-notification-ios/-/push-notification-ios-1.5.0.tgz#b41802b58d2388c8cb76cd219bbeec9ac9a4c06d"
-  integrity sha512-88Uwu6S8oRVnuMfBMGN+MtTyUjiVmMKwfObYrPmm+b2E2Aqk0WlZ4clfECukG8QIzv1pfELJZ5uZMVTYMI6klg==
-  dependencies:
-    invariant "^2.2.4"
-
 "@react-native-community/push-notification-ios@https://github.com/chochihim/push-notification-ios.git#f5e3e904dfd259a1a1a5bf8ca6b4bfaa67da9e26":
   version "1.5.0"
   resolved "https://github.com/chochihim/push-notification-ios.git#f5e3e904dfd259a1a1a5bf8ca6b4bfaa67da9e26"
