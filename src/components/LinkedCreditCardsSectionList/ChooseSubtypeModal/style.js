@@ -40,6 +40,7 @@ export const subtypeItemLabel = theme => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
-export const modalPadding = css`
+export const modalContainer = theme => css`
   padding: 24px;
+  ${theme.colors.elevatedBackground4};
 `;
