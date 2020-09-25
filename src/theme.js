@@ -72,6 +72,13 @@ export const darkTheme = {
     toggleOn: ['#88D9DE', 'rgba(136, 217, 222, 0.38)'],
     toggleOff: ['rgba(255, 255, 255, 0.6)', 'rgba(255, 255, 255, 0.38)'],
 
+    // logo
+    logo: {
+      plaid: 'rgba(255, 255, 255, 0.87)',
+    },
+
+    unknownCard: ['#252525', '#777777', '#363636'],
+
     // others
     borderColor: 'rgba(255, 255, 255, 0.2)',
     contrastBorderColor: 'rgba(18, 18, 18, 0.2)',
@@ -169,6 +176,13 @@ export const lightTheme = {
 
     toggleOn: ['#FFFFFF', '#21CEDB'],
     toggleOff: ['rgba(255, 255, 255, 0.87)', 'rgba(0, 0, 0, 0.1)'],
+
+    // logo
+    logo: {
+      plaid: '#111111',
+    },
+
+    unknownCard: ['#F2F2F2', '#919191', '#E6E6E6'],
 
     // others
     borderColor: 'rgba(0, 0, 0, 0.2)',
@@ -277,6 +291,10 @@ lightTheme.colors.toggleOn.button = lightTheme.colors.toggleOn[0];
 lightTheme.colors.toggleOn.track = lightTheme.colors.toggleOn[1];
 lightTheme.colors.toggleOff.button = lightTheme.colors.toggleOff[0];
 lightTheme.colors.toggleOff.track = lightTheme.colors.toggleOff[1];
+
+lightTheme.colors.unknownCard.background = lightTheme.colors.unknownCard[0];
+lightTheme.colors.unknownCard.color = lightTheme.colors.unknownCard[1];
+lightTheme.colors.unknownCard.border = lightTheme.colors.unknownCard[2];
 
 lightTheme.fonts.pageTitle = lightTheme.fonts.heading;
 lightTheme.fonts.heading1 = lightTheme.fonts.heading;
@@ -420,6 +438,10 @@ darkTheme.colors.toggleOn.button = darkTheme.colors.toggleOn[0];
 darkTheme.colors.toggleOn.track = darkTheme.colors.toggleOn[1];
 darkTheme.colors.toggleOff.button = darkTheme.colors.toggleOff[0];
 darkTheme.colors.toggleOff.track = darkTheme.colors.toggleOff[1];
+
+darkTheme.colors.unknownCard.background = darkTheme.colors.unknownCard[0];
+darkTheme.colors.unknownCard.color = darkTheme.colors.unknownCard[1];
+darkTheme.colors.unknownCard.border = darkTheme.colors.unknownCard[2];
 
 darkTheme.fonts.pageTitle = darkTheme.fonts.heading;
 darkTheme.fonts.heading1 = darkTheme.fonts.heading;

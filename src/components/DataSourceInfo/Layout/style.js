@@ -11,27 +11,23 @@ export const icons = css`
   margin-bottom: 40px;
 `;
 
-export const whiteCircle = css`
+export const circleBackground = css`
   justify-content: center;
   align-items: center;
   height: 42px;
   width: 42px;
-  background-color: white;
   border-radius: 21px;
 `;
 
 export const iconShadow = css`
-  shadow-color: #000000;
-  shadow-offset: 0 2px;
-  shadow-opacity: 0.2;
-  shadow-radius: 3.84;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
-export const dashDot = css`
+export const dashDot = theme => css`
   height: 4px;
   width: 4px;
   border-radius: 2px;
-  background-color: rgba(33, 206, 219, 0.2);
+  background-color: ${theme.colors.secondary.border};
   margin-horizontal: 2px;
 `;
 
@@ -43,7 +39,8 @@ export const logoPosition = css`
   right: 0;
 `;
 
-export const title = css`
+export const title = theme => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
   text-align: center;
   margin-bottom: 40px;
 `;
