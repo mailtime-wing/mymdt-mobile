@@ -72,6 +72,7 @@ export const AuthProvider = ({children}) => {
     client.writeQuery({
       query: AUTH_TOKENS,
       data: {
+        tokensInitialized: true,
         accessToken: '',
         refreshToken: '',
         isRefreshTokenExpired: false,
@@ -100,6 +101,7 @@ export const AuthProvider = ({children}) => {
               authToken = data.refreshAccessToken;
             } catch (e) {
               signOut();
+              return;
             }
           }
         }
