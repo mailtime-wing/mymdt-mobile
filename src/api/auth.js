@@ -24,7 +24,7 @@ export const REGISTER_API = gql`
     $phoneNumber: String!
     $otp: String!
     $locale: Locale!
-    $deviceId: String
+    $deviceId: String!
   ) {
     register(
       phoneNumber: $phoneNumber

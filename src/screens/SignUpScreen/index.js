@@ -6,6 +6,7 @@ import {GET_OTP_API, REGISTER_API} from '@/api/auth';
 import errorCodeEnum from '@/enum/errorCode';
 import {AuthContext} from '@/context/auth';
 import {IntlContext} from '@/context/Intl';
+import {NotificationContext} from '@/context/notification';
 import PopupModal from '@/components/PopupModal';
 import LoginForm from '@/components/LoginForm';
 import ScreenContainer from '@/components/ScreenContainer';
@@ -61,6 +62,9 @@ const SignUpScreen = ({navigation}) => {
     {error: registerRequestError},
     registerRequestReset,
   ] = useMutationWithReset(REGISTER_API);
+  const {
+    state: {deviceId},
+  } = useContext(NotificationContext);
 
   const error = otpRequestError || registerRequestError;
   const errorCode = error?.graphQLErrors[0]?.extensions?.code;
@@ -92,6 +96,7 @@ const SignUpScreen = ({navigation}) => {
           phoneNumber: completePhoneNumber,
           otp: values.verificationCode,
           locale: localeEnum,
+          deviceId,
         },
       });
       updateAuthToken(data.register.accessToken, data.register.refreshToken);
