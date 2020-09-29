@@ -67,7 +67,11 @@ export default function useFetch(
         });
 
         if (result.status < 200 || result.status > 399) {
-          throw new Error();
+          let errorMessage = '';
+          try {
+            errorMessage = await result.text();
+          } catch {}
+          throw new Error(errorMessage);
         }
 
         const contentType = result.headers.get('Content-Type');
