@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, ScrollView} from 'react-native';
 import {useTheme} from 'emotion-theming';
 import {css} from '@emotion/native';
@@ -8,11 +8,14 @@ import LinearGradientBackground from '@/components/LinearGradientBackground';
 import AppButton from '@/components/AppButton';
 import AppIcon from '@/components/AppIcon';
 import AppAvator from '@/components/AppAvator';
+import AppToast from '@/components/AppToast';
 import PopupModal from '@/components/PopupModal';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
 import MRPGiftBox from '@/components/MRPGiftBox';
 import RewardGotPopup from '@/components/RewardGotPopup';
 import EnterPinModal from '@/components/EnterPinModal';
+
+import {ToastContext} from '@/context/toast';
 
 import HomeIcon from '@/assets/home.svg';
 import HeartIcon from '@/assets/heart_icon.svg';
@@ -40,6 +43,7 @@ const BrowseScreen = ({...props}) => {
   const [showLinearGradient, setShowLinearGradient] = useState(false);
   const [showReward, setShowReward] = useState(false);
   const [showPin, setShowPin] = useState(false);
+  const {addToast} = useContext(ToastContext);
 
   return (
     <LinearGradientBackground>
@@ -48,6 +52,123 @@ const BrowseScreen = ({...props}) => {
         {
           /*for test*/
           <>
+            <View
+              style={[
+                css`
+                  ${theme.colors.elevatedBackground1}
+                `,
+                testStyle,
+              ]}>
+              <AppToast
+                variant="theme"
+                text="You got a reward!"
+                style={marginForTest}
+              />
+              <AppToast
+                variant="info"
+                text="Saved to Favorites Saved to Favorites Saved to Favorites"
+                style={marginForTest}
+              />
+              <AppToast variant="error" style={marginForTest} />
+            </View>
+
+            <View
+              style={[
+                css`
+                  ${theme.colors.elevatedBackground1}
+                `,
+                testStyle,
+              ]}>
+              <AppButton
+                variant="filled"
+                text="show theme toast"
+                sizeVariant="normal"
+                colorVariant="secondary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+                onPress={() =>
+                  addToast({
+                    text:
+                      'this is a very very very very very very very very very very very very very very very very very very big gift',
+                    variant: 'theme',
+                  })
+                }
+              />
+              <AppButton
+                variant="filled"
+                text="show error toast"
+                sizeVariant="large"
+                colorVariant="alert"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+                onPress={() =>
+                  addToast({
+                    text: 'this is error toast',
+                    variant: 'error',
+                  })
+                }
+              />
+              <AppButton
+                variant="filled"
+                text="show info toast"
+                sizeVariant="large"
+                colorVariant="contrast"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+                onPress={() =>
+                  addToast({
+                    text: 'this is info toast',
+                    variant: 'info',
+                  })
+                }
+              />
+            </View>
+
+            <View
+              style={[
+                css`
+                  ${theme.colors.elevatedBackground1}
+                `,
+                testStyle,
+              ]}>
+              <AppButton
+                variant="filled"
+                text="Verfiy your pin"
+                sizeVariant="compact"
+                colorVariant="primary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+                onPress={() => setShowPin(true)}
+              />
+              <AppButton
+                variant="filled"
+                text="Click to get reward"
+                sizeVariant="normal"
+                colorVariant="secondary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+                onPress={() => setShowReward(true)}
+              />
+              <AppButton
+                variant="filled"
+                text="Click to open pop up"
+                sizeVariant="large"
+                colorVariant="alert"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+                onPress={() => setShow(true)}
+              />
+              <AppButton
+                variant="filled"
+                text="Normal Filled Disabled Secondary"
+                sizeVariant="normal"
+                colorVariant="secondary"
+                svgIcon={HomeIcon}
+                style={marginForTest}
+                disabled
+              />
+            </View>
+
             <View
               style={[
                 css`
@@ -123,15 +244,7 @@ const BrowseScreen = ({...props}) => {
                   imageSrc={require('@/assets/dog_avatar.png')}
                 />
               </View>
-            </View>
 
-            <View
-              style={[
-                css`
-                  ${theme.colors.elevatedBackground1}
-                `,
-                testStyle,
-              ]}>
               <View style={rowForTest}>
                 <AppIcon
                   sizeVariant="small"
@@ -152,51 +265,6 @@ const BrowseScreen = ({...props}) => {
                   svgIcon={HeartIcon}
                 />
               </View>
-              <AppButton
-                variant="filled"
-                text="Verfiy your pin"
-                sizeVariant="compact"
-                colorVariant="primary"
-                svgIcon={HomeIcon}
-                style={marginForTest}
-                onPress={() => setShowPin(true)}
-              />
-              <AppButton
-                variant="filled"
-                text="Click to get reward"
-                sizeVariant="normal"
-                colorVariant="secondary"
-                svgIcon={HomeIcon}
-                style={marginForTest}
-                onPress={() => setShowReward(true)}
-              />
-              <AppButton
-                variant="filled"
-                text="Click to open pop up"
-                sizeVariant="large"
-                colorVariant="alert"
-                svgIcon={HomeIcon}
-                style={marginForTest}
-                onPress={() => setShow(true)}
-              />
-              <AppButton
-                variant="filled"
-                text="Click to open linear-gradient"
-                sizeVariant="large"
-                colorVariant="contrast"
-                svgIcon={HomeIcon}
-                style={marginForTest}
-                onPress={() => setShowLinearGradient(true)}
-              />
-              <AppButton
-                variant="filled"
-                text="Normal Filled Disabled Secondary"
-                sizeVariant="normal"
-                colorVariant="secondary"
-                svgIcon={HomeIcon}
-                style={marginForTest}
-                disabled
-              />
             </View>
 
             <View

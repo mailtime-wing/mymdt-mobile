@@ -9,6 +9,7 @@ import {AuthProvider} from '@/context/auth';
 import {PreloadDataProvider} from '@/context/preloadData';
 import {SetupFlowProvider} from '@/context/setupFlow';
 import {NotificationProvider} from '@/context/notification';
+import {ToastProvider} from '@/context/toast';
 import NavigationRoot from '@/screens/Root';
 
 function App() {
@@ -17,15 +18,17 @@ function App() {
       <SafeAreaProvider>
         <ThemeProvider>
           <IntlContainer>
-            <AuthProvider>
-              <NotificationProvider>
-                <PreloadDataProvider>
-                  <SetupFlowProvider>
-                    <NavigationRoot />
-                  </SetupFlowProvider>
-                </PreloadDataProvider>
-              </NotificationProvider>
-            </AuthProvider>
+            <ToastProvider>
+              <AuthProvider>
+                <NotificationProvider>
+                  <PreloadDataProvider>
+                    <SetupFlowProvider>
+                      <NavigationRoot />
+                    </SetupFlowProvider>
+                  </PreloadDataProvider>
+                </NotificationProvider>
+              </AuthProvider>
+            </ToastProvider>
           </IntlContainer>
         </ThemeProvider>
       </SafeAreaProvider>
