@@ -2,12 +2,12 @@ import {setContext} from '@apollo/client/link/context';
 
 import {AUTH_TOKENS} from '@/api/auth';
 
-const authLink = setContext((_, previousContext) => {
-  if (!previousContext.auth || !previousContext.client) {
+const authLink = setContext((operation, previousContext) => {
+  if (!previousContext.auth) {
     return;
   }
 
-  const {accessToken} = previousContext.client.readQuery({
+  const {accessToken} = operation.client.readQuery({
     query: AUTH_TOKENS,
   });
 

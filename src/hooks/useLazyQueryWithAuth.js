@@ -1,4 +1,4 @@
-import {useLazyQuery, useApolloClient} from '@apollo/client';
+import {useLazyQuery} from '@apollo/client';
 
 /**
  * @typedef {import('graphql').DocumentNode} DocumentNode
@@ -9,13 +9,11 @@ import {useLazyQuery, useApolloClient} from '@apollo/client';
  *
  */
 export default function useLazyQueryWithAuth(query, options = {}) {
-  const client = useApolloClient();
   const {context, ..._options} = options;
   const {headers, ..._context} = context || {};
 
   return useLazyQuery(query, {
     context: {
-      client,
       auth: true,
       ..._context,
     },

@@ -1,4 +1,4 @@
-import {useMutation, useApolloClient} from '@apollo/client';
+import {useMutation} from '@apollo/client';
 
 /**
  * @typedef {import('graphql').DocumentNode} DocumentNode
@@ -9,13 +9,11 @@ import {useMutation, useApolloClient} from '@apollo/client';
  *
  */
 export default function useMutationWithAuth(mutation, options = {}) {
-  const client = useApolloClient();
   const {context, ..._options} = options;
   const {headers, ..._context} = context || {};
 
   return useMutation(mutation, {
     context: {
-      client,
       auth: true,
       ..._context,
     },

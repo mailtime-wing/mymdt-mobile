@@ -24,7 +24,7 @@ export default class RefreshAccessTokenErrorLink extends ApolloLink {
 
   errorHandler = ({networkError, operation, forward}) => {
     /** @type {ApolloClient} */
-    const client = operation.getContext().client;
+    const client = operation.client;
     const auth = operation.getContext().auth;
     if (networkError?.statusCode === 401 && client && auth) {
       let forward$;
@@ -69,12 +69,12 @@ export default class RefreshAccessTokenErrorLink extends ApolloLink {
           }
         };
 
-        forward$ = fromPromise(fetch()).filter(value => Boolean(value));
+        forward$ = fromPromise(fetch()).filter((value) => Boolean(value));
       } else {
         // Will only emit once the Promise is resolved
         forward$ = fromPromise(
           new Promise((resolve, reject) => {
-            this.pendingRequests.push(done => {
+            this.pendingRequests.push((done) => {
               if (!done) {
                 reject(networkError);
                 return;
@@ -90,8 +90,8 @@ export default class RefreshAccessTokenErrorLink extends ApolloLink {
     }
   };
 
-  resolvePendingRequests = done => {
-    this.pendingRequests.map(callback => callback(done));
+  resolvePendingRequests = (done) => {
+    this.pendingRequests.map((callback) => callback(done));
     this.pendingRequests = [];
   };
 
