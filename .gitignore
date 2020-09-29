@@ -62,7 +62,6 @@ buck-out/
 .eslintcache
 
 .env
-.env.*
 !.env.sample
 
 .vscode
