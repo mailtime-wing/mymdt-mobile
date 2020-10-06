@@ -18,7 +18,7 @@ function App() {
       <SafeAreaProvider>
         <ThemeProvider>
           <IntlContainer>
-            <ToastProvider>
+            <ToastProvider client={client}>
               <AuthProvider>
                 <NotificationProvider>
                   <PreloadDataProvider>

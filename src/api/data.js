@@ -1,5 +1,11 @@
 import {gql} from 'apollo-boost';
 
+export const TOAST_ERRORS = gql`
+  query ToastErrors {
+    toastErrors @client
+  }
+`;
+
 export const UPDATE_USER_PROFILE_API = gql`
   mutation UpdateUserProfile(
     $name: String!

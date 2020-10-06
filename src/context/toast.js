@@ -6,22 +6,50 @@ import React, {
   useEffect,
 } from 'react';
 import ToastList from '@/components/ToastList';
+import {TOAST_ERRORS} from '@/api/data';
+import {useQuery} from '@apollo/client';
 
 export const ToastContext = createContext();
 
-export const ToastProvider = ({children}) => {
-  const [toasts, setToasts] = useState([]);
+function assignToastId(toastList) {
   let toastId = 1;
+  if (toastList.length <= 0) {
+    return toastList;
+  }
+  return toastList.map((te) => ({...te, id: toastId++}));
+}
+
+export const ToastProvider = ({client, children}) => {
+  const [, setErrors] = useState(false);
+  const {data} = useQuery(TOAST_ERRORS);
+  const toastErrors = data.toastErrors;
+  const _toastErrors = assignToastId(toastErrors);
 
   const addToast = useCallback(
-    toastObj =>
-      setToasts(_toasts => [..._toasts, {...toastObj, id: toastId++}]),
-    [toastId],
+    (toastObj) => {
+      client.writeQuery({
+        query: TOAST_ERRORS,
+        data: {
+          toastErrors: [...toastErrors, toastObj],
+        },
+      });
+      setErrors((err) => !err);
+    },
+    [toastErrors, client],
   );
 
-  const removeToast = useCallback(_toastId => {
-    setToasts(_toasts => _toasts.filter(t => t.id !== _toastId));
-  }, []);
+  const removeToast = useCallback(
+    (_toastId) => {
+      client.writeQuery({
+        query: TOAST_ERRORS,
+        data: {
+          toastErrors: _toastErrors.filter((te) => te.id !== _toastId),
+        },
+      });
+      setErrors((err) => !err);
+    },
+    [client, _toastErrors],
+  );
 
   const toastContext = useMemo(
     () => ({
@@ -33,18 +61,18 @@ export const ToastProvider = ({children}) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (toasts.length) {
-        toastContext.removeToast(toasts[0].id);
+      if (_toastErrors.length) {
+        toastContext.removeToast(_toastErrors[0].id);
       }
-    }, 1500);
+    }, 3000);
     return () => {
       clearInterval(interval);
     };
-  }, [toastContext, toasts]);
+  }, [toastContext, _toastErrors]);
 
   return (
     <ToastContext.Provider value={toastContext}>
-      <ToastList toasts={toasts} />
+      <ToastList toasts={_toastErrors} />
       {children}
     </ToastContext.Provider>
   );
