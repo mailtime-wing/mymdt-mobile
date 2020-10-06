@@ -19,10 +19,11 @@ const AppIcon = ({
   backgroundColor,
   sizeVariant,
   svgIcon: SvgIcon,
+  style,
   ...props
 }) => {
   return (
-    <View style={container(sizeVariant, backgroundColor)} {...props}>
+    <View style={[container(sizeVariant, backgroundColor), style]} {...props}>
       <SvgIcon {...icon(sizeVariant, color)} />
     </View>
   );
