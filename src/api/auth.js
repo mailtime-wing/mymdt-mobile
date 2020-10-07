@@ -19,28 +19,19 @@ export const GET_OTP_API = gql`
   }
 `;
 
-export const REGISTER_API = gql`
-  mutation Register(
+export const ENTER_API = gql`
+  mutation Enter(
     $phoneNumber: String!
     $otp: String!
     $locale: Locale!
     $deviceId: String!
   ) {
-    register(
+    enter(
       phoneNumber: $phoneNumber
       otp: $otp
       locale: $locale
       deviceId: $deviceId
     ) {
-      accessToken
-      refreshToken
-    }
-  }
-`;
-
-export const LOGIN_API = gql`
-  mutation Login($phoneNumber: String!, $otp: String!, $deviceId: String!) {
-    login(phoneNumber: $phoneNumber, otp: $otp, deviceId: $deviceId) {
       accessToken
       refreshToken
     }

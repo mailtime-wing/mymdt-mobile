@@ -103,7 +103,7 @@ const OnboardingScreen = ({navigation}) => (
       <CardSection />
       <View style={paddingHorizontal}>
         <AppButton
-          onPress={() => navigation.navigate('sign_in')}
+          onPress={() => navigation.navigate('enter')}
           text="start earning"
           variant="filled"
           sizeVariant="large"

@@ -12,14 +12,15 @@ export const VerificationCodeContainer = styled.View`
   flex: 1;
 `;
 
-export const titleStyle = theme => css`
+export const titleStyle = (theme) => css`
   color: ${theme.colors.secondary.normal};
   margin-bottom: 24px;
 `;
 
-export const termsStyle = theme => css`
+export const termsStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
-  margin-top: 11px;
+  margin-top: 110px;
+  margin-bottom: 16px;
   padding: 0 24px;
   text-align: center;
 `;

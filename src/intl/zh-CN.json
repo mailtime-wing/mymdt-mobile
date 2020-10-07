@@ -8,6 +8,8 @@
   "dark": "夜间模式",
   "light": "日间模式",
   "system_default": "系统默认",
+  "welcome_to_reward_me": "WELCOME to RewardMe",
+  "enter_verification_code": "Enter your verification code",
   
   "valid_until": "Valid until {date}",
   "cashback_type": "Cashback type",
@@ -241,7 +243,8 @@
     "connect_more": "连接更多",
     "sure": "好吧!",
     "continue": "继续",
-    "upgrade": "升级"
+    "upgrade": "升级",
+    "verify": "验证"
   },
 
   "error": {

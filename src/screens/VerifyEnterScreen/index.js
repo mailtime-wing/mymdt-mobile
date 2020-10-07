@@ -1,18 +1,19 @@
 import React, {useContext} from 'react';
 import {ScrollView} from 'react-native';
-import {FormattedMessage} from 'react-intl';
-
-import {GET_OTP_API, REGISTER_API} from '@/api/auth';
-import errorCodeEnum from '@/enum/errorCode';
 import {AuthContext} from '@/context/auth';
 import {IntlContext} from '@/context/Intl';
 import {NotificationContext} from '@/context/notification';
-import PopupModal from '@/components/PopupModal';
-import LoginForm from '@/components/LoginForm';
+import {FormattedMessage} from 'react-intl';
+import errorCodeEnum from '@/enum/errorCode';
+import VerifyVerificationCodeForm from '@/components/VerifyVerificationCodeForm';
 import ScreenContainer from '@/components/ScreenContainer';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
+import PopupModal from '@/components/PopupModal';
 
-const renderClientError = errorCode => {
+import splitPhoneNumber from '@/utils/splitPhoneNumber';
+import {ENTER_API} from '@/api/auth';
+
+const renderClientError = (errorCode) => {
   if (!errorCode) {
     return null;
   }
@@ -49,76 +50,51 @@ const renderClientError = errorCode => {
   }
 };
 
-const SignUpScreen = ({navigation}) => {
+const VerifyEnterScreen = ({route}) => {
+  const [enterRequest, {error}, reset] = useMutationWithReset(ENTER_API);
+  const {phoneNubmer} = route.params;
   const {localeEnum} = useContext(IntlContext);
   const {updateAuthToken} = useContext(AuthContext);
-  const [
-    otpRequest,
-    {error: otpRequestError},
-    otpRequestReset,
-  ] = useMutationWithReset(GET_OTP_API);
-  const [
-    registerRequest,
-    {error: registerRequestError},
-    registerRequestReset,
-  ] = useMutationWithReset(REGISTER_API);
   const {
     state: {deviceId},
   } = useContext(NotificationContext);
 
-  const error = otpRequestError || registerRequestError;
   const errorCode = error?.graphQLErrors[0]?.extensions?.code;
   const clientError = renderClientError(errorCode);
 
-  const reset = mode => {
-    otpRequestReset();
-    registerRequestReset();
-
-    if (mode === 'OK' && errorCode === errorCodeEnum[305]) {
-      navigation.navigate('sign_in', {isSignUp: false});
-    }
-  };
-
-  const handleSendPress = values =>
-    otpRequest({
-      variables: {
-        phoneNumber: values.phonePrefix + values.phone,
-        locale: localeEnum,
-        action: 'REGISTER',
-      },
-    });
-
-  const handleSubmitPress = async values => {
-    const completePhoneNumber = values.phonePrefix + values.phone;
+  const handleVerifyPress = async (values) => {
     try {
-      const {data} = await registerRequest({
+      const {data} = await enterRequest({
         variables: {
-          phoneNumber: completePhoneNumber,
+          phoneNumber: phoneNubmer,
           otp: values.verificationCode,
           locale: localeEnum,
           deviceId,
         },
       });
-      updateAuthToken(data.register.accessToken, data.register.refreshToken);
+      updateAuthToken(data.enter.accessToken, data.enter.refreshToken);
     } catch (e) {}
   };
 
   return (
     <ScrollView>
       <ScreenContainer hasTopBar>
-        <LoginForm
-          title={<FormattedMessage id="sign_up" defaultMessage="SIGN UP" />}
+        <VerifyVerificationCodeForm
+          title={<FormattedMessage id="enter_verification_code" />}
           description={
             <FormattedMessage
-              id="setting_up_agree_terms_and_policy"
-              defaultMessage="By setting up the account, you agree with RewardMe’s Terms of Service and Privacy Policy."
+              id="we_have_sent_otp"
+              values={{
+                phone_number: splitPhoneNumber(phoneNubmer),
+              }}
             />
           }
           submitButtonText={
-            <FormattedMessage id="sign_up" defaultMessage="SIGN UP" />
+            <FormattedMessage id="button.verify" defaultMessage="Verify" />
           }
-          onSendPress={handleSendPress}
-          onSubmit={handleSubmitPress}
+          phoneNubmer={phoneNubmer}
+          otpActionKey="ENTER"
+          onSubmit={handleVerifyPress}
         />
       </ScreenContainer>
       {!!clientError && (
@@ -140,4 +116,4 @@ const SignUpScreen = ({navigation}) => {
   );
 };
 
-export default SignUpScreen;
+export default VerifyEnterScreen;
