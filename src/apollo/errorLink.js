@@ -32,8 +32,6 @@ const errorLink = onError(
       console.log(`[Network error]: ${networkError}`);
       writeErrorIntoQuery(networkError.toString());
     }
-
-    return forward(operation);
   },
 );
 

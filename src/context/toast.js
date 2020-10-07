@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import ToastList from '@/components/ToastList';
 import {TOAST_ERRORS} from '@/api/data';
-import {useQuery} from '@apollo/client';
+import {useQuery, useApolloClient} from '@apollo/client';
 
 export const ToastContext = createContext();
 
@@ -19,7 +19,8 @@ function assignToastId(toastList) {
   return toastList.map((te) => ({...te, id: toastId++}));
 }
 
-export const ToastProvider = ({client, children}) => {
+export const ToastProvider = ({children}) => {
+  const client = useApolloClient();
   const [, setErrors] = useState(false);
   const {data} = useQuery(TOAST_ERRORS);
   const toastErrors = data.toastErrors;
