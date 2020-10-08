@@ -8,6 +8,8 @@
   "dark": "Dark",
   "light": "Light",
   "system_default": "System default",
+  "welcome_to_reward_me": "WELCOME to RewardMe",
+  "enter_verification_code": "Enter your verification code",
   
   "valid_until": "Valid until {date}",
   "cashback_type": "Cashback type",
@@ -60,10 +62,15 @@
   "optional": "Optional",
   "number_of_characters": "{length}/{limit} characters",
   "withdraw_mdt": "withdraw MDT",
-
   "redeem": "Redeem",
   "profile": "Profile",
   "redeem_details": "Gift Cards / Special Rewards",
+  "onboarding01_title": "Earn rewards by\n doing what you love to do. ",
+  "onboarding01_detail": "No referral link, no expiration, no hassle.",
+  "onboarding02_title": "The more you shop,\nthe more you earn",
+  "onboarding02_detail": "Get rewarded for your online purchases automatically.",
+  "onboarding03_title": "A new way to get cash back",
+  "onboarding03_detail": "Gift cards, cash, or crypto, it’s your call.",
 
   "membership_level_0": "Basic",
   "membership_level_1": "Silver",
@@ -130,7 +137,7 @@
   "referral_code": "Referral Code",
   "claim_gift_on_birthday": "You can claim gift on your birthday",
   "login_in_agree_terms_and_policy": "By logging in your email address, you agree with RewardMe’s Terms of Service and Privacy Policy.",
-  "setting_up_agree_terms_and_policy": "By setting up the account, you agree with RewardMe’s Terms of Service and Privacy Policy.",
+  "setting_up_agree_terms_and_policy": "By using RewardMe services, you agree with RewardMe’s Terms of Service and Privacy Policy.",
   "setting_up_account": "Setting up your account...",
   "searching_for_receipts": "Searching for Receipts...",
   "it_might_take_some_time": "It might take some time, we will notify you once it’s done.",
@@ -219,7 +226,7 @@
     "start": "start",
     "finish": "finish",
     "back": "back",
-    "send_verification_code": "Send",
+    "send_verification_code": "Send verification code",
     "resend_verification_code": "Resend",
     "submit": "Submit",
     "success": "Success",
@@ -236,7 +243,8 @@
     "connect_more": "Connect more",
     "sure": "SURE!",
     "continue": "Continue",
-    "upgrade": "Upgrade"
+    "upgrade": "Upgrade",
+    "verify": "Verify"
   },
 
   "error": {

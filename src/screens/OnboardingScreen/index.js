@@ -1,17 +1,15 @@
 import React, {useState, useRef} from 'react';
-import {Dimensions, ScrollView} from 'react-native';
+import {Dimensions, ScrollView, View, Image} from 'react-native';
 import {useTheme} from 'emotion-theming';
 import {
-  Container,
-  ContentContainer,
-  ButtonContainer,
-  ColorBackground,
-  SwiperContainer,
-  MarginContainer,
+  container,
+  paddingHorizontal,
   headerStyle,
   detailStyle,
+  image as imageStyle,
   styles,
 } from './style';
+import ScreenContainer from '@/components/ScreenContainer';
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
 import {FormattedMessage} from 'react-intl';
@@ -19,7 +17,7 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
-const wp = percentage => {
+const wp = (percentage) => {
   const value = (percentage * viewportWidth) / 100;
   return Math.round(value);
 };
@@ -35,40 +33,42 @@ const CardSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const refCarousel = useRef(null);
 
-  const renderItem = ({item: {header, detail}, index}) => {
+  const renderItem = ({item: {header, detail, imgSrc}, index}) => {
     return (
-      <ContentContainer>
-        <ColorBackground backgroundColor="#DFF7FF" />
-        <AppText variant="heading3" style={headerStyle(theme)}>
-          {header}
-        </AppText>
-        <AppText variant="body1" style={detailStyle(theme)}>
-          {detail}
-        </AppText>
-      </ContentContainer>
+      <View>
+        <Image style={imageStyle} source={imgSrc} resizeMode="center" />
+        <View style={paddingHorizontal}>
+          <AppText variant="heading3" style={headerStyle(theme)}>
+            {header}
+          </AppText>
+          <AppText variant="body1" style={detailStyle(theme)}>
+            {detail}
+          </AppText>
+        </View>
+      </View>
     );
   };
 
   const data = [
     {
-      header: 'Login to your email. Shop. Get cashback rewards.',
-      detail:
-        'Select your favorite brands and start shopping to earn cashback rewards.',
+      header: <FormattedMessage id="onboarding01_title" />,
+      detail: <FormattedMessage id="onboarding01_detail" />,
+      imgSrc: require('@/assets/onboarding01.png'),
     },
     {
-      header: 'Earn Points every time you shop your favorite brands.',
-      detail:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, (Need Big tech terms to distract users)',
+      header: <FormattedMessage id="onboarding02_title" />,
+      detail: <FormattedMessage id="onboarding02_detail" />,
+      imgSrc: require('@/assets/onboarding02.png'),
     },
     {
-      header: 'Collect Points and redeem them on Gift Cards.',
-      detail:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy ',
+      header: <FormattedMessage id="onboarding03_title" />,
+      detail: <FormattedMessage id="onboarding03_detail" />,
+      imgSrc: require('@/assets/onboarding03.png'),
     },
   ];
 
   return (
-    <SwiperContainer>
+    <View>
       <Carousel
         ref={refCarousel}
         layout="default"
@@ -80,50 +80,37 @@ const CardSection = () => {
         inactiveSlideOpacity={0}
         containerCustomStyle={styles.container}
         activeAnimationType="decay"
-        onSnapToItem={index => setActiveIndex(index)}
+        onSnapToItem={(index) => setActiveIndex(index)}
       />
       <Pagination
         dotsLength={data.length}
         activeDotIndex={activeIndex}
         containerStyle={styles.paginationContainer}
-        dotColor="#00BACE"
+        dotColor={theme.colors.secondary.normal}
         dotStyle={styles.paginationDot}
-        inactiveDotColor="rgba(3, 99, 239, 0.2)"
+        inactiveDotColor={theme.colors.textOnBackground.disabled}
         inactiveDotScale={1}
         carouselRef={refCarousel}
         tappableDots={!!refCarousel}
       />
-    </SwiperContainer>
+    </View>
   );
 };
 
 const OnboardingScreen = ({navigation}) => (
   <ScrollView>
-    <Container>
+    <ScreenContainer style={container}>
       <CardSection />
-      <ButtonContainer>
+      <View style={paddingHorizontal}>
         <AppButton
-          onPress={() => navigation.navigate('sign_up')}
-          text={
-            <FormattedMessage
-              id="join_rewardme"
-              defaultMessage="JOIN REWARDME"
-            />
-          }
+          onPress={() => navigation.navigate('enter')}
+          text="start earning"
           variant="filled"
           sizeVariant="large"
           colorVariant="secondary"
         />
-        <MarginContainer />
-        <AppButton
-          onPress={() => navigation.navigate('sign_in')}
-          text={<FormattedMessage id="sign_in" defaultMessage="Sign In" />}
-          variant="outlined"
-          sizeVariant="normal"
-          colorVariant="secondary"
-        />
-      </ButtonContainer>
-    </Container>
+      </View>
+    </ScreenContainer>
   </ScrollView>
 );
 

@@ -51,7 +51,7 @@ const WelcomeScreen = () => {
         <AppText variant="caption" style={startAndAgree(theme)}>
           <FormattedMessage
             id="setting_up_agree_terms_and_policy"
-            defaultMessage="By setting up the account, you agree with RewardMe’s Terms of Service and Privacy Policy."
+            defaultMessage="By using RewardMe services, you agree with RewardMe’s Terms of Service and Privacy Policy."
           />
         </AppText>
       </ScreenContainer>

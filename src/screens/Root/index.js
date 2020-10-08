@@ -12,8 +12,8 @@ import {css} from '@emotion/native';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
 import OfferSelectScreen from '@/screens/OfferSelectScreen';
-import SignInScreen from '@/screens/SignInScreen';
-import SignUpScreen from '@/screens/SignUpScreen';
+import EnterScreen from '@/screens/EnterScreen';
+import VerifyEnterScreen from '@/screens/VerifyEnterScreen';
 import UserProfileScreen from '@/screens/UserProfileScreen';
 import BindEmailScreen from '@/screens/BindEmailScreen';
 import LoadingScreen from '@/screens/LoadingScreen';
@@ -79,8 +79,8 @@ const screens = [
     component: OnboardingScreen,
     options: {headerShown: false},
   },
-  {name: 'sign_in', component: SignInScreen},
-  {name: 'sign_up', component: SignUpScreen},
+  {name: 'enter', component: EnterScreen},
+  {name: 'verify_enter', component: VerifyEnterScreen},
   {name: 'loading', component: LoadingScreen},
 ];
 
@@ -355,7 +355,7 @@ const Main = () => {
             name={name}
             {...screenProps}
             options={{
-              headerLeft: props =>
+              headerLeft: (props) =>
                 appBarShown === false ? null : <BackAppButton {...props} />,
               headerStyle: {
                 ...headerStyle,
@@ -367,7 +367,7 @@ const Main = () => {
         ))}
       {authToken
         ? setupScreens
-            .filter(setupScreen => validScreenNames[setupScreen.name])
+            .filter((setupScreen) => validScreenNames[setupScreen.name])
             .map(({name, appBarShown, options, ...screenProps}) => {
               return (
                 <MainStack.Screen
@@ -375,7 +375,7 @@ const Main = () => {
                   name={name}
                   {...screenProps}
                   options={{
-                    headerLeft: props =>
+                    headerLeft: (props) =>
                       appBarShown === false ? null : (
                         <BackAppButton {...props} />
                       ),
@@ -446,7 +446,7 @@ const Root = () => {
           ...TransitionPresets.ModalPresentationIOS,
           headerTitle: null,
           cardStyle: [styles.card],
-          headerLeft: props => <CloseIconButton {...props} />,
+          headerLeft: (props) => <CloseIconButton {...props} />,
           cardOverlayEnabled: true,
           gestureEnabled: true,
           headerStatusBarHeight: 0,
