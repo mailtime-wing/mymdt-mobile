@@ -86,7 +86,7 @@ const CardSection = () => {
         dotsLength={data.length}
         activeDotIndex={activeIndex}
         containerStyle={styles.paginationContainer}
-        dotColor={theme.colors.buttonContrastTextColor}
+        dotColor={theme.colors.secondary.normal}
         dotStyle={styles.paginationDot}
         inactiveDotColor={theme.colors.textOnBackground.disabled}
         inactiveDotScale={1}
