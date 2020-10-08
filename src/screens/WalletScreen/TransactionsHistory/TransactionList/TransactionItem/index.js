@@ -1,22 +1,23 @@
 import React from 'react';
+import {View, TouchableOpacity} from 'react-native';
 import {FormattedDate} from 'react-intl';
 
 import AppText from '@/components/AppText2';
 import AppIcon from '@/components/AppIcon';
 
-import {
-  TransactionContainer,
-  RowContainer,
-  nameStyle,
-  dateStyle,
-} from './style';
+import {nameStyle, dateStyle, transaction, container} from './style';
 import {useTheme} from 'emotion-theming';
 import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
 
-const TransactionItem = ({icon, name, date, coin, cardType}) => {
+const TransactionItem = ({item, cardType, coin, navigation}) => {
   const theme = useTheme();
+
+  const handleTransactionPress = () => {
+    navigation.navigate('transaction_detail', {item: item});
+  };
+
   return (
-    <RowContainer>
+    <TouchableOpacity style={container} onPress={handleTransactionPress}>
       <AppIcon
         color={theme.colors.background1}
         backgroundColor={
@@ -25,23 +26,23 @@ const TransactionItem = ({icon, name, date, coin, cardType}) => {
             : theme.colors.primary.normal
         }
         sizeVariant="small"
-        svgIcon={icon}
+        svgIcon={item.icon}
       />
-      <TransactionContainer>
+      <View style={transaction}>
         <AppText variant="body1" style={nameStyle(theme)}>
-          {name}
+          {item.node.title}
         </AppText>
         <AppText variant="caption" style={dateStyle(theme)}>
           <FormattedDate
-            value={date}
+            value={item.node.transactionTime}
             year="numeric"
             month="long"
             day="2-digit"
           />
         </AppText>
-      </TransactionContainer>
+      </View>
       {coin}
-    </RowContainer>
+    </TouchableOpacity>
   );
 };
 

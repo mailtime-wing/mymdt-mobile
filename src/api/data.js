@@ -334,6 +334,14 @@ export const TRANSACTIONS_QUERY = gql`
               transactionTime
               amount
               title
+              data {
+                ... on CheckInTransactionData {
+                  day
+                }
+                ... on ConversionTransactionData {
+                  converstionRate
+                }
+              }
             }
           }
           pageInfo {

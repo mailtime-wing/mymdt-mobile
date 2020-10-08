@@ -62,6 +62,7 @@ const TransactionsHistory = ({
       <TransactionList
         transactionsHistoryList={transactionsHistoryList}
         cardType={cardType}
+        navigation={navigation}
         {...props}
       />
     </View>

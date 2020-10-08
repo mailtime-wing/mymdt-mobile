@@ -16,10 +16,9 @@ const TransactionList = ({transactionsHistoryList, cardType, ...props}) => {
   const theme = useTheme();
   const renderItem = ({item}) => (
     <TransactionItem
-      icon={item.icon}
-      name={item.node.title}
-      date={item.node.transactionTime}
+      item={item}
       cardType={cardType}
+      {...props}
       coin={
         cardType === MEASURABLE_REWARD_POINT ? (
           <MRPCoin
@@ -47,7 +46,7 @@ const TransactionList = ({transactionsHistoryList, cardType, ...props}) => {
       <FlatList
         data={transactionsHistoryList}
         renderItem={renderItem}
-        keyExtractor={item => item.node.id}
+        keyExtractor={(item) => item.node.id}
         onEndReachedThreshold={0.1}
         {...props}
       />
