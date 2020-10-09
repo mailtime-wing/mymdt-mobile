@@ -1,34 +1,5 @@
 import styled, {css} from '@emotion/native';
 
-export const RowContainer = styled.View`
-  flex-direction: row;
-  padding: 12px 0;
-  margin: 24px 0;
-  justify-content: space-between;
-`;
-
-export const ConversionRateLeftContainer = styled.View`
-  flex-direction: column;
-`;
-
-export const ConversionRateRightContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const almostEqualSymbol = theme => css`
-  margin: 0 4px;
-  color: ${theme.colors.textOnBackground.disabled};
-`;
-
-export const conversionRateText = theme => css`
-  color: ${theme.colors.textOnBackground.highEmphasis};
-`;
-
-export const conversionUpdateDate = theme => css`
-  color: ${theme.colors.textOnBackground.disabled};
-`;
-
 export const ConvertersContainer = styled.View`
   justify-content: center;
   margin-bottom: 24px;
@@ -40,9 +11,9 @@ export const ConverterContainer = styled.View`
   height: 120px;
   padding: 24px;
   border-radius: 24px;
-  border: 1px solid ${props => props.theme.colors.background2};
+  border: 1px solid ${(props) => props.theme.colors.background2};
   background-color: transparent;
-  ${props =>
+  ${(props) =>
     props.isFocus &&
     `border: 2px solid ${props.theme.colors.secondary.normal};
     background-color: ${props.theme.colors.inputFocusBackground};`};
@@ -60,13 +31,13 @@ export const Input = styled.TextInput`
   line-height: 44px;
   flex: 1;
   text-align: right;
-  color: ${props =>
+  color: ${(props) =>
     props.editable
       ? props.theme.colors.contrastColor
       : props.theme.colors.textOnBackground.disabled};
 `;
 
-export const numberText = theme => css`
+export const numberText = (theme) => css`
   flex: 1;
   text-align: right;
   color: ${theme.colors.textOnBackground.disabled};
@@ -77,7 +48,7 @@ export const Margin = styled.View`
 `;
 
 export const InputAccessoryViewContainer = styled.View`
-  background-color: ${props => props.theme.colors.background1};
+  background-color: ${(props) => props.theme.colors.background1};
   flex-direction: row;
   align-items: center;
 `;
@@ -85,19 +56,38 @@ export const InputAccessoryViewContainer = styled.View`
 export const InputAccessoryButton = styled.TouchableOpacity`
   flex: 1;
   padding: 16px 0;
-  border: 1px solid ${props => props.theme.colors.background2};
+  border: 1px solid ${(props) => props.theme.colors.background2};
 `;
 
-export const inputAccessoryButtonText = theme => css`
+export const inputAccessoryButtonText = (theme) => css`
   color: ${theme.colors.secondary.dark};
   text-align: center;
 `;
 
-export const errorText = theme => css`
+export const errorText = (theme) => css`
   color: ${theme.colors.textOnError.light};
 `;
 
 export const convertIcon = css`
   position: absolute;
   align-self: center;
+`;
+
+export const conversionSection = css`
+  flex-direction: row;
+  padding: 12px 0;
+  margin: 24px 0;
+  justify-content: space-between;
+`;
+
+export const leftContainer = css`
+  flex-direction: column;
+`;
+
+export const conversionRateText = (theme) => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
+`;
+
+export const conversionUpdateDate = (theme) => css`
+  color: ${theme.colors.textOnBackground.disabled};
 `;

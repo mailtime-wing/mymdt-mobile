@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
-import {FormattedDate} from 'react-intl';
+import formatToTransactionTime from '@/utils/formatToTransactionTime';
 
 import AppText from '@/components/AppText2';
 import AppIcon from '@/components/AppIcon';
@@ -33,12 +33,7 @@ const TransactionItem = ({item, cardType, coin, navigation}) => {
           {item.node.title}
         </AppText>
         <AppText variant="caption" style={dateStyle(theme)}>
-          <FormattedDate
-            value={item.node.transactionTime}
-            year="numeric"
-            month="long"
-            day="2-digit"
-          />
+          {formatToTransactionTime(item.node.transactionTime)}
         </AppText>
       </View>
       {coin}

@@ -1,5 +1,6 @@
 import React, {useState, useCallback} from 'react';
-import {FormattedMessage, FormattedDate} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
+import formatToTransactionTime from '@/utils/formatToTransactionTime';
 import {useFocusEffect} from '@react-navigation/native';
 import {GET_USER_OFFER_API, GET_USER_MEMBERSHIP_API} from '@/api/data';
 
@@ -131,14 +132,7 @@ const OfferPreferenceEditScreen = ({navigation}) => {
               <FormattedMessage
                 id="edited_in_30_days"
                 values={{
-                  date: (
-                    <FormattedDate
-                      value={canEditDate}
-                      year="numeric"
-                      month="long"
-                      day="2-digit"
-                    />
-                  ),
+                  date: formatToTransactionTime(canEditDate),
                 }}
               />
             }

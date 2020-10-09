@@ -339,7 +339,9 @@ export const TRANSACTIONS_QUERY = gql`
                   day
                 }
                 ... on ConversionTransactionData {
-                  converstionRate
+                  conversionRate
+                  from
+                  to
                 }
               }
             }
