@@ -7,9 +7,11 @@ import {
 } from '@apollo/client';
 // import { concatPagination, relayStylePagination } from "@apollo/client/utilities"
 import {AUTH_TOKENS} from '@/api/auth';
+import {TOAST_ERRORS} from '@/api/data';
 
 import RefreshAccessTokenErrorLink from './RefreshAccessTokenErrorLink';
 import authLink from './authLink';
+import errorLink from './errorLink';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -22,6 +24,7 @@ const link = ApolloLink.from([
   }),
   new RefreshAccessTokenErrorLink(),
   authLink,
+  errorLink,
   new HttpLink({
     uri: `${Config.API_SCHEME}://${Config.API_ENDPOINT}`,
   }),
@@ -36,6 +39,13 @@ client.writeQuery({
     accessToken: '',
     refreshToken: '',
     isRefreshTokenExpired: false,
+  },
+});
+
+client.writeQuery({
+  query: TOAST_ERRORS,
+  data: {
+    toastErrors: [],
   },
 });
 
