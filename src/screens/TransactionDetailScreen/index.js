@@ -4,8 +4,9 @@ import ModalContainer from '@/components/ModalContainer';
 import AppText from '@/components/AppText2';
 import ConversionRate from '@/components/ConversionRate';
 import formatToTransactionTime from '@/utils/formatToTransactionTime';
-
+import TransactionItem from '@/components/TransactionItem';
 import TransactitonType from '@/enum/transactionsType';
+import ConvertIcon from '@/assets/convert_icon.svg';
 
 import {
   section,
@@ -26,7 +27,7 @@ const RenderTransationDetail = ({transactionItem}) => {
       return (
         <View style={itemContainer}>
           <AppText variant="body1" style={titleStyle(theme)}>
-            Check-in Day
+            Check-in Reward
           </AppText>
           <AppText variant="body2" style={detail(theme)}>
             {transactionItem.amount}
@@ -101,6 +102,12 @@ const TransactionDetailScreen = ({route}) => {
             {transactionItem.type}
           </AppText>
         </View>
+        <TransactionItem
+          title={transactionItem.title}
+          date={transactionItem.transactionTime}
+          icon={ConvertIcon}
+          coinBackgroundColor={theme.colors.secondary.normal}
+        />
       </View>
       <View style={section}>
         <View style={sectionHeaderContainer(theme)}>
