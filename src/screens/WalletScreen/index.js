@@ -90,7 +90,7 @@ const WalletScreen = ({navigation}) => {
         <MRPCoin
           amount={
             data?.userProfile?.currencyAccounts?.find(
-              ca => ca.currencyCode === MEASURABLE_REWARD_POINT,
+              (ca) => ca.currencyCode === MEASURABLE_REWARD_POINT,
             )?.balance || 0
           }
           size={42}
@@ -120,7 +120,7 @@ const WalletScreen = ({navigation}) => {
         <MDTCoin
           amount={
             data?.userProfile?.currencyAccounts?.find(
-              ca => ca.currencyCode === MEASURABLE_DATA_TOKEN,
+              (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
             )?.balance || 0
           }
           size={42}
@@ -131,7 +131,7 @@ const WalletScreen = ({navigation}) => {
       ),
       aroundInUsd: ToUsdAmount(
         data?.userProfile?.currencyAccounts?.find(
-          ca => ca.currencyCode === MEASURABLE_DATA_TOKEN,
+          (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
         )?.balance || 0,
       ),
       theme: mdtTheme,
@@ -158,8 +158,9 @@ const WalletScreen = ({navigation}) => {
 
   const currentCard = cardList[activeCardIndex];
   const currentCardData = data?.userProfile?.currencyAccounts[0];
+  const currencyCode = currentCardData?.currencyCode;
   const cardTransactionsHistory = currentCardData?.transactions?.edges.map(
-    transaction =>
+    (transaction) =>
       (transaction = {
         ...transaction,
         icon: ConvertIcon,
@@ -176,7 +177,7 @@ const WalletScreen = ({navigation}) => {
     });
   }, [activeCardIndex, currentCard.type, getTransactions]);
 
-  const handleOnSnapToItem = cardIndex => {
+  const handleOnSnapToItem = (cardIndex) => {
     setActiveCardIndex(cardIndex);
   };
 
@@ -188,7 +189,7 @@ const WalletScreen = ({navigation}) => {
     setShowBottomSheet(false);
   };
 
-  const handleItemPress = index => {
+  const handleItemPress = (index) => {
     setActiveFilterIndex(index);
   };
 
@@ -268,6 +269,7 @@ const WalletScreen = ({navigation}) => {
           <TransactionsHistory
             transactionsHistoryList={cardTransactionsHistory}
             currentTheme={currentCard.theme}
+            currencyCode={currencyCode}
             cardType={currentCard.type}
             currentFilter={
               <FormattedMessage id="button.filter" defaultMessage="FILTER" />

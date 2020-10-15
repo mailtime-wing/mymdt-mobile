@@ -14,14 +14,17 @@ const flexEnd = {justifyContent: 'flex-end'};
 
 const TransactionList = ({
   transactionsHistoryList,
-  cardType,
+  currencyCode,
   navigation,
   ...props
 }) => {
   const theme = useTheme();
   const renderItem = ({item}) => {
     const handleTransactionPress = () => {
-      navigation.navigate('transaction_detail', {item: {...item, icon: null}});
+      navigation.navigate('transaction_detail', {
+        item: {...item, icon: null},
+        currencyCode: currencyCode,
+      });
     };
 
     return (
@@ -31,12 +34,12 @@ const TransactionList = ({
           title={item.node.title}
           date={item.node.transactionTime}
           coinBackgroundColor={
-            cardType === MEASURABLE_REWARD_POINT
+            currencyCode === MEASURABLE_REWARD_POINT
               ? theme.colors.secondary.normal
               : theme.colors.primary.normal
           }
           coin={
-            cardType === MEASURABLE_REWARD_POINT ? (
+            currencyCode === MEASURABLE_REWARD_POINT ? (
               <MRPCoin
                 amount={item.node.amount}
                 size={16}

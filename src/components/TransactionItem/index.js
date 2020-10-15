@@ -8,10 +8,17 @@ import AppIcon from '@/components/AppIcon';
 import {nameStyle, dateStyle, transaction, container} from './style';
 import {useTheme} from 'emotion-theming';
 
-const TransactionItem = ({title, date, icon, coin, coinBackgroundColor}) => {
+const TransactionItem = ({
+  title,
+  date,
+  icon,
+  coin,
+  coinBackgroundColor,
+  style,
+}) => {
   const theme = useTheme();
   return (
-    <View style={container}>
+    <View style={[container, style]}>
       {icon && (
         <AppIcon
           color={theme.colors.background1}
@@ -21,7 +28,7 @@ const TransactionItem = ({title, date, icon, coin, coinBackgroundColor}) => {
         />
       )}
       <View style={transaction}>
-        <AppText variant="body1" style={nameStyle(theme)}>
+        <AppText variant="body1" style={nameStyle(theme)} numberOfLines={1}>
           {title}
         </AppText>
         <AppText variant="caption" style={dateStyle(theme)}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import ModalContainer from '@/components/ModalContainer';
 import AppText from '@/components/AppText2';
 import ConversionRate from '@/components/ConversionRate';
@@ -7,6 +7,7 @@ import formatToTransactionTime from '@/utils/formatToTransactionTime';
 import TransactionItem from '@/components/TransactionItem';
 import TransactitonType from '@/enum/transactionsType';
 import ConvertIcon from '@/assets/convert_icon.svg';
+import TransactionAmount from '@/components/TransactionAmount';
 
 import {
   section,
@@ -15,6 +16,7 @@ import {
   title as titleStyle,
   detail,
   item as itemContainer,
+  transactionItemStyle,
 } from './style';
 
 import {useTheme} from 'emotion-theming';
@@ -83,6 +85,71 @@ const RenderTransationDetail = ({transactionItem}) => {
           </View>
         </>
       );
+    case TransactitonType.CASH_BACK:
+      return (
+        <>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              Recipient
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              foobar@gmail.com
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              Email Title
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              Saturday Night Uber Trip
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              Sender
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              uber.hongkong@uber.com
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              Recipient
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              foobar@gmail.com
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              Receive Time
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              {formatToTransactionTime(transactionTime)}
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              Cash Back Earned
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              <TransactionAmount
+                variant="to"
+                unitVariant="newToken"
+                amount={123}
+              />
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              Cash Back Rate
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              2%
+            </AppText>
+          </View>
+        </>
+      );
     default:
       return null;
   }
@@ -92,31 +159,42 @@ const TransactionDetailScreen = ({route}) => {
   const theme = useTheme();
   const {
     item: {node: transactionItem},
+    currencyCode,
   } = route.params;
 
   return (
     <ModalContainer>
-      <View style={section}>
-        <View style={sectionHeaderContainer(theme)}>
-          <AppText variant="label" style={sectionHeader(theme)}>
-            {transactionItem.type}
-          </AppText>
+      <ScrollView>
+        <View style={section}>
+          <View style={sectionHeaderContainer(theme)}>
+            <AppText variant="label" style={sectionHeader(theme)}>
+              {transactionItem.type}
+            </AppText>
+          </View>
+          <TransactionItem
+            title={transactionItem.title}
+            date={transactionItem.transactionTime}
+            icon={ConvertIcon}
+            coinBackgroundColor={theme.colors.secondary.normal}
+            coin={
+              <TransactionAmount
+                variant="to"
+                unitVariant={currencyCode}
+                amount={transactionItem.amount}
+              />
+            }
+            style={transactionItemStyle}
+          />
         </View>
-        <TransactionItem
-          title={transactionItem.title}
-          date={transactionItem.transactionTime}
-          icon={ConvertIcon}
-          coinBackgroundColor={theme.colors.secondary.normal}
-        />
-      </View>
-      <View style={section}>
-        <View style={sectionHeaderContainer(theme)}>
-          <AppText variant="label" style={sectionHeader(theme)}>
-            detail
-          </AppText>
+        <View style={section}>
+          <View style={sectionHeaderContainer(theme)}>
+            <AppText variant="label" style={sectionHeader(theme)}>
+              detail
+            </AppText>
+          </View>
+          <RenderTransationDetail transactionItem={transactionItem} />
         </View>
-        <RenderTransationDetail transactionItem={transactionItem} />
-      </View>
+      </ScrollView>
     </ModalContainer>
   );
 };

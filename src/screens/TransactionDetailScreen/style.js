@@ -26,3 +26,7 @@ export const title = (theme) => css`
 export const detail = (theme) => css`
   color: ${theme.colors.textOnBackground.disabled};
 `;
+
+export const transactionItemStyle = css`
+  padding-right: 24px;
+`;

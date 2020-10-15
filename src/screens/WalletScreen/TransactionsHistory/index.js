@@ -20,6 +20,7 @@ const TransactionsHistory = ({
   handleFilterPress,
   navigation,
   cardType,
+  currencyCode,
   ...props
 }) => {
   const theme = useTheme();
@@ -38,7 +39,7 @@ const TransactionsHistory = ({
           variant="outlined"
           sizeVariant="normal"
           colorVariant={
-            cardType === MEASURABLE_REWARD_POINT ? 'secondary' : 'primary'
+            currencyCode === MEASURABLE_REWARD_POINT ? 'secondary' : 'primary'
           }
           svgIcon={FilterIcon}
           numberOfLines={1}
@@ -55,13 +56,13 @@ const TransactionsHistory = ({
           variant="outlined"
           sizeVariant="compact"
           colorVariant={
-            cardType === MEASURABLE_REWARD_POINT ? 'secondary' : 'primary'
+            currencyCode === MEASURABLE_REWARD_POINT ? 'secondary' : 'primary'
           }
         />
       </View>
       <TransactionList
         transactionsHistoryList={transactionsHistoryList}
-        cardType={cardType}
+        currencyCode={currencyCode}
         navigation={navigation}
         {...props}
       />
