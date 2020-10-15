@@ -178,7 +178,9 @@ const TransactionDetailScreen = ({route}) => {
             coinBackgroundColor={theme.colors.secondary.normal}
             coin={
               <TransactionAmount
-                variant="to"
+                variant={
+                  currencyCode === transactionItem.data.to ? 'to' : 'from'
+                }
                 unitVariant={currencyCode}
                 amount={transactionItem.amount}
               />
