@@ -34,9 +34,8 @@ const RenderTabContent = ({index, ...props}) => {
 const TabSection = () => {
   const theme = useTheme();
   const [activeTab, setActiveTab] = useState(0);
-  const [referralCode] = useState('F83R10'); // TODO: get from api
 
-  const handleTabPress = index => {
+  const handleTabPress = (index) => {
     setActiveTab(index);
   };
 
@@ -61,7 +60,7 @@ const TabSection = () => {
         })}
       </View>
       <View style={contentContainer}>
-        <RenderTabContent index={activeTab} referralCode={referralCode} />
+        <RenderTabContent index={activeTab} />
       </View>
     </>
   );

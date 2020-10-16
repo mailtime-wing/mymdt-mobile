@@ -29,6 +29,7 @@
 		B606DDA52461047100CAA2E6 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606DD93246014BC00CAA2E6 /* Dummy.swift */; };
 		CE570F21104C4C8889BBF5B2 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4356FC964D94E4FBB247D38 /* Inter-Medium.ttf */; };
 		E4A861414D4F4AFCEC62E206 /* libPods-RewardMe-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6668AC177D9D64DC5B43B235 /* libPods-RewardMe-tvOS.a */; };
+		F97D5BE62537FAB40084DC70 /* RewardMe.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = F9C307FD25062FAF00839944 /* RewardMe.entitlements */; };
 		F9AE9D392521ED2900E84BE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9AE9D382521ED2900E84BE2 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -395,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F97D5BE62537FAB40084DC70 /* RewardMe.entitlements in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				F9AE9D392521ED2900E84BE2 /* LaunchScreen.storyboard in Resources */,
 				6150B33F4BDE4FA198E9ABBA /* Inter-Regular.ttf in Resources */,

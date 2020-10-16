@@ -10,6 +10,7 @@ import {PreloadDataProvider} from '@/context/preloadData';
 import {SetupFlowProvider} from '@/context/setupFlow';
 import {NotificationProvider} from '@/context/notification';
 import {ToastProvider} from '@/context/toast';
+import {BranchProvider} from '@/context/branch';
 import NavigationRoot from '@/screens/Root';
 
 function App() {
@@ -23,7 +24,9 @@ function App() {
                 <NotificationProvider>
                   <PreloadDataProvider>
                     <SetupFlowProvider>
-                      <NavigationRoot />
+                      <BranchProvider>
+                        <NavigationRoot />
+                      </BranchProvider>
                     </SetupFlowProvider>
                   </PreloadDataProvider>
                 </NotificationProvider>

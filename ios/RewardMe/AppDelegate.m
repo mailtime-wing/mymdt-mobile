@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+#import <RNBranch/RNBranch.h>
 #import <RNCPushNotificationIOS.h>
 
 #import <UserNotifications/UserNotifications.h>
@@ -34,7 +35,6 @@ static void InitializeFlipper(UIApplication *application) {
   [client start];
 }
 #endif
-
 
 @implementation AppDelegate
 
@@ -71,6 +71,10 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
   #ifdef FB_SONARKIT_ENABLED
     InitializeFlipper(application);
   #endif
+  
+  // Uncomment this line to use the test key instead of the live one.
+  [RNBranch useTestInstance];
+  [RNBranch initSessionWithLaunchOptions:launchOptions isReferrable:YES];
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
@@ -108,7 +112,18 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
    openURL:(NSURL *)url
    options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
+  if ([RNBranch application:application openURL:url options:options])  {
+    return YES;
+  }
+  
   return [RCTLinkingManager application:application openURL:url options:options];
+}
+
+- (BOOL)application:(UIApplication *)application
+    continueUserActivity:(NSUserActivity *)userActivity
+    restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler
+{
+    return [RNBranch continueUserActivity:userActivity];
 }
 
 @end

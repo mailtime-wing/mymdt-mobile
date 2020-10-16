@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {
   TouchableWithoutFeedback,
   Keyboard,
@@ -11,12 +11,13 @@ import {useTheme} from 'emotion-theming';
 
 import Input from '@/components/AppInput';
 import AppButton from '@/components/AppButton';
-import useSetupFlow from '@/hooks/useSetupFlow';
-import useMutationWithAuth from '@/hooks/useMutationWithAuth';
-import {UPDATE_USER_PROFILE_API} from '@/api/data';
 import GenderSelector, {genderOptions} from '@/components/GenderSelector';
 import DateTimePickerInput from '@/components/DateTimePickerInput';
 import AppText from '@/components/AppText2';
+import useSetupFlow from '@/hooks/useSetupFlow';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
+import {BranchContext} from '@/context/branch';
+import {UPDATE_USER_PROFILE_API} from '@/api/data';
 
 import {
   Container,
@@ -28,7 +29,12 @@ import {
   dateContainer,
 } from './style';
 
-const UserProfileForm = ({showDatePicker, handleDatePickerPress, theme}) => {
+const UserProfileForm = ({
+  showDatePicker,
+  handleDatePickerPress,
+  theme,
+  referralCode,
+}) => {
   const {
     handleSubmit,
     values,
@@ -36,6 +42,12 @@ const UserProfileForm = ({showDatePicker, handleDatePickerPress, theme}) => {
     errors,
     isValid,
   } = useFormikContext();
+
+  useEffect(() => {
+    if (referralCode) {
+      setFieldValue('referralCode', referralCode);
+    }
+  }, [setFieldValue, referralCode]);
 
   return (
     <FormContainer>
@@ -85,6 +97,7 @@ const UserProfileScreen = () => {
     UPDATE_USER_PROFILE_API,
   );
   const {navigateByFlow} = useSetupFlow();
+  const {referringParams} = useContext(BranchContext);
 
   const handleDatePickerPress = () => {
     setShowDatePicker(!showDatePicker);
@@ -95,7 +108,7 @@ const UserProfileScreen = () => {
     Keyboard.dismiss();
   };
 
-  const handleSubmitPress = async values => {
+  const handleSubmitPress = async (values) => {
     try {
       await updateUserProfileRequest({
         variables: {
@@ -112,7 +125,7 @@ const UserProfileScreen = () => {
     }
   };
 
-  const validate = values => {
+  const validate = (values) => {
     const errors = {};
 
     if (!values.name) {
@@ -145,14 +158,15 @@ const UserProfileScreen = () => {
                 name: '',
                 gender: genderOptions[0].value,
                 dob: new Date(),
-                referralCode: '',
+                referralCode: referringParams?.referralCode || '',
               }}
-              onSubmit={values => handleSubmitPress(values)}
-              validate={values => validate(values)}>
+              onSubmit={(values) => handleSubmitPress(values)}
+              validate={(values) => validate(values)}>
               <UserProfileForm
                 showDatePicker={showDatePicker}
                 handleDatePickerPress={handleDatePickerPress}
                 theme={theme}
+                referralCode={referringParams?.referralCode || ''}
               />
             </Formik>
           </Container>

@@ -7023,6 +7023,11 @@ react-native-auto-scrolling@^2.0.0:
   resolved "https://registry.yarnpkg.com/react-native-auto-scrolling/-/react-native-auto-scrolling-2.0.0.tgz#febeccc8602cdab9bc5e8f412362415b2679807c"
   integrity sha512-gGrfq2GUZ/c1rmPmAE4mnNq5MuSuW0WgABjUpH+mdqtSePjcp0HsIIfSxfe2Us4QD6sWTn1/FRa3Tq9PTcKAWg==
 
+react-native-branch@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-5.0.0.tgz#9d2102abb3c9a577ce4327e434151ece2b4c7c78"
+  integrity sha512-6VInx3bvWOfEJ916zdA1yzJhcjB26N0oMUJInW3reFIijsk6KOjyM46UH3/MixdNUOV/nZn1JoRZM+wpLffDWQ==
+
 react-native-carrier-info@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/react-native-carrier-info/-/react-native-carrier-info-1.1.2.tgz#4444f7586994acb2f1d78005a2a48635815bae53"

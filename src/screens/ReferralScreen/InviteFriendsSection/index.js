@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, TextInput} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
@@ -7,6 +7,7 @@ import Clipboard from '@react-native-community/clipboard';
 import AppButton from '@/components/AppButton';
 import ProgressBar from '@/components/ProgressBar';
 import AppText from '@/components/AppText2';
+import {BranchContext} from '@/context/branch';
 import {
   progressBarContainer,
   referralContainer,
@@ -19,11 +20,28 @@ import {
   textInputContainer,
 } from './style';
 
-const InviteFriendSection = ({referralCode}) => {
+const InviteFriendSection = () => {
   const theme = useTheme();
+  const [referralUrl, setReferralUrl] = useState('');
+  const {branchUniversalObject} = useContext(BranchContext);
+
+  useEffect(() => {
+    const generate = async () => {
+      const {url} = await branchUniversalObject.generateShortUrl({
+        feature: 'referral',
+        channel: 'RewardMe',
+      });
+
+      setReferralUrl(url);
+    };
+
+    if (branchUniversalObject) {
+      generate();
+    }
+  }, [branchUniversalObject]);
 
   const copyToClipboard = () => {
-    Clipboard.setString(referralCode);
+    Clipboard.setString(referralUrl);
   };
 
   return (
@@ -57,7 +75,7 @@ const InviteFriendSection = ({referralCode}) => {
         <View style={inputContainer}>
           <View style={textInputContainer(theme)}>
             <TextInput
-              value={referralCode}
+              value={referralUrl}
               style={textInput(theme)}
               editable={false}
             />

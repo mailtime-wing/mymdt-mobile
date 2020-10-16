@@ -113,6 +113,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>branch_app_domain</key>
+	<string>e6lxo.app.link</string>
+	<key>branch_key</key>
+	<string>key_live_dpS8QTwWJmi2ZmSPoXWF3jkgzChYC9pz</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
