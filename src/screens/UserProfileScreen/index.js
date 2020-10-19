@@ -69,12 +69,6 @@ const UserProfileForm = ({
       />
       <Input
         label={<FormattedMessage id="referral_code" />}
-        remark={
-          <FormattedMessage
-            id="edit_prefernece_afterward"
-            defaultMessage="You can fill in later in profile page"
-          />
-        }
         name="referralCode"
       />
       <AppButton

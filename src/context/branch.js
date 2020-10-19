@@ -1,8 +1,9 @@
 import React, {createContext, useEffect, useReducer} from 'react';
 import branch from 'react-native-branch';
+import {useIntl} from 'react-intl';
 
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
-import {GET_USER_ID} from '@/api/data';
+import {GET_USER_REFERRAL_CODE} from '@/api/data';
 
 const initialContextValue = {
   branchUniversalObject: null,
@@ -32,10 +33,15 @@ const reducer = (state, action) => {
 
 export const BranchProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialContextValue);
+  const intl = useIntl();
 
-  const {data: getUserIdData} = useQueryWithAuth(GET_USER_ID);
-  const userId = getUserIdData?.userProfile?.id;
-  const referralCode = 'F83R10'; // TODO: get from api
+  const {data, error: requestError} = useQueryWithAuth(GET_USER_REFERRAL_CODE);
+  const userId = data?.userProfile?.id;
+  const referralCode = data?.userProfile?.referralCode;
+
+  if (requestError) {
+    // TODO: should we retry?
+  }
 
   useEffect(() => {
     const generate = async () => {
@@ -44,10 +50,14 @@ export const BranchProvider = ({children}) => {
         const branchUniversalObject = await branch.createBranchUniversalObject(
           userId,
           {
-            title: 'Cool Content!',
-            contentDescription: 'Cool Content Description',
+            title: intl.formatMessage({
+              id: 'joinRewardMe',
+            }),
+            contentDescription: intl.formatMessage({
+              id: 'joinRewardMeWithThisLink',
+            }),
+            contentImageUrl: 'https://files.reward.me/app_icon_180.png',
             contentMetadata: {
-              ratingAverage: 4.2,
               customMetadata: {
                 referralCode,
               },
@@ -58,20 +68,20 @@ export const BranchProvider = ({children}) => {
           type: UPDATE_BRANCH_UNIVERSAL_OBJECT,
           payload: branchUniversalObject,
         });
-      } catch (error) {
+      } catch {
         // TODO
       }
     };
 
-    if (userId) {
+    if (userId && referralCode && !state.branchUniversalObject) {
       generate();
     }
-  }, [userId]);
+  }, [userId, referralCode, state.branchUniversalObject, intl]);
 
   useEffect(() => {
     branch.subscribe(({error, params, uri}) => {
       if (error) {
-        console.error('Error from Branch: ' + error);
+        // TODO: nothing we can do?
         return;
       }
 

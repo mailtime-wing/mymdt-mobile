@@ -10,7 +10,7 @@
   "system_default": "系统默认",
   "welcome_to_reward_me": "WELCOME to RewardMe",
   "enter_verification_code": "Enter your verification code",
-  
+
   "valid_until": "Valid until {date}",
   "cashback_type": "Cashback type",
   "referral": "Referral",
@@ -26,7 +26,7 @@
   "requirements": "Requirements",
   "special_offers_from_brands": "Special offers from {number_of_brands} brands",
   "additional_percentage_cashback": "Additional {percentage} cashback",
-  
+
   "browse": "发现",
   "browse_details": "限时活动 / 任务 / 分享",
   "bonus": "任务",
@@ -209,6 +209,8 @@
   "your_credentials_will_never_be": "Your credentials will never be made accessible to RewardMe",
   "this_email_is_already_bound": "该邮箱已绑定帐号。",
   "we_partner_with_credigo": "We partner with CrediGO to securely link your card",
+  "joinRewardMe": "Join RewardMe!",
+  "joinRewardMeWithThisLink": "Join RewardMe with this link and earn reward immediately!",
 
   "earned_in_past_7_days": "Earned {amount} in past 7 days",
   "earned_in_total": "Earned {amount} in total",

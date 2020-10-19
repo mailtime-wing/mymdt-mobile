@@ -443,3 +443,12 @@ export const UPDATE_NOTIFICATION = gql`
     }
   }
 `;
+
+export const GET_USER_REFERRAL_CODE = gql`
+  query {
+    userProfile {
+      id
+      referralCode
+    }
+  }
+`;
