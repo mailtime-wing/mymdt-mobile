@@ -1,9 +1,10 @@
 import React, {createContext, useContext, useState, useMemo} from 'react';
-import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {Graph} from '@dagrejs/graphlib';
 
 import {NotificationContext} from '@/context/notification';
 import {PreloadDataContext} from '@/context/preloadData';
+import {Platform} from 'react-native';
+import notificationStatus from '@/enum/notificationStatus';
 
 const setupFlowContextInitialValue = {
   validScreenNames: {},
@@ -92,8 +93,8 @@ export const SetupFlowProvider = ({children}) => {
       result.sign_up_reward = true;
     }
     if (
-      permissions.authorizationStatus !==
-      PushNotificationIOS.AuthorizationStatus.UNAuthorizationStatusNotDetermined
+      permissions.authorizationStatus !== notificationStatus.NotDetermined ||
+      Platform.OS !== 'ios'
     ) {
       result.notification_permission = true;
     }
@@ -103,7 +104,7 @@ export const SetupFlowProvider = ({children}) => {
   /** @type {Object.<string, boolean>} */
   const validScreenNames = useMemo(() => {
     const result = {};
-    graph.nodes().forEach(nodeName => {
+    graph.nodes().forEach((nodeName) => {
       if (!invalidScreenNames[nodeName]) {
         result[nodeName] = true;
       }

@@ -31,7 +31,7 @@ const SettingScreen = () => {
   );
   const {themeList, themeMode, changeThemeMode} = useContext(ThemeContext);
   const activeThemeIndex = themeList.indexOf(
-    themeList.find(t => t.value === themeMode),
+    themeList.find((t) => t.value === themeMode),
   );
 
   const {data} = useQueryWithAuth(IS_NOTIFICATION_ENABLED);
@@ -72,14 +72,14 @@ const SettingScreen = () => {
     });
   };
 
-  const handlePopupCallback = cb => {
+  const handlePopupCallback = (cb) => {
     if (cb === 'OK') {
       Linking.openSettings();
     }
     setShowPopup(false);
   };
 
-  const handleLanguageOptionPress = index => {
+  const handleLanguageOptionPress = (index) => {
     saveLanguage(languageList[index]);
   };
 
@@ -87,7 +87,7 @@ const SettingScreen = () => {
     setShowLanguageBottomSheet(false);
   };
 
-  const handleThemeModeOptionPress = index => {
+  const handleThemeModeOptionPress = (index) => {
     changeThemeMode(themeList[index].value);
   };
 
@@ -122,7 +122,7 @@ const SettingScreen = () => {
         <ListOption
           key="Theme"
           label={<FormattedMessage id="theme" />}
-          value={themeList.find(t => t.value === themeMode).label}
+          value={themeList.find((t) => t.value === themeMode).label}
           onPress={() => setShowThemeModeBottomSheet(true)}
         />
         <AppText variant="label" style={appVersionStyle(theme)}>
@@ -130,9 +130,7 @@ const SettingScreen = () => {
             id="app_version"
             defaultMessage="App Version: {version}"
             values={{
-              version: `${VersionNumber.appVersion}-${
-                VersionNumber.buildVersion
-              }`,
+              version: `${VersionNumber.appVersion}-${VersionNumber.buildVersion}`,
             }}
           />
         </AppText>

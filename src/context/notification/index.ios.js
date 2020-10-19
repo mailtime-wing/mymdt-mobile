@@ -6,21 +6,19 @@ import React, {
   useCallback,
   useContext,
 } from 'react';
-import {Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {getUniqueId} from 'react-native-device-info';
 
 import {AuthContext} from '@/context/auth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {REGISTER_DEVICE} from '@/api/auth';
+import notificationStatus from '@/enum/notificationStatus';
 
 const INITIAL_PERMISSIONS = {
   alert: false,
   badge: false,
   sound: false,
-  // TODO: check again after https://github.com/react-native-community/push-notification-ios/pull/185 is merged
-  authorizationStatus:
-    PushNotificationIOS.AuthorizationStatus.UNAuthorizationStatusNotDetermined,
+  authorizationStatus: notificationStatus.NotDetermined,
 };
 
 const UPDATE_PERMISSION = 'updatePermission';
@@ -35,7 +33,6 @@ const initialState = {
 const initialContextValue = {
   state: initialState,
   checkPermissions: () => Promise.resolve(INITIAL_PERMISSIONS),
-  notify: () => {},
   request: () => Promise.resolve(),
 };
 export const NotificationContext = createContext(initialContextValue);
@@ -57,8 +54,6 @@ const reducer = (state, action) => {
   }
 };
 
-const IOS = Platform.OS === 'ios';
-
 export const NotificationProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {authToken} = useContext(AuthContext);
@@ -67,11 +62,9 @@ export const NotificationProvider = ({children}) => {
   const checkPermissions = useCallback(async () => {
     try {
       let permissions;
-      if (IOS) {
-        permissions = await new Promise(resolve =>
-          PushNotificationIOS.checkPermissions(resolve),
-        );
-      }
+      permissions = await new Promise((resolve) =>
+        PushNotificationIOS.checkPermissions(resolve),
+      );
 
       if (!permissions) {
         dispatch({type: UPDATE_PERMISSION, payload: initialState.permissions});
@@ -87,22 +80,9 @@ export const NotificationProvider = ({children}) => {
     }
   }, []);
 
-  const notify = useCallback(details => {
-    try {
-      if (IOS) {
-        PushNotificationIOS.presentLocalNotification(details);
-      }
-    } catch (e) {
-      console.error('error send local noti ios');
-    }
-  }, []);
-
   const request = useCallback(async () => {
     try {
-      if (IOS) {
-        return await PushNotificationIOS.requestPermissions();
-      }
-      return {};
+      return await PushNotificationIOS.requestPermissions();
     } catch (e) {
       console.error('error request permission ios');
       return {};
@@ -112,11 +92,10 @@ export const NotificationProvider = ({children}) => {
   const notificationContext = useMemo(
     () => ({
       checkPermissions,
-      notify,
       request,
       state,
     }),
-    [checkPermissions, notify, request, state],
+    [checkPermissions, request, state],
   );
 
   useEffect(() => {
@@ -124,9 +103,7 @@ export const NotificationProvider = ({children}) => {
       const permissions = await checkPermissions();
       // always request to trigger `register` event for device token
       if (
-        permissions.authorizationStatus !==
-        PushNotificationIOS.AuthorizationStatus
-          .UNAuthorizationStatusNotDetermined
+        permissions.authorizationStatus !== notificationStatus.NotDetermined
       ) {
         request();
       }
@@ -136,7 +113,7 @@ export const NotificationProvider = ({children}) => {
   }, [checkPermissions, request]);
 
   useEffect(() => {
-    const handler = deviceToken => {
+    const handler = (deviceToken) => {
       dispatch({type: UPDATE_DEVICE_TOKEN, payload: deviceToken});
     };
 
@@ -149,11 +126,10 @@ export const NotificationProvider = ({children}) => {
   useEffect(() => {
     const _registerDevice = async () => {
       try {
-        const platform = Platform.OS === 'ios' ? 'apns' : '';
         await registerDevice({
           variables: {
             deviceId: state.deviceId,
-            platform,
+            platform: 'apns',
             pushToken: state.deviceToken,
           },
         });
