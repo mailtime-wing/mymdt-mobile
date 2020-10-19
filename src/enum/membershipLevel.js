@@ -1,8 +1,8 @@
 export default {
-  BASIC: 0,
-  SILVER: 1,
-  GOLD: 2,
-  PLATINUM: 3,
-  DIAMOND: 4,
-  SPECIAL: 5,
+  NEWBIE: 0,
+  STARTER: 1,
+  EXTRA: 2,
+  ELITE: 3,
+  INFINITE: 4,
+  INFINITE_PRIVILEGE: 5,
 };

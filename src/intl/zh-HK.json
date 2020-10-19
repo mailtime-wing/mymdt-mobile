@@ -72,12 +72,12 @@
   "onboarding03_title": "A new way to get cash back",
   "onboarding03_detail": "Gift cards, cash, or crypto, it’s your call.",
 
-  "membership_level_0": "普通用戶",
-  "membership_level_1": "白銀用戶",
-  "membership_level_2": "金鑽用戶",
-  "membership_level_3": "白金用戶",
-  "membership_level_4": "鑽石用戶",
-  "membership_level_5": "特級用戶",
+  "membership_level_0": "Newbie",
+  "membership_level_1": "Starter",
+  "membership_level_2": "Extra",
+  "membership_level_3": "Elite",
+  "membership_level_4": "Infinite",
+  "membership_level_5": "Infinite Privilege",
 
   "offers_selected": "{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",
   "more_offers_selected": "MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED",

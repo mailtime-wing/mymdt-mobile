@@ -7,28 +7,28 @@ import membershipLevel from '@/enum/membershipLevel';
 
 const levelCardList = [
   {
-    level: membershipLevel.BASIC,
-    cardSrc: require('@/assets/basic_membership_card.png'),
+    level: membershipLevel.NEWBIE,
+    cardSrc: require('@/assets/starter_card.png'),
   },
   {
-    level: membershipLevel.SILVER,
-    cardSrc: require('@/assets/silver_membership_card.png'),
+    level: membershipLevel.STARTER,
+    cardSrc: require('@/assets/starter_card.png'),
   },
   {
-    level: membershipLevel.GOLD,
-    cardSrc: require('@/assets/gold_membership_card.png'),
+    level: membershipLevel.EXTRA,
+    cardSrc: require('@/assets/extra_card.png'),
   },
   {
-    level: membershipLevel.PLATINUM,
-    cardSrc: require('@/assets/platinum_membership_card.png'),
+    level: membershipLevel.ELITE,
+    cardSrc: require('@/assets/elite_card.png'),
   },
   {
-    level: membershipLevel.DIAMOND,
-    cardSrc: require('@/assets/diamond_membership_card.png'),
+    level: membershipLevel.INFINITE,
+    cardSrc: require('@/assets/infinite_card.png'),
   },
   {
-    level: membershipLevel.SPECIAL,
-    cardSrc: require('@/assets/special_membership_card.png'),
+    level: membershipLevel.INFINITE_PRIVILEGE,
+    cardSrc: require('@/assets/infinite_privilege_card.png'),
   },
 ];
 
@@ -36,7 +36,8 @@ const MembershipCard = ({userLevel, style}) => {
   return (
     <Image
       source={
-        levelCardList.find(levelCard => userLevel === levelCard.level)?.cardSrc
+        levelCardList.find((levelCard) => userLevel === levelCard.level)
+          ?.cardSrc
       }
       style={[image, style]}
     />
