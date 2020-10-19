@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import {FormattedNumber} from 'react-intl';
 import AppText from '@/components/AppText2';
@@ -16,21 +16,18 @@ import {useTheme} from 'emotion-theming';
  *
  * @type {import('react').FunctionComponent<Props>}
  */
-const TransactionAmount = ({amount, variant, unitVariant, style, ...props}) => {
+const TransactionAmount = ({amount, variant, unitVariant, style}) => {
   const theme = useTheme();
-  const [unit, setUnit] = useState('');
-
-  useEffect(() => {
-    if (unitVariant === 'MDT') {
-      setUnit('MDT');
-    }
-    if (unitVariant === 'MRP') {
-      setUnit('P');
-    }
-    if (unitVariant === 'newToken') {
-      setUnit('NT');
-    }
-  }, [unitVariant]);
+  let unit = '';
+  if (unitVariant === 'MDT') {
+    unit = 'MDT';
+  }
+  if (unitVariant === 'MRP') {
+    unit = 'P';
+  }
+  if (unitVariant === 'newToken') {
+    unit = 'NT';
+  }
 
   return (
     <View style={[container, style]}>
