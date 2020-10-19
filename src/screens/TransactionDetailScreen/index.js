@@ -3,11 +3,11 @@ import {View, ScrollView} from 'react-native';
 import ModalContainer from '@/components/ModalContainer';
 import AppText from '@/components/AppText2';
 import ConversionRate from '@/components/ConversionRate';
-import formatToTransactionTime from '@/utils/formatToTransactionTime';
 import TransactionItem from '@/components/TransactionItem';
 import TransactitonType from '@/enum/transactionsType';
 import ConvertIcon from '@/assets/convert_icon.svg';
 import TransactionAmount from '@/components/TransactionAmount';
+import FormattedTransactionDate from '@/components/FormattedTransactionDate';
 
 import {
   section,
@@ -52,7 +52,7 @@ const RenderTransationDetail = ({transactionItem}) => {
               Redeem Time
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              {formatToTransactionTime(transactionTime)}
+              <FormattedTransactionDate dateTime={transactionTime} />
             </AppText>
           </View>
         </>
@@ -80,7 +80,7 @@ const RenderTransationDetail = ({transactionItem}) => {
               Conversion Time
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              {formatToTransactionTime(transactionTime)}
+              <FormattedTransactionDate dateTime={transactionTime} />
             </AppText>
           </View>
         </>
@@ -125,7 +125,7 @@ const RenderTransationDetail = ({transactionItem}) => {
               Receive Time
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              {formatToTransactionTime(transactionTime)}
+              <FormattedTransactionDate dateTime={transactionTime} />
             </AppText>
           </View>
           <View style={itemContainer}>
@@ -179,7 +179,7 @@ const TransactionDetailScreen = ({route}) => {
             coin={
               <TransactionAmount
                 variant={
-                  currencyCode === transactionItem.data.to ? 'to' : 'from'
+                  currencyCode === transactionItem.data.from ? 'from' : 'to'
                 }
                 unitVariant={currencyCode}
                 amount={transactionItem.amount}

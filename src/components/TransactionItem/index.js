@@ -1,9 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
-import formatToTransactionTime from '@/utils/formatToTransactionTime';
 
 import AppText from '@/components/AppText2';
 import AppIcon from '@/components/AppIcon';
+import FormattedTransactionDate from '@/components/FormattedTransactionDate';
 
 import {nameStyle, dateStyle, transaction, container} from './style';
 import {useTheme} from 'emotion-theming';
@@ -32,7 +32,7 @@ const TransactionItem = ({
           {title}
         </AppText>
         <AppText variant="caption" style={dateStyle(theme)}>
-          {formatToTransactionTime(date)}
+          <FormattedTransactionDate dateTime={date} />
         </AppText>
       </View>
       {coin}
