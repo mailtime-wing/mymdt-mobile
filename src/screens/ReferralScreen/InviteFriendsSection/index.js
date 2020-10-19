@@ -1,13 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {View, TextInput} from 'react-native';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {useTheme} from 'emotion-theming';
-import Clipboard from '@react-native-community/clipboard';
 
 import AppButton from '@/components/AppButton';
 import ProgressBar from '@/components/ProgressBar';
 import AppText from '@/components/AppText2';
 import {BranchContext} from '@/context/branch';
+import ShareIcon from '@/assets/icon_share.svg';
 import {
   progressBarContainer,
   referralContainer,
@@ -22,6 +22,7 @@ import {
 
 const InviteFriendSection = () => {
   const theme = useTheme();
+  const intl = useIntl();
   const [referralUrl, setReferralUrl] = useState('');
   const {branchUniversalObject} = useContext(BranchContext);
 
@@ -40,8 +41,22 @@ const InviteFriendSection = () => {
     }
   }, [branchUniversalObject]);
 
-  const copyToClipboard = () => {
-    Clipboard.setString(referralUrl);
+  const handleSharePress = async () => {
+    if (branchUniversalObject) {
+      let shareOptions = {
+        messageHeader: intl.formatMessage({
+          id: 'joinRewardMe',
+        }),
+        messageBody: intl.formatMessage({
+          id: 'joinRewardMeWithThisLink',
+        }),
+      };
+      let linkProperties = {
+        feature: 'referral',
+        channel: 'RewardMe',
+      };
+      await branchUniversalObject.showShareSheet(shareOptions, linkProperties);
+    }
   };
 
   return (
@@ -82,11 +97,12 @@ const InviteFriendSection = () => {
           </View>
         </View>
         <AppButton
-          onPress={copyToClipboard}
-          text="COPY"
+          onPress={handleSharePress}
+          text="SHARE"
           variant="filled"
           sizeVariant="normal"
           colorVariant="secondary"
+          svgIcon={ShareIcon}
         />
       </View>
     </>

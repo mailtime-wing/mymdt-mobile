@@ -51,10 +51,10 @@ export const BranchProvider = ({children}) => {
           userId,
           {
             title: intl.formatMessage({
-              id: 'joinRewardMe',
+              id: 'referralOgTitle',
             }),
             contentDescription: intl.formatMessage({
-              id: 'joinRewardMeWithThisLink',
+              id: 'referralOgDescription',
             }),
             contentImageUrl: 'https://files.reward.me/app_icon_180.png',
             contentMetadata: {
