@@ -1,8 +1,13 @@
-import styled from '@emotion/native';
+import {css} from '@emotion/native';
 
-export const Container = styled.View`
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  background-color: ${props => props.theme.colors.background1};
+export const imageStyle = css`
+  position: absolute;
+  align-self: center;
+  margin-top: 80px;
+  z-index: 1;
+`;
+
+export const upgradeSection = css`
+  margin-top: 130px;
+  padding-top: 90px;
 `;

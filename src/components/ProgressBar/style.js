@@ -2,6 +2,7 @@ import {css} from '@emotion/native';
 
 export const container = css`
   padding: 8px 0;
+  flex: 1;
 `;
 
 export const detailRowContainer = css`
@@ -11,8 +12,8 @@ export const detailRowContainer = css`
 `;
 
 export const progressBar = css`
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 `;
 
 export const progressLabelContainer = css`
