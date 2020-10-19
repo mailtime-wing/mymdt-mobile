@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RewardMe</string>
+    <string name="default_notification_channel_id">rewardme</string>
+    <string name="default_notification_channel_name">RewardMe</string>
 </resources>
