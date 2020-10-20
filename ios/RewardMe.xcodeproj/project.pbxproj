@@ -31,6 +31,8 @@
 		E4A861414D4F4AFCEC62E206 /* libPods-RewardMe-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6668AC177D9D64DC5B43B235 /* libPods-RewardMe-tvOS.a */; };
 		F97D5BE62537FAB40084DC70 /* RewardMe.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = F9C307FD25062FAF00839944 /* RewardMe.entitlements */; };
 		F9AE9D392521ED2900E84BE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9AE9D382521ED2900E84BE2 /* LaunchScreen.storyboard */; };
+		F9EB711B253EE0E8002D8825 /* branch.debug.json in Resources */ = {isa = PBXBuildFile; fileRef = F9EB7119253EE0E8002D8825 /* branch.debug.json */; };
+		F9EB711C253EE0E8002D8825 /* branch.json in Resources */ = {isa = PBXBuildFile; fileRef = F9EB711A253EE0E8002D8825 /* branch.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F9AE9D382521ED2900E84BE2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F9C307FD25062FAF00839944 /* RewardMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RewardMe.entitlements; path = RewardMe/RewardMe.entitlements; sourceTree = "<group>"; };
+		F9EB7119253EE0E8002D8825 /* branch.debug.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = branch.debug.json; path = ../branch.debug.json; sourceTree = "<group>"; };
+		F9EB711A253EE0E8002D8825 /* branch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = branch.json; path = ../branch.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +198,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F9EB7119253EE0E8002D8825 /* branch.debug.json */,
+				F9EB711A253EE0E8002D8825 /* branch.json */,
 				13B07FAE1A68108700A75B9A /* RewardMe */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* RewardMeTests */,
@@ -404,6 +410,8 @@
 				504367D6D25C442BA4E156EF /* Neo Sans Pro Light.ttf in Resources */,
 				904F8359FA26440899AF6A98 /* Neo Sans Pro Medium.ttf in Resources */,
 				CE570F21104C4C8889BBF5B2 /* Inter-Medium.ttf in Resources */,
+				F9EB711B253EE0E8002D8825 /* branch.debug.json in Resources */,
+				F9EB711C253EE0E8002D8825 /* branch.json in Resources */,
 				91F0737104024F06A19E21C0 /* Inter-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

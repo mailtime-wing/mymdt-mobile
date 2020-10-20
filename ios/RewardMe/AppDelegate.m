@@ -72,8 +72,6 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
     InitializeFlipper(application);
   #endif
   
-  // Uncomment this line to use the test key instead of the live one.
-  [RNBranch useTestInstance];
   [RNBranch initSessionWithLaunchOptions:launchOptions isReferrable:YES];
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
