@@ -6,6 +6,7 @@ import React, {
   useCallback,
   useContext,
 } from 'react';
+import Config from 'react-native-config';
 import MailtimePush from 'react-native-mailtime-push';
 import {getUniqueId} from 'react-native-device-info';
 
@@ -27,10 +28,12 @@ const INITIAL_PERMISSIONS = {
 
 const UPDATE_PERMISSION = 'updatePermission';
 const UPDATE_DEVICE_TOKEN = 'updateDeviceToken';
+const UPDATE_DEVICE_PLATFORM = 'updateDevicePlatform';
 const initialState = {
   permissions: INITIAL_PERMISSIONS,
   deviceId: getUniqueId(),
   deviceToken: '',
+  platform: '',
 };
 
 const initialContextValue = {
@@ -52,6 +55,11 @@ const reducer = (state, action) => {
         ...state,
         deviceToken: action.payload,
       };
+    case UPDATE_DEVICE_PLATFORM:
+      return {
+        ...state,
+        platform: action.payload,
+      };
     default:
       break;
   }
@@ -65,8 +73,24 @@ export const NotificationProvider = ({children}) => {
   const userId = data?.userProfile?.id;
 
   useEffect(() => {
-    MailtimePush.init('rewardme', 'RewardMe');
-  }, []);
+    MailtimePush.init(
+      Config.DEFAULT_NOTIFICATION_CHANNEL_ID,
+      Config.DEFAULT_NOTIFICATION_CHANNEL_NAME,
+    );
+
+    const getPlatformAndToken = async () => {
+      try {
+        const mtPush = await MailtimePush.register(userId);
+        dispatch({type: UPDATE_DEVICE_TOKEN, payload: mtPush.token});
+        dispatch({type: UPDATE_DEVICE_PLATFORM, payload: mtPush.platform});
+      } catch (e) {
+        console.error('error getPlatformAndToken', e);
+      }
+    };
+    if (state.permissions.alert && userId) {
+      getPlatformAndToken();
+    }
+  }, [state.permissions.alert, userId]);
 
   const checkPermissions = useCallback(async () => {
     const deniedPermission = {
@@ -85,10 +109,11 @@ export const NotificationProvider = ({children}) => {
         return deniedPermission;
       }
 
-      if (!state.deviceToken) {
-        // android: update device token once permissions is authorized
-        const mtPush = await MailtimePush.register(userId);
-        dispatch({type: UPDATE_DEVICE_TOKEN, payload: mtPush.token});
+      if (permissionStatus === 'authorized') {
+        dispatch({
+          type: UPDATE_PERMISSION,
+          payload: initialState.permissions,
+        });
       }
       return initialState.permissions;
     } catch (e) {
@@ -96,7 +121,7 @@ export const NotificationProvider = ({children}) => {
       dispatch({type: UPDATE_PERMISSION, payload: deniedPermission});
       return deniedPermission;
     }
-  }, [userId, state.deviceToken]);
+  }, []);
 
   const request = useCallback(async () => {
     try {
@@ -123,23 +148,29 @@ export const NotificationProvider = ({children}) => {
   useEffect(() => {
     const _registerDevice = async () => {
       try {
-        const mtPush = await MailtimePush.register(userId);
         await registerDevice({
           variables: {
             deviceId: state.deviceId,
-            platform: mtPush.platform,
-            pushToken: mtPush.token,
+            platform: state.platform,
+            pushToken: state.deviceToken,
           },
         });
       } catch (e) {
+        console.error('fail to register device', e);
         // TODO: what to do if it fails?
       }
     };
 
-    if (state.deviceToken && authToken && userId) {
+    if (state.deviceToken && state.platform && authToken) {
       _registerDevice();
     }
-  }, [authToken, registerDevice, state.deviceId, state.deviceToken, userId]);
+  }, [
+    authToken,
+    registerDevice,
+    state.deviceId,
+    state.deviceToken,
+    state.platform,
+  ]);
 
   return (
     <NotificationContext.Provider value={notificationContext}>
