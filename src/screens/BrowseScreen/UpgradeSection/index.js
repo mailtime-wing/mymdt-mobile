@@ -17,7 +17,7 @@ import AppText from '@/components/AppText2';
 import ProgressBar from '@/components/ProgressBar';
 import AppButton from '@/components/AppButton';
 
-const UpgradeSection = ({userNextLevel, navigation, style}) => {
+const UpgradeSection = ({userNextLevel, style}) => {
   const theme = useTheme();
   const canUpgrade = false; // from api later
   // TODO: handle update ui when have api

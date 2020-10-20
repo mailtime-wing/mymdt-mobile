@@ -1,0 +1,12 @@
+<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g style="mix-blend-mode:multiply">
+<path d="M21.5 4H3.5C2.39543 4 1.5 4.89543 1.5 6V18C1.5 19.1046 2.39543 20 3.5 20H21.5C22.6046 20 23.5 19.1046 23.5 18V6C23.5 4.89543 22.6046 4 21.5 4Z" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<path d="M1.5 16H23.5"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<rect x="5" y="9.5" width="3" height="2" rx="0.5" />
+<rect x="5" y="9.5" width="3" height="2" rx="0.5" />
+</g>
+</svg>
