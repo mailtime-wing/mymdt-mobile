@@ -52,7 +52,7 @@ const RenderTransationDetail = ({transactionItem}) => {
               Redeem Time
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              <FormattedTransactionDate dateTime={transactionTime} />
+              <FormattedTransactionDate value={transactionTime} />
             </AppText>
           </View>
         </>
@@ -80,7 +80,7 @@ const RenderTransationDetail = ({transactionItem}) => {
               Conversion Time
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              <FormattedTransactionDate dateTime={transactionTime} />
+              <FormattedTransactionDate value={transactionTime} />
             </AppText>
           </View>
         </>
@@ -125,7 +125,7 @@ const RenderTransationDetail = ({transactionItem}) => {
               Receive Time
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              <FormattedTransactionDate dateTime={transactionTime} />
+              <FormattedTransactionDate value={transactionTime} />
             </AppText>
           </View>
           <View style={itemContainer}>

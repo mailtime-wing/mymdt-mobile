@@ -32,7 +32,7 @@ const TransactionItem = ({
           {title}
         </AppText>
         <AppText variant="caption" style={dateStyle(theme)}>
-          <FormattedTransactionDate dateTime={date} />
+          <FormattedTransactionDate value={date} />
         </AppText>
       </View>
       {coin}

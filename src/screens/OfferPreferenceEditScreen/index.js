@@ -132,7 +132,7 @@ const OfferPreferenceEditScreen = ({navigation}) => {
               <FormattedMessage
                 id="edited_in_30_days"
                 values={{
-                  date: <FormattedTransactionDate dateTime={canEditDate} />,
+                  date: <FormattedTransactionDate value={canEditDate} />,
                 }}
               />
             }
