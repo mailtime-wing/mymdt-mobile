@@ -111,7 +111,7 @@ export const darkTheme = {
     body: 'Inter',
     heading: Platform.OS === 'ios' ? 'Neo Sans Pro' : 'Neo Sans Pro Medium',
   },
-  fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36, 48],
+  fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36, 48, 11],
   fontWeights: [400, 500, 600, 700],
   lineHeights: {},
 };
@@ -216,7 +216,7 @@ export const lightTheme = {
     body: 'Inter',
     heading: Platform.OS === 'ios' ? 'Neo Sans Pro' : 'Neo Sans Pro Medium',
   },
-  fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36, 48],
+  fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36, 48, 11],
   fontWeights: [400, 500, 600, 700],
   lineHeights: {},
 };
@@ -304,16 +304,25 @@ lightTheme.fonts.heading4 = lightTheme.fonts.heading;
 lightTheme.fonts.heading5 = lightTheme.fonts.heading;
 lightTheme.fonts.subTitle1 = lightTheme.fonts.heading;
 lightTheme.fonts.subTitle2 = lightTheme.fonts.heading;
+lightTheme.fonts.subTitle3 = lightTheme.fonts.heading;
 lightTheme.fonts.body1 = lightTheme.fonts.body;
 lightTheme.fonts.body2 = lightTheme.fonts.body;
 lightTheme.fonts.caption = lightTheme.fonts.body;
+lightTheme.fonts.captionNew = lightTheme.fonts.body;
 lightTheme.fonts.value = lightTheme.fonts.body;
 lightTheme.fonts.button = lightTheme.fonts.body;
-lightTheme.fonts.label = lightTheme.fonts.body;
+lightTheme.fonts.label = lightTheme.fonts.heading;
 lightTheme.fonts.overline = lightTheme.fonts.body;
 lightTheme.fonts.initials1 = lightTheme.fonts.body;
 lightTheme.fonts.initials2 = lightTheme.fonts.body;
 lightTheme.fonts.initials3 = lightTheme.fonts.body;
+lightTheme.fonts.unit11 = lightTheme.fonts.body;
+lightTheme.fonts.unit16 = lightTheme.fonts.body;
+lightTheme.fonts.digit12mono = lightTheme.fonts.body;
+lightTheme.fonts.digit16mono = lightTheme.fonts.body;
+lightTheme.fonts.digit36 = lightTheme.fonts.body;
+lightTheme.fonts.digit36mono = lightTheme.fonts.body;
+
 lightTheme.fontSizes.pageTitle = lightTheme.fontSizes[8];
 lightTheme.fontSizes.heading1 = lightTheme.fontSizes[8];
 lightTheme.fontSizes.heading2 = lightTheme.fontSizes[7];
@@ -322,9 +331,11 @@ lightTheme.fontSizes.heading4 = lightTheme.fontSizes[5];
 lightTheme.fontSizes.heading5 = lightTheme.fontSizes[4];
 lightTheme.fontSizes.subTitle1 = lightTheme.fontSizes[4];
 lightTheme.fontSizes.subTitle2 = lightTheme.fontSizes[3];
+lightTheme.fontSizes.subTitle3 = lightTheme.fontSizes[2];
 lightTheme.fontSizes.body1 = lightTheme.fontSizes[3];
 lightTheme.fontSizes.body2 = lightTheme.fontSizes[2];
 lightTheme.fontSizes.caption = lightTheme.fontSizes[1];
+lightTheme.fontSizes.captionNew = lightTheme.fontSizes[1];
 lightTheme.fontSizes.value = lightTheme.fontSizes[3];
 lightTheme.fontSizes.button = lightTheme.fontSizes[2];
 lightTheme.fontSizes.label = lightTheme.fontSizes[1];
@@ -332,6 +343,13 @@ lightTheme.fontSizes.overline = lightTheme.fontSizes[0];
 lightTheme.fontSizes.initials1 = lightTheme.fontSizes[6];
 lightTheme.fontSizes.initials2 = lightTheme.fontSizes[8];
 lightTheme.fontSizes.initials3 = lightTheme.fontSizes[9];
+lightTheme.fontSizes.unit11 = lightTheme.fontSizes[10];
+lightTheme.fontSizes.unit16 = lightTheme.fontSizes[3];
+lightTheme.fontSizes.digit12mono = lightTheme.fontSizes[1];
+lightTheme.fontSizes.digit16mono = lightTheme.fontSizes[3];
+lightTheme.fontSizes.digit36 = lightTheme.fontSizes[8];
+lightTheme.fontSizes.digit36mono = lightTheme.fontSizes[8];
+
 lightTheme.fontWeights.pageTitle = lightTheme.fontWeights[1];
 lightTheme.fontWeights.heading1 = lightTheme.fontWeights[1];
 lightTheme.fontWeights.heading2 = lightTheme.fontWeights[1];
@@ -340,9 +358,11 @@ lightTheme.fontWeights.heading4 = lightTheme.fontWeights[1];
 lightTheme.fontWeights.heading5 = lightTheme.fontWeights[1];
 lightTheme.fontWeights.subTitle1 = lightTheme.fontWeights[2];
 lightTheme.fontWeights.subTitle2 = lightTheme.fontWeights[2];
+lightTheme.fontWeights.subTitle3 = lightTheme.fontWeights[2];
 lightTheme.fontWeights.body1 = lightTheme.fontWeights[0];
 lightTheme.fontWeights.body2 = lightTheme.fontWeights[0];
 lightTheme.fontWeights.caption = lightTheme.fontWeights[0];
+lightTheme.fontWeights.captionNew = lightTheme.fontWeights[0];
 lightTheme.fontWeights.value = lightTheme.fontWeights[2];
 lightTheme.fontWeights.button = lightTheme.fontWeights[2];
 lightTheme.fontWeights.label = lightTheme.fontWeights[3];
@@ -350,6 +370,12 @@ lightTheme.fontWeights.overline = lightTheme.fontWeights[2];
 lightTheme.fontWeights.initials1 = lightTheme.fontWeights[2];
 lightTheme.fontWeights.initials2 = lightTheme.fontWeights[2];
 lightTheme.fontWeights.initials3 = lightTheme.fontWeights[2];
+lightTheme.fontWeights.unit11 = lightTheme.fontWeights[2];
+lightTheme.fontWeights.unit16 = lightTheme.fontWeights[2];
+lightTheme.fontWeights.digit12mono = lightTheme.fontWeights[1];
+lightTheme.fontWeights.digit16mono = lightTheme.fontWeights[1];
+lightTheme.fontWeights.digit36 = lightTheme.fontWeights[2];
+lightTheme.fontWeights.digit36mono = lightTheme.fontWeights[2];
 
 lightTheme.lineHeights.pageTitle = lightTheme.fontSizes.pageTitle * 1.25;
 lightTheme.lineHeights.heading1 = lightTheme.fontSizes.heading1 * 1.25;
@@ -359,9 +385,11 @@ lightTheme.lineHeights.heading4 = lightTheme.fontSizes.heading4 * 1.25;
 lightTheme.lineHeights.heading5 = lightTheme.fontSizes.heading5 * 1.25;
 lightTheme.lineHeights.subTitle1 = lightTheme.fontSizes.subTitle1 * 1.25;
 lightTheme.lineHeights.subTitle2 = lightTheme.fontSizes.subTitle2 * 1.25;
+lightTheme.lineHeights.subTitle3 = lightTheme.fontSizes.subTitle3 * 1.25;
 lightTheme.lineHeights.body1 = lightTheme.fontSizes.body1 * 1.5;
 lightTheme.lineHeights.body2 = lightTheme.fontSizes.body2 * 1.5;
 lightTheme.lineHeights.caption = lightTheme.fontSizes.caption * 1.5;
+lightTheme.lineHeights.captionNew = lightTheme.fontSizes.captionNew * 1.25;
 lightTheme.lineHeights.value = lightTheme.fontSizes.value * 1.5;
 lightTheme.lineHeights.button = lightTheme.fontSizes.button * 1.5;
 lightTheme.lineHeights.label = lightTheme.fontSizes.label * 1.5;
@@ -369,6 +397,12 @@ lightTheme.lineHeights.overline = lightTheme.fontSizes.overline * 1.5;
 lightTheme.lineHeights.initials1 = lightTheme.fontSizes.initials1 * 1.5;
 lightTheme.lineHeights.initials2 = lightTheme.fontSizes.initials2 * 1.5;
 lightTheme.lineHeights.initials3 = lightTheme.fontSizes.initials3 * 1.5;
+lightTheme.lineHeights.unit11 = lightTheme.fontSizes.unit11 * 1.5;
+lightTheme.lineHeights.unit16 = lightTheme.fontSizes.unit16 * 1.5;
+lightTheme.lineHeights.digit12mono = lightTheme.fontSizes.digit12mono * 1.25;
+lightTheme.lineHeights.digit16mono = lightTheme.fontSizes.digit16mono * 1.5;
+lightTheme.lineHeights.digit36 = lightTheme.fontSizes.digit36 * 1.5;
+lightTheme.lineHeights.digit36mono = lightTheme.fontSizes.digit36mono * 1.5;
 
 // main theme
 darkTheme.colors.primary.normal = darkTheme.colors.primary[0];
@@ -451,9 +485,11 @@ darkTheme.fonts.heading4 = darkTheme.fonts.heading;
 darkTheme.fonts.heading5 = darkTheme.fonts.heading;
 darkTheme.fonts.subTitle1 = darkTheme.fonts.heading;
 darkTheme.fonts.subTitle2 = darkTheme.fonts.heading;
+darkTheme.fonts.subTitle3 = darkTheme.fonts.heading;
 darkTheme.fonts.body1 = darkTheme.fonts.body;
 darkTheme.fonts.body2 = darkTheme.fonts.body;
 darkTheme.fonts.caption = darkTheme.fonts.body;
+darkTheme.fonts.captionNew = darkTheme.fonts.body;
 darkTheme.fonts.value = darkTheme.fonts.body;
 darkTheme.fonts.button = darkTheme.fonts.body;
 darkTheme.fonts.label = darkTheme.fonts.body;
@@ -461,6 +497,13 @@ darkTheme.fonts.overline = darkTheme.fonts.body;
 darkTheme.fonts.initials1 = darkTheme.fonts.body;
 darkTheme.fonts.initials2 = darkTheme.fonts.body;
 darkTheme.fonts.initials3 = darkTheme.fonts.body;
+darkTheme.fonts.unit11 = darkTheme.fonts.body;
+darkTheme.fonts.unit16 = darkTheme.fonts.body;
+darkTheme.fonts.digit12mono = darkTheme.fonts.body;
+darkTheme.fonts.digit16mono = darkTheme.fonts.body;
+darkTheme.fonts.digit36 = darkTheme.fonts.body;
+darkTheme.fonts.digit36mono = darkTheme.fonts.body;
+
 darkTheme.fontSizes.pageTitle = darkTheme.fontSizes[8];
 darkTheme.fontSizes.heading1 = darkTheme.fontSizes[8];
 darkTheme.fontSizes.heading2 = darkTheme.fontSizes[7];
@@ -469,9 +512,11 @@ darkTheme.fontSizes.heading4 = darkTheme.fontSizes[5];
 darkTheme.fontSizes.heading5 = darkTheme.fontSizes[4];
 darkTheme.fontSizes.subTitle1 = darkTheme.fontSizes[4];
 darkTheme.fontSizes.subTitle2 = darkTheme.fontSizes[3];
+darkTheme.fontSizes.subTitle3 = darkTheme.fontSizes[2];
 darkTheme.fontSizes.body1 = darkTheme.fontSizes[3];
 darkTheme.fontSizes.body2 = darkTheme.fontSizes[2];
 darkTheme.fontSizes.caption = darkTheme.fontSizes[1];
+darkTheme.fontSizes.captionNew = darkTheme.fontSizes[1];
 darkTheme.fontSizes.value = darkTheme.fontSizes[3];
 darkTheme.fontSizes.button = darkTheme.fontSizes[2];
 darkTheme.fontSizes.label = darkTheme.fontSizes[1];
@@ -479,6 +524,13 @@ darkTheme.fontSizes.overline = darkTheme.fontSizes[0];
 darkTheme.fontSizes.initials1 = darkTheme.fontSizes[6];
 darkTheme.fontSizes.initials2 = darkTheme.fontSizes[8];
 darkTheme.fontSizes.initials3 = darkTheme.fontSizes[9];
+darkTheme.fontSizes.unit11 = darkTheme.fontSizes[10];
+darkTheme.fontSizes.unit16 = darkTheme.fontSizes[3];
+darkTheme.fontSizes.digit12mono = darkTheme.fontSizes[1];
+darkTheme.fontSizes.digit16mono = darkTheme.fontSizes[3];
+darkTheme.fontSizes.digit36 = darkTheme.fontSizes[8];
+darkTheme.fontSizes.digit36mono = darkTheme.fontSizes[8];
+
 darkTheme.fontWeights.pageTitle = darkTheme.fontWeights[1];
 darkTheme.fontWeights.heading1 = darkTheme.fontWeights[1];
 darkTheme.fontWeights.heading2 = darkTheme.fontWeights[1];
@@ -487,9 +539,11 @@ darkTheme.fontWeights.heading4 = darkTheme.fontWeights[1];
 darkTheme.fontWeights.heading5 = darkTheme.fontWeights[1];
 darkTheme.fontWeights.subTitle1 = darkTheme.fontWeights[2];
 darkTheme.fontWeights.subTitle2 = darkTheme.fontWeights[2];
+darkTheme.fontWeights.subTitle3 = darkTheme.fontWeights[2];
 darkTheme.fontWeights.body1 = darkTheme.fontWeights[0];
 darkTheme.fontWeights.body2 = darkTheme.fontWeights[0];
 darkTheme.fontWeights.caption = darkTheme.fontWeights[0];
+darkTheme.fontWeights.captionNew = darkTheme.fontWeights[0];
 darkTheme.fontWeights.value = darkTheme.fontWeights[2];
 darkTheme.fontWeights.button = darkTheme.fontWeights[2];
 darkTheme.fontWeights.label = darkTheme.fontWeights[3];
@@ -497,6 +551,12 @@ darkTheme.fontWeights.overline = darkTheme.fontWeights[2];
 darkTheme.fontWeights.initials1 = darkTheme.fontWeights[2];
 darkTheme.fontWeights.initials2 = darkTheme.fontWeights[2];
 darkTheme.fontWeights.initials3 = darkTheme.fontWeights[2];
+darkTheme.fontWeights.unit11 = darkTheme.fontWeights[2];
+darkTheme.fontWeights.unit16 = darkTheme.fontWeights[2];
+darkTheme.fontWeights.digit12mono = darkTheme.fontWeights[1];
+darkTheme.fontWeights.digit16mono = darkTheme.fontWeights[1];
+darkTheme.fontWeights.digit36 = darkTheme.fontWeights[2];
+darkTheme.fontWeights.digit36mono = darkTheme.fontWeights[2];
 
 darkTheme.lineHeights.pageTitle = darkTheme.fontSizes.pageTitle * 1.25;
 darkTheme.lineHeights.heading1 = darkTheme.fontSizes.heading1 * 1.25;
@@ -506,9 +566,11 @@ darkTheme.lineHeights.heading4 = darkTheme.fontSizes.heading4 * 1.25;
 darkTheme.lineHeights.heading5 = darkTheme.fontSizes.heading5 * 1.25;
 darkTheme.lineHeights.subTitle1 = darkTheme.fontSizes.subTitle1 * 1.25;
 darkTheme.lineHeights.subTitle2 = darkTheme.fontSizes.subTitle2 * 1.25;
+darkTheme.lineHeights.subTitle3 = darkTheme.fontSizes.subTitle3 * 1.25;
 darkTheme.lineHeights.body1 = darkTheme.fontSizes.body1 * 1.5;
 darkTheme.lineHeights.body2 = darkTheme.fontSizes.body2 * 1.5;
 darkTheme.lineHeights.caption = darkTheme.fontSizes.caption * 1.5;
+darkTheme.lineHeights.captionNew = darkTheme.fontSizes.captionNew * 1.25;
 darkTheme.lineHeights.value = darkTheme.fontSizes.value * 1.5;
 darkTheme.lineHeights.button = darkTheme.fontSizes.button * 1.5;
 darkTheme.lineHeights.label = darkTheme.fontSizes.label * 1.5;
@@ -516,3 +578,9 @@ darkTheme.lineHeights.overline = darkTheme.fontSizes.overline * 1.5;
 darkTheme.lineHeights.initials1 = darkTheme.fontSizes.initials1 * 1.5;
 darkTheme.lineHeights.initials2 = darkTheme.fontSizes.initials2 * 1.5;
 darkTheme.lineHeights.initials3 = darkTheme.fontSizes.initials3 * 1.5;
+darkTheme.lineHeights.unit11 = darkTheme.fontSizes.unit11 * 1.5;
+darkTheme.lineHeights.unit16 = darkTheme.fontSizes.unit16 * 1.5;
+darkTheme.lineHeights.digit12mono = darkTheme.fontSizes.digit12mono * 1.25;
+darkTheme.lineHeights.digit16mono = darkTheme.fontSizes.digit16mono * 1.5;
+darkTheme.lineHeights.digit36 = darkTheme.fontSizes.digit36 * 1.5;
+darkTheme.lineHeights.digit36mono = darkTheme.fontSizes.digit36mono * 1.5;

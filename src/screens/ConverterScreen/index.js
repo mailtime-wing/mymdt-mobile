@@ -48,7 +48,7 @@ const ConverterScreen = ({navigation, route}) => {
 
   const conversionRate = data?.conversionRate || 0;
 
-  const handleConvertPress = async values => {
+  const handleConvertPress = async (values) => {
     try {
       const result = await convert({
         variables: {
@@ -63,15 +63,13 @@ const ConverterScreen = ({navigation, route}) => {
       }
     } catch (e) {
       console.error(
-        `Error in convert currency from ${values.from} to ${
-          values.to
-        } with amount ${values.amount}`,
+        `Error in convert currency from ${values.from} to ${values.to} with amount ${values.amount}`,
         e,
       );
     }
   };
 
-  const validate = values => {
+  const validate = (values) => {
     const errors = {};
     if (values.amount <= 0) {
       errors.amount = 'must more than 0';
@@ -105,8 +103,6 @@ const ConverterScreen = ({navigation, route}) => {
               <ConvertForm
                 conversionRate={conversionRate}
                 changeConvertCurrency={handleChangeConvertCurrency}
-                isConvertFromMrpToMdt={isConvertFromMrpToMdt}
-                isConvertFromMdtToMrp={isConvertFromMdtToMrp}
                 from={from}
                 to={to}
               />

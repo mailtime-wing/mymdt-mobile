@@ -58,6 +58,7 @@ import ReferralScreen from '@/screens/ReferralScreen';
 import ConverterScreen from '@/screens/ConverterScreen';
 import WithdrawalScreen from '@/screens/WithdrawalScreen';
 import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
+import TransactionDetailScreen from '@/screens/TransactionDetailScreen';
 
 import MembershipDetailScreen from '@/screens/MembershipDetailScreen';
 
@@ -162,6 +163,7 @@ const authModalScreens = [
   {name: 'converter', component: ConverterScreen},
   {name: 'withdrawal', component: WithdrawalScreen},
   {name: 'missing_receipt', component: MissingReceiptScreen},
+  {name: 'transaction_detail', component: TransactionDetailScreen},
   {
     name: 'membership_detail',
     component: MembershipDetailScreen,

@@ -1,41 +1,43 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {
   FormattedMessage,
-  FormattedTime,
   FormattedNumber,
+  FormattedTime,
   useIntl,
 } from 'react-intl';
-import {InputAccessoryView, TouchableOpacity, Platform} from 'react-native';
+import {
+  View,
+  InputAccessoryView,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import {useFormikContext, useField} from 'formik';
 import {useTheme} from 'emotion-theming';
 import {GET_CURRENCY_BALANCE_API} from '@/api/data';
 import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
 
 import {
-  RowContainer,
-  ConversionRateLeftContainer,
-  ConversionRateRightContainer,
   ConvertersContainer,
   ConverterContainer,
   Input,
   Margin,
   InputAccessoryViewContainer,
   InputAccessoryButton,
-  almostEqualSymbol,
-  conversionRateText,
-  conversionUpdateDate,
   converterType,
   numberText,
   inputAccessoryButtonText,
   errorText,
   convertIcon,
+  conversionSection,
+  leftContainer,
+  conversionRateText,
+  conversionUpdateDate,
 } from './style';
 
 import AppButton from '@/components/AppButton';
-import MDTCoin from '@/components/MDTCoin';
-import MRPCoin from '@/components/MRPCoin';
 import AppText from '@/components/AppText2';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import ConversionRate from '@/components/ConversionRate';
 
 import ConvertIcon from '@/assets/convert.svg';
 
@@ -103,7 +105,7 @@ const ConverterInput = ({
   const onError = meta.error;
   // TODO: handle when have error design
 
-  const handleChange = text => {
+  const handleChange = (text) => {
     // TODO: handle other symbol in the future e.g. "1.000.000"
     let result = text;
 
@@ -125,79 +127,6 @@ const ConverterInput = ({
         onChangeText={handleChange}
         {...props}
       />
-    </>
-  );
-};
-
-const ConversionRate = ({
-  conversionRate,
-  isConvertFromMrpToMdt,
-  isConvertFromMdtToMrp,
-}) => {
-  const theme = useTheme();
-
-  return (
-    <>
-      <RowContainer>
-        <ConversionRateLeftContainer>
-          <AppText variant="body1" style={conversionRateText(theme)}>
-            <FormattedMessage
-              id="conversion_rate"
-              defaultMessage="Conversion Rate"
-            />
-          </AppText>
-          <AppText variant="caption" style={conversionUpdateDate(theme)}>
-            <FormattedMessage
-              id="lastupdate_at"
-              defaultMessage="Last update at {time}"
-              values={{
-                time: <FormattedTime value={new Date()} />,
-              }}
-            />
-          </AppText>
-        </ConversionRateLeftContainer>
-        <ConversionRateRightContainer>
-          {isConvertFromMrpToMdt && (
-            <>
-              <MRPCoin
-                amount={1}
-                size={16}
-                fontSize={16}
-                color={theme.colors.textOfMrp}
-              />
-              <AppText variant="body2" style={almostEqualSymbol(theme)}>
-                ≈
-              </AppText>
-              <MDTCoin
-                amount={conversionRate}
-                size={16}
-                fontSize={16}
-                color={theme.colors.textOfMdt}
-              />
-            </>
-          )}
-
-          {isConvertFromMdtToMrp && (
-            <>
-              <MDTCoin
-                amount={1}
-                size={16}
-                fontSize={16}
-                color={theme.colors.textOfMdt}
-              />
-              <AppText variant="body2" style={almostEqualSymbol(theme)}>
-                ≈
-              </AppText>
-              <MRPCoin
-                amount={conversionRate}
-                size={16}
-                fontSize={16}
-                color={theme.colors.textOfMrp}
-              />
-            </>
-          )}
-        </ConversionRateRightContainer>
-      </RowContainer>
     </>
   );
 };
@@ -228,19 +157,43 @@ const ConvertForm = ({
   };
 
   const handleConverterOnChange = useCallback(
-    amount => {
+    (amount) => {
       setFieldValue('amount', amount);
     },
     [setFieldValue],
   );
 
-  const handleError = useCallback(error => {
+  const handleError = useCallback((error) => {
     setClientError(error);
   }, []);
 
   return (
     <>
-      <ConversionRate conversionRate={conversionRate} {...props} />
+      <View style={conversionSection}>
+        <View style={leftContainer}>
+          <AppText variant="body1" style={conversionRateText(theme)}>
+            <FormattedMessage
+              id="conversion_rate"
+              defaultMessage="Conversion Rate"
+            />
+          </AppText>
+          <AppText variant="caption" style={conversionUpdateDate(theme)}>
+            <FormattedMessage
+              id="lastupdate_at"
+              defaultMessage="Last update at {time}"
+              values={{
+                time: <FormattedTime value={new Date()} />,
+              }}
+            />
+          </AppText>
+        </View>
+        <ConversionRate
+          conversionRate={conversionRate}
+          from={from}
+          to={to}
+          {...props}
+        />
+      </View>
       <ConvertersContainer>
         <ConverterContainer
           onBlur={handleOnBlur}
