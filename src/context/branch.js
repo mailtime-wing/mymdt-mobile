@@ -79,19 +79,25 @@ export const BranchProvider = ({children}) => {
   }, [userId, referralCode, state.branchUniversalObject, intl]);
 
   useEffect(() => {
-    branch.subscribe(({error, params, uri}) => {
-      if (error) {
-        // TODO: nothing we can do?
-        return;
-      }
+    if (userId) {
+      branch.subscribe(({error, params, uri}) => {
+        if (error) {
+          // TODO: nothing we can do?
+          return;
+        }
 
-      // params will never be null if error is null
-      dispatch({
-        type: UPDATE_REFERRING_PARAMS,
-        payload: params,
+        // ignore self-referring
+        if (userId === params.$canonical_identifier) {
+          return;
+        }
+
+        dispatch({
+          type: UPDATE_REFERRING_PARAMS,
+          payload: params,
+        });
       });
-    });
-  }, []);
+    }
+  }, [userId]);
 
   return (
     <BranchContext.Provider value={state}>{children}</BranchContext.Provider>

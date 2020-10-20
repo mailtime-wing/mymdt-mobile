@@ -28,12 +28,15 @@ const InviteFriendSection = () => {
 
   useEffect(() => {
     const generate = async () => {
-      const {url} = await branchUniversalObject.generateShortUrl({
-        feature: 'referral',
-        channel: 'RewardMe',
-      });
-
-      setReferralUrl(url);
+      try {
+        const {url} = await branchUniversalObject.generateShortUrl({
+          feature: 'referral',
+          channel: 'RewardMe',
+        });
+        setReferralUrl(url);
+      } catch {
+        // TODO
+      }
     };
 
     if (branchUniversalObject) {
