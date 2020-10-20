@@ -19,14 +19,18 @@ import {useTheme} from 'emotion-theming';
 const TransactionAmount = ({amount, variant, unitVariant, style}) => {
   const theme = useTheme();
   let unit = '';
-  if (unitVariant === 'MDT') {
-    unit = 'MDT';
-  }
-  if (unitVariant === 'MRP') {
-    unit = 'P';
-  }
-  if (unitVariant === 'newToken') {
-    unit = 'NT';
+  switch (unitVariant) {
+    case 'MDT':
+      unit = 'MDT';
+      break;
+    case 'MRP':
+      unit = 'P';
+      break;
+    case 'newToken':
+      unit = 'NT';
+      break;
+    default:
+      break;
   }
 
   return (
