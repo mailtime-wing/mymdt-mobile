@@ -9,6 +9,7 @@ import MembershipCard from '@/components/MembershipCard';
 import UpgradeSection from './UpgradeSection';
 import ShortcutSection from './ShortcutSection';
 import CashBackSummarySection from './CashBackSummarySection';
+import MembershipInfoCard from './MembershipInfoCard';
 
 import {imageStyle, upgradeSection, sectionMargin} from './style';
 
@@ -33,6 +34,7 @@ const BrowseScreen = ({navigation}) => {
         />
         <ShortcutSection navigation={navigation} style={sectionMargin} />
         <CashBackSummarySection navigation={navigation} style={sectionMargin} />
+        <MembershipInfoCard userLevel={userLevel} style={sectionMargin} />
       </ScrollView>
     </LinearGradientBackground>
   );
