@@ -77,7 +77,9 @@ export const NotificationProvider = ({children}) => {
       Config.DEFAULT_NOTIFICATION_CHANNEL_ID,
       Config.DEFAULT_NOTIFICATION_CHANNEL_NAME,
     );
+  }, []);
 
+  useEffect(() => {
     const getPlatformAndToken = async () => {
       try {
         const mtPush = await MailtimePush.register(userId);
@@ -87,6 +89,7 @@ export const NotificationProvider = ({children}) => {
         console.error('error getPlatformAndToken', e);
       }
     };
+
     if (state.permissions.alert && userId) {
       getPlatformAndToken();
     }
