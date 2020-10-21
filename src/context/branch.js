@@ -1,8 +1,15 @@
-import React, {createContext, useEffect, useReducer, useMemo} from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useMemo,
+} from 'react';
 import branch from 'react-native-branch';
 import {useIntl} from 'react-intl';
 
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import {AuthContext} from '@/context/auth';
 import {GET_USER_REFERRAL_CODE} from '@/api/data';
 
 const initialContextValue = {
@@ -35,6 +42,7 @@ const reducer = (state, action) => {
 export const BranchProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialContextValue);
   const intl = useIntl();
+  const {authToken} = useContext(AuthContext);
 
   const {data, error: requestError} = useQueryWithAuth(GET_USER_REFERRAL_CODE);
   const userId = data?.userProfile?.id;
@@ -78,6 +86,12 @@ export const BranchProvider = ({children}) => {
       generate();
     }
   }, [userId, referralCode, state.branchUniversalObject, intl]);
+
+  useEffect(() => {
+    if (!authToken) {
+      branch.logout();
+    }
+  }, [authToken]);
 
   useEffect(() => {
     let unsubscribe = null;
