@@ -4,11 +4,11 @@ import SafeAreaView from 'react-native-safe-area-view';
 import {styles, safeAreaStyle} from './style';
 import {useTheme} from 'emotion-theming';
 
-const LinearGradientBackground = ({children, style}) => {
+const LinearGradientBackground = ({colors, children, style}) => {
   const theme = useTheme();
   return (
     <LinearGradient
-      colors={theme.colors.linearGradientBackground}
+      colors={colors || theme.colors.linearGradientBackground}
       style={[styles.linearGradient, style]}>
       <SafeAreaView style={safeAreaStyle}>{children}</SafeAreaView>
     </LinearGradient>

@@ -3,7 +3,7 @@ import {css} from '@emotion/native';
 export const imageStyle = css`
   position: absolute;
   align-self: center;
-  margin-top: 80px;
+  margin-top: 16px;
   z-index: 1;
 `;
 

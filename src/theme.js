@@ -51,18 +51,24 @@ export const darkTheme = {
     errorBackground: 'rgba(255, 113, 113, 0.2)',
     themeBackground: '#121212',
 
-    // membership
+    // membership (background, color, border, gradient)
     membership: {
       newbie: [
         '#121212',
         'rgba(255, 255, 255, 0.87)',
         'rgba(255, 255, 255, 0.08)',
+        ['#121212', '#121212'],
       ],
-      starter: ['#88D9DE', '#121212'],
-      extra: ['#9FBDE9', '#121212'],
-      elite: ['#DBDBDB', '#454545'],
-      infinite: ['#ECDCBC', '#6F5D40'],
-      infinite_privilege: ['#000000', '#FFFFFF', '#FFFFFF'],
+      starter: ['#88D9DE', '#121212', '', ['#005A5F', '#003234']],
+      extra: ['#9FBDE9', '#121212', '', ['#003A8F', '#002862']],
+      elite: ['#DBDBDB', '#454545', '', ['#656565', '#363636']],
+      infinite: ['#ECDCBC', '#6F5D40', '', ['#745A00', '#292300']],
+      infinite_privilege: [
+        '#000000',
+        '#FFFFFF',
+        '#FFFFFF',
+        ['#575757', '#313131'],
+      ],
     },
 
     // button
@@ -160,14 +166,14 @@ export const lightTheme = {
     errorBackground: 'rgba(216, 16, 16, 0.1)',
     themeBackground: '#21CEDB',
 
-    // membership
+    // membership (background, color, border, gradient)
     membership: {
-      newbie: ['#000000', '#FFFFFF', '#000000'],
-      starter: ['#00BACE', '#FFFFFF'],
-      extra: ['#0363EF', '#FFFFFF'],
-      elite: ['#EAEAEA', '#707070'],
-      infinite: ['#FFDC22', '#8F722E'],
-      infinite_privilege: ['#000000', '#FFFFFF'],
+      newbie: ['#000000', '#FFFFFF', '#000000', ['#FAFAFA', '#F2F2F2']],
+      starter: ['#00BACE', '#FFFFFF', '', ['#ABEBEE', '#E6FEFF']],
+      extra: ['#0363EF', '#FFFFFF', '', ['#C9DFFF', '#EAF2FF']],
+      elite: ['#EAEAEA', '#707070', '', ['#DEDEDE', '#F7F7F7']],
+      infinite: ['#FFDC22', '#8F722E', '', ['#EEDBBA', '#FFF8EC']],
+      infinite_privilege: ['#000000', '#FFFFFF', '', ['#A3A3A3', '#F2F2F2']],
     },
 
     // button
@@ -267,24 +273,36 @@ lightTheme.colors.membership.newbie.text =
   lightTheme.colors.membership.newbie[1];
 lightTheme.colors.membership.newbie.border =
   lightTheme.colors.membership.newbie[2];
+lightTheme.colors.membership.newbie.gradient =
+  lightTheme.colors.membership.newbie[3];
 lightTheme.colors.membership.starter.background =
   lightTheme.colors.membership.starter[0];
 lightTheme.colors.membership.starter.text =
   lightTheme.colors.membership.starter[1];
+lightTheme.colors.membership.starter.gradient =
+  lightTheme.colors.membership.starter[3];
 lightTheme.colors.membership.extra.background =
   lightTheme.colors.membership.extra[0];
 lightTheme.colors.membership.extra.text = lightTheme.colors.membership.extra[1];
+lightTheme.colors.membership.extra.gradient =
+  lightTheme.colors.membership.extra[3];
 lightTheme.colors.membership.elite.background =
   lightTheme.colors.membership.elite[0];
 lightTheme.colors.membership.elite.text = lightTheme.colors.membership.elite[1];
+lightTheme.colors.membership.elite.gradient =
+  lightTheme.colors.membership.elite[3];
 lightTheme.colors.membership.infinite.background =
   lightTheme.colors.membership.infinite[0];
 lightTheme.colors.membership.infinite.text =
   lightTheme.colors.membership.infinite[1];
+lightTheme.colors.membership.infinite.gradient =
+  lightTheme.colors.membership.infinite[3];
 lightTheme.colors.membership.infinite_privilege.background =
   lightTheme.colors.membership.infinite_privilege[0];
 lightTheme.colors.membership.infinite_privilege.text =
   lightTheme.colors.membership.infinite_privilege[1];
+lightTheme.colors.membership.infinite_privilege.gradient =
+  lightTheme.colors.membership.infinite_privilege[3];
 
 // others
 lightTheme.colors.toggleOn.button = lightTheme.colors.toggleOn[0];
@@ -453,26 +471,38 @@ darkTheme.colors.membership.newbie.background =
 darkTheme.colors.membership.newbie.text = darkTheme.colors.membership.newbie[1];
 darkTheme.colors.membership.newbie.border =
   darkTheme.colors.membership.newbie[2];
+darkTheme.colors.membership.newbie.gradient =
+  darkTheme.colors.membership.newbie[3];
 darkTheme.colors.membership.starter.background =
   darkTheme.colors.membership.starter[0];
 darkTheme.colors.membership.starter.text =
   darkTheme.colors.membership.starter[1];
+darkTheme.colors.membership.starter.gradient =
+  darkTheme.colors.membership.starter[3];
 darkTheme.colors.membership.extra.background =
   darkTheme.colors.membership.extra[0];
 darkTheme.colors.membership.extra.text = darkTheme.colors.membership.extra[1];
+darkTheme.colors.membership.extra.gradient =
+  darkTheme.colors.membership.extra[3];
 darkTheme.colors.membership.elite.background =
   darkTheme.colors.membership.elite[0];
 darkTheme.colors.membership.elite.text = darkTheme.colors.membership.elite[1];
+darkTheme.colors.membership.elite.gradient =
+  darkTheme.colors.membership.elite[3];
 darkTheme.colors.membership.infinite.background =
   darkTheme.colors.membership.infinite[0];
 darkTheme.colors.membership.infinite.text =
   darkTheme.colors.membership.infinite[1];
+darkTheme.colors.membership.infinite.gradient =
+  darkTheme.colors.membership.infinite[3];
 darkTheme.colors.membership.infinite_privilege.background =
   darkTheme.colors.membership.infinite_privilege[0];
 darkTheme.colors.membership.infinite_privilege.text =
   darkTheme.colors.membership.infinite_privilege[1];
 darkTheme.colors.membership.infinite_privilege.border =
   darkTheme.colors.membership.infinite_privilege[2];
+darkTheme.colors.membership.infinite_privilege.gradient =
+  darkTheme.colors.membership.infinite_privilege[3];
 
 // others
 darkTheme.colors.toggleOn.button = darkTheme.colors.toggleOn[0];
