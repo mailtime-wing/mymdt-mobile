@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {View, TextInput} from 'react-native';
+import React, {useEffect, useContext, useRef} from 'react';
+import {View, TextInput, Share, Platform} from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
@@ -23,17 +23,18 @@ import {
 const InviteFriendSection = () => {
   const theme = useTheme();
   const intl = useIntl();
-  const [referralUrl, setReferralUrl] = useState('');
-  const {branchUniversalObject} = useContext(BranchContext);
+  const referralUrlRef = useRef('');
+  const {branchUniversalObject, referralCode} = useContext(BranchContext);
 
   useEffect(() => {
     const generate = async () => {
       try {
-        const {url} = await branchUniversalObject.generateShortUrl({
+        let {url} = await branchUniversalObject.generateShortUrl({
           feature: 'referral',
           channel: 'RewardMe',
         });
-        setReferralUrl(url);
+        url = `${url}?r=${referralCode}`;
+        referralUrlRef.current = url;
       } catch {
         // TODO
       }
@@ -42,23 +43,24 @@ const InviteFriendSection = () => {
     if (branchUniversalObject) {
       generate();
     }
-  }, [branchUniversalObject]);
+  }, [branchUniversalObject, referralCode]);
 
   const handleSharePress = async () => {
     if (branchUniversalObject) {
-      let shareOptions = {
-        messageHeader: intl.formatMessage({
+      Share.share({
+        message:
+          Platform.OS === 'android'
+            ? `${intl.formatMessage({
+                id: 'joinRewardMeWithThisLink',
+              })} ${referralUrlRef.current}`
+            : intl.formatMessage({
+                id: 'joinRewardMeWithThisLink',
+              }),
+        title: intl.formatMessage({
           id: 'joinRewardMe',
         }),
-        messageBody: intl.formatMessage({
-          id: 'joinRewardMeWithThisLink',
-        }),
-      };
-      let linkProperties = {
-        feature: 'referral',
-        channel: 'RewardMe',
-      };
-      await branchUniversalObject.showShareSheet(shareOptions, linkProperties);
+        url: referralUrlRef.current,
+      });
     }
   };
 
@@ -93,7 +95,7 @@ const InviteFriendSection = () => {
         <View style={inputContainer}>
           <View style={textInputContainer(theme)}>
             <TextInput
-              value={referralUrl}
+              value={referralCode}
               style={textInput(theme)}
               editable={false}
             />
@@ -106,6 +108,7 @@ const InviteFriendSection = () => {
           sizeVariant="normal"
           colorVariant="secondary"
           svgIcon={ShareIcon}
+          disabled={!branchUniversalObject}
         />
       </View>
     </>

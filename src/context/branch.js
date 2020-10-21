@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useReducer} from 'react';
+import React, {createContext, useEffect, useReducer, useMemo} from 'react';
 import branch from 'react-native-branch';
 import {useIntl} from 'react-intl';
 
@@ -8,6 +8,7 @@ import {GET_USER_REFERRAL_CODE} from '@/api/data';
 const initialContextValue = {
   branchUniversalObject: null,
   referringParams: null,
+  referralCode: '',
 };
 
 export const BranchContext = createContext(initialContextValue);
@@ -79,8 +80,9 @@ export const BranchProvider = ({children}) => {
   }, [userId, referralCode, state.branchUniversalObject, intl]);
 
   useEffect(() => {
+    let unsubscribe = null;
     if (userId) {
-      branch.subscribe(({error, params, uri}) => {
+      unsubscribe = branch.subscribe(({error, params, uri}) => {
         if (error) {
           // TODO: nothing we can do?
           return;
@@ -91,15 +93,34 @@ export const BranchProvider = ({children}) => {
           return;
         }
 
-        dispatch({
-          type: UPDATE_REFERRING_PARAMS,
-          payload: params,
-        });
+        if (unsubscribe) {
+          dispatch({
+            type: UPDATE_REFERRING_PARAMS,
+            payload: params,
+          });
+        }
       });
     }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+        unsubscribe = null;
+      }
+    };
   }, [userId]);
 
+  const contextValue = useMemo(
+    () => ({
+      ...state,
+      referralCode,
+    }),
+    [state, referralCode],
+  );
+
   return (
-    <BranchContext.Provider value={state}>{children}</BranchContext.Provider>
+    <BranchContext.Provider value={contextValue}>
+      {children}
+    </BranchContext.Provider>
   );
 };
