@@ -8,8 +8,9 @@ import LinearGradientBackground from '@/components/LinearGradientBackground';
 import MembershipCard from '@/components/MembershipCard';
 import UpgradeSection from './UpgradeSection';
 import ShortcutSection from './ShortcutSection';
+import CashBackSummarySection from './CashBackSummarySection';
 
-import {imageStyle, upgradeSection, shortcutSection} from './style';
+import {imageStyle, upgradeSection, sectionMargin} from './style';
 
 const BrowseScreen = ({navigation}) => {
   const {data} = useQueryWithAuth(GET_USER_MEMBERSHIP_API, {
@@ -28,9 +29,10 @@ const BrowseScreen = ({navigation}) => {
         <UpgradeSection
           userNextLevel={userNextLevel}
           navigation={navigation}
-          style={upgradeSection}
+          style={[upgradeSection, sectionMargin]}
         />
-        <ShortcutSection navigation={navigation} style={shortcutSection} />
+        <ShortcutSection navigation={navigation} style={sectionMargin} />
+        <CashBackSummarySection navigation={navigation} style={sectionMargin} />
       </ScrollView>
     </LinearGradientBackground>
   );

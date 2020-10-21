@@ -210,6 +210,9 @@
   "this_email_is_already_bound": "該郵箱已綁定帳號。",
   "we_partner_with_credigo": "We partner with CrediGO to securely link your card",
 
+  "earned_in_past_7_days": "Earned {amount} in past 7 days",
+  "earned_in_total": "Earned {amount} in total",
+
   "button": {
     "done": "完成",
     "edit": "編輯",

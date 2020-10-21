@@ -12,6 +12,6 @@ export const upgradeSection = css`
   padding-top: 90px;
 `;
 
-export const shortcutSection = css`
-  margin-top: 16px;
+export const sectionMargin = css`
+  margin-bottom: 16px;
 `;
