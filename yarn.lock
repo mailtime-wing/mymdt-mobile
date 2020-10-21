@@ -1516,9 +1516,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/progress-view/-/progress-view-1.0.3.tgz#6aaafd2d885771de6ef3a15e04f988af824dfa8b"
   integrity sha512-zpOop2VvkPHtomWtKbs62hhUhxzzpZsuo8tybxwaF6J+qY77rvYG9esDMOb0twXpa0i1jD+8nGyoiMS/Rx8Vtg==
 
-"@react-native-community/push-notification-ios@https://github.com/chochihim/push-notification-ios.git#f5e3e904dfd259a1a1a5bf8ca6b4bfaa67da9e26":
-  version "1.5.0"
-  resolved "https://github.com/chochihim/push-notification-ios.git#f5e3e904dfd259a1a1a5bf8ca6b4bfaa67da9e26"
+"@react-native-community/push-notification-ios@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/push-notification-ios/-/push-notification-ios-1.6.0.tgz#ca2107c6921c84f725edd16b32be287c9e3866c3"
+  integrity sha512-cZMG7IBtGX+IZ7pKa7zysX0Upz4nz5KNWWVMX7kQshdwkd1NPqmH9wL5GdW/RRttTnjmESSQz4zeHKYsDLAkSQ==
   dependencies:
     invariant "^2.2.4"
 
@@ -7005,6 +7006,11 @@ react-native-anchor-point@^1.0.1:
   resolved "https://registry.yarnpkg.com/react-native-anchor-point/-/react-native-anchor-point-1.0.1.tgz#4426b4e59cd28f3280a5752606a7dbbed0fcf6f3"
   integrity sha512-CQgXJ10fkvvNygfd+ikHkbuvVCRH0vX5HY9EwWtvfNV3VBNgBRJHOcPoCqNeOkGJRuHtGHKRtshE+uY8VtVgmA==
 
+react-native-android-notification-listener@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-android-notification-listener/-/react-native-android-notification-listener-1.0.4.tgz#5d773c2ff179ab193aa2b655ac9dad1ec77aa798"
+  integrity sha512-AilabZwBVgx02stxryxDpP810DTPdFc8OV04We08/M5gDKJMb31VYG6M+g7M1VFAZR5TeFc4JAJ7UrRQpdYGEw==
+
 react-native-animatable@^1.3.0:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.3.tgz#a13a4af8258e3bb14d0a9d839917e9bb9274ec8a"
@@ -7064,6 +7070,10 @@ react-native-linear-gradient@^2.5.6:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
   integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
+
+"react-native-mailtime-push@https://github.com/measurabledatatoken/react-native-mailtime-push.git":
+  version "0.1.0"
+  resolved "https://github.com/measurabledatatoken/react-native-mailtime-push.git#e0d1069c82f9edd99a78fc5f8fc4bd478a91f2da"
 
 "react-native-mailtime-sdk@https://github.com/measurabledatatoken/react-native-mailtime-sdk.git":
   version "0.1.0"
