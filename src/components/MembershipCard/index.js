@@ -8,7 +8,7 @@ import membershipLevel from '@/enum/membershipLevel';
 const levelCardList = [
   {
     level: membershipLevel.NEWBIE,
-    cardSrc: require('@/assets/starter_card.png'),
+    cardSrc: require('@/assets/newbie_card.png'),
   },
   {
     level: membershipLevel.STARTER,
