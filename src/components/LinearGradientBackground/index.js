@@ -8,7 +8,7 @@ const LinearGradientBackground = ({colors, children, style}) => {
   const theme = useTheme();
   return (
     <LinearGradient
-      colors={colors || theme.colors.linearGradientBackground}
+      colors={colors || theme.colors.linearGradientBackground.theme}
       style={[styles.linearGradient, style]}>
       <SafeAreaView style={safeAreaStyle}>{children}</SafeAreaView>
     </LinearGradient>

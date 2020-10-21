@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {useTheme} from 'emotion-theming';
-import {css} from '@emotion/native';
 
 import {
   sectionContainer,
@@ -16,6 +15,7 @@ import DollarSignIcon from '@/assets/dollar_sign_icon';
 import BagIcon from '@/assets/icon_shopping-bag';
 import ReferralIcon from '@/assets/referral_icon.svg';
 import MailIcon from '@/assets/icon_mail.svg';
+import LinearGradient from 'react-native-linear-gradient';
 
 import AppText from '@/components/AppText2';
 import AppIcon from '@/components/AppIcon';
@@ -58,14 +58,9 @@ const ShortcutSection = ({navigation, style}) => {
   ];
 
   return (
-    <View
-      style={[
-        css`
-          ${theme.colors.elevatedBackground1}
-        `,
-        sectionContainer,
-        style,
-      ]}>
+    <LinearGradient
+      colors={theme.colors.linearGradientBackground.contrast}
+      style={[sectionContainer, style]}>
       <AppText variant="heading6" style={quickActions(theme)}>
         Quick Actions
       </AppText>
@@ -83,7 +78,7 @@ const ShortcutSection = ({navigation, style}) => {
           </TouchableOpacity>
         ))}
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 export default ShortcutSection;

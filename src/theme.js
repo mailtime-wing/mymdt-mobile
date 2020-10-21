@@ -95,7 +95,10 @@ export const darkTheme = {
     borderColor: 'rgba(255, 255, 255, 0.2)',
     contrastBorderColor: 'rgba(18, 18, 18, 0.2)',
 
-    linearGradientBackground: ['#121212', '#121212'],
+    linearGradientBackground: [
+      ['#121212', '#121212'],
+      ['rgba(30, 30, 30, 0)', '#1E1E1E'],
+    ],
     tabScreenStatusBar: '#121212',
 
     system_theme: '#121212',
@@ -206,7 +209,10 @@ export const lightTheme = {
     borderColor: 'rgba(0, 0, 0, 0.2)',
     contrastBorderColor: 'rgba(255, 255, 255, 0.2)',
 
-    linearGradientBackground: ['#FDFBF2', '#E2FAFF'],
+    linearGradientBackground: [
+      ['#FDFBF2', '#E2FAFF'],
+      ['rgba(255, 255, 255, 0)', '#FFFFFF'],
+    ],
     tabScreenStatusBar: '#FDFBF2',
 
     system_theme: '#F4F4F4',
@@ -278,6 +284,11 @@ lightTheme.colors.elevatedThemeBackground.mrp =
   lightTheme.colors.elevatedThemeBackground[0];
 lightTheme.colors.elevatedThemeBackground.mdt =
   lightTheme.colors.elevatedThemeBackground[1];
+
+lightTheme.colors.linearGradientBackground.theme =
+  lightTheme.colors.linearGradientBackground[0];
+lightTheme.colors.linearGradientBackground.contrast =
+  lightTheme.colors.linearGradientBackground[1];
 
 // membership
 lightTheme.colors.membership.newbie.background =
@@ -478,6 +489,11 @@ darkTheme.colors.elevatedThemeBackground.mrp =
   darkTheme.colors.elevatedThemeBackground[0];
 darkTheme.colors.elevatedThemeBackground.mdt =
   darkTheme.colors.elevatedThemeBackground[1];
+
+darkTheme.colors.linearGradientBackground.theme =
+  darkTheme.colors.linearGradientBackground[0];
+darkTheme.colors.linearGradientBackground.contrast =
+  darkTheme.colors.linearGradientBackground[1];
 
 // membership
 darkTheme.colors.membership.newbie.background =
