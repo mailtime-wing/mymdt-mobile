@@ -4,7 +4,13 @@ export const darkTheme = {
   colors: {
     // main theme
     primary: ['#9FBDE9', '#9FBDE9', 'rgba(159, 189, 233, 0.2)'],
-    secondary: ['#88D9DE', '#88D9DE', '#88D9DE', 'rgba(136, 217, 222, 0.2)'],
+    secondary: [
+      '#88D9DE',
+      '#88D9DE',
+      '#88D9DE',
+      'rgba(136, 217, 222, 0.2)',
+      'rgba(136, 217, 222, 0.24)',
+    ],
     contrastColor: '#FFFFFF',
 
     // text
@@ -126,7 +132,13 @@ export const lightTheme = {
   colors: {
     // main theme
     primary: ['#0363EF', '#0036C5', 'rgba(3, 99, 239, 0.05)'],
-    secondary: ['#21CEDB', '#ABEBEE', '#00BACE', 'rgba(33, 206, 219, 0.2)'],
+    secondary: [
+      '#21CEDB',
+      '#ABEBEE',
+      '#00BACE',
+      'rgba(33, 206, 219, 0.2)',
+      '#E9FAFB',
+    ],
     contrastColor: '#000000',
 
     // text
@@ -236,6 +248,7 @@ lightTheme.colors.secondary.normal = lightTheme.colors.secondary[0];
 lightTheme.colors.secondary.light = lightTheme.colors.secondary[1];
 lightTheme.colors.secondary.dark = lightTheme.colors.secondary[2];
 lightTheme.colors.secondary.border = lightTheme.colors.secondary[3];
+lightTheme.colors.secondary.superLight = lightTheme.colors.secondary[4];
 
 // text
 lightTheme.colors.textOnError.normal = lightTheme.colors.textOnError[0];
@@ -435,6 +448,7 @@ darkTheme.colors.secondary.normal = darkTheme.colors.secondary[0];
 darkTheme.colors.secondary.light = darkTheme.colors.secondary[1];
 darkTheme.colors.secondary.dark = darkTheme.colors.secondary[2];
 darkTheme.colors.secondary.border = darkTheme.colors.secondary[3];
+darkTheme.colors.secondary.superLight = darkTheme.colors.secondary[4];
 
 // text
 darkTheme.colors.textOnError.normal = darkTheme.colors.textOnError[0];

@@ -24,6 +24,7 @@ import {
 } from './style';
 
 import ArrowIcon from '@/assets/list_arrow.svg';
+import ShoppingBagAddIcon from '@/assets/icon_shopping-bag-add.svg';
 
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
@@ -31,6 +32,7 @@ import {FormattedMessage} from 'react-intl';
 
 const CashBackItem = ({icon, brand}) => {
   const theme = useTheme();
+  // TODO: create <AppTag /> component for %
   return (
     <View style={rowContainer}>
       <View style={imageContainer}>
@@ -41,7 +43,7 @@ const CashBackItem = ({icon, brand}) => {
           <AppText variant="heading5" style={brandName(theme)}>
             {brand}
           </AppText>
-          <AppText variant="heading5" style={brandPercentage(theme)}>
+          <AppText variant="heading6" style={brandPercentage(theme)}>
             0.5% cashback
           </AppText>
         </View>
@@ -80,7 +82,7 @@ const CashBackSummarySection = ({navigation, style}) => {
 
   return (
     <View style={[style]}>
-      <TouchableOpacity style={upperSection}>
+      <TouchableOpacity style={upperSection(theme)}>
         <View style={rewardMeContainer}>
           <Image source={require('@/assets/rewardme.png')} style={rewardMe} />
         </View>
@@ -140,6 +142,7 @@ const CashBackSummarySection = ({navigation, style}) => {
           colorVariant="secondary"
           text="Add merchant"
           style={button}
+          svgIcon={ShoppingBagAddIcon}
         />
       </View>
     </View>

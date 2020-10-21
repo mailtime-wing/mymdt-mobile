@@ -35,8 +35,8 @@ export const rewardMeContainer = css`
   width: 80px;
 `;
 
-export const upperSection = css`
-  background: #e9fafb;
+export const upperSection = (theme) => css`
+  background: ${theme.colors.secondary.superLight};
   flex-direction: row;
   justify-items: center;
   align-content: center;
