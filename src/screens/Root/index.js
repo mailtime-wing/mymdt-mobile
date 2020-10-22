@@ -61,6 +61,7 @@ import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
 import TransactionDetailScreen from '@/screens/TransactionDetailScreen';
 
 import MembershipDetailScreen from '@/screens/MembershipDetailScreen';
+import CashBackSummaryScreen from '@/screens/CashBackSummaryScreen';
 
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
@@ -168,6 +169,10 @@ const authModalScreens = [
     name: 'membership_detail',
     component: MembershipDetailScreen,
     options: {themeStyle: true},
+  },
+  {
+    name: 'cash_back_summary',
+    component: CashBackSummaryScreen,
   },
 ];
 

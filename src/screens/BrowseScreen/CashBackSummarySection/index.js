@@ -77,12 +77,12 @@ const CashBackItem = ({icon, brand}) => {
   );
 };
 
-const CashBackSummarySection = ({navigation, style}) => {
+const CashBackSummarySection = ({onPress, style}) => {
   const theme = useTheme();
 
   return (
-    <View style={[style]}>
-      <TouchableOpacity style={upperSection(theme)}>
+    <View style={style}>
+      <TouchableOpacity style={upperSection(theme)} onPress={onPress}>
         <View style={rewardMeContainer}>
           <Image source={require('@/assets/rewardme.png')} style={rewardMe} />
         </View>
