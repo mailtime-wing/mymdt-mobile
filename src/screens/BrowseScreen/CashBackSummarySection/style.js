@@ -60,12 +60,6 @@ export const arrow = css`
   align-self: center;
 `;
 
-export const brandImage = css`
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-`;
-
 export const imageContainer = css`
   width: 80px;
   padding-vertical: 8px;

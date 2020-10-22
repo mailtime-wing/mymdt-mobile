@@ -98,6 +98,7 @@ export const darkTheme = {
     linearGradientBackground: [
       ['#121212', '#121212'],
       ['rgba(30, 30, 30, 0)', '#1E1E1E'],
+      ['#3B4F50', '#232323'],
     ],
     tabScreenStatusBar: '#121212',
 
@@ -106,6 +107,9 @@ export const darkTheme = {
     alert: '#FFD542',
 
     rewardCircleBackground: '#464646',
+
+    cashBackSummaryBackground: '#232323',
+    cashBackSummaryChip: '#4B4B4B',
 
     avatarsInitials: [
       '#F19898',
@@ -212,6 +216,7 @@ export const lightTheme = {
     linearGradientBackground: [
       ['#FDFBF2', '#E2FAFF'],
       ['rgba(255, 255, 255, 0)', '#FFFFFF'],
+      ['#B0F8FD', '#232323'],
     ],
     tabScreenStatusBar: '#FDFBF2',
 
@@ -220,6 +225,9 @@ export const lightTheme = {
     alert: '#FFD542',
 
     rewardCircleBackground: '#FFFFFF',
+
+    cashBackSummaryBackground: '#E9FAFB',
+    cashBackSummaryChip: '#FFFFFF',
 
     avatarsInitials: [
       '#F15454',
@@ -290,6 +298,8 @@ lightTheme.colors.linearGradientBackground.theme =
   lightTheme.colors.linearGradientBackground[0];
 lightTheme.colors.linearGradientBackground.contrast =
   lightTheme.colors.linearGradientBackground[1];
+lightTheme.colors.linearGradientBackground.cashBackSummary =
+  lightTheme.colors.linearGradientBackground[2];
 
 // membership
 lightTheme.colors.membership.newbie.background =
@@ -499,6 +509,8 @@ darkTheme.colors.linearGradientBackground.theme =
   darkTheme.colors.linearGradientBackground[0];
 darkTheme.colors.linearGradientBackground.contrast =
   darkTheme.colors.linearGradientBackground[1];
+darkTheme.colors.linearGradientBackground.cashBackSummary =
+  darkTheme.colors.linearGradientBackground[2];
 
 // membership
 darkTheme.colors.membership.newbie.background =
