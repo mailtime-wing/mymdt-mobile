@@ -86,13 +86,8 @@ const TransactionAmount = ({
       <AppText
         variant={amountTextVariant}
         style={[
-          amountStyle(
-            theme,
-            variant,
-            unitVariant,
-            amountColor,
-            amountSizeVariant,
-          ),
+          amountStyle(theme, variant, unitVariant, amountSizeVariant),
+          amountColor && {color: amountColor},
         ]}>
         <FormattedNumber
           value={amount}
@@ -102,7 +97,10 @@ const TransactionAmount = ({
       </AppText>
       <AppText
         variant={unitTextVariant}
-        style={unitStyle(theme, variant, unitVariant, unitColor)}>
+        style={[
+          unitStyle(theme, variant, unitVariant),
+          unitColor && {color: unitColor},
+        ]}>
         {unit}
       </AppText>
     </View>
