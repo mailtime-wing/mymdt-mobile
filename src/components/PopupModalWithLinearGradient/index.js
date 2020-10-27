@@ -50,7 +50,7 @@ const PopupModalWithLinearGradient = ({
         </View>
       ) : (
         <LinearGradient
-          colors={theme.colors.linearGradientBackground}
+          colors={theme.colors.linearGradientBackground.theme}
           style={linearGradientStyle}>
           {children}
           <AppButton

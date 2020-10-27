@@ -13,23 +13,23 @@ import membershipLevel from '@/enum/membershipLevel';
 
 const levelCardList = [
   {
-    level: membershipLevel.BASIC,
+    level: membershipLevel.STARTER,
     label: <FormattedMessage id="membership_level_0" />,
-    card: <MembershipCard userLevel={membershipLevel.BASIC} style={image} />,
+    card: <MembershipCard userLevel={membershipLevel.STARTER} style={image} />,
     privileges: ['Cashback in 2 selected merchants 0.5% cashback'],
     requirements: [],
   },
   {
-    level: membershipLevel.SILVER,
+    level: membershipLevel.EXTRA,
     label: <FormattedMessage id="membership_level_1" />,
-    card: <MembershipCard userLevel={membershipLevel.SILVER} style={image} />,
+    card: <MembershipCard userLevel={membershipLevel.EXTRA} style={image} />,
     privileges: ['Cashback in 3 selected merchants 1% cashback'],
     requirements: [{name: 'Total Referral', detail: '2 friends'}],
   },
   {
-    level: membershipLevel.GOLD,
+    level: membershipLevel.ELITE,
     label: <FormattedMessage id="membership_level_2" />,
-    card: <MembershipCard userLevel={membershipLevel.GOLD} style={image} />,
+    card: <MembershipCard userLevel={membershipLevel.ELITE} style={image} />,
     privileges: [
       'Cashback in 4 selected merchants 1.5% cashback',
       'Birthday gift',
@@ -40,9 +40,9 @@ const levelCardList = [
     ],
   },
   {
-    level: membershipLevel.PLATINUM,
+    level: membershipLevel.INFINITE,
     label: <FormattedMessage id="membership_level_3" />,
-    card: <MembershipCard userLevel={membershipLevel.PLATINUM} style={image} />,
+    card: <MembershipCard userLevel={membershipLevel.INFINITE} style={image} />,
     privileges: [
       'Cashback in 4 selected merchants 2% cashback',
       'Birthday gift',
@@ -54,9 +54,14 @@ const levelCardList = [
     ],
   },
   {
-    level: membershipLevel.DIAMOND,
+    level: membershipLevel.INFINITE_PRIVILEGE,
     label: <FormattedMessage id="membership_level_4" />,
-    card: <MembershipCard userLevel={membershipLevel.DIAMOND} style={image} />,
+    card: (
+      <MembershipCard
+        userLevel={membershipLevel.INFINITE_PRIVILEGE}
+        style={image}
+      />
+    ),
     privileges: [
       'Cashback in all merchants supported 4% cashback',
       'Birthday gift',
@@ -68,9 +73,9 @@ const levelCardList = [
     ],
   },
   // {
-  //   level: membershipLevel.SPECIAL,
+  //   level: membershipLevel.NEWBIE,
   //   label: <FormattedMessage id='membership_level_5' />,
-  //   card: <MembershipCard userLevel={membershipLevel.BASIC} style={image} />,
+  //   card: <MembershipCard userLevel={membershipLevel.STARTER} style={image} />,
   //   privileges: [],
   //   requirements: [],
   // },

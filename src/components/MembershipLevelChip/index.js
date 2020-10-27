@@ -11,39 +11,39 @@ const MembershipLevelChip = ({userLevel, style}) => {
   const theme = useTheme();
   const levels = [
     {
-      level: membershipLevel.BASIC,
-      backgroundColor: theme.colors.membership.basic.background,
-      textColor: theme.colors.membership.basic.text,
-      borderColor: theme.colors.membership.basic.border,
+      level: membershipLevel.NEWBIE,
+      backgroundColor: theme.colors.membership.newbie.background,
+      textColor: theme.colors.membership.newbie.text,
     },
     {
-      level: membershipLevel.SILVER,
-      backgroundColor: theme.colors.membership.silver.background,
-      textColor: theme.colors.membership.silver.text,
+      level: membershipLevel.STARTER,
+      backgroundColor: theme.colors.membership.starter.background,
+      textColor: theme.colors.membership.starter.text,
     },
     {
-      level: membershipLevel.GOLD,
-      backgroundColor: theme.colors.membership.gold.background,
-      textColor: theme.colors.membership.gold.text,
+      level: membershipLevel.EXTRA,
+      backgroundColor: theme.colors.membership.extra.background,
+      textColor: theme.colors.membership.extra.text,
     },
     {
-      level: membershipLevel.PLATINUM,
-      backgroundColor: theme.colors.membership.platinum.background,
-      textColor: theme.colors.membership.platinum.text,
+      level: membershipLevel.ELITE,
+      backgroundColor: theme.colors.membership.elite.background,
+      textColor: theme.colors.membership.elite.text,
     },
     {
-      level: membershipLevel.DIAMOND,
-      backgroundColor: theme.colors.membership.diamond.background,
-      textColor: theme.colors.membership.diamond.text,
+      level: membershipLevel.INFINITE,
+      backgroundColor: theme.colors.membership.infinite.background,
+      textColor: theme.colors.membership.infinite.text,
     },
     {
-      level: membershipLevel.SPECIAL,
-      backgroundColor: theme.colors.membership.special.background,
-      textColor: theme.colors.membership.special.text,
+      level: membershipLevel.INFINITE_PRIVILEGE,
+      backgroundColor: theme.colors.membership.infinite_privilege.background,
+      textColor: theme.colors.membership.infinite_privilege.text,
+      borderColor: theme.colors.membership.infinite_privilege.border,
     },
   ];
 
-  const currentLevel = levels.find(level => level.level === userLevel);
+  const currentLevel = levels.find((level) => level.level === userLevel);
   const backgroundColor = currentLevel.backgroundColor;
   const textColor = currentLevel.textColor;
   const borderColor = currentLevel.borderColor;

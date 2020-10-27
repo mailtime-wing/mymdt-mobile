@@ -4,7 +4,13 @@ export const darkTheme = {
   colors: {
     // main theme
     primary: ['#9FBDE9', '#9FBDE9', 'rgba(159, 189, 233, 0.2)'],
-    secondary: ['#88D9DE', '#88D9DE', '#88D9DE', 'rgba(136, 217, 222, 0.2)'],
+    secondary: [
+      '#88D9DE',
+      '#88D9DE',
+      '#88D9DE',
+      'rgba(136, 217, 222, 0.2)',
+      'rgba(136, 217, 222, 0.24)',
+    ],
     contrastColor: '#FFFFFF',
 
     // text
@@ -51,18 +57,24 @@ export const darkTheme = {
     errorBackground: 'rgba(255, 113, 113, 0.2)',
     themeBackground: '#121212',
 
-    // membership
+    // membership (background, color, border, gradient)
     membership: {
-      basic: [
+      newbie: [
         '#121212',
         'rgba(255, 255, 255, 0.87)',
         'rgba(255, 255, 255, 0.08)',
+        ['#121212', '#121212'],
       ],
-      silver: ['#A4A4A4', '#121212'],
-      gold: ['#CEBE85', '#121212'],
-      platinum: ['#ADB8CF', '#121212'],
-      diamond: ['#D0DCE6', '#121212'],
-      special: ['#9FBDE9', '#121212'],
+      starter: ['#88D9DE', '#121212', '', ['#005A5F', '#003234']],
+      extra: ['#9FBDE9', '#121212', '', ['#003A8F', '#002862']],
+      elite: ['#DBDBDB', '#454545', '', ['#656565', '#363636']],
+      infinite: ['#ECDCBC', '#6F5D40', '', ['#745A00', '#292300']],
+      infinite_privilege: [
+        '#000000',
+        '#FFFFFF',
+        '#FFFFFF',
+        ['#575757', '#313131'],
+      ],
     },
 
     // button
@@ -83,7 +95,10 @@ export const darkTheme = {
     borderColor: 'rgba(255, 255, 255, 0.2)',
     contrastBorderColor: 'rgba(18, 18, 18, 0.2)',
 
-    linearGradientBackground: ['#121212', '#121212'],
+    linearGradientBackground: [
+      ['#121212', '#121212'],
+      ['rgba(30, 30, 30, 0)', '#1E1E1E'],
+    ],
     tabScreenStatusBar: '#121212',
 
     system_theme: '#121212',
@@ -120,7 +135,13 @@ export const lightTheme = {
   colors: {
     // main theme
     primary: ['#0363EF', '#0036C5', 'rgba(3, 99, 239, 0.05)'],
-    secondary: ['#21CEDB', '#ABEBEE', '#00BACE', 'rgba(33, 206, 219, 0.2)'],
+    secondary: [
+      '#21CEDB',
+      '#ABEBEE',
+      '#00BACE',
+      'rgba(33, 206, 219, 0.2)',
+      '#E9FAFB',
+    ],
     contrastColor: '#000000',
 
     // text
@@ -160,14 +181,14 @@ export const lightTheme = {
     errorBackground: 'rgba(216, 16, 16, 0.1)',
     themeBackground: '#21CEDB',
 
-    // membership
+    // membership (background, color, border, gradient)
     membership: {
-      basic: ['#000000', '#FFFFFF', '#000000'],
-      silver: ['#EAEAEA', '#707070'],
-      gold: ['#FFDC22', '#8F722E'],
-      platinum: ['#DFE3EB', '#466C8E'],
-      diamond: ['#DCF3F4', '#417296'],
-      special: ['#0363EF', '#FFFFFF'],
+      newbie: ['#000000', '#FFFFFF', '#000000', ['#FAFAFA', '#F2F2F2']],
+      starter: ['#00BACE', '#FFFFFF', '', ['#ABEBEE', '#E6FEFF']],
+      extra: ['#0363EF', '#FFFFFF', '', ['#C9DFFF', '#EAF2FF']],
+      elite: ['#EAEAEA', '#707070', '', ['#DEDEDE', '#F7F7F7']],
+      infinite: ['#FFDC22', '#8F722E', '', ['#EEDBBA', '#FFF8EC']],
+      infinite_privilege: ['#000000', '#FFFFFF', '', ['#A3A3A3', '#F2F2F2']],
     },
 
     // button
@@ -188,7 +209,10 @@ export const lightTheme = {
     borderColor: 'rgba(0, 0, 0, 0.2)',
     contrastBorderColor: 'rgba(255, 255, 255, 0.2)',
 
-    linearGradientBackground: ['#FDFBF2', '#E2FAFF'],
+    linearGradientBackground: [
+      ['#FDFBF2', '#E2FAFF'],
+      ['rgba(255, 255, 255, 0)', '#FFFFFF'],
+    ],
     tabScreenStatusBar: '#FDFBF2',
 
     system_theme: '#F4F4F4',
@@ -230,6 +254,7 @@ lightTheme.colors.secondary.normal = lightTheme.colors.secondary[0];
 lightTheme.colors.secondary.light = lightTheme.colors.secondary[1];
 lightTheme.colors.secondary.dark = lightTheme.colors.secondary[2];
 lightTheme.colors.secondary.border = lightTheme.colors.secondary[3];
+lightTheme.colors.secondary.superLight = lightTheme.colors.secondary[4];
 
 // text
 lightTheme.colors.textOnError.normal = lightTheme.colors.textOnError[0];
@@ -260,31 +285,48 @@ lightTheme.colors.elevatedThemeBackground.mrp =
 lightTheme.colors.elevatedThemeBackground.mdt =
   lightTheme.colors.elevatedThemeBackground[1];
 
+lightTheme.colors.linearGradientBackground.theme =
+  lightTheme.colors.linearGradientBackground[0];
+lightTheme.colors.linearGradientBackground.contrast =
+  lightTheme.colors.linearGradientBackground[1];
+
 // membership
-lightTheme.colors.membership.basic.background =
-  lightTheme.colors.membership.basic[0];
-lightTheme.colors.membership.basic.text = lightTheme.colors.membership.basic[1];
-lightTheme.colors.membership.basic.border =
-  lightTheme.colors.membership.basic[2];
-lightTheme.colors.membership.silver.background =
-  lightTheme.colors.membership.silver[0];
-lightTheme.colors.membership.silver.text =
-  lightTheme.colors.membership.silver[1];
-lightTheme.colors.membership.gold.background =
-  lightTheme.colors.membership.gold[0];
-lightTheme.colors.membership.gold.text = lightTheme.colors.membership.gold[1];
-lightTheme.colors.membership.platinum.background =
-  lightTheme.colors.membership.platinum[0];
-lightTheme.colors.membership.platinum.text =
-  lightTheme.colors.membership.platinum[1];
-lightTheme.colors.membership.diamond.background =
-  lightTheme.colors.membership.diamond[0];
-lightTheme.colors.membership.diamond.text =
-  lightTheme.colors.membership.diamond[1];
-lightTheme.colors.membership.special.background =
-  lightTheme.colors.membership.special[0];
-lightTheme.colors.membership.special.text =
-  lightTheme.colors.membership.special[1];
+lightTheme.colors.membership.newbie.background =
+  lightTheme.colors.membership.newbie[0];
+lightTheme.colors.membership.newbie.text =
+  lightTheme.colors.membership.newbie[1];
+lightTheme.colors.membership.newbie.border =
+  lightTheme.colors.membership.newbie[2];
+lightTheme.colors.membership.newbie.gradient =
+  lightTheme.colors.membership.newbie[3];
+lightTheme.colors.membership.starter.background =
+  lightTheme.colors.membership.starter[0];
+lightTheme.colors.membership.starter.text =
+  lightTheme.colors.membership.starter[1];
+lightTheme.colors.membership.starter.gradient =
+  lightTheme.colors.membership.starter[3];
+lightTheme.colors.membership.extra.background =
+  lightTheme.colors.membership.extra[0];
+lightTheme.colors.membership.extra.text = lightTheme.colors.membership.extra[1];
+lightTheme.colors.membership.extra.gradient =
+  lightTheme.colors.membership.extra[3];
+lightTheme.colors.membership.elite.background =
+  lightTheme.colors.membership.elite[0];
+lightTheme.colors.membership.elite.text = lightTheme.colors.membership.elite[1];
+lightTheme.colors.membership.elite.gradient =
+  lightTheme.colors.membership.elite[3];
+lightTheme.colors.membership.infinite.background =
+  lightTheme.colors.membership.infinite[0];
+lightTheme.colors.membership.infinite.text =
+  lightTheme.colors.membership.infinite[1];
+lightTheme.colors.membership.infinite.gradient =
+  lightTheme.colors.membership.infinite[3];
+lightTheme.colors.membership.infinite_privilege.background =
+  lightTheme.colors.membership.infinite_privilege[0];
+lightTheme.colors.membership.infinite_privilege.text =
+  lightTheme.colors.membership.infinite_privilege[1];
+lightTheme.colors.membership.infinite_privilege.gradient =
+  lightTheme.colors.membership.infinite_privilege[3];
 
 // others
 lightTheme.colors.toggleOn.button = lightTheme.colors.toggleOn[0];
@@ -302,6 +344,7 @@ lightTheme.fonts.heading2 = lightTheme.fonts.heading;
 lightTheme.fonts.heading3 = lightTheme.fonts.heading;
 lightTheme.fonts.heading4 = lightTheme.fonts.heading;
 lightTheme.fonts.heading5 = lightTheme.fonts.heading;
+lightTheme.fonts.heading6 = lightTheme.fonts.heading;
 lightTheme.fonts.subTitle1 = lightTheme.fonts.heading;
 lightTheme.fonts.subTitle2 = lightTheme.fonts.heading;
 lightTheme.fonts.subTitle3 = lightTheme.fonts.heading;
@@ -329,6 +372,7 @@ lightTheme.fontSizes.heading2 = lightTheme.fontSizes[7];
 lightTheme.fontSizes.heading3 = lightTheme.fontSizes[6];
 lightTheme.fontSizes.heading4 = lightTheme.fontSizes[5];
 lightTheme.fontSizes.heading5 = lightTheme.fontSizes[4];
+lightTheme.fontSizes.heading6 = lightTheme.fontSizes[3];
 lightTheme.fontSizes.subTitle1 = lightTheme.fontSizes[4];
 lightTheme.fontSizes.subTitle2 = lightTheme.fontSizes[3];
 lightTheme.fontSizes.subTitle3 = lightTheme.fontSizes[2];
@@ -356,6 +400,7 @@ lightTheme.fontWeights.heading2 = lightTheme.fontWeights[1];
 lightTheme.fontWeights.heading3 = lightTheme.fontWeights[1];
 lightTheme.fontWeights.heading4 = lightTheme.fontWeights[1];
 lightTheme.fontWeights.heading5 = lightTheme.fontWeights[1];
+lightTheme.fontWeights.heading6 = lightTheme.fontWeights[1];
 lightTheme.fontWeights.subTitle1 = lightTheme.fontWeights[2];
 lightTheme.fontWeights.subTitle2 = lightTheme.fontWeights[2];
 lightTheme.fontWeights.subTitle3 = lightTheme.fontWeights[2];
@@ -383,6 +428,7 @@ lightTheme.lineHeights.heading2 = lightTheme.fontSizes.heading2 * 1.25;
 lightTheme.lineHeights.heading3 = lightTheme.fontSizes.heading3 * 1.25;
 lightTheme.lineHeights.heading4 = lightTheme.fontSizes.heading4 * 1.25;
 lightTheme.lineHeights.heading5 = lightTheme.fontSizes.heading5 * 1.25;
+lightTheme.lineHeights.heading6 = lightTheme.fontSizes.heading6 * 1.25;
 lightTheme.lineHeights.subTitle1 = lightTheme.fontSizes.subTitle1 * 1.25;
 lightTheme.lineHeights.subTitle2 = lightTheme.fontSizes.subTitle2 * 1.25;
 lightTheme.lineHeights.subTitle3 = lightTheme.fontSizes.subTitle3 * 1.25;
@@ -413,6 +459,7 @@ darkTheme.colors.secondary.normal = darkTheme.colors.secondary[0];
 darkTheme.colors.secondary.light = darkTheme.colors.secondary[1];
 darkTheme.colors.secondary.dark = darkTheme.colors.secondary[2];
 darkTheme.colors.secondary.border = darkTheme.colors.secondary[3];
+darkTheme.colors.secondary.superLight = darkTheme.colors.secondary[4];
 
 // text
 darkTheme.colors.textOnError.normal = darkTheme.colors.textOnError[0];
@@ -443,29 +490,49 @@ darkTheme.colors.elevatedThemeBackground.mrp =
 darkTheme.colors.elevatedThemeBackground.mdt =
   darkTheme.colors.elevatedThemeBackground[1];
 
+darkTheme.colors.linearGradientBackground.theme =
+  darkTheme.colors.linearGradientBackground[0];
+darkTheme.colors.linearGradientBackground.contrast =
+  darkTheme.colors.linearGradientBackground[1];
+
 // membership
-darkTheme.colors.membership.basic.background =
-  darkTheme.colors.membership.basic[0];
-darkTheme.colors.membership.basic.text = darkTheme.colors.membership.basic[1];
-darkTheme.colors.membership.basic.border = darkTheme.colors.membership.basic[2];
-darkTheme.colors.membership.silver.background =
-  darkTheme.colors.membership.silver[0];
-darkTheme.colors.membership.silver.text = darkTheme.colors.membership.silver[1];
-darkTheme.colors.membership.gold.background =
-  darkTheme.colors.membership.gold[0];
-darkTheme.colors.membership.gold.text = darkTheme.colors.membership.gold[1];
-darkTheme.colors.membership.platinum.background =
-  darkTheme.colors.membership.platinum[0];
-darkTheme.colors.membership.platinum.text =
-  darkTheme.colors.membership.platinum[1];
-darkTheme.colors.membership.diamond.background =
-  darkTheme.colors.membership.diamond[0];
-darkTheme.colors.membership.diamond.text =
-  darkTheme.colors.membership.diamond[1];
-darkTheme.colors.membership.special.background =
-  darkTheme.colors.membership.special[0];
-darkTheme.colors.membership.special.text =
-  darkTheme.colors.membership.special[1];
+darkTheme.colors.membership.newbie.background =
+  darkTheme.colors.membership.newbie[0];
+darkTheme.colors.membership.newbie.text = darkTheme.colors.membership.newbie[1];
+darkTheme.colors.membership.newbie.border =
+  darkTheme.colors.membership.newbie[2];
+darkTheme.colors.membership.newbie.gradient =
+  darkTheme.colors.membership.newbie[3];
+darkTheme.colors.membership.starter.background =
+  darkTheme.colors.membership.starter[0];
+darkTheme.colors.membership.starter.text =
+  darkTheme.colors.membership.starter[1];
+darkTheme.colors.membership.starter.gradient =
+  darkTheme.colors.membership.starter[3];
+darkTheme.colors.membership.extra.background =
+  darkTheme.colors.membership.extra[0];
+darkTheme.colors.membership.extra.text = darkTheme.colors.membership.extra[1];
+darkTheme.colors.membership.extra.gradient =
+  darkTheme.colors.membership.extra[3];
+darkTheme.colors.membership.elite.background =
+  darkTheme.colors.membership.elite[0];
+darkTheme.colors.membership.elite.text = darkTheme.colors.membership.elite[1];
+darkTheme.colors.membership.elite.gradient =
+  darkTheme.colors.membership.elite[3];
+darkTheme.colors.membership.infinite.background =
+  darkTheme.colors.membership.infinite[0];
+darkTheme.colors.membership.infinite.text =
+  darkTheme.colors.membership.infinite[1];
+darkTheme.colors.membership.infinite.gradient =
+  darkTheme.colors.membership.infinite[3];
+darkTheme.colors.membership.infinite_privilege.background =
+  darkTheme.colors.membership.infinite_privilege[0];
+darkTheme.colors.membership.infinite_privilege.text =
+  darkTheme.colors.membership.infinite_privilege[1];
+darkTheme.colors.membership.infinite_privilege.border =
+  darkTheme.colors.membership.infinite_privilege[2];
+darkTheme.colors.membership.infinite_privilege.gradient =
+  darkTheme.colors.membership.infinite_privilege[3];
 
 // others
 darkTheme.colors.toggleOn.button = darkTheme.colors.toggleOn[0];
@@ -483,6 +550,7 @@ darkTheme.fonts.heading2 = darkTheme.fonts.heading;
 darkTheme.fonts.heading3 = darkTheme.fonts.heading;
 darkTheme.fonts.heading4 = darkTheme.fonts.heading;
 darkTheme.fonts.heading5 = darkTheme.fonts.heading;
+darkTheme.fonts.heading6 = darkTheme.fonts.heading;
 darkTheme.fonts.subTitle1 = darkTheme.fonts.heading;
 darkTheme.fonts.subTitle2 = darkTheme.fonts.heading;
 darkTheme.fonts.subTitle3 = darkTheme.fonts.heading;
@@ -510,6 +578,7 @@ darkTheme.fontSizes.heading2 = darkTheme.fontSizes[7];
 darkTheme.fontSizes.heading3 = darkTheme.fontSizes[6];
 darkTheme.fontSizes.heading4 = darkTheme.fontSizes[5];
 darkTheme.fontSizes.heading5 = darkTheme.fontSizes[4];
+darkTheme.fontSizes.heading6 = darkTheme.fontSizes[3];
 darkTheme.fontSizes.subTitle1 = darkTheme.fontSizes[4];
 darkTheme.fontSizes.subTitle2 = darkTheme.fontSizes[3];
 darkTheme.fontSizes.subTitle3 = darkTheme.fontSizes[2];
@@ -537,6 +606,7 @@ darkTheme.fontWeights.heading2 = darkTheme.fontWeights[1];
 darkTheme.fontWeights.heading3 = darkTheme.fontWeights[1];
 darkTheme.fontWeights.heading4 = darkTheme.fontWeights[1];
 darkTheme.fontWeights.heading5 = darkTheme.fontWeights[1];
+darkTheme.fontWeights.heading6 = darkTheme.fontWeights[1];
 darkTheme.fontWeights.subTitle1 = darkTheme.fontWeights[2];
 darkTheme.fontWeights.subTitle2 = darkTheme.fontWeights[2];
 darkTheme.fontWeights.subTitle3 = darkTheme.fontWeights[2];
@@ -564,6 +634,7 @@ darkTheme.lineHeights.heading2 = darkTheme.fontSizes.heading2 * 1.25;
 darkTheme.lineHeights.heading3 = darkTheme.fontSizes.heading3 * 1.25;
 darkTheme.lineHeights.heading4 = darkTheme.fontSizes.heading4 * 1.25;
 darkTheme.lineHeights.heading5 = darkTheme.fontSizes.heading5 * 1.25;
+darkTheme.lineHeights.heading6 = darkTheme.fontSizes.heading6 * 1.25;
 darkTheme.lineHeights.subTitle1 = darkTheme.fontSizes.subTitle1 * 1.25;
 darkTheme.lineHeights.subTitle2 = darkTheme.fontSizes.subTitle2 * 1.25;
 darkTheme.lineHeights.subTitle3 = darkTheme.fontSizes.subTitle3 * 1.25;

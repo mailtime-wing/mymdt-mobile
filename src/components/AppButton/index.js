@@ -4,7 +4,7 @@ import {useTheme} from 'emotion-theming';
 
 import AppText from '@/components/AppText2';
 
-import {container, textButton, icon} from './style';
+import {container, text as textStyle, icon} from './style';
 
 /**
  * @typedef {Object} Props
@@ -38,9 +38,7 @@ const AppButton = ({
       disabled={disabled}
       {...props}>
       {SvgIcon && <SvgIcon {...icon(theme, variant, colorVariant, !!text)} />}
-      <AppText
-        variant="button"
-        style={textButton(theme, variant, colorVariant)}>
+      <AppText variant="button" style={textStyle(theme, variant, colorVariant)}>
         {text}
       </AppText>
     </TouchableOpacity>
