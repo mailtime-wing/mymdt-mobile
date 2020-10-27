@@ -3,30 +3,43 @@ import {View} from 'react-native';
 import {FormattedNumber} from 'react-intl';
 import AppText from '@/components/AppText2';
 
+import {
+  MEASURABLE_DATA_TOKEN,
+  MEASURABLE_REWARD_POINT,
+  NEW_TOKEN,
+} from '@/constants/currency';
+
 import {amount as amountStyle, container, unit as unitStyle} from './style';
 import {useTheme} from 'emotion-theming';
 
 /**
  * @typedef {Object} Props
- * @property {'mdt'|'rewardPoint'|'newToken'} unitVariant
+ * @property {MEASURABLE_DATA_TOKEN|MEASURABLE_REWARD_POINT|NEW_TOKEN} unitVariant
  * @property {'from'|'to'} variant
+ * @property {'small'|'normal'} sizeVariant
  */
 
 /**
  *
  * @type {import('react').FunctionComponent<Props>}
  */
-const TransactionAmount = ({amount, variant, unitVariant, style}) => {
+const TransactionAmount = ({
+  amount,
+  variant,
+  unitVariant,
+  sizeVariant,
+  style,
+}) => {
   const theme = useTheme();
   let unit = '';
   switch (unitVariant) {
-    case 'MDT':
+    case MEASURABLE_DATA_TOKEN:
       unit = 'MDT';
       break;
-    case 'MRP':
+    case MEASURABLE_REWARD_POINT:
       unit = 'P';
       break;
-    case 'newToken':
+    case NEW_TOKEN:
       unit = 'NT';
       break;
     default:
@@ -35,16 +48,29 @@ const TransactionAmount = ({amount, variant, unitVariant, style}) => {
 
   return (
     <View style={[container, style]}>
-      <AppText variant="digit16mono" style={[amountStyle(theme, variant)]}>
+      <AppText
+        variant="digit16mono"
+        style={[amountStyle(theme, variant, unitVariant)]}>
         <FormattedNumber
           value={amount}
           minimumFractionDigits={2}
           maximumFractionDigits={2}
         />
       </AppText>
-      <AppText variant="unit11" style={unitStyle(theme, variant)}>
-        {unit}
-      </AppText>
+      {sizeVariant === 'small' && (
+        <AppText
+          variant="unit11"
+          style={unitStyle(theme, variant, unitVariant)}>
+          {unit}
+        </AppText>
+      )}
+      {sizeVariant === 'normal' && (
+        <AppText
+          variant="unit16"
+          style={unitStyle(theme, variant, unitVariant)}>
+          {unit}
+        </AppText>
+      )}
     </View>
   );
 };
