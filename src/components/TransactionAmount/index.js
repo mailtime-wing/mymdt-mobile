@@ -37,6 +37,7 @@ const TransactionAmount = ({
   amountSizeVariant,
   showDollarSign,
   showAlmostEqual,
+  showDecimal,
   style,
 }) => {
   const theme = useTheme();
@@ -109,8 +110,8 @@ const TransactionAmount = ({
         ]}>
         <FormattedNumber
           value={amount}
-          minimumFractionDigits={4}
-          maximumFractionDigits={4}
+          minimumFractionDigits={showDecimal ? 4 : 0}
+          maximumFractionDigits={showDecimal ? 4 : 0}
         />
       </AppText>
       <AppText
@@ -128,6 +129,7 @@ const TransactionAmount = ({
 TransactionAmount.defaultProps = {
   amountSizeVariant: 'normal',
   unitSizeVariant: 'normal',
+  showDecimal: true,
 };
 
 export default TransactionAmount;
