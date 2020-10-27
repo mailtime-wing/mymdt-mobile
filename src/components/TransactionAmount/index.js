@@ -16,7 +16,10 @@ import {useTheme} from 'emotion-theming';
  * @typedef {Object} Props
  * @property {MEASURABLE_DATA_TOKEN|MEASURABLE_REWARD_POINT|NEW_TOKEN} unitVariant
  * @property {'from'|'to'} variant
- * @property {'small'|'normal'} sizeVariant
+ * @property {'small'|'normal'} unitSizeVariant
+ * @property {'small'|'normal'|'large'} amountSizeVariant
+ * @property {string} amountColor
+ * @property {string} unitColor
  */
 
 /**
@@ -27,11 +30,18 @@ const TransactionAmount = ({
   amount,
   variant,
   unitVariant,
-  sizeVariant,
+  unitSizeVariant,
+  unitColor,
+  amountColor,
+  amountSizeVariant,
   style,
 }) => {
   const theme = useTheme();
+
   let unit = '';
+  let unitTextVariant = '';
+  let amountTextVariant = '';
+
   switch (unitVariant) {
     case MEASURABLE_DATA_TOKEN:
       unit = 'MDT';
@@ -46,33 +56,62 @@ const TransactionAmount = ({
       break;
   }
 
+  switch (unitSizeVariant) {
+    case 'small':
+      unitTextVariant = 'unit11';
+      break;
+    case 'normal':
+      unitTextVariant = 'unit16';
+      break;
+    default:
+      break;
+  }
+
+  switch (amountSizeVariant) {
+    case 'small':
+      amountTextVariant = 'digit12mono';
+      break;
+    case 'normal':
+      amountTextVariant = 'digit16mono';
+      break;
+    case 'large':
+      amountTextVariant = 'digit36mono';
+      break;
+    default:
+      break;
+  }
+
   return (
     <View style={[container, style]}>
       <AppText
-        variant="digit16mono"
-        style={[amountStyle(theme, variant, unitVariant)]}>
+        variant={amountTextVariant}
+        style={[
+          amountStyle(
+            theme,
+            variant,
+            unitVariant,
+            amountColor,
+            amountSizeVariant,
+          ),
+        ]}>
         <FormattedNumber
           value={amount}
           minimumFractionDigits={2}
           maximumFractionDigits={2}
         />
       </AppText>
-      {sizeVariant === 'small' && (
-        <AppText
-          variant="unit11"
-          style={unitStyle(theme, variant, unitVariant)}>
-          {unit}
-        </AppText>
-      )}
-      {sizeVariant === 'normal' && (
-        <AppText
-          variant="unit16"
-          style={unitStyle(theme, variant, unitVariant)}>
-          {unit}
-        </AppText>
-      )}
+      <AppText
+        variant={unitTextVariant}
+        style={unitStyle(theme, variant, unitVariant, unitColor)}>
+        {unit}
+      </AppText>
     </View>
   );
+};
+
+TransactionAmount.defaultProps = {
+  amountSizeVariant: 'normal',
+  unitSizeVariant: 'normal',
 };
 
 export default TransactionAmount;
