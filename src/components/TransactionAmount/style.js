@@ -5,7 +5,7 @@ import {
   NEW_TOKEN,
 } from '@/constants/currency';
 
-export const amount = (theme, variant, unitVariant) => css`
+export const amount = (theme, variant, unitVariant, amountSizeVariant) => css`
   ${variant === 'from' &&
   `
   color: ${theme.colors.textOnError.normal};
@@ -33,6 +33,7 @@ export const amount = (theme, variant, unitVariant) => css`
   `}
 
   margin-right: 4px;
+  ${amountSizeVariant === 'large' && 'margin-right: 8px;'}
 `;
 
 export const unit = (theme, variant, unitVariant) => css`

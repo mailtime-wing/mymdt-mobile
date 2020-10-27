@@ -135,7 +135,7 @@ const RenderTransationDetail = ({transactionItem}) => {
             <AppText variant="body2" style={detail(theme)}>
               <TransactionAmount
                 variant="to"
-                sizeVariant="small"
+                unitSizeVariant="small"
                 unitVariant="NT"
                 amount={123}
               />
@@ -179,12 +179,12 @@ const TransactionDetailScreen = ({route}) => {
             coinBackgroundColor={theme.colors.secondary.normal}
             coin={
               <TransactionAmount
+                amount={transactionItem.amount}
                 variant={
                   currencyCode === transactionItem.data.from ? 'from' : 'to'
                 }
                 unitVariant={currencyCode}
-                sizeVariant="small"
-                amount={transactionItem.amount}
+                unitSizeVariant="small"
               />
             }
             style={transactionItemStyle}
