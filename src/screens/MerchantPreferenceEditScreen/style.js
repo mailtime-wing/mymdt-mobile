@@ -1,23 +1,23 @@
 import styled, {css} from '@emotion/native';
 
-export const headerDetailStyle = theme => css`
+export const headerDetailStyle = (theme) => css`
   margin-top: 24px;
   margin-bottom: 40px;
   color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;
 
-export const detailStyle = theme => css`
+export const detailStyle = (theme) => css`
   padding-top: 8px;
   padding-bottom: 16px;
   color: ${theme.colors.textOnBackground.mediumEmphasis};
   width: 70%;
 `;
 
-export const headerStyle = theme => css`
+export const headerStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
-export const numberOfBrandStyle = theme => css`
+export const numberOfBrandStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
@@ -34,6 +34,6 @@ export const Container = styled.View`
 `;
 
 export const Divider = styled.View`
-  border: 1px solid ${props => props.theme.colors.background2};
+  border: 1px solid ${(props) => props.theme.colors.background2};
   margin: 16px 0;
 `;

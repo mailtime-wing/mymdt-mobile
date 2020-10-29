@@ -5,17 +5,17 @@ export const ScrollContainer = styled.ScrollView`
   padding-right: 24px;
 `;
 
-export const detailStyle = theme => css`
+export const detailStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
   margin-bottom: 30px;
 `;
 
-export const titleStyle = theme => css`
+export const titleStyle = (theme) => css`
   color: ${theme.colors.secondary.normal};
   margin-bottom: 30px;
 `;
 
-export const hightLightText = theme => css`
+export const hightLightText = (theme) => css`
   color: ${theme.colors.secondary.normal};
 `;
 
@@ -30,7 +30,7 @@ export const FixedContainer = styled.View`
   height: 110px;
   border-width: 1px;
   border-radius: 24px 24px 0px 0px;
-  border-color: ${props => props.theme.colors.borderColor};
+  border-color: ${(props) => props.theme.colors.borderColor};
   elevation: 1;
 `;
 

@@ -17,7 +17,7 @@ const preloadDataContextInitialValue = {
     isDataSourceBound: false,
     isProfileCompleted: false,
     isCashbackCurrencyCodeSet: false,
-    isBasicOfferSet: false,
+    isMerchantSet: false,
   },
   appConfig: {},
 };

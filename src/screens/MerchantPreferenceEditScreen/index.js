@@ -1,11 +1,11 @@
 import React, {useState, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {useFocusEffect} from '@react-navigation/native';
-import {GET_USER_OFFER_API, GET_USER_MEMBERSHIP_API} from '@/api/data';
+import {GET_USER_MERCHANTS_API, GET_USER_MEMBERSHIP_API} from '@/api/data';
 
 import ModalContaienr from '@/components/ModalContainer';
 import AppButton from '@/components/AppButton';
-import OfferList from '@/components/OfferList';
+import MerchantList from '@/components/MerchantList';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import AppText from '@/components/AppText2';
@@ -24,11 +24,11 @@ import {
 } from './style';
 import {useTheme} from 'emotion-theming';
 
-const OfferPreferenceEditScreen = ({navigation}) => {
+const MerchantPreferenceEditScreen = ({navigation}) => {
   const theme = useTheme();
   const [showModal, setShowModal] = useState(false);
 
-  const {data, loading, refetch} = useQueryWithAuth(GET_USER_OFFER_API, {
+  const {data, loading, refetch} = useQueryWithAuth(GET_USER_MERCHANTS_API, {
     fetchPolicy: 'network-only',
   });
   const {
@@ -36,11 +36,11 @@ const OfferPreferenceEditScreen = ({navigation}) => {
     loading: userMembershipLoading,
   } = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
 
-  const numberOfOffer =
-    userMembershipData?.userProfile?.membership?.brandsNumAllowed || 0;
+  const numberOfMerchant =
+    userMembershipData?.userProfile?.membership?.merchantsNumAllowed || 0;
 
   const canEditDate = new Date(
-    userMembershipData?.userProfile?.basicOfferAvailableForEditAt,
+    userMembershipData?.userProfile?.merchantAvailableForEditAt,
   );
   const canEditPreference = new Date() >= canEditDate;
 
@@ -52,8 +52,8 @@ const OfferPreferenceEditScreen = ({navigation}) => {
 
   const handleEditPress = () => {
     if (canEditPreference) {
-      navigation.navigate('offers_preference', {
-        fromOfferPreferenceEditScreen: true,
+      navigation.navigate('merchants_preference', {
+        fromMerchantPreferenceEditScreen: true,
       });
     } else {
       setShowModal(true);
@@ -85,7 +85,7 @@ const OfferPreferenceEditScreen = ({navigation}) => {
               />
             </AppText>
             <AppText variant="body1" style={numberOfBrandStyle(theme)}>
-              {numberOfOffer} Brands
+              {numberOfMerchant} Brands
             </AppText>
           </RowContainer>
           <AppText variant="caption" style={detailStyle(theme)}>
@@ -117,7 +117,7 @@ const OfferPreferenceEditScreen = ({navigation}) => {
           {loading ? (
             <LoadingSpinner />
           ) : (
-            <OfferList offerList={data?.userProfile?.offers} />
+            <MerchantList merchantList={data?.userProfile?.merchants} />
           )}
         </Container>
         {showModal && (
@@ -144,4 +144,4 @@ const OfferPreferenceEditScreen = ({navigation}) => {
   );
 };
 
-export default OfferPreferenceEditScreen;
+export default MerchantPreferenceEditScreen;
