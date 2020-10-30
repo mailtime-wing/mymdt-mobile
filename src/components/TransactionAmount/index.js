@@ -7,6 +7,7 @@ import {
   MEASURABLE_DATA_TOKEN,
   MEASURABLE_REWARD_POINT,
   NEW_TOKEN,
+  USD,
 } from '@/constants/currency';
 
 import {amount as amountStyle, container, unit as unitStyle} from './style';
@@ -17,7 +18,7 @@ import {useTheme} from 'emotion-theming';
  * @property {MEASURABLE_DATA_TOKEN|MEASURABLE_REWARD_POINT|NEW_TOKEN} unitVariant
  * @property {'from'|'to'} variant
  * @property {'small'|'normal'} unitSizeVariant
- * @property {'small'|'normal'|'large'} amountSizeVariant
+ * @property {'small'|'normal'|'large'|'largeProportional'} amountSizeVariant
  * @property {string} amountColor
  * @property {string} unitColor
  */
@@ -34,6 +35,8 @@ const TransactionAmount = ({
   unitColor,
   amountColor,
   amountSizeVariant,
+  showDollarSign,
+  showAlmostEqual,
   style,
 }) => {
   const theme = useTheme();
@@ -51,6 +54,9 @@ const TransactionAmount = ({
       break;
     case NEW_TOKEN:
       unit = 'NT';
+      break;
+    case USD:
+      unit = 'USD';
       break;
     default:
       break;
@@ -77,6 +83,9 @@ const TransactionAmount = ({
     case 'large':
       amountTextVariant = 'digit36mono';
       break;
+    case 'largeProportional':
+      amountTextVariant = 'digit36';
+      break;
     default:
       break;
   }
@@ -89,10 +98,19 @@ const TransactionAmount = ({
           amountStyle(theme, variant, unitVariant, amountSizeVariant),
           amountColor && {color: amountColor},
         ]}>
+        {showAlmostEqual && '≈'}
+        {showDollarSign && '$'}
+      </AppText>
+      <AppText
+        variant={amountTextVariant}
+        style={[
+          amountStyle(theme, variant, unitVariant, amountSizeVariant),
+          amountColor && {color: amountColor},
+        ]}>
         <FormattedNumber
           value={amount}
-          minimumFractionDigits={2}
-          maximumFractionDigits={2}
+          minimumFractionDigits={4}
+          maximumFractionDigits={4}
         />
       </AppText>
       <AppText
