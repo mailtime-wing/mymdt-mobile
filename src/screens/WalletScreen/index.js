@@ -1,348 +1,225 @@
-import React, {useState, useEffect} from 'react';
-import {FormattedMessage} from 'react-intl';
-import {VirtualizedList, View} from 'react-native';
+import React from 'react';
+import {View, TouchableOpacity, ScrollView} from 'react-native';
 import {TRANSACTIONS_QUERY} from '@/api/data';
-import {REWARD, REDEEM, INTEREST, CHECK_IN} from '@/constants/transactionsType';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {useTheme} from 'emotion-theming';
 
 import AccountBar from '@/components/AccountBar';
-import LinearGradientBackground from '@/components/LinearGradientBackground';
-import MDTCoin from '@/components/MDTCoin';
-import MRPCoin from '@/components/MRPCoin';
-import TransactionBottomSheet from '@/components/TransactionBottomSheet';
+import AppText from '@/components/AppText2';
+import TransactionAmount from '@/components/TransactionAmount';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
+import QuickActions from '@/components/QuickActions';
 
-import CardList from './CardList';
-import ActionButtons from './ActionButtons';
-import TransactionsHistory from '@/components/TransactionsHistory';
+import DollarSignIcon from '@/assets/dollar_sign_icon';
+import ConvertIcon from '@/assets/convert_icon.svg';
+// import GiftIcon from '@/assets/gift_icon.svg';
+import WithdrawalIcon from '@/assets/icon_upload.svg';
+import StakeMdtIcon from '@/assets/icon_download.svg';
+// import MyMdtIcon from '@/assets/mymdt_icon.svg';
 
 import {
   MEASURABLE_REWARD_POINT,
   MEASURABLE_DATA_TOKEN,
+  NEW_TOKEN,
+  USD,
 } from '@/constants/currency';
 
-import ConvertIcon from '@/assets/convert_icon.svg';
-// import GiftIcon from '@/assets/gift_icon.svg';
-// import WithdrawalIcon from '@/assets/withdraw_icon.svg';
-// import MyMdtIcon from '@/assets/mymdt_icon.svg';
+import SafeAreaView from 'react-native-safe-area-view';
 
-import {historyListHeader} from './style';
+import ArrowIcon from '@/assets/list_arrow.svg';
 
-import FilterIcon from '@/assets/filter.svg';
+import {
+  container,
+  total,
+  totalBalance as totalBalanceText,
+  textAlignCenter,
+  currencyRow,
+  currency,
+  amount,
+  amountContainer,
+  lastCurrencyRow,
+  arrow,
+  spinner,
+  payout,
+  sectionMargin,
+} from './style';
 
-import AppButton from '@/components/AppButton';
-import AppIcon from '@/components/AppIcon';
-
-const styleFlexEnd = {
-  justifyContent: 'flex-end',
-  alignItems: 'center',
-  marginBottom: 8,
-};
-
-const filterList = [
-  {label: 'ALL'},
-  {label: 'REWARD', value: REWARD},
-  {label: 'REDEEM', value: REDEEM},
-  {label: 'INTEREST', value: INTEREST},
-  {label: 'CHECK_IN', value: CHECK_IN},
-  ['foo@gmail.com', 'bar@gmail.com'],
-  ['Mastercard (•••• 1001)', 'ABC Bank (•••• 1234)', 'ABC Bank (•••• 4567)'],
-];
-
-function ToUsdAmount(amount) {
+function ToUsdAmount(_amount) {
   let usdRate = 0.78;
-  return (amount * usdRate).toFixed(3);
+  const result = _amount * usdRate;
+  return result;
 }
 
 const WalletScreen = ({navigation}) => {
   const theme = useTheme();
-  const [activeCardIndex, setActiveCardIndex] = useState(0);
-  const [showBottomSheet, setShowBottomSheet] = useState(false);
-  const [activeFilterIndex, setActiveFilterIndex] = useState(0);
-  const [getTransactions, {data, loading, fetchMore}] = useLazyQueryWithAuth(
-    TRANSACTIONS_QUERY,
+  const {data, loading} = useQueryWithAuth(TRANSACTIONS_QUERY, {
+    fetchPolicy: 'network-only',
+  });
+  const rpAmount =
+    data?.userProfile?.currencyAccounts.find(
+      (ca) => ca.currencyCode === MEASURABLE_REWARD_POINT,
+    )?.balance || 0;
+  const mdtAmount =
+    data?.userProfile?.currencyAccounts.find(
+      (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
+    )?.balance || 0;
+  const ntAmount = 1234;
+  const totalBalance = mdtAmount + ntAmount;
+
+  const quickActionList = [
     {
-      fetchPolicy: 'network-only',
-    },
-  );
-
-  useEffect(() => {
-    getTransactions();
-  }, [getTransactions]);
-
-  const mrpTheme = {
-    color: theme.colors.secondary.normal,
-    backgroundColor: theme.colors.secondary.normal,
-    borderColor: theme.colors.secondary.border,
-    cardNameColor: theme.colors.nameOnMrpCard,
-    cardBackgroundColor: theme.colors.mrpCard,
-    buttonsStyle: theme.colors.elevatedThemeBackground.mrp,
-  };
-
-  const mdtTheme = {
-    color: theme.colors.primary.normal,
-    backgroundColor: theme.colors.primary.normal,
-    borderColor: theme.colors.primary.border,
-    cardNameColor: theme.colors.nameOnMdtCard,
-    cardBackgroundColor: theme.colors.mdtCard,
-    buttonsStyle: theme.colors.elevatedThemeBackground.mdt,
-  };
-
-  const cardList = [
-    {
-      type: MEASURABLE_REWARD_POINT,
-      title: 'RewardPoint',
-      coin: (
-        <MRPCoin
-          amount={
-            data?.userProfile?.currencyAccounts?.find(
-              (ca) => ca.currencyCode === MEASURABLE_REWARD_POINT,
-            )?.balance || 0
-          }
-          size={42}
-          fontSize={42}
-          color={theme.colors.mrpCardValue}
-          style={styleFlexEnd}
-        />
-      ),
-      theme: mrpTheme,
-      actionList: [
-        {
-          name: 'convert',
-          id: 'converter',
-          initialFrom: MEASURABLE_REWARD_POINT,
-          initialTo: MEASURABLE_DATA_TOKEN,
-          icon: ConvertIcon,
-          color: mrpTheme.color,
-        },
-        // {name: 'redeem gift', icon: GiftIcon, color: mrpTheme.color},
-      ],
-      buttonsStyle: mrpTheme.buttonsStyle,
+      name: 'Stake MDT',
+      icon: StakeMdtIcon,
+      action: () => navigation.navigate('settings'),
     },
     {
-      type: MEASURABLE_DATA_TOKEN,
-      title: 'Measurable Data Token',
-      coin: (
-        <MDTCoin
-          amount={
-            data?.userProfile?.currencyAccounts?.find(
-              (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
-            )?.balance || 0
-          }
-          size={42}
-          fontSize={42}
-          color={theme.colors.mdtCardValue}
-          style={styleFlexEnd}
-        />
-      ),
-      aroundInUsd: ToUsdAmount(
-        data?.userProfile?.currencyAccounts?.find(
-          (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
-        )?.balance || 0,
-      ),
-      theme: mdtTheme,
-      actionList: [
-        {
-          name: 'convert',
-          id: 'converter',
+      name: 'Withdraw',
+      icon: WithdrawalIcon,
+      action: () => navigation.navigate('settings'),
+    },
+    {
+      name: 'Convert',
+      icon: ConvertIcon,
+      action: () =>
+        navigation.navigate('converter', {
           initialFrom: MEASURABLE_DATA_TOKEN,
           initialTo: MEASURABLE_REWARD_POINT,
-          icon: ConvertIcon,
-          color: mdtTheme.color,
-        },
-        // {
-        //   name: 'withdrawal',
-        //   id: 'withdrawal',
-        //   icon: WithdrawalIcon,
-        //   color: mdtTheme.color,
-        // },
-        // {name: 'gift code', icon: MyMdtIcon, color: mdtTheme.color},
-      ],
-      buttonsStyle: mdtTheme.buttonsStyle,
+        }),
+    },
+    {
+      name: 'Cashback type',
+      icon: DollarSignIcon,
+      action: () => navigation.navigate('settings'),
     },
   ];
 
-  const currentCard = cardList[activeCardIndex];
-  const currentCardData = data?.userProfile?.currencyAccounts[0];
-  const currencyCode = currentCardData?.currencyCode;
-  const cardTransactionsHistory = currentCardData?.transactions?.edges.map(
-    (transaction) =>
-      (transaction = {
-        ...transaction,
-        icon: (
-          <AppIcon
-            color={theme.colors.background1}
-            backgroundColor={
-              currencyCode === MEASURABLE_REWARD_POINT
-                ? theme.colors.secondary.normal
-                : theme.colors.primary.normal
-            }
-            sizeVariant="small"
-            svgIcon={ConvertIcon}
-          />
-        ),
-      }),
-  );
-  const pageInfo = currentCardData?.transactions.pageInfo;
-  const filter = activeFilterIndex ? filterList[activeFilterIndex].value : null;
-
-  useEffect(() => {
-    getTransactions({
-      variables: {
-        currencyCode: currentCard.type || MEASURABLE_REWARD_POINT,
-      },
-    });
-  }, [activeCardIndex, currentCard.type, getTransactions]);
-
-  const handleOnSnapToItem = (cardIndex) => {
-    setActiveCardIndex(cardIndex);
-  };
-
-  const handleFilterPress = () => {
-    setShowBottomSheet(true);
-  };
-
-  const handleLayoutPress = () => {
-    setShowBottomSheet(false);
-  };
-
-  const handleItemPress = (index) => {
-    setActiveFilterIndex(index);
-  };
-
-  const onApplyPress = () => {
-    getTransactions({
-      variables: {
-        ...(filter && {
-          filter: {
-            type: filter,
-          },
-        }),
-        currencyCode: currentCard.type,
-      },
-    });
-
-    setShowBottomSheet(false);
-  };
-
-  const onLoadMore = () => {
-    if (!pageInfo?.hasNextPage) {
-      return;
-    }
-
-    fetchMore({
-      ...(filter && {
-        filter: {
-          type: filter,
-        },
-      }),
-      variables: {
-        currencyCode: currentCard.type,
-        cursor: pageInfo.endCursor,
-      },
-      updateQuery: (previousResult, {fetchMoreResult}) => {
-        if (
-          !fetchMoreResult?.userProfile?.currencyAccounts?.[0]?.transactions
-            ?.edges?.length
-        ) {
-          return previousResult;
-        }
-
-        const newData = JSON.parse(JSON.stringify(fetchMoreResult));
-
-        newData.userProfile.currencyAccounts[0].transactions.edges = [
-          ...previousResult.userProfile.currencyAccounts[0].transactions.edges,
-          ...fetchMoreResult.userProfile.currencyAccounts[0].transactions.edges,
-        ];
-
-        return newData;
-      },
-    });
-  };
-
   return (
-    <LinearGradientBackground>
-      <VirtualizedList
-        getItemCount={() => 0}
-        ListHeaderComponent={
-          <>
-            {/* TODO: improve loading */}
-            {loading && <LoadingSpinner />}
-            <AccountBar navigation={navigation} />
-            <CardList
-              cardList={cardList}
-              onSnapToItem={handleOnSnapToItem}
-              activeCardIndex={activeCardIndex}
-            />
-            <ActionButtons
-              actionList={currentCard.actionList}
-              buttonsStyle={currentCard.buttonsStyle}
-              color={currentCard.theme.color}
-              navigation={navigation}
-            />
-          </>
-        }
-        ListFooterComponent={
-          <TransactionsHistory
-            headerComponent={
-              <View style={historyListHeader(theme)}>
-                <AppButton
-                  onPress={handleFilterPress}
-                  text={
-                    <FormattedMessage
-                      id="button.filter"
-                      defaultMessage="FILTER"
-                    />
-                  }
-                  variant="outlined"
-                  sizeVariant="normal"
-                  colorVariant={
-                    currencyCode === MEASURABLE_REWARD_POINT
-                      ? 'secondary'
-                      : 'primary'
-                  }
-                  svgIcon={FilterIcon}
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                />
-                <AppButton
-                  onPress={() => navigation.navigate('missing_receipt')}
-                  text={
-                    <FormattedMessage
-                      id="missing_receipt"
-                      defaultMessage="missing receipt"
-                    />
-                  }
-                  variant="outlined"
-                  sizeVariant="compact"
-                  colorVariant={
-                    currencyCode === MEASURABLE_REWARD_POINT
-                      ? 'secondary'
-                      : 'primary'
-                  }
-                />
-              </View>
-            }
-            transactionsHistoryList={cardTransactionsHistory}
-            currencyCode={currencyCode}
-            navigation={navigation}
-            // FlatList props
-            onEndReached={onLoadMore}
+    <ScrollView>
+      <SafeAreaView style={container(theme)}>
+        <AccountBar showCoins={false} />
+        <AppText variant="label" style={[total(theme), textAlignCenter]}>
+          total balance
+        </AppText>
+        {loading ? (
+          <LoadingSpinner color={theme.colors.background1} />
+        ) : (
+          <TransactionAmount
+            amount={totalBalance}
+            showDollarSign
+            amountSizeVariant="largeProportional"
+            amountColor={theme.colors.textOnThemeBackground.highEmphasis}
+            style={totalBalanceText}
           />
-        }
-      />
-      {showBottomSheet && (
-        <TransactionBottomSheet
-          title={<FormattedMessage id="filter_by" defaultMessage="Filter by" />}
-          items={filterList}
-          activeOptionIndex={activeFilterIndex}
-          onLayoutPress={handleLayoutPress}
-          onItemPress={handleItemPress}
-          onApplyPress={onApplyPress}
+        )}
+      </SafeAreaView>
+      <View style={currencyRow(theme)}>
+        <AppText variant="subTitle2" style={currency(theme)}>
+          RewardPoint
+        </AppText>
+        {loading ? (
+          <LoadingSpinner style={spinner} />
+        ) : (
+          <View style={amountContainer}>
+            <TransactionAmount
+              amount={rpAmount}
+              amountSizeVariant="normal"
+              unitSizeVariant="small"
+              unitVariant={MEASURABLE_REWARD_POINT}
+              unitColor={theme.colors.secondary.dark}
+              amountColor={theme.colors.textOnBackground.mediumEmphasis}
+              style={amount}
+            />
+            <TransactionAmount
+              amount={ToUsdAmount(rpAmount)}
+              amountSizeVariant="small"
+              unitSizeVariant="small"
+              unitVariant={USD}
+              showDollarSign
+              showAlmostEqual
+              unitColor={theme.colors.textOnBackground.mediumEmphasis}
+              amountColor={theme.colors.textOnBackground.mediumEmphasis}
+              style={amount}
+            />
+          </View>
+        )}
+
+        <ArrowIcon style={arrow} />
+      </View>
+      <TouchableOpacity style={currencyRow(theme)}>
+        <AppText variant="subTitle2" style={currency(theme)}>
+          MDT
+        </AppText>
+        {loading ? (
+          <LoadingSpinner style={spinner} />
+        ) : (
+          <View style={amountContainer}>
+            <TransactionAmount
+              amount={mdtAmount}
+              amountSizeVariant="normal"
+              unitSizeVariant="small"
+              unitVariant={MEASURABLE_DATA_TOKEN}
+              amountColor={theme.colors.textOnBackground.mediumEmphasis}
+              unitColor={theme.colors.secondary.dark}
+              style={amount}
+            />
+            <TransactionAmount
+              amount={ToUsdAmount(mdtAmount)}
+              amountSizeVariant="small"
+              unitSizeVariant="small"
+              unitVariant={USD}
+              showDollarSign
+              showAlmostEqual
+              unitColor={theme.colors.textOnBackground.mediumEmphasis}
+              amountColor={theme.colors.textOnBackground.mediumEmphasis}
+              style={amount}
+            />
+            <AppText variant="digit12mono" style={payout(theme)}>
+              Earned 100,000NT (Payout in 4 days)
+            </AppText>
+          </View>
+        )}
+        <ArrowIcon
+          stroke={theme.colors.textOnBackground.mediumEmphasis}
+          style={arrow}
         />
-      )}
-    </LinearGradientBackground>
+      </TouchableOpacity>
+      <TouchableOpacity style={[currencyRow(theme), lastCurrencyRow]}>
+        <AppText variant="subTitle2" style={currency(theme)}>
+          NewToken
+        </AppText>
+        {loading ? (
+          <LoadingSpinner style={spinner} />
+        ) : (
+          <View style={amountContainer}>
+            <TransactionAmount
+              amount={ntAmount}
+              amountSizeVariant="normal"
+              unitSizeVariant="small"
+              unitVariant={NEW_TOKEN}
+              amountColor={theme.colors.textOnBackground.mediumEmphasis}
+              unitColor={theme.colors.secondary.dark}
+              style={amount}
+            />
+            <TransactionAmount
+              amount={ToUsdAmount(ntAmount)}
+              amountSizeVariant="small"
+              unitSizeVariant="small"
+              unitVariant={USD}
+              showDollarSign
+              showAlmostEqual
+              unitColor={theme.colors.textOnBackground.mediumEmphasis}
+              amountColor={theme.colors.textOnBackground.mediumEmphasis}
+              style={amount}
+            />
+          </View>
+        )}
+        <ArrowIcon
+          stroke={theme.colors.textOnBackground.mediumEmphasis}
+          style={arrow}
+        />
+      </TouchableOpacity>
+      <QuickActions actionList={quickActionList} style={sectionMargin} />
+    </ScrollView>
   );
 };
 
