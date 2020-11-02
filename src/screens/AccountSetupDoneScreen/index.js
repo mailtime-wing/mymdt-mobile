@@ -23,7 +23,7 @@ const AccountSetupDoneScreen = () => {
   } = useQueryWithAuth(GET_USER_REWARDS_API);
 
   const accountSetupReward = userRewardsApiData?.userProfile?.rewards?.find(
-    reward => reward.task_id === appConfig.accountSetupTaskID,
+    (reward) => reward.taskId === appConfig.accountSetupTaskID,
   );
 
   const handlePress = () => {

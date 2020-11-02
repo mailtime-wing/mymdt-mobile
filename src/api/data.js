@@ -166,7 +166,7 @@ export const GET_USER_REWARDS_API = gql`
       rewards {
         id
         value
-        task_id
+        taskId
       }
     }
   }
@@ -236,8 +236,8 @@ export const GET_USER_TASK_GROUPS_AND_REWARD_API = gql`
       }
       rewards {
         id
-        task_id
-        claimed_time
+        taskId
+        claimedTime
       }
     }
   }
