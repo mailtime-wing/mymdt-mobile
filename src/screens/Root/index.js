@@ -11,7 +11,7 @@ import {useTheme} from 'emotion-theming';
 import {css} from '@emotion/native';
 
 import OnboardingScreen from '@/screens/OnboardingScreen';
-import OfferSelectScreen from '@/screens/OfferSelectScreen';
+import MerchantSelectScreen from '@/screens/MerchantSelectScreen';
 import EnterScreen from '@/screens/EnterScreen';
 import VerifyEnterScreen from '@/screens/VerifyEnterScreen';
 import UserProfileScreen from '@/screens/UserProfileScreen';
@@ -48,7 +48,7 @@ import VerifyIdentityScreen from '@/screens/VerifyIdentityScreen';
 import ResetPinScreen from '@/screens/ResetPinScreen';
 import PinSuccessScreen from '@/screens/PinSuccessScreen';
 
-import OfferPreferenceEditScreen from '@/screens/OfferPreferenceEditScreen';
+import MerchantPreferenceEditScreen from '@/screens/MerchantPreferenceEditScreen';
 import LinkedCardsSettingScreen from '@/screens/LinkedCardsSettingScreen';
 import ChooseRegionSettingScreen from '@/screens/ChooseRegionSettingScreen';
 import DataSourceInfoSettingScreen from '@/screens/DataSourceInfoSettingScreen';
@@ -100,7 +100,7 @@ const setupScreens = [
   },
   // 3rd step: select offers
   {name: 'welcome', component: WelcomeScreen},
-  {name: 'offer_select', component: OfferSelectScreen},
+  {name: 'merchant_select', component: MerchantSelectScreen},
   // 4rd step: bind email (which is skippable)
   {
     name: 'introduction',
@@ -174,8 +174,8 @@ const authModalScreens = [
 const settingScreens = [
   {name: 'settingsHome', component: SettingScreen},
   {name: 'edit_profile', component: UserProfileEditScreen},
-  {name: 'offers_preference_edit', component: OfferPreferenceEditScreen},
-  {name: 'offers_preference', component: OfferSelectScreen},
+  {name: 'offers_preference_edit', component: MerchantPreferenceEditScreen},
+  {name: 'merchants_preference', component: MerchantSelectScreen},
   {name: 'emails_binding', component: BindEmailScreen}, // same as add_email in setupScreens (but different navigator)
   {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
   {name: 'referral', component: ReferralScreen},

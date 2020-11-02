@@ -74,26 +74,31 @@ export const GET_USER_EMAIL_ACCOUNTS_API = gql`
   }
 `;
 
-export const GET_BASIC_OFFER_API = gql`
-  query BasicOffers($locale: Locale!) {
-    basicOffers(locale: $locale) {
+export const GET_MERCHANTS_API = gql`
+  query Merchants {
+    merchants {
       id
-      type
       name
-      description
-      cashbackRate
-      brand {
-        id
-        name
-        logo
-      }
+      logo
     }
   }
 `;
 
-export const UPDATE_BASIC_OFFER_API = gql`
-  mutation UpdateBasicOffers($ids: [ID!]!) {
-    updateBasicOffers(ids: $ids)
+export const CHOOSE_MERCHANTS_API = gql`
+  mutation ChooseMerchants($ids: [ID!]!) {
+    chooseMerchants(ids: $ids)
+  }
+`;
+
+export const GET_ALLOWED_MERCHANT_NUM = gql`
+  query {
+    userProfile {
+      id
+      membership {
+        id
+        merchantsNumAllowed
+      }
+    }
   }
 `;
 
@@ -106,13 +111,12 @@ export const GET_USER_MEMBERSHIP_API = gql`
         id
         name
         level
-        inviteRequired
         mdtRequired
-        brandsNumAllowed
         cashbackAdd
         interestRate
+        merchantsNumAllowed
       }
-      basicOfferAvailableForEditAt
+      merchantAvailableForEditAt
       currencyAccounts {
         id
         currencyCode
@@ -122,21 +126,14 @@ export const GET_USER_MEMBERSHIP_API = gql`
   }
 `;
 
-export const GET_USER_OFFER_API = gql`
+export const GET_USER_MERCHANTS_API = gql`
   query {
     userProfile {
       id
-      offers {
+      merchants {
         id
-        type
-        brand {
-          id
-          name
-          logo
-        }
         name
-        description
-        cashbackRate
+        logo
       }
     }
   }
@@ -150,7 +147,7 @@ export const GET_USER_SETUP_STATUS_API = gql`
         isDataSourceBound
         isProfileCompleted
         isCashbackCurrencyCodeSet
-        isBasicOfferSet
+        isMerchantSet
       }
     }
   }
@@ -168,15 +165,8 @@ export const GET_USER_REWARDS_API = gql`
       id
       rewards {
         id
-        name
-        description
         value
-        claimable
-        claimed_time
-        callback_url
-        user_id
-        status
-        task_id
+        taskId
       }
     }
   }
@@ -186,7 +176,6 @@ export const GET_APP_CONFIG_API = gql`
   query {
     appConfig {
       accountSetupTaskID
-      inviteFriendTaskID
     }
   }
 `;
@@ -247,15 +236,8 @@ export const GET_USER_TASK_GROUPS_AND_REWARD_API = gql`
       }
       rewards {
         id
-        name
-        description
-        value
-        claimable
-        callback_url
-        claimed_time
-        user_id
-        task_id
-        status
+        taskId
+        claimedTime
       }
     }
   }

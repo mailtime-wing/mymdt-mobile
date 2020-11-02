@@ -1,11 +1,9 @@
-import React, {useState, useContext, useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {useQuery} from '@apollo/client';
 import {useTheme} from 'emotion-theming';
 
-import {IntlContext} from '@/context/Intl';
 import AppButton from '@/components/AppButton';
-import OfferList from '@/components/OfferList';
+import MerchantList from '@/components/MerchantList';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ScreenContainer from '@/components/ScreenContainer';
@@ -14,9 +12,9 @@ import useSetupFlow from '@/hooks/useSetupFlow';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {
-  GET_BASIC_OFFER_API,
-  GET_USER_MEMBERSHIP_API,
-  UPDATE_BASIC_OFFER_API,
+  GET_MERCHANTS_API,
+  GET_ALLOWED_MERCHANT_NUM,
+  CHOOSE_MERCHANTS_API,
 } from '@/api/data';
 
 import {
@@ -29,40 +27,33 @@ import {
   brandSelectedText,
 } from './style';
 
-const OfferSelectScreen = ({route, navigation}) => {
+const MerchantSelectScreen = ({route, navigation}) => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
-  const [selectedOffers, setSelectedOffers] = useState([]);
+  const [selectedMerchants, setSelectedMerchants] = useState([]);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
-  const [isErrorFromOfferList, setIsErrorFromOfferList] = useState(false);
-  const {localeEnum} = useContext(IntlContext);
-  const basicOfferApiData = useQuery(GET_BASIC_OFFER_API, {
-    variables: {locale: localeEnum},
-  });
-  const userMembershipApiData = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
-  const [updateBasicOfferRequest] = useMutationWithAuth(UPDATE_BASIC_OFFER_API);
-  const numberOfOffer =
-    userMembershipApiData.data &&
-    userMembershipApiData.data.userProfile.membership.brandsNumAllowed;
+  const [isErrorFromMerchantList, setIsErrorFromMerchantList] = useState(false);
+  const {data, loading, error} = useQueryWithAuth(GET_MERCHANTS_API);
+  const {
+    data: allowedMerchantNum,
+    loading: allowedMerchantNumLoading,
+    error: allowedMerchantNumError,
+  } = useQueryWithAuth(GET_ALLOWED_MERCHANT_NUM);
+  const [chooseMerchantRequest] = useMutationWithAuth(CHOOSE_MERCHANTS_API);
+  const numberOfMerchant =
+    allowedMerchantNum &&
+    allowedMerchantNum.userProfile.membership.merchantsNumAllowed;
 
   const formatOfferString = () => {
-    const lastOfferIndex = selectedOffers.length - 1;
-    const lastOffer = selectedOffers[lastOfferIndex]
-      ? selectedOffers[lastOfferIndex].name
-      : '';
-    let result = selectedOffers
-      .map(offer => {
-        if (selectedOffers.indexOf(offer) !== lastOfferIndex) {
-          return offer.name;
-        }
-      })
+    const result = selectedMerchants
+      .map((merchant) => merchant.name)
       .join(' and ');
-    return result + lastOffer;
+    return result;
   };
 
-  const handlePopupState = state => {
+  const handlePopupState = (state) => {
     if (state === 'OK') {
-      handleSubmitBasicOffer();
+      handleSubmitMerchant();
     }
     setShowConfirmPopup(false);
   };
@@ -71,19 +62,19 @@ const OfferSelectScreen = ({route, navigation}) => {
     setShowConfirmPopup(true);
   };
 
-  const handleError = useCallback(isError => {
-    setIsErrorFromOfferList(isError);
+  const handleError = useCallback((isError) => {
+    setIsErrorFromMerchantList(isError);
   }, []);
 
-  const handleSubmitBasicOffer = async () => {
+  const handleSubmitMerchant = async () => {
     try {
-      await updateBasicOfferRequest({
+      await chooseMerchantRequest({
         variables: {
-          ids: selectedOffers.map(selectedOffer => selectedOffer.id),
+          ids: selectedMerchants.map((selectedOffer) => selectedOffer.id),
         },
       });
 
-      if (route?.params?.fromOfferPreferenceEditScreen) {
+      if (route?.params?.fromMerchantPreferenceEditScreen) {
         navigation.goBack();
         return;
       }
@@ -94,11 +85,11 @@ const OfferSelectScreen = ({route, navigation}) => {
     }
   };
 
-  if (basicOfferApiData.loading || userMembershipApiData.loading) {
+  if (loading || allowedMerchantNumLoading) {
     return <LoadingSpinner />;
   }
 
-  if (basicOfferApiData.error || userMembershipApiData.error) {
+  if (error || allowedMerchantNumError) {
     return (
       <PopupModal
         title="Error"
@@ -127,10 +118,10 @@ const OfferSelectScreen = ({route, navigation}) => {
           <AppText variant="body1" style={detailStyle(theme)}>
             <FormattedMessage
               id="please_select_brands"
-              defaultMessage="Please choose <FilterText>{number_of_offers} brands/services</FilterText> to earn points with each time you spend there."
+              defaultMessage="Please choose <FilterText>{number_of_merchants} brands/services</FilterText> to earn points with each time you spend there."
               values={{
-                number_of_offers: numberOfOffer,
-                FilterText: str => (
+                number_of_merchants: numberOfMerchant,
+                FilterText: (str) => (
                   <AppText variant="body1" style={hightLightText(theme)}>
                     {str}
                   </AppText>
@@ -139,13 +130,11 @@ const OfferSelectScreen = ({route, navigation}) => {
               }}
             />
           </AppText>
-          <OfferList
-            offerList={
-              basicOfferApiData.data && basicOfferApiData.data.basicOffers
-            }
-            selectedOffers={selectedOffers}
-            setSelectedOffers={setSelectedOffers}
-            offersLimit={numberOfOffer}
+          <MerchantList
+            merchantList={data.merchants}
+            selectedMerchants={selectedMerchants}
+            setSelectedMerchants={setSelectedMerchants}
+            merchantsLimit={numberOfMerchant}
             onError={handleError}
           />
         </ScreenContainer>
@@ -153,30 +142,30 @@ const OfferSelectScreen = ({route, navigation}) => {
       <FixedContainer>
         <AppText
           variant="label"
-          style={brandSelectedText(theme, isErrorFromOfferList)}>
-          {isErrorFromOfferList ? (
+          style={brandSelectedText(theme, isErrorFromMerchantList)}>
+          {isErrorFromMerchantList ? (
             <FormattedMessage
-              id="more_offers_selected"
-              defaultMessage="MORE THAN {numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED"
+              id="more_merchants_selected"
+              defaultMessage="MORE THAN {numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED"
               values={{
-                numberOfOffer: numberOfOffer,
-                offerCount: selectedOffers.length,
+                numberOfMerchant: numberOfMerchant,
+                merchantCount: selectedMerchants.length,
               }}
             />
           ) : (
             <FormattedMessage
-              id="offers_selected"
-              defaultMessage="{numberOfOffer} {offerCount, plural, =0 {brand} one {brand} other {brands}} SELECTED"
+              id="merchants_selected"
+              defaultMessage="{numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED"
               values={{
-                numberOfOffer: selectedOffers.length,
-                offerCount: selectedOffers.length,
+                numberOfMerchant: selectedMerchants.length,
+                merchantCount: selectedMerchants.length,
               }}
             />
           )}
         </AppText>
         <AppButton
           onPress={handleNextPress}
-          disabled={isErrorFromOfferList}
+          disabled={isErrorFromMerchantList}
           text={
             <FormattedMessage id="button.confirm" defaultMessage="confirm" />
           }
@@ -196,4 +185,4 @@ const OfferSelectScreen = ({route, navigation}) => {
   );
 };
 
-export default OfferSelectScreen;
+export default MerchantSelectScreen;

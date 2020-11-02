@@ -38,7 +38,7 @@ export const SetupFlowProvider = ({children}) => {
       'user_profile',
       'choose_cash_back_type',
       'welcome',
-      'offer_select',
+      'merchant_select',
       'introduction',
     ],
     'next',
@@ -73,9 +73,9 @@ export const SetupFlowProvider = ({children}) => {
     if (setupStatus?.isCashbackCurrencyCodeSet) {
       result.choose_cash_back_type = true;
     }
-    if (setupStatus?.isBasicOfferSet) {
+    if (setupStatus?.isMerchantSet) {
       result.welcome = true;
-      result.offer_select = true;
+      result.merchant_select = true;
     }
     if (setupStatus?.isDataSourceBound) {
       result.introduction = true;
@@ -85,10 +85,7 @@ export const SetupFlowProvider = ({children}) => {
       result.data_source_info = true;
       result.linked_cards = true;
     }
-    if (
-      setupStatus?.isCashbackCurrencyCodeSet &&
-      setupStatus?.isBasicOfferSet
-    ) {
+    if (setupStatus?.isCashbackCurrencyCodeSet && setupStatus?.isMerchantSet) {
       result.account_setup_done = true;
       result.sign_up_reward = true;
     }

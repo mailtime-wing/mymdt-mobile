@@ -42,7 +42,7 @@ const TaskList = ({taskList, userRewardList, onClaimPress}) => {
     onClaimPress();
   };
 
-  const handleClaimPress = async rewardId => {
+  const handleClaimPress = async (rewardId) => {
     try {
       await claimRewardRequest({
         variables: {
@@ -55,7 +55,7 @@ const TaskList = ({taskList, userRewardList, onClaimPress}) => {
     }
   };
 
-  const handleOpenUrl = async url => {
+  const handleOpenUrl = async (url) => {
     if (!url) {
       setClientError(true);
       return;
@@ -68,12 +68,12 @@ const TaskList = ({taskList, userRewardList, onClaimPress}) => {
 
   return (
     <>
-      {taskList.map(task => {
+      {taskList.map((task) => {
         const relatedReward = userRewardList.find(
-          ct => ct.task_id === task.taskId,
+          (ct) => ct.taskId === task.taskId,
         );
         task = {...task, reward: {...relatedReward}};
-        const claimedDate = task.reward?.claimed_time;
+        const claimedDate = task.reward?.claimedTime;
         const claimed = !!claimedDate;
         const callbackUrl = task.taskUrl;
 
@@ -106,7 +106,7 @@ const TaskList = ({taskList, userRewardList, onClaimPress}) => {
               amount={task.rewardValue}
               size={16}
               fontSize={16}
-              color={props => props.theme.colors.textOfMrp}
+              color={(props) => props.theme.colors.textOfMrp}
               style={claimed && flexEnd}
             />
             {!claimed ? (
