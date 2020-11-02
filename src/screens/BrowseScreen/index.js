@@ -31,19 +31,19 @@ const DemoComponents = () => {
     <>
       <View style={testStyle}>
         <AppTag
-          variant="opacity"
+          variant="transparent"
           sizeVariant="small"
           colorVariant="primary"
           text="current"
         />
         <AppTag
-          variant="opacity"
+          variant="transparent"
           sizeVariant="small"
           colorVariant="secondary"
           text="current"
         />
         <AppTag
-          variant="opacity"
+          variant="transparent"
           sizeVariant="small"
           colorVariant="contrast"
           text="current"
@@ -71,21 +71,21 @@ const DemoComponents = () => {
       </View>
       <View style={testStyle}>
         <AppTag
-          variant="opacity"
+          variant="transparent"
           sizeVariant="normal"
           colorVariant="primary"
           text="Tag Text"
           svgIcon={LockIcon}
         />
         <AppTag
-          variant="opacity"
+          variant="transparent"
           sizeVariant="normal"
           colorVariant="secondary"
           text="Tag Text"
           svgIcon={LockIcon}
         />
         <AppTag
-          variant="opacity"
+          variant="transparent"
           sizeVariant="normal"
           colorVariant="contrast"
           text="Tag Text"
@@ -121,15 +121,15 @@ const DemoComponents = () => {
           backgroundColor: theme.colors.secondary.normal,
         }}>
         <AppTag
-          variant="opacity"
+          variant="transparent"
           sizeVariant="small"
-          colorVariant="theme"
+          colorVariant="onBackground"
           text="current"
         />
         <AppTag
           variant="normal"
           sizeVariant="small"
-          colorVariant="theme"
+          colorVariant="onBackground"
           text="current"
         />
       </View>
@@ -139,16 +139,16 @@ const DemoComponents = () => {
           backgroundColor: theme.colors.secondary.normal,
         }}>
         <AppTag
-          variant="opacity"
+          variant="transparent"
           sizeVariant="normal"
-          colorVariant="theme"
+          colorVariant="onBackground"
           text="Tag Text"
           svgIcon={LockIcon}
         />
         <AppTag
           variant="normal"
           sizeVariant="normal"
-          colorVariant="theme"
+          colorVariant="onBackground"
           text="Tag Text"
           svgIcon={LockIcon}
         />

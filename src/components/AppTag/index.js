@@ -8,9 +8,9 @@ import {container, text as textStyle, icon} from './style';
 
 /**
  * @typedef {Object} Props
- * @property {'normal'|'opacity'} variant
+ * @property {'normal'|'transparent'} variant
  * @property {'small'|'normal'} sizeVariant
- * @property {'primary'|'secondary'|'contrast'|'theme'} colorVariant
+ * @property {'primary'|'secondary'|'contrast'|'onBackground'} colorVariant
  */
 
 /**

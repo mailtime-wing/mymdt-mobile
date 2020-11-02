@@ -1,4 +1,5 @@
 import {Platform} from 'react-native';
+import {transparentize} from 'polished';
 
 export const darkTheme = {
   colors: {
@@ -94,20 +95,20 @@ export const darkTheme = {
     // tag
     tag: {
       primary: {
-        background: ['rgba(159, 189, 233, 0.2)', '#9FBDE9'],
-        text: ['#9FBDE9', '#121212'],
+        background: {},
+        text: {},
       },
       secondary: {
-        background: ['rgba(136, 217, 222, 0.2)', '#ABEBEE'],
-        text: ['#88D9DE', '#121212'],
+        background: {},
+        text: {},
       },
       contrast: {
-        background: ['rgba(255, 255, 255, 0.2)', 'rgba(255, 255, 255, 0.87)'],
-        text: ['rgba(255, 255, 255, 0.6)', 'rgba(18, 18, 18, 0.6)'],
+        background: {},
+        text: {},
       },
-      theme: {
-        background: ['rgba(18, 18, 18, 0.4)', '#121212'],
-        text: ['#ABB3B3', '#A0A0A0'],
+      onBackground: {
+        background: {},
+        text: {},
       },
     },
 
@@ -228,20 +229,20 @@ export const lightTheme = {
     // tag
     tag: {
       primary: {
-        background: ['rgba(3, 99, 239, 0.1)', '#0363EF'],
-        text: ['#0363EF', '#FFFFFF'],
+        background: {},
+        text: {},
       },
       secondary: {
-        background: ['rgba(33, 206, 219, 0.1)', '#21CEDB'],
-        text: ['#00BACE', '#FFFFFF'],
+        background: {},
+        text: {},
       },
       contrast: {
-        background: ['rgba(0, 0, 0, 0.1)', '#000000'],
-        text: ['rgba(0, 0, 0, 0.6)', 'rgba(255, 255, 255, 0.6)'],
+        background: {},
+        text: {},
       },
-      theme: {
-        background: ['rgba(255, 255, 255, 0.6)', '#FFFFFF'],
-        text: ['#567A7D', '#666666'],
+      onBackground: {
+        background: {},
+        text: {},
       },
     },
 
@@ -369,36 +370,55 @@ lightTheme.colors.membership.infinite_privilege.gradient =
   lightTheme.colors.membership.infinite_privilege[3];
 
 // tag
-lightTheme.colors.tag.primary.background.opacity =
-  lightTheme.colors.tag.primary.background[0];
+lightTheme.colors.tag.primary.background.transparent = transparentize(
+  0.9,
+  lightTheme.colors.primary.normal,
+);
 lightTheme.colors.tag.primary.background.normal =
-  lightTheme.colors.tag.primary.background[1];
-lightTheme.colors.tag.primary.text.opacity =
-  lightTheme.colors.tag.primary.text[0];
-lightTheme.colors.tag.primary.text.normal =
-  lightTheme.colors.tag.primary.text[1];
-lightTheme.colors.tag.secondary.background.opacity =
-  lightTheme.colors.tag.secondary.background[0];
+  lightTheme.colors.primary.normal;
+lightTheme.colors.tag.primary.text.transparent =
+  lightTheme.colors.primary.normal;
+lightTheme.colors.tag.primary.text.normal = lightTheme.colors.background1;
+
+lightTheme.colors.tag.secondary.background.transparent = transparentize(
+  0.9,
+  lightTheme.colors.secondary.normal,
+);
 lightTheme.colors.tag.secondary.background.normal =
-  lightTheme.colors.tag.secondary.background[1];
-lightTheme.colors.tag.secondary.text.opacity =
-  lightTheme.colors.tag.secondary.text[0];
-lightTheme.colors.tag.secondary.text.normal =
-  lightTheme.colors.tag.secondary.text[1];
-lightTheme.colors.tag.contrast.background.opacity =
-  lightTheme.colors.tag.contrast.background[0];
+  lightTheme.colors.secondary.normal;
+lightTheme.colors.tag.secondary.text.transparent =
+  lightTheme.colors.secondary.normal;
+lightTheme.colors.tag.secondary.text.normal = lightTheme.colors.background1;
+
+lightTheme.colors.tag.contrast.background.transparent = transparentize(
+  0.9,
+  lightTheme.colors.contrastColor,
+);
 lightTheme.colors.tag.contrast.background.normal =
-  lightTheme.colors.tag.contrast.background[1];
-lightTheme.colors.tag.contrast.text.opacity =
-  lightTheme.colors.tag.contrast.text[0];
-lightTheme.colors.tag.contrast.text.normal =
-  lightTheme.colors.tag.contrast.text[1];
-lightTheme.colors.tag.theme.background.opacity =
-  lightTheme.colors.tag.theme.background[0];
-lightTheme.colors.tag.theme.background.normal =
-  lightTheme.colors.tag.theme.background[1];
-lightTheme.colors.tag.theme.text.opacity = lightTheme.colors.tag.theme.text[0];
-lightTheme.colors.tag.theme.text.normal = lightTheme.colors.tag.theme.text[1];
+  lightTheme.colors.contrastColor;
+lightTheme.colors.tag.contrast.text.transparent = transparentize(
+  0.4,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.tag.contrast.text.normal = transparentize(
+  0.4,
+  lightTheme.colors.background1,
+);
+
+lightTheme.colors.tag.onBackground.background.transparent = transparentize(
+  0.4,
+  lightTheme.colors.background1,
+);
+lightTheme.colors.tag.onBackground.background.normal =
+  lightTheme.colors.background1;
+lightTheme.colors.tag.onBackground.text.transparent = transparentize(
+  0.4,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.tag.onBackground.text.normal = transparentize(
+  0.4,
+  lightTheme.colors.contrastColor,
+);
 
 // others
 lightTheme.colors.toggleOn.button = lightTheme.colors.toggleOn[0];
@@ -611,35 +631,56 @@ darkTheme.colors.membership.infinite_privilege.gradient =
   darkTheme.colors.membership.infinite_privilege[3];
 
 // tag
-darkTheme.colors.tag.primary.background.opacity =
-  darkTheme.colors.tag.primary.background[0];
+darkTheme.colors.tag.primary.background.transparent = transparentize(
+  0.8,
+  darkTheme.colors.primary.normal,
+);
 darkTheme.colors.tag.primary.background.normal =
-  darkTheme.colors.tag.primary.background[1];
-darkTheme.colors.tag.primary.text.opacity =
-  darkTheme.colors.tag.primary.text[0];
-darkTheme.colors.tag.primary.text.normal = darkTheme.colors.tag.primary.text[1];
-darkTheme.colors.tag.secondary.background.opacity =
-  darkTheme.colors.tag.secondary.background[0];
+  darkTheme.colors.primary.normal;
+darkTheme.colors.tag.primary.text.transparent = darkTheme.colors.primary.normal;
+darkTheme.colors.tag.primary.text.normal = darkTheme.colors.background1;
+
+darkTheme.colors.tag.secondary.background.transparent = transparentize(
+  0.8,
+  darkTheme.colors.secondary.normal,
+);
 darkTheme.colors.tag.secondary.background.normal =
-  darkTheme.colors.tag.secondary.background[1];
-darkTheme.colors.tag.secondary.text.opacity =
-  darkTheme.colors.tag.secondary.text[0];
-darkTheme.colors.tag.secondary.text.normal =
-  darkTheme.colors.tag.secondary.text[1];
-darkTheme.colors.tag.contrast.background.opacity =
-  darkTheme.colors.tag.contrast.background[0];
-darkTheme.colors.tag.contrast.background.normal =
-  darkTheme.colors.tag.contrast.background[1];
-darkTheme.colors.tag.contrast.text.opacity =
-  darkTheme.colors.tag.contrast.text[0];
-darkTheme.colors.tag.contrast.text.normal =
-  darkTheme.colors.tag.contrast.text[1];
-darkTheme.colors.tag.theme.background.opacity =
-  darkTheme.colors.tag.theme.background[0];
-darkTheme.colors.tag.theme.background.normal =
-  darkTheme.colors.tag.theme.background[1];
-darkTheme.colors.tag.theme.text.opacity = darkTheme.colors.tag.theme.text[0];
-darkTheme.colors.tag.theme.text.normal = darkTheme.colors.tag.theme.text[1];
+  darkTheme.colors.secondary.normal;
+darkTheme.colors.tag.secondary.text.transparent =
+  darkTheme.colors.secondary.normal;
+darkTheme.colors.tag.secondary.text.normal = darkTheme.colors.background1;
+
+darkTheme.colors.tag.contrast.background.transparent = transparentize(
+  0.8,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.tag.contrast.background.normal = transparentize(
+  0.13,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.tag.contrast.text.transparent = transparentize(
+  0.4,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.tag.contrast.text.normal = transparentize(
+  0.4,
+  darkTheme.colors.background1,
+);
+
+darkTheme.colors.tag.onBackground.background.transparent = transparentize(
+  0.6,
+  darkTheme.colors.background1,
+);
+darkTheme.colors.tag.onBackground.background.normal =
+  darkTheme.colors.background1;
+darkTheme.colors.tag.onBackground.text.transparent = transparentize(
+  0.4,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.tag.onBackground.text.normal = transparentize(
+  0.4,
+  darkTheme.colors.contrastColor,
+);
 
 // others
 darkTheme.colors.toggleOn.button = darkTheme.colors.toggleOn[0];

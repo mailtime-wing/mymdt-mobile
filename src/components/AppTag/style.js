@@ -27,39 +27,39 @@ export const container = (theme, variant, sizeVariant, colorVariant) => css`
     `
     }
     ${
-      colorVariant === 'theme' &&
+      colorVariant === 'onBackground' &&
       `
-      background-color: ${theme.colors.tag.theme.background.normal};
+      background-color: ${theme.colors.tag.onBackground.background.normal};
     `
     }
   `}
-  ${variant === 'opacity' &&
+  ${variant === 'transparent' &&
   `
     ${
       colorVariant === 'primary' &&
       `
       
-      background-color: ${theme.colors.tag.primary.background.opacity};
+      background-color: ${theme.colors.tag.primary.background.transparent};
     `
     }
     ${
       colorVariant === 'secondary' &&
       `
       
-      background-color: ${theme.colors.tag.secondary.background.opacity};
+      background-color: ${theme.colors.tag.secondary.background.transparent};
     `
     }
     ${
       colorVariant === 'contrast' &&
       `
       
-      background-color: ${theme.colors.tag.contrast.background.opacity};
+      background-color: ${theme.colors.tag.contrast.background.transparent};
     `
     }
     ${
-      colorVariant === 'theme' &&
+      colorVariant === 'onBackground' &&
       `
-      background-color: ${theme.colors.tag.theme.background.opacity};
+      background-color: ${theme.colors.tag.onBackground.background.transparent};
     `
     }
   `}
@@ -93,39 +93,39 @@ export const text = (theme, variant, colorVariant) => css`
     `
     }
     ${
-      colorVariant === 'theme' &&
+      colorVariant === 'onBackground' &&
       `
-      color: ${theme.colors.tag.theme.text.normal};
+      color: ${theme.colors.tag.onBackground.text.normal};
     `
     }
   `}
-  ${variant === 'opacity' &&
+  ${variant === 'transparent' &&
   `
     ${
       colorVariant === 'primary' &&
       `
       
-      color: ${theme.colors.tag.primary.text.opacity};
+      color: ${theme.colors.tag.primary.text.transparent};
     `
     }
     ${
       colorVariant === 'secondary' &&
       `
       
-      color: ${theme.colors.tag.secondary.text.opacity};
+      color: ${theme.colors.tag.secondary.text.transparent};
     `
     }
     ${
       colorVariant === 'contrast' &&
       `
       
-      color: ${theme.colors.tag.contrast.text.opacity};
+      color: ${theme.colors.tag.contrast.text.transparent};
     `
     }
     ${
-      colorVariant === 'theme' &&
+      colorVariant === 'onBackground' &&
       `
-      color: ${theme.colors.tag.theme.text.opacity};
+      color: ${theme.colors.tag.onBackground.text.transparent};
     `
     }
   `}
@@ -163,45 +163,45 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
     `
     }
     ${
-      colorVariant === 'theme' &&
+      colorVariant === 'onBackground' &&
       `
-      fill: ${theme.colors.tag.theme.text.normal};
-      stroke: ${theme.colors.tag.theme.text.normal};
+      fill: ${theme.colors.tag.onBackground.text.normal};
+      stroke: ${theme.colors.tag.onBackground.text.normal};
       stroke-width: 2;
     `
     }
     `}
-  ${variant === 'opacity' &&
+  ${variant === 'transparent' &&
   `
     ${
       colorVariant === 'primary' &&
       `
-      fill: ${theme.colors.tag.primary.text.opacity};
-      stroke: ${theme.colors.tag.primary.text.opacity};
+      fill: ${theme.colors.tag.primary.text.transparent};
+      stroke: ${theme.colors.tag.primary.text.transparent};
       stroke-width: 2;
     `
     }
     ${
       colorVariant === 'secondary' &&
       `
-      fill: ${theme.colors.tag.secondary.text.opacity};
-      stroke: ${theme.colors.tag.secondary.text.opacity};
+      fill: ${theme.colors.tag.secondary.text.transparent};
+      stroke: ${theme.colors.tag.secondary.text.transparent};
       stroke-width: 2;
     `
     }
     ${
       colorVariant === 'contrast' &&
       `
-      fill: ${theme.colors.tag.contrast.text.opacity};
-      stroke: ${theme.colors.tag.contrast.text.opacity};
+      fill: ${theme.colors.tag.contrast.text.transparent};
+      stroke: ${theme.colors.tag.contrast.text.transparent};
       stroke-width: 2;
     `
     }
     ${
-      colorVariant === 'theme' &&
+      colorVariant === 'onBackground' &&
       `
-      fill: ${theme.colors.tag.theme.text.opacity};
-      stroke: ${theme.colors.tag.theme.text.opacity};
+      fill: ${theme.colors.tag.onBackground.text.transparent};
+      stroke: ${theme.colors.tag.onBackground.text.transparent};
       stroke-width: 2;
     `
     }
