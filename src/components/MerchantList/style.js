@@ -46,5 +46,6 @@ export const icon = css`
 export const merchantNameStyle = (theme) => css`
   margin-top: 8px;
   margin-bottom: 4px;
+  text-align: center;
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;
