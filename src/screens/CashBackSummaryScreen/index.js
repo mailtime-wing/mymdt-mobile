@@ -80,10 +80,6 @@ const CashBackSummaryScreen = ({navigation}) => {
     },
   );
 
-  useEffect(() => {
-    getTransactions();
-  }, [getTransactions]);
-
   const currentCardData = data?.userProfile?.currencyAccounts[0];
   const currencyCode = MEASURABLE_REWARD_POINT;
   const cardTransactionsHistory = currentCardData?.transactions?.edges.map(
