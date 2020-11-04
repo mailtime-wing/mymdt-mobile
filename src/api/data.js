@@ -449,3 +449,27 @@ export const GET_USER_REFERRAL_CODE = gql`
     }
   }
 `;
+
+export const GET_USER_REFERRAL_STATUS = gql`
+  query {
+    userProfile {
+      id
+      referrals {
+        id
+        status
+        userId
+        isReferrer
+        friendInfo {
+          id
+          name
+          maskedPhoneNumber
+        }
+        reward {
+          id
+          value
+          claimedTime
+        }
+      }
+    }
+  }
+`;

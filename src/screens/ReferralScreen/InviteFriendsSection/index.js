@@ -18,6 +18,7 @@ import {
   progressLabelStyle,
   textInput,
   textInputContainer,
+  container,
 } from './style';
 
 const InviteFriendSection = () => {
@@ -65,7 +66,7 @@ const InviteFriendSection = () => {
   };
 
   return (
-    <>
+    <View style={container}>
       <AppText variant="body1" style={detailStyle(theme)}>
         Invite friends to RewardMe. Rewards will be given if they can finish the
         account setup.
@@ -111,7 +112,7 @@ const InviteFriendSection = () => {
           disabled={!branchUniversalObject}
         />
       </View>
-    </>
+    </View>
   );
 };
 

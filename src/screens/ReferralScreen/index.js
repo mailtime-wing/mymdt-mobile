@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View, ScrollView, TouchableOpacity} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
@@ -10,12 +10,10 @@ import AppText from '@/components/AppText2';
 
 import {
   titleStyle,
-  container,
   tabGroupContainer,
   tabContainer,
   tabNameStyle,
   activeBottomBar,
-  contentContainer,
 } from './style';
 
 const tabList = ['INVITE FRIENDS', 'REWARDS'];
@@ -59,9 +57,7 @@ const TabSection = () => {
           );
         })}
       </View>
-      <View style={contentContainer}>
-        <RenderTabContent index={activeTab} />
-      </View>
+      <RenderTabContent index={activeTab} />
     </>
   );
 };
@@ -71,12 +67,12 @@ const ReferralScreen = () => {
 
   return (
     <ScreenContainer>
-      <View style={container}>
+      <ScrollView>
         <AppText variant="pageTitle" style={titleStyle(theme)}>
           <FormattedMessage id="referral" defaultMessage="Referral" />
         </AppText>
         <TabSection />
-      </View>
+      </ScrollView>
     </ScreenContainer>
   );
 };

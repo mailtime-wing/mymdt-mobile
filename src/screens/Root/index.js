@@ -240,7 +240,7 @@ const linkingConfig = {
           exact: true,
         },
         referral: {
-          path: 'invitefd',
+          path: 'referral',
           exact: true,
         },
       },
