@@ -111,9 +111,6 @@ export const GET_USER_MEMBERSHIP_API = gql`
         id
         name
         level
-        mdtRequired
-        cashbackAdd
-        interestRate
         merchantsNumAllowed
       }
       merchantAvailableForEditAt
