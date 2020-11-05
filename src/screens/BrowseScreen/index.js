@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {GET_USER_MEMBERSHIP_API} from '@/api/data';
 
@@ -14,6 +14,148 @@ import MembershipInfoCard from './MembershipInfoCard';
 
 import {imageStyle, upgradeSection, sectionMargin} from './style';
 import {useTheme} from 'emotion-theming';
+
+import AppTag from '@/components/AppTag';
+import LockIcon from '@/assets/icon_lock.svg';
+
+const testStyle = {
+  padding: 12,
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'space-around',
+};
+
+const DemoComponents = () => {
+  const theme = useTheme();
+  return (
+    <>
+      <View style={testStyle}>
+        <AppTag
+          variant="transparent"
+          sizeVariant="small"
+          colorVariant="primary"
+          text="current"
+        />
+        <AppTag
+          variant="transparent"
+          sizeVariant="small"
+          colorVariant="secondary"
+          text="current"
+        />
+        <AppTag
+          variant="transparent"
+          sizeVariant="small"
+          colorVariant="contrast"
+          text="current"
+        />
+      </View>
+      <View style={testStyle}>
+        <AppTag
+          variant="normal"
+          sizeVariant="small"
+          colorVariant="primary"
+          text="current"
+        />
+        <AppTag
+          variant="normal"
+          sizeVariant="small"
+          colorVariant="secondary"
+          text="current"
+        />
+        <AppTag
+          variant="normal"
+          sizeVariant="small"
+          colorVariant="contrast"
+          text="current"
+        />
+      </View>
+      <View style={testStyle}>
+        <AppTag
+          variant="transparent"
+          sizeVariant="normal"
+          colorVariant="primary"
+          text="Tag Text"
+          svgIcon={LockIcon}
+        />
+        <AppTag
+          variant="transparent"
+          sizeVariant="normal"
+          colorVariant="secondary"
+          text="Tag Text"
+          svgIcon={LockIcon}
+        />
+        <AppTag
+          variant="transparent"
+          sizeVariant="normal"
+          colorVariant="contrast"
+          text="Tag Text"
+          svgIcon={LockIcon}
+        />
+      </View>
+      <View style={testStyle}>
+        <AppTag
+          variant="normal"
+          sizeVariant="normal"
+          colorVariant="primary"
+          text="Tag Text"
+          svgIcon={LockIcon}
+        />
+        <AppTag
+          variant="normal"
+          sizeVariant="normal"
+          colorVariant="secondary"
+          text="Tag Text"
+          svgIcon={LockIcon}
+        />
+        <AppTag
+          variant="normal"
+          sizeVariant="normal"
+          colorVariant="contrast"
+          text="Tag Text"
+          svgIcon={LockIcon}
+        />
+      </View>
+      <View
+        style={{
+          ...testStyle,
+          backgroundColor: theme.colors.secondary.normal,
+        }}>
+        <AppTag
+          variant="transparent"
+          sizeVariant="small"
+          colorVariant="onBackground"
+          text="current"
+        />
+        <AppTag
+          variant="normal"
+          sizeVariant="small"
+          colorVariant="onBackground"
+          text="current"
+        />
+      </View>
+      <View
+        style={{
+          ...testStyle,
+          backgroundColor: theme.colors.secondary.normal,
+        }}>
+        <AppTag
+          variant="transparent"
+          sizeVariant="normal"
+          colorVariant="onBackground"
+          text="Tag Text"
+          svgIcon={LockIcon}
+        />
+        <AppTag
+          variant="normal"
+          sizeVariant="normal"
+          colorVariant="onBackground"
+          text="Tag Text"
+          svgIcon={LockIcon}
+        />
+      </View>
+    </>
+  );
+};
 
 const BrowseScreen = ({navigation}) => {
   const theme = useTheme();
@@ -72,6 +214,7 @@ const BrowseScreen = ({navigation}) => {
           navigation={navigation}
           style={[upgradeSection, sectionMargin]}
         />
+        <DemoComponents />
         <ShortcutSection navigation={navigation} style={sectionMargin} />
         <CashBackSummarySection
           onPress={handleCashBackSummaryPress}

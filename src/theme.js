@@ -1,4 +1,5 @@
 import {Platform} from 'react-native';
+import {transparentize} from 'polished';
 
 export const darkTheme = {
   colors: {
@@ -90,6 +91,26 @@ export const darkTheme = {
     },
 
     unknownCard: ['#252525', '#777777', '#363636'],
+
+    // tag
+    tag: {
+      primary: {
+        background: {},
+        text: {},
+      },
+      secondary: {
+        background: {},
+        text: {},
+      },
+      contrast: {
+        background: {},
+        text: {},
+      },
+      onBackground: {
+        background: {},
+        text: {},
+      },
+    },
 
     // others
     borderColor: 'rgba(255, 255, 255, 0.2)',
@@ -208,6 +229,26 @@ export const lightTheme = {
     },
 
     unknownCard: ['#F2F2F2', '#919191', '#E6E6E6'],
+
+    // tag
+    tag: {
+      primary: {
+        background: {},
+        text: {},
+      },
+      secondary: {
+        background: {},
+        text: {},
+      },
+      contrast: {
+        background: {},
+        text: {},
+      },
+      onBackground: {
+        background: {},
+        text: {},
+      },
+    },
 
     // others
     borderColor: 'rgba(0, 0, 0, 0.2)',
@@ -339,6 +380,57 @@ lightTheme.colors.membership.infinite_privilege.text =
 lightTheme.colors.membership.infinite_privilege.gradient =
   lightTheme.colors.membership.infinite_privilege[3];
 
+// tag
+lightTheme.colors.tag.primary.background.transparent = transparentize(
+  0.9,
+  lightTheme.colors.primary.normal,
+);
+lightTheme.colors.tag.primary.background.normal =
+  lightTheme.colors.primary.normal;
+lightTheme.colors.tag.primary.text.transparent =
+  lightTheme.colors.primary.normal;
+lightTheme.colors.tag.primary.text.normal = lightTheme.colors.background1;
+
+lightTheme.colors.tag.secondary.background.transparent = transparentize(
+  0.9,
+  lightTheme.colors.secondary.normal,
+);
+lightTheme.colors.tag.secondary.background.normal =
+  lightTheme.colors.secondary.normal;
+lightTheme.colors.tag.secondary.text.transparent =
+  lightTheme.colors.secondary.normal;
+lightTheme.colors.tag.secondary.text.normal = lightTheme.colors.background1;
+
+lightTheme.colors.tag.contrast.background.transparent = transparentize(
+  0.9,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.tag.contrast.background.normal =
+  lightTheme.colors.contrastColor;
+lightTheme.colors.tag.contrast.text.transparent = transparentize(
+  0.4,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.tag.contrast.text.normal = transparentize(
+  0.4,
+  lightTheme.colors.background1,
+);
+
+lightTheme.colors.tag.onBackground.background.transparent = transparentize(
+  0.4,
+  lightTheme.colors.background1,
+);
+lightTheme.colors.tag.onBackground.background.normal =
+  lightTheme.colors.background1;
+lightTheme.colors.tag.onBackground.text.transparent = transparentize(
+  0.4,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.tag.onBackground.text.normal = transparentize(
+  0.4,
+  lightTheme.colors.contrastColor,
+);
+
 // others
 lightTheme.colors.toggleOn.button = lightTheme.colors.toggleOn[0];
 lightTheme.colors.toggleOn.track = lightTheme.colors.toggleOn[1];
@@ -367,6 +459,7 @@ lightTheme.fonts.value = lightTheme.fonts.body;
 lightTheme.fonts.button = lightTheme.fonts.body;
 lightTheme.fonts.label = lightTheme.fonts.heading;
 lightTheme.fonts.overline = lightTheme.fonts.body;
+lightTheme.fonts.smallText = lightTheme.fonts.body;
 lightTheme.fonts.initials1 = lightTheme.fonts.body;
 lightTheme.fonts.initials2 = lightTheme.fonts.body;
 lightTheme.fonts.initials3 = lightTheme.fonts.body;
@@ -396,6 +489,7 @@ lightTheme.fontSizes.value = lightTheme.fontSizes[3];
 lightTheme.fontSizes.button = lightTheme.fontSizes[2];
 lightTheme.fontSizes.label = lightTheme.fontSizes[1];
 lightTheme.fontSizes.overline = lightTheme.fontSizes[0];
+lightTheme.fontSizes.smallText = lightTheme.fontSizes[1];
 lightTheme.fontSizes.initials1 = lightTheme.fontSizes[6];
 lightTheme.fontSizes.initials2 = lightTheme.fontSizes[8];
 lightTheme.fontSizes.initials3 = lightTheme.fontSizes[9];
@@ -425,6 +519,7 @@ lightTheme.fontWeights.value = lightTheme.fontWeights[2];
 lightTheme.fontWeights.button = lightTheme.fontWeights[2];
 lightTheme.fontWeights.label = lightTheme.fontWeights[3];
 lightTheme.fontWeights.overline = lightTheme.fontWeights[2];
+lightTheme.fontWeights.smallText = lightTheme.fontWeights[1];
 lightTheme.fontWeights.initials1 = lightTheme.fontWeights[2];
 lightTheme.fontWeights.initials2 = lightTheme.fontWeights[2];
 lightTheme.fontWeights.initials3 = lightTheme.fontWeights[2];
@@ -454,6 +549,7 @@ lightTheme.lineHeights.value = lightTheme.fontSizes.value * 1.5;
 lightTheme.lineHeights.button = lightTheme.fontSizes.button * 1.5;
 lightTheme.lineHeights.label = lightTheme.fontSizes.label * 1.5;
 lightTheme.lineHeights.overline = lightTheme.fontSizes.overline * 1.5;
+lightTheme.lineHeights.smallText = lightTheme.fontSizes.smallText * 1.25;
 lightTheme.lineHeights.initials1 = lightTheme.fontSizes.initials1 * 1.5;
 lightTheme.lineHeights.initials2 = lightTheme.fontSizes.initials2 * 1.5;
 lightTheme.lineHeights.initials3 = lightTheme.fontSizes.initials3 * 1.5;
@@ -551,6 +647,58 @@ darkTheme.colors.membership.infinite_privilege.border =
 darkTheme.colors.membership.infinite_privilege.gradient =
   darkTheme.colors.membership.infinite_privilege[3];
 
+// tag
+darkTheme.colors.tag.primary.background.transparent = transparentize(
+  0.8,
+  darkTheme.colors.primary.normal,
+);
+darkTheme.colors.tag.primary.background.normal =
+  darkTheme.colors.primary.normal;
+darkTheme.colors.tag.primary.text.transparent = darkTheme.colors.primary.normal;
+darkTheme.colors.tag.primary.text.normal = darkTheme.colors.background1;
+
+darkTheme.colors.tag.secondary.background.transparent = transparentize(
+  0.8,
+  darkTheme.colors.secondary.normal,
+);
+darkTheme.colors.tag.secondary.background.normal =
+  darkTheme.colors.secondary.normal;
+darkTheme.colors.tag.secondary.text.transparent =
+  darkTheme.colors.secondary.normal;
+darkTheme.colors.tag.secondary.text.normal = darkTheme.colors.background1;
+
+darkTheme.colors.tag.contrast.background.transparent = transparentize(
+  0.8,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.tag.contrast.background.normal = transparentize(
+  0.13,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.tag.contrast.text.transparent = transparentize(
+  0.4,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.tag.contrast.text.normal = transparentize(
+  0.4,
+  darkTheme.colors.background1,
+);
+
+darkTheme.colors.tag.onBackground.background.transparent = transparentize(
+  0.6,
+  darkTheme.colors.background1,
+);
+darkTheme.colors.tag.onBackground.background.normal =
+  darkTheme.colors.background1;
+darkTheme.colors.tag.onBackground.text.transparent = transparentize(
+  0.4,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.tag.onBackground.text.normal = transparentize(
+  0.4,
+  darkTheme.colors.contrastColor,
+);
+
 // others
 darkTheme.colors.toggleOn.button = darkTheme.colors.toggleOn[0];
 darkTheme.colors.toggleOn.track = darkTheme.colors.toggleOn[1];
@@ -579,6 +727,7 @@ darkTheme.fonts.value = darkTheme.fonts.body;
 darkTheme.fonts.button = darkTheme.fonts.body;
 darkTheme.fonts.label = darkTheme.fonts.body;
 darkTheme.fonts.overline = darkTheme.fonts.body;
+darkTheme.fonts.smallText = darkTheme.fonts.body;
 darkTheme.fonts.initials1 = darkTheme.fonts.body;
 darkTheme.fonts.initials2 = darkTheme.fonts.body;
 darkTheme.fonts.initials3 = darkTheme.fonts.body;
@@ -608,6 +757,7 @@ darkTheme.fontSizes.value = darkTheme.fontSizes[3];
 darkTheme.fontSizes.button = darkTheme.fontSizes[2];
 darkTheme.fontSizes.label = darkTheme.fontSizes[1];
 darkTheme.fontSizes.overline = darkTheme.fontSizes[0];
+darkTheme.fontSizes.smallText = darkTheme.fontSizes[1];
 darkTheme.fontSizes.initials1 = darkTheme.fontSizes[6];
 darkTheme.fontSizes.initials2 = darkTheme.fontSizes[8];
 darkTheme.fontSizes.initials3 = darkTheme.fontSizes[9];
@@ -637,6 +787,7 @@ darkTheme.fontWeights.value = darkTheme.fontWeights[2];
 darkTheme.fontWeights.button = darkTheme.fontWeights[2];
 darkTheme.fontWeights.label = darkTheme.fontWeights[3];
 darkTheme.fontWeights.overline = darkTheme.fontWeights[2];
+darkTheme.fontWeights.smallText = darkTheme.fontWeights[1];
 darkTheme.fontWeights.initials1 = darkTheme.fontWeights[2];
 darkTheme.fontWeights.initials2 = darkTheme.fontWeights[2];
 darkTheme.fontWeights.initials3 = darkTheme.fontWeights[2];
@@ -666,6 +817,7 @@ darkTheme.lineHeights.value = darkTheme.fontSizes.value * 1.5;
 darkTheme.lineHeights.button = darkTheme.fontSizes.button * 1.5;
 darkTheme.lineHeights.label = darkTheme.fontSizes.label * 1.5;
 darkTheme.lineHeights.overline = darkTheme.fontSizes.overline * 1.5;
+darkTheme.lineHeights.smallText = darkTheme.fontSizes.smallText * 1.25;
 darkTheme.lineHeights.initials1 = darkTheme.fontSizes.initials1 * 1.5;
 darkTheme.lineHeights.initials2 = darkTheme.fontSizes.initials2 * 1.5;
 darkTheme.lineHeights.initials3 = darkTheme.fontSizes.initials3 * 1.5;
