@@ -13,7 +13,7 @@ const MembershipInfoCard = ({userLevel, style}) => {
       : require('@/assets/dashboard_upgrade_card.png');
   return (
     <View style={style}>
-      <Image source={imgSrc} style={image} />
+      <Image source={imgSrc} style={image} resizeMode="contain" />
       <AppButton
         variant="filled"
         sizeVariant="normal"

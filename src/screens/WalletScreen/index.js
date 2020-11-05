@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {VirtualizedList} from 'react-native';
+import {VirtualizedList, View} from 'react-native';
 import {TRANSACTIONS_QUERY} from '@/api/data';
 import {REWARD, REDEEM, INTEREST, CHECK_IN} from '@/constants/transactionsType';
 import {useTheme} from 'emotion-theming';
@@ -15,7 +15,7 @@ import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
 
 import CardList from './CardList';
 import ActionButtons from './ActionButtons';
-import TransactionsHistory from './TransactionsHistory';
+import TransactionsHistory from '@/components/TransactionsHistory';
 
 import {
   MEASURABLE_REWARD_POINT,
@@ -26,6 +26,13 @@ import ConvertIcon from '@/assets/convert_icon.svg';
 // import GiftIcon from '@/assets/gift_icon.svg';
 // import WithdrawalIcon from '@/assets/withdraw_icon.svg';
 // import MyMdtIcon from '@/assets/mymdt_icon.svg';
+
+import {historyListHeader} from './style';
+
+import FilterIcon from '@/assets/filter.svg';
+
+import AppButton from '@/components/AppButton';
+import AppIcon from '@/components/AppIcon';
 
 const styleFlexEnd = {
   justifyContent: 'flex-end',
@@ -163,7 +170,18 @@ const WalletScreen = ({navigation}) => {
     (transaction) =>
       (transaction = {
         ...transaction,
-        icon: ConvertIcon,
+        icon: (
+          <AppIcon
+            color={theme.colors.background1}
+            backgroundColor={
+              currencyCode === MEASURABLE_REWARD_POINT
+                ? theme.colors.secondary.normal
+                : theme.colors.primary.normal
+            }
+            sizeVariant="small"
+            svgIcon={ConvertIcon}
+          />
+        ),
       }),
   );
   const pageInfo = currentCardData?.transactions.pageInfo;
@@ -267,14 +285,47 @@ const WalletScreen = ({navigation}) => {
         }
         ListFooterComponent={
           <TransactionsHistory
-            transactionsHistoryList={cardTransactionsHistory}
-            currentTheme={currentCard.theme}
-            currencyCode={currencyCode}
-            cardType={currentCard.type}
-            currentFilter={
-              <FormattedMessage id="button.filter" defaultMessage="FILTER" />
+            headerComponent={
+              <View style={historyListHeader(theme)}>
+                <AppButton
+                  onPress={handleFilterPress}
+                  text={
+                    <FormattedMessage
+                      id="button.filter"
+                      defaultMessage="FILTER"
+                    />
+                  }
+                  variant="outlined"
+                  sizeVariant="normal"
+                  colorVariant={
+                    currencyCode === MEASURABLE_REWARD_POINT
+                      ? 'secondary'
+                      : 'primary'
+                  }
+                  svgIcon={FilterIcon}
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                />
+                <AppButton
+                  onPress={() => navigation.navigate('missing_receipt')}
+                  text={
+                    <FormattedMessage
+                      id="missing_receipt"
+                      defaultMessage="missing receipt"
+                    />
+                  }
+                  variant="outlined"
+                  sizeVariant="compact"
+                  colorVariant={
+                    currencyCode === MEASURABLE_REWARD_POINT
+                      ? 'secondary'
+                      : 'primary'
+                  }
+                />
+              </View>
             }
-            handleFilterPress={handleFilterPress}
+            transactionsHistoryList={cardTransactionsHistory}
+            currencyCode={currencyCode}
             navigation={navigation}
             // FlatList props
             onEndReached={onLoadMore}

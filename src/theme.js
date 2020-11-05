@@ -98,6 +98,7 @@ export const darkTheme = {
     linearGradientBackground: [
       ['#121212', '#121212'],
       ['rgba(30, 30, 30, 0)', '#1E1E1E'],
+      ['#3B4F50', '#232323'],
     ],
     tabScreenStatusBar: '#121212',
 
@@ -106,6 +107,9 @@ export const darkTheme = {
     alert: '#FFD542',
 
     rewardCircleBackground: '#464646',
+
+    cashBackSummaryBackground: '#232323',
+    cashBackSummaryChip: '#4B4B4B',
 
     avatarsInitials: [
       '#F19898',
@@ -212,6 +216,7 @@ export const lightTheme = {
     linearGradientBackground: [
       ['#FDFBF2', '#E2FAFF'],
       ['rgba(255, 255, 255, 0)', '#FFFFFF'],
+      ['#B0F8FD', '#232323'],
     ],
     tabScreenStatusBar: '#FDFBF2',
 
@@ -220,6 +225,9 @@ export const lightTheme = {
     alert: '#FFD542',
 
     rewardCircleBackground: '#FFFFFF',
+
+    cashBackSummaryBackground: '#E9FAFB',
+    cashBackSummaryChip: '#FFFFFF',
 
     avatarsInitials: [
       '#F15454',
@@ -239,6 +247,7 @@ export const lightTheme = {
   fonts: {
     body: 'Inter',
     heading: Platform.OS === 'ios' ? 'Neo Sans Pro' : 'Neo Sans Pro Medium',
+    smallText: 'Inter-Medium',
   },
   fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36, 48, 11],
   fontWeights: [400, 500, 600, 700],
@@ -289,6 +298,8 @@ lightTheme.colors.linearGradientBackground.theme =
   lightTheme.colors.linearGradientBackground[0];
 lightTheme.colors.linearGradientBackground.contrast =
   lightTheme.colors.linearGradientBackground[1];
+lightTheme.colors.linearGradientBackground.cashBackSummary =
+  lightTheme.colors.linearGradientBackground[2];
 
 // membership
 lightTheme.colors.membership.newbie.background =
@@ -365,6 +376,7 @@ lightTheme.fonts.digit12mono = lightTheme.fonts.body;
 lightTheme.fonts.digit16mono = lightTheme.fonts.body;
 lightTheme.fonts.digit36 = lightTheme.fonts.body;
 lightTheme.fonts.digit36mono = lightTheme.fonts.body;
+lightTheme.fonts.smallText = lightTheme.fonts.smallText;
 
 lightTheme.fontSizes.pageTitle = lightTheme.fontSizes[8];
 lightTheme.fontSizes.heading1 = lightTheme.fontSizes[8];
@@ -393,6 +405,7 @@ lightTheme.fontSizes.digit12mono = lightTheme.fontSizes[1];
 lightTheme.fontSizes.digit16mono = lightTheme.fontSizes[3];
 lightTheme.fontSizes.digit36 = lightTheme.fontSizes[8];
 lightTheme.fontSizes.digit36mono = lightTheme.fontSizes[8];
+lightTheme.fontSizes.smallText = lightTheme.fontSizes[1];
 
 lightTheme.fontWeights.pageTitle = lightTheme.fontWeights[1];
 lightTheme.fontWeights.heading1 = lightTheme.fontWeights[1];
@@ -421,6 +434,7 @@ lightTheme.fontWeights.digit12mono = lightTheme.fontWeights[1];
 lightTheme.fontWeights.digit16mono = lightTheme.fontWeights[1];
 lightTheme.fontWeights.digit36 = lightTheme.fontWeights[2];
 lightTheme.fontWeights.digit36mono = lightTheme.fontWeights[2];
+lightTheme.fontWeights.smallText = lightTheme.fontWeights[1];
 
 lightTheme.lineHeights.pageTitle = lightTheme.fontSizes.pageTitle * 1.25;
 lightTheme.lineHeights.heading1 = lightTheme.fontSizes.heading1 * 1.25;
@@ -449,6 +463,7 @@ lightTheme.lineHeights.digit12mono = lightTheme.fontSizes.digit12mono * 1.25;
 lightTheme.lineHeights.digit16mono = lightTheme.fontSizes.digit16mono * 1.5;
 lightTheme.lineHeights.digit36 = lightTheme.fontSizes.digit36 * 1.5;
 lightTheme.lineHeights.digit36mono = lightTheme.fontSizes.digit36mono * 1.5;
+lightTheme.lineHeights.smallText = lightTheme.fontSizes.smallText * 1.25;
 
 // main theme
 darkTheme.colors.primary.normal = darkTheme.colors.primary[0];
@@ -494,6 +509,8 @@ darkTheme.colors.linearGradientBackground.theme =
   darkTheme.colors.linearGradientBackground[0];
 darkTheme.colors.linearGradientBackground.contrast =
   darkTheme.colors.linearGradientBackground[1];
+darkTheme.colors.linearGradientBackground.cashBackSummary =
+  darkTheme.colors.linearGradientBackground[2];
 
 // membership
 darkTheme.colors.membership.newbie.background =
@@ -571,6 +588,7 @@ darkTheme.fonts.digit12mono = darkTheme.fonts.body;
 darkTheme.fonts.digit16mono = darkTheme.fonts.body;
 darkTheme.fonts.digit36 = darkTheme.fonts.body;
 darkTheme.fonts.digit36mono = darkTheme.fonts.body;
+darkTheme.fonts.smallText = darkTheme.fonts.smallText;
 
 darkTheme.fontSizes.pageTitle = darkTheme.fontSizes[8];
 darkTheme.fontSizes.heading1 = darkTheme.fontSizes[8];
@@ -599,6 +617,7 @@ darkTheme.fontSizes.digit12mono = darkTheme.fontSizes[1];
 darkTheme.fontSizes.digit16mono = darkTheme.fontSizes[3];
 darkTheme.fontSizes.digit36 = darkTheme.fontSizes[8];
 darkTheme.fontSizes.digit36mono = darkTheme.fontSizes[8];
+darkTheme.fontSizes.smallText = darkTheme.fontSizes[1];
 
 darkTheme.fontWeights.pageTitle = darkTheme.fontWeights[1];
 darkTheme.fontWeights.heading1 = darkTheme.fontWeights[1];
@@ -627,6 +646,7 @@ darkTheme.fontWeights.digit12mono = darkTheme.fontWeights[1];
 darkTheme.fontWeights.digit16mono = darkTheme.fontWeights[1];
 darkTheme.fontWeights.digit36 = darkTheme.fontWeights[2];
 darkTheme.fontWeights.digit36mono = darkTheme.fontWeights[2];
+darkTheme.fontWeights.smallText = darkTheme.fontWeights[1];
 
 darkTheme.lineHeights.pageTitle = darkTheme.fontSizes.pageTitle * 1.25;
 darkTheme.lineHeights.heading1 = darkTheme.fontSizes.heading1 * 1.25;
@@ -655,3 +675,4 @@ darkTheme.lineHeights.digit12mono = darkTheme.fontSizes.digit12mono * 1.25;
 darkTheme.lineHeights.digit16mono = darkTheme.fontSizes.digit16mono * 1.5;
 darkTheme.lineHeights.digit36 = darkTheme.fontSizes.digit36 * 1.5;
 darkTheme.lineHeights.digit36mono = darkTheme.fontSizes.digit36mono * 1.5;
+darkTheme.lineHeights.smallText = darkTheme.fontSizes.smallText * 1.25;

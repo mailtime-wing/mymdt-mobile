@@ -51,6 +51,10 @@ const BrowseScreen = ({navigation}) => {
   const userLevel = data?.userProfile?.membership?.level || 0;
   const userNextLevel = userLevel + 1;
 
+  const handleCashBackSummaryPress = () => {
+    navigation.navigate('cash_back_summary');
+  };
+
   // TODO: do not linear gradient the whole scroll view
   // TODO: add card scaled shadow
   return (
@@ -69,7 +73,10 @@ const BrowseScreen = ({navigation}) => {
           style={[upgradeSection, sectionMargin]}
         />
         <ShortcutSection navigation={navigation} style={sectionMargin} />
-        <CashBackSummarySection navigation={navigation} style={sectionMargin} />
+        <CashBackSummarySection
+          onPress={handleCashBackSummaryPress}
+          style={sectionMargin}
+        />
         <MembershipInfoCard userLevel={userLevel} style={sectionMargin} />
       </ScrollView>
     </LinearGradientBackground>

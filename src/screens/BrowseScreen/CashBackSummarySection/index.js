@@ -16,7 +16,6 @@ import {
   brand as brandName,
   brandPercentage,
   imageContainer,
-  brandImage,
   brandDetail as brandDetailContainer,
   selectedMerchant,
   rowContainer,
@@ -28,6 +27,7 @@ import ShoppingBagAddIcon from '@/assets/icon_shopping-bag-add.svg';
 
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
+import BrandIcon from '@/components/BrandIcon';
 import {FormattedMessage} from 'react-intl';
 
 const CashBackItem = ({icon, brand}) => {
@@ -36,7 +36,7 @@ const CashBackItem = ({icon, brand}) => {
   return (
     <View style={rowContainer}>
       <View style={imageContainer}>
-        <Image source={icon} style={brandImage} />
+        <BrandIcon sizeVariant="large" ImgSrc={icon} />
       </View>
       <View style={brandDetailContainer(theme)}>
         <View style={rowContainer}>
@@ -77,12 +77,12 @@ const CashBackItem = ({icon, brand}) => {
   );
 };
 
-const CashBackSummarySection = ({navigation, style}) => {
+const CashBackSummarySection = ({onPress, style}) => {
   const theme = useTheme();
 
   return (
-    <View style={[style]}>
-      <TouchableOpacity style={upperSection(theme)}>
+    <View style={style}>
+      <TouchableOpacity style={upperSection(theme)} onPress={onPress}>
         <View style={rewardMeContainer}>
           <Image source={require('@/assets/rewardme.png')} style={rewardMe} />
         </View>

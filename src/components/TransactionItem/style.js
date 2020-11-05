@@ -1,15 +1,14 @@
 import {css} from '@emotion/native';
 
 export const transaction = css`
-  flex: 3;
-  justify-content: center;
-  margin-left: 16px;
+  flex: 1;
   margin-right: 16px;
+  justify-content: center;
+  padding-vertical: 12px;
 `;
 
 export const container = css`
   flex-direction: row;
-  padding: 12px 0;
 `;
 
 export const nameStyle = (theme) => css`
@@ -18,4 +17,17 @@ export const nameStyle = (theme) => css`
 
 export const dateStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.disabled};
+`;
+
+export const border = (theme) => css`
+  border-bottom-width: 1px;
+  border-bottom-color: ${theme.colors.background2};
+  margin-left: 16px;
+  padding-right: 16px;
+  flex-grow: 1;
+  flex-direction: row;
+`;
+
+export const iconContainer = css`
+  align-self: center;
 `;
