@@ -4,7 +4,6 @@ import {TRANSACTIONS_QUERY} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {useTheme} from 'emotion-theming';
 
-import AccountBar from '@/components/AccountBar';
 import AppText from '@/components/AppText2';
 import TransactionAmount from '@/components/TransactionAmount';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -25,6 +24,7 @@ import {
 } from '@/constants/currency';
 
 import SafeAreaView from 'react-native-safe-area-view';
+import convertToUsdAmount from '@/utils/convertToUsdAmount';
 
 import ArrowIcon from '@/assets/list_arrow.svg';
 
@@ -44,12 +44,6 @@ import {
   sectionMargin,
 } from './style';
 
-function ToUsdAmount(_amount) {
-  let usdRate = 0.78;
-  const result = _amount * usdRate;
-  return result;
-}
-
 const WalletScreen = ({navigation}) => {
   const theme = useTheme();
   const {data, loading} = useQueryWithAuth(TRANSACTIONS_QUERY, {
@@ -63,7 +57,9 @@ const WalletScreen = ({navigation}) => {
     data?.userProfile?.currencyAccounts.find(
       (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
     )?.balance || 0;
-  const ntAmount = 1234;
+  const ntAmount =
+    data?.userProfile?.currencyAccounts.find((ca) => ca.currencyCode === 'USDT')
+      ?.balance || 0;
   const totalBalance = mdtAmount + ntAmount;
 
   const quickActionList = [
@@ -93,10 +89,21 @@ const WalletScreen = ({navigation}) => {
     },
   ];
 
+  const handleMrpPress = () => {
+    navigation.navigate('mrp_detail');
+  };
+
+  const handleMdtPress = () => {
+    navigation.navigate('mdt_detail');
+  };
+
+  const handleNewTokenPress = () => {
+    navigation.navigate('newToken_detail');
+  };
+
   return (
     <ScrollView>
       <SafeAreaView style={container(theme)}>
-        <AccountBar showCoins={false} />
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
           total balance
         </AppText>
@@ -107,12 +114,13 @@ const WalletScreen = ({navigation}) => {
             amount={totalBalance}
             showDollarSign
             amountSizeVariant="largeProportional"
+            unitColor={theme.colors.textOnThemeBackground.highEmphasis}
             amountColor={theme.colors.textOnThemeBackground.highEmphasis}
             style={totalBalanceText}
           />
         )}
       </SafeAreaView>
-      <View style={currencyRow(theme)}>
+      <TouchableOpacity style={currencyRow(theme)} onPress={handleMrpPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
           RewardPoint
         </AppText>
@@ -130,7 +138,7 @@ const WalletScreen = ({navigation}) => {
               style={amount}
             />
             <TransactionAmount
-              amount={ToUsdAmount(rpAmount)}
+              amount={convertToUsdAmount(rpAmount)}
               amountSizeVariant="small"
               unitSizeVariant="small"
               unitVariant={USD}
@@ -142,10 +150,12 @@ const WalletScreen = ({navigation}) => {
             />
           </View>
         )}
-
-        <ArrowIcon style={arrow} />
-      </View>
-      <TouchableOpacity style={currencyRow(theme)}>
+        <ArrowIcon
+          stroke={theme.colors.textOnBackground.mediumEmphasis}
+          style={arrow}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity style={currencyRow(theme)} onPress={handleMdtPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
           MDT
         </AppText>
@@ -163,7 +173,7 @@ const WalletScreen = ({navigation}) => {
               style={amount}
             />
             <TransactionAmount
-              amount={ToUsdAmount(mdtAmount)}
+              amount={convertToUsdAmount(mdtAmount)}
               amountSizeVariant="small"
               unitSizeVariant="small"
               unitVariant={USD}
@@ -183,7 +193,9 @@ const WalletScreen = ({navigation}) => {
           style={arrow}
         />
       </TouchableOpacity>
-      <TouchableOpacity style={[currencyRow(theme), lastCurrencyRow]}>
+      <TouchableOpacity
+        style={[currencyRow(theme), lastCurrencyRow]}
+        onPress={handleNewTokenPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
           NewToken
         </AppText>
@@ -201,7 +213,7 @@ const WalletScreen = ({navigation}) => {
               style={amount}
             />
             <TransactionAmount
-              amount={ToUsdAmount(ntAmount)}
+              amount={convertToUsdAmount(ntAmount)}
               amountSizeVariant="small"
               unitSizeVariant="small"
               unitVariant={USD}

@@ -1,7 +1,7 @@
 import {css} from '@emotion/native';
 
 export const container = (theme) => css`
-  background: ${theme.colors.secondary.normal};
+  background: ${theme.colors.secondary.walletBackground};
 `;
 
 export const total = (theme) => css`

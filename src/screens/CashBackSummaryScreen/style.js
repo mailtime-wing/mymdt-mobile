@@ -57,3 +57,7 @@ export const historyHeaderContainer = (theme) => css`
 export const cashBackTitle = (theme) => css`
   color: ${theme.colors.contrastColor};
 `;
+
+export const background = (theme) => css`
+  ${theme.colors.elevatedBackground4};
+`;

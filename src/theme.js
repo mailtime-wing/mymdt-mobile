@@ -4,13 +4,14 @@ import {transparentize} from 'polished';
 export const darkTheme = {
   colors: {
     // main theme
-    primary: ['#9FBDE9', '#9FBDE9', 'rgba(159, 189, 233, 0.2)'],
+    primary: ['#9FBDE9', '#9FBDE9', 'rgba(159, 189, 233, 0.2)', '#364562'],
     secondary: [
       '#88D9DE',
       '#88D9DE',
       '#88D9DE',
       'rgba(136, 217, 222, 0.2)',
       'rgba(136, 217, 222, 0.24)',
+      '#2C5F63',
     ],
     contrastColor: '#FFFFFF',
 
@@ -43,6 +44,7 @@ export const darkTheme = {
       '#121212',
       'rgba(255, 255, 255, 0.12)',
       'rgba(255, 255, 255, 0.2)',
+      '#121212',
     ],
     elevatedBackground: [
       'background-color: #1E1E1E;',
@@ -159,13 +161,14 @@ export const darkTheme = {
 export const lightTheme = {
   colors: {
     // main theme
-    primary: ['#0363EF', '#0036C5', 'rgba(3, 99, 239, 0.05)'],
+    primary: ['#0363EF', '#0036C5', 'rgba(3, 99, 239, 0.05)', '#0363EF'],
     secondary: [
       '#21CEDB',
       '#ABEBEE',
       '#00BACE',
       'rgba(33, 206, 219, 0.2)',
       '#E9FAFB',
+      '#21CEDB',
     ],
     contrastColor: '#000000',
 
@@ -191,7 +194,12 @@ export const lightTheme = {
     textOnThemeBackground: ['#FFFFFF', '#FFFFFF'],
 
     // background
-    background: ['#FFFFFF', 'rgba(0, 0, 0, 0.05)', 'rgba(0, 0, 0, 0.1)'],
+    background: [
+      '#FFFFFF',
+      'rgba(0, 0, 0, 0.05)',
+      'rgba(0, 0, 0, 0.1)',
+      '#F2F2F2',
+    ],
     elevatedBackground: [
       'background-color: #FFFFFF;',
       'background-color: #FFFFFF; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);',
@@ -299,12 +307,14 @@ export const lightTheme = {
 lightTheme.colors.primary.normal = lightTheme.colors.primary[0];
 lightTheme.colors.primary.dark = lightTheme.colors.primary[1];
 lightTheme.colors.primary.border = lightTheme.colors.primary[2];
+lightTheme.colors.primary.walletBackground = lightTheme.colors.primary[3];
 
 lightTheme.colors.secondary.normal = lightTheme.colors.secondary[0];
 lightTheme.colors.secondary.light = lightTheme.colors.secondary[1];
 lightTheme.colors.secondary.dark = lightTheme.colors.secondary[2];
 lightTheme.colors.secondary.border = lightTheme.colors.secondary[3];
 lightTheme.colors.secondary.superLight = lightTheme.colors.secondary[4];
+lightTheme.colors.secondary.walletBackground = lightTheme.colors.secondary[5];
 
 // text
 lightTheme.colors.textOnError.normal = lightTheme.colors.textOnError[0];
@@ -326,6 +336,7 @@ lightTheme.colors.textOnThemeBackground.mediumEmphasis =
 lightTheme.colors.background1 = lightTheme.colors.background[0];
 lightTheme.colors.background2 = lightTheme.colors.background[1];
 lightTheme.colors.background3 = lightTheme.colors.background[2];
+lightTheme.colors.background4 = lightTheme.colors.background[3];
 lightTheme.colors.elevatedBackground1 = lightTheme.colors.elevatedBackground[0];
 lightTheme.colors.elevatedBackground2 = lightTheme.colors.elevatedBackground[1];
 lightTheme.colors.elevatedBackground3 = lightTheme.colors.elevatedBackground[2];
@@ -565,12 +576,14 @@ lightTheme.lineHeights.smallText = lightTheme.fontSizes.smallText * 1.25;
 darkTheme.colors.primary.normal = darkTheme.colors.primary[0];
 darkTheme.colors.primary.dark = darkTheme.colors.primary[1];
 darkTheme.colors.primary.border = darkTheme.colors.primary[2];
+darkTheme.colors.primary.walletBackground = darkTheme.colors.primary[3];
 
 darkTheme.colors.secondary.normal = darkTheme.colors.secondary[0];
 darkTheme.colors.secondary.light = darkTheme.colors.secondary[1];
 darkTheme.colors.secondary.dark = darkTheme.colors.secondary[2];
 darkTheme.colors.secondary.border = darkTheme.colors.secondary[3];
 darkTheme.colors.secondary.superLight = darkTheme.colors.secondary[4];
+darkTheme.colors.secondary.walletBackground = darkTheme.colors.secondary[5];
 
 // text
 darkTheme.colors.textOnError.normal = darkTheme.colors.textOnError[0];
@@ -592,6 +605,7 @@ darkTheme.colors.textOnThemeBackground.mediumEmphasis =
 darkTheme.colors.background1 = darkTheme.colors.background[0];
 darkTheme.colors.background2 = darkTheme.colors.background[1];
 darkTheme.colors.background3 = darkTheme.colors.background[2];
+darkTheme.colors.background4 = darkTheme.colors.background[3];
 darkTheme.colors.elevatedBackground1 = darkTheme.colors.elevatedBackground[0];
 darkTheme.colors.elevatedBackground2 = darkTheme.colors.elevatedBackground[1];
 darkTheme.colors.elevatedBackground3 = darkTheme.colors.elevatedBackground[2];
