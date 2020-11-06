@@ -36,28 +36,12 @@ const Item = ({
     friendInfo: {name, maskedPhoneNumber},
     reward,
   },
-  claimRewardRequest,
   claimRewardData,
+  claimRewardPress,
   handleRewardGotPress,
 }) => {
   const theme = useTheme();
   const {value, claimedTime, id: rewardId} = reward || {};
-
-  const handleClaimPress = async () => {
-    try {
-      if (rewardId) {
-        console.log(rewardId);
-        await claimRewardRequest({
-          variables: {
-            id: rewardId,
-          },
-        });
-      }
-      return;
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   return (
     <View style={rewardContainer}>
@@ -114,7 +98,7 @@ const Item = ({
               style={marginRight}
             />
             <AppButton
-              onPress={handleClaimPress}
+              onPress={() => claimRewardPress(rewardId)}
               variant="filled"
               sizeVariant="compact"
               colorVariant="secondary"
@@ -137,19 +121,44 @@ const Item = ({
 const RewardsSection = () => {
   const theme = useTheme();
 
-  const {data, refetch, loading} = useQueryWithAuth(GET_USER_REFERRAL_STATUS, {
-    fetchPolicy: 'network-only',
-  });
+  const {data, loading, updateQuery} = useQueryWithAuth(
+    GET_USER_REFERRAL_STATUS,
+    {
+      fetchPolicy: 'network-only',
+    },
+  );
 
   const [
     claimRewardRequest,
-    {data: claimRewardData},
+    {data: claimRewardData, loading: claimRewardLoading},
     reset,
   ] = useMutationWithReset(CLAIM_REWARD_API, {}, {withAuth: true});
 
   const handleRewardGotPress = () => {
     reset();
-    refetch();
+  };
+
+  const handleRewardClaimPress = async (rewardId) => {
+    try {
+      await claimRewardRequest({
+        variables: {
+          id: rewardId,
+        },
+      });
+
+      updateQuery((prev) => {
+        const newData = JSON.parse(JSON.stringify(prev));
+        const referralItem = newData.userProfile.referrals.find(
+          (_r) => _r.reward.id === rewardId,
+        );
+        if (referralItem) {
+          referralItem.reward.claimedTime = new Date();
+          return newData;
+        }
+        return false;
+      });
+      // TODO: handle error
+    } catch (e) {}
   };
 
   const sectionData = {};
@@ -173,7 +182,7 @@ const RewardsSection = () => {
       data: sectionData[section],
     }));
 
-  if (loading) {
+  if (loading || claimRewardLoading) {
     return <LoadingSpinner />;
   }
 
@@ -184,8 +193,8 @@ const RewardsSection = () => {
       renderItem={({item}) => (
         <Item
           item={item}
+          claimRewardPress={handleRewardClaimPress}
           claimRewardData={claimRewardData}
-          claimRewardRequest={claimRewardRequest}
           handleRewardGotPress={handleRewardGotPress}
         />
       )}
