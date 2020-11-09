@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {BadgeImage} from './style';
 
-const AchievementBadge = ({day, setDaysPresentInBadge, isEnglish}) => {
+const AchievementBadge = ({
+  day,
+  setDaysPresentInBadge,
+  checkedInToday,
+  isEnglish,
+}) => {
   const achievementDays = [
     {
       targetDay: 50,
@@ -30,22 +35,29 @@ const AchievementBadge = ({day, setDaysPresentInBadge, isEnglish}) => {
     },
   ];
   let badgeSourceArray = [];
-  achievementDays.map(ad => {
-    if (day >= ad.targetDay) {
+  achievementDays.map((ad) => {
+    const todayIsTargetDay = day === ad.targetDay;
+    const todayIsAfterTargetDay = day > ad.targetDay;
+    if ((todayIsTargetDay && checkedInToday) || todayIsAfterTargetDay) {
       badgeSourceArray.push(ad);
     }
   });
 
-  if (badgeSourceArray.length <= 0) {
-    return null;
-  } else {
-    const targetDayInTheLatestBadge =
-      badgeSourceArray[badgeSourceArray.length - 1].targetDay;
-    setDaysPresentInBadge(targetDayInTheLatestBadge);
-  }
+  // TODO: improve loading
+  useEffect(() => {
+    if (badgeSourceArray.length > 0) {
+      const targetDayInTheLatestBadge =
+        badgeSourceArray[badgeSourceArray.length - 1].targetDay;
+      setDaysPresentInBadge(targetDayInTheLatestBadge);
+    }
+  }, [badgeSourceArray, setDaysPresentInBadge]);
 
-  return badgeSourceArray.map(badge => (
-    <BadgeImage source={badge.imageSource} />
+  return badgeSourceArray.map((badge) => (
+    <BadgeImage
+      key={badge.targetDay}
+      source={badge.imageSource}
+      resizeMode="contain"
+    />
   ));
 };
 

@@ -11,6 +11,7 @@ import {margin, dayList, container, checkInButton} from './style';
 import AppButton from '@/components/AppButton';
 import RewardGotPopup from '@/components/RewardGotPopup';
 import PopupModal from '@/components/PopupModal';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import DayList from './DayList';
 import AchievementBadge from './AchievementBadge';
 
@@ -33,7 +34,7 @@ const DailyCheckIn = () => {
     }
   }, [todayElementLayout]);
 
-  const {data, refetch} = useQueryWithAuth(GET_CHECK_IN_STATUS_API);
+  const {data, refetch, loading} = useQueryWithAuth(GET_CHECK_IN_STATUS_API);
 
   const [
     checkIn,
@@ -66,6 +67,10 @@ const DailyCheckIn = () => {
     refetch();
   };
 
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <View style={container}>
       <ScrollView
@@ -75,7 +80,8 @@ const DailyCheckIn = () => {
         style={dayList}>
         <View style={margin} />
         <AchievementBadge
-          day={checkedInToday ? today : today - 1}
+          day={today}
+          checkedInToday={checkedInToday}
           setDaysPresentInBadge={setDaysPresentInBadge}
           isEnglish={isEnglish}
         />
