@@ -189,7 +189,7 @@ const BrowseScreen = ({navigation}) => {
     {
       name: 'Referral',
       icon: ReferralIcon,
-      action: () => navigation.navigate('settings'),
+      action: () => navigation.navigate('referral'),
     },
     {
       name: 'Selected Merchants',
