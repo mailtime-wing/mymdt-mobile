@@ -153,6 +153,7 @@ const RewardsSection = () => {
         );
         if (referralItem) {
           referralItem.reward.claimedTime = new Date();
+          referralItem.reward.status = 'CLAIMED';
           return newData;
         }
         return false;
