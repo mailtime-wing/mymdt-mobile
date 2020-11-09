@@ -34,7 +34,9 @@ const DailyCheckIn = () => {
     }
   }, [todayElementLayout]);
 
-  const {data, refetch, loading} = useQueryWithAuth(GET_CHECK_IN_STATUS_API);
+  const {data, loading, updateQuery} = useQueryWithAuth(
+    GET_CHECK_IN_STATUS_API,
+  );
 
   const [
     checkIn,
@@ -64,7 +66,15 @@ const DailyCheckIn = () => {
 
   const handleRewardGotPress = () => {
     reset();
-    refetch();
+    updateQuery((prev) => {
+      const newData = JSON.parse(JSON.stringify(prev));
+      if (newData) {
+        newData.userProfile.checkInStatus.hasCheckedInToday = true;
+      } else {
+        return false;
+      }
+      return newData;
+    });
   };
 
   if (loading) {
