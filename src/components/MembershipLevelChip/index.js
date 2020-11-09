@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import {levelChip, levelText, border} from './style';
+import {levelChip, border} from './style';
 import membershipLevel from '@/enum/membershipLevel';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
@@ -55,7 +55,7 @@ const MembershipLevelChip = ({userLevel, style}) => {
         !!borderColor && border(borderColor),
         style,
       ]}>
-      <AppText variant="label" style={levelText(textColor)}>
+      <AppText variant="label" style={{color: textColor}}>
         <FormattedMessage id={`membership_level_${currentLevel.level}`} />
       </AppText>
     </View>

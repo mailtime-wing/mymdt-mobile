@@ -10,7 +10,7 @@ export const ButtonsContainer = styled.View`
 export const ButtonContainer = styled.TouchableOpacity`
   padding: 16px 8px;
   border-radius: 16px;
-  background-color: ${props => props.theme.colors.background1};
+  background-color: ${(props) => props.theme.colors.background1};
   flex: 1;
   margin: 0 8px;
   justify-content: center;
@@ -25,7 +25,7 @@ export const ButtonText = styled(Text)`
   letter-spacing: 0.5px;
   text-transform: uppercase;
   ${Platform.OS === 'ios' && 'font-weight: bold;'}
-  color: ${props =>
+  color: ${(props) =>
     props.color ? props.color : props.theme.colors.contrastColor};
   margin-top: 8px;
 `;

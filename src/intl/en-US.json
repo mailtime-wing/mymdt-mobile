@@ -251,7 +251,8 @@
     "sure": "SURE!",
     "continue": "Continue",
     "upgrade": "Upgrade",
-    "verify": "Verify"
+    "verify": "Verify",
+    "more": "More"
   },
 
   "error": {

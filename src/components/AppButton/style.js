@@ -23,6 +23,18 @@ export const container = (
     `
     }
     ${
+      colorVariant === 'primaryDark' &&
+      `
+    background-color: ${theme.colors.primary.dark};
+    `
+    }
+    ${
+      colorVariant === 'secondaryDark' &&
+      `
+    background-color: ${theme.colors.secondary.dark};
+    `
+    }
+    ${
       colorVariant === 'secondary' &&
       /* apply box-shadow only when
       1. colorVariant === 'secondary'
@@ -81,6 +93,12 @@ export const container = (
       border-color: ${theme.colors.buttonContrastBorderColor};
     `
     }
+    ${
+      colorVariant === 'white' &&
+      `
+      border-color: white;
+    `
+    }
   `}
 
   ${sizeVariant === 'compact' &&
@@ -110,13 +128,13 @@ export const text = (theme, variant, colorVariant) => css`
   ${variant === 'filled' &&
   `
     ${
-      colorVariant === 'primary' &&
+      (colorVariant === 'primary' || colorVariant === 'primaryDark') &&
       `
       color: ${theme.colors.background1};
     `
     }
     ${
-      colorVariant === 'secondary' &&
+      (colorVariant === 'secondary' || colorVariant === 'secondaryDark') &&
       `
       color: ${theme.colors.background1};
     `
@@ -160,6 +178,12 @@ export const text = (theme, variant, colorVariant) => css`
       color: ${theme.colors.buttonContrastTextColor};
     `
     }
+    ${
+      colorVariant === 'white' &&
+      `
+      color: white;
+    `
+    }
     `}
 `;
 
@@ -171,17 +195,19 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
   ${variant === 'filled' &&
   `
     ${
-      colorVariant === 'primary' &&
+      (colorVariant === 'primary' || colorVariant === 'primaryDark') &&
       `
       fill: ${theme.colors.background1};
       stroke: ${theme.colors.background1};
+      stroke-width: 2px;
     `
     }
     ${
-      colorVariant === 'secondary' &&
+      (colorVariant === 'secondary' || colorVariant === 'secondaryDark') &&
       `
       fill: ${theme.colors.background1};
       stroke: ${theme.colors.background1};
+      stroke-width: 2px;
     `
     }
     ${
@@ -189,6 +215,7 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.background1};
       stroke: ${theme.colors.background1};
+      stroke-width: 2px;
     `
     }
     ${
@@ -196,6 +223,7 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.secondary.normal};
       stroke: ${theme.colors.secondary.normal};
+      stroke-width: 2px;
     `
     }
     `}
@@ -206,6 +234,7 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.primary.normal};
       stroke: ${theme.colors.primary.normal};
+      stroke-width: 2px;
     `
     }
     ${
@@ -213,6 +242,7 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.secondary.normal};
       stroke: ${theme.colors.secondary.normal};
+      stroke-width: 2px;
     `
     }
     ${
@@ -220,6 +250,7 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.textOnError.normal};
       stroke: ${theme.colors.textOnError.normal};
+      stroke-width: 2px;
     `
     }
     ${
@@ -227,6 +258,15 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.buttonContrastTextColor};
       stroke: ${theme.colors.buttonContrastTextColor};
+      stroke-width: 2px;
+    `
+    }
+    ${
+      colorVariant === 'white' &&
+      `
+      fill: white;
+      stroke: white;
+      stroke-width: 2px;
     `
     }
   `}

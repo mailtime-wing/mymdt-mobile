@@ -1,6 +1,6 @@
 import {css} from '@emotion/native';
 
-export const card = backgroundColor => css`
+export const card = (backgroundColor) => css`
   width: 260px;
   height: 164px;
   border-radius: 16px;
@@ -18,6 +18,6 @@ export const usd = css`
   text-align: right;
 `;
 
-export const cardName = cardNameColor => css`
-  color: ${cardNameColor}; 
+export const cardName = (cardNameColor) => css`
+  color: ${cardNameColor};
 `;

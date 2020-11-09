@@ -1,14 +1,14 @@
 import React from 'react';
 import {View} from 'react-native';
-
 import {useTheme} from 'emotion-theming';
-import {css} from '@emotion/native';
 
-import {historyListContainer} from './style';
+import {historyListContainer, noTransaction} from './style';
 import TransactionList from './TransactionList';
 
+import AppText from '@/components/AppText2';
+
 const TransactionsHistory = ({
-  transactionsHistoryList,
+  transactionsHistoryList = [],
   currencyCode,
   headerComponent,
   style,
@@ -16,20 +16,19 @@ const TransactionsHistory = ({
 }) => {
   const theme = useTheme();
   return (
-    <View
-      style={[
-        css`
-          ${theme.colors.elevatedBackground4}
-        `,
-        historyListContainer,
-        style,
-      ]}>
+    <View style={[historyListContainer, style]}>
       {headerComponent}
-      <TransactionList
-        transactionsHistoryList={transactionsHistoryList}
-        currencyCode={currencyCode}
-        {...props}
-      />
+      {transactionsHistoryList.length > 0 ? (
+        <TransactionList
+          transactionsHistoryList={transactionsHistoryList}
+          currencyCode={currencyCode}
+          {...props}
+        />
+      ) : (
+        <AppText variant="smallText" style={noTransaction(theme)}>
+          No Transaction
+        </AppText>
+      )}
     </View>
   );
 };

@@ -9,7 +9,7 @@ import AppText from '@/components/AppText2';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
-const wp = percentage => {
+const wp = (percentage) => {
   const value = (percentage * viewportWidth) / 100;
   return Math.round(value);
 };

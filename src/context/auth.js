@@ -144,7 +144,7 @@ export const AuthProvider = ({children}) => {
   }, [refreshTokenRequest, authData.refreshToken, updateAuthToken, signOut]);
 
   const handlePopupPress = useCallback(
-    pressed => {
+    (pressed) => {
       if (pressed) {
         signOut();
       }
@@ -156,7 +156,7 @@ export const AuthProvider = ({children}) => {
     () => ({
       refreshAccessToken,
       updateAuthToken,
-      updateCashBackType: async cashBackType => {
+      updateCashBackType: async (cashBackType) => {
         try {
           await AsyncStorage.setItem('cashBackType', cashBackType);
         } catch (error) {

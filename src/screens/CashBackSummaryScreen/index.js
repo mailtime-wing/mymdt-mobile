@@ -24,6 +24,7 @@ import {
   firstChipMargin,
   historyHeaderContainer,
   cashBackTitle,
+  background as historyBackground,
 } from './style';
 
 import {ThemeContext} from '@/context/theme';
@@ -240,6 +241,7 @@ const CashBackSummaryScreen = ({navigation}) => {
             navigation={navigation}
             transactionsHistoryList={cardTransactionsHistory}
             onEndReached={onLoadMore}
+            style={historyBackground(theme)}
           />
         }
       />

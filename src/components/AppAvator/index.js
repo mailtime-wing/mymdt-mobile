@@ -16,7 +16,7 @@ import AppText from '@/components/AppText2';
 
 /**
  * @typedef {Object} Props
- * @property {'default|initials|icons|image'} variant
+ * @property {'default|initials|icon|image'} variant
  * @property {'small'|'normal'|'large'} sizeVariant
  */
 
@@ -25,7 +25,16 @@ import AppText from '@/components/AppText2';
  * @type {import('react').FunctionComponent<Props>}
  */
 
-const AppAvator = ({variant, sizeVariant, imageSrc, name, style}) => {
+const AppAvator = ({
+  variant,
+  sizeVariant,
+  imageSrc,
+  svgIcon: SvgIcon,
+  backgroundColor,
+  color,
+  name,
+  style,
+}) => {
   const theme = useTheme();
 
   if (variant === 'initials') {
@@ -55,10 +64,16 @@ const AppAvator = ({variant, sizeVariant, imageSrc, name, style}) => {
     );
   }
 
-  if (variant === 'icons') {
+  if (variant === 'icon') {
     return (
-      <View style={[container(sizeVariant), iconContainer(theme), style]}>
-        <Image source={imageSrc} style={icon(sizeVariant)} />
+      <View
+        style={[
+          container(sizeVariant),
+          iconContainer,
+          {backgroundColor: backgroundColor},
+          style,
+        ]}>
+        <SvgIcon {...icon(sizeVariant, color)} />
       </View>
     );
   }

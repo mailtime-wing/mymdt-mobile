@@ -7,10 +7,17 @@ import membershipLevel from '@/enum/membershipLevel';
 import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import MembershipCard from '@/components/MembershipCard';
+import QuickActions from '@/components/QuickActions';
 import UpgradeSection from './UpgradeSection';
-import ShortcutSection from './ShortcutSection';
 import CashBackSummarySection from './CashBackSummarySection';
 import MembershipInfoCard from './MembershipInfoCard';
+
+import AwardIcon from '@/assets/icon_award.svg';
+import CreditCardIcon from '@/assets/icon_credit-card.svg';
+import DollarSignIcon from '@/assets/dollar_sign_icon';
+import BagIcon from '@/assets/icon_shopping-bag';
+import ReferralIcon from '@/assets/referral_icon.svg';
+import MailIcon from '@/assets/icon_mail.svg';
 
 import {imageStyle, upgradeSection, sectionMargin} from './style';
 import {useTheme} from 'emotion-theming';
@@ -163,6 +170,39 @@ const BrowseScreen = ({navigation}) => {
     fetchPolicy: 'network-only',
   });
 
+  const quickActionList = [
+    {
+      name: 'Privileges',
+      icon: AwardIcon,
+      action: () => navigation.navigate('settings'),
+    },
+    {
+      name: 'Add Email',
+      icon: MailIcon,
+      action: () => navigation.navigate('settings'),
+    },
+    {
+      name: 'Add Card',
+      icon: CreditCardIcon,
+      action: () => navigation.navigate('settings'),
+    },
+    {
+      name: 'Referral',
+      icon: ReferralIcon,
+      action: () => navigation.navigate('settings'),
+    },
+    {
+      name: 'Selected Merchants',
+      icon: BagIcon,
+      action: () => navigation.navigate('settings'),
+    },
+    {
+      name: 'Cashback type',
+      icon: DollarSignIcon,
+      action: () => navigation.navigate('settings'),
+    },
+  ];
+
   const levelGradientList = [
     {
       level: membershipLevel.NEWBIE,
@@ -215,11 +255,12 @@ const BrowseScreen = ({navigation}) => {
           style={[upgradeSection, sectionMargin]}
         />
         <DemoComponents />
-        <ShortcutSection navigation={navigation} style={sectionMargin} />
         <CashBackSummarySection
           onPress={handleCashBackSummaryPress}
           style={sectionMargin}
         />
+        <QuickActions style={sectionMargin} actionList={quickActionList} />
+        <CashBackSummarySection navigation={navigation} style={sectionMargin} />
         <MembershipInfoCard userLevel={userLevel} style={sectionMargin} />
       </ScrollView>
     </LinearGradientBackground>
