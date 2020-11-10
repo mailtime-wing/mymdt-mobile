@@ -39,6 +39,7 @@
   "reward_type_default": "reward",
   "reward_type_check_in": "check-in reward",
   "reward_type_bonus_task": "bonus task reward",
+  "reward_type_referral": "referral reward",
   "converted_from": "Converted from",
 
   "wallet": "钱包",

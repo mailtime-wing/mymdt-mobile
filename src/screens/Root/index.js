@@ -174,6 +174,7 @@ const authModalScreens = [
     name: 'cash_back_summary',
     component: CashBackSummaryScreen,
   },
+  {name: 'referral', component: ReferralScreen},
 ];
 
 const settingScreens = [
@@ -183,7 +184,6 @@ const settingScreens = [
   {name: 'merchants_preference', component: MerchantSelectScreen},
   {name: 'emails_binding', component: BindEmailScreen}, // same as add_email in setupScreens (but different navigator)
   {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
-  {name: 'referral', component: ReferralScreen},
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'verify_phone_number', component: VerifyPhoneNumberScreen},
   {name: 'change_phone_number', component: ChangePhoneNumberScreen},
@@ -239,11 +239,11 @@ const linkingConfig = {
           path: 'bindbank',
           exact: true,
         },
-        referral: {
-          path: 'invitefd',
-          exact: true,
-        },
       },
+    },
+    referral: {
+      path: 'referral',
+      exact: true,
     },
     home: {
       // return to home if the path not match

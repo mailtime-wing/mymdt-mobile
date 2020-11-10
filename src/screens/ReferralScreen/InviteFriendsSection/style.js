@@ -5,19 +5,19 @@ export const progressBarContainer = css`
   margin-bottom: 24px;
 `;
 
-export const detailStyle = theme => css`
+export const detailStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;
 
-export const sectionHeaderStyle = theme => css`
+export const sectionHeaderStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
-export const progressTitleStyle = theme => css`
+export const progressTitleStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
-export const progressLabelStyle = theme => css`
+export const progressLabelStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;
 
@@ -32,14 +32,18 @@ export const inputContainer = css`
   flex: 1;
 `;
 
-export const textInput = theme => css`
+export const textInput = (theme) => css`
   padding: 14px 16px;
   color: ${theme.colors.contrastColor};
 `;
 
-export const textInputContainer = theme => css`
+export const textInputContainer = (theme) => css`
   border-radius: 8px;
   border: 2px solid transparent;
   margin: 4px 0;
   background-color: ${theme.colors.background2};
+`;
+
+export const container = css`
+  padding: 24px;
 `;
