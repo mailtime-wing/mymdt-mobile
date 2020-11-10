@@ -10,7 +10,7 @@ import {
 } from './style';
 import {useTheme} from 'emotion-theming';
 
-const ProgressBar = ({title, label, progressLabel, progress, style}) => {
+const ProgressBar = ({title, label, progressLabel, progress, color, style}) => {
   const theme = useTheme();
   return (
     <View style={[container, style]}>
@@ -22,7 +22,7 @@ const ProgressBar = ({title, label, progressLabel, progress, style}) => {
         {Platform.OS === 'ios' ? (
           <ProgressBarIOS
             progress={progress}
-            progressTintColor={theme.colors.secondary.normal}
+            progressTintColor={color || theme.colors.secondary.normal}
             trackTintColor={theme.colors.background3}
           />
         ) : (
@@ -30,7 +30,7 @@ const ProgressBar = ({title, label, progressLabel, progress, style}) => {
             styleAttr="Horizontal"
             indeterminate={false}
             progress={progress}
-            color={theme.colors.secondary.normal}
+            color={color || theme.colors.secondary.normal}
           />
         )}
       </View>
