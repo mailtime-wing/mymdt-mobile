@@ -18,7 +18,7 @@ import CheckedIcon from '@/assets/icon_check-circle-2.svg';
 
 const Requirement = ({task, target, progress, unit, action, actionText}) => {
   const theme = useTheme();
-  const done = progress === target;
+  const done = progress >= target;
   const doneColor = theme.colors.primary.normal; // finished use this color
 
   return (
