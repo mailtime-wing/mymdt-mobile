@@ -6,7 +6,7 @@ import membershipLevel from '@/enum/membershipLevel';
 
 import {image, button} from './style';
 
-const MembershipInfoCard = ({userLevel, style}) => {
+const MembershipInfoCard = ({userLevel, style, onPress}) => {
   const imgSrc =
     userLevel === membershipLevel.NEWBIE
       ? require('@/assets/dashboard_setup_card.png')
@@ -15,6 +15,7 @@ const MembershipInfoCard = ({userLevel, style}) => {
     <View style={style}>
       <Image source={imgSrc} style={image} resizeMode="contain" />
       <AppButton
+        onPress={onPress}
         variant="filled"
         sizeVariant="normal"
         colorVariant="secondary"

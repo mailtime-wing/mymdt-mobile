@@ -4,17 +4,9 @@ import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 import {css} from '@emotion/native';
 
-import {
-  progressTitleStyle,
-  progressLabelStyle,
-  progressContainer,
-  container,
-  sectionTitle,
-  rowContainer,
-  button,
-} from './style';
+import {container, sectionTitle} from './style';
 import AppText from '@/components/AppText2';
-import ProgressBar from '@/components/ProgressBar';
+import Requirement from '@/components/Requirement';
 import AppButton from '@/components/AppButton';
 
 const UpgradeSection = ({userNextLevel, style}) => {
@@ -42,29 +34,13 @@ const UpgradeSection = ({userNextLevel, style}) => {
           }}
         />
       </AppText>
-      <View style={rowContainer}>
-        <ProgressBar
-          title={
-            <AppText variant="body2" style={progressTitleStyle(theme)}>
-              <FormattedMessage id="referral" />
-            </AppText>
-          }
-          progressLabel={
-            <AppText variant="caption" style={progressLabelStyle(theme)}>
-              0/1
-            </AppText>
-          }
-          progress={0 / 1}
-          style={progressContainer}
-        />
-        <AppButton
-          variant="filled"
-          sizeVariant="compact"
-          colorVariant="secondary"
-          text="bind"
-          style={button}
-        />
-      </View>
+      <Requirement
+        task="Bind 1 Email or 1 card"
+        target={1}
+        progress={0}
+        action={() => console.log('pressed')}
+        actionText="Bind"
+      />
       {canUpgrade && (
         <AppButton
           variant="filled"

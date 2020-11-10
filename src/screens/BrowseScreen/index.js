@@ -206,27 +206,27 @@ const BrowseScreen = ({navigation}) => {
   const levelGradientList = [
     {
       level: membershipLevel.NEWBIE,
-      gradient: theme.colors.membership.newbie.gradient,
+      gradient: theme.colors.membership.newbie.dashboard.gradient,
     },
     {
       level: membershipLevel.STARTER,
-      gradient: theme.colors.membership.starter.gradient,
+      gradient: theme.colors.membership.starter.dashboard.gradient,
     },
     {
       level: membershipLevel.EXTRA,
-      gradient: theme.colors.membership.extra.gradient,
+      gradient: theme.colors.membership.extra.dashboard.gradient,
     },
     {
       level: membershipLevel.ELITE,
-      gradient: theme.colors.membership.elite.gradient,
+      gradient: theme.colors.membership.elite.dashboard.gradient,
     },
     {
       level: membershipLevel.INFINITE,
-      gradient: theme.colors.membership.infinite.gradient,
+      gradient: theme.colors.membership.infinite.dashboard.gradient,
     },
     {
       level: membershipLevel.INFINITE_PRIVILEGE,
-      gradient: theme.colors.membership.infinite_privilege.gradient,
+      gradient: theme.colors.membership.infinite_privilege.dashboard.gradient,
     },
   ];
 
@@ -235,6 +235,10 @@ const BrowseScreen = ({navigation}) => {
 
   const handleCashBackSummaryPress = () => {
     navigation.navigate('cash_back_summary');
+  };
+
+  const handleViewMorePress = () => {
+    navigation.navigate('membership_detail');
   };
 
   // TODO: do not linear gradient the whole scroll view
@@ -261,7 +265,11 @@ const BrowseScreen = ({navigation}) => {
         />
         <QuickActions style={sectionMargin} actionList={quickActionList} />
         <CashBackSummarySection navigation={navigation} style={sectionMargin} />
-        <MembershipInfoCard userLevel={userLevel} style={sectionMargin} />
+        <MembershipInfoCard
+          userLevel={userLevel}
+          style={sectionMargin}
+          onPress={handleViewMorePress}
+        />
       </ScrollView>
     </LinearGradientBackground>
   );

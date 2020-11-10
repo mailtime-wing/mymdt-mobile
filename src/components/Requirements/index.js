@@ -27,6 +27,9 @@ const Requirements = ({
     stakingPlan: {amount} = {},
     isInvitationRequired,
   },
+  currentStakeAmount,
+  currentReferralNum,
+  currentBindingNum,
 }) => {
   const theme = useTheme();
   const showCompleteAccountSetup =
@@ -61,7 +64,7 @@ const Requirements = ({
         <Requirement
           task={`Stake ${amount} MDT`}
           target={amount}
-          progress={500}
+          progress={currentStakeAmount}
           action={() => console.log('pressed')}
           actionText="stake mdt"
           colorVariant="primary"
@@ -78,7 +81,7 @@ const Requirements = ({
         <Requirement
           task={`Refer ${referralsNumRequired} friend`}
           target={referralsNumRequired}
-          progress={1}
+          progress={currentReferralNum}
           action={() => console.log('pressed')}
           actionText="invite friends"
           colorVariant="primary"
@@ -89,7 +92,7 @@ const Requirements = ({
         <Requirement
           task={`Bind ${dataSourceBindingsNumRequired} Email or ${dataSourceBindingsNumRequired} card`}
           target={dataSourceBindingsNumRequired}
-          progress={0}
+          progress={currentBindingNum}
           action={() => console.log('pressed')}
           actionText="Bind"
           colorVariant="primary"
@@ -117,6 +120,9 @@ Requirements.defaultProps = {
   dataSourceBindingsNumRequired: 0,
   referralsNumRequired: 0,
   isInvitationRequired: false,
+  currentStakeAmount: 0,
+  currentReferralNum: 0,
+  currentBindingNum: 0,
 };
 
 export default Requirements;

@@ -5,48 +5,59 @@ export const card = css`
   border-radius: 24px;
   margin-horizontal: 24px;
   margin-vertical: 16px;
-  padding: 24px;
-  height: 560px;
 `;
 
-export const currentStyle = theme => css`
-  color: ${theme.colors.secondary.normal};
+export const upperSection = (backgroundColor) => css`
+  background-color: ${backgroundColor};
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+`;
+
+export const tag = (theme) => css`
+  background: ${theme.colors.primary.normal};
+  border-top-right-radius: 32px;
+  border-bottom-right-radius: 32px;
+  width: 88px;
+  height: 16px;
+  padding-left: 24px;
+  padding-right: 8px;
+  justify-content: center;
+`;
+
+export const tagStyle = css`
+  margin-top: 60px;
+`;
+
+export const margin = css`
+  margin-top: 76px; // 60 margin-top + 16 tag height
+`;
+
+export const cardContainer = css`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
+
+export const currentStyle = (theme) => css`
+  color: ${theme.colors.background1};
   text-align: center;
 `;
 
-export const highEmphasis = theme => css`
-  color: ${theme.colors.textOnBackground.highEmphasis};
-  text-align: center;
+export const level = (textColor) => css`
+  color: ${textColor};
+  text-align: left;
+  margin-left: 24px;
+  margin-vertical: 8px;
+  text-transform: uppercase;
+  z-index: 1;
 `;
 
-export const mediumEmphasis = theme => css`
-  color: ${theme.colors.textOnBackground.mediumEmphasis};
-  text-align: center;
+export const privilegeSectionPadding = css`
+  padding-horizontal: 24px;
 `;
 
-export const level = css`
-  margin-top: 8px;
-  margin-bottom: 16px;
-`;
-
-export const privilege = css`
-  margin-top: 40px;
-  margin-bottom: 8px;
-`;
-
-export const requirement = css`
-  margin-top: 24px;
-`;
-
-export const requirementsContainer = css`
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 8px;
-`;
-
-export const button = css`
-  align-self: center;
-  margin-top: auto;
+export const upgradeButton = css`
+  margin-top: 16px;
 `;
 
 export const styles = StyleSheet.create({
@@ -57,7 +68,7 @@ export const styles = StyleSheet.create({
   },
   paginationContainer: {
     paddingVertical: 0,
-    marginTop: 8,
-    marginBottom: 48,
+    marginTop: 24,
+    marginBottom: 16,
   },
 });

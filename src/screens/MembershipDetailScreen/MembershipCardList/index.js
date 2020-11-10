@@ -3,28 +3,30 @@ import {Dimensions, View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import AppText from '@/components/AppText2';
-import AppButton from '@/components/AppButton';
-import {css} from '@emotion/native';
 import {GET_USER_MEMBERSHIP_API} from '@/api/data';
 import {useTheme} from 'emotion-theming';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import Requirements from '@/components/Requirements';
+import Privileges from '@/components/Privileges';
 
 import {
-  card,
-  highEmphasis,
-  mediumEmphasis,
+  card as cardStyle,
   currentStyle,
-  button,
-  level,
-  privilege,
-  requirement,
-  requirementsContainer,
+  level as levelStyle,
+  cardContainer,
+  upperSection,
+  margin,
+  tag,
+  tagStyle,
+  privilegeSectionPadding,
+  upgradeButton,
   styles,
 } from './style';
+import AppButton from '@/components/AppButton';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
-const wp = percentage => {
+const wp = (percentage) => {
   const value = (percentage * viewportWidth) / 100;
   return Math.round(value);
 };
@@ -35,6 +37,17 @@ const itemHorizontalMargin = wp(0);
 const sliderWidth = viewportWidth;
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
+const CurrentTag = ({style}) => {
+  const theme = useTheme();
+  return (
+    <View style={[tag(theme), style]}>
+      <AppText variant="overline" style={currentStyle(theme)}>
+        <FormattedMessage id="isCurrent" defaultMessage="Current" />
+      </AppText>
+    </View>
+  );
+};
+
 const MembershipCardList = ({cardList, onScroll}) => {
   const theme = useTheme();
   const refCarousel = useRef(null);
@@ -42,67 +55,78 @@ const MembershipCardList = ({cardList, onScroll}) => {
   const {data} = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
   const userLevel = data?.userProfile?.membership?.level || 0;
 
-  const renderItem = ({item, index}) => {
-    const current = userLevel === index;
-    const next = userLevel + 1 === index;
+  const renderItem = ({
+    item: {
+      level,
+      label,
+      textColor,
+      backgroundColor,
+      starColor,
+      card,
+      membership: {
+        cashbackPercentage,
+        merchantsNumAllowed,
+        stakingInterestRate,
+        ...restMembership
+      },
+      upgradeAvailale,
+      downgradeAvailale,
+    },
+    index,
+  }) => {
+    const isCurrentLevel = userLevel === index;
+    const isMembershipLevelLower = index < userLevel;
+    const isMembershipLevelHigher = index > userLevel;
+    const canUpgrade = upgradeAvailale && isMembershipLevelHigher;
+    const canDowngrade = downgradeAvailale && isMembershipLevelLower;
+
     return (
-      <View
-        key={item.level}
-        style={[
-          css`
-            ${theme.colors.elevatedBackground3}
-          `,
-          card,
-        ]}>
-        <AppText variant="label" style={currentStyle(theme)}>
-          {current ? (
-            <FormattedMessage id="current" defaultMessage="Current" />
-          ) : next ? (
-            <FormattedMessage id="button.next" defaultMessage="Next" />
+      <View key={level} style={cardStyle}>
+        <View style={upperSection(backgroundColor)}>
+          {isCurrentLevel ? (
+            <CurrentTag style={tagStyle} />
           ) : (
-            ' '
+            <View style={margin} />
           )}
-        </AppText>
-        <AppText variant="subTitle1" style={[highEmphasis(theme), level]}>
-          {item.label}
-        </AppText>
-        {item.card}
-        {item.privileges.length > 0 && (
-          <AppText variant="heading5" style={[highEmphasis(theme), privilege]}>
-            <FormattedMessage id="privileges" defaultMessage="Privileges" />
+          <AppText variant="heading3" style={levelStyle(textColor)}>
+            {label}
           </AppText>
+          <View style={cardContainer}>{card}</View>
+        </View>
+        {(cashbackPercentage || merchantsNumAllowed || stakingInterestRate) && (
+          <Privileges
+            key={level}
+            starColor={starColor}
+            cashbackPercentage={cashbackPercentage}
+            merchantsNumAllowed={merchantsNumAllowed}
+            stakingInterestRate={stakingInterestRate}
+            style={privilegeSectionPadding}
+          />
         )}
-        {item.privileges.map(_p => (
-          <AppText key={_p} variant="body2" style={highEmphasis(theme)}>
-            {_p}
-          </AppText>
-        ))}
-        {item.requirements.length > 0 && (
-          <AppText
-            variant="heading5"
-            style={[highEmphasis(theme), requirement]}>
-            <FormattedMessage id="requirements" defaultMessage="Requirements" />
-          </AppText>
-        )}
-        {item.requirements.map(_r => (
-          <View key={_r.name} style={requirementsContainer}>
-            <AppText variant="body2" style={highEmphasis(theme)}>
-              {_r.name}
-            </AppText>
-            <AppText variant="body2" style={mediumEmphasis(theme)}>
-              {_r.detail}
-            </AppText>
-          </View>
-        ))}
-        {next && (
+        <Requirements
+          requirements={restMembership}
+          currentStakeAmount={200000}
+          currentReferralNum={2}
+          currentBindingNum={2}
+        />
+        {isMembershipLevelHigher && (
           <AppButton
-            text={
-              <FormattedMessage id="button.upgrade" defaultMessage="Upgrade" />
-            }
             variant="filled"
             sizeVariant="normal"
             colorVariant="secondary"
-            style={button}
+            text={canUpgrade ? 'upgrade' : 'upgrade is not available'}
+            disabled={!canUpgrade}
+            style={upgradeButton}
+          />
+        )}
+        {isMembershipLevelLower && (
+          <AppButton
+            variant="filled"
+            sizeVariant="normal"
+            colorVariant="secondary"
+            text={canDowngrade ? 'downgrade' : 'downgrade is not available'}
+            disabled={!canDowngrade}
+            style={upgradeButton}
           />
         )}
       </View>
@@ -111,6 +135,17 @@ const MembershipCardList = ({cardList, onScroll}) => {
 
   return (
     <View>
+      <Pagination
+        dotsLength={cardList.length}
+        activeDotIndex={activeIndex}
+        containerStyle={styles.paginationContainer}
+        dotColor={theme.colors.buttonContrastTextColor}
+        dotStyle={styles.paginationDot}
+        inactiveDotColor={theme.colors.toggleOff.button}
+        inactiveDotScale={1}
+        carouselRef={refCarousel}
+        tappableDots={!!refCarousel}
+      />
       <Carousel
         ref={refCarousel}
         data={cardList}
@@ -121,19 +156,8 @@ const MembershipCardList = ({cardList, onScroll}) => {
         inactiveSlideScale={1}
         inactiveSlideOpacity={1}
         activeAnimationType="decay"
-        onSnapToItem={index => setActiveIndex(index)}
+        onSnapToItem={(index) => setActiveIndex(index)}
         onScroll={onScroll}
-      />
-      <Pagination
-        dotsLength={cardList.length}
-        activeDotIndex={activeIndex}
-        containerStyle={styles.paginationContainer}
-        dotColor={theme.colors.buttonContrastTextColor}
-        dotStyle={styles.paginationDot}
-        inactiveDotColor={theme.colors.textOnBackground.disabled}
-        inactiveDotScale={1}
-        carouselRef={refCarousel}
-        tappableDots={!!refCarousel}
       />
     </View>
   );
