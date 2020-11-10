@@ -101,6 +101,11 @@ export const container = (
     }
   `}
 
+  ${sizeVariant === 'moreCompact' &&
+  `
+    padding-top: 7px;
+    padding-bottom: 7px;
+    `}
   ${sizeVariant === 'compact' &&
   `
     padding-top: 4px;
