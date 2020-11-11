@@ -60,6 +60,10 @@ export const upgradeButton = css`
   margin-top: 16px;
 `;
 
+export const image = css`
+  margin-left: auto;
+`;
+
 export const styles = StyleSheet.create({
   paginationDot: {
     width: 8,

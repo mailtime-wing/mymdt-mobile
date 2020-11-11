@@ -473,3 +473,26 @@ export const GET_USER_REFERRAL_STATUS = gql`
     }
   }
 `;
+
+export const GET_AVAILABLE_MEMBERSHIPS = gql`
+  query {
+    userProfile {
+      availableMemberships {
+        level
+        referralsNumRequired
+        dataSourceBindingsNumRequired
+        stakingPlan {
+          sourceCurrencyCode
+          yieldCurrencyCode
+          lockupPeriodInDay
+          amount
+        }
+        isInvitationRequired
+        operator
+        cashbackPercentage
+        merchantsNumAllowed
+        stakingInterestRate
+      }
+    }
+  }
+`;

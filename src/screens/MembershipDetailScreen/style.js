@@ -6,10 +6,6 @@ export const titleStyle = (theme) => css`
   padding-left: 24px;
 `;
 
-export const image = css`
-  margin-left: auto;
-`;
-
 export const lines = css`
   position: absolute;
   align-self: center;
