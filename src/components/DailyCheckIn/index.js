@@ -71,7 +71,7 @@ const DailyCheckIn = () => {
       if (newData) {
         newData.userProfile.checkInStatus.hasCheckedInToday = true;
       } else {
-        return false;
+        return prev;
       }
       return newData;
     });
