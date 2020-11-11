@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {useFocusEffect} from '@react-navigation/native';
-import {GET_USER_MERCHANTS_API, GET_USER_MEMBERSHIP_API} from '@/api/data';
+import {GET_USER_MERCHANTS_API, GET_MERCHANT_AVAILABLE_AT} from '@/api/data';
 
 import ModalContaienr from '@/components/ModalContainer';
 import AppButton from '@/components/AppButton';
@@ -34,7 +34,7 @@ const MerchantPreferenceEditScreen = ({navigation}) => {
   const {
     data: userMembershipData,
     loading: userMembershipLoading,
-  } = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
+  } = useQueryWithAuth(GET_MERCHANT_AVAILABLE_AT);
 
   const numberOfMerchant =
     userMembershipData?.userProfile?.membership?.merchantsNumAllowed || 0;

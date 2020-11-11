@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
-import {GET_USER_MEMBERSHIP_API} from '@/api/data';
+import {GET_USER_MEMBERSHIP_API, GET_CURRENCY_BALANCE_API} from '@/api/data';
 import {useTheme} from 'emotion-theming';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 
@@ -25,6 +25,7 @@ import {
 const AccountBar = ({navigation, showCoins}) => {
   const theme = useTheme();
   const {data} = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
+  const {data: currencyData} = useQueryWithAuth(GET_CURRENCY_BALANCE_API);
 
   return (
     <View style={accountContainer}>
@@ -46,25 +47,25 @@ const AccountBar = ({navigation, showCoins}) => {
           <View style={[coinChip(theme), marginRight]}>
             <MRPCoin
               amount={
-                data?.userProfile?.currencyAccounts.find(
-                  ca => ca.currencyCode === MEASURABLE_REWARD_POINT,
+                currencyData?.userProfile?.currencyAccounts.find(
+                  (ca) => ca.currencyCode === MEASURABLE_REWARD_POINT,
                 ).balance || 0
               }
               size={18}
               fontSize={16}
-              color={props => props.theme.colors.textOfMrp}
+              color={(props) => props.theme.colors.textOfMrp}
             />
           </View>
           <View style={coinChip(theme)}>
             <MDTCoin
               amount={
-                data?.userProfile?.currencyAccounts.find(
-                  ca => ca.currencyCode === MEASURABLE_DATA_TOKEN,
+                currencyData?.userProfile?.currencyAccounts.find(
+                  (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
                 ).balance || 0
               }
               size={18}
               fontSize={16}
-              color={props => props.theme.colors.textOfMdt}
+              color={(props) => props.theme.colors.textOfMdt}
             />
           </View>
         </View>

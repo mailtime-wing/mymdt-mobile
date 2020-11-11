@@ -111,14 +111,19 @@ export const GET_USER_MEMBERSHIP_API = gql`
         id
         name
         level
+      }
+    }
+  }
+`;
+
+export const GET_MERCHANT_AVAILABLE_AT = gql`
+  query {
+    userProfile {
+      id
+      membership {
         merchantsNumAllowed
       }
       merchantAvailableForEditAt
-      currencyAccounts {
-        id
-        currencyCode
-        balance
-      }
     }
   }
 `;
@@ -492,6 +497,23 @@ export const GET_AVAILABLE_MEMBERSHIPS = gql`
         cashbackPercentage
         merchantsNumAllowed
         stakingInterestRate
+      }
+    }
+  }
+`;
+
+export const GET_USER_REFERRAL_AND_BINDING = gql`
+  query {
+    userProfile {
+      referrals {
+        isReferrer
+        status
+      }
+      emailAccounts {
+        id
+      }
+      bankItems {
+        id
       }
     }
   }
