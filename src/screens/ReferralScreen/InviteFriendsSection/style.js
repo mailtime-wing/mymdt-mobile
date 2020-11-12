@@ -45,5 +45,6 @@ export const textInputContainer = (theme) => css`
 `;
 
 export const container = css`
-  padding: 24px;
+  padding-top: 24px;
+  padding-horizontal: 24px;
 `;

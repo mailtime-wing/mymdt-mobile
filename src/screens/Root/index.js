@@ -62,6 +62,7 @@ import TransactionDetailScreen from '@/screens/TransactionDetailScreen';
 
 import MembershipDetailScreen from '@/screens/MembershipDetailScreen';
 import CashBackSummaryScreen from '@/screens/CashBackSummaryScreen';
+import StakeScreen from '@/screens/StakeScreen';
 
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
@@ -175,6 +176,10 @@ const authModalScreens = [
     component: CashBackSummaryScreen,
   },
   {name: 'referral', component: ReferralScreen},
+  {
+    name: 'stake',
+    component: StakeScreen,
+  },
 ];
 
 const settingScreens = [

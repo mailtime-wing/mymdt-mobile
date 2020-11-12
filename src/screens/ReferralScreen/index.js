@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, ScrollView, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
@@ -7,59 +7,28 @@ import InviteFriendsSection from './InviteFriendsSection';
 import RewardsSection from './RewardsSection';
 import ScreenContainer from '@/components/ScreenContainer';
 import AppText from '@/components/AppText2';
+import TabSection from '@/components/TabSection';
 
-import {
-  titleStyle,
-  tabGroupContainer,
-  tabContainer,
-  tabNameStyle,
-  activeBottomBar,
-} from './style';
+import {titleStyle} from './style';
 
-const tabList = ['INVITE FRIENDS', 'REWARDS'];
+const tabList = [
+  {
+    name: 'INVITE FRIENDS',
+  },
+  {
+    name: 'REWARDS',
+  },
+];
 
-const RenderTabContent = ({index, ...props}) => {
+const RenderTabContent = ({index}) => {
   switch (index) {
     case 0:
-      return <InviteFriendsSection {...props} />;
+      return <InviteFriendsSection />;
     case 1:
       return <RewardsSection />;
     default:
       return null;
   }
-};
-
-const TabSection = () => {
-  const theme = useTheme();
-  const [activeTab, setActiveTab] = useState(0);
-
-  const handleTabPress = (index) => {
-    setActiveTab(index);
-  };
-
-  return (
-    <>
-      <View style={tabGroupContainer}>
-        {tabList.map((tab, index) => {
-          const active = index === activeTab;
-          return (
-            <TouchableOpacity
-              key={tab}
-              style={tabContainer(theme)}
-              onPress={() => handleTabPress(index)}>
-              <AppText
-                variant="button"
-                style={tabNameStyle(theme, index === activeTab)}>
-                {tab}
-              </AppText>
-              {active && <View style={activeBottomBar(theme)} />}
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-      <RenderTabContent index={activeTab} />
-    </>
-  );
 };
 
 const ReferralScreen = () => {
@@ -71,7 +40,12 @@ const ReferralScreen = () => {
         <AppText variant="pageTitle" style={titleStyle(theme)}>
           <FormattedMessage id="referral" defaultMessage="Referral" />
         </AppText>
-        <TabSection />
+        <TabSection
+          tabList={tabList}
+          RenderTabContent={RenderTabContent}
+          activeTextColor={theme.colors.secondary.dark}
+          activeTabColor={theme.colors.secondary.normal}
+        />
       </ScrollView>
     </ScreenContainer>
   );
