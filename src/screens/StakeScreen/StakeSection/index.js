@@ -11,6 +11,7 @@ import TransactionAmount from '@/components/TransactionAmount';
 
 import StakeMdt from '@/components/StakeMdt';
 import DepositMdt from '@/components/DepositMdt';
+import CryptoExchanges from '@/components/CryptoExchanges';
 
 import {
   container,
@@ -107,11 +108,14 @@ const StackSection = ({
           pa={pa}
         />
       ) : (
-        <DepositMdt
-          availableMdt={availableMdt}
-          depositAmount={stakeAmount - availableMdt}
-          address={address}
-        />
+        <>
+          <DepositMdt
+            availableMdt={availableMdt}
+            depositAmount={stakeAmount - availableMdt}
+            address={address}
+          />
+          <CryptoExchanges />
+        </>
       )}
     </>
   );
