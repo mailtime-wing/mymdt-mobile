@@ -1,4 +1,5 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import {Dimensions, View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
@@ -77,7 +78,8 @@ const MembershipCardList = () => {
 
   const {
     data: upgradeRequiredData,
-    loading: referralAndBindingDataLoading,
+    loading: upgradeRequiredDataLoading,
+    refetch: upgradeRequiredDataRefetch,
   } = useQueryWithAuth(GET_USER_UPGRADE_REQUIRED_DATA);
   const referFriendCount =
     upgradeRequiredData?.userProfile?.referrals.filter(
@@ -89,6 +91,12 @@ const MembershipCardList = () => {
     0;
   const currentStakeAmount =
     upgradeRequiredData?.userProfile?.staking?.amount || 0;
+
+  useFocusEffect(
+    useCallback(() => {
+      upgradeRequiredDataRefetch();
+    }, [upgradeRequiredDataRefetch]),
+  );
 
   const handleOnSnapToItem = (index) => {
     setActiveIndex(index);
@@ -201,7 +209,7 @@ const MembershipCardList = () => {
     return dataObj;
   });
 
-  if (referralAndBindingDataLoading || availableMembershipsLoading || loading) {
+  if (upgradeRequiredDataLoading || availableMembershipsLoading || loading) {
     return <LoadingSpinner />;
   }
 

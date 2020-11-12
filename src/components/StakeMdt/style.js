@@ -1,12 +1,5 @@
 import {css} from '@emotion/native';
 
-export const container = (theme) => css`
-  padding: 24px;
-  ${theme.colors.elevatedBackground3};
-  border-bottom-left-radius: 24px;
-  border-bottom-right-radius: 24px;
-`;
-
 export const mediumEmphasis = (theme) => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;

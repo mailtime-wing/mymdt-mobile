@@ -30,6 +30,7 @@ const Requirements = ({
     stakingPlan,
     isInvitationRequired,
     operator,
+    stakingInterestRate,
   },
   membershipLevel,
   referFriendCount,
@@ -68,7 +69,12 @@ const Requirements = ({
                 task={`Stake ${stakingPlan.amount} MDT`}
                 target={stakingPlan.amount}
                 progress={currentStakeAmount}
-                action={() => navigation.navigate('stake')}
+                action={() =>
+                  navigation.navigate('stake', {
+                    ...stakingPlan,
+                    stakingInterestRate: stakingInterestRate,
+                  })
+                }
                 actionText="stake mdt"
                 colorVariant="primary"
               />

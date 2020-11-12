@@ -8,7 +8,6 @@ import AppButton from '@/components/AppButton';
 import TransactionAmount from '@/components/TransactionAmount';
 
 import {
-  container,
   mediumEmphasis,
   rowContainer,
   stakeSummary,
@@ -17,31 +16,32 @@ import {
   stakeButton,
 } from './style';
 
-const StakeMdt = ({stakeAmount, remainingUnstakeAmount, pa}) => {
+const StakeMdt = ({
+  stakingPlan: {stakingInterestRate, lockupPeriodInDay},
+  remainingUnstakeAmount,
+  stakeDate,
+  expectedAvailableDate,
+  onConfirmStakePress,
+}) => {
   const theme = useTheme();
+
   return (
-    <View style={container(theme)}>
+    <View>
       <View style={stakeSummary(theme)}>
         <View style={[rowContainer, summaryItem]}>
-          <AppText variant="subTitle2" style={mdtTextColor(theme)}>
-            Stake Amount
+          <AppText variant="smallText" style={mdtTextColor(theme)}>
+            Annual Percentage Yield
           </AppText>
-          <AppText variant="digit16mono" style={mdtTextColor(theme)}>
-            <TransactionAmount
-              amount={stakeAmount}
-              unitSizeVariant="small"
-              unitVariant="MDT"
-              variant="to"
-              showDecimal={false}
-            />
+          <AppText variant="caption" style={mediumEmphasis(theme)}>
+            {stakingInterestRate}%
           </AppText>
         </View>
         <View style={[rowContainer, summaryItem]}>
           <AppText variant="smallText" style={mdtTextColor(theme)}>
-            APY
+            Stake Period
           </AppText>
           <AppText variant="caption" style={mediumEmphasis(theme)}>
-            {pa}%
+            {lockupPeriodInDay} days
           </AppText>
         </View>
         <View style={[rowContainer, summaryItem]}>
@@ -49,20 +49,20 @@ const StakeMdt = ({stakeAmount, remainingUnstakeAmount, pa}) => {
             Stake Date
           </AppText>
           <AppText variant="caption" style={mediumEmphasis(theme)}>
-            <FormattedDate value={new Date()} />
+            <FormattedDate value={stakeDate} />
           </AppText>
         </View>
         <View style={[rowContainer, summaryItem]}>
           <AppText variant="smallText" style={mdtTextColor(theme)}>
-            Unstake Date
+            Expected Available Date
           </AppText>
           <AppText variant="caption" style={mediumEmphasis(theme)}>
-            <FormattedDate value={new Date()} />
+            <FormattedDate value={expectedAvailableDate} />
           </AppText>
         </View>
         <View style={[rowContainer, summaryItem]}>
           <AppText variant="smallText" style={mdtTextColor(theme)}>
-            Remaining Unstake MDT
+            Remaining Available MDT
           </AppText>
           <AppText variant="caption" style={mediumEmphasis(theme)}>
             <TransactionAmount
@@ -72,12 +72,12 @@ const StakeMdt = ({stakeAmount, remainingUnstakeAmount, pa}) => {
               unitVariant="MDT"
               unitColor={theme.colors.textOnBackground.mediumEmphasis}
               amountColor={theme.colors.textOnBackground.mediumEmphasis}
-              showDecimal={false}
             />
           </AppText>
         </View>
       </View>
       <AppButton
+        onPress={onConfirmStakePress}
         variant="filled"
         sizeVariant="large"
         colorVariant="primary"
@@ -86,6 +86,13 @@ const StakeMdt = ({stakeAmount, remainingUnstakeAmount, pa}) => {
       />
     </View>
   );
+};
+
+StakeMdt.defaultProps = {
+  stakingPlan: {
+    stakingInterestRate: 0,
+    lockupPeriodInDay: 0,
+  },
 };
 
 export default StakeMdt;

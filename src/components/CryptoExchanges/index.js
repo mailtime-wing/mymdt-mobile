@@ -9,7 +9,6 @@ import AppIcon from '@/components/AppIcon';
 import ExternalLinkIcon from '@/assets/icon_external-link.svg';
 
 import {
-  container,
   header,
   exchangesName,
   referralLink,
@@ -38,7 +37,7 @@ const ReferralLink = ({url}) => {
 const CryptoExchanges = () => {
   const theme = useTheme();
   return (
-    <View style={container(theme)}>
+    <View>
       <AppText variant="body2" style={[header(theme), textAlignCenter]}>
         MDT is available in these crypto exchanges
       </AppText>

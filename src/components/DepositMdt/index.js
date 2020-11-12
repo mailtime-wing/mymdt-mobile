@@ -10,7 +10,6 @@ import CopyIcon from '@/assets/icon_copy.svg';
 import AlertIcon from '@/assets/icon_alert-triangle.svg';
 
 import {
-  container,
   mediumEmphasis,
   highEmphasis,
   notEnought,
@@ -21,6 +20,7 @@ import {
   alert,
   copyText,
   textAlignCenter,
+  alertContainer,
 } from './style';
 
 const DepositMdt = ({depositAmount, address}) => {
@@ -31,21 +31,26 @@ const DepositMdt = ({depositAmount, address}) => {
   };
 
   return (
-    <View style={container(theme)}>
-      <View style={[rowContainer, alert]}>
-        <AlertIcon
-          fill={theme.colors.textOnError.normal}
-          stroke={theme.colors.textOnError.normal}
-        />
-        <AppText variant="subTitle3" style={notEnought(theme)}>
-          You don’t have enough MDT
+    <View>
+      <View style={alertContainer(theme)}>
+        <View style={[rowContainer, alert]}>
+          <AlertIcon
+            fill={theme.colors.textOnError.normal}
+            stroke={theme.colors.textOnError.normal}
+            strokeWidth={2}
+          />
+          <AppText variant="subTitle3" style={notEnought(theme)}>
+            You don’t have enough MDT
+          </AppText>
+        </View>
+        <AppText
+          variant="body2"
+          style={[mediumEmphasis(theme), textAlignCenter]}>
+          You can stake MDT after transfering{' '}
+          <FormattedNumber value={depositAmount} /> MDT to the deposit address
+          below.
         </AppText>
       </View>
-      <AppText variant="body2" style={[mediumEmphasis(theme), textAlignCenter]}>
-        You can stake MDT after transfering{' '}
-        <FormattedNumber value={depositAmount} /> MDT to the deposit address
-        below.
-      </AppText>
       <AppText variant="label" style={[depositAddress, mediumEmphasis(theme)]}>
         MDT Deposit Address
       </AppText>
@@ -63,6 +68,7 @@ const DepositMdt = ({depositAmount, address}) => {
           <CopyIcon
             fill={theme.colors.primary.normal}
             stroke={theme.colors.primary.normal}
+            strokeWidth={2}
           />
           <AppText variant="button" style={copyText(theme)}>
             copy

@@ -422,15 +422,23 @@ const Root = () => {
   const {authToken} = useContext(AuthContext);
   const theme = useTheme();
 
-  const rootCardStyle = {
-    ...screenUnderModalOptions.cardStyle,
-    backgroundColor: theme.colors.background1,
-  };
+  const rootCardStyle = [
+    {
+      ...screenUnderModalOptions.cardStyle,
+    },
+    css`
+      ${theme.colors.elevatedBackground2}
+    `,
+  ];
 
-  const rootHeaderStyle = {
-    ...screenUnderModalOptions.headerStyle,
-    backgroundColor: theme.colors.background1,
-  };
+  const rootHeaderStyle = [
+    {
+      ...screenUnderModalOptions.headerStyle,
+    },
+    css`
+      ${theme.colors.elevatedBackground2}
+    `,
+  ];
 
   const themeCardStyle = {
     ...screenUnderModalOptions.cardStyle,
