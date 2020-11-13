@@ -12,33 +12,35 @@ const MembershipLevelChip = ({userLevel, style}) => {
   const levels = [
     {
       level: membershipLevel.NEWBIE,
-      backgroundColor: theme.colors.membership.newbie.background,
-      textColor: theme.colors.membership.newbie.text,
+      backgroundColor: theme.colors.membership.newbie.badge.background,
+      textColor: theme.colors.membership.newbie.badge.text,
+      borderColor: theme.colors.membership.newbie.badge.border,
     },
     {
       level: membershipLevel.STARTER,
-      backgroundColor: theme.colors.membership.starter.background,
-      textColor: theme.colors.membership.starter.text,
+      backgroundColor: theme.colors.membership.starter.badge.background,
+      textColor: theme.colors.membership.starter.badge.text,
     },
     {
       level: membershipLevel.EXTRA,
-      backgroundColor: theme.colors.membership.extra.background,
-      textColor: theme.colors.membership.extra.text,
+      backgroundColor: theme.colors.membership.extra.badge.background,
+      textColor: theme.colors.membership.extra.badge.text,
     },
     {
       level: membershipLevel.ELITE,
-      backgroundColor: theme.colors.membership.elite.background,
-      textColor: theme.colors.membership.elite.text,
+      backgroundColor: theme.colors.membership.elite.badge.background,
+      textColor: theme.colors.membership.elite.badge.text,
     },
     {
       level: membershipLevel.INFINITE,
-      backgroundColor: theme.colors.membership.infinite.background,
-      textColor: theme.colors.membership.infinite.text,
+      backgroundColor: theme.colors.membership.infinite.badge.background,
+      textColor: theme.colors.membership.infinite.badge.text,
     },
     {
       level: membershipLevel.INFINITE_PRIVILEGE,
-      backgroundColor: theme.colors.membership.infinite_privilege.background,
-      textColor: theme.colors.membership.infinite_privilege.text,
+      backgroundColor:
+        theme.colors.membership.infinite_privilege.badge.background,
+      textColor: theme.colors.membership.infinite_privilege.badge.text,
       borderColor: theme.colors.membership.infinite_privilege.border,
     },
   ];

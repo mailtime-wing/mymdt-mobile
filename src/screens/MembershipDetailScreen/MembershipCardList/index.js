@@ -3,28 +3,39 @@ import {Dimensions, View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import AppText from '@/components/AppText2';
-import AppButton from '@/components/AppButton';
-import {css} from '@emotion/native';
-import {GET_USER_MEMBERSHIP_API} from '@/api/data';
+import {
+  GET_USER_MEMBERSHIP_API,
+  GET_AVAILABLE_MEMBERSHIPS,
+  GET_USER_UPGRADE_REQUIRED_DATA,
+} from '@/api/data';
 import {useTheme} from 'emotion-theming';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import Requirements from '@/components/Requirements';
+import Privileges from '@/components/Privileges';
+
+import MembershipGlareCard from '@/components/MembershipGlareCard';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import membershipLevel from '@/enum/membershipLevel';
 
 import {
-  card,
-  highEmphasis,
-  mediumEmphasis,
+  card as cardStyle,
   currentStyle,
-  button,
-  level,
-  privilege,
-  requirement,
-  requirementsContainer,
+  level as levelStyle,
+  cardContainer,
+  upperSection,
+  margin,
+  tag,
+  tagStyle,
+  privilegeSectionPadding,
+  upgradeButton,
+  image,
   styles,
 } from './style';
+import AppButton from '@/components/AppButton';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
-const wp = percentage => {
+const wp = (percentage) => {
   const value = (percentage * viewportWidth) / 100;
   return Math.round(value);
 };
@@ -35,74 +46,219 @@ const itemHorizontalMargin = wp(0);
 const sliderWidth = viewportWidth;
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
-const MembershipCardList = ({cardList, onScroll}) => {
+const CurrentTag = ({style}) => {
+  const theme = useTheme();
+  return (
+    <View style={[tag(theme), style]}>
+      <AppText variant="overline" style={currentStyle(theme)}>
+        <FormattedMessage id="isCurrent" defaultMessage="Current" />
+      </AppText>
+    </View>
+  );
+};
+
+const BINDING = 'binding';
+const REFERRAL = 'referral';
+const STAKING = 'staking';
+const INVITATION = 'invitation';
+
+const MembershipCardList = () => {
   const theme = useTheme();
   const refCarousel = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const {data} = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
+  const {data, loading} = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
+  const {
+    data: availableMembershipsData,
+    loading: availableMembershipsLoading,
+  } = useQueryWithAuth(GET_AVAILABLE_MEMBERSHIPS);
   const userLevel = data?.userProfile?.membership?.level || 0;
+  const availableMemberships =
+    availableMembershipsData?.userProfile?.availableMemberships || [];
 
-  const renderItem = ({item, index}) => {
-    const current = userLevel === index;
-    const next = userLevel + 1 === index;
+  const {
+    data: upgradeRequiredData,
+    loading: referralAndBindingDataLoading,
+  } = useQueryWithAuth(GET_USER_UPGRADE_REQUIRED_DATA);
+  const referFriendCount =
+    upgradeRequiredData?.userProfile?.referrals.filter(
+      (referral) => referral.isReferrer && referral.status === 'PROCESSED',
+    ).length || 0;
+  const bindDataSourceCount =
+    upgradeRequiredData?.userProfile?.emailAccounts?.length ||
+    0 + upgradeRequiredData?.userProfile?.bankItems?.length ||
+    0;
+  const currentStakeAmount =
+    upgradeRequiredData?.userProfile?.staking?.amount || 0;
+
+  const handleOnSnapToItem = (index) => {
+    setActiveIndex(index);
+  };
+
+  const checkCanUpgrade = ({
+    dataSourceBindingsNumRequired,
+    referralsNumRequired,
+    stakingPlan,
+    isInvitationRequired,
+    operator,
+  } = {}) => {
+    const requirementsList = [];
+
+    function checkRequirementIsMet(requirement) {
+      switch (requirement) {
+        case REFERRAL:
+          if (referFriendCount >= referralsNumRequired) {
+            return true;
+          }
+          return false;
+        case BINDING:
+          if (bindDataSourceCount >= dataSourceBindingsNumRequired) {
+            return true;
+          }
+          return false;
+        case STAKING:
+          if (currentStakeAmount >= stakingPlan?.amount) {
+            return true;
+          }
+          return false;
+        case INVITATION:
+          return false;
+        default:
+          return false;
+      }
+    }
+
+    if (dataSourceBindingsNumRequired > 0) {
+      requirementsList.push(BINDING);
+    }
+    if (referralsNumRequired > 0) {
+      requirementsList.push(REFERRAL);
+    }
+    if (stakingPlan) {
+      requirementsList.push(STAKING);
+    }
+    if (isInvitationRequired) {
+      requirementsList.push(INVITATION);
+    }
+
+    if (operator === 'AND') {
+      return requirementsList.every((r) => checkRequirementIsMet(r));
+    } else {
+      return requirementsList.some((r) => checkRequirementIsMet(r));
+    }
+  };
+
+  const cardStyleMap = {
+    [membershipLevel.NEWBIE]: {
+      backgroundColor: theme.colors.membership.newbie.card.background,
+      textColor: theme.colors.membership.newbie.card.text,
+      starColor: theme.colors.membership.newbie.star,
+    },
+    [membershipLevel.STARTER]: {
+      backgroundColor: theme.colors.membership.starter.card.background,
+      textColor: theme.colors.membership.starter.card.text,
+      starColor: theme.colors.membership.starter.star,
+    },
+    [membershipLevel.EXTRA]: {
+      backgroundColor: theme.colors.membership.extra.card.background,
+      textColor: theme.colors.membership.extra.card.text,
+      starColor: theme.colors.membership.extra.star,
+    },
+    [membershipLevel.ELITE]: {
+      backgroundColor: theme.colors.membership.elite.card.background,
+      textColor: theme.colors.membership.elite.card.text,
+      starColor: theme.colors.membership.elite.star,
+    },
+    [membershipLevel.INFINITE]: {
+      backgroundColor: theme.colors.membership.infinite.card.background,
+      textColor: theme.colors.membership.infinite.card.text,
+      starColor: theme.colors.membership.infinite.star,
+    },
+    [membershipLevel.INFINITE_PRIVILEGE]: {
+      backgroundColor:
+        theme.colors.membership.infinite_privilege.card.background,
+      textColor: theme.colors.membership.infinite_privilege.card.text,
+      starColor: theme.colors.membership.infinite_privilege.star,
+    },
+  };
+
+  const cardList = availableMemberships.map((membership) => {
+    const {backgroundColor, textColor, starColor} = cardStyleMap[
+      membership.level
+    ];
+    const dataObj = {};
+    dataObj.label = (
+      <FormattedMessage id={`membership_level_${membership.level}`} />
+    );
+    dataObj.card = (
+      <MembershipGlareCard userLevel={membership.level} style={image} />
+    );
+    dataObj.membership = membership;
+    dataObj.backgroundColor = backgroundColor;
+    dataObj.textColor = textColor;
+    dataObj.starColor = starColor;
+    dataObj.upgradeAvailable = checkCanUpgrade(membership);
+
+    return dataObj;
+  });
+
+  if (referralAndBindingDataLoading || availableMembershipsLoading || loading) {
+    return <LoadingSpinner />;
+  }
+
+  const renderItem = ({
+    item: {
+      label,
+      textColor,
+      backgroundColor,
+      starColor,
+      card,
+      membership,
+      upgradeAvailable,
+    },
+  }) => {
+    const isCurrentLevel = userLevel === membership.level;
+    const isMembershipLevelHigher = membership.level > userLevel;
+    const canUpgrade = upgradeAvailable && isMembershipLevelHigher;
+
     return (
-      <View
-        key={item.level}
-        style={[
-          css`
-            ${theme.colors.elevatedBackground3}
-          `,
-          card,
-        ]}>
-        <AppText variant="label" style={currentStyle(theme)}>
-          {current ? (
-            <FormattedMessage id="current" defaultMessage="Current" />
-          ) : next ? (
-            <FormattedMessage id="button.next" defaultMessage="Next" />
+      <View key={membership.level} style={cardStyle}>
+        <View style={upperSection(backgroundColor)}>
+          {isCurrentLevel ? (
+            <CurrentTag style={tagStyle} />
           ) : (
-            ' '
+            <View style={margin} />
           )}
-        </AppText>
-        <AppText variant="subTitle1" style={[highEmphasis(theme), level]}>
-          {item.label}
-        </AppText>
-        {item.card}
-        {item.privileges.length > 0 && (
-          <AppText variant="heading5" style={[highEmphasis(theme), privilege]}>
-            <FormattedMessage id="privileges" defaultMessage="Privileges" />
+          <AppText variant="heading3" style={levelStyle(textColor)}>
+            {label}
           </AppText>
+          <View style={cardContainer}>{card}</View>
+        </View>
+        {membership.level !== membershipLevel.NEWBIE && (
+          // Skip Privileges section when userLevel = NEWBIE
+          <Privileges
+            key={membership.level}
+            starColor={starColor}
+            cashbackPercentage={membership.cashbackPercentage}
+            merchantsNumAllowed={membership.merchantsNumAllowed}
+            stakingInterestRate={membership.stakingInterestRate}
+            style={privilegeSectionPadding}
+          />
         )}
-        {item.privileges.map(_p => (
-          <AppText key={_p} variant="body2" style={highEmphasis(theme)}>
-            {_p}
-          </AppText>
-        ))}
-        {item.requirements.length > 0 && (
-          <AppText
-            variant="heading5"
-            style={[highEmphasis(theme), requirement]}>
-            <FormattedMessage id="requirements" defaultMessage="Requirements" />
-          </AppText>
-        )}
-        {item.requirements.map(_r => (
-          <View key={_r.name} style={requirementsContainer}>
-            <AppText variant="body2" style={highEmphasis(theme)}>
-              {_r.name}
-            </AppText>
-            <AppText variant="body2" style={mediumEmphasis(theme)}>
-              {_r.detail}
-            </AppText>
-          </View>
-        ))}
-        {next && (
+        <Requirements
+          membership={membership}
+          membershipLevel={membership.level}
+          referFriendCount={referFriendCount}
+          bindDataSourceCount={bindDataSourceCount}
+          currentStakeAmount={currentStakeAmount}
+        />
+        {isMembershipLevelHigher && (
           <AppButton
-            text={
-              <FormattedMessage id="button.upgrade" defaultMessage="Upgrade" />
-            }
             variant="filled"
             sizeVariant="normal"
             colorVariant="secondary"
-            style={button}
+            text={canUpgrade ? 'upgrade' : 'upgrade is not available'}
+            disabled={!canUpgrade}
+            style={upgradeButton}
           />
         )}
       </View>
@@ -111,6 +267,17 @@ const MembershipCardList = ({cardList, onScroll}) => {
 
   return (
     <View>
+      <Pagination
+        dotsLength={cardList.length}
+        activeDotIndex={activeIndex}
+        containerStyle={styles.paginationContainer}
+        dotColor={theme.colors.buttonContrastTextColor}
+        dotStyle={styles.paginationDot}
+        inactiveDotColor={theme.colors.toggleOff.button}
+        inactiveDotScale={1}
+        carouselRef={refCarousel}
+        tappableDots={!!refCarousel}
+      />
       <Carousel
         ref={refCarousel}
         data={cardList}
@@ -121,19 +288,7 @@ const MembershipCardList = ({cardList, onScroll}) => {
         inactiveSlideScale={1}
         inactiveSlideOpacity={1}
         activeAnimationType="decay"
-        onSnapToItem={index => setActiveIndex(index)}
-        onScroll={onScroll}
-      />
-      <Pagination
-        dotsLength={cardList.length}
-        activeDotIndex={activeIndex}
-        containerStyle={styles.paginationContainer}
-        dotColor={theme.colors.buttonContrastTextColor}
-        dotStyle={styles.paginationDot}
-        inactiveDotColor={theme.colors.textOnBackground.disabled}
-        inactiveDotScale={1}
-        carouselRef={refCarousel}
-        tappableDots={!!refCarousel}
+        onSnapToItem={handleOnSnapToItem}
       />
     </View>
   );

@@ -111,14 +111,19 @@ export const GET_USER_MEMBERSHIP_API = gql`
         id
         name
         level
+      }
+    }
+  }
+`;
+
+export const GET_MERCHANT_AVAILABLE_AT = gql`
+  query {
+    userProfile {
+      id
+      membership {
         merchantsNumAllowed
       }
       merchantAvailableForEditAt
-      currencyAccounts {
-        id
-        currencyCode
-        balance
-      }
     }
   }
 `;
@@ -468,6 +473,58 @@ export const GET_USER_REFERRAL_STATUS = gql`
           id
           value
           claimedTime
+        }
+      }
+    }
+  }
+`;
+
+export const GET_AVAILABLE_MEMBERSHIPS = gql`
+  query {
+    userProfile {
+      id
+      availableMemberships {
+        id
+        level
+        referralsNumRequired
+        dataSourceBindingsNumRequired
+        stakingPlan {
+          id
+          sourceCurrencyCode
+          yieldCurrencyCode
+          lockupPeriodInDay
+          amount
+        }
+        isInvitationRequired
+        operator
+        cashbackPercentage
+        merchantsNumAllowed
+        stakingInterestRate
+      }
+    }
+  }
+`;
+
+export const GET_USER_UPGRADE_REQUIRED_DATA = gql`
+  query {
+    userProfile {
+      id
+      referrals {
+        id
+        isReferrer
+        status
+      }
+      emailAccounts {
+        id
+      }
+      bankItems {
+        id
+      }
+      staking {
+        id
+        stakingPlan {
+          id
+          amount
         }
       }
     }

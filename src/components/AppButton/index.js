@@ -9,7 +9,7 @@ import {container, text as textStyle, icon} from './style';
 /**
  * @typedef {Object} Props
  * @property {'filled'|'outlined'|'transparent'} variant
- * @property {'compact'|'normal'|'large'} sizeVariant
+ * @property {'moreCompact'|'compact'|'normal'|'large'} sizeVariant
  * @property {'primary'|'primaryDark'|'secondary'|'secondaryDark'|'alert'|'contrast'|'white'} colorVariant
  */
 
@@ -38,7 +38,9 @@ const AppButton = ({
       disabled={disabled}
       {...props}>
       {SvgIcon && <SvgIcon {...icon(theme, variant, colorVariant, !!text)} />}
-      <AppText variant="button" style={textStyle(theme, variant, colorVariant)}>
+      <AppText
+        variant={sizeVariant === 'moreCompact' ? 'moreCompactButton' : 'button'}
+        style={textStyle(theme, variant, colorVariant)}>
         {text}
       </AppText>
     </TouchableOpacity>
