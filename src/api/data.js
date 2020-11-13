@@ -502,7 +502,7 @@ export const GET_AVAILABLE_MEMBERSHIPS = gql`
   }
 `;
 
-export const GET_USER_REFERRAL_AND_BINDING = gql`
+export const GET_USER_UPGRADE_REQUIRED_DATA = gql`
   query {
     userProfile {
       referrals {
@@ -514,6 +514,12 @@ export const GET_USER_REFERRAL_AND_BINDING = gql`
       }
       bankItems {
         id
+      }
+      staking {
+        id
+        stakingPlan {
+          amount
+        }
       }
     }
   }
