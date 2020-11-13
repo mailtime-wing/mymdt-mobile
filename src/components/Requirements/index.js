@@ -23,7 +23,7 @@ import CheckedIcon from '@/assets/icon_check-circle-2.svg';
 import membershipLevelEnum from '@/enum/membershipLevel';
 
 const Requirements = ({
-  requirements: {
+  membership: {
     dataSourceBindingsNumRequired,
     referralsNumRequired,
     stakingPlan,

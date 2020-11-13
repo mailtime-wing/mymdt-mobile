@@ -79,12 +79,14 @@ const MembershipCardList = () => {
     data: upgradeRequiredData,
     loading: referralAndBindingDataLoading,
   } = useQueryWithAuth(GET_USER_UPGRADE_REQUIRED_DATA);
-  const referFriendCount = upgradeRequiredData?.userProfile?.referrals.filter(
-    (referral) => referral.isReferrer && referral.status === 'PROCESSED',
-  ).length;
+  const referFriendCount =
+    upgradeRequiredData?.userProfile?.referrals.filter(
+      (referral) => referral.isReferrer && referral.status === 'PROCESSED',
+    ).length || 0;
   const bindDataSourceCount =
-    upgradeRequiredData?.userProfile?.emailAccounts?.length +
-    upgradeRequiredData?.userProfile?.bankItems?.length;
+    upgradeRequiredData?.userProfile?.emailAccounts?.length ||
+    0 + upgradeRequiredData?.userProfile?.bankItems?.length ||
+    0;
   const currentStakeAmount =
     upgradeRequiredData?.userProfile?.staking?.amount || 0;
 
@@ -145,58 +147,56 @@ const MembershipCardList = () => {
     }
   };
 
-  const cardStyleList = [
-    {
-      level: membershipLevel.NEWBIE,
+  const cardStyleMap = {
+    [membershipLevel.NEWBIE]: {
       backgroundColor: theme.colors.membership.newbie.card.background,
       textColor: theme.colors.membership.newbie.card.text,
       starColor: theme.colors.membership.newbie.star,
     },
-    {
-      level: membershipLevel.STARTER,
+    [membershipLevel.STARTER]: {
       backgroundColor: theme.colors.membership.starter.card.background,
       textColor: theme.colors.membership.starter.card.text,
       starColor: theme.colors.membership.starter.star,
     },
-    {
-      level: membershipLevel.EXTRA,
+    [membershipLevel.EXTRA]: {
       backgroundColor: theme.colors.membership.extra.card.background,
       textColor: theme.colors.membership.extra.card.text,
       starColor: theme.colors.membership.extra.star,
     },
-    {
-      level: membershipLevel.ELITE,
+    [membershipLevel.ELITE]: {
       backgroundColor: theme.colors.membership.elite.card.background,
       textColor: theme.colors.membership.elite.card.text,
       starColor: theme.colors.membership.elite.star,
     },
-    {
-      level: membershipLevel.INFINITE,
+    [membershipLevel.INFINITE]: {
       backgroundColor: theme.colors.membership.infinite.card.background,
       textColor: theme.colors.membership.infinite.card.text,
       starColor: theme.colors.membership.infinite.star,
     },
-    {
-      level: membershipLevel.INFINITE_PRIVILEGE,
+    [membershipLevel.INFINITE_PRIVILEGE]: {
       backgroundColor:
         theme.colors.membership.infinite_privilege.card.background,
       textColor: theme.colors.membership.infinite_privilege.card.text,
       starColor: theme.colors.membership.infinite_privilege.star,
     },
-  ];
+  };
 
-  const cardList = availableMemberships.map(({id, level, ...rest}) => {
-    const {backgroundColor, textColor, starColor} = cardStyleList.find(
-      (cs) => cs.level === level,
-    );
+  const cardList = availableMemberships.map((membership) => {
+    const {backgroundColor, textColor, starColor} = cardStyleMap[
+      membership.level
+    ];
     const dataObj = {};
-    dataObj.label = <FormattedMessage id={`membership_level_${level}`} />;
-    dataObj.card = <MembershipGlareCard userLevel={level} style={image} />;
-    dataObj.membership = {level: level, ...rest};
+    dataObj.label = (
+      <FormattedMessage id={`membership_level_${membership.level}`} />
+    );
+    dataObj.card = (
+      <MembershipGlareCard userLevel={membership.level} style={image} />
+    );
+    dataObj.membership = membership;
     dataObj.backgroundColor = backgroundColor;
     dataObj.textColor = textColor;
     dataObj.starColor = starColor;
-    dataObj.upgradeAvailable = checkCanUpgrade(rest);
+    dataObj.upgradeAvailable = checkCanUpgrade(membership);
 
     return dataObj;
   });
@@ -212,23 +212,16 @@ const MembershipCardList = () => {
       backgroundColor,
       starColor,
       card,
-      membership: {
-        level,
-        cashbackPercentage,
-        merchantsNumAllowed,
-        stakingInterestRate,
-        ...restMembership
-      },
+      membership,
       upgradeAvailable,
     },
-    index,
   }) => {
-    const isCurrentLevel = userLevel === index;
-    const isMembershipLevelHigher = index > userLevel;
+    const isCurrentLevel = userLevel === membership.level;
+    const isMembershipLevelHigher = membership.level > userLevel;
     const canUpgrade = upgradeAvailable && isMembershipLevelHigher;
 
     return (
-      <View key={level} style={cardStyle}>
+      <View key={membership.level} style={cardStyle}>
         <View style={upperSection(backgroundColor)}>
           {isCurrentLevel ? (
             <CurrentTag style={tagStyle} />
@@ -240,20 +233,20 @@ const MembershipCardList = () => {
           </AppText>
           <View style={cardContainer}>{card}</View>
         </View>
-        {level !== membershipLevel.NEWBIE && (
+        {membership.level !== membershipLevel.NEWBIE && (
           // Skip Privileges section when userLevel = NEWBIE
           <Privileges
-            key={level}
+            key={membership.level}
             starColor={starColor}
-            cashbackPercentage={cashbackPercentage}
-            merchantsNumAllowed={merchantsNumAllowed}
-            stakingInterestRate={stakingInterestRate}
+            cashbackPercentage={membership.cashbackPercentage}
+            merchantsNumAllowed={membership.merchantsNumAllowed}
+            stakingInterestRate={membership.stakingInterestRate}
             style={privilegeSectionPadding}
           />
         )}
         <Requirements
-          requirements={restMembership}
-          membershipLevel={index}
+          membership={membership}
+          membershipLevel={membership.level}
           referFriendCount={referFriendCount}
           bindDataSourceCount={bindDataSourceCount}
           currentStakeAmount={currentStakeAmount}
