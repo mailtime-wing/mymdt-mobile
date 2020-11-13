@@ -482,11 +482,14 @@ export const GET_USER_REFERRAL_STATUS = gql`
 export const GET_AVAILABLE_MEMBERSHIPS = gql`
   query {
     userProfile {
+      id
       availableMemberships {
+        id
         level
         referralsNumRequired
         dataSourceBindingsNumRequired
         stakingPlan {
+          id
           sourceCurrencyCode
           yieldCurrencyCode
           lockupPeriodInDay
@@ -505,7 +508,9 @@ export const GET_AVAILABLE_MEMBERSHIPS = gql`
 export const GET_USER_UPGRADE_REQUIRED_DATA = gql`
   query {
     userProfile {
+      id
       referrals {
+        id
         isReferrer
         status
       }
@@ -518,6 +523,7 @@ export const GET_USER_UPGRADE_REQUIRED_DATA = gql`
       staking {
         id
         stakingPlan {
+          id
           amount
         }
       }
