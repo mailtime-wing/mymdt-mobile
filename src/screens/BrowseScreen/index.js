@@ -1,7 +1,11 @@
 import React from 'react';
 import {ScrollView, View} from 'react-native';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
-import {GET_USER_MEMBERSHIP_API} from '@/api/data';
+import {
+  GET_USER_MEMBERSHIP_API,
+  GET_AVAILABLE_MEMBERSHIPS,
+  GET_USER_UPGRADE_REQUIRED_DATA,
+} from '@/api/data';
 
 import membershipLevel from '@/enum/membershipLevel';
 import AccountBar from '@/components/AccountBar';
@@ -23,6 +27,7 @@ import {imageStyle, upgradeSection, sectionMargin} from './style';
 import {useTheme} from 'emotion-theming';
 
 import AppTag from '@/components/AppTag';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import LockIcon from '@/assets/icon_lock.svg';
 
 const testStyle = {
@@ -166,9 +171,36 @@ const DemoComponents = () => {
 
 const BrowseScreen = ({navigation}) => {
   const theme = useTheme();
-  const {data} = useQueryWithAuth(GET_USER_MEMBERSHIP_API, {
+  const {data, loading} = useQueryWithAuth(GET_USER_MEMBERSHIP_API, {
     fetchPolicy: 'network-only',
   });
+  const {
+    data: availableMembershipsData,
+    loading: availableMembershipsDataLoading,
+  } = useQueryWithAuth(GET_AVAILABLE_MEMBERSHIPS);
+
+  const {
+    data: upgradeRequiredData,
+    loading: upgradeRequiredDataLoading,
+  } = useQueryWithAuth(GET_USER_UPGRADE_REQUIRED_DATA);
+  const referFriendCount =
+    upgradeRequiredData?.userProfile?.referrals.filter(
+      (referral) => referral.isReferrer && referral.status === 'PROCESSED',
+    ).length || 0;
+  const bindDataSourceCount =
+    upgradeRequiredData?.userProfile?.emailAccounts?.length ||
+    0 + upgradeRequiredData?.userProfile?.bankItems?.length ||
+    0;
+  const currentStakeAmount =
+    upgradeRequiredData?.userProfile?.staking?.amount || 0;
+
+  const userLevel = data?.userProfile?.membership?.level || 0;
+  const userNextLevel = userLevel + 1;
+  const availableMemberships =
+    availableMembershipsData?.userProfile?.availableMemberships || [];
+  const nextLevelMembership = availableMemberships.find(
+    (ams) => ams.level === userNextLevel,
+  );
 
   const quickActionList = [
     {
@@ -203,35 +235,26 @@ const BrowseScreen = ({navigation}) => {
     },
   ];
 
-  const levelGradientList = [
-    {
-      level: membershipLevel.NEWBIE,
+  const levelGradientMap = {
+    [membershipLevel.NEWBIE]: {
       gradient: theme.colors.membership.newbie.dashboard.gradient,
     },
-    {
-      level: membershipLevel.STARTER,
+    [membershipLevel.STARTER]: {
       gradient: theme.colors.membership.starter.dashboard.gradient,
     },
-    {
-      level: membershipLevel.EXTRA,
+    [membershipLevel.EXTRA]: {
       gradient: theme.colors.membership.extra.dashboard.gradient,
     },
-    {
-      level: membershipLevel.ELITE,
+    [membershipLevel.ELITE]: {
       gradient: theme.colors.membership.elite.dashboard.gradient,
     },
-    {
-      level: membershipLevel.INFINITE,
+    [membershipLevel.INFINITE]: {
       gradient: theme.colors.membership.infinite.dashboard.gradient,
     },
-    {
-      level: membershipLevel.INFINITE_PRIVILEGE,
+    [membershipLevel.INFINITE_PRIVILEGE]: {
       gradient: theme.colors.membership.infinite_privilege.dashboard.gradient,
     },
-  ];
-
-  const userLevel = data?.userProfile?.membership?.level || 0;
-  const userNextLevel = userLevel + 1;
+  };
 
   const handleCashBackSummaryPress = () => {
     navigation.navigate('cash_back_summary');
@@ -241,15 +264,17 @@ const BrowseScreen = ({navigation}) => {
     navigation.navigate('membership_detail');
   };
 
+  if (
+    loading ||
+    availableMembershipsDataLoading ||
+    upgradeRequiredDataLoading
+  ) {
+    return <LoadingSpinner />;
+  }
   // TODO: do not linear gradient the whole scroll view
   // TODO: add card scaled shadow
   return (
-    <LinearGradientBackground
-      colors={
-        levelGradientList.find(
-          (levelGradient) => userLevel === levelGradient.level,
-        )?.gradient
-      }>
+    <LinearGradientBackground colors={levelGradientMap[userLevel].gradient}>
       <AccountBar navigation={navigation} showCoins />
       <ScrollView>
         <MembershipCard userLevel={userLevel} style={imageStyle} />
@@ -257,6 +282,10 @@ const BrowseScreen = ({navigation}) => {
           userNextLevel={userNextLevel}
           navigation={navigation}
           style={[upgradeSection, sectionMargin]}
+          membership={nextLevelMembership}
+          referFriendCount={referFriendCount}
+          bindDataSourceCount={bindDataSourceCount}
+          currentStakeAmount={currentStakeAmount}
         />
         <DemoComponents />
         <CashBackSummarySection

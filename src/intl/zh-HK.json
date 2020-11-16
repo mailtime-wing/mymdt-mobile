@@ -222,6 +222,9 @@
   "stake_mdt_successfully": "Stake MDT Successfully",
   "stake_amount_and_date": "You have successfully staked {amount} until {date}.",
 
+  "confirm_upgrade": "Confirm Upgrade",
+  "confirm_upgrade_to_next_level": "Are you sure to upgrade your membership to {next_level} level?",
+
   "button": {
     "done": "完成",
     "edit": "編輯",

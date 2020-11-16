@@ -11,12 +11,13 @@ import {
 } from '@/api/data';
 import {useTheme} from 'emotion-theming';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
-import Requirements from '@/components/Requirements';
+import MembershipRequirements from '@/components/MembershipRequirements';
 import Privileges from '@/components/Privileges';
 
 import MembershipGlareCard from '@/components/MembershipGlareCard';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import membershipLevel from '@/enum/membershipLevel';
+import checkCanUpgrade from '@/utils/checkCanUpgrade';
 
 import {
   card as cardStyle,
@@ -58,11 +59,6 @@ const CurrentTag = ({style}) => {
   );
 };
 
-const BINDING = 'binding';
-const REFERRAL = 'referral';
-const STAKING = 'staking';
-const INVITATION = 'invitation';
-
 const MembershipCardList = () => {
   const theme = useTheme();
   const refCarousel = useRef(null);
@@ -100,59 +96,6 @@ const MembershipCardList = () => {
 
   const handleOnSnapToItem = (index) => {
     setActiveIndex(index);
-  };
-
-  const checkCanUpgrade = ({
-    dataSourceBindingsNumRequired,
-    referralsNumRequired,
-    stakingPlan,
-    isInvitationRequired,
-    operator,
-  } = {}) => {
-    const requirementsList = [];
-
-    function checkRequirementIsMet(requirement) {
-      switch (requirement) {
-        case REFERRAL:
-          if (referFriendCount >= referralsNumRequired) {
-            return true;
-          }
-          return false;
-        case BINDING:
-          if (bindDataSourceCount >= dataSourceBindingsNumRequired) {
-            return true;
-          }
-          return false;
-        case STAKING:
-          if (currentStakeAmount >= stakingPlan?.amount) {
-            return true;
-          }
-          return false;
-        case INVITATION:
-          return false;
-        default:
-          return false;
-      }
-    }
-
-    if (dataSourceBindingsNumRequired > 0) {
-      requirementsList.push(BINDING);
-    }
-    if (referralsNumRequired > 0) {
-      requirementsList.push(REFERRAL);
-    }
-    if (stakingPlan) {
-      requirementsList.push(STAKING);
-    }
-    if (isInvitationRequired) {
-      requirementsList.push(INVITATION);
-    }
-
-    if (operator === 'AND') {
-      return requirementsList.every((r) => checkRequirementIsMet(r));
-    } else {
-      return requirementsList.some((r) => checkRequirementIsMet(r));
-    }
   };
 
   const cardStyleMap = {
@@ -204,7 +147,12 @@ const MembershipCardList = () => {
     dataObj.backgroundColor = backgroundColor;
     dataObj.textColor = textColor;
     dataObj.starColor = starColor;
-    dataObj.upgradeAvailable = checkCanUpgrade(membership);
+    dataObj.upgradeAvailable = checkCanUpgrade(
+      membership,
+      referFriendCount,
+      bindDataSourceCount,
+      currentStakeAmount,
+    );
 
     return dataObj;
   });
@@ -252,9 +200,8 @@ const MembershipCardList = () => {
             style={privilegeSectionPadding}
           />
         )}
-        <Requirements
+        <MembershipRequirements
           membership={membership}
-          membershipLevel={membership.level}
           referFriendCount={referFriendCount}
           bindDataSourceCount={bindDataSourceCount}
           currentStakeAmount={currentStakeAmount}
