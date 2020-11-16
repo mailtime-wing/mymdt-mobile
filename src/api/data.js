@@ -536,3 +536,13 @@ export const UPDATE_STAKING_PLAN = gql`
     updateStakingPlan(id: $id)
   }
 `;
+
+export const GET_USER_LOCALE_AND_PHONE_NUMBER = gql`
+  query {
+    userProfile {
+      id
+      locale
+      phoneNumber
+    }
+  }
+`;

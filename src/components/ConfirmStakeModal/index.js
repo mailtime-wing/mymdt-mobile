@@ -45,8 +45,4 @@ const ConfirmStakeModal = ({
   );
 };
 
-ConfirmStakeModal.defaultProps = {
-  mask: '',
-};
-
 export default ConfirmStakeModal;
