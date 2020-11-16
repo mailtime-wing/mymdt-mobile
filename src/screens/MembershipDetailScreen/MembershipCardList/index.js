@@ -90,7 +90,7 @@ const MembershipCardList = () => {
     0 + upgradeRequiredData?.userProfile?.bankItems?.length ||
     0;
   const currentStakeAmount =
-    upgradeRequiredData?.userProfile?.staking?.amount || 0;
+    upgradeRequiredData?.userProfile?.staking[0]?.stakingPlan.amount || 0;
 
   useFocusEffect(
     useCallback(() => {

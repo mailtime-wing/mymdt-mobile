@@ -12,9 +12,11 @@ import DepositMdt from '@/components/DepositMdt';
 import CryptoExchanges from '@/components/CryptoExchanges';
 import ConfirmStakeModal from '@/components/ConfirmStakeModal';
 
-import {GET_CURRENCY_BALANCE_API} from '@/api/data';
+import {GET_CURRENCY_BALANCE_API, UPDATE_STAKING_PLAN} from '@/api/data';
 import {MEASURABLE_DATA_TOKEN} from '@/constants/currency';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 import LockIcon from '@/assets/icon_lock.svg';
 
@@ -47,14 +49,18 @@ const AvailableMDT = ({amount}) => {
 
 const StackScreen = ({navigation, route}) => {
   const theme = useTheme();
-  const {data} = useQueryWithAuth(GET_CURRENCY_BALANCE_API, {
+  const {data, loading} = useQueryWithAuth(GET_CURRENCY_BALANCE_API, {
     variables: {currencyCode: MEASURABLE_DATA_TOKEN},
   });
   const [address] = useState('0x16qjQCfDS4LV3MkgWCe8CFm5WD3FFmZwKH');
   const [showConfirmStakeModal, setShowConfirmStakeModal] = useState(false);
   const stakingPlan = route.params;
-  const availableMdt =
-    data?.userProfile?.currencyAccounts[0]?.balance + 200000 || 0;
+
+  const [updateStakingPlan] = useMutationWithAuth(UPDATE_STAKING_PLAN, {
+    skip: !stakingPlan.id,
+    variables: {id: stakingPlan.id},
+  });
+  const availableMdt = data?.userProfile?.currencyAccounts[0]?.balance || 0;
   const stakeAmount = stakingPlan.amount;
   const stakeDate = new Date();
   const expectedAvailableDate = new Date().setDate(
@@ -63,9 +69,15 @@ const StackScreen = ({navigation, route}) => {
   const remainingUnstakeAmount = availableMdt - stakeAmount;
   const isStakeAvailable = remainingUnstakeAmount >= 0;
 
-  const handleConfirmStakePress = () => {
-    // TODO: integrate stake API
-    setShowConfirmStakeModal(true);
+  const handleConfirmStakePress = async () => {
+    try {
+      const result = await updateStakingPlan();
+      if (result) {
+        setShowConfirmStakeModal(true);
+      }
+    } catch (e) {
+      // TODO: handle error
+    }
   };
 
   const handleConfirmPress = () => {
@@ -88,6 +100,10 @@ const StackScreen = ({navigation, route}) => {
       headerRight: () => <AvailableMDT amount={availableMdt} />,
     });
   });
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <ScrollView>
