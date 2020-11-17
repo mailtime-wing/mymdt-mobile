@@ -56,7 +56,7 @@ const reducer = (state, action) => {
 
 export const NotificationProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const {authToken} = useContext(AuthContext);
+  const {isLoggedIn} = useContext(AuthContext);
   const [registerDevice] = useMutationWithAuth(REGISTER_DEVICE);
 
   const checkPermissions = useCallback(async () => {
@@ -138,10 +138,10 @@ export const NotificationProvider = ({children}) => {
       }
     };
 
-    if (state.deviceToken && authToken) {
+    if (state.deviceToken && isLoggedIn) {
       _registerDevice();
     }
-  }, [authToken, registerDevice, state.deviceId, state.deviceToken]);
+  }, [isLoggedIn, registerDevice, state.deviceId, state.deviceToken]);
 
   return (
     <NotificationContext.Provider value={notificationContext}>

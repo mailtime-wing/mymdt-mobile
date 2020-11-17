@@ -7,7 +7,7 @@ import {
 } from '@apollo/client';
 // import { concatPagination, relayStylePagination } from "@apollo/client/utilities"
 import {AUTH_TOKENS} from '@/api/auth';
-import {TOAST_ERRORS} from '@/api/data';
+import {TOAST_ERRORS, GET_INITIAL_USER_DATA} from '@/api/data';
 
 import RefreshAccessTokenErrorLink from './RefreshAccessTokenErrorLink';
 import authLink from './authLink';
@@ -39,6 +39,25 @@ client.writeQuery({
     accessToken: '',
     refreshToken: '',
     isRefreshTokenExpired: false,
+  },
+});
+
+const defaultUser = {
+  id: 'default-user',
+  locale: 'en-US',
+  setupStatus: {
+    isDataSourceBound: false,
+    isProfileCompleted: false,
+    isCashbackCurrencyCodeSet: false,
+    isMerchantSet: false,
+  },
+  __typename: 'User',
+};
+
+client.writeQuery({
+  query: GET_INITIAL_USER_DATA,
+  data: {
+    userProfile: defaultUser,
   },
 });
 

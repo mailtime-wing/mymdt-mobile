@@ -11,6 +11,7 @@ import {SetupFlowProvider} from '@/context/setupFlow';
 import {NotificationProvider} from '@/context/notification';
 import {ToastProvider} from '@/context/toast';
 import {BranchProvider} from '@/context/branch';
+import {SplashProvider} from '@/context/splash';
 import NavigationRoot from '@/screens/Root';
 
 function App() {
@@ -18,21 +19,24 @@ function App() {
     <ApolloProvider client={client}>
       <SafeAreaProvider>
         <ThemeProvider>
-          <IntlContainer>
-            <ToastProvider>
-              <AuthProvider>
+          <ToastProvider>
+            <AuthProvider>
+              <IntlContainer>
                 <NotificationProvider>
                   <PreloadDataProvider>
-                    <SetupFlowProvider>
-                      <BranchProvider>
-                        <NavigationRoot />
-                      </BranchProvider>
-                    </SetupFlowProvider>
+                    <BranchProvider>
+                      <SplashProvider>
+                        {/* UI related components are placed under splash to avoid flickerin */}
+                        <SetupFlowProvider>
+                          <NavigationRoot />
+                        </SetupFlowProvider>
+                      </SplashProvider>
+                    </BranchProvider>
                   </PreloadDataProvider>
                 </NotificationProvider>
-              </AuthProvider>
-            </ToastProvider>
-          </IntlContainer>
+              </IntlContainer>
+            </AuthProvider>
+          </ToastProvider>
         </ThemeProvider>
       </SafeAreaProvider>
     </ApolloProvider>

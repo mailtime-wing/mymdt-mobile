@@ -1,1 +1,1 @@
-export const LANGUAGE_STORAGE_KEY = 'language'
+export const LOCALE_STORAGE_KEY = 'locale';

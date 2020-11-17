@@ -9,18 +9,17 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {useApolloClient, useQuery} from '@apollo/client';
 import jwt_decode from 'jwt-decode';
 import {AUTH_TOKENS, REFRESH_TOKEN_API} from '@/api/auth';
+import {GET_INITIAL_USER_DATA} from '@/api/data';
 import {useMutation} from '@apollo/client';
 
 import PopupModal from '@/components/PopupModal';
 
 export const AuthContext = createContext({
-  refreshAccessToken: () => {},
-  refreshTokenMutationResult: {},
-  updateAuthToken: () => {},
+  initialized: false,
+  isLoggedIn: false,
   updateCashBackType: () => {},
+  signIn: () => {},
   signOut: () => {},
-  authToken: '',
-  refreshToken: '',
   cashBackType: '',
 });
 
@@ -52,33 +51,44 @@ export const AuthProvider = ({children}) => {
   const {data: authData} = useQuery(AUTH_TOKENS);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
 
-  const updateAuthToken = useCallback(
-    (authToken, refreshToken) => {
-      authToken = authToken || '';
-      refreshToken = refreshToken || '';
-      client.writeQuery({
-        query: AUTH_TOKENS,
-        data: {
-          tokensInitialized: true,
-          accessToken: authToken,
-          refreshToken: refreshToken,
-        },
-      });
-    },
-    [client],
-  );
-
+  // clear token cache
   const signOut = useCallback(() => {
     client.writeQuery({
       query: AUTH_TOKENS,
       data: {
-        tokensInitialized: true,
         accessToken: '',
         refreshToken: '',
         isRefreshTokenExpired: false,
       },
     });
   }, [client]);
+
+  // set token cache and fetch initially-required data
+  const signIn = useCallback(
+    async (accessToken, refreshToken) => {
+      try {
+        client.writeQuery({
+          query: AUTH_TOKENS,
+          data: {
+            accessToken,
+            refreshToken,
+          },
+        });
+
+        await client.query({
+          query: GET_INITIAL_USER_DATA,
+          context: {
+            auth: true,
+          },
+          fetchPolicy: 'network-only',
+        });
+      } catch {
+        // TODO: can we do better?
+        signOut();
+      }
+    },
+    [client, signOut],
+  );
 
   // Initialize tokens from AsyncStorage. If token is expired, try to refresh it
   useEffect(() => {
@@ -100,18 +110,41 @@ export const AuthProvider = ({children}) => {
               });
               authToken = data.refreshAccessToken;
             } catch (e) {
-              signOut();
+              authToken = '';
+              refreshToken = '';
               return;
             }
           }
         }
+
+        if (!authToken || !refreshToken) {
+          signOut();
+        } else {
+          await signIn(authToken, refreshToken);
+        }
       } catch (error) {
         console.error('error getting authToken', error);
+        signOut();
       }
-      updateAuthToken(authToken, refreshToken);
+
+      client.writeQuery({
+        query: AUTH_TOKENS,
+        data: {
+          tokensInitialized: true,
+        },
+      });
     };
-    getToken();
-  }, [refreshTokenRequest, signOut, updateAuthToken]);
+
+    if (!authData.tokensInitialized) {
+      getToken();
+    }
+  }, [
+    refreshTokenRequest,
+    client,
+    signIn,
+    signOut,
+    authData.tokensInitialized,
+  ]);
 
   // whenever tokens change (after initialization), update the AsyncStorage
   useEffect(() => {
@@ -129,20 +162,6 @@ export const AuthProvider = ({children}) => {
     }
   }, [authData.accessToken, authData.refreshToken, authData.tokensInitialized]);
 
-  const refreshAccessToken = useCallback(async () => {
-    try {
-      const {data} = await refreshTokenRequest({
-        variables: {
-          refreshToken: authData.refreshToken,
-        },
-      });
-      await updateAuthToken(data.refreshAccessToken, authData.refreshToken);
-      return data.refreshAccessToken;
-    } catch (e) {
-      signOut();
-    }
-  }, [refreshTokenRequest, authData.refreshToken, updateAuthToken, signOut]);
-
   const handlePopupPress = useCallback(
     (pressed) => {
       if (pressed) {
@@ -154,8 +173,8 @@ export const AuthProvider = ({children}) => {
 
   const authContext = useMemo(
     () => ({
-      refreshAccessToken,
-      updateAuthToken,
+      initialized: authData.tokensInitialized,
+      isLoggedIn: !!authData.tokensInitialized && !!authData.accessToken,
       updateCashBackType: async (cashBackType) => {
         try {
           await AsyncStorage.setItem('cashBackType', cashBackType);
@@ -167,24 +186,18 @@ export const AuthProvider = ({children}) => {
           payload: cashBackType,
         });
       },
+      signIn,
       signOut,
-      authToken: authData.accessToken,
-      refreshToken: authData.refreshToken,
       cashBackType: state.cashBackType,
     }),
     [
-      refreshAccessToken,
-      updateAuthToken,
+      authData.tokensInitialized,
+      signIn,
       signOut,
       authData.accessToken,
-      authData.refreshToken,
       state.cashBackType,
     ],
   );
-
-  if (!authData.tokensInitialized) {
-    return null;
-  }
 
   return (
     <AuthContext.Provider value={authContext}>

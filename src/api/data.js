@@ -546,3 +546,27 @@ export const GET_USER_LOCALE_AND_PHONE_NUMBER = gql`
     }
   }
 `;
+
+export const GET_USER_LOCALE = gql`
+  query {
+    userProfile {
+      id
+      locale
+    }
+  }
+`;
+
+export const GET_INITIAL_USER_DATA = gql`
+  query {
+    userProfile {
+      id
+      locale
+      setupStatus {
+        isDataSourceBound
+        isProfileCompleted
+        isCashbackCurrencyCodeSet
+        isMerchantSet
+      }
+    }
+  }
+`;

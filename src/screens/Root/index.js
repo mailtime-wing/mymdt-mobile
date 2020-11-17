@@ -332,7 +332,7 @@ const Setting = ({navigation}) => {
 
 const Main = () => {
   const theme = useTheme();
-  const {authToken} = useContext(AuthContext);
+  const {isLoggedIn} = useContext(AuthContext);
   const {validScreenNames} = useContext(SetupFlowContext);
   const {top} = useSafeAreaInsets();
 
@@ -360,7 +360,7 @@ const Main = () => {
           paddingLeft: 24,
         },
       }}>
-      {!authToken &&
+      {!isLoggedIn &&
         screens.map(({name, appBarShown, options, ...screenProps}) => (
           <MainStack.Screen
             key={name}
@@ -377,7 +377,7 @@ const Main = () => {
             }}
           />
         ))}
-      {authToken
+      {isLoggedIn
         ? setupScreens
             .filter((setupScreen) => validScreenNames[setupScreen.name])
             .map(({name, appBarShown, options, ...screenProps}) => {
@@ -401,7 +401,7 @@ const Main = () => {
               );
             })
         : null}
-      {authToken
+      {isLoggedIn
         ? authScreens.map(({name, options, ...screenProps}) => (
             <MainStack.Screen
               key={name}
@@ -419,7 +419,7 @@ const Main = () => {
 };
 
 const Root = () => {
-  const {authToken} = useContext(AuthContext);
+  const {isLoggedIn} = useContext(AuthContext);
   const theme = useTheme();
 
   const rootCardStyle = [
@@ -476,14 +476,14 @@ const Root = () => {
           component={Main}
           options={{headerShown: false}}
         />
-        {authToken ? (
+        {isLoggedIn ? (
           <RootStack.Screen
             name="settings"
             component={Setting}
             options={{headerShown: false}}
           />
         ) : null}
-        {authToken
+        {isLoggedIn
           ? authModalScreens.map(({name, options, ...screenProps}) => (
               <RootStack.Screen
                 key={name}

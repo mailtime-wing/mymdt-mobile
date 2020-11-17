@@ -42,7 +42,7 @@ const reducer = (state, action) => {
 export const BranchProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialContextValue);
   const intl = useIntl();
-  const {authToken} = useContext(AuthContext);
+  const {isLoggedIn} = useContext(AuthContext);
 
   const {data, error: requestError} = useQueryWithAuth(GET_USER_REFERRAL_CODE);
   const userId = data?.userProfile?.id;
@@ -88,10 +88,10 @@ export const BranchProvider = ({children}) => {
   }, [userId, referralCode, state.branchUniversalObject, intl]);
 
   useEffect(() => {
-    if (!authToken) {
+    if (!isLoggedIn) {
       branch.logout();
     }
-  }, [authToken]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     let unsubscribe = null;

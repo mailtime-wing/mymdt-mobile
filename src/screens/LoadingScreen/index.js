@@ -5,9 +5,8 @@ import {Container, Status, Detail} from './style';
 
 import Button from '@/components/Button';
 
-const LoadingScreen = ({navigation, route}) => {
+const LoadingScreen = ({navigation}) => {
   const [finishSetup, setFinishSetup] = useState(false);
-  const {authToken, refreshToken} = route.params;
 
   useEffect(() => {
     setTimeout(() => setFinishSetup(true), 3000);
@@ -28,12 +27,7 @@ const LoadingScreen = ({navigation, route}) => {
             <FormattedMessage id="it_might_take_some_time" />
           </Detail>
           <Button
-            onPress={() =>
-              navigation.navigate('notification_permission', {
-                authToken: authToken,
-                refreshToken: refreshToken,
-              })
-            }>
+            onPress={() => navigation.navigate('notification_permission')}>
             <FormattedMessage id="button.next" />
           </Button>
         </>

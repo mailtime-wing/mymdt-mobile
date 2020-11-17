@@ -22,7 +22,7 @@ import {appVersionStyle, container} from './style';
 
 const SettingScreen = () => {
   const theme = useTheme();
-  const {languageList, language, saveLanguage} = useContext(IntlContext);
+  const {languageList, language, saveLocale} = useContext(IntlContext);
   const {checkPermissions, request} = useContext(NotificationContext);
   const [showPopup, setShowPopup] = useState(false);
   const [showLanguageBottomSheet, setShowLanguageBottomSheet] = useState(false);
@@ -80,7 +80,7 @@ const SettingScreen = () => {
   };
 
   const handleLanguageOptionPress = (index) => {
-    saveLanguage(languageList[index]);
+    saveLocale(languageList[index].value);
   };
 
   const handleLanguageBottomSheetLayoutPress = () => {

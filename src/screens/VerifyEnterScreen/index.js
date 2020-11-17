@@ -54,7 +54,7 @@ const VerifyEnterScreen = ({route}) => {
   const [enterRequest, {error}, reset] = useMutationWithReset(ENTER_API);
   const {phoneNubmer} = route.params;
   const {localeEnum} = useContext(IntlContext);
-  const {updateAuthToken} = useContext(AuthContext);
+  const {signIn} = useContext(AuthContext);
   const {
     state: {deviceId},
   } = useContext(NotificationContext);
@@ -72,7 +72,7 @@ const VerifyEnterScreen = ({route}) => {
           deviceId,
         },
       });
-      updateAuthToken(data.enter.accessToken, data.enter.refreshToken);
+      signIn(data.enter.accessToken, data.enter.refreshToken);
     } catch (e) {}
   };
 

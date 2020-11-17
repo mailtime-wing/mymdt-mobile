@@ -12,7 +12,7 @@ import {AuthContext} from '@/context/auth';
  *
  */
 export default function useQueryWithAuth(query, options = {}) {
-  const {authToken} = useContext(AuthContext);
+  const {isLoggedIn} = useContext(AuthContext);
   const {context, ..._options} = options;
   const {headers, ..._context} = context || {};
 
@@ -21,7 +21,7 @@ export default function useQueryWithAuth(query, options = {}) {
       auth: true,
       ..._context,
     },
-    skip: !authToken,
+    skip: !isLoggedIn,
     ..._options,
   });
 }

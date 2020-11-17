@@ -67,9 +67,9 @@ const reducer = (state, action) => {
 
 export const NotificationProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const {authToken} = useContext(AuthContext);
+  const {isLoggedIn} = useContext(AuthContext);
   const [registerDevice] = useMutationWithAuth(REGISTER_DEVICE);
-  const {data} = useQueryWithAuth(GET_USER_ID, {skip: !authToken});
+  const {data} = useQueryWithAuth(GET_USER_ID, {skip: !isLoggedIn});
   const userId = data?.userProfile?.id;
 
   useEffect(() => {
@@ -164,11 +164,11 @@ export const NotificationProvider = ({children}) => {
       }
     };
 
-    if (state.deviceToken && state.platform && authToken) {
+    if (state.deviceToken && state.platform && isLoggedIn) {
       _registerDevice();
     }
   }, [
-    authToken,
+    isLoggedIn,
     registerDevice,
     state.deviceId,
     state.deviceToken,

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useCallback} from 'react';
+import React, {useContext, useEffect, useCallback, useRef} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
@@ -82,6 +82,8 @@ const VerifyVerificationCodeForm = ({
   const {localeEnum} = useContext(IntlContext);
   const [otpRequest] = useMutationWithReset(GET_OTP_API, {}, {withAuth: true});
   const [timeLeft, setCountdownTime] = useCountDownTimer(0);
+  const handleSendPressFiredRef = useRef(false);
+
   const isTimerStarted = timeLeft > 0;
   const handleSendPress = useCallback(() => {
     setCountdownTime(60);
@@ -95,8 +97,9 @@ const VerifyVerificationCodeForm = ({
   }, [localeEnum, otpActionKey, otpRequest, phoneNubmer, setCountdownTime]);
 
   useEffect(() => {
-    if (phoneNubmer) {
+    if (phoneNubmer && !handleSendPressFiredRef.current) {
       handleSendPress();
+      handleSendPressFiredRef.current = true;
     }
   }, [handleSendPress, phoneNubmer]);
 

@@ -1,9 +1,10 @@
 import React, {createContext, useContext, useState, useMemo} from 'react';
-import {Graph} from '@dagrejs/graphlib';
-
-import {NotificationContext} from '@/context/notification';
-import {PreloadDataContext} from '@/context/preloadData';
 import {Platform} from 'react-native';
+import {Graph} from '@dagrejs/graphlib';
+import {useQuery} from '@apollo/client';
+
+import {GET_USER_SETUP_STATUS_API} from '@/api/data';
+import {NotificationContext} from '@/context/notification';
 import notificationStatus from '@/enum/notificationStatus';
 
 const setupFlowContextInitialValue = {
@@ -16,7 +17,10 @@ export const SetupFlowProvider = ({children}) => {
   const {
     state: {permissions},
   } = useContext(NotificationContext);
-  const {setupStatus} = useContext(PreloadDataContext);
+  const {data} = useQuery(GET_USER_SETUP_STATUS_API, {
+    fetchPolicy: 'cache-only',
+  });
+  const setupStatus = data?.userProfile?.setupStatus || {};
   const [graph] = useState(new Graph());
 
   /**
