@@ -570,3 +570,15 @@ export const GET_INITIAL_USER_DATA = gql`
     }
   }
 `;
+
+export const UPGRADE_MEMBERSHIP = gql`
+  mutation UpgradeMembership($id: ID!) {
+    upgradeMembership(id: $id) {
+      id
+      membership {
+        id
+        level
+      }
+    }
+  }
+`;

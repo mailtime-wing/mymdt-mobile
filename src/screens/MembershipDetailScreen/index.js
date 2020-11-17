@@ -33,7 +33,7 @@ const MembershipDetailScreen = ({navigation}) => {
           defaultMessage="Membership program"
         />
       </AppText>
-      <MembershipCardList />
+      <MembershipCardList navigation={navigation} />
     </ScrollView>
   );
 };

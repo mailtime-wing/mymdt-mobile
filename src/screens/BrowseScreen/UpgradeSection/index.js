@@ -4,6 +4,9 @@ import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 import {css} from '@emotion/native';
 
+import {UPGRADE_MEMBERSHIP} from '@/api/data';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
+
 import {container, sectionTitle} from './style';
 import AppText from '@/components/AppText2';
 import Requirements from '@/components/Requirements';
@@ -11,15 +14,26 @@ import AppButton from '@/components/AppButton';
 import PopupModal from '@/components/PopupModal';
 import checkCanUpgrade from '@/utils/checkCanUpgrade';
 
-const UpgradeSection = ({userNextLevel, style, ...props}) => {
+const UpgradeSection = ({userNextLevel, style, navigation, ...props}) => {
   const theme = useTheme();
+  const [upgradeMembership] = useMutationWithAuth(UPGRADE_MEMBERSHIP, {
+    skip: !props.membership.id,
+    variables: {id: props.membership.id},
+  });
   const nextLevelString = (
     <FormattedMessage id={`membership_level_${userNextLevel}`} />
   );
   const [showConfirmUpgradePopup, setshowConfirmUpgradePopup] = useState(false);
-  const handlePopupCallback = (cb) => {
+  const handlePopupCallback = async (cb) => {
     if (cb === 'OK') {
-      // TODO: integrate upgrade api
+      try {
+        const result = await upgradeMembership();
+        if (result) {
+          navigation.navigate('upgrade', {level: userNextLevel});
+        }
+      } catch (e) {
+        // TODO: handle error
+      }
     }
     setshowConfirmUpgradePopup(false);
   };

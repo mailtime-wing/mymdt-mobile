@@ -8,13 +8,16 @@ import {
   GET_USER_MEMBERSHIP_API,
   GET_AVAILABLE_MEMBERSHIPS,
   GET_USER_UPGRADE_REQUIRED_DATA,
+  UPGRADE_MEMBERSHIP,
 } from '@/api/data';
 import {useTheme} from 'emotion-theming';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import MembershipRequirements from '@/components/MembershipRequirements';
 import Privileges from '@/components/Privileges';
 
 import MembershipGlareCard from '@/components/MembershipGlareCard';
+import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import membershipLevel from '@/enum/membershipLevel';
 import checkCanUpgrade from '@/utils/checkCanUpgrade';
@@ -59,15 +62,23 @@ const CurrentTag = ({style}) => {
   );
 };
 
-const MembershipCardList = () => {
+const MembershipCardList = ({navigation}) => {
   const theme = useTheme();
   const refCarousel = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showConfirmUpgradePopup, setshowConfirmUpgradePopup] = useState(false);
+  const [membershipToBeUpgraded, setMembershipToBeUpgraded] = useState({});
+
   const {data, loading} = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
   const {
     data: availableMembershipsData,
     loading: availableMembershipsLoading,
   } = useQueryWithAuth(GET_AVAILABLE_MEMBERSHIPS);
+  const [upgradeMembership] = useMutationWithAuth(UPGRADE_MEMBERSHIP, {
+    skip: !membershipToBeUpgraded || !membershipToBeUpgraded.id,
+    variables: {id: membershipToBeUpgraded.id},
+  });
+
   const userLevel = data?.userProfile?.membership?.level || 0;
   const availableMemberships =
     availableMembershipsData?.userProfile?.availableMemberships || [];
@@ -96,6 +107,25 @@ const MembershipCardList = () => {
 
   const handleOnSnapToItem = (index) => {
     setActiveIndex(index);
+  };
+
+  const handleUpgradePress = (membership) => {
+    setMembershipToBeUpgraded(membership);
+    setshowConfirmUpgradePopup(true);
+  };
+
+  const handlePopupCallback = async (cb) => {
+    if (cb === 'OK') {
+      try {
+        const result = await upgradeMembership();
+        if (result) {
+          navigation.navigate('upgrade', {level: membershipToBeUpgraded.level});
+        }
+      } catch (e) {
+        // TODO: handle error
+      }
+    }
+    setshowConfirmUpgradePopup(false);
   };
 
   const cardStyleMap = {
@@ -208,12 +238,40 @@ const MembershipCardList = () => {
         />
         {isMembershipLevelHigher && (
           <AppButton
+            onPress={() => handleUpgradePress(membership)}
             variant="filled"
             sizeVariant="normal"
             colorVariant="secondary"
             text={canUpgrade ? 'upgrade' : 'upgrade is not available'}
             disabled={!canUpgrade}
             style={upgradeButton}
+          />
+        )}
+        {showConfirmUpgradePopup && (
+          <PopupModal
+            title={
+              <FormattedMessage
+                id="confirm_upgrade"
+                defaultMessage="Confirm Upgrade"
+              />
+            }
+            detail={
+              <FormattedMessage
+                id="confirm_upgrade_to_next_level"
+                defaultMessage="Are you sure to upgrade your membership to {next_level} level?"
+                values={{
+                  next_level: (
+                    <FormattedMessage
+                      id={`membership_level_${membershipToBeUpgraded.level}`}
+                    />
+                  ),
+                }}
+              />
+            }
+            callback={handlePopupCallback}
+            okButtonLabel={
+              <FormattedMessage id="button.confirm" defaultMessage="login" />
+            }
           />
         )}
       </View>

@@ -61,6 +61,7 @@ import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
 import TransactionDetailScreen from '@/screens/TransactionDetailScreen';
 
 import MembershipDetailScreen from '@/screens/MembershipDetailScreen';
+import UpgradeScreen from '@/screens/UpgradeScreen';
 import CashBackSummaryScreen from '@/screens/CashBackSummaryScreen';
 import StakeScreen from '@/screens/StakeScreen';
 
@@ -155,6 +156,11 @@ const authScreens = [
     name: 'membership',
     component: MembershipScreen,
     options: {headerTransparent: true},
+  },
+  {
+    name: 'upgrade',
+    component: UpgradeScreen,
+    options: {headerShown: false},
   },
 ];
 
