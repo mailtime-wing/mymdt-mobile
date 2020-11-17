@@ -530,3 +530,19 @@ export const GET_USER_UPGRADE_REQUIRED_DATA = gql`
     }
   }
 `;
+
+export const UPDATE_STAKING_PLAN = gql`
+  mutation UpdateStakingPlan($id: ID!) {
+    updateStakingPlan(id: $id)
+  }
+`;
+
+export const GET_USER_LOCALE_AND_PHONE_NUMBER = gql`
+  query {
+    userProfile {
+      id
+      locale
+      phoneNumber
+    }
+  }
+`;

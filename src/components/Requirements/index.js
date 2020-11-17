@@ -4,6 +4,7 @@ import {FormattedMessage} from 'react-intl';
 import AppText from '@/components/AppText2';
 import {useTheme} from 'emotion-theming';
 import Requirement from '@/components/Requirement';
+import {useNavigation} from '@react-navigation/native';
 
 import {
   requirement,
@@ -29,6 +30,7 @@ const Requirements = ({
     stakingPlan,
     isInvitationRequired,
     operator,
+    stakingInterestRate,
   },
   membershipLevel,
   referFriendCount,
@@ -36,6 +38,7 @@ const Requirements = ({
   currentStakeAmount,
 }) => {
   const theme = useTheme();
+  const navigation = useNavigation();
   const showCompleteAccountSetup =
     membershipLevel === membershipLevelEnum.NEWBIE;
   const showOr = operator === 'OR';
@@ -66,7 +69,12 @@ const Requirements = ({
                 task={`Stake ${stakingPlan.amount} MDT`}
                 target={stakingPlan.amount}
                 progress={currentStakeAmount}
-                action={() => console.log('pressed')}
+                action={() =>
+                  navigation.navigate('stake', {
+                    ...stakingPlan,
+                    stakingInterestRate: stakingInterestRate,
+                  })
+                }
                 actionText="stake mdt"
                 colorVariant="primary"
               />

@@ -28,6 +28,7 @@ const TransactionList = ({
           coin={
             <TransactionAmount
               variant="to"
+              unitSizeVariant="small"
               unitVariant={currencyCode}
               amount={item.node.amount}
             />

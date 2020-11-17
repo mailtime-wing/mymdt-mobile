@@ -141,6 +141,9 @@ export const darkTheme = {
       ['#121212', '#121212'],
       ['rgba(30, 30, 30, 0)', '#1E1E1E'],
       ['#3B4F50', '#232323'],
+      ['#656565', '#363636'],
+      ['#695A26', '#353329'],
+      ['#000000', '#383838'],
     ],
     tabScreenStatusBar: '#121212',
 
@@ -314,6 +317,9 @@ export const lightTheme = {
       ['#FDFBF2', '#E2FAFF'],
       ['rgba(255, 255, 255, 0)', '#FFFFFF'],
       ['#B0F8FD', '#232323'],
+      ['#DEDEDE', '#F6F6F6'],
+      ['#EEDBBA', '#FFF8EC'],
+      ['#A3A3A3', '#F2F2F2'],
     ],
     tabScreenStatusBar: '#FDFBF2',
 
@@ -400,6 +406,12 @@ lightTheme.colors.linearGradientBackground.contrast =
   lightTheme.colors.linearGradientBackground[1];
 lightTheme.colors.linearGradientBackground.cashBackSummary =
   lightTheme.colors.linearGradientBackground[2];
+lightTheme.colors.linearGradientBackground.elite =
+  lightTheme.colors.linearGradientBackground[3];
+lightTheme.colors.linearGradientBackground.infinite =
+  lightTheme.colors.linearGradientBackground[4];
+lightTheme.colors.linearGradientBackground.infinite_privilege =
+  lightTheme.colors.linearGradientBackground[5];
 
 // membership
 lightTheme.colors.membership.newbie.badge.background =
@@ -652,10 +664,10 @@ lightTheme.lineHeights.initials2 = lightTheme.fontSizes.initials2 * 1.5;
 lightTheme.lineHeights.initials3 = lightTheme.fontSizes.initials3 * 1.5;
 lightTheme.lineHeights.unit11 = lightTheme.fontSizes.unit11 * 1.5;
 lightTheme.lineHeights.unit16 = lightTheme.fontSizes.unit16 * 1.5;
-lightTheme.lineHeights.digit12mono = lightTheme.fontSizes.digit12mono * 1.25;
-lightTheme.lineHeights.digit16mono = lightTheme.fontSizes.digit16mono * 1.5;
-lightTheme.lineHeights.digit36 = lightTheme.fontSizes.digit36 * 1.5;
-lightTheme.lineHeights.digit36mono = lightTheme.fontSizes.digit36mono * 1.5;
+lightTheme.lineHeights.digit12mono = lightTheme.fontSizes.digit12mono;
+lightTheme.lineHeights.digit16mono = lightTheme.fontSizes.digit16mono;
+lightTheme.lineHeights.digit36 = lightTheme.fontSizes.digit36;
+lightTheme.lineHeights.digit36mono = lightTheme.fontSizes.digit36mono;
 lightTheme.lineHeights.smallText = lightTheme.fontSizes.smallText * 1.25;
 
 // main theme
@@ -707,6 +719,12 @@ darkTheme.colors.linearGradientBackground.contrast =
   darkTheme.colors.linearGradientBackground[1];
 darkTheme.colors.linearGradientBackground.cashBackSummary =
   darkTheme.colors.linearGradientBackground[2];
+darkTheme.colors.linearGradientBackground.elite =
+  darkTheme.colors.linearGradientBackground[3];
+darkTheme.colors.linearGradientBackground.infinite =
+  darkTheme.colors.linearGradientBackground[4];
+darkTheme.colors.linearGradientBackground.infinite_privilege =
+  darkTheme.colors.linearGradientBackground[5];
 
 // membership
 darkTheme.colors.membership.newbie.badge.background =
@@ -979,8 +997,8 @@ darkTheme.lineHeights.initials2 = darkTheme.fontSizes.initials2 * 1.5;
 darkTheme.lineHeights.initials3 = darkTheme.fontSizes.initials3 * 1.5;
 darkTheme.lineHeights.unit11 = darkTheme.fontSizes.unit11 * 1.5;
 darkTheme.lineHeights.unit16 = darkTheme.fontSizes.unit16 * 1.5;
-darkTheme.lineHeights.digit12mono = darkTheme.fontSizes.digit12mono * 1.25;
-darkTheme.lineHeights.digit16mono = darkTheme.fontSizes.digit16mono * 1.5;
-darkTheme.lineHeights.digit36 = darkTheme.fontSizes.digit36 * 1.5;
-darkTheme.lineHeights.digit36mono = darkTheme.fontSizes.digit36mono * 1.5;
+darkTheme.lineHeights.digit12mono = darkTheme.fontSizes.digit12mono;
+darkTheme.lineHeights.digit16mono = darkTheme.fontSizes.digit16mono;
+darkTheme.lineHeights.digit36 = darkTheme.fontSizes.digit36;
+darkTheme.lineHeights.digit36mono = darkTheme.fontSizes.digit36mono;
 darkTheme.lineHeights.smallText = darkTheme.fontSizes.smallText * 1.25;
