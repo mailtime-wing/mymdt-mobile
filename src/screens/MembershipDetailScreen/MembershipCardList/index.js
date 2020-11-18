@@ -4,19 +4,18 @@ import {Dimensions, View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import AppText from '@/components/AppText2';
-import {
-  GET_USER_MEMBERSHIP_API,
-  GET_AVAILABLE_MEMBERSHIPS,
-  GET_USER_UPGRADE_REQUIRED_DATA,
-} from '@/api/data';
+import {GET_CHECK_USER_CAN_UPGRADE_DATA, UPGRADE_MEMBERSHIP} from '@/api/data';
 import {useTheme} from 'emotion-theming';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
-import Requirements from '@/components/Requirements';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
+import MembershipRequirements from './MembershipRequirements';
 import Privileges from '@/components/Privileges';
 
 import MembershipGlareCard from '@/components/MembershipGlareCard';
+import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import membershipLevel from '@/enum/membershipLevel';
+import checkCanUpgrade from '@/utils/checkCanUpgrade';
 
 import {
   card as cardStyle,
@@ -58,101 +57,61 @@ const CurrentTag = ({style}) => {
   );
 };
 
-const BINDING = 'binding';
-const REFERRAL = 'referral';
-const STAKING = 'staking';
-const INVITATION = 'invitation';
-
-const MembershipCardList = () => {
+const MembershipCardList = ({navigation}) => {
   const theme = useTheme();
   const refCarousel = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const {data, loading} = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
-  const {
-    data: availableMembershipsData,
-    loading: availableMembershipsLoading,
-  } = useQueryWithAuth(GET_AVAILABLE_MEMBERSHIPS);
-  const userLevel = data?.userProfile?.membership?.level || 0;
-  const availableMemberships =
-    availableMembershipsData?.userProfile?.availableMemberships || [];
+  const [showConfirmUpgradePopup, setshowConfirmUpgradePopup] = useState(false);
+  const [membershipToBeUpgraded, setMembershipToBeUpgraded] = useState({});
 
-  const {
-    data: upgradeRequiredData,
-    loading: upgradeRequiredDataLoading,
-    refetch: upgradeRequiredDataRefetch,
-  } = useQueryWithAuth(GET_USER_UPGRADE_REQUIRED_DATA);
+  const {data, loading, refetch} = useQueryWithAuth(
+    GET_CHECK_USER_CAN_UPGRADE_DATA,
+  );
+  const [upgradeMembership] = useMutationWithAuth(UPGRADE_MEMBERSHIP, {
+    variables: {id: membershipToBeUpgraded.id},
+  });
+
+  const userLevel = data?.userProfile?.membership?.level || 0;
+  const availableMemberships = data?.userProfile?.availableMemberships || [];
+
   const referFriendCount =
-    upgradeRequiredData?.userProfile?.referrals.filter(
+    data?.userProfile?.referrals.filter(
       (referral) => referral.isReferrer && referral.status === 'PROCESSED',
     ).length || 0;
   const bindDataSourceCount =
-    upgradeRequiredData?.userProfile?.emailAccounts?.length ||
-    0 + upgradeRequiredData?.userProfile?.bankItems?.length ||
+    data?.userProfile?.emailAccounts?.length ||
+    0 + data?.userProfile?.bankItems?.length ||
     0;
   const currentStakeAmount =
-    upgradeRequiredData?.userProfile?.staking[0]?.stakingPlan.amount || 0;
+    data?.userProfile?.staking[0]?.stakingPlan.amount || 0;
 
   useFocusEffect(
     useCallback(() => {
-      upgradeRequiredDataRefetch();
-    }, [upgradeRequiredDataRefetch]),
+      refetch();
+    }, [refetch]),
   );
 
   const handleOnSnapToItem = (index) => {
     setActiveIndex(index);
   };
 
-  const checkCanUpgrade = ({
-    dataSourceBindingsNumRequired,
-    referralsNumRequired,
-    stakingPlan,
-    isInvitationRequired,
-    operator,
-  } = {}) => {
-    const requirementsList = [];
+  const handleUpgradePress = (membership) => {
+    setMembershipToBeUpgraded(membership);
+    setshowConfirmUpgradePopup(true);
+  };
 
-    function checkRequirementIsMet(requirement) {
-      switch (requirement) {
-        case REFERRAL:
-          if (referFriendCount >= referralsNumRequired) {
-            return true;
-          }
-          return false;
-        case BINDING:
-          if (bindDataSourceCount >= dataSourceBindingsNumRequired) {
-            return true;
-          }
-          return false;
-        case STAKING:
-          if (currentStakeAmount >= stakingPlan?.amount) {
-            return true;
-          }
-          return false;
-        case INVITATION:
-          return false;
-        default:
-          return false;
+  const handlePopupCallback = async (cb) => {
+    if (cb === 'OK') {
+      try {
+        const result = await upgradeMembership();
+        if (result) {
+          navigation.navigate('upgrade', {level: membershipToBeUpgraded.level});
+        }
+      } catch (e) {
+        // TODO: handle error
       }
     }
-
-    if (dataSourceBindingsNumRequired > 0) {
-      requirementsList.push(BINDING);
-    }
-    if (referralsNumRequired > 0) {
-      requirementsList.push(REFERRAL);
-    }
-    if (stakingPlan) {
-      requirementsList.push(STAKING);
-    }
-    if (isInvitationRequired) {
-      requirementsList.push(INVITATION);
-    }
-
-    if (operator === 'AND') {
-      return requirementsList.every((r) => checkRequirementIsMet(r));
-    } else {
-      return requirementsList.some((r) => checkRequirementIsMet(r));
-    }
+    setshowConfirmUpgradePopup(false);
   };
 
   const cardStyleMap = {
@@ -204,12 +163,17 @@ const MembershipCardList = () => {
     dataObj.backgroundColor = backgroundColor;
     dataObj.textColor = textColor;
     dataObj.starColor = starColor;
-    dataObj.upgradeAvailable = checkCanUpgrade(membership);
+    dataObj.upgradeAvailable = checkCanUpgrade(
+      membership,
+      referFriendCount,
+      bindDataSourceCount,
+      currentStakeAmount,
+    );
 
     return dataObj;
   });
 
-  if (upgradeRequiredDataLoading || availableMembershipsLoading || loading) {
+  if (loading) {
     return <LoadingSpinner />;
   }
 
@@ -252,21 +216,48 @@ const MembershipCardList = () => {
             style={privilegeSectionPadding}
           />
         )}
-        <Requirements
+        <MembershipRequirements
           membership={membership}
-          membershipLevel={membership.level}
           referFriendCount={referFriendCount}
           bindDataSourceCount={bindDataSourceCount}
           currentStakeAmount={currentStakeAmount}
         />
         {isMembershipLevelHigher && (
           <AppButton
+            onPress={() => handleUpgradePress(membership)}
             variant="filled"
             sizeVariant="normal"
             colorVariant="secondary"
             text={canUpgrade ? 'upgrade' : 'upgrade is not available'}
             disabled={!canUpgrade}
             style={upgradeButton}
+          />
+        )}
+        {showConfirmUpgradePopup && (
+          <PopupModal
+            title={
+              <FormattedMessage
+                id="confirm_upgrade"
+                defaultMessage="Confirm Upgrade"
+              />
+            }
+            detail={
+              <FormattedMessage
+                id="confirm_upgrade_to_next_level"
+                defaultMessage="Are you sure to upgrade your membership to {next_level} level?"
+                values={{
+                  next_level: (
+                    <FormattedMessage
+                      id={`membership_level_${membershipToBeUpgraded.level}`}
+                    />
+                  ),
+                }}
+              />
+            }
+            callback={handlePopupCallback}
+            okButtonLabel={
+              <FormattedMessage id="button.confirm" defaultMessage="login" />
+            }
           />
         )}
       </View>

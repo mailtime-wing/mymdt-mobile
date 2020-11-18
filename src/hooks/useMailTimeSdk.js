@@ -67,7 +67,7 @@ export default () => {
     MailtimeAuth.setAccessGoogleWithAppPassword(true);
   }, []);
 
-  const login = async emailAddress => {
+  const login = async (emailAddress) => {
     try {
       dispatch({type: UPDATE_SDK_STATUS, payload: STATUS_IN_PROCCESS});
       const sdkToken = await MailtimeAuth.login(emailAddress);
