@@ -20,10 +20,11 @@ import ModalContainer from '@/components/ModalContainer';
 import SpecialListOption from '@/components/SpecialListOption';
 import AppButton from '@/components/AppButton';
 import Switch from '@/components/Switch';
-import EditButton from '@/components/EditButton';
-import CancelButton from '@/components/CancelButton';
-import ConfirmButton from '@/components/ConfirmButton';
+import BackIconButton from '@/components/BackIconButton';
 import CloseIconButton from '@/components/CloseIconButton';
+import EditAppButton from '@/components/EditAppButton';
+import ConfirmAppButton from '@/components/ConfirmAppButton';
+import CancelAppButton from '@/components/CancelAppButton';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import AppText from '@/components/AppText2';
@@ -108,7 +109,10 @@ const BindEmailEditScreen = ({navigation}) => {
     dispatch({type: RESET});
     if (data) {
       let emailAccounts = data?.userProfile.emailAccounts || [];
-      emailAccounts = emailAccounts.map(email => ({...email, sharing: false})); // sharing data api later
+      emailAccounts = emailAccounts.map((email) => ({
+        ...email,
+        sharing: false,
+      })); // sharing data api later
       setEmails(emailAccounts);
     }
   }, [data]);
@@ -116,13 +120,19 @@ const BindEmailEditScreen = ({navigation}) => {
   useLayoutEffect(() => {
     if (state.isEditing) {
       navigation.setOptions({
-        headerLeft: () => <CancelButton onPress={handleCancelPress} />,
-        headerRight: () => <ConfirmButton onPress={handleConfirmPress} />,
+        headerLeft: () => <CancelAppButton onPress={handleCancelPress} />,
+        headerRight: () => <ConfirmAppButton onPress={handleConfirmPress} />,
       });
     } else {
       navigation.setOptions({
-        headerLeft: props => <CloseIconButton {...props} />,
-        headerRight: () => <EditButton onPress={handleEditPress} />,
+        headerLeft: ({onPress}) => {
+          return onPress ? (
+            <BackIconButton onPress={onPress} />
+          ) : (
+            <CloseIconButton onPress={() => navigation.goBack()} />
+          );
+        },
+        headerRight: () => <EditAppButton onPress={handleEditPress} />,
       });
     }
   }, [state.isEditing, navigation]);
@@ -139,11 +149,11 @@ const BindEmailEditScreen = ({navigation}) => {
     // no action this moment
   };
 
-  const handleUnbindPress = email => {
+  const handleUnbindPress = (email) => {
     dispatch({type: UPDATE_IS_EMAIL_UNBINDING, payload: email});
   };
 
-  const handleCallback = result => {
+  const handleCallback = (result) => {
     if (result === 'OK') {
       handleUnbindEmailConfirmPress();
       return;
@@ -165,7 +175,7 @@ const BindEmailEditScreen = ({navigation}) => {
     }
   };
 
-  const handleInputChange = index => {
+  const handleInputChange = (index) => {
     const newEmails = [...emails];
     newEmails[index].sharing = !newEmails[index].sharing;
     setEmails(newEmails);
@@ -232,9 +242,7 @@ const BindEmailEditScreen = ({navigation}) => {
       {state.isUnbinding && (
         <PopupModal
           title="Unbind this email"
-          detail={`You will not get any data rewards from ${
-            state.unbindingEmail?.emailAddress
-          } after unbinding.`}
+          detail={`You will not get any data rewards from ${state.unbindingEmail?.emailAddress} after unbinding.`}
           callback={handleCallback}
         />
       )}

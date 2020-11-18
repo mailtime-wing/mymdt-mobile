@@ -49,17 +49,19 @@ const BrowseScreen = ({navigation}) => {
     {
       name: 'Privileges',
       icon: AwardIcon,
-      action: () => navigation.navigate('settings'),
+      action: () => navigation.navigate('membership_detail'),
     },
     {
       name: 'Add Email',
       icon: MailIcon,
-      action: () => navigation.navigate('settings'),
+      action: () =>
+        navigation.navigate('settings', {screen: 'emails_binding_edit'}),
     },
     {
       name: 'Add Card',
       icon: CreditCardIcon,
-      action: () => navigation.navigate('settings'),
+      action: () =>
+        navigation.navigate('settings', {screen: 'linked_cards_setting'}),
     },
     {
       name: 'Referral',
@@ -69,7 +71,8 @@ const BrowseScreen = ({navigation}) => {
     {
       name: 'Selected Merchants',
       icon: BagIcon,
-      action: () => navigation.navigate('settings'),
+      action: () =>
+        navigation.navigate('settings', {screen: 'merchants_preference'}),
     },
     {
       name: 'Cashback type',
