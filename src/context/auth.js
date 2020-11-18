@@ -112,7 +112,6 @@ export const AuthProvider = ({children}) => {
             } catch (e) {
               authToken = '';
               refreshToken = '';
-              return;
             }
           }
         }
