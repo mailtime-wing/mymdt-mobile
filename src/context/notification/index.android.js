@@ -11,12 +11,12 @@ import MailtimePush from 'react-native-mailtime-push';
 import {getUniqueId} from 'react-native-device-info';
 
 import {AuthContext} from '@/context/auth';
+import {IntlContext} from '@/context/Intl';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {REGISTER_DEVICE} from '@/api/auth';
 import {GET_USER_ID} from '@/api/data';
 
-import RNAndroidNotificationListener from 'react-native-android-notification-listener';
 import notificationStatus from '@/enum/notificationStatus';
 
 const INITIAL_PERMISSIONS = {
@@ -68,6 +68,7 @@ const reducer = (state, action) => {
 export const NotificationProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {isLoggedIn} = useContext(AuthContext);
+  const {localeEnum} = useContext(IntlContext);
   const [registerDevice] = useMutationWithAuth(REGISTER_DEVICE);
   const {data} = useQueryWithAuth(GET_USER_ID, {skip: !isLoggedIn});
   const userId = data?.userProfile?.id;
@@ -102,9 +103,8 @@ export const NotificationProvider = ({children}) => {
       authorizationStatus: notificationStatus.Denied,
     };
     try {
-      const permissionStatus = await RNAndroidNotificationListener.getPermissionStatus();
-      // permissions result can be 'authorized' or 'denied'
-      if (permissionStatus === 'denied') {
+      const areNotificationsEnabled = await MailtimePush.areNotificationsEnabled();
+      if (!areNotificationsEnabled) {
         dispatch({
           type: UPDATE_PERMISSION,
           payload: deniedPermission,
@@ -112,12 +112,11 @@ export const NotificationProvider = ({children}) => {
         return deniedPermission;
       }
 
-      if (permissionStatus === 'authorized') {
-        dispatch({
-          type: UPDATE_PERMISSION,
-          payload: initialState.permissions,
-        });
-      }
+      dispatch({
+        type: UPDATE_PERMISSION,
+        payload: initialState.permissions,
+      });
+
       return initialState.permissions;
     } catch (e) {
       console.error('error check permission android', e);
@@ -126,14 +125,8 @@ export const NotificationProvider = ({children}) => {
     }
   }, []);
 
-  const request = useCallback(async () => {
-    try {
-      return await RNAndroidNotificationListener.requestPermission();
-    } catch (e) {
-      console.error('error request permission android');
-      return {};
-    }
-  }, []);
+  // dummy function for consistent behaviour with ios version
+  const request = useCallback(() => ({}), []);
 
   const notificationContext = useMemo(
     () => ({
@@ -156,6 +149,7 @@ export const NotificationProvider = ({children}) => {
             deviceId: state.deviceId,
             platform: state.platform,
             pushToken: state.deviceToken,
+            locale: localeEnum,
           },
         });
       } catch (e) {
@@ -173,6 +167,7 @@ export const NotificationProvider = ({children}) => {
     state.deviceId,
     state.deviceToken,
     state.platform,
+    localeEnum,
   ]);
 
   return (

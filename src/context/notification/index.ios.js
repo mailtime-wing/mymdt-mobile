@@ -10,6 +10,7 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import {getUniqueId} from 'react-native-device-info';
 
 import {AuthContext} from '@/context/auth';
+import {IntlContext} from '@/context/Intl';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {REGISTER_DEVICE} from '@/api/auth';
 import notificationStatus from '@/enum/notificationStatus';
@@ -57,6 +58,7 @@ const reducer = (state, action) => {
 export const NotificationProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {isLoggedIn} = useContext(AuthContext);
+  const {localeEnum} = useContext(IntlContext);
   const [registerDevice] = useMutationWithAuth(REGISTER_DEVICE);
 
   const checkPermissions = useCallback(async () => {
@@ -131,6 +133,7 @@ export const NotificationProvider = ({children}) => {
             deviceId: state.deviceId,
             platform: 'apns',
             pushToken: state.deviceToken,
+            locale: localeEnum,
           },
         });
       } catch (e) {
@@ -141,7 +144,13 @@ export const NotificationProvider = ({children}) => {
     if (state.deviceToken && isLoggedIn) {
       _registerDevice();
     }
-  }, [isLoggedIn, registerDevice, state.deviceId, state.deviceToken]);
+  }, [
+    isLoggedIn,
+    registerDevice,
+    state.deviceId,
+    state.deviceToken,
+    localeEnum,
+  ]);
 
   return (
     <NotificationContext.Provider value={notificationContext}>

@@ -604,3 +604,14 @@ export const UPGRADE_MEMBERSHIP = gql`
     }
   }
 `;
+
+export const UPDATE_USER_LOCALE = gql`
+  mutation UpdateUserLocale($locale: Locale!) {
+    updateLocale(locale: $locale) {
+      user {
+        id
+        locale
+      }
+    }
+  }
+`;

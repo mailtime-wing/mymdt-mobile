@@ -7006,11 +7006,6 @@ react-native-anchor-point@^1.0.1:
   resolved "https://registry.yarnpkg.com/react-native-anchor-point/-/react-native-anchor-point-1.0.1.tgz#4426b4e59cd28f3280a5752606a7dbbed0fcf6f3"
   integrity sha512-CQgXJ10fkvvNygfd+ikHkbuvVCRH0vX5HY9EwWtvfNV3VBNgBRJHOcPoCqNeOkGJRuHtGHKRtshE+uY8VtVgmA==
 
-react-native-android-notification-listener@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-android-notification-listener/-/react-native-android-notification-listener-1.0.4.tgz#5d773c2ff179ab193aa2b655ac9dad1ec77aa798"
-  integrity sha512-AilabZwBVgx02stxryxDpP810DTPdFc8OV04We08/M5gDKJMb31VYG6M+g7M1VFAZR5TeFc4JAJ7UrRQpdYGEw==
-
 react-native-animatable@^1.3.0:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.3.tgz#a13a4af8258e3bb14d0a9d839917e9bb9274ec8a"
@@ -7077,8 +7072,8 @@ react-native-linear-gradient@^2.5.6:
   integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
 "react-native-mailtime-push@https://github.com/measurabledatatoken/react-native-mailtime-push.git":
-  version "0.1.0"
-  resolved "https://github.com/measurabledatatoken/react-native-mailtime-push.git#e0d1069c82f9edd99a78fc5f8fc4bd478a91f2da"
+  version "1.0.1"
+  resolved "https://github.com/measurabledatatoken/react-native-mailtime-push.git#d5df6c0170beb6b1a73bc68f3f25bb4a1f1214f9"
 
 "react-native-mailtime-sdk@https://github.com/measurabledatatoken/react-native-mailtime-sdk.git":
   version "0.1.0"

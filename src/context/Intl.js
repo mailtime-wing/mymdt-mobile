@@ -1,13 +1,11 @@
 import React, {createContext, useCallback} from 'react';
 import {Text} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import {IntlProvider} from 'react-intl';
-import {useApolloClient, useQuery} from '@apollo/client';
-import {gql} from 'apollo-boost';
+import {useQuery} from '@apollo/client';
 
-import {GET_USER_LOCALE} from '@/api/data';
+import {GET_USER_LOCALE, UPDATE_USER_LOCALE} from '@/api/data';
+import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import locales from '@/constants/locale';
-import {LOCALE_STORAGE_KEY} from '@/constants/storageKey';
 
 import enMessages from '@/intl/en-US.json';
 import hkMessages from '@/intl/zh-HK.json';
@@ -56,10 +54,9 @@ function flattenMessages(nestedMessages = {}, prefix = '') {
 }
 
 const IntlContainer = (props) => {
-  const client = useApolloClient();
   const {data} = useQuery(GET_USER_LOCALE, {fetchPolicy: 'cache-only'});
+  const [updateUserLocale] = useMutationWithAuth(UPDATE_USER_LOCALE);
 
-  const id = data?.userProfile?.id || 'default-user';
   const locale = data?.userProfile?.locale || locales.EN_US;
 
   const language =
@@ -70,27 +67,19 @@ const IntlContainer = (props) => {
   const saveLocale = useCallback(
     async (newLocale) => {
       try {
-        await AsyncStorage.setItem(
-          LOCALE_STORAGE_KEY,
-          JSON.stringify(newLocale),
+        const localeForAPI = Object.keys(locales).find(
+          (key) => locales[key] === newLocale,
         );
-        client.writeQuery({
-          id: `User:${id}`,
-          rootId: '',
-          query: gql`
-            query {
-              locale
-            }
-          `,
-          data: {
-            locale: newLocale,
+        await updateUserLocale({
+          variables: {
+            locale: localeForAPI,
           },
         });
       } catch (error) {
         console.error(error);
       }
     },
-    [client, id],
+    [updateUserLocale],
   );
 
   return (
