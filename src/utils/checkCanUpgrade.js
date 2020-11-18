@@ -4,13 +4,7 @@ const STAKING = 'staking';
 const INVITATION = 'invitation';
 
 const checkCanUpgrade = (
-  {
-    dataSourceBindingsNumRequired,
-    referralsNumRequired,
-    stakingPlan,
-    isInvitationRequired,
-    operator,
-  } = {},
+  membership,
   referFriendCount,
   bindDataSourceCount,
   currentStakeAmount,
@@ -20,17 +14,17 @@ const checkCanUpgrade = (
   function checkRequirementIsMet(requirement) {
     switch (requirement) {
       case REFERRAL:
-        if (referFriendCount >= referralsNumRequired) {
+        if (referFriendCount >= membership?.referralsNumRequired) {
           return true;
         }
         return false;
       case BINDING:
-        if (bindDataSourceCount >= dataSourceBindingsNumRequired) {
+        if (bindDataSourceCount >= membership?.dataSourceBindingsNumRequired) {
           return true;
         }
         return false;
       case STAKING:
-        if (currentStakeAmount >= stakingPlan?.amount) {
+        if (currentStakeAmount >= membership?.stakingPlan?.amount) {
           return true;
         }
         return false;
@@ -41,20 +35,20 @@ const checkCanUpgrade = (
     }
   }
 
-  if (dataSourceBindingsNumRequired > 0) {
+  if (membership?.dataSourceBindingsNumRequired > 0) {
     requirementsList.push(BINDING);
   }
-  if (referralsNumRequired > 0) {
+  if (membership?.referralsNumRequired > 0) {
     requirementsList.push(REFERRAL);
   }
-  if (stakingPlan) {
+  if (membership?.stakingPlan) {
     requirementsList.push(STAKING);
   }
-  if (isInvitationRequired) {
+  if (membership?.isInvitationRequired) {
     requirementsList.push(INVITATION);
   }
 
-  if (operator === 'AND') {
+  if (membership?.operator === 'AND') {
     return requirementsList.every((r) => checkRequirementIsMet(r));
   } else {
     return requirementsList.some((r) => checkRequirementIsMet(r));

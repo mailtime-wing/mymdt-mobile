@@ -57,7 +57,6 @@ const StackScreen = ({navigation, route}) => {
   const stakingPlan = route.params;
 
   const [updateStakingPlan] = useMutationWithAuth(UPDATE_STAKING_PLAN, {
-    skip: !stakingPlan.id,
     variables: {id: stakingPlan.id},
   });
   const availableMdt = data?.userProfile?.currencyAccounts[0]?.balance || 0;

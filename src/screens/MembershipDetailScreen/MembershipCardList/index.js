@@ -13,7 +13,7 @@ import {
 import {useTheme} from 'emotion-theming';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
-import MembershipRequirements from '@/components/MembershipRequirements';
+import MembershipRequirements from './MembershipRequirements';
 import Privileges from '@/components/Privileges';
 
 import MembershipGlareCard from '@/components/MembershipGlareCard';
@@ -75,7 +75,6 @@ const MembershipCardList = ({navigation}) => {
     loading: availableMembershipsLoading,
   } = useQueryWithAuth(GET_AVAILABLE_MEMBERSHIPS);
   const [upgradeMembership] = useMutationWithAuth(UPGRADE_MEMBERSHIP, {
-    skip: !membershipToBeUpgraded || !membershipToBeUpgraded.id,
     variables: {id: membershipToBeUpgraded.id},
   });
 

@@ -7,7 +7,7 @@ import Requirements from '@/components/Requirements';
 
 import {requirement, container, requirementSection} from './style';
 
-const MembershipRequirements = ({...props}) => {
+const MembershipRequirements = (props) => {
   const theme = useTheme();
 
   return (
