@@ -505,10 +505,32 @@ export const GET_AVAILABLE_MEMBERSHIPS = gql`
   }
 `;
 
-export const GET_USER_UPGRADE_REQUIRED_DATA = gql`
+export const GET_CHECK_USER_CAN_UPGRADE_DATA = gql`
   query {
     userProfile {
       id
+      membership {
+        id
+        level
+      }
+      availableMemberships {
+        id
+        level
+        referralsNumRequired
+        dataSourceBindingsNumRequired
+        stakingPlan {
+          id
+          sourceCurrencyCode
+          yieldCurrencyCode
+          lockupPeriodInDay
+          amount
+        }
+        isInvitationRequired
+        operator
+        cashbackPercentage
+        merchantsNumAllowed
+        stakingInterestRate
+      }
       referrals {
         id
         isReferrer

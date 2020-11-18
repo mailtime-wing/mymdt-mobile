@@ -4,12 +4,7 @@ import {Dimensions, View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import AppText from '@/components/AppText2';
-import {
-  GET_USER_MEMBERSHIP_API,
-  GET_AVAILABLE_MEMBERSHIPS,
-  GET_USER_UPGRADE_REQUIRED_DATA,
-  UPGRADE_MEMBERSHIP,
-} from '@/api/data';
+import {GET_CHECK_USER_CAN_UPGRADE_DATA, UPGRADE_MEMBERSHIP} from '@/api/data';
 import {useTheme} from 'emotion-theming';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
@@ -69,39 +64,31 @@ const MembershipCardList = ({navigation}) => {
   const [showConfirmUpgradePopup, setshowConfirmUpgradePopup] = useState(false);
   const [membershipToBeUpgraded, setMembershipToBeUpgraded] = useState({});
 
-  const {data, loading} = useQueryWithAuth(GET_USER_MEMBERSHIP_API);
-  const {
-    data: availableMembershipsData,
-    loading: availableMembershipsLoading,
-  } = useQueryWithAuth(GET_AVAILABLE_MEMBERSHIPS);
+  const {data, loading, refetch} = useQueryWithAuth(
+    GET_CHECK_USER_CAN_UPGRADE_DATA,
+  );
   const [upgradeMembership] = useMutationWithAuth(UPGRADE_MEMBERSHIP, {
     variables: {id: membershipToBeUpgraded.id},
   });
 
   const userLevel = data?.userProfile?.membership?.level || 0;
-  const availableMemberships =
-    availableMembershipsData?.userProfile?.availableMemberships || [];
+  const availableMemberships = data?.userProfile?.availableMemberships || [];
 
-  const {
-    data: upgradeRequiredData,
-    loading: upgradeRequiredDataLoading,
-    refetch: upgradeRequiredDataRefetch,
-  } = useQueryWithAuth(GET_USER_UPGRADE_REQUIRED_DATA);
   const referFriendCount =
-    upgradeRequiredData?.userProfile?.referrals.filter(
+    data?.userProfile?.referrals.filter(
       (referral) => referral.isReferrer && referral.status === 'PROCESSED',
     ).length || 0;
   const bindDataSourceCount =
-    upgradeRequiredData?.userProfile?.emailAccounts?.length ||
-    0 + upgradeRequiredData?.userProfile?.bankItems?.length ||
+    data?.userProfile?.emailAccounts?.length ||
+    0 + data?.userProfile?.bankItems?.length ||
     0;
   const currentStakeAmount =
-    upgradeRequiredData?.userProfile?.staking[0]?.stakingPlan.amount || 0;
+    data?.userProfile?.staking[0]?.stakingPlan.amount || 0;
 
   useFocusEffect(
     useCallback(() => {
-      upgradeRequiredDataRefetch();
-    }, [upgradeRequiredDataRefetch]),
+      refetch();
+    }, [refetch]),
   );
 
   const handleOnSnapToItem = (index) => {
@@ -186,7 +173,7 @@ const MembershipCardList = ({navigation}) => {
     return dataObj;
   });
 
-  if (upgradeRequiredDataLoading || availableMembershipsLoading || loading) {
+  if (loading) {
     return <LoadingSpinner />;
   }
 
