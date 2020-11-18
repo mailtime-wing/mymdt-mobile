@@ -19,7 +19,7 @@ import StakeMdtIcon from '@/assets/icon_download.svg';
 import {
   MEASURABLE_REWARD_POINT,
   MEASURABLE_DATA_TOKEN,
-  NEW_TOKEN,
+  MM,
   USD,
 } from '@/constants/currency';
 
@@ -197,7 +197,7 @@ const WalletScreen = ({navigation}) => {
         style={[currencyRow(theme), lastCurrencyRow]}
         onPress={handleNewTokenPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
-          NewToken
+          MM
         </AppText>
         {loading ? (
           <LoadingSpinner style={spinner} />
@@ -207,7 +207,7 @@ const WalletScreen = ({navigation}) => {
               amount={ntAmount}
               amountSizeVariant="normal"
               unitSizeVariant="small"
-              unitVariant={NEW_TOKEN}
+              unitVariant={MM}
               amountColor={theme.colors.textOnBackground.mediumEmphasis}
               unitColor={theme.colors.secondary.dark}
               style={amount}

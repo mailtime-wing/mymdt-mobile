@@ -2,7 +2,7 @@ import {css} from '@emotion/native';
 import {
   MEASURABLE_DATA_TOKEN,
   MEASURABLE_REWARD_POINT,
-  NEW_TOKEN,
+  MM,
 } from '@/constants/currency';
 
 export const amount = (theme, variant, unitVariant, amountSizeVariant) => css`
@@ -25,7 +25,7 @@ export const amount = (theme, variant, unitVariant, amountSizeVariant) => css`
       `
     }
     ${
-      unitVariant === NEW_TOKEN &&
+      unitVariant === MM &&
       `
         color: cyan;
       `
@@ -56,7 +56,7 @@ export const unit = (theme, variant, unitVariant) => css`
       `
     }
     ${
-      unitVariant === NEW_TOKEN &&
+      unitVariant === MM &&
       `
         color: cyan;
       `

@@ -136,7 +136,7 @@ const RenderTransationDetail = ({transactionItem}) => {
               <TransactionAmount
                 variant="to"
                 unitSizeVariant="small"
-                unitVariant="NT"
+                unitVariant="MM"
                 amount={123}
               />
             </AppText>
