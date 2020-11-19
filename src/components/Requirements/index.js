@@ -93,7 +93,7 @@ const Requirements = ({
               task={`Bind ${dataSourceBindingsNumRequired} Email or ${dataSourceBindingsNumRequired} card`}
               target={dataSourceBindingsNumRequired}
               progress={bindDataSourceCount}
-              action={() => console.log('pressed')}
+              action={() => navigation.navigate('settings')}
               actionText="Bind"
               colorVariant="primary"
             />

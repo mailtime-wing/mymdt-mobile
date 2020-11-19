@@ -50,7 +50,7 @@ const NewTokenDetailScreen = ({navigation}) => {
     <ScrollView>
       <SafeAreaView style={container(theme)}>
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
-          newtoken balance
+          mm balance
         </AppText>
         {loading ? (
           <LoadingSpinner color={theme.colors.background1} />
@@ -60,7 +60,7 @@ const NewTokenDetailScreen = ({navigation}) => {
               amount={newTokenAmount}
               amountSizeVariant="largeProportional"
               amountColor={theme.colors.textOnThemeBackground.highEmphasis}
-              unitVariant="NT"
+              unitVariant="MM"
               unitColor={theme.colors.textOnThemeBackground.highEmphasis}
               style={totalBalanceText}
             />

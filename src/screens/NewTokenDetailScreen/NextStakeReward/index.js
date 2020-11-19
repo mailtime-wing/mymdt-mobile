@@ -27,7 +27,7 @@ const NextStakeReward = ({style}) => {
         amount={nextStakeAmount}
         amountSizeVariant="largeProportional"
         amountColor={theme.colors.textOnBackground.mediumEmphasis}
-        unitVariant="NT"
+        unitVariant="MM"
         unitColor={theme.colors.secondary.dark}
         style={center}
       />

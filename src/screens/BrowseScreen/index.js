@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, View} from 'react-native';
+import {ScrollView} from 'react-native';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {GET_CHECK_USER_CAN_UPGRADE_DATA} from '@/api/data';
 
@@ -22,148 +22,7 @@ import MailIcon from '@/assets/icon_mail.svg';
 import {imageStyle, upgradeSection, sectionMargin} from './style';
 import {useTheme} from 'emotion-theming';
 
-import AppTag from '@/components/AppTag';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import LockIcon from '@/assets/icon_lock.svg';
-
-const testStyle = {
-  padding: 12,
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  justifyContent: 'space-around',
-};
-
-const DemoComponents = () => {
-  const theme = useTheme();
-  return (
-    <>
-      <View style={testStyle}>
-        <AppTag
-          variant="transparent"
-          sizeVariant="small"
-          colorVariant="primary"
-          text="current"
-        />
-        <AppTag
-          variant="transparent"
-          sizeVariant="small"
-          colorVariant="secondary"
-          text="current"
-        />
-        <AppTag
-          variant="transparent"
-          sizeVariant="small"
-          colorVariant="contrast"
-          text="current"
-        />
-      </View>
-      <View style={testStyle}>
-        <AppTag
-          variant="normal"
-          sizeVariant="small"
-          colorVariant="primary"
-          text="current"
-        />
-        <AppTag
-          variant="normal"
-          sizeVariant="small"
-          colorVariant="secondary"
-          text="current"
-        />
-        <AppTag
-          variant="normal"
-          sizeVariant="small"
-          colorVariant="contrast"
-          text="current"
-        />
-      </View>
-      <View style={testStyle}>
-        <AppTag
-          variant="transparent"
-          sizeVariant="normal"
-          colorVariant="primary"
-          text="Tag Text"
-          svgIcon={LockIcon}
-        />
-        <AppTag
-          variant="transparent"
-          sizeVariant="normal"
-          colorVariant="secondary"
-          text="Tag Text"
-          svgIcon={LockIcon}
-        />
-        <AppTag
-          variant="transparent"
-          sizeVariant="normal"
-          colorVariant="contrast"
-          text="Tag Text"
-          svgIcon={LockIcon}
-        />
-      </View>
-      <View style={testStyle}>
-        <AppTag
-          variant="normal"
-          sizeVariant="normal"
-          colorVariant="primary"
-          text="Tag Text"
-          svgIcon={LockIcon}
-        />
-        <AppTag
-          variant="normal"
-          sizeVariant="normal"
-          colorVariant="secondary"
-          text="Tag Text"
-          svgIcon={LockIcon}
-        />
-        <AppTag
-          variant="normal"
-          sizeVariant="normal"
-          colorVariant="contrast"
-          text="Tag Text"
-          svgIcon={LockIcon}
-        />
-      </View>
-      <View
-        style={{
-          ...testStyle,
-          backgroundColor: theme.colors.secondary.normal,
-        }}>
-        <AppTag
-          variant="transparent"
-          sizeVariant="small"
-          colorVariant="onBackground"
-          text="current"
-        />
-        <AppTag
-          variant="normal"
-          sizeVariant="small"
-          colorVariant="onBackground"
-          text="current"
-        />
-      </View>
-      <View
-        style={{
-          ...testStyle,
-          backgroundColor: theme.colors.secondary.normal,
-        }}>
-        <AppTag
-          variant="transparent"
-          sizeVariant="normal"
-          colorVariant="onBackground"
-          text="Tag Text"
-          svgIcon={LockIcon}
-        />
-        <AppTag
-          variant="normal"
-          sizeVariant="normal"
-          colorVariant="onBackground"
-          text="Tag Text"
-          svgIcon={LockIcon}
-        />
-      </View>
-    </>
-  );
-};
 
 const BrowseScreen = ({navigation}) => {
   const theme = useTheme();
@@ -190,17 +49,19 @@ const BrowseScreen = ({navigation}) => {
     {
       name: 'Privileges',
       icon: AwardIcon,
-      action: () => navigation.navigate('settings'),
+      action: () => navigation.navigate('membership_detail'),
     },
     {
       name: 'Add Email',
       icon: MailIcon,
-      action: () => navigation.navigate('settings'),
+      action: () =>
+        navigation.navigate('settings', {screen: 'emails_binding_edit'}),
     },
     {
       name: 'Add Card',
       icon: CreditCardIcon,
-      action: () => navigation.navigate('settings'),
+      action: () =>
+        navigation.navigate('settings', {screen: 'linked_cards_setting'}),
     },
     {
       name: 'Referral',
@@ -210,7 +71,8 @@ const BrowseScreen = ({navigation}) => {
     {
       name: 'Selected Merchants',
       icon: BagIcon,
-      action: () => navigation.navigate('settings'),
+      action: () =>
+        navigation.navigate('settings', {screen: 'merchants_preference'}),
     },
     {
       name: 'Cashback type',
@@ -267,7 +129,6 @@ const BrowseScreen = ({navigation}) => {
           bindDataSourceCount={bindDataSourceCount}
           currentStakeAmount={currentStakeAmount}
         />
-        <DemoComponents />
         <CashBackSummarySection
           onPress={handleCashBackSummaryPress}
           style={sectionMargin}

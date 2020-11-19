@@ -60,7 +60,6 @@ const CurrentTag = ({style}) => {
 const MembershipCardList = ({navigation}) => {
   const theme = useTheme();
   const refCarousel = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [showConfirmUpgradePopup, setshowConfirmUpgradePopup] = useState(false);
   const [membershipToBeUpgraded, setMembershipToBeUpgraded] = useState({});
 
@@ -72,6 +71,8 @@ const MembershipCardList = ({navigation}) => {
   });
 
   const userLevel = data?.userProfile?.membership?.level || 0;
+  const userNextLevel = userLevel + 1;
+  const [activeIndex, setActiveIndex] = useState(userNextLevel);
   const availableMemberships = data?.userProfile?.availableMemberships || [];
 
   const referFriendCount =
@@ -288,6 +289,7 @@ const MembershipCardList = ({navigation}) => {
         inactiveSlideOpacity={1}
         activeAnimationType="decay"
         onSnapToItem={handleOnSnapToItem}
+        firstItem={userNextLevel}
       />
     </View>
   );

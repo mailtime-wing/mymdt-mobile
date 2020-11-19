@@ -83,7 +83,7 @@ const MdtStake = ({
             amount={accuredRewardAmount}
             amountSizeVariant="normal"
             unitSizeVariant="small"
-            unitVariant="NT"
+            unitVariant="MM"
             unitColor={theme.colors.secondary.dark}
             amountColor={theme.colors.textOnBackground.mediumEmphasis}
           />
@@ -96,7 +96,7 @@ const MdtStake = ({
             amount={cumulativeRewardAmount}
             amountSizeVariant="normal"
             unitSizeVariant="small"
-            unitVariant="NT"
+            unitVariant="MM"
             unitColor={theme.colors.secondary.dark}
             amountColor={theme.colors.textOnBackground.mediumEmphasis}
           />
