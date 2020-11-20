@@ -24,6 +24,7 @@ const TransactionBottomSheet = ({
   activeOptionIndex,
   onLayoutPress,
   onItemPress,
+  onBankItemPress,
   onApplyPress,
 }) => {
   const theme = useTheme();
@@ -53,13 +54,37 @@ const TransactionBottomSheet = ({
             </AppText>
             <Divider />
             {items.map((item, index) => {
-              if (Array.isArray(item)) {
+              if (Array.isArray(item.data)) {
                 return (
                   <BottomSheetOptionList
                     currentActive={activeOptionIndex === index}
-                    onItemPress={() => onItemPress(index)}
-                    options={item}
-                    title="Cash Back"
+                    onItemPress={onItemPress}
+                    sectionIndex={index}
+                    options={item.data}
+                    title={item.title}
+                  />
+                );
+              } else if (typeof item.data === 'object') {
+                // special handle for banks filter
+                // TODO: improve this bottom sheet later?
+                const subTypes = Object.keys(item.data);
+                const options = [];
+                subTypes.forEach((subType) =>
+                  item.data[subType].forEach((mask) =>
+                    options.push({
+                      value: {subType: subType, mask: mask},
+                      label: `${subType} (•••• ${mask})`,
+                    }),
+                  ),
+                );
+                return (
+                  <BottomSheetOptionList
+                    currentActive={activeOptionIndex === index}
+                    onItemPress={onItemPress}
+                    onBankItemPress={onBankItemPress}
+                    sectionIndex={index}
+                    options={options}
+                    title={item.title}
                   />
                 );
               } else {

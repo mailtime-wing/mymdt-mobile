@@ -4,13 +4,16 @@ import React, {
   useEffect,
   useState,
   useContext,
+  useMemo,
 } from 'react';
-import {TRANSACTIONS_QUERY} from '@/api/data';
 import {VirtualizedList, TouchableOpacity, Image, View} from 'react-native';
 import {useTheme} from 'emotion-theming';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
-import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
 import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
+import {GET_MERCHANTS_API} from '@/api/data';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import DemoData from './data.json';
 
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -36,12 +39,6 @@ import TransactionBottomSheet from '@/components/TransactionBottomSheet';
 import TransactionsHistory from '@/components/TransactionsHistory';
 import AppButton from '@/components/AppButton';
 import BrandIcon from '@/components/BrandIcon';
-
-const filterList = [
-  [],
-  ['foo@gmail.com', 'bar@gmail.com'],
-  ['Mastercard (•••• 1001)', 'ABC Bank (•••• 1234)'],
-];
 
 const SummaryChip = ({currency, amount, range, style}) => {
   const theme = useTheme();
@@ -71,40 +68,94 @@ const CashBackSummaryScreen = ({navigation}) => {
     ? require('@/assets/cashback-history-background_dark.png')
     : require('@/assets/cashback-history-background.png');
   const [showBottomSheet, setShowBottomSheet] = useState(false);
-  const [activeFilterIndex, setActiveFilterIndex] = useState(0);
-  // TODO: use real data when have api (do not have cash back api this moment)
-  // now: hardcode using MRP transaction data
-  const [getTransactions, {data, fetchMore}] = useLazyQueryWithAuth(
-    TRANSACTIONS_QUERY,
-    {
-      fetchPolicy: 'network-only',
-    },
+  const [activeFilterSectionIndex, setActiveFilterSectionIndex] = useState(0);
+  const [activeFilterItemIndex, setActiveFilterItemIndex] = useState(null);
+  const [activeFilterSubType, setActiveFilterSubType] = useState('');
+  const [activeFilterMask, setActiveFilterMask] = useState('');
+  const [cashBackHistoryList, setCashBackHistoryList] = useState([]);
+
+  const {data: merchantsData, loading: merchantsLoading} = useQueryWithAuth(
+    GET_MERCHANTS_API,
   );
 
-  const currentCardData = data?.userProfile?.currencyAccounts[0];
-  const currencyCode = MEASURABLE_REWARD_POINT;
-  const cardTransactionsHistory = currentCardData?.transactions?.edges.map(
-    (transaction) =>
-      (transaction = {
-        ...transaction,
-        icon: (
-          <BrandIcon
-            sizeVariant="normal"
-            ImgSrc={require('@/assets/netflix.png')}
-          />
-        ),
-      }),
+  const cashBackHistoryRawList = useMemo(
+    () =>
+      DemoData.data?.edges.map(
+        (h) =>
+          (h = {
+            cursor: h.cursor,
+            icon: merchantsLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <BrandIcon
+                sizeVariant="normal"
+                ImgSrc={{
+                  uri: merchantsData?.merchants.find(
+                    (merchant) => merchant.name === h.node.merchant,
+                  ).logo,
+                }}
+              />
+            ),
+            node: {
+              amount: h.node.purchase_amount,
+              id: h.node.id,
+              title: h.node.merchant,
+              transactionTime: h.node.history_time,
+              type: h.node.provider,
+              data: {
+                email: h.node.data?.account_email,
+                subType: h.node.data?.subType,
+                mask: h.node.data?.mask,
+              },
+            },
+          }),
+      ),
+    [merchantsData, merchantsLoading],
   );
-  const pageInfo = currentCardData?.transactions.pageInfo;
-  const filter = activeFilterIndex ? filterList[activeFilterIndex].value : null;
 
   useEffect(() => {
-    getTransactions({
-      variables: {
-        currencyCode: MEASURABLE_REWARD_POINT,
-      },
-    });
-  }, [getTransactions]);
+    setCashBackHistoryList(cashBackHistoryRawList);
+  }, [cashBackHistoryRawList]);
+
+  const currencyCode = MEASURABLE_REWARD_POINT;
+
+  const dataByMerchants = [];
+  const dataByEmails = [];
+  const dataByBanks = {};
+
+  DemoData.data?.edges.forEach((history) => {
+    if (
+      !!history.node.merchant &&
+      !dataByMerchants.includes(history.node.merchant)
+    ) {
+      dataByMerchants.push(history.node.merchant);
+    }
+
+    if (
+      !!history.node.data.account_email &&
+      !dataByEmails.includes(history.node.data.account_email)
+    ) {
+      dataByEmails.push(history.node.data.account_email);
+    }
+
+    if (!!history.node.data.subType && !!history.node.data.mask) {
+      if (!dataByBanks[history.node.data.subType]) {
+        dataByBanks[history.node.data.subType] = [];
+      }
+
+      if (
+        !dataByBanks[history.node.data.subType].includes(history.node.data.mask)
+      ) {
+        dataByBanks[history.node.data.subType].push(history.node.data.mask);
+      }
+    }
+  });
+
+  const filterList = [
+    {title: 'Cashback from Selected Merchants', data: dataByMerchants},
+    {title: 'Cashback from Emails', data: dataByEmails},
+    {title: 'Cashback from Bank accounts', data: dataByBanks},
+  ];
 
   const handleFilterPress = () => {
     setShowBottomSheet(true);
@@ -114,59 +165,58 @@ const CashBackSummaryScreen = ({navigation}) => {
     setShowBottomSheet(false);
   };
 
-  const handleItemPress = (index) => {
-    setActiveFilterIndex(index);
+  const handleItemPress = (index, itemIndex) => {
+    setActiveFilterSectionIndex(index);
+    setActiveFilterItemIndex(itemIndex);
+  };
+
+  const handleBankItemPress = (subType, mask) => {
+    setActiveFilterSubType(subType);
+    setActiveFilterMask(mask);
   };
 
   const onApplyPress = () => {
-    getTransactions({
-      variables: {
-        ...(filter && {
-          filter: {
-            type: filter,
-          },
-        }),
-        currencyCode: MEASURABLE_REWARD_POINT,
-      },
-    });
+    if (activeFilterSectionIndex === 0) {
+      //filter by merchants
+      setCashBackHistoryList(
+        cashBackHistoryRawList.filter(
+          (history) =>
+            history.node.title ===
+            filterList[activeFilterSectionIndex].data[activeFilterItemIndex],
+        ),
+      );
+    }
+
+    if (activeFilterSectionIndex === 1) {
+      //filter by emails
+      console.log(
+        'email',
+        cashBackHistoryRawList.map((h) => h.node.data.account_email),
+      );
+      setCashBackHistoryList(
+        cashBackHistoryRawList.filter(
+          (history) =>
+            history.node.data.email ===
+            filterList[activeFilterSectionIndex].data[activeFilterItemIndex],
+        ),
+      );
+    }
+
+    if (activeFilterSectionIndex === 2) {
+      //filter by banks
+      setCashBackHistoryList(
+        cashBackHistoryRawList.filter(
+          (history) =>
+            history.node.data.subType === activeFilterSubType &&
+            history.node.data.mask === activeFilterMask,
+        ),
+      );
+    }
 
     setShowBottomSheet(false);
   };
 
-  const onLoadMore = () => {
-    if (!pageInfo?.hasNextPage) {
-      return;
-    }
-
-    fetchMore({
-      ...(filter && {
-        filter: {
-          type: filter,
-        },
-      }),
-      variables: {
-        currencyCode: MEASURABLE_REWARD_POINT,
-        cursor: pageInfo.endCursor,
-      },
-      updateQuery: (previousResult, {fetchMoreResult}) => {
-        if (
-          !fetchMoreResult?.userProfile?.currencyAccounts?.[0]?.transactions
-            ?.edges?.length
-        ) {
-          return previousResult;
-        }
-
-        const newData = JSON.parse(JSON.stringify(fetchMoreResult));
-
-        newData.userProfile.currencyAccounts[0].transactions.edges = [
-          ...previousResult.userProfile.currencyAccounts[0].transactions.edges,
-          ...fetchMoreResult.userProfile.currencyAccounts[0].transactions.edges,
-        ];
-
-        return newData;
-      },
-    });
-  };
+  const onLoadMore = () => {};
 
   const handleMissingCartPress = useCallback(() => {
     navigation.navigate('missing_receipt');
@@ -256,7 +306,7 @@ const CashBackSummaryScreen = ({navigation}) => {
             }
             currencyCode={currencyCode}
             navigation={navigation}
-            transactionsHistoryList={cardTransactionsHistory}
+            transactionsHistoryList={cashBackHistoryList}
             onEndReached={onLoadMore}
             style={historyBackground(theme)}
           />
@@ -266,9 +316,10 @@ const CashBackSummaryScreen = ({navigation}) => {
         <TransactionBottomSheet
           title={<FormattedMessage id="filter_by" defaultMessage="Filter by" />}
           items={filterList}
-          activeOptionIndex={activeFilterIndex}
+          activeOptionIndex={activeFilterSectionIndex}
           onLayoutPress={handleLayoutPress}
           onItemPress={handleItemPress}
+          onBankItemPress={handleBankItemPress}
           onApplyPress={onApplyPress}
         />
       )}

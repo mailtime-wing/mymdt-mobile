@@ -1,8 +1,8 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
-import {GET_CHECK_USER_CAN_UPGRADE_DATA} from '@/api/data';
 import {FormattedMessage} from 'react-intl';
+import {GET_CHECK_USER_CAN_UPGRADE_DATA, GET_MERCHANTS_API} from '@/api/data';
 
 import membershipLevel from '@/enum/membershipLevel';
 import AccountBar from '@/components/AccountBar';
@@ -28,6 +28,9 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 const BrowseScreen = ({navigation}) => {
   const theme = useTheme();
   const {data, loading} = useQueryWithAuth(GET_CHECK_USER_CAN_UPGRADE_DATA);
+  const {data: merchantsData, loading: merchantsLoading} = useQueryWithAuth(
+    GET_MERCHANTS_API,
+  );
 
   const referFriendCount =
     data?.userProfile?.referrals.filter(
@@ -138,11 +141,16 @@ const BrowseScreen = ({navigation}) => {
           currentStakeAmount={currentStakeAmount}
         />
         <QuickActions style={sectionMargin} actionList={quickActionList} />
-        <CashBackSummarySection
-          navigation={navigation}
-          onPress={handleCashBackSummaryPress}
-          style={sectionMargin}
-        />
+        {merchantsLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <CashBackSummarySection
+            navigation={navigation}
+            onPress={handleCashBackSummaryPress}
+            style={sectionMargin}
+            merchantsData={merchantsData?.merchants}
+          />
+        )}
         <MembershipInfoCard
           userLevel={userLevel}
           style={sectionMargin}

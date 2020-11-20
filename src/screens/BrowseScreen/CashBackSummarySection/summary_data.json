@@ -1,0 +1,21 @@
+{
+  "data": {
+      "total_cashback": "77.058152262816425",
+      "total_cashback_in_period": "60.224297784552315",
+      "day_period": 20,
+      "merchant_summary_infos": [
+          {
+              "merchant": "Amazon",
+              "total_cashback": "73.893152262816425",
+              "total_cashback_in_period": "60.224297784552315",
+              "day_period": 20
+          },
+          {
+              "merchant": "Uber",
+              "total_cashback": "3.165",
+              "total_cashback_in_period": "0",
+              "day_period": 20
+          }
+      ]
+  }
+}
