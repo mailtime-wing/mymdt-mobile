@@ -48,19 +48,24 @@ const reducer = (state, action) => {
 export const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const client = useApolloClient();
-  const {data: authData} = useQuery(AUTH_TOKENS);
+  const {data: authData = {}} = useQuery(AUTH_TOKENS);
   const [refreshTokenRequest] = useMutation(REFRESH_TOKEN_API);
 
   // clear token cache
-  const signOut = useCallback(() => {
-    client.writeQuery({
+  const signOut = useCallback(async () => {
+    // TODO: Most auth-required rendering and fetching depends on whether has logged in, which is determined by
+    // the existence of accessToken. Before resetStore, we manually clear this state to make those rendering
+    // and fetching stale so that we can avoid bug. Need to re-visit to check if we can skip it.
+    await client.writeQuery({
       query: AUTH_TOKENS,
       data: {
+        tokensInitialized: true,
         accessToken: '',
         refreshToken: '',
         isRefreshTokenExpired: false,
       },
     });
+    await client.resetStore();
   }, [client]);
 
   // set token cache and fetch initially-required data
@@ -117,13 +122,13 @@ export const AuthProvider = ({children}) => {
         }
 
         if (!authToken || !refreshToken) {
-          signOut();
+          await signOut();
         } else {
           await signIn(authToken, refreshToken);
         }
       } catch (error) {
         console.error('error getting authToken', error);
-        signOut();
+        await signOut();
       }
 
       client.writeQuery({

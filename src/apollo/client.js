@@ -68,4 +68,32 @@ client.writeQuery({
   },
 });
 
+client.onResetStore(async () => {
+  client.writeQuery({
+    query: AUTH_TOKENS,
+    data: {
+      tokensInitialized: true,
+      accessToken: '',
+      refreshToken: '',
+      isRefreshTokenExpired: false,
+    },
+  });
+
+  client.writeQuery({
+    query: GET_INITIAL_USER_DATA,
+    data: {
+      userProfile: defaultUser,
+    },
+    broadcast: false,
+  });
+
+  client.writeQuery({
+    query: TOAST_ERRORS,
+    data: {
+      toastErrors: [],
+    },
+    broadcast: false,
+  });
+});
+
 export default client;
