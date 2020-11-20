@@ -23,14 +23,15 @@
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="https" android:host="e6lxo.app.link" />
+        <data android:scheme="https" android:host="get.reward.me" />
+        <data android:scheme="https" android:host="e6lxo-alternate.app.link" />
+        <data android:scheme="https" android:host="e6lxo.test-app.link" />
+        <data android:scheme="https" android:host="e6lxo-alternate.test-app.link" />
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     <!-- FCM -->
-    <meta-data
-      android:name="com.google.firebase.messaging.default_notification_channel_id"
-      android:value="@string/DEFAULT_NOTIFICATION_CHANNEL_ID" />
+    <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/DEFAULT_NOTIFICATION_CHANNEL_ID" />
     <!-- FCM -->
   </application>
 </manifest>

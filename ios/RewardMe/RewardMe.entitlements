@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:e6lxo.app.link</string>
+		<string>applinks:get.reward.me</string>
 		<string>applinks:e6lxo-alternate.app.link</string>
 		<string>applinks:e6lxo.test-app.link</string>
 		<string>applinks:e6lxo-alternate.test-app.link</string>
