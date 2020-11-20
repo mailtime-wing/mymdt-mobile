@@ -19,7 +19,6 @@ import {
 import ModalContainer from '@/components/ModalContainer';
 import SpecialListOption from '@/components/SpecialListOption';
 import AppButton from '@/components/AppButton';
-import Switch from '@/components/Switch';
 import BackIconButton from '@/components/BackIconButton';
 import CloseIconButton from '@/components/CloseIconButton';
 import EditAppButton from '@/components/EditAppButton';
@@ -175,12 +174,6 @@ const BindEmailEditScreen = ({navigation}) => {
     }
   };
 
-  const handleInputChange = (index) => {
-    const newEmails = [...emails];
-    newEmails[index].sharing = !newEmails[index].sharing;
-    setEmails(newEmails);
-  };
-
   if (loading || unbindEmailLoading) {
     return <LoadingSpinner />;
   }
@@ -191,19 +184,14 @@ const BindEmailEditScreen = ({navigation}) => {
         <AppText variant="label" style={titleText(theme)}>
           <FormattedMessage id="email" defaultMessage="email" />
         </AppText>
-        {!state.isEditing && (
-          <AppText variant="label" style={titleText(theme)}>
-            <FormattedMessage id="data_sharing" defaultMessage="data sharing" />
-          </AppText>
-        )}
       </TitleContainer>
       <Container>
-        {emails.map((email, index) => (
+        {emails.map((email) => (
           <SpecialListOption
             key={email.emailAddress}
             label={<AppText variant="body1">{email.emailAddress}</AppText>}
             value={
-              state.isEditing ? (
+              state.isEditing && (
                 <UnbindButton onPress={() => handleUnbindPress(email)}>
                   <AppText variant="button" style={removeText(theme)}>
                     <FormattedMessage
@@ -212,11 +200,6 @@ const BindEmailEditScreen = ({navigation}) => {
                     />
                   </AppText>
                 </UnbindButton>
-              ) : (
-                <Switch
-                  value={email.sharing}
-                  onChange={() => handleInputChange(index)}
-                />
               )
             }
           />
