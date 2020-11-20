@@ -72,11 +72,13 @@ const AccountSecurityScreen = ({navigation}) => {
             />
           }
         />
-        <ListOption
-          key="forget_pin"
-          label={<FormattedMessage id="forget_pin" />}
-          onPress={() => navigation.navigate('forget_pin')}
-        />
+        {isPinSet && (
+          <ListOption
+            key="forget_pin"
+            label={<FormattedMessage id="forget_pin" />}
+            onPress={() => navigation.navigate('forget_pin')}
+          />
+        )}
         <ListOption
           key="change_phone_number"
           label={<FormattedMessage id="change_phone_number" />}
@@ -85,7 +87,7 @@ const AccountSecurityScreen = ({navigation}) => {
         <EnterPinModal
           visible={showEnterPinModal}
           callback={() => setShowEnterPinModal(false)}
-          onSuccess={pin =>
+          onSuccess={(pin) =>
             navigation.navigate('verify_phone_number', {
               pin: pin,
             })
