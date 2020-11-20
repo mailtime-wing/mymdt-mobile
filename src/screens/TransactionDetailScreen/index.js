@@ -181,7 +181,7 @@ const TransactionDetailScreen = ({route}) => {
               <TransactionAmount
                 amount={transactionItem.amount}
                 variant={
-                  currencyCode === transactionItem.data.from ? 'from' : 'to'
+                  currencyCode === transactionItem.data?.from ? 'from' : 'to'
                 }
                 unitVariant={currencyCode}
                 unitSizeVariant="small"
