@@ -129,12 +129,12 @@ const BrowseScreen = ({navigation}) => {
           bindDataSourceCount={bindDataSourceCount}
           currentStakeAmount={currentStakeAmount}
         />
+        <QuickActions style={sectionMargin} actionList={quickActionList} />
         <CashBackSummarySection
+          navigation={navigation}
           onPress={handleCashBackSummaryPress}
           style={sectionMargin}
         />
-        <QuickActions style={sectionMargin} actionList={quickActionList} />
-        <CashBackSummarySection navigation={navigation} style={sectionMargin} />
         <MembershipInfoCard
           userLevel={userLevel}
           style={sectionMargin}

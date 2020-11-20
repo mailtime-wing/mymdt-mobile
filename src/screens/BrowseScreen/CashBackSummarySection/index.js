@@ -77,7 +77,7 @@ const CashBackItem = ({icon, brand}) => {
   );
 };
 
-const CashBackSummarySection = ({onPress, style}) => {
+const CashBackSummarySection = ({navigation, onPress, style}) => {
   const theme = useTheme();
 
   return (
@@ -137,6 +137,9 @@ const CashBackSummarySection = ({onPress, style}) => {
           brand="Rakuten JP"
         />
         <AppButton
+          onPress={() =>
+            navigation.navigate('settings', {screen: 'merchants_preference'})
+          }
           variant="filled"
           sizeVariant="normal"
           colorVariant="secondary"
