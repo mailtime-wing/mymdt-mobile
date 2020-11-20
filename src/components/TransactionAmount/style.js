@@ -27,7 +27,7 @@ export const amount = (theme, variant, unitVariant, amountSizeVariant) => css`
     ${
       unitVariant === MM &&
       `
-        color: cyan;
+        color: ${theme.colors.secondary.normal};
       `
     }
   `}
@@ -58,7 +58,7 @@ export const unit = (theme, variant, unitVariant) => css`
     ${
       unitVariant === MM &&
       `
-        color: cyan;
+        color: ${theme.colors.secondary.normal};
       `
     }
   `}

@@ -29,7 +29,7 @@ import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
 import BrandIcon from '@/components/BrandIcon';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
-import SummaryDemoData from './summary_data.json';
+// import SummaryDemoData from './summary_data.json';
 
 const CashBackItem = ({icon, brand, earnInTotal, earnInPeriod}) => {
   const theme = useTheme();
@@ -89,6 +89,7 @@ const CashBackSummarySection = ({
   navigation,
   onPress,
   style,
+  summaryData,
 }) => {
   const theme = useTheme();
 
@@ -117,7 +118,7 @@ const CashBackSummarySection = ({
                     />{' '}
                     <FormattedNumber
                       value={Number(
-                        SummaryDemoData.data.total_cashback_in_period,
+                        summaryData?.data?.total_cashback_in_period || 0,
                       )}
                     />
                   </AppText>
@@ -136,7 +137,7 @@ const CashBackSummarySection = ({
                       defaultMessage="USD"
                     />{' '}
                     <FormattedNumber
-                      value={Number(SummaryDemoData.data.total_cashback)}
+                      value={Number(summaryData?.data.total_cashback || 0)}
                     />
                   </AppText>
                 ),
@@ -163,7 +164,7 @@ const CashBackSummarySection = ({
             defaultMessage="Cash Back from Selected Merchants"
           />
         </AppText>
-        {SummaryDemoData.data.merchant_summary_infos.map((merchant_summary) => (
+        {summaryData?.data?.merchant_summary_infos.map((merchant_summary) => (
           <CashBackItem
             icon={{
               uri: merchantsData?.find(

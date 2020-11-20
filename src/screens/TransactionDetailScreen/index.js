@@ -167,14 +167,6 @@ const RenderTransationDetail = ({transactionItem}) => {
               {transactionItem.data.email}
             </AppText>
           </View>
-          <View style={itemContainer}>
-            <AppText variant="body1" style={titleStyle(theme)}>
-              Email Title
-            </AppText>
-            <AppText variant="body2" style={detail(theme)}>
-              Saturday Night Uber Trip
-            </AppText>
-          </View>
         </>
       );
     case TransactitonType.BANK:

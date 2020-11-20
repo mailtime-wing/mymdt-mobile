@@ -25,6 +25,12 @@ import {useTheme} from 'emotion-theming';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
 
+import {AUTH_TOKENS} from '@/api/auth';
+import {useQuery} from '@apollo/client';
+import useSWR from 'swr';
+
+const url = 'https://distribute-alpha.reward.me/cashback/summary?period=7';
+
 const BrowseScreen = ({navigation}) => {
   const theme = useTheme();
   const {data, loading} = useQueryWithAuth(GET_CHECK_USER_CAN_UPGRADE_DATA);
@@ -48,6 +54,17 @@ const BrowseScreen = ({navigation}) => {
   const nextLevelMembership = availableMemberships.find(
     (ams) => ams.level === userNextLevel,
   );
+
+  const {data: authData} = useQuery(AUTH_TOKENS);
+  const fetcher = (...args) =>
+    fetch(...args, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authData.accessToken}`,
+      },
+    }).then((res) => res.json());
+  const {data: fetchedData} = useSWR(url, fetcher);
+  // TODO: handle error
 
   const quickActionList = [
     {
@@ -114,7 +131,10 @@ const BrowseScreen = ({navigation}) => {
   };
 
   const handleCashBackSummaryPress = () => {
-    navigation.navigate('cash_back_summary');
+    navigation.navigate('cash_back_summary', {
+      cashBackTotal: fetchedData.data.total_cashback || 0,
+      cashBackTotalInPeriod: fetchedData.data.total_cashback_in_period || 0,
+    });
   };
 
   const handleViewMorePress = () => {
@@ -149,6 +169,7 @@ const BrowseScreen = ({navigation}) => {
             onPress={handleCashBackSummaryPress}
             style={sectionMargin}
             merchantsData={merchantsData?.merchants}
+            summaryData={fetchedData}
           />
         )}
         <MembershipInfoCard

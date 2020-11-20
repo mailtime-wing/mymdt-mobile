@@ -9,11 +9,13 @@ import React, {
 import {VirtualizedList, TouchableOpacity, Image, View} from 'react-native';
 import {useTheme} from 'emotion-theming';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
-import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
+import {MM} from '@/constants/currency';
 import {GET_MERCHANTS_API} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import DemoData from './data.json';
+// import DemoData from './data.json';
+import {AUTH_TOKENS} from '@/api/auth';
+import {useQuery} from '@apollo/client';
 
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -37,8 +39,25 @@ import MissingCartIcon from '@/assets/icon_missed-shopping-cart.svg';
 import TransactionBottomSheet from '@/components/TransactionBottomSheet';
 
 import TransactionsHistory from '@/components/TransactionsHistory';
-import AppButton from '@/components/AppButton';
+// import AppButton from '@/components/AppButton';
 import BrandIcon from '@/components/BrandIcon';
+
+import {useSWRInfinite} from 'swr';
+
+const url = 'https://distribute-alpha.reward.me/cashback/histories';
+
+const getKey = (pageIndex, previousPageData) => {
+  // reached the end
+  if (previousPageData && !previousPageData.data) {
+    return null;
+  }
+  // first page, we don't have `previousPageData`
+  if (pageIndex === 0) {
+    return `${url}?first=10`;
+  }
+  // add the cursor to the API endpoint
+  return `${url}?after=${previousPageData.endCursor}&first=10`;
+};
 
 const SummaryChip = ({currency, amount, range, style}) => {
   const theme = useTheme();
@@ -61,9 +80,10 @@ const SummaryChip = ({currency, amount, range, style}) => {
   );
 };
 
-const CashBackSummaryScreen = ({navigation}) => {
+const CashBackSummaryScreen = ({navigation, route}) => {
   const theme = useTheme();
   const {isDark} = useContext(ThemeContext);
+  const {cashBackTotal, cashBackTotalInPeriod} = route.params;
   const backgroundImg = isDark
     ? require('@/assets/cashback-history-background_dark.png')
     : require('@/assets/cashback-history-background.png');
@@ -77,10 +97,26 @@ const CashBackSummaryScreen = ({navigation}) => {
   const {data: merchantsData, loading: merchantsLoading} = useQueryWithAuth(
     GET_MERCHANTS_API,
   );
+  const {data: authData} = useQuery(AUTH_TOKENS);
+
+  const fetcher = (...args) =>
+    fetch(...args, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authData.accessToken}`,
+      },
+    }).then((res) => res.json());
+
+  const {data: fetchedCashBackData} = useSWRInfinite(getKey, fetcher);
+
+  const currencyCode = MM;
+
+  // TODO: handle pagination
 
   const cashBackHistoryRawList = useMemo(
     () =>
-      DemoData.data?.edges.map(
+      !!fetchedCashBackData &&
+      fetchedCashBackData[0].data?.edges.map(
         (h) =>
           (h = {
             cursor: h.cursor,
@@ -97,7 +133,7 @@ const CashBackSummaryScreen = ({navigation}) => {
               />
             ),
             node: {
-              amount: h.node.purchase_amount,
+              amount: h.node.cashback,
               id: h.node.id,
               title: h.node.merchant,
               transactionTime: h.node.history_time,
@@ -110,46 +146,44 @@ const CashBackSummaryScreen = ({navigation}) => {
             },
           }),
       ),
-    [merchantsData, merchantsLoading],
+    [fetchedCashBackData, merchantsData, merchantsLoading],
   );
 
   useEffect(() => {
     setCashBackHistoryList(cashBackHistoryRawList);
   }, [cashBackHistoryRawList]);
 
-  const currencyCode = MEASURABLE_REWARD_POINT;
-
   const dataByMerchants = [];
   const dataByEmails = [];
   const dataByBanks = {};
 
-  DemoData.data?.edges.forEach((history) => {
-    if (
-      !!history.node.merchant &&
-      !dataByMerchants.includes(history.node.merchant)
-    ) {
-      dataByMerchants.push(history.node.merchant);
-    }
+  // DemoData.data?.edges.forEach((history) => {
+  //   if (
+  //     !!history.node.merchant &&
+  //     !dataByMerchants.includes(history.node.merchant)
+  //   ) {
+  //     dataByMerchants.push(history.node.merchant);
+  //   }
 
-    if (
-      !!history.node.data.account_email &&
-      !dataByEmails.includes(history.node.data.account_email)
-    ) {
-      dataByEmails.push(history.node.data.account_email);
-    }
+  //   if (
+  //     !!history.node.data.account_email &&
+  //     !dataByEmails.includes(history.node.data.account_email)
+  //   ) {
+  //     dataByEmails.push(history.node.data.account_email);
+  //   }
 
-    if (!!history.node.data.subType && !!history.node.data.mask) {
-      if (!dataByBanks[history.node.data.subType]) {
-        dataByBanks[history.node.data.subType] = [];
-      }
+  //   if (!!history.node.data.subType && !!history.node.data.mask) {
+  //     if (!dataByBanks[history.node.data.subType]) {
+  //       dataByBanks[history.node.data.subType] = [];
+  //     }
 
-      if (
-        !dataByBanks[history.node.data.subType].includes(history.node.data.mask)
-      ) {
-        dataByBanks[history.node.data.subType].push(history.node.data.mask);
-      }
-    }
-  });
+  //     if (
+  //       !dataByBanks[history.node.data.subType].includes(history.node.data.mask)
+  //     ) {
+  //       dataByBanks[history.node.data.subType].push(history.node.data.mask);
+  //     }
+  //   }
+  // });
 
   const filterList = [
     {title: 'Cashback from Selected Merchants', data: dataByMerchants},
@@ -157,9 +191,9 @@ const CashBackSummaryScreen = ({navigation}) => {
     {title: 'Cashback from Bank accounts', data: dataByBanks},
   ];
 
-  const handleFilterPress = () => {
-    setShowBottomSheet(true);
-  };
+  // const handleFilterPress = () => {
+  //   setShowBottomSheet(true);
+  // };
 
   const handleLayoutPress = () => {
     setShowBottomSheet(false);
@@ -189,10 +223,6 @@ const CashBackSummaryScreen = ({navigation}) => {
 
     if (activeFilterSectionIndex === 1) {
       //filter by emails
-      console.log(
-        'email',
-        cashBackHistoryRawList.map((h) => h.node.data.account_email),
-      );
       setCashBackHistoryList(
         cashBackHistoryRawList.filter(
           (history) =>
@@ -258,7 +288,6 @@ const CashBackSummaryScreen = ({navigation}) => {
             <View style={body}>
               <SummaryChip
                 currency="USD"
-                amount={10.12}
                 range={
                   <FormattedMessage
                     id="in_past_days"
@@ -268,14 +297,15 @@ const CashBackSummaryScreen = ({navigation}) => {
                     }}
                   />
                 }
+                amount={cashBackTotalInPeriod}
                 style={firstChipMargin}
               />
               <SummaryChip
                 currency="USD"
-                amount={1234.21}
                 range={
                   <FormattedMessage id="in_totals" defaultMessage="In Totals" />
                 }
+                amount={cashBackTotal}
               />
               <Image
                 style={banner}
@@ -295,13 +325,13 @@ const CashBackSummaryScreen = ({navigation}) => {
                     defaultMessage="Cash Back History"
                   />
                 </AppText>
-                <AppButton
+                {/* <AppButton
                   onPress={handleFilterPress}
                   variant="outlined"
                   sizeVariant="compact"
                   colorVariant="secondary"
                   text={<FormattedMessage id="button.filter" />}
-                />
+                /> */}
               </View>
             }
             currencyCode={currencyCode}
