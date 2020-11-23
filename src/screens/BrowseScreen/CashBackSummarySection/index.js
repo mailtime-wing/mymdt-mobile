@@ -29,7 +29,6 @@ import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
 import BrandIcon from '@/components/BrandIcon';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
-// import SummaryDemoData from './summary_data.json';
 
 const CashBackItem = ({icon, brand, earnInTotal, earnInPeriod}) => {
   const theme = useTheme();
@@ -92,6 +91,7 @@ const CashBackSummarySection = ({
   summaryData,
 }) => {
   const theme = useTheme();
+  console.log(summaryData?.data);
 
   return (
     <View style={style}>
@@ -169,7 +169,7 @@ const CashBackSummarySection = ({
             icon={{
               uri: merchantsData?.find(
                 (merchant) => merchant.name === merchant_summary.merchant,
-              ).logo,
+              )?.logo,
             }}
             brand={merchant_summary.merchant}
             earnInTotal={merchant_summary.total_cashback}

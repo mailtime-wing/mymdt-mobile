@@ -8,12 +8,11 @@ import React, {
 } from 'react';
 import {VirtualizedList, TouchableOpacity, Image, View} from 'react-native';
 import {useTheme} from 'emotion-theming';
-import {FormattedMessage, FormattedNumber} from 'react-intl';
+import {FormattedNumber} from 'react-intl';
 import {MM} from '@/constants/currency';
 import {GET_MERCHANTS_API} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import LoadingSpinner from '@/components/LoadingSpinner';
-// import DemoData from './data.json';
 import {AUTH_TOKENS} from '@/api/auth';
 import {useQuery} from '@apollo/client';
 
@@ -36,7 +35,7 @@ import {ThemeContext} from '@/context/theme';
 import AppIcon from '@/components/AppIcon';
 import AppText from '@/components/AppText2';
 import MissingCartIcon from '@/assets/icon_missed-shopping-cart.svg';
-import TransactionBottomSheet from '@/components/TransactionBottomSheet';
+// import TransactionBottomSheet from '@/components/TransactionBottomSheet';
 
 import TransactionsHistory from '@/components/TransactionsHistory';
 // import AppButton from '@/components/AppButton';
@@ -87,11 +86,9 @@ const CashBackSummaryScreen = ({navigation, route}) => {
   const backgroundImg = isDark
     ? require('@/assets/cashback-history-background_dark.png')
     : require('@/assets/cashback-history-background.png');
-  const [showBottomSheet, setShowBottomSheet] = useState(false);
-  const [activeFilterSectionIndex, setActiveFilterSectionIndex] = useState(0);
-  const [activeFilterItemIndex, setActiveFilterItemIndex] = useState(null);
-  const [activeFilterSubType, setActiveFilterSubType] = useState('');
-  const [activeFilterMask, setActiveFilterMask] = useState('');
+  // const [showBottomSheet, setShowBottomSheet] = useState(false);
+  // const [activeFilterSectionIndex, setActiveFilterSectionIndex] = useState(0);
+  // const [activeFilterItemIndex, setActiveFilterItemIndex] = useState(null);
   const [cashBackHistoryList, setCashBackHistoryList] = useState([]);
 
   const {data: merchantsData, loading: merchantsLoading} = useQueryWithAuth(
@@ -153,98 +150,32 @@ const CashBackSummaryScreen = ({navigation, route}) => {
     setCashBackHistoryList(cashBackHistoryRawList);
   }, [cashBackHistoryRawList]);
 
-  const dataByMerchants = [];
-  const dataByEmails = [];
-  const dataByBanks = {};
+  // const dataByMerchants = [];
+  // const dataByEmails = [];
+  // const dataByBanks = {};
 
-  // DemoData.data?.edges.forEach((history) => {
-  //   if (
-  //     !!history.node.merchant &&
-  //     !dataByMerchants.includes(history.node.merchant)
-  //   ) {
-  //     dataByMerchants.push(history.node.merchant);
-  //   }
-
-  //   if (
-  //     !!history.node.data.account_email &&
-  //     !dataByEmails.includes(history.node.data.account_email)
-  //   ) {
-  //     dataByEmails.push(history.node.data.account_email);
-  //   }
-
-  //   if (!!history.node.data.subType && !!history.node.data.mask) {
-  //     if (!dataByBanks[history.node.data.subType]) {
-  //       dataByBanks[history.node.data.subType] = [];
-  //     }
-
-  //     if (
-  //       !dataByBanks[history.node.data.subType].includes(history.node.data.mask)
-  //     ) {
-  //       dataByBanks[history.node.data.subType].push(history.node.data.mask);
-  //     }
-  //   }
-  // });
-
-  const filterList = [
-    {title: 'Cashback from Selected Merchants', data: dataByMerchants},
-    {title: 'Cashback from Emails', data: dataByEmails},
-    {title: 'Cashback from Bank accounts', data: dataByBanks},
-  ];
+  // const filterList = [
+  //   {title: 'Cashback from Selected Merchants', data: dataByMerchants},
+  //   {title: 'Cashback from Emails', data: dataByEmails},
+  //   {title: 'Cashback from Bank accounts', data: dataByBanks},
+  // ];
 
   // const handleFilterPress = () => {
   //   setShowBottomSheet(true);
   // };
 
-  const handleLayoutPress = () => {
-    setShowBottomSheet(false);
-  };
+  // const handleLayoutPress = () => {
+  //   setShowBottomSheet(false);
+  // };
 
-  const handleItemPress = (index, itemIndex) => {
-    setActiveFilterSectionIndex(index);
-    setActiveFilterItemIndex(itemIndex);
-  };
+  // const handleItemPress = (index, itemIndex) => {
+  //   setActiveFilterSectionIndex(index);
+  //   setActiveFilterItemIndex(itemIndex);
+  // };
 
-  const handleBankItemPress = (subType, mask) => {
-    setActiveFilterSubType(subType);
-    setActiveFilterMask(mask);
-  };
-
-  const onApplyPress = () => {
-    if (activeFilterSectionIndex === 0) {
-      //filter by merchants
-      setCashBackHistoryList(
-        cashBackHistoryRawList.filter(
-          (history) =>
-            history.node.title ===
-            filterList[activeFilterSectionIndex].data[activeFilterItemIndex],
-        ),
-      );
-    }
-
-    if (activeFilterSectionIndex === 1) {
-      //filter by emails
-      setCashBackHistoryList(
-        cashBackHistoryRawList.filter(
-          (history) =>
-            history.node.data.email ===
-            filterList[activeFilterSectionIndex].data[activeFilterItemIndex],
-        ),
-      );
-    }
-
-    if (activeFilterSectionIndex === 2) {
-      //filter by banks
-      setCashBackHistoryList(
-        cashBackHistoryRawList.filter(
-          (history) =>
-            history.node.data.subType === activeFilterSubType &&
-            history.node.data.mask === activeFilterMask,
-        ),
-      );
-    }
-
-    setShowBottomSheet(false);
-  };
+  // const onApplyPress = () => {
+  //   setShowBottomSheet(false);
+  // };
 
   const onLoadMore = () => {};
 
@@ -342,17 +273,16 @@ const CashBackSummaryScreen = ({navigation, route}) => {
           />
         }
       />
-      {showBottomSheet && (
+      {/* {showBottomSheet && (
         <TransactionBottomSheet
           title={<FormattedMessage id="filter_by" defaultMessage="Filter by" />}
           items={filterList}
           activeOptionIndex={activeFilterSectionIndex}
           onLayoutPress={handleLayoutPress}
           onItemPress={handleItemPress}
-          onBankItemPress={handleBankItemPress}
           onApplyPress={onApplyPress}
         />
-      )}
+      )} */}
     </>
   );
 };

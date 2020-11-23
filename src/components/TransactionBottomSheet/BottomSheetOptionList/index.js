@@ -21,8 +21,6 @@ const BottomSheetOptionList = ({
   options,
   currentActive,
   onItemPress,
-  onBankItemPress,
-  sectionIndex,
 }) => {
   const theme = useTheme();
   const [isExpand, setIsExpand] = useState(false);
@@ -34,13 +32,7 @@ const BottomSheetOptionList = ({
 
   const handleOptionPress = (optionIndex) => {
     setActiveItemIndex(optionIndex);
-    onItemPress(sectionIndex, optionIndex);
-  };
-
-  const handleBankOptionPress = (bankObj, optionIndex) => {
-    onBankItemPress(bankObj.subType, bankObj.mask);
-    setActiveItemIndex(optionIndex);
-    onItemPress(sectionIndex, optionIndex);
+    onItemPress();
   };
 
   useEffect(() => {
@@ -70,59 +62,31 @@ const BottomSheetOptionList = ({
         {options &&
           options.map((option, index) => {
             const optionActive = activeItemIndex === index;
-            if (typeof option === 'object') {
-              return (
-                <Option
-                  active={optionActive}
-                  onPress={() => handleBankOptionPress(option.value, index)}>
-                  <RightSide>
-                    {optionActive ? (
-                      <ActiveRadioIcon
-                        stroke={theme.colors.secondary.normal}
-                        fill={theme.colors.secondary.normal}
-                        strokeWidth="2"
-                      />
-                    ) : (
-                      <RadioIcon
-                        stroke={theme.colors.textOnBackground.highEmphasis}
-                        strokeWidth="2"
-                      />
-                    )}
-                  </RightSide>
-                  <AppText
-                    variant="body1"
-                    style={labelStyle(theme, optionActive)}>
-                    {option.label}
-                  </AppText>
-                </Option>
-              );
-            } else {
-              return (
-                <Option
-                  active={optionActive}
-                  onPress={() => handleOptionPress(index)}>
-                  <RightSide>
-                    {optionActive ? (
-                      <ActiveRadioIcon
-                        stroke={theme.colors.secondary.normal}
-                        fill={theme.colors.secondary.normal}
-                        strokeWidth="2"
-                      />
-                    ) : (
-                      <RadioIcon
-                        stroke={theme.colors.textOnBackground.highEmphasis}
-                        strokeWidth="2"
-                      />
-                    )}
-                  </RightSide>
-                  <AppText
-                    variant="body1"
-                    style={labelStyle(theme, optionActive)}>
-                    {option}
-                  </AppText>
-                </Option>
-              );
-            }
+            return (
+              <Option
+                active={optionActive}
+                onPress={() => handleOptionPress(index)}>
+                <RightSide>
+                  {optionActive ? (
+                    <ActiveRadioIcon
+                      stroke={theme.colors.secondary.normal}
+                      fill={theme.colors.secondary.normal}
+                      strokeWidth="2"
+                    />
+                  ) : (
+                    <RadioIcon
+                      stroke={theme.colors.textOnBackground.highEmphasis}
+                      strokeWidth="2"
+                    />
+                  )}
+                </RightSide>
+                <AppText
+                  variant="body1"
+                  style={labelStyle(theme, optionActive)}>
+                  {option}
+                </AppText>
+              </Option>
+            );
           })}
       </OptionsContainer>
     </>
