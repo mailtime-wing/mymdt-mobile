@@ -273,9 +273,12 @@
     "error_code_100": "系統錯誤，請稍後再試。",
     "error_code_201": "用戶已存在，請登入。",
     "error_code_202": "驗證碼錯誤。",
+    "error_code_202_with_field": "{field}無效。",
     "error_code_203": "驗證碼錯誤。",
+    "error_code_301": "用戶不存在。",
     "error_code_305": "用戶已存在。",
     "something_went_wrong_please_try_again_later": "出錯了，請稍後再試。",
-    "enter_screen_invalid_phone_number": "電話號碼無效。"
+    "enter_screen_invalid_phone_number": "電話號碼無效。",
+    "enter_screen_action_not_available": "您請求驗證碼的次數過多，請稍後再試。"
   }
 }

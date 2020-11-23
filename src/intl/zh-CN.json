@@ -273,9 +273,12 @@
     "error_code_100": "系统错误，请稍后再试。",
     "error_code_201": "用户已存在，请登入。",
     "error_code_202": "验证码错误。",
+    "error_code_202_with_field": "{field}无效。",
     "error_code_203": "验证码错误。",
+    "error_code_301": "用戶不存在。",
     "error_code_305": "用户已存在。",
     "something_went_wrong_please_try_again_later": "出错了，请稍后再试。",
-    "enter_screen_invalid_phone_number": "电话号码无效。"
+    "enter_screen_invalid_phone_number": "电话号码无效。",
+    "enter_screen_action_not_available": "您请求验证码的次数过多。请稍后再试."
   }
 }

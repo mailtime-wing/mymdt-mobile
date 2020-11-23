@@ -21,6 +21,15 @@ const EnterScreen = ({navigation}) => {
           [errorCodeEnum.DATA_INVALID]: intl.formatMessage({
             id: 'error.enter_screen_invalid_phone_number',
           }),
+          [errorCodeEnum.USER_NOT_EXIST]: intl.formatMessage({
+            id: 'error.error_code_301',
+          }),
+          [errorCodeEnum.USER_ALREADY_EXIST]: intl.formatMessage({
+            id: 'error.error_code_305',
+          }),
+          [errorCodeEnum.ACTION_NOT_AVAILABLE]: intl.formatMessage({
+            id: 'error.enter_screen_action_not_available',
+          }),
         },
       },
     },

@@ -130,8 +130,8 @@
   "email_account": "EMAIL {email_count}",
   "add_email_account": "add Account",
   "telephone": "Telephone",
-  "phone_number": "PHONE NUMBER",
-  "verification_code": "VERIFICATION CODE",
+  "phone_number": "Phone number",
+  "verification_code": "Verification code",
   "your_name": "Nickname",
   "gender": "Gender",
   "date_of_birth": "Date of Birth",
@@ -273,9 +273,12 @@
     "error_code_100": "System Error, Please try again later.",
     "error_code_201": "User already exist. Please sign in.",
     "error_code_202": "Verification Code invalid.",
+    "error_code_202_with_field": "{field} is not valid.",
     "error_code_203": "Verification Code invalid.",
+    "error_code_301": "User does not exist.",
     "error_code_305": "User already exist.",
     "something_went_wrong_please_try_again_later": "Something went wrong. Please try again later.",
-    "enter_screen_invalid_phone_number": "Phone number is not valid"
+    "enter_screen_invalid_phone_number": "Phone number is not valid",
+    "enter_screen_action_not_available": "You've requested for verification code too many times. Please try again later."
   }
 }
