@@ -40,6 +40,7 @@ const VerifyIdentityScreen = ({navigation, route}) => {
         phoneNubmer={phoneNubmer}
         otpActionKey={otpActionKey}
         onSubmit={handleSubmitPress}
+        requestOtpOnMount={true}
       />
     </ModalContainer>
   );

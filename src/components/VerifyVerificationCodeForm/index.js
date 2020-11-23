@@ -77,12 +77,17 @@ const VerifyVerificationCodeForm = ({
   onSubmit,
   phoneNubmer,
   otpActionKey,
+  startCountdownOnMount,
+  initialCountdownSeconds,
+  requestOtpOnMount,
 }) => {
   const theme = useTheme();
   const {localeEnum} = useContext(IntlContext);
   const [otpRequest] = useMutationWithReset(GET_OTP_API, {}, {withAuth: true});
-  const [timeLeft, setCountdownTime] = useCountDownTimer(0);
-  const handleSendPressFiredRef = useRef(false);
+  const [timeLeft, setCountdownTime] = useCountDownTimer(
+    startCountdownOnMount ? initialCountdownSeconds : 0,
+  );
+  const mountedRef = useRef(false);
 
   const isTimerStarted = timeLeft > 0;
   const handleSendPress = useCallback(() => {
@@ -97,11 +102,20 @@ const VerifyVerificationCodeForm = ({
   }, [localeEnum, otpActionKey, otpRequest, phoneNubmer, setCountdownTime]);
 
   useEffect(() => {
-    if (phoneNubmer && !handleSendPressFiredRef.current) {
-      handleSendPress();
-      handleSendPressFiredRef.current = true;
+    if (!mountedRef.current) {
+      if (requestOtpOnMount && phoneNubmer) {
+        handleSendPress();
+      }
+
+      mountedRef.current = true;
     }
-  }, [handleSendPress, phoneNubmer]);
+  }, [
+    handleSendPress,
+    phoneNubmer,
+    requestOtpOnMount,
+    startCountdownOnMount,
+    setCountdownTime,
+  ]);
 
   return (
     <View style={container}>

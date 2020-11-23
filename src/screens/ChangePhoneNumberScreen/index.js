@@ -10,20 +10,20 @@ import LoginForm from '@/components/LoginForm';
 import ScreenContainer from '@/components/ScreenContainer';
 import errorCodeEnum from '@/enum/errorCode';
 
-const renderClientError = errorCode => {
+const renderClientError = (errorCode) => {
   if (!errorCode) {
     return null;
   }
 
   switch (errorCode) {
-    case errorCodeEnum['202']:
+    case errorCodeEnum.DATA_INVALID:
       return (
         <FormattedMessage
           id="error.error_code_202"
           defaultMessage="Verification Code invalid."
         />
       );
-    case errorCodeEnum['203']:
+    case errorCodeEnum.DATA_EXPIRED:
       return (
         <FormattedMessage
           id="error.error_code_203"
@@ -64,7 +64,7 @@ const ChangePhoneNumberScreen = ({navigation, route}) => {
     changePhoneNumberRequestReset();
   };
 
-  const handleSendPress = values =>
+  const handleSendPress = (values) =>
     otpRequest({
       variables: {
         phoneNumber: values.phonePrefix + values.phone,
@@ -73,7 +73,7 @@ const ChangePhoneNumberScreen = ({navigation, route}) => {
       },
     });
 
-  const handleSubmitPress = async values => {
+  const handleSubmitPress = async (values) => {
     try {
       const {data} = await changePhoneNumberRequest({
         variables: {

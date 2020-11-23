@@ -274,6 +274,8 @@
     "error_code_201": "用户已存在，请登入。",
     "error_code_202": "验证码错误。",
     "error_code_203": "验证码错误。",
-    "error_code_305": "用户已存在。"
+    "error_code_305": "用户已存在。",
+    "something_went_wrong_please_try_again_later": "出错了，请稍后再试。",
+    "enter_screen_invalid_phone_number": "电话号码无效。"
   }
 }

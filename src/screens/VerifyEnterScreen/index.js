@@ -19,21 +19,21 @@ const renderClientError = (errorCode) => {
   }
 
   switch (errorCode) {
-    case errorCodeEnum['202']:
+    case errorCodeEnum.DATA_INVALID:
       return (
         <FormattedMessage
           id="error.error_code_202"
           defaultMessage="Verification Code invalid."
         />
       );
-    case errorCodeEnum['203']:
+    case errorCodeEnum.DATA_EXPIRED:
       return (
         <FormattedMessage
           id="error.error_code_203"
           defaultMessage="Verification Code invalid."
         />
       );
-    case errorCodeEnum['305']:
+    case errorCodeEnum.USER_ALREADY_EXIST:
       return (
         <FormattedMessage
           id="error.error_code_305"
@@ -52,7 +52,7 @@ const renderClientError = (errorCode) => {
 
 const VerifyEnterScreen = ({route}) => {
   const [enterRequest, {error}, reset] = useMutationWithReset(ENTER_API);
-  const {phoneNubmer} = route.params;
+  const {phoneNubmer, remainingSeconds = 60} = route.params;
   const {localeEnum} = useContext(IntlContext);
   const {signIn} = useContext(AuthContext);
   const {
@@ -95,6 +95,9 @@ const VerifyEnterScreen = ({route}) => {
           phoneNubmer={phoneNubmer}
           otpActionKey="ENTER"
           onSubmit={handleVerifyPress}
+          startCountdownOnMount={true}
+          initialCountdownSeconds={remainingSeconds}
+          requestOtpOnMount={false}
         />
       </ScreenContainer>
       {!!clientError && (
