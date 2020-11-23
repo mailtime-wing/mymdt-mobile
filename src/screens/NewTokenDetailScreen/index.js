@@ -20,6 +20,7 @@ import convertToUsdAmount from '@/utils/convertToUsdAmount';
 
 import NextStakeReward from './NextStakeReward';
 import NewTokenTransactionHistory from './NewTokenTransactionHistory';
+import {FormattedMessage} from 'react-intl';
 
 import {
   container,
@@ -50,7 +51,8 @@ const NewTokenDetailScreen = ({navigation}) => {
     <ScrollView>
       <SafeAreaView style={container(theme)}>
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
-          mm balance
+          <FormattedMessage id="currencies.mm" defaultMessage="MM" />{' '}
+          <FormattedMessage id="total_balance" defaultMessage="total balance" />
         </AppText>
         {loading ? (
           <LoadingSpinner color={theme.colors.background1} />

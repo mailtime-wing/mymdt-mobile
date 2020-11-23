@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Image} from 'react-native';
+import {FormattedMessage} from 'react-intl';
 
 import AppButton from '@/components/AppButton';
 import membershipLevel from '@/enum/membershipLevel';
@@ -19,7 +20,7 @@ const MembershipInfoCard = ({userLevel, style, onPress}) => {
         variant="filled"
         sizeVariant="normal"
         colorVariant="secondary"
-        text="view more"
+        text={<FormattedMessage id="view_more" defaultMessage="View more" />}
         style={button}
       />
     </View>

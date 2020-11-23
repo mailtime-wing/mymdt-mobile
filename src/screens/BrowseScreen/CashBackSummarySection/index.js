@@ -44,7 +44,11 @@ const CashBackItem = ({icon, brand}) => {
             {brand}
           </AppText>
           <AppText variant="heading6" style={brandPercentage(theme)}>
-            0.5% cashback
+            <FormattedMessage
+              id="cash_back_percentage"
+              defaultMessage="{percentage}% cashback"
+              values={{percentage: 0.5}}
+            />
           </AppText>
         </View>
 
@@ -54,7 +58,8 @@ const CashBackItem = ({icon, brand}) => {
             values={{
               amount: (
                 <AppText variant="caption" style={amount(theme)}>
-                  USD 5
+                  <FormattedMessage id="currencies.usd" defaultMessage="USD" />{' '}
+                  5
                 </AppText>
               ),
             }}
@@ -66,7 +71,8 @@ const CashBackItem = ({icon, brand}) => {
             values={{
               amount: (
                 <AppText variant="caption" style={amount(theme)}>
-                  USD 3,240
+                  <FormattedMessage id="currencies.usd" defaultMessage="USD" />{' '}
+                  3240
                 </AppText>
               ),
             }}
@@ -88,7 +94,10 @@ const CashBackSummarySection = ({navigation, onPress, style}) => {
         </View>
         <View style={summaryContainer}>
           <AppText variant="heading4" style={summaryHeader(theme)}>
-            Cash Back Summary
+            <FormattedMessage
+              id="cash_back_summary"
+              defaultMessage="Cash Back Summary"
+            />
           </AppText>
           <AppText variant="caption" style={earned(theme)}>
             <FormattedMessage
@@ -96,7 +105,11 @@ const CashBackSummarySection = ({navigation, onPress, style}) => {
               values={{
                 amount: (
                   <AppText variant="caption" style={amount(theme)}>
-                    USD 10
+                    <FormattedMessage
+                      id="currencies.usd"
+                      defaultMessage="USD"
+                    />{' '}
+                    10
                   </AppText>
                 ),
               }}
@@ -108,7 +121,11 @@ const CashBackSummarySection = ({navigation, onPress, style}) => {
               values={{
                 amount: (
                   <AppText variant="caption" style={amount(theme)}>
-                    USD 6,480
+                    <FormattedMessage
+                      id="currencies.usd"
+                      defaultMessage="USD"
+                    />{' '}
+                    6480
                   </AppText>
                 ),
               }}
@@ -129,7 +146,10 @@ const CashBackSummarySection = ({navigation, onPress, style}) => {
           `,
         ]}>
         <AppText variant="subTitle3" style={selectedMerchant(theme)}>
-          Cash Back from Selected Merchants
+          <FormattedMessage
+            id="cash_back_from_selected_merchants"
+            defaultMessage="Cash Back from Selected Merchants"
+          />
         </AppText>
         <CashBackItem icon={require('@/assets/netflix.png')} brand="Amazon" />
         <CashBackItem
@@ -143,7 +163,9 @@ const CashBackSummarySection = ({navigation, onPress, style}) => {
           variant="filled"
           sizeVariant="normal"
           colorVariant="secondary"
-          text="Add merchant"
+          text={
+            <FormattedMessage id="add_merchant" defaultMessage="Add merchant" />
+          }
           style={button}
           svgIcon={ShoppingBagAddIcon}
         />

@@ -6,6 +6,7 @@ import {FormattedDate} from 'react-intl';
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 import TransactionAmount from '@/components/TransactionAmount';
+import {FormattedMessage} from 'react-intl';
 
 import {
   mediumEmphasis,
@@ -30,7 +31,10 @@ const StakeMdt = ({
       <View style={stakeSummary(theme)}>
         <View style={[rowContainer, summaryItem]}>
           <AppText variant="smallText" style={mdtTextColor(theme)}>
-            Annual Percentage Yield
+            <FormattedMessage
+              id="annual_percentage_yield"
+              defaultMessage="Annual Percentage Yield"
+            />
           </AppText>
           <AppText variant="caption" style={mediumEmphasis(theme)}>
             {stakingInterestRate}%
@@ -38,15 +42,21 @@ const StakeMdt = ({
         </View>
         <View style={[rowContainer, summaryItem]}>
           <AppText variant="smallText" style={mdtTextColor(theme)}>
-            Stake Period
+            <FormattedMessage id="stake_period" defaultMessage="Stake Period" />
           </AppText>
           <AppText variant="caption" style={mediumEmphasis(theme)}>
-            {lockupPeriodInDay} days
+            <FormattedMessage
+              id="number_of_days"
+              defaultMessage="{day} days"
+              values={{
+                day: lockupPeriodInDay,
+              }}
+            />
           </AppText>
         </View>
         <View style={[rowContainer, summaryItem]}>
           <AppText variant="smallText" style={mdtTextColor(theme)}>
-            Stake Date
+            <FormattedMessage id="stake_date" defaultMessage="Stake Date" />
           </AppText>
           <AppText variant="caption" style={mediumEmphasis(theme)}>
             <FormattedDate value={stakeDate} />
@@ -54,7 +64,10 @@ const StakeMdt = ({
         </View>
         <View style={[rowContainer, summaryItem]}>
           <AppText variant="smallText" style={mdtTextColor(theme)}>
-            Expected Available Date
+            <FormattedMessage
+              id="expected_available_date"
+              defaultMessage="Expected Available Date"
+            />
           </AppText>
           <AppText variant="caption" style={mediumEmphasis(theme)}>
             <FormattedDate value={expectedAvailableDate} />
@@ -62,7 +75,10 @@ const StakeMdt = ({
         </View>
         <View style={[rowContainer, summaryItem]}>
           <AppText variant="smallText" style={mdtTextColor(theme)}>
-            Remaining Available MDT
+            <FormattedMessage
+              id="remaining_available_mdt"
+              defaultMessage="Remaining Available MDT"
+            />
           </AppText>
           <AppText variant="caption" style={mediumEmphasis(theme)}>
             <TransactionAmount

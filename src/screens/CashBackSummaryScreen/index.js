@@ -209,10 +209,24 @@ const CashBackSummaryScreen = ({navigation}) => {
               <SummaryChip
                 currency="USD"
                 amount={10.12}
-                range="In Past 7 Days"
+                range={
+                  <FormattedMessage
+                    id="in_past_days"
+                    defaultMessage="In Past {day} Days"
+                    values={{
+                      day: 7,
+                    }}
+                  />
+                }
                 style={firstChipMargin}
               />
-              <SummaryChip currency="USD" amount={1234.21} range="In Totals" />
+              <SummaryChip
+                currency="USD"
+                amount={1234.21}
+                range={
+                  <FormattedMessage id="in_totals" defaultMessage="In Totals" />
+                }
+              />
               <Image
                 style={banner}
                 source={require('@/assets/upgrade_promotion_banner.png')}
@@ -226,7 +240,10 @@ const CashBackSummaryScreen = ({navigation}) => {
             headerComponent={
               <View style={historyHeaderContainer(theme)}>
                 <AppText variant="heading5" style={cashBackTitle(theme)}>
-                  Cash Back History
+                  <FormattedMessage
+                    id="cash_back_history"
+                    defaultMessage="Cash Back History"
+                  />
                 </AppText>
                 <AppButton
                   onPress={handleFilterPress}

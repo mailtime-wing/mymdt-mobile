@@ -2,6 +2,7 @@ import React from 'react';
 import {ScrollView} from 'react-native';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {GET_CHECK_USER_CAN_UPGRADE_DATA} from '@/api/data';
+import {FormattedMessage} from 'react-intl';
 
 import membershipLevel from '@/enum/membershipLevel';
 import AccountBar from '@/components/AccountBar';
@@ -47,35 +48,42 @@ const BrowseScreen = ({navigation}) => {
 
   const quickActionList = [
     {
-      name: 'Privileges',
+      name: <FormattedMessage id="privileges" defaultMessage="Privileges" />,
       icon: AwardIcon,
       action: () => navigation.navigate('membership_detail'),
     },
     {
-      name: 'Add Email',
+      name: <FormattedMessage id="add_email" defaultMessage="Add Email" />,
       icon: MailIcon,
       action: () =>
         navigation.navigate('settings', {screen: 'emails_binding_edit'}),
     },
     {
-      name: 'Add Card',
+      name: <FormattedMessage id="add_card" defaultMessage="Add Card" />,
       icon: CreditCardIcon,
       action: () =>
         navigation.navigate('settings', {screen: 'linked_cards_setting'}),
     },
     {
-      name: 'Referral',
+      name: <FormattedMessage id="referral" defaultMessage="Referral" />,
       icon: ReferralIcon,
       action: () => navigation.navigate('referral'),
     },
     {
-      name: 'Selected Merchants',
+      name: (
+        <FormattedMessage
+          id="selected_merchants"
+          defaultMessage="Selected Merchants"
+        />
+      ),
       icon: BagIcon,
       action: () =>
         navigation.navigate('settings', {screen: 'merchants_preference'}),
     },
     {
-      name: 'Cashback type',
+      name: (
+        <FormattedMessage id="cashback_type" defaultMessage="Cashback type" />
+      ),
       icon: DollarSignIcon,
       action: () => navigation.navigate('settings'),
     },

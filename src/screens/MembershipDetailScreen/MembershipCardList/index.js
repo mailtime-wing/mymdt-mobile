@@ -51,7 +51,7 @@ const CurrentTag = ({style}) => {
   return (
     <View style={[tag(theme), style]}>
       <AppText variant="overline" style={currentStyle(theme)}>
-        <FormattedMessage id="isCurrent" defaultMessage="Current" />
+        <FormattedMessage id="current" defaultMessage="Current" />
       </AppText>
     </View>
   );
@@ -229,7 +229,19 @@ const MembershipCardList = ({navigation}) => {
             variant="filled"
             sizeVariant="normal"
             colorVariant="secondary"
-            text={canUpgrade ? 'upgrade' : 'upgrade is not available'}
+            text={
+              canUpgrade ? (
+                <FormattedMessage
+                  id="button.upgrade"
+                  defaultMessage="Upgrade"
+                />
+              ) : (
+                <FormattedMessage
+                  id="button.upgrade_not_available"
+                  defaultMessage="Upgrade is not available"
+                />
+              )
+            }
             disabled={!canUpgrade}
             style={upgradeButton}
           />
