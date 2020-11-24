@@ -40,6 +40,7 @@ import MissingCartIcon from '@/assets/icon_missed-shopping-cart.svg';
 import TransactionsHistory from '@/components/TransactionsHistory';
 // import AppButton from '@/components/AppButton';
 import BrandIcon from '@/components/BrandIcon';
+import {FormattedMessage} from 'react-intl';
 
 import {useSWRInfinite} from 'swr';
 

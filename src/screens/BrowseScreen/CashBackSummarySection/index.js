@@ -91,7 +91,6 @@ const CashBackSummarySection = ({
   summaryData,
 }) => {
   const theme = useTheme();
-  console.log(summaryData?.data);
 
   return (
     <View style={style}>
