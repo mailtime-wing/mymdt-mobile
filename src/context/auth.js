@@ -13,7 +13,7 @@ import {GET_INITIAL_USER_DATA} from '@/api/data';
 import {useMutation} from '@apollo/client';
 
 import PopupModal from '@/components/PopupModal';
-import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
+import {REWARD_DOLLAR} from '@/constants/currency';
 
 export const AuthContext = createContext({
   initialized: false,
@@ -27,7 +27,7 @@ export const AuthContext = createContext({
 const UPDATE_CASH_BACK_TYPE = 'updateCashBackType';
 
 const initialState = {
-  cashBackType: MEASURABLE_REWARD_POINT, // discuss before to set reward point as default cash back type
+  cashBackType: REWARD_DOLLAR, // discuss before to set reward dollar as default cash back type
 };
 
 const reducer = (state, action) => {

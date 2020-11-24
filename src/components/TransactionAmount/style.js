@@ -1,9 +1,5 @@
 import {css} from '@emotion/native';
-import {
-  MEASURABLE_DATA_TOKEN,
-  MEASURABLE_REWARD_POINT,
-  MM,
-} from '@/constants/currency';
+import {MEASURABLE_DATA_TOKEN, REWARD_DOLLAR, ME} from '@/constants/currency';
 
 export const amount = (theme, variant, unitVariant, amountSizeVariant) => css`
   ${variant === 'from' &&
@@ -19,13 +15,13 @@ export const amount = (theme, variant, unitVariant, amountSizeVariant) => css`
       `
     }
     ${
-      unitVariant === MEASURABLE_REWARD_POINT &&
+      unitVariant === REWARD_DOLLAR &&
       `
         color: ${theme.colors.secondary.normal};
       `
     }
     ${
-      unitVariant === MM &&
+      unitVariant === ME &&
       `
         color: ${theme.colors.secondary.normal};
       `
@@ -50,13 +46,13 @@ export const unit = (theme, variant, unitVariant) => css`
       `
     }
     ${
-      unitVariant === MEASURABLE_REWARD_POINT &&
+      unitVariant === REWARD_DOLLAR &&
       `
         color: ${theme.colors.secondary.normal};
       `
     }
     ${
-      unitVariant === MM &&
+      unitVariant === ME &&
       `
         color: ${theme.colors.secondary.normal};
       `

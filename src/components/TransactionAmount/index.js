@@ -5,8 +5,8 @@ import AppText from '@/components/AppText2';
 
 import {
   MEASURABLE_DATA_TOKEN,
-  MEASURABLE_REWARD_POINT,
-  MM,
+  REWARD_DOLLAR,
+  ME,
   USD,
 } from '@/constants/currency';
 
@@ -15,7 +15,7 @@ import {useTheme} from 'emotion-theming';
 
 /**
  * @typedef {Object} Props
- * @property {MEASURABLE_DATA_TOKEN|MEASURABLE_REWARD_POINT|MM|USD} unitVariant
+ * @property {MEASURABLE_DATA_TOKEN|REWARD_DOLLAR|ME|USD} unitVariant
  * @property {'from'|'to'} variant
  * @property {'small'|'normal'} unitSizeVariant
  * @property {'small'|'normal'|'large'|'largeProportional'} amountSizeVariant
@@ -50,11 +50,11 @@ const TransactionAmount = ({
     case MEASURABLE_DATA_TOKEN:
       unit = 'MDT';
       break;
-    case MEASURABLE_REWARD_POINT:
-      unit = 'P';
+    case REWARD_DOLLAR:
+      unit = 'R';
       break;
-    case MM:
-      unit = 'MM';
+    case ME:
+      unit = ME;
       break;
     case USD:
       unit = 'USD';

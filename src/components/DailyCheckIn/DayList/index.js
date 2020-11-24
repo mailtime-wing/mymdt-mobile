@@ -1,7 +1,7 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
+import {REWARD_DOLLAR} from '@/constants/currency';
 
 import {
   DayTextEnglish,
@@ -23,7 +23,8 @@ const DayList = ({
   isEnglish,
   coinColor,
 }) => {
-  return ( // TODO: special handle dark mode style for daily check in 
+  return (
+    // TODO: special handle dark mode style for daily check in
     <>
       {todayAndAfterRewards &&
         todayAndAfterRewards.map((amount, index) => {
@@ -53,12 +54,12 @@ const DayList = ({
                   </DayTextChinese>
                 </>
               )}
-              {cashbackCurrencyCode === MEASURABLE_REWARD_POINT ? (
+              {cashbackCurrencyCode === REWARD_DOLLAR ? (
                 <MRPCoin
                   amount={amount}
                   size={18}
                   fontSize={16}
-                  color={props =>
+                  color={(props) =>
                     passedDay ? props.theme.colors.background1 : coinColor
                   }
                 />
@@ -67,7 +68,7 @@ const DayList = ({
                   amount={amount}
                   size={18}
                   fontSize={16}
-                  color={props =>
+                  color={(props) =>
                     passedDay ? props.theme.colors.background1 : coinColor
                   }
                 />

@@ -8,10 +8,7 @@ import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 
 import {convertedText, gotRewardText, convertedContainer} from './style';
 
-import {
-  MEASURABLE_REWARD_POINT,
-  MEASURABLE_DATA_TOKEN,
-} from '@/constants/currency';
+import {REWARD_DOLLAR, MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 
 import MRPCoin from '@/components/MRPCoin';
 import MDTCoin from '@/components/MDTCoin';
@@ -41,7 +38,7 @@ const RewardGotPopup = ({
   const {data} = useQueryWithAuth(GET_CONVERSION_RATE_API, {
     skip: !convert || rewardAmount === 0,
     variables: {
-      from: MEASURABLE_REWARD_POINT,
+      from: REWARD_DOLLAR,
       to: MEASURABLE_DATA_TOKEN,
     },
   });

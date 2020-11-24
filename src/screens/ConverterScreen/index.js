@@ -6,10 +6,7 @@ import {useTheme} from 'emotion-theming';
 import {GET_CONVERSION_RATE_API, CURRENCY_CONVERT_API} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
-import {
-  MEASURABLE_REWARD_POINT,
-  MEASURABLE_DATA_TOKEN,
-} from '@/constants/currency';
+import {REWARD_DOLLAR, MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 
 import {detailStyle, container} from './style';
 
@@ -23,18 +20,18 @@ const ConverterScreen = ({navigation, route}) => {
   const [from, setFrom] = useState(initialFrom);
   const [to, setTo] = useState(initialTo);
   const isConvertFromMrpToMdt =
-    from === MEASURABLE_REWARD_POINT && to === MEASURABLE_DATA_TOKEN;
+    from === REWARD_DOLLAR && to === MEASURABLE_DATA_TOKEN;
   const isConvertFromMdtToMrp =
-    from === MEASURABLE_DATA_TOKEN && to === MEASURABLE_REWARD_POINT;
+    from === MEASURABLE_DATA_TOKEN && to === REWARD_DOLLAR;
 
   const handleChangeConvertCurrency = useCallback(() => {
     if (isConvertFromMrpToMdt) {
       setFrom(MEASURABLE_DATA_TOKEN);
-      setTo(MEASURABLE_REWARD_POINT);
+      setTo(REWARD_DOLLAR);
     }
 
     if (isConvertFromMdtToMrp) {
-      setFrom(MEASURABLE_REWARD_POINT);
+      setFrom(REWARD_DOLLAR);
       setTo(MEASURABLE_DATA_TOKEN);
     }
   }, [isConvertFromMrpToMdt, isConvertFromMdtToMrp]);

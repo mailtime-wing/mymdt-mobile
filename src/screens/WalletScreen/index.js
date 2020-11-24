@@ -18,9 +18,9 @@ import StakeMdtIcon from '@/assets/icon_download.svg';
 import {FormattedMessage} from 'react-intl';
 
 import {
-  MEASURABLE_REWARD_POINT,
+  REWARD_DOLLAR,
   MEASURABLE_DATA_TOKEN,
-  MM,
+  ME,
   USDT,
 } from '@/constants/currency';
 
@@ -52,14 +52,14 @@ const WalletScreen = ({navigation}) => {
   });
   const rpAmount =
     data?.userProfile?.currencyAccounts.find(
-      (ca) => ca.currencyCode === MEASURABLE_REWARD_POINT,
+      (ca) => ca.currencyCode === REWARD_DOLLAR,
     )?.balance || 0;
   const mdtAmount =
     data?.userProfile?.currencyAccounts.find(
       (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
     )?.balance || 0;
   const ntAmount =
-    data?.userProfile?.currencyAccounts.find((ca) => ca.currencyCode === USDT)
+    data?.userProfile?.currencyAccounts.find((ca) => ca.currencyCode === ME)
       ?.balance || 0;
   const totalBalance = mdtAmount + ntAmount;
   // const earnedMM = 40; // TODO: get from api
@@ -81,7 +81,7 @@ const WalletScreen = ({navigation}) => {
       action: () =>
         navigation.navigate('converter', {
           initialFrom: MEASURABLE_DATA_TOKEN,
-          initialTo: MEASURABLE_REWARD_POINT,
+          initialTo: REWARD_DOLLAR,
         }),
     },
     {
@@ -124,10 +124,7 @@ const WalletScreen = ({navigation}) => {
       </SafeAreaView>
       <TouchableOpacity style={currencyRow(theme)} onPress={handleMrpPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
-          <FormattedMessage
-            id="currencies.reward_dollar"
-            defaultMessage="Reward Dollar"
-          />
+          <FormattedMessage id="currencies.rd" defaultMessage="Reward Dollar" />
         </AppText>
         {loading ? (
           <LoadingSpinner style={spinner} />
@@ -137,7 +134,7 @@ const WalletScreen = ({navigation}) => {
               amount={rpAmount}
               amountSizeVariant="normal"
               unitSizeVariant="small"
-              unitVariant={MEASURABLE_REWARD_POINT}
+              unitVariant={REWARD_DOLLAR}
               unitColor={theme.colors.secondary.dark}
               amountColor={theme.colors.textOnBackground.mediumEmphasis}
               style={amount}
@@ -195,7 +192,7 @@ const WalletScreen = ({navigation}) => {
                 values={{
                   amount: earnedMM,
                   currency: (
-                    <FormattedMessage id="currencies.mm" defaultMessage="MM" />
+                    <FormattedMessage id="currencies.me" defaultMessage="ME" />
                   ),
                   day: 7,
                 }}
@@ -212,7 +209,7 @@ const WalletScreen = ({navigation}) => {
         style={[currencyRow(theme), lastCurrencyRow]}
         onPress={handleNewTokenPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
-          <FormattedMessage id="currencies.mm" defaultMessage="MM" />
+          <FormattedMessage id="currencies.me" defaultMessage="ME" />
         </AppText>
         {loading ? (
           <LoadingSpinner style={spinner} />
@@ -222,7 +219,7 @@ const WalletScreen = ({navigation}) => {
               amount={ntAmount}
               amountSizeVariant="normal"
               unitSizeVariant="small"
-              unitVariant={MM}
+              unitVariant={ME}
               amountColor={theme.colors.textOnBackground.mediumEmphasis}
               unitColor={theme.colors.secondary.dark}
               style={amount}

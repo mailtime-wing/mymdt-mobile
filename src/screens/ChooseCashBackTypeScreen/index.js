@@ -12,10 +12,7 @@ import ScreenContainer from '@/components/ScreenContainer';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {UPDATE_USER_CASHBACK_CURRENCY_CODE_API} from '@/api/data';
-import {
-  MEASURABLE_REWARD_POINT,
-  MEASURABLE_DATA_TOKEN,
-} from '@/constants/currency';
+import {REWARD_DOLLAR, MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 
 import {
   container,
@@ -34,7 +31,7 @@ const cashbackTypeList = [
     title: 'Return in RewardPoint',
     detail:
       'The convert rate is more stable and you can redeem gift cards in app.',
-    type: MEASURABLE_REWARD_POINT,
+    type: REWARD_DOLLAR,
   },
   {
     level: 'Advanced',

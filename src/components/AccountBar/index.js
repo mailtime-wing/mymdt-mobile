@@ -17,10 +17,7 @@ import MembershipLevelChip from '@/components/MembershipLevelChip';
 import AppAvator from '@/components/AppAvator';
 import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
-import {
-  MEASURABLE_DATA_TOKEN,
-  MEASURABLE_REWARD_POINT,
-} from '@/constants/currency';
+import {MEASURABLE_DATA_TOKEN, REWARD_DOLLAR} from '@/constants/currency';
 
 const AccountBar = ({navigation, showCoins}) => {
   const theme = useTheme();
@@ -48,7 +45,7 @@ const AccountBar = ({navigation, showCoins}) => {
             <MRPCoin
               amount={
                 currencyData?.userProfile?.currencyAccounts.find(
-                  (ca) => ca.currencyCode === MEASURABLE_REWARD_POINT,
+                  (ca) => ca.currencyCode === REWARD_DOLLAR,
                 )?.balance || 0
               }
               size={18}

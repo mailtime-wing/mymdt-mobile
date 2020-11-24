@@ -9,7 +9,7 @@ import AppButton from '@/components/AppButton';
 import TransactionAmount from '@/components/TransactionAmount';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
-import {MEASURABLE_REWARD_POINT, USD} from '@/constants/currency';
+import {REWARD_DOLLAR, USD} from '@/constants/currency';
 
 import SafeAreaView from 'react-native-safe-area-view';
 
@@ -34,7 +34,7 @@ import {
 
 const MrpDetailScreen = ({navigation}) => {
   const theme = useTheme();
-  const currencyCode = MEASURABLE_REWARD_POINT;
+  const currencyCode = REWARD_DOLLAR;
 
   const {data, loading} = useQueryWithAuth(TRANSACTIONS_QUERY, {
     fetchPolicy: 'network-only',
@@ -51,10 +51,7 @@ const MrpDetailScreen = ({navigation}) => {
     <ScrollView>
       <SafeAreaView style={container(theme)}>
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
-          <FormattedMessage
-            id="currencies.reward_dollar"
-            defaultMessage="Reward Dollar"
-          />{' '}
+          <FormattedMessage id="currencies.rd" defaultMessage="Reward Dollar" />{' '}
           <FormattedMessage id="total_balance" defaultMessage="total balance" />
         </AppText>
         {loading ? (

@@ -9,7 +9,7 @@ import AppButton from '@/components/AppButton';
 import TransactionAmount from '@/components/TransactionAmount';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
-import {USD, MM} from '@/constants/currency';
+import {USD, ME} from '@/constants/currency';
 
 import SafeAreaView from 'react-native-safe-area-view';
 
@@ -51,7 +51,7 @@ const NewTokenDetailScreen = ({navigation}) => {
     <ScrollView>
       <SafeAreaView style={container(theme)}>
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
-          <FormattedMessage id="currencies.mm" defaultMessage="MM" />{' '}
+          <FormattedMessage id="currencies.me" defaultMessage="ME" />{' '}
           <FormattedMessage id="total_balance" defaultMessage="total balance" />
         </AppText>
         {loading ? (
@@ -62,7 +62,7 @@ const NewTokenDetailScreen = ({navigation}) => {
               amount={newTokenAmount}
               amountSizeVariant="largeProportional"
               amountColor={theme.colors.textOnThemeBackground.highEmphasis}
-              unitVariant={MM}
+              unitVariant={ME}
               unitColor={theme.colors.textOnThemeBackground.highEmphasis}
               style={totalBalanceText}
             />

@@ -12,7 +12,7 @@ import {GET_USER_REFERRAL_STATUS} from '@/api/data';
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 import {CLAIM_REWARD_API} from '@/api/data';
-import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
+import {REWARD_DOLLAR} from '@/constants/currency';
 import RewardGotPopup from '@/components/RewardGotPopup';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
@@ -67,7 +67,7 @@ const Item = ({
             <TransactionAmount
               amount={value}
               amountColor={theme.colors.textOnBackground.disabled}
-              unitVariant={MEASURABLE_REWARD_POINT}
+              unitVariant={REWARD_DOLLAR}
               unitSizeVariant="small"
               unitColor={theme.colors.secondary.normal}
             />
@@ -94,7 +94,7 @@ const Item = ({
             <TransactionAmount
               amount={value}
               amountColor={theme.colors.textOnBackground.disabled}
-              unitVariant={MEASURABLE_REWARD_POINT}
+              unitVariant={REWARD_DOLLAR}
               unitSizeVariant="small"
               unitColor={theme.colors.secondary.normal}
               style={marginRight}

@@ -9,7 +9,7 @@ import React, {
 import {VirtualizedList, TouchableOpacity, Image, View} from 'react-native';
 import {useTheme} from 'emotion-theming';
 import {FormattedNumber} from 'react-intl';
-import {MM} from '@/constants/currency';
+import {ME} from '@/constants/currency';
 import {GET_MERCHANTS_API} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -107,7 +107,7 @@ const CashBackSummaryScreen = ({navigation, route}) => {
 
   const {data: fetchedCashBackData} = useSWRInfinite(getKey, fetcher);
 
-  const currencyCode = MM;
+  const currencyCode = ME;
 
   // TODO: handle pagination
 

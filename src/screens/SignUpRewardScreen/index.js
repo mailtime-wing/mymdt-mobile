@@ -7,7 +7,7 @@ import LinearGradientBackground from '@/components/LinearGradientBackground';
 import MDTGiftBox from '@/components/MDTGiftBox';
 import AppButton from '@/components/AppButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
-import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
+import {REWARD_DOLLAR} from '@/constants/currency';
 
 import {
   Container,
@@ -114,7 +114,7 @@ const GiftBoxReady = ({setIsOpened}) => {
 const GiftBoxOpened = ({rewardAmount}) => {
   const {cashBackType} = useContext(AuthContext);
   const coinIconSource =
-    cashBackType === MEASURABLE_REWARD_POINT
+    cashBackType === REWARD_DOLLAR
       ? require('@/assets/coin.png')
       : require('@/assets/mdt_coin.png');
 

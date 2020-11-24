@@ -6,7 +6,7 @@ import {useTheme} from 'emotion-theming';
 import AppText from '@/components/AppText2';
 import TransactionAmount from '@/components/TransactionAmount';
 
-import {USD, MEASURABLE_DATA_TOKEN, MM} from '@/constants/currency';
+import {USD, MEASURABLE_DATA_TOKEN, ME} from '@/constants/currency';
 
 import convertToUsdAmount from '@/utils/convertToUsdAmount';
 
@@ -94,7 +94,7 @@ const MdtStake = ({
             amount={accuredRewardAmount}
             amountSizeVariant="normal"
             unitSizeVariant="small"
-            unitVariant={MM}
+            unitVariant={ME}
             unitColor={theme.colors.secondary.dark}
             amountColor={theme.colors.textOnBackground.mediumEmphasis}
           />
@@ -110,7 +110,7 @@ const MdtStake = ({
             amount={cumulativeRewardAmount}
             amountSizeVariant="normal"
             unitSizeVariant="small"
-            unitVariant={MM}
+            unitVariant={ME}
             unitColor={theme.colors.secondary.dark}
             amountColor={theme.colors.textOnBackground.mediumEmphasis}
           />

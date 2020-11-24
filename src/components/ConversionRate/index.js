@@ -6,16 +6,13 @@ import MDTCoin from '@/components/MDTCoin';
 import MRPCoin from '@/components/MRPCoin';
 import AppText from '@/components/AppText2';
 
-import {
-  MEASURABLE_REWARD_POINT,
-  MEASURABLE_DATA_TOKEN,
-} from '@/constants/currency';
+import {REWARD_DOLLAR, MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 
 import {almostEqualSymbol, container} from './style';
 
 const TransactionCoin = ({type, amount}) => {
   const theme = useTheme();
-  if (type === MEASURABLE_REWARD_POINT) {
+  if (type === REWARD_DOLLAR) {
     return (
       <MRPCoin
         amount={amount}
