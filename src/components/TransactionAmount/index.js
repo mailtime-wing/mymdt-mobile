@@ -15,7 +15,7 @@ import {useTheme} from 'emotion-theming';
 
 /**
  * @typedef {Object} Props
- * @property {MEASURABLE_DATA_TOKEN|MEASURABLE_REWARD_POINT|MM} unitVariant
+ * @property {MEASURABLE_DATA_TOKEN|MEASURABLE_REWARD_POINT|MM|USD} unitVariant
  * @property {'from'|'to'} variant
  * @property {'small'|'normal'} unitSizeVariant
  * @property {'small'|'normal'|'large'|'largeProportional'} amountSizeVariant

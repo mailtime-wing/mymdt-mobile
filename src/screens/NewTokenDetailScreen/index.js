@@ -9,7 +9,7 @@ import AppButton from '@/components/AppButton';
 import TransactionAmount from '@/components/TransactionAmount';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
-import {USD} from '@/constants/currency';
+import {USD, MM} from '@/constants/currency';
 
 import SafeAreaView from 'react-native-safe-area-view';
 
@@ -62,7 +62,7 @@ const NewTokenDetailScreen = ({navigation}) => {
               amount={newTokenAmount}
               amountSizeVariant="largeProportional"
               amountColor={theme.colors.textOnThemeBackground.highEmphasis}
-              unitVariant="MM"
+              unitVariant={MM}
               unitColor={theme.colors.textOnThemeBackground.highEmphasis}
               style={totalBalanceText}
             />

@@ -6,7 +6,7 @@ import {useTheme} from 'emotion-theming';
 import AppText from '@/components/AppText2';
 import TransactionAmount from '@/components/TransactionAmount';
 
-import {USD} from '@/constants/currency';
+import {USD, MM} from '@/constants/currency';
 
 import convertToUsdAmount from '@/utils/convertToUsdAmount';
 
@@ -31,7 +31,7 @@ const NextStakeReward = ({style}) => {
         amount={nextStakeAmount}
         amountSizeVariant="largeProportional"
         amountColor={theme.colors.textOnBackground.mediumEmphasis}
-        unitVariant="MM"
+        unitVariant={MM}
         unitColor={theme.colors.secondary.dark}
         style={center}
       />
