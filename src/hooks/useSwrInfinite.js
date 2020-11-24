@@ -5,8 +5,6 @@ import {useQuery} from '@apollo/client';
 const url = 'https://distribute-alpha.reward.me/cashback/histories';
 
 const getKey = (pageIndex, previousPageData) => {
-  console.log('pageIndex', pageIndex);
-  console.log('previousPageData', previousPageData);
   // reached the end
   if (previousPageData && !previousPageData.data) {
     return null;
@@ -26,13 +24,9 @@ export default function useSwrInfinite() {
       headers: {
         Authorization: `Bearer ${authData.accessToken}`,
       },
-      // body: JSON.stringify(bodyData),
     }).then((res) => res.json());
 
-  const {data, size, setSize} = useSWRInfinite(getKey, fetcher);
-  console.log('data', data);
-  console.log('size', size);
-  console.log('setSize', setSize);
+  const {data} = useSWRInfinite(getKey, fetcher);
   const {data: authData} = useQuery(AUTH_TOKENS);
 
   return {
