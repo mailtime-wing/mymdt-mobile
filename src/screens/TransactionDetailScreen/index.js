@@ -11,6 +11,8 @@ import FormattedTransactionDate from '@/components/FormattedTransactionDate';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import BrandIcon from '@/components/BrandIcon';
 import {GET_MERCHANTS_API} from '@/api/data';
+import {FormattedMessage} from 'react-intl';
+import {MM} from '@/constants/currency';
 
 import {
   section,
@@ -33,7 +35,10 @@ const RenderTransationDetail = ({transactionItem}) => {
       return (
         <View style={itemContainer}>
           <AppText variant="body1" style={titleStyle(theme)}>
-            Check-in Reward
+            <FormattedMessage
+              id="check_in_reward"
+              defaultMessage="Check-in Reward"
+            />
           </AppText>
           <AppText variant="body2" style={detail(theme)}>
             {transactionItem.amount}
@@ -45,7 +50,7 @@ const RenderTransationDetail = ({transactionItem}) => {
         <>
           <View style={itemContainer}>
             <AppText variant="body1" style={titleStyle(theme)}>
-              Reward Name
+              <FormattedMessage id="reward_name" defaultMessage="Reward Name" />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
               {title}
@@ -53,7 +58,7 @@ const RenderTransationDetail = ({transactionItem}) => {
           </View>
           <View style={itemContainer}>
             <AppText variant="body1" style={titleStyle(theme)}>
-              Redeem Time
+              <FormattedMessage id="redeem_time" defaultMessage="Redeem Time" />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
               <FormattedTransactionDate value={transactionTime} />
@@ -69,7 +74,10 @@ const RenderTransationDetail = ({transactionItem}) => {
         <>
           <View style={itemContainer}>
             <AppText variant="body1" style={titleStyle(theme)}>
-              Conversion Rate
+              <FormattedMessage
+                id="conversion_rate"
+                defaultMessage="Conversion Rate"
+              />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
               <ConversionRate
@@ -81,101 +89,114 @@ const RenderTransationDetail = ({transactionItem}) => {
           </View>
           <View style={itemContainer}>
             <AppText variant="body1" style={titleStyle(theme)}>
-              Conversion Time
-            </AppText>
-            <AppText variant="body2" style={detail(theme)}>
-              <FormattedTransactionDate value={transactionTime} />
-            </AppText>
-          </View>
-        </>
-      );
-    case TransactitonType.CASH_BACK:
-      return (
-        <>
-          <View style={itemContainer}>
-            <AppText variant="body1" style={titleStyle(theme)}>
-              Recipient
-            </AppText>
-            <AppText variant="body2" style={detail(theme)}>
-              foobar@gmail.com
-            </AppText>
-          </View>
-          <View style={itemContainer}>
-            <AppText variant="body1" style={titleStyle(theme)}>
-              Email Title
-            </AppText>
-            <AppText variant="body2" style={detail(theme)}>
-              Saturday Night Uber Trip
-            </AppText>
-          </View>
-          <View style={itemContainer}>
-            <AppText variant="body1" style={titleStyle(theme)}>
-              Sender
-            </AppText>
-            <AppText variant="body2" style={detail(theme)}>
-              uber.hongkong@uber.com
-            </AppText>
-          </View>
-          <View style={itemContainer}>
-            <AppText variant="body1" style={titleStyle(theme)}>
-              Recipient
-            </AppText>
-            <AppText variant="body2" style={detail(theme)}>
-              foobar@gmail.com
-            </AppText>
-          </View>
-          <View style={itemContainer}>
-            <AppText variant="body1" style={titleStyle(theme)}>
-              Receive Time
-            </AppText>
-            <AppText variant="body2" style={detail(theme)}>
-              <FormattedTransactionDate value={transactionTime} />
-            </AppText>
-          </View>
-          <View style={itemContainer}>
-            <AppText variant="body1" style={titleStyle(theme)}>
-              Cash Back Earned
-            </AppText>
-            <AppText variant="body2" style={detail(theme)}>
-              <TransactionAmount
-                variant="to"
-                unitSizeVariant="small"
-                unitVariant="MM"
-                amount={123}
+              <FormattedMessage
+                id="conversion_time"
+                defaultMessage="Conversion Time"
               />
             </AppText>
-          </View>
-          <View style={itemContainer}>
-            <AppText variant="body1" style={titleStyle(theme)}>
-              Cash Back Rate
-            </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              2%
+              <FormattedTransactionDate value={transactionTime} />
             </AppText>
           </View>
         </>
       );
     case TransactitonType.MAI:
-      // TODO: confirm detail with designer
       return (
         <>
           <View style={itemContainer}>
             <AppText variant="body1" style={titleStyle(theme)}>
-              Recipient
+              <FormattedMessage id="recipient" defaultMessage="Recipient" />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
               {transactionItem.data.email}
             </AppText>
           </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              <FormattedMessage id="email_title" defaultMessage="Email Title" />
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              {transactionItem.data.emailSubject}
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              <FormattedMessage id="sender" defaultMessage="Sender" />
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              {transactionItem.data.senderEmail}
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              <FormattedMessage
+                id="receive_time"
+                defaultMessage="Receive Time"
+              />
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              <FormattedTransactionDate
+                value={transactionItem.data.receiveTime}
+              />
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              <FormattedMessage id="amount" defaultMessage="Amount" />
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              <FormattedMessage id="currencies.usd" defaultMessage="USD" />{' '}
+              {transactionItem.data.amount}
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              <FormattedMessage
+                id="cashback_rate"
+                defaultMessage="Cash Back Rate"
+              />
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              {transactionItem.cashbackRate}%
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              <FormattedMessage
+                id="cashback_earned"
+                defaultMessage="Cash Back Earned"
+              />
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              <TransactionAmount
+                amount={transactionItem.amount}
+                unitVariant={MM}
+                unitSizeVariant="small"
+                amountSizeVariant="normal"
+                unitColor={theme.colors.primary.normal}
+                amountColor={theme.colors.primary.normal}
+              />
+            </AppText>
+          </View>
         </>
       );
     case TransactitonType.BANK:
-      // TODO: confirm detail with designer
       return (
         <>
           <View style={itemContainer}>
             <AppText variant="body1" style={titleStyle(theme)}>
-              Bank
+              <FormattedMessage
+                id="credit_card_number"
+                defaultMessage="Credit Card Number"
+              />
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              •••• {transactionItem.data.mask}
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              <FormattedMessage id="bank" defaultMessage="Bank" />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
               {transactionItem.data.subType}
@@ -183,10 +204,40 @@ const RenderTransationDetail = ({transactionItem}) => {
           </View>
           <View style={itemContainer}>
             <AppText variant="body1" style={titleStyle(theme)}>
-              Card
+              <FormattedMessage id="amount" defaultMessage="Amount" />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              {transactionItem.data.mask}
+              <FormattedMessage id="currencies.usd" defaultMessage="USD" />{' '}
+              {transactionItem.data.amount}
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              <FormattedMessage
+                id="cashback_rate"
+                defaultMessage="Cash Back Rate"
+              />
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              {transactionItem.cashbackRate}%
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              <FormattedMessage
+                id="cashback_earned"
+                defaultMessage="Cash Back Earned"
+              />
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              <TransactionAmount
+                amount={transactionItem.amount}
+                unitVariant={MM}
+                unitSizeVariant="small"
+                amountSizeVariant="normal"
+                unitColor={theme.colors.primary.normal}
+                amountColor={theme.colors.primary.normal}
+              />
             </AppText>
           </View>
         </>
