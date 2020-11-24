@@ -9,9 +9,7 @@
   "light": "Light",
   "system_default": "System default",
   "welcome_to_reward_me": "WELCOME to RewardMe",
-  "enter_verification_code": "Enter your verification code",
-
-  "valid_until": "Valid until {date}",
+  "enter_verification_code": "Enter your verification code","valid_until": "Valid until {date}",
   "cashback_type": "Cashback type",
   "referral": "Referral",
   "membership_program": "Membership program",
@@ -25,9 +23,7 @@
   "privileges": "Privileges",
   "requirements": "Requirements",
   "special_offers_from_brands": "Special offers from {number_of_brands} brands",
-  "additional_percentage_cashback": "Additional {percentage} cashback",
-
-  "browse": "Browse",
+  "additional_percentage_cashback": "Additional {percentage} cashback","browse": "Browse",
   "browse_details": "Promtions / Referrals / Share",
   "bonus": "Bonus",
   "check_in_task": "Daily check-in",
@@ -40,9 +36,7 @@
   "reward_type_check_in": "check-in reward",
   "reward_type_bonus_task": "bonus task reward",
   "reward_type_referral": "referral reward",
-  "converted_from": "Converted from",
-
-  "wallet": "Wallet",
+  "converted_from": "Converted from","wallet": "Wallet",
   "converter": "Converter",
   "conversion_rate": "Conversion Rate",
   "converter_detail": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, ut odio nulla posuere turpis mauris purus.",
@@ -71,16 +65,12 @@
   "onboarding02_title": "The more you shop,\nthe more you earn",
   "onboarding02_detail": "Get rewarded for your online purchases automatically.",
   "onboarding03_title": "A new way to get cash back",
-  "onboarding03_detail": "Gift cards, cash, or crypto, it’s your call.",
-
-  "membership_level_0": "Newbie",
+  "onboarding03_detail": "Gift cards, cash, or crypto, it’s your call.","membership_level_0": "Newbie",
   "membership_level_1": "Starter",
   "membership_level_2": "Extra",
   "membership_level_3": "Elite",
   "membership_level_4": "Infinite",
-  "membership_level_5": "Infinite Privilege",
-
-  "merchants_selected": "{numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED",
+  "membership_level_5": "Infinite Privilege","merchants_selected": "{numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED",
   "more_merchants_selected": "MORE THAN {numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED",
   "total_balance": "Total Balance",
   "offers_preference_edit": "Brands Preference",
@@ -109,9 +99,7 @@
   "account_security": "Account Security",
   "welcome": "Welcome!",
   "welcome_detail": "RewardMe is a cashback app that let you earn points after online/offline shopping, in-app purchase or subscribe to online services.",
-  "notification": "Notification",
-
-  "join_rewardme": "JOIN REWARDME",
+  "notification": "Notification","join_rewardme": "JOIN REWARDME",
   "special_offer": "Special offers",
   "select_offer_details": "We also provide a special offer for everyone. You can choose your favorite or frequently spend brands. The cashback rate depends on your membership level.",
   "confirm_select_offer_details": "Once you shop in these {number_of_merchants} brands, you will earn cash back.",
@@ -146,9 +134,7 @@
   "turn_on_notifications_to_learn": "Turn on notifications to receive news about new rewards, latest promotional events and limited offers.",
   "account_setup_done": "Your account has been set up",
   "change_cashback_perference_later": "RewardMe provides 2 types of cashback. You can change the perference afterwards.",
-  "choose_cash_back_type": "Choose your cashback type",
-
-  "pin": "PIN",
+  "choose_cash_back_type": "Choose your cashback type","pin": "PIN",
   "face_id_or_touch_id": "Face ID/Tounch ID",
   "forget_pin": "Forget PIN",
   "forget_pin_detail": "We have to verify your identity before resetting your PIN. We’ll send you a verification code to your phone number via text message.",
@@ -185,13 +171,9 @@
   "your_choices": "Preference",
   "get_reward_from_brands": "Choose your favorite brands with the special cashback rate.",
   "edited_preference_recently": "It seems you’ve edited the preference recently.",
-  "edited_in_30_days": "You have edited the preference in recent 30 days. You can edit the preference after {date}.",
-
-  "you_got": "You got",
+  "edited_in_30_days": "You have edited the preference in recent 30 days. You can edit the preference after {date}.","you_got": "You got",
   "got_sign_up_reward": "You got a sign-up reward",
-  "tap_to_open": "Tap to open",
-
-  "linkedBankAccounts": "Linked Bank Accounts",
+  "tap_to_open": "Tap to open","linkedBankAccounts": "Linked Bank Accounts",
   "itMayTakeSomeTimeToAnalyze": "It may take some time to analyze your shopping e-receipts. We will notify you once it’s done.",
   "unknownCardType": "Unknown card type",
   "selectCardTypeFor": "Select the card type for •••• {mask}",
@@ -213,9 +195,7 @@
   "referralOgTitle": "RewardMe",
   "referralOgDescription": "Earn cashback as you spend with RewardMe!",
   "joinRewardMe": "Join RewardMe!",
-  "joinRewardMeWithThisLink": "Join RewardMe with this link and earn reward immediately!",
-
-  "earned_in_past_7_days": "Earned {amount} in past 7 days",
+  "joinRewardMeWithThisLink": "Join RewardMe with this link and earn reward immediately!","earned_in_past_7_days": "Earned {amount} in past 7 days",
   "earned_in_total": "Earned {amount} in total",
   "you_will_enjoy_pa_percentage": "You will enjoy {pa_percentage} in MDT Stake Rewards. It will be credited in MM to your wallet every 7 days.",
   "per_annum": "p.a.",
@@ -247,18 +227,13 @@
   "view_more": "View more",
   "add_email": "Add Email",
   "add_card": "Add Card",
-  "selected_merchants": "Selected Merchants",
-
-  "confirm_upgrade": "Confirm Upgrade",
-  "confirm_upgrade_to_next_level": "Are you sure to upgrade your membership to {next_level} level?",
-
-  "currencies": {
+  "selected_merchants": "Selected Merchants","confirm_upgrade": "Confirm Upgrade",
+  "confirm_upgrade_to_next_level": "Are you sure to upgrade your membership to {next_level} level?","currencies": {
     "reward_dollar": "Reward Dollar",
     "mdt": "MDT",
     "mm": "MM",
     "usd": "USD"
   },
-
   "button": {
     "done": "Done",
     "edit": "Edit",
@@ -297,7 +272,6 @@
     "verify": "Verify",
     "more": "More"
   },
-
   "error": {
     "required": "Required",
     "invalid_otp": "OTP is a 6 digit number",
