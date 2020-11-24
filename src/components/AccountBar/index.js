@@ -49,7 +49,7 @@ const AccountBar = ({navigation, showCoins}) => {
               amount={
                 currencyData?.userProfile?.currencyAccounts.find(
                   (ca) => ca.currencyCode === MEASURABLE_REWARD_POINT,
-                ).balance || 0
+                )?.balance || 0
               }
               size={18}
               fontSize={16}
@@ -61,7 +61,7 @@ const AccountBar = ({navigation, showCoins}) => {
               amount={
                 currencyData?.userProfile?.currencyAccounts.find(
                   (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
-                ).balance || 0
+                )?.balance || 0
               }
               size={18}
               fontSize={16}

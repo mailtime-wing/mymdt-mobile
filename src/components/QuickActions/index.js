@@ -26,8 +26,8 @@ const QuickActions = ({actionList, style}) => {
         <FormattedMessage id="quick_actions" defaultMessage="Quick Actions" />
       </AppText>
       <View style={actionsContainer}>
-        {actionList.map(({name, icon, action}) => (
-          <TouchableOpacity key={name} style={shortcut} onPress={action}>
+        {actionList.map(({name, icon, action}, index) => (
+          <TouchableOpacity key={index} style={shortcut} onPress={action}>
             <AppIcon
               color={theme.colors.secondary.normal}
               sizeVariant="normal"

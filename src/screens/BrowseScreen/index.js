@@ -34,9 +34,11 @@ const url = 'https://distribute-alpha.reward.me/cashback/summary?period=7';
 const BrowseScreen = ({navigation}) => {
   const theme = useTheme();
   const {data, loading} = useQueryWithAuth(GET_CHECK_USER_CAN_UPGRADE_DATA);
-  const {data: merchantsData, loading: merchantsLoading} = useQueryWithAuth(
-    GET_MERCHANTS_API,
-  );
+  const {
+    data: merchantsData,
+    loading: merchantsLoading,
+    error: merchantsError,
+  } = useQueryWithAuth(GET_MERCHANTS_API);
 
   const referFriendCount =
     data?.userProfile?.referrals.filter(
@@ -56,14 +58,24 @@ const BrowseScreen = ({navigation}) => {
   );
 
   const {data: authData} = useQuery(AUTH_TOKENS);
-  const fetcher = (...args) =>
-    fetch(...args, {
+  const fetcher = async (...args) => {
+    const res = await fetch(...args, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${authData.accessToken}`,
       },
-    }).then((res) => res.json());
-  const {data: fetchedData} = useSWR(url, fetcher);
+    });
+
+    if (!res.ok) {
+      const error = new Error('An error occurred while fetching the data.');
+      throw error;
+    }
+
+    return res.json();
+  };
+
+  const {data: summaryData, error: summaryError} = useSWR(url, fetcher);
+  const isSummaryLoading = !summaryData && !summaryError;
   // TODO: handle error
 
   const quickActionList = [
@@ -131,10 +143,12 @@ const BrowseScreen = ({navigation}) => {
   };
 
   const handleCashBackSummaryPress = () => {
-    navigation.navigate('cash_back_summary', {
-      cashBackTotal: fetchedData.data.total_cashback || 0,
-      cashBackTotalInPeriod: fetchedData.data.total_cashback_in_period || 0,
-    });
+    if (summaryData) {
+      navigation.navigate('cash_back_summary', {
+        cashBackTotal: summaryData.data.total_cashback || 0,
+        cashBackTotalInPeriod: summaryData.data.total_cashback_in_period || 0,
+      });
+    }
   };
 
   const handleViewMorePress = () => {
@@ -161,15 +175,15 @@ const BrowseScreen = ({navigation}) => {
           currentStakeAmount={currentStakeAmount}
         />
         <QuickActions style={sectionMargin} actionList={quickActionList} />
-        {merchantsLoading ? (
+        {merchantsLoading || isSummaryLoading ? (
           <LoadingSpinner />
-        ) : (
+        ) : merchantsError || summaryError ? null : (
           <CashBackSummarySection
             navigation={navigation}
             onPress={handleCashBackSummaryPress}
             style={sectionMargin}
             merchantsData={merchantsData?.merchants}
-            summaryData={fetchedData}
+            summaryData={summaryData}
           />
         )}
         <MembershipInfoCard
