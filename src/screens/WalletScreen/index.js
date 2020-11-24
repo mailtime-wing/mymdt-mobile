@@ -15,6 +15,7 @@ import ConvertIcon from '@/assets/convert_icon.svg';
 import WithdrawalIcon from '@/assets/icon_upload.svg';
 import StakeMdtIcon from '@/assets/icon_download.svg';
 // import MyMdtIcon from '@/assets/mymdt_icon.svg';
+import {FormattedMessage} from 'react-intl';
 
 import {
   MEASURABLE_REWARD_POINT,
@@ -40,7 +41,7 @@ import {
   lastCurrencyRow,
   arrow,
   spinner,
-  payout,
+  // payout,
   sectionMargin,
 } from './style';
 
@@ -61,6 +62,7 @@ const WalletScreen = ({navigation}) => {
     data?.userProfile?.currencyAccounts.find((ca) => ca.currencyCode === 'USDT')
       ?.balance || 0;
   const totalBalance = mdtAmount + ntAmount;
+  // const earnedMM = 40; // TODO: get from api
 
   const quickActionList = [
     {
@@ -105,7 +107,7 @@ const WalletScreen = ({navigation}) => {
     <ScrollView>
       <SafeAreaView style={container(theme)}>
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
-          total balance
+          <FormattedMessage id="total_balance" defaultMessage="total balance" />
         </AppText>
         {loading ? (
           <LoadingSpinner color={theme.colors.background1} />
@@ -122,7 +124,10 @@ const WalletScreen = ({navigation}) => {
       </SafeAreaView>
       <TouchableOpacity style={currencyRow(theme)} onPress={handleMrpPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
-          RewardPoint
+          <FormattedMessage
+            id="currencies.reward_dollar"
+            defaultMessage="Reward Dollar"
+          />
         </AppText>
         {loading ? (
           <LoadingSpinner style={spinner} />
@@ -157,7 +162,7 @@ const WalletScreen = ({navigation}) => {
       </TouchableOpacity>
       <TouchableOpacity style={currencyRow(theme)} onPress={handleMdtPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
-          MDT
+          <FormattedMessage id="currencies.mdt" defaultMessage="MDT" />
         </AppText>
         {loading ? (
           <LoadingSpinner style={spinner} />
@@ -183,9 +188,19 @@ const WalletScreen = ({navigation}) => {
               amountColor={theme.colors.textOnBackground.mediumEmphasis}
               style={amount}
             />
-            <AppText variant="digit12mono" style={payout(theme)}>
-              Earned 100,000NT (Payout in 4 days)
-            </AppText>
+            {/* <AppText variant="digit12mono" style={payout(theme)}>
+              <FormattedMessage
+                id="earned_amount_and_payout_in_days"
+                defaultMessage="Earned {amount}{currency} (Payout in {day} days)"
+                values={{
+                  amount: earnedMM,
+                  currency: (
+                    <FormattedMessage id="currencies.mm" defaultMessage="MM" />
+                  ),
+                  day: 7,
+                }}
+              />
+            </AppText> */}
           </View>
         )}
         <ArrowIcon
@@ -197,7 +212,7 @@ const WalletScreen = ({navigation}) => {
         style={[currencyRow(theme), lastCurrencyRow]}
         onPress={handleNewTokenPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
-          MM
+          <FormattedMessage id="currencies.mm" defaultMessage="MM" />
         </AppText>
         {loading ? (
           <LoadingSpinner style={spinner} />

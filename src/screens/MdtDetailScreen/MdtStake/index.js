@@ -21,6 +21,7 @@ import {
   rowContainer,
   payout,
 } from './style';
+import {FormattedMessage} from 'react-intl';
 
 // TODO: add tag payout when related commit merged
 // TODO: add recent transaction when related commit merged
@@ -37,7 +38,7 @@ const MdtStake = ({
   return (
     <View style={[container(theme), style]}>
       <AppText variant="heading6" style={header(theme)}>
-        MDT Stake
+        <FormattedMessage id="mdt_stake" defaultMessage="MDT Stake" />
       </AppText>
       <TransactionAmount
         amount={mdtStakeAmount}
@@ -61,7 +62,10 @@ const MdtStake = ({
       <View style={summary(theme)}>
         <View style={rowContainer}>
           <AppText variant="subTitle3" style={summaryHeader(theme)}>
-            Annual Percentage Yield
+            <FormattedMessage
+              id="annual_percentage_yield"
+              defaultMessage="Annual Percentage Yield"
+            />
           </AppText>
           <AppText variant="body2" style={percentageStyle(theme)}>
             {paPercentage}%
@@ -70,12 +74,19 @@ const MdtStake = ({
         <View style={rowContainer}>
           <View>
             <AppText variant="subTitle3" style={summaryHeader(theme)}>
-              Accured Reward
+              <FormattedMessage
+                id="accured_reward"
+                defaultMessage="Accured Reward"
+              />
             </AppText>
             {
               // TODO: change to smallText when related commit merge
               <AppText variant="subTitle3" style={payout(theme)}>
-                Payout in 6 days
+                <FormattedMessage
+                  id="payout_in_days"
+                  defaultMessage="Payout in {day} days"
+                  values={{day: 6}}
+                />
               </AppText>
             }
           </View>
@@ -90,7 +101,10 @@ const MdtStake = ({
         </View>
         <View style={rowContainer}>
           <AppText variant="subTitle3" style={summaryHeader(theme)}>
-            Cumulative Reward
+            <FormattedMessage
+              id="cumulative_reward"
+              defaultMessage="Cumulative Reward"
+            />
           </AppText>
           <TransactionAmount
             amount={cumulativeRewardAmount}
@@ -105,7 +119,7 @@ const MdtStake = ({
       <View style={diviver(theme)} />
 
       <AppText variant="heading6" style={header(theme)}>
-        Available
+        <FormattedMessage id="available" defaultMessage="Available" />
       </AppText>
       <TransactionAmount
         amount={availableMdt}

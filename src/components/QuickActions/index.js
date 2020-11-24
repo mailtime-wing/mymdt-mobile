@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {useTheme} from 'emotion-theming';
+import {FormattedMessage} from 'react-intl';
 
 import {
   sectionContainer,
@@ -22,7 +23,7 @@ const QuickActions = ({actionList, style}) => {
       colors={theme.colors.linearGradientBackground.contrast}
       style={[sectionContainer, style]}>
       <AppText variant="heading6" style={quickActions(theme)}>
-        Quick Actions
+        <FormattedMessage id="quick_actions" defaultMessage="Quick Actions" />
       </AppText>
       <View style={actionsContainer}>
         {actionList.map(({name, icon, action}) => (

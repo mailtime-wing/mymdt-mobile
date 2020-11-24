@@ -20,6 +20,7 @@ import convertToUsdAmount from '@/utils/convertToUsdAmount';
 
 import MdtStake from './MdtStake';
 import MdtTransactionHistory from './MdtTransactionHistory';
+import {FormattedMessage} from 'react-intl';
 
 import {
   container,
@@ -54,7 +55,8 @@ const MdtDetailScreen = ({navigation}) => {
     <ScrollView>
       <SafeAreaView style={container(theme)}>
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
-          mdt total balance
+          <FormattedMessage id="currencies.mdt" defaultMessage="MDT" />{' '}
+          <FormattedMessage id="total_balance" defaultMessage="total balance" />
         </AppText>
         {loading ? (
           <LoadingSpinner color={theme.colors.background1} />

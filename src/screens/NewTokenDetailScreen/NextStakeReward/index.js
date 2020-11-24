@@ -11,6 +11,7 @@ import {USD} from '@/constants/currency';
 import convertToUsdAmount from '@/utils/convertToUsdAmount';
 
 import {container, header, center} from './style';
+import {FormattedMessage} from 'react-intl';
 
 // TODO: add tag payout when related commit merged
 // TODO: add recent transaction when related commit merged
@@ -21,7 +22,10 @@ const NextStakeReward = ({style}) => {
   return (
     <View style={[container(theme), style]}>
       <AppText variant="heading6" style={header(theme)}>
-        Next Stake Reward
+        <FormattedMessage
+          id="next_stake_reward"
+          defaultMessage="Next Stake Reward"
+        />
       </AppText>
       <TransactionAmount
         amount={nextStakeAmount}

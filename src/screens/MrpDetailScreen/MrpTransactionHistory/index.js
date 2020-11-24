@@ -82,7 +82,10 @@ const MrpTransactionHistory = ({navigation, currencyCode, style}) => {
         headerComponent={
           <View style={historyHeaderContainer(theme)}>
             <AppText variant="heading5" style={cashBackTitle(theme)}>
-              Recent Transactions
+              <FormattedMessage
+                id="recent_transactions"
+                defaultMessage="Recent Transactions"
+              />
             </AppText>
             <AppButton
               variant="transparent"

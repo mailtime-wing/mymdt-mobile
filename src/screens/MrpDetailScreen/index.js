@@ -19,6 +19,7 @@ import DepositIcon from '@/assets/icon_download.svg';
 import convertToUsdAmount from '@/utils/convertToUsdAmount';
 
 import MrpTransactionHistory from './MrpTransactionHistory';
+import {FormattedMessage} from 'react-intl';
 
 import {
   container,
@@ -50,7 +51,11 @@ const MrpDetailScreen = ({navigation}) => {
     <ScrollView>
       <SafeAreaView style={container(theme)}>
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
-          Reward point balance
+          <FormattedMessage
+            id="currencies.reward_dollar"
+            defaultMessage="Reward Dollar"
+          />{' '}
+          <FormattedMessage id="total_balance" defaultMessage="total balance" />
         </AppText>
         {loading ? (
           <LoadingSpinner color={theme.colors.background1} />
