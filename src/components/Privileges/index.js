@@ -28,7 +28,13 @@ const Privileges = ({
             variant="body2"
             style={highEmphasis(theme)}
             numberOfLines={2}>
-            {cashbackPercentage}% Cash Back
+            <FormattedMessage
+              id="cashback_percentage"
+              defaultMessage="{percentage}% Cash Back"
+              values={{
+                percentage: cashbackPercentage,
+              }}
+            />
           </AppText>
         </View>
       )}
@@ -39,7 +45,13 @@ const Privileges = ({
             variant="body2"
             style={highEmphasis(theme)}
             numberOfLines={2}>
-            Cash Back From {merchantsNumAllowed} Merchants
+            <FormattedMessage
+              id="cashback_from_number_of_merchants"
+              defaultMessage="Cash Back From {number} Merchants"
+              values={{
+                number: merchantsNumAllowed,
+              }}
+            />
           </AppText>
         </View>
       )}
@@ -50,7 +62,13 @@ const Privileges = ({
             variant="body2"
             style={highEmphasis(theme)}
             numberOfLines={2}>
-            {stakingInterestRate}% p.a. MDT Stake Rewards Return in New Token*
+            <FormattedMessage
+              id="staking_interest_rate_percentage_return_in_new_token"
+              defaultMessage="{percentage}% p.a. MDT Stake Rewards Return in New Token*"
+              values={{
+                percentage: stakingInterestRate,
+              }}
+            />
           </AppText>
         </View>
       )}

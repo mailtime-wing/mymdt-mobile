@@ -145,7 +145,10 @@ const UserProfileScreen = () => {
               <FormattedMessage id="we_hope_to_provide" />
             </AppText>
             <AppText variant="body2" style={requiredText(theme)}>
-              * means required
+              <FormattedMessage
+                id="star_means_required"
+                defaultMessage="* means required"
+              />
             </AppText>
             <Formik
               initialValues={{

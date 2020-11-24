@@ -26,11 +26,16 @@ const IntroductionScreen = () => {
       <Container>
         <BackgroundImage source={require('@/assets/introduce_1.png')} />
         <AppText variant="heading3" style={titleStyle(theme)}>
-          Select which way to retrieve your shopping records
+          <FormattedMessage
+            id="select_way_to_retrieve_your_shopping_records"
+            defaultMessage="Select which way to retrieve your shopping records"
+          />
         </AppText>
         <AppText variant="body1" style={detailStyle(theme)}>
-          RewardMe needs your shopping transaction records in order to give your
-          cash back.
+          <FormattedMessage
+            id="reward_me_needs_your_transaction_records"
+            defaultMessage="RewardMe needs your shopping transaction records in order to give your cash back."
+          />
         </AppText>
         <BindingButton
           icon={<BindingEmailIcon />}

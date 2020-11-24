@@ -22,6 +22,7 @@ import {
   rowContainer,
   exchangesImage,
 } from './style';
+import {FormattedMessage} from 'react-intl';
 
 const ReferralLink = ({url}) => {
   const theme = useTheme();
@@ -33,7 +34,7 @@ const ReferralLink = ({url}) => {
         color={theme.colors.textOnBackground.disabled}
       />
       <AppText variant="caption" style={referralLink(theme)}>
-        Referral link
+        <FormattedMessage id="referral_link" defaultMessage="Referral link" />
       </AppText>
     </TouchableOpacity>
   );
@@ -81,7 +82,10 @@ const CryptoExchanges = () => {
   return (
     <View>
       <AppText variant="body2" style={[header(theme), textAlignCenter]}>
-        MDT is available in these crypto exchanges
+        <FormattedMessage
+          id="mdt_available_in_crypto_exchanges"
+          defaultMessage="MDT is available in these crypto exchanges"
+        />
       </AppText>
       <View style={rowContainer}>
         <AppAvator
@@ -91,7 +95,7 @@ const CryptoExchanges = () => {
           style={exchangesImage}
         />
         <AppText variant="body1" style={exchangesName(theme)}>
-          Binance
+          <FormattedMessage id="binance" defaultMessage="Binance" />
         </AppText>
         <ReferralLink url={binanceUrl} />
       </View>
@@ -103,7 +107,7 @@ const CryptoExchanges = () => {
           style={exchangesImage}
         />
         <AppText variant="body1" style={exchangesName(theme)}>
-          OKEx
+          <FormattedMessage id="okex" defaultMessage="OKEx" />
         </AppText>
         <ReferralLink url={okexUrl} />
       </View>
@@ -115,7 +119,7 @@ const CryptoExchanges = () => {
           style={exchangesImage}
         />
         <AppText variant="body1" style={exchangesName(theme)}>
-          Digifinex
+          <FormattedMessage id="digifinex" defaultMessage="Digifinex" />
         </AppText>
         <ReferralLink url={digifinexUrl} />
       </View>

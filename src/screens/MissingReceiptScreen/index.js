@@ -112,7 +112,7 @@ const MissingReceiptScreen = ({navigation}) => {
     setShowDatePicker(false);
   };
 
-  const handleSubmitPress = async values => {
+  const handleSubmitPress = async (values) => {
     try {
       await reportMissingReceipt({
         variables: {
@@ -143,7 +143,7 @@ const MissingReceiptScreen = ({navigation}) => {
     amount: '',
   };
 
-  const validate = values => {
+  const validate = (values) => {
     const errors = {};
 
     if (!values.email) {
@@ -193,12 +193,15 @@ const MissingReceiptScreen = ({navigation}) => {
                 />
               </AppText>
               <AppText variant="body1" style={detailStyle(theme)}>
-                * required
+                <FormattedMessage
+                  id="star_means_required"
+                  defaultMessage="* means required"
+                />
               </AppText>
               <Formik
                 initialValues={initialValues}
-                onSubmit={values => handleSubmitPress(values)}
-                validate={values => validate(values)}>
+                onSubmit={(values) => handleSubmitPress(values)}
+                validate={(values) => validate(values)}>
                 <Form
                   showDatePicker={showDatePicker}
                   handleDatePickerPress={handleDatePickerPress}

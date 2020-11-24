@@ -1,5 +1,5 @@
 import React, {useState, useLayoutEffect} from 'react';
-import {FormattedDate} from 'react-intl';
+import {FormattedDate, FormattedMessage} from 'react-intl';
 import {View, ScrollView} from 'react-native';
 import {useTheme} from 'emotion-theming';
 
@@ -115,7 +115,7 @@ const StackScreen = ({navigation, route}) => {
           style={[icon, center]}
         />
         <AppText variant="label" style={stakeAmountText(theme)}>
-          STAKE AMOUNT
+          <FormattedMessage id="stake_amount" defaultMessage="STAKE AMOUNT" />
         </AppText>
         <TransactionAmount
           amount={stakeAmount}

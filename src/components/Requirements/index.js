@@ -18,6 +18,7 @@ import AppButton from '@/components/AppButton';
 import CheckedIcon from '@/assets/icon_check-circle-2.svg';
 
 import membershipLevelEnum from '@/enum/membershipLevel';
+import {FormattedMessage} from 'react-intl';
 
 const Requirements = ({
   membership: {
@@ -43,13 +44,18 @@ const Requirements = ({
       {isInvitationRequired ? (
         <View style={rowContainer}>
           <AppText variant="subTitle3" style={invitationOnly(theme)}>
-            Internal Invitation Only
+            <FormattedMessage
+              id="internal_invitation_only"
+              defaultMessage="Internal Invitation Only"
+            />
           </AppText>
           <AppButton
             variant="filled"
             sizeVariant="moreCompact"
             colorVariant="secondary"
-            text="request"
+            text={
+              <FormattedMessage id="button.request" defaultMessage="Request" />
+            }
             style={requestButton}
           />
         </View>
@@ -66,14 +72,19 @@ const Requirements = ({
                   stakingInterestRate: stakingInterestRate,
                 })
               }
-              actionText="stake mdt"
+              actionText={
+                <FormattedMessage
+                  id="button.stake_mdt"
+                  defaultMessage="Stake mdt"
+                />
+              }
               colorVariant="primary"
             />
           )}
 
           {showOr && (
             <AppText variant="overline" style={or(theme)}>
-              Or
+              <FormattedMessage id="or" defaultMessage="Or" />
             </AppText>
           )}
 
@@ -83,7 +94,12 @@ const Requirements = ({
               target={referralsNumRequired}
               progress={referFriendCount}
               action={() => navigation.navigate('referral')}
-              actionText="invite friends"
+              actionText={
+                <FormattedMessage
+                  id="button.invite_friends"
+                  defaultMessage="Invite friends"
+                />
+              }
               colorVariant="primary"
             />
           )}
@@ -94,7 +110,9 @@ const Requirements = ({
               target={dataSourceBindingsNumRequired}
               progress={bindDataSourceCount}
               action={() => navigation.navigate('settings')}
-              actionText="Bind"
+              actionText={
+                <FormattedMessage id="button.bind" defaultMessage="bind" />
+              }
               colorVariant="primary"
             />
           )}
@@ -102,7 +120,10 @@ const Requirements = ({
           {showCompleteAccountSetup && (
             <View style={rowContainer}>
               <AppText variant="subTitle3" style={completeSetup(theme)}>
-                Complete Account Setup
+                <FormattedMessage
+                  id="complete_account_setup"
+                  defaultMessage="Complete Account Setup"
+                />
               </AppText>
               <View style={finishedContainer}>
                 <CheckedIcon
@@ -110,7 +131,7 @@ const Requirements = ({
                   strokeWidth={2}
                 />
                 <AppText variant="subTitle3" style={finished(theme)}>
-                  Finished
+                  <FormattedMessage id="finished" defaultMessage="Finished" />
                 </AppText>
               </View>
             </View>
