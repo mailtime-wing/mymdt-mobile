@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import {useFormikContext, useField} from 'formik';
 import {useTheme} from 'emotion-theming';
+
 import {GET_CURRENCY_BALANCE_API} from '@/api/data';
 import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
 
@@ -38,8 +39,11 @@ import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ConversionRate from '@/components/ConversionRate';
-
 import ConvertIcon from '@/assets/convert.svg';
+import {
+  MEASURABLE_DATA_TOKEN,
+  MEASURABLE_REWARD_POINT,
+} from '@/constants/currency';
 
 const inputAccessoryViewID = 'converterButtons';
 
@@ -144,8 +148,8 @@ const ConvertForm = ({
   const [toAmount, setToAmount] = useState(0);
   const [clientError, setClientError] = useState('');
   const label = {
-    MRP: 'RewardPoint',
-    MDT: 'Measurable Data Token',
+    [MEASURABLE_REWARD_POINT]: 'RewardPoint',
+    [MEASURABLE_DATA_TOKEN]: 'Measurable Data Token',
   };
 
   useEffect(() => {

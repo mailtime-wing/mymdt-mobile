@@ -3,11 +3,7 @@ import {View, ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {css} from '@emotion/native';
 
-import {
-  AuthContext,
-  MEASURABLE_REWARD_POINT,
-  MEASURABLE_DATA_TOKEN,
-} from '@/context/auth';
+import {AuthContext} from '@/context/auth';
 import {useTheme} from 'emotion-theming';
 
 import AppText from '@/components/AppText2';
@@ -16,6 +12,10 @@ import ScreenContainer from '@/components/ScreenContainer';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {UPDATE_USER_CASHBACK_CURRENCY_CODE_API} from '@/api/data';
+import {
+  MEASURABLE_REWARD_POINT,
+  MEASURABLE_DATA_TOKEN,
+} from '@/constants/currency';
 
 import {
   container,
@@ -91,7 +91,7 @@ const ChooseCashBackTypeScreen = () => {
   );
   const {updateCashBackType} = useContext(AuthContext);
 
-  const handleChoosePress = async cashbackType => {
+  const handleChoosePress = async (cashbackType) => {
     try {
       await updateUserCashbackCurrencyCodeRequest({
         variables: {
@@ -120,7 +120,7 @@ const ChooseCashBackTypeScreen = () => {
             defaultMessage="RewardMe provides 2 types of cashback. You can change the perference afterwards."
           />
         </AppText>
-        {cashbackTypeList.map(cbt => (
+        {cashbackTypeList.map((cbt) => (
           <CashBackType
             key={cbt.type}
             cashback={cbt}

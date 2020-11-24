@@ -2,11 +2,12 @@ import React, {useRef, useEffect, useState, useContext} from 'react';
 import {Animated} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
-import {AuthContext, MEASURABLE_REWARD_POINT} from '@/context/auth';
+import {AuthContext} from '@/context/auth';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import MDTGiftBox from '@/components/MDTGiftBox';
 import AppButton from '@/components/AppButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
+import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
 
 import {
   Container,
@@ -22,7 +23,7 @@ import {
   buttonContainer,
 } from './style';
 
-const AnimatedText = props => {
+const AnimatedText = (props) => {
   const fadeAnim = useRef(new Animated.Value(0.2)).current;
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const AnimatedText = props => {
   );
 };
 
-const AnimatedFloat = props => {
+const AnimatedFloat = (props) => {
   const floatAnim = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     const float = () => {

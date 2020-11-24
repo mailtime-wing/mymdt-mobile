@@ -21,7 +21,7 @@ import {
   MEASURABLE_REWARD_POINT,
   MEASURABLE_DATA_TOKEN,
   MM,
-  USD,
+  USDT,
 } from '@/constants/currency';
 
 import SafeAreaView from 'react-native-safe-area-view';
@@ -59,7 +59,7 @@ const WalletScreen = ({navigation}) => {
       (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
     )?.balance || 0;
   const ntAmount =
-    data?.userProfile?.currencyAccounts.find((ca) => ca.currencyCode === 'USDT')
+    data?.userProfile?.currencyAccounts.find((ca) => ca.currencyCode === USDT)
       ?.balance || 0;
   const totalBalance = mdtAmount + ntAmount;
   // const earnedMM = 40; // TODO: get from api
@@ -146,7 +146,7 @@ const WalletScreen = ({navigation}) => {
               amount={convertToUsdAmount(rpAmount)}
               amountSizeVariant="small"
               unitSizeVariant="small"
-              unitVariant={USD}
+              unitVariant={USDT}
               showDollarSign
               showAlmostEqual
               unitColor={theme.colors.textOnBackground.mediumEmphasis}
@@ -181,7 +181,7 @@ const WalletScreen = ({navigation}) => {
               amount={convertToUsdAmount(mdtAmount)}
               amountSizeVariant="small"
               unitSizeVariant="small"
-              unitVariant={USD}
+              unitVariant={USDT}
               showDollarSign
               showAlmostEqual
               unitColor={theme.colors.textOnBackground.mediumEmphasis}
@@ -231,7 +231,7 @@ const WalletScreen = ({navigation}) => {
               amount={convertToUsdAmount(ntAmount)}
               amountSizeVariant="small"
               unitSizeVariant="small"
-              unitVariant={USD}
+              unitVariant={USDT}
               showDollarSign
               showAlmostEqual
               unitColor={theme.colors.textOnBackground.mediumEmphasis}

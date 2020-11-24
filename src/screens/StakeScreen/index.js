@@ -36,7 +36,7 @@ const AvailableMDT = ({amount}) => {
     <View style={availableMdtContainer(theme)}>
       <TransactionAmount
         amount={amount}
-        unitVariant="MDT"
+        unitVariant={MEASURABLE_DATA_TOKEN}
         unitColor={theme.colors.primary.normal}
         unitSizeVariant="small"
         amountSizeVariant="normal"
@@ -119,7 +119,7 @@ const StackScreen = ({navigation, route}) => {
         </AppText>
         <TransactionAmount
           amount={stakeAmount}
-          unitVariant="MDT"
+          unitVariant={MEASURABLE_DATA_TOKEN}
           unitColor={theme.colors.primary.normal}
           unitSizeVariant="small"
           amountSizeVariant="large"
@@ -155,7 +155,7 @@ const StackScreen = ({navigation, route}) => {
         amount={
           <TransactionAmount
             amount={stakeAmount}
-            unitVariant="MDT"
+            unitVariant={MEASURABLE_DATA_TOKEN}
             unitColor={theme.colors.textOnBackground.mediumEmphasis}
             unitSizeVariant="normal"
             amountSizeVariant="normal"

@@ -1,12 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
 import {useTheme} from 'emotion-theming';
-import {FormattedDate} from 'react-intl';
+import {FormattedDate, FormattedMessage} from 'react-intl';
 
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 import TransactionAmount from '@/components/TransactionAmount';
-import {FormattedMessage} from 'react-intl';
+import {MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 
 import {
   mediumEmphasis,
@@ -85,7 +85,7 @@ const StakeMdt = ({
               amount={remainingUnstakeAmount}
               unitSizeVariant="small"
               amountSizeVariant="small"
-              unitVariant="MDT"
+              unitVariant={MEASURABLE_DATA_TOKEN}
               unitColor={theme.colors.textOnBackground.mediumEmphasis}
               amountColor={theme.colors.textOnBackground.mediumEmphasis}
             />
