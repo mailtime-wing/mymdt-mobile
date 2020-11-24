@@ -38,7 +38,7 @@ const PopupModal = ({
       transparent
       modalBodyStyle={[
         css`
-          ${theme.colors.elevatedBackground4}
+          ${theme.colors.elevatedBackgroundHigh}
         `,
         modalPadding,
       ]}

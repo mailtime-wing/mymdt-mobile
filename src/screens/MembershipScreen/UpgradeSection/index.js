@@ -48,7 +48,7 @@ const UpgradeSection = ({userNextLevel, navigation}) => {
       <View
         style={[
           css`
-            ${theme.colors.elevatedBackground1}
+            ${theme.colors.elevatedBackgroundFlat}
           `,
           upperSectionContainer,
         ]}>
@@ -128,7 +128,7 @@ const UpgradeSection = ({userNextLevel, navigation}) => {
         onPress={() => navigation.navigate('membership_detail')}
         style={[
           css`
-            ${theme.colors.elevatedBackground1}
+            ${theme.colors.elevatedBackgroundFlat}
           `,
           lowerSectionContainer(theme),
         ]}>

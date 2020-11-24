@@ -42,7 +42,7 @@ const UpgradeSection = ({userNextLevel, style, navigation, ...props}) => {
     <View
       style={[
         css`
-          ${theme.colors.elevatedBackground1}
+          ${theme.colors.elevatedDarkerCardFlat}
         `,
         container,
         style,

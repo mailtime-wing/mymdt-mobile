@@ -299,7 +299,7 @@ const Setting = ({navigation}) => {
 
   const settingCardStyle = [
     css`
-      ${theme.colors.elevatedBackground1}
+      ${theme.colors.elevatedBackgroundFlat}
     `,
     {
       ...screenUnderModalOptions.cardStyle,
@@ -308,7 +308,7 @@ const Setting = ({navigation}) => {
 
   const settingHeaderStyle = [
     css`
-      ${theme.colors.elevatedBackground1}
+      ${theme.colors.elevatedBackgroundFlat}
     `,
     {
       ...screenUnderModalOptions.headerStyle,
@@ -433,7 +433,7 @@ const Root = () => {
       ...screenUnderModalOptions.cardStyle,
     },
     css`
-      ${theme.colors.elevatedBackground2}
+      ${theme.colors.elevatedBackgroundLow}
     `,
   ];
 
@@ -442,7 +442,7 @@ const Root = () => {
       ...screenUnderModalOptions.headerStyle,
     },
     css`
-      ${theme.colors.elevatedBackground2}
+      ${theme.colors.elevatedBackgroundLow}
     `,
   ];
 

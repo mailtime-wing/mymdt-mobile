@@ -31,7 +31,7 @@ const PopupModalWithLinearGradient = ({
       modalBodyStyle={
         isDark && [
           css`
-            ${theme.colors.elevatedBackground4}
+            ${theme.colors.elevatedBackgroundHigh}
           `,
           modalPadding,
         ]

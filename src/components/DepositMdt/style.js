@@ -9,7 +9,7 @@ export const highEmphasis = (theme) => css`
 `;
 
 export const alertContainer = (theme) => css`
-  background: ${theme.colors.textOnError.superLight};
+  background: ${theme.colors.detailBox.error};
   border-radius: 24px;
   padding: 16px;
 `;

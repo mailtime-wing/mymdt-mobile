@@ -23,7 +23,7 @@ const ShortcutSection = () => {
     <View
       style={[
         css`
-          ${theme.colors.elevatedBackground1}
+          ${theme.colors.elevatedBackgroundFlat}
         `,
         sectionContainer,
       ]}>

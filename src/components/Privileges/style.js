@@ -1,7 +1,7 @@
 import {css} from '@emotion/native';
 
 export const container = (theme) => css`
-  ${theme.colors.elevatedBackground3};
+  ${theme.colors.elevatedBackgroundMedium};
   padding-vertical: 24px;
   border-bottom-width: 1px;
   border-bottom-width: 1px;

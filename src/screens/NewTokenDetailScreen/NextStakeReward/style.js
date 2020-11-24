@@ -1,7 +1,7 @@
 import {css} from '@emotion/native';
 
 export const container = (theme) => css`
-  ${theme.colors.elevatedBackground1};
+  ${theme.colors.elevatedDarkerCardFlat};
   border-radius: 24px;
   padding: 24px;
 `;

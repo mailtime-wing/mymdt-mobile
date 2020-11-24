@@ -44,7 +44,7 @@ const TransactionBottomSheet = ({
           <View
             style={[
               css`
-                ${theme.colors.elevatedBackground2}
+                ${theme.colors.elevatedBackgroundLow}
               `,
               modal,
             ]}>

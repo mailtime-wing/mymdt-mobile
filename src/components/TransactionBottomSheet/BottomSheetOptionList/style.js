@@ -5,17 +5,19 @@ export const OptionHeader = styled.TouchableOpacity`
   align-items: center;
   justify-content: space-between;
   padding: 12px 24px;
-  ${props =>
-    props.active && `background: ${props.theme.colors.secondary.border};`}
-  border: 1px solid ${props => props.theme.colors.background2};
+  ${(props) =>
+    props.active &&
+    `background: ${props.theme.colors.secondary.normal20Opacity};`}
+  border: 1px solid ${(props) => props.theme.colors.background2};
 `;
 
 export const Option = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   padding: 12px 48px;
-  ${props =>
-    props.active && `background: ${props.theme.colors.secondary.border};`}
+  ${(props) =>
+    props.active &&
+    `background: ${props.theme.colors.secondary.normal20Opacity};`}
 `;
 
 export const RightSide = styled.View`
@@ -24,7 +26,7 @@ export const RightSide = styled.View`
 `;
 
 export const OptionsContainer = styled.View`
-  height: ${props => (props.expand ? 'auto' : '0')};
+  height: ${(props) => (props.expand ? 'auto' : '0')};
   overflow: hidden;
 `;
 

@@ -51,7 +51,7 @@ const CashBackType = ({cashback, handleChoosePress, theme}) => (
   <View
     style={[
       css`
-        ${theme.colors.elevatedBackground1}
+        ${theme.colors.elevatedBackgroundFlat}
       `,
       boxContainer,
     ]}>

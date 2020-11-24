@@ -1,7 +1,7 @@
 import {css} from '@emotion/native';
 
 export const container = (theme) => css`
-  ${theme.colors.elevatedBackground1};
+  ${theme.colors.elevatedDarkerCardFlat};
   border-radius: 24px;
   padding-top: 24px;
   padding-bottom: 16px;
@@ -24,7 +24,7 @@ export const diviver = (theme) => css`
 `;
 
 export const summary = (theme) => css`
-  background: ${theme.colors.primary.border};
+  background: ${theme.colors.detailBox.primary};
   margin-top: 24px;
   margin-horizontal: 24px;
   border-radius: 16px;

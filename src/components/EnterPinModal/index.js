@@ -68,7 +68,7 @@ const EnterPinModal = ({onSuccess, callback, ...props}) => {
   };
 
   const handleOnFulill = useCallback(
-    async code => {
+    async (code) => {
       try {
         await verifyPin({
           variables: {
@@ -87,7 +87,7 @@ const EnterPinModal = ({onSuccess, callback, ...props}) => {
       transparent
       modalBodyStyle={[
         css`
-          ${theme.colors.elevatedBackground4}
+          ${theme.colors.elevatedBackgroundHigh}
         `,
       ]}
       {...props}>
@@ -123,7 +123,7 @@ const EnterPinModal = ({onSuccess, callback, ...props}) => {
             password={true}
             value={pin}
             autoFocus
-            onTextChange={code => setPin(code)}
+            onTextChange={(code) => setPin(code)}
             onFulfill={handleOnFulill}
             editable={pin.length < codeLength}
             keyboardType="number-pad"

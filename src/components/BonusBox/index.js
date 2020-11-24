@@ -19,7 +19,7 @@ const BonusBox = ({title, detail, icon, children}) => {
     <View
       style={[
         css`
-          ${theme.colors.elevatedBackground1}
+          ${theme.colors.elevatedDarkerCardFlat}
         `,
         card,
       ]}>
