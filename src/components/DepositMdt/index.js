@@ -22,6 +22,7 @@ import {
   textAlignCenter,
   alertContainer,
 } from './style';
+import {FormattedMessage} from 'react-intl';
 
 const DepositMdt = ({depositAmount, address}) => {
   const theme = useTheme();
@@ -40,19 +41,27 @@ const DepositMdt = ({depositAmount, address}) => {
             strokeWidth={2}
           />
           <AppText variant="subTitle3" style={notEnought(theme)}>
-            You don’t have enough MDT
+            <FormattedMessage
+              id="you_dont_have_enought_mdt"
+              defaultMessage="You don’t have enough MDT"
+            />
           </AppText>
         </View>
         <AppText
           variant="body2"
           style={[mediumEmphasis(theme), textAlignCenter]}>
-          You can stake MDT after transfering{' '}
-          <FormattedNumber value={depositAmount} /> MDT to the deposit address
-          below.
+          <FormattedMessage
+            id="you_can_stake_after_transfer_mdt_to_deposit_address"
+            defaultMessage="You can stake MDT after transfering {amount} MDT to the deposit address below."
+            values={{amount: <FormattedNumber value={depositAmount} />}}
+          />
         </AppText>
       </View>
       <AppText variant="label" style={[depositAddress, mediumEmphasis(theme)]}>
-        MDT Deposit Address
+        <FormattedMessage
+          id="mdt_deposit_address"
+          defaultMessage="MDT Deposit Address"
+        />
       </AppText>
       <View style={rowContainer}>
         <View style={inputContainer(theme)}>
@@ -71,7 +80,7 @@ const DepositMdt = ({depositAmount, address}) => {
             strokeWidth={2}
           />
           <AppText variant="button" style={copyText(theme)}>
-            copy
+            <FormattedMessage id="button.copy" defaultMessage="Copy" />
           </AppText>
         </TouchableOpacity>
       </View>

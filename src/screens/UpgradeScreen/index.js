@@ -27,11 +27,19 @@ const UpgradeScreen = ({navigation, route}) => {
   return (
     <View style={container}>
       <AppText variant="heading2" style={congrats(theme)}>
-        Congratulations!
+        <FormattedMessage
+          id="congratulations"
+          defaultMessage="Congratulations!"
+        />
       </AppText>
       <AppText variant="heading5" style={member(theme)}>
-        You are {<FormattedMessage id={`membership_level_${level}`} />} member
-        now
+        <FormattedMessage
+          id="you_are_next_level_member_now"
+          defaultMessage="You are {next_level} member now!"
+          values={{
+            next_level: <FormattedMessage id={`membership_level_${level}`} />,
+          }}
+        />
       </AppText>
       <AppButton
         variant="filled"

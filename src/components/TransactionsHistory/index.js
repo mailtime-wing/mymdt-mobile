@@ -6,6 +6,7 @@ import {historyListContainer, noTransaction} from './style';
 import TransactionList from './TransactionList';
 
 import AppText from '@/components/AppText2';
+import {FormattedMessage} from 'react-intl';
 
 const TransactionsHistory = ({
   transactionsHistoryList = [],
@@ -26,7 +27,10 @@ const TransactionsHistory = ({
         />
       ) : (
         <AppText variant="smallText" style={noTransaction(theme)}>
-          No Transaction
+          <FormattedMessage
+            id="no_transaction"
+            defaultMessage="No Transaction"
+          />
         </AppText>
       )}
     </View>

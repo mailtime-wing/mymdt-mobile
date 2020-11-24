@@ -16,6 +16,7 @@ import BagIcon from '@/assets/icon_shopping-bag';
 import ReferralIcon from '@/assets/referral_icon.svg';
 import MailIcon from '@/assets/icon_mail.svg';
 import LinearGradient from 'react-native-linear-gradient';
+import {FormattedMessage} from 'react-intl';
 
 import AppText from '@/components/AppText2';
 import AppIcon from '@/components/AppIcon';
@@ -62,7 +63,7 @@ const ShortcutSection = ({navigation, style}) => {
       colors={theme.colors.linearGradientBackground.contrast}
       style={[sectionContainer, style]}>
       <AppText variant="heading6" style={quickActions(theme)}>
-        Quick Actions
+        <FormattedMessage id="quick_actions" defaultMessage="Quick Actions" />
       </AppText>
       <View style={actionsContainer}>
         {shortcutList.map(({name, icon, action}) => (

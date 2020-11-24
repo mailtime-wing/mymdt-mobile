@@ -85,7 +85,11 @@ const MerchantPreferenceEditScreen = ({navigation}) => {
               />
             </AppText>
             <AppText variant="body1" style={numberOfBrandStyle(theme)}>
-              {numberOfMerchant} Brands
+              <FormattedMessage
+                id="number_of_merchants"
+                defaultMessage="{number} Merchants"
+                values={{number: numberOfMerchant}}
+              />
             </AppText>
           </RowContainer>
           <AppText variant="caption" style={detailStyle(theme)}>

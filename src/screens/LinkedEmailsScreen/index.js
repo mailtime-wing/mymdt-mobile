@@ -115,11 +115,11 @@ const LinkedEmailsScreen = ({navigation, route}) => {
     }
   }, [refetch, route]);
 
-  const handleUnbindPress = email => {
+  const handleUnbindPress = (email) => {
     dispatch({type: UPDATE_IS_EMAIL_UNBINDING, payload: email});
   };
 
-  const handleCallback = result => {
+  const handleCallback = (result) => {
     if (result === 'OK') {
       handleUnbindEmailConfirmPress();
       return;
@@ -201,7 +201,10 @@ const LinkedEmailsScreen = ({navigation, route}) => {
             <NoEmailContainer>
               <Image source={require('@/assets/no_email_added.png')} />
               <AppText variant="heading3" style={noEmailStyle(theme)}>
-                No email added
+                <FormattedMessage
+                  id="no_email_added"
+                  defaultMessage="No email added"
+                />
               </AppText>
             </NoEmailContainer>
           )}
@@ -233,9 +236,7 @@ const LinkedEmailsScreen = ({navigation, route}) => {
         {state.isUnbinding && (
           <PopupModal
             title="Remove this email"
-            detail={`You will not get any data rewards from ${
-              state.unbindingEmail?.emailAddress
-            } after unbinding.`}
+            detail={`You will not get any data rewards from ${state.unbindingEmail?.emailAddress} after unbinding.`}
             callback={handleCallback}
           />
         )}

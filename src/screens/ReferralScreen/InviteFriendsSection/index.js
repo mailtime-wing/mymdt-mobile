@@ -68,13 +68,15 @@ const InviteFriendSection = () => {
   return (
     <View style={container}>
       <AppText variant="body1" style={detailStyle(theme)}>
-        Invite friends to RewardMe. Rewards will be given if they can finish the
-        account setup.
+        <FormattedMessage
+          id="invite_friends_to_reward_me"
+          defaultMessage="Invite friends to RewardMe. Rewards will be given if they can finish the account setup."
+        />
       </AppText>
       <ProgressBar
         title={
           <AppText variant="body2" style={progressTitleStyle(theme)}>
-            <FormattedMessage id="referral" />
+            <FormattedMessage id="referral" defaultMessage="Referral" />
           </AppText>
         }
         progressLabel={
@@ -86,11 +88,16 @@ const InviteFriendSection = () => {
         style={progressBarContainer}
       />
       <AppText variant="heading5" style={sectionHeaderStyle(theme)}>
-        Share your referral code
+        <FormattedMessage
+          id="share_your_referral_code"
+          defaultMessage="Share your referral code"
+        />
       </AppText>
       <AppText variant="body1" style={detailStyle(theme)}>
-        Once your friend entered the code and completed the account setup, you
-        and your friend will get 500.
+        <FormattedMessage
+          id="once_your_friend_entered_the_code"
+          defaultMessage="Once your friend entered the code and completed the account setup, you and your friend will get 500."
+        />
       </AppText>
       <View style={referralContainer}>
         <View style={inputContainer}>

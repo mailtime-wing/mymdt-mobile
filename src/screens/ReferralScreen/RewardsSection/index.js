@@ -59,7 +59,7 @@ const Item = ({
       <View>
         {status === 'PENDING' && (
           <AppText variant="caption" style={statusStyle(theme)}>
-            Pending
+            <FormattedMessage id="pending" defaultMessage="Pending" />
           </AppText>
         )}
         {status === 'PROCESSED' && !!claimedTime && (
