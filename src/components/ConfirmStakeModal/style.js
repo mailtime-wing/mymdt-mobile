@@ -12,7 +12,7 @@ export const detail = (theme) => css`
 
 export const modalContainer = (theme) => css`
   padding: 24px;
-  ${theme.colors.elevatedBackground4};
+  ${theme.colors.elevatedBackgroundHigh};
 `;
 
 export const button = css`

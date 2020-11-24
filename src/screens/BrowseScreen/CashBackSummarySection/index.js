@@ -154,7 +154,7 @@ const CashBackSummarySection = ({
         style={[
           lowerSection,
           css`
-            ${theme.colors.elevatedBackground1}
+            ${theme.colors.elevatedBackgroundFlat}
           `,
         ]}>
         <AppText variant="subTitle3" style={selectedMerchant(theme)}>

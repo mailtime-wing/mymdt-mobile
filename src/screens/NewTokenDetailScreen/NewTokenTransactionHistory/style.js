@@ -14,5 +14,5 @@ export const cashBackTitle = (theme) => css`
 `;
 
 export const background = (theme) => css`
-  ${theme.colors.elevatedBackground1};
+  ${theme.colors.elevatedDarkerCardFlat};
 `;

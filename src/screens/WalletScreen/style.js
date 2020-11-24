@@ -21,7 +21,7 @@ export const textAlignCenter = css`
 
 export const currencyRow = (theme) => css`
   flex-direction: row;
-  ${theme.colors.elevatedBackground1};
+  ${theme.colors.elevatedDarkerCardFlat};
   padding-vertical: 16px;
   border-bottom-width: 1px;
   border-bottom-color: ${theme.colors.background2};

@@ -82,7 +82,7 @@ const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
   const theme = useTheme();
   const backgroundColorRegexp = /(background-color:\s)(#.{6})/;
   const shieldColor = backgroundColorRegexp.exec(
-    theme.colors.elevatedBackground3,
+    theme.colors.elevatedBackgroundMedium,
   )[2];
 
   return (
@@ -92,7 +92,7 @@ const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
           style={[
             circleBackground,
             css`
-              ${theme.colors.elevatedBackground3}
+              ${theme.colors.elevatedBackgroundMedium}
             `,
           ]}>
           <AppIcon
@@ -115,7 +115,7 @@ const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
           style={[
             circleBackground,
             css`
-              ${theme.colors.elevatedBackground3}
+              ${theme.colors.elevatedBackgroundMedium}
             `,
           ]}>
           <AppIcon

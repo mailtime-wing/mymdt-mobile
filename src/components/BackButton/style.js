@@ -5,7 +5,7 @@ import Text from '@/components/AppText';
 export const ButtonContainer = styled.TouchableOpacity`
   padding: 8px;
   height: 36px;
-  border: 1px solid ${props => props.theme.colors.secondary.border};
+  border: 1px solid ${(props) => props.theme.colors.secondary.normal20Opacity};
   border-radius: 24px;
   background: transparent;
 `;
@@ -19,7 +19,7 @@ export const Container = styled.View`
 export const ButtonText = styled(Text)`
   font-size: 14px;
   letter-spacing: 1.5px;
-  color: ${props => props.theme.colors.secondary.normal};
+  color: ${(props) => props.theme.colors.secondary.normal};
   font-weight: bold;
   text-transform: uppercase;
 `;

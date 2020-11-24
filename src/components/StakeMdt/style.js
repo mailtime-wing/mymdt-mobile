@@ -9,7 +9,7 @@ export const rowContainer = css`
 `;
 
 export const stakeSummary = (theme) => css`
-  background-color: ${theme.colors.primary.border};
+  background-color: ${theme.colors.detailBox.primary};
   padding-bottom: 16px;
   padding-horizontal: 16px;
   border-radius: 16px;

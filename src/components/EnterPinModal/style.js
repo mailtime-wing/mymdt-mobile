@@ -1,7 +1,7 @@
 import {css} from '@emotion/native';
 import {StyleSheet} from 'react-native';
 
-export const titleStyle = theme => css`
+export const titleStyle = (theme) => css`
   color: ${theme.colors.contrastColor};
   text-align: center;
   margin-top: 8px;
@@ -37,7 +37,7 @@ export const header = css`
   align-items: center;
 `;
 
-export const pinMask = theme => css`
+export const pinMask = (theme) => css`
   width: 12px;
   height: 12px;
   border-radius: 25px;
@@ -48,12 +48,12 @@ export const pinContainer = css`
   margin-vertical: 24;
 `;
 
-export const errorStyle = theme => css`
+export const errorStyle = (theme) => css`
   color: ${theme.colors.textOnError.normal};
   text-align: center;
 `;
 
-export const styles = theme =>
+export const styles = (theme) =>
   StyleSheet.create({
     container: {
       marginBottom: 8,
@@ -69,7 +69,7 @@ export const styles = theme =>
       borderWidth: 2,
       borderRadius: 8,
       borderColor: theme.colors.secondary.normal,
-      backgroundColor: theme.colors.primary.border,
+      backgroundColor: theme.colors.primary.normal20Opacity,
     },
     pinCellError: {
       borderRadius: 8,

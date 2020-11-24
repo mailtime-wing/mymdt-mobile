@@ -4,53 +4,29 @@ import {transparentize} from 'polished';
 export const darkTheme = {
   colors: {
     // main theme
-    primary: ['#9FBDE9', '#9FBDE9', 'rgba(159, 189, 233, 0.2)', '#364562'],
-    secondary: [
-      '#88D9DE',
-      '#88D9DE',
-      '#88D9DE',
-      'rgba(136, 217, 222, 0.2)',
-      'rgba(136, 217, 222, 0.24)',
-      '#2C5F63',
-    ],
+    primary: ['#9FBDE9', '#6B91DB', '#364562'],
+    secondary: ['#88D9DE', '#2C5F63'],
     contrastColor: '#FFFFFF',
 
-    // text
-    textOfMrp: '#88D9DE',
-    textOfMdt: '#9FBDE9',
-    nameOnMrpCard: '#88D9DE',
-    nameOnMdtCard: '#9FBDE9',
-    mrpCard: 'rgba(135, 218, 222, 0.24)',
-    mdtCard: 'rgba(159, 189, 233, 0.24)',
-    mrpCardValue: 'rgba(255, 255, 255, 0.87)',
-    mdtCardValue: 'rgba(255, 255, 255, 0.87)',
-    textOnError: [
-      '#FF7171',
-      'rgba(255, 113, 113, 0.7)',
-      'rgba(255, 113, 113, 0.16)',
-    ],
-    textOnBackground: [
-      'rgba(255, 255, 255, 0.87)',
-      'rgba(255, 255, 255, 0.6)',
-      'rgba(255, 255, 255, 0.38)',
-    ],
-    textOnThemeBackground: [
-      'rgba(255, 255, 255, 0.87)',
-      'rgba(255, 255, 255, 0.6)',
-    ],
-
     // background
-    background: [
-      '#121212',
-      'rgba(255, 255, 255, 0.12)',
-      'rgba(255, 255, 255, 0.2)',
-      '#121212',
-    ],
+    background: ['#121212'],
     elevatedBackground: [
-      'background-color: #1E1E1E;',
+      'background-color: #121212;',
       'background-color: #232323;',
       'background-color: #2C2C2C;',
       'background-color: #363636;',
+    ],
+    elevatedDarkerBackground: [
+      'background-color: #121212;',
+      'background-color: #1E1E1E;',
+      'background-color: #232323;',
+      'background-color: #2C2C2C;',
+    ],
+    elevatedDarkerCardSurface: [
+      'background-color: #1E1E1E; border-color: rgba(255, 255, 255, 0.08);',
+      'background-color: #232323; border-color: rgba(255, 255, 255, 0.08);',
+      'background-color: #2C2C2C; border-color: rgba(255, 255, 255, 0.08);',
+      'background-color: #363636; border-color: rgba(255, 255, 255, 0.08);',
     ],
     elevatedThemeBackground: [
       'background-color: #232323;',
@@ -58,9 +34,20 @@ export const darkTheme = {
     ],
     inputFocusBackground: 'rgba(159, 189, 233, 0.2)',
     errorBackground: 'rgba(255, 113, 113, 0.2)',
-    themeBackground: '#121212',
     linesBackground: '#101320',
+    detailBox: {},
 
+    // text
+    textOfMrp: '#88D9DE',
+    textOfMdt: '#9FBDE9',
+    textOnError: ['#FF7171'],
+    textOnBackground: {},
+    textOnThemeBackground: [
+      'rgba(255, 255, 255, 0.87)',
+      'rgba(255, 255, 255, 0.6)',
+    ],
+
+    // membership
     membership: {
       newbie: {
         badge: ['#000000'],
@@ -99,12 +86,8 @@ export const darkTheme = {
       },
     },
 
-    // button
-    buttonContrastBorderColor: 'rgba(136, 217, 222, 0.2)',
-    buttonContrastTextColor: '#88D9DE',
-
-    toggleOn: ['#88D9DE', 'rgba(136, 217, 222, 0.38)'],
-    toggleOff: ['rgba(255, 255, 255, 0.6)', 'rgba(255, 255, 255, 0.38)'],
+    toggleOn: {},
+    toggleOff: {},
 
     // logo
     logo: {
@@ -183,50 +166,29 @@ export const darkTheme = {
 export const lightTheme = {
   colors: {
     // main theme
-    primary: ['#0363EF', '#0036C5', 'rgba(3, 99, 239, 0.05)', '#0363EF'],
-    secondary: [
-      '#21CEDB',
-      '#ABEBEE',
-      '#00BACE',
-      'rgba(33, 206, 219, 0.2)',
-      '#E9FAFB',
-      '#21CEDB',
-    ],
+    primary: ['#0363EF', '#0036C5'],
+    secondary: ['#21CEDB', '#ABEBEE', '#00BACE'],
     contrastColor: '#000000',
 
-    // text
-    textOfMrp: '#1E7884',
-    textOfMdt: '#0036C5',
-    nameOnMrpCard: '#FFFFFF',
-    nameOnMdtCard: '#FFFFFF',
-    mrpCard: '#21CEDB',
-    mdtCard: '#0363EF',
-    mrpCardValue: '#FFFFFF',
-    mdtCardValue: '#FFFFFF',
-    textOnError: [
-      '#D81010',
-      'rgba(216, 16, 16, 0.6)',
-      'rgba(216, 16, 16, 0.1)',
-    ],
-    textOnBackground: [
-      'rgba(0, 0, 0, 0.8)',
-      'rgba(0, 0, 0, 0.6)',
-      'rgba(0, 0, 0, 0.4)',
-    ],
-    textOnThemeBackground: ['#FFFFFF', '#FFFFFF'],
-
     // background
-    background: [
-      '#FFFFFF',
-      'rgba(0, 0, 0, 0.05)',
-      'rgba(0, 0, 0, 0.1)',
-      '#F2F2F2',
-    ],
+    background: ['#FFFFFF', '#F2F2F2'],
     elevatedBackground: [
       'background-color: #FFFFFF;',
       'background-color: #FFFFFF; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);',
       'background-color: #FFFFFF; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);',
       'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);',
+    ],
+    elevatedDarkerBackground: [
+      'background-color: #F2F2F2;',
+      'background-color: #F2F2F2; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);',
+      'background-color: #F2F2F2; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);',
+      'background-color: #F2F2F2; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);',
+    ],
+    elevatedDarkerCardSurface: [
+      'background-color: #FFFFFF;',
+      'background-color: #FFFFFF;',
+      'background-color: #FFFFFF;',
+      'background-color: #FFFFFF;',
     ],
     elevatedThemeBackground: [
       'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(11, 142, 157, 0.1);',
@@ -234,12 +196,20 @@ export const lightTheme = {
     ],
     inputFocusBackground: 'rgba(3, 99, 239, 0.05)',
     errorBackground: 'rgba(216, 16, 16, 0.1)',
-    themeBackground: '#21CEDB',
     linesBackground: '#001C83',
+    detailBox: {},
 
+    // text
+    textOfMrp: '#1E7884',
+    textOfMdt: '#0036C5',
+    textOnError: ['#D81010'],
+    textOnBackground: {},
+    textOnThemeBackground: {},
+
+    // membership
     membership: {
       newbie: {
-        badge: ['#000000'],
+        badge: {},
         card: ['#FAFAFA'],
         dashboard: [['#FAFAFA', '#F2F2F2']],
       },
@@ -268,19 +238,15 @@ export const lightTheme = {
         star: ['#DEC8A2'],
       },
       infinite_privilege: {
-        badge: ['#000000'],
+        badge: {},
         card: ['#ACACAC'],
         dashboard: [['#A3A3A3', '#F2F2F2']],
         star: ['#646464'],
       },
     },
 
-    // button
-    buttonContrastBorderColor: 'rgba(255, 255, 255, 0.4)',
-    buttonContrastTextColor: '#FFFFFF',
-
-    toggleOn: ['#FFFFFF', '#21CEDB'],
-    toggleOff: ['rgba(255, 255, 255, 0.87)', 'rgba(0, 0, 0, 0.1)'],
+    toggleOn: {},
+    toggleOff: {},
 
     // logo
     logo: {
@@ -310,9 +276,6 @@ export const lightTheme = {
     },
 
     // others
-    borderColor: 'rgba(0, 0, 0, 0.2)',
-    contrastBorderColor: 'rgba(255, 255, 255, 0.2)',
-
     linearGradientBackground: [
       ['#FDFBF2', '#E2FAFF'],
       ['rgba(255, 255, 255, 0)', '#FFFFFF'],
@@ -325,12 +288,9 @@ export const lightTheme = {
 
     system_theme: '#F4F4F4',
 
-    alert: '#FFD542',
-
-    rewardCircleBackground: '#FFFFFF',
-
+    rewardCircleBackground: {},
+    cashBackSummaryChip: {},
     cashBackSummaryBackground: '#E9FAFB',
-    cashBackSummaryChip: '#FFFFFF',
 
     avatarsInitials: [
       '#F15454',
@@ -360,45 +320,71 @@ export const lightTheme = {
 // main theme
 lightTheme.colors.primary.normal = lightTheme.colors.primary[0];
 lightTheme.colors.primary.dark = lightTheme.colors.primary[1];
-lightTheme.colors.primary.border = lightTheme.colors.primary[2];
-lightTheme.colors.primary.walletBackground = lightTheme.colors.primary[3];
+lightTheme.colors.primary.normal20Opacity = transparentize(
+  0.8,
+  lightTheme.colors.primary.normal,
+);
+lightTheme.colors.primary.walletBackground = lightTheme.colors.primary.normal;
 
 lightTheme.colors.secondary.normal = lightTheme.colors.secondary[0];
 lightTheme.colors.secondary.light = lightTheme.colors.secondary[1];
 lightTheme.colors.secondary.dark = lightTheme.colors.secondary[2];
-lightTheme.colors.secondary.border = lightTheme.colors.secondary[3];
-lightTheme.colors.secondary.superLight = lightTheme.colors.secondary[4];
-lightTheme.colors.secondary.walletBackground = lightTheme.colors.secondary[5];
-
-// text
-lightTheme.colors.textOnError.normal = lightTheme.colors.textOnError[0];
-lightTheme.colors.textOnError.light = lightTheme.colors.textOnError[1];
-lightTheme.colors.textOnError.superLight = lightTheme.colors.textOnError[2];
-
-lightTheme.colors.textOnBackground.highEmphasis =
-  lightTheme.colors.textOnBackground[0];
-lightTheme.colors.textOnBackground.mediumEmphasis =
-  lightTheme.colors.textOnBackground[1];
-lightTheme.colors.textOnBackground.disabled =
-  lightTheme.colors.textOnBackground[2];
-lightTheme.colors.textOnThemeBackground.highEmphasis =
-  lightTheme.colors.textOnThemeBackground[0];
-lightTheme.colors.textOnThemeBackground.mediumEmphasis =
-  lightTheme.colors.textOnThemeBackground[1];
+lightTheme.colors.secondary.normal20Opacity = transparentize(
+  0.8,
+  lightTheme.colors.secondary.normal,
+);
+lightTheme.colors.secondary.normal10Opacity = transparentize(
+  0.9,
+  lightTheme.colors.secondary.normal,
+);
+lightTheme.colors.secondary.walletBackground =
+  lightTheme.colors.secondary.normal;
 
 // background
 lightTheme.colors.background1 = lightTheme.colors.background[0];
-lightTheme.colors.background2 = lightTheme.colors.background[1];
-lightTheme.colors.background3 = lightTheme.colors.background[2];
-lightTheme.colors.background4 = lightTheme.colors.background[3];
-lightTheme.colors.elevatedBackground1 = lightTheme.colors.elevatedBackground[0];
-lightTheme.colors.elevatedBackground2 = lightTheme.colors.elevatedBackground[1];
-lightTheme.colors.elevatedBackground3 = lightTheme.colors.elevatedBackground[2];
-lightTheme.colors.elevatedBackground4 = lightTheme.colors.elevatedBackground[3];
+lightTheme.colors.background2 = transparentize(
+  0.95,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.background3 = transparentize(
+  0.9,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.background4 = lightTheme.colors.background[1];
+
+lightTheme.colors.elevatedBackgroundFlat =
+  lightTheme.colors.elevatedBackground[0];
+lightTheme.colors.elevatedBackgroundLow =
+  lightTheme.colors.elevatedBackground[1];
+lightTheme.colors.elevatedBackgroundMedium =
+  lightTheme.colors.elevatedBackground[2];
+lightTheme.colors.elevatedBackgroundHigh =
+  lightTheme.colors.elevatedBackground[3];
+
+lightTheme.colors.elevatedDarkerBackgroundFlat =
+  lightTheme.colors.elevatedDarkerBackground[0];
+lightTheme.colors.elevatedDarkerBackgroundLow =
+  lightTheme.colors.elevatedDarkerBackground[1];
+lightTheme.colors.elevatedDarkerBackgroundMedium =
+  lightTheme.colors.elevatedDarkerBackground[2];
+lightTheme.colors.elevatedDarkerBackgroundHigh =
+  lightTheme.colors.elevatedDarkerBackground[3];
+
+lightTheme.colors.elevatedDarkerCardFlat =
+  lightTheme.colors.elevatedDarkerCardSurface[0];
+lightTheme.colors.elevatedDarkerCardLow =
+  lightTheme.colors.elevatedDarkerCardSurface[1];
+lightTheme.colors.elevatedDarkerCardMedium =
+  lightTheme.colors.elevatedDarkerCardSurface[2];
+lightTheme.colors.elevatedDarkerCardHigh =
+  lightTheme.colors.elevatedDarkerCardSurface[3];
+
 lightTheme.colors.elevatedThemeBackground.mrp =
   lightTheme.colors.elevatedThemeBackground[0];
 lightTheme.colors.elevatedThemeBackground.mdt =
   lightTheme.colors.elevatedThemeBackground[1];
+
+lightTheme.colors.themeBackground = lightTheme.colors.secondary.normal;
 
 lightTheme.colors.linearGradientBackground.theme =
   lightTheme.colors.linearGradientBackground[0];
@@ -413,9 +399,51 @@ lightTheme.colors.linearGradientBackground.infinite =
 lightTheme.colors.linearGradientBackground.infinite_privilege =
   lightTheme.colors.linearGradientBackground[5];
 
+// text
+lightTheme.colors.textOnError.normal = lightTheme.colors.textOnError[0];
+lightTheme.colors.textOnError.light = transparentize(
+  0.4,
+  lightTheme.colors.textOnError.normal,
+);
+lightTheme.colors.textOnError.superLight = transparentize(
+  0.9,
+  lightTheme.colors.textOnError.normal,
+);
+
+lightTheme.colors.textOnBackground.highEmphasis = transparentize(
+  0.2,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.textOnBackground.mediumEmphasis = transparentize(
+  0.4,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.textOnBackground.disabled = transparentize(
+  0.6,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.textOnThemeBackground.highEmphasis =
+  lightTheme.colors.background1;
+lightTheme.colors.textOnThemeBackground.mediumEmphasis =
+  lightTheme.colors.background1;
+
+// DetailBox
+lightTheme.colors.detailBox.primary = transparentize(
+  0.9,
+  lightTheme.colors.primary.normal,
+);
+lightTheme.colors.detailBox.secondary = transparentize(
+  0.9,
+  lightTheme.colors.secondary.normal,
+);
+lightTheme.colors.detailBox.error = transparentize(
+  0.9,
+  lightTheme.colors.textOnError.normal,
+);
+
 // membership
 lightTheme.colors.membership.newbie.badge.background =
-  lightTheme.colors.membership.newbie.badge[0];
+  lightTheme.colors.contrastColor;
 lightTheme.colors.membership.newbie.badge.text = lightTheme.colors.background1;
 lightTheme.colors.membership.newbie.dashboard.gradient =
   lightTheme.colors.membership.newbie.dashboard[0];
@@ -472,7 +500,7 @@ lightTheme.colors.membership.infinite.star =
   lightTheme.colors.membership.infinite.star[0];
 
 lightTheme.colors.membership.infinite_privilege.badge.background =
-  lightTheme.colors.membership.infinite_privilege.badge[0];
+  lightTheme.colors.contrastColor;
 lightTheme.colors.membership.infinite_privilege.badge.text =
   lightTheme.colors.background1;
 lightTheme.colors.membership.infinite_privilege.dashboard.gradient =
@@ -535,15 +563,41 @@ lightTheme.colors.tag.onBackground.text.normal = transparentize(
   lightTheme.colors.contrastColor,
 );
 
+// border
+lightTheme.colors.borderColor = transparentize(
+  0.8,
+  lightTheme.colors.contrastColor,
+);
+lightTheme.colors.contrastBorderColor = transparentize(
+  0.8,
+  lightTheme.colors.background1,
+);
+
+// button
+lightTheme.colors.buttonContrastBorderColor = transparentize(
+  0.6,
+  lightTheme.colors.background1,
+);
+lightTheme.colors.buttonContrastTextColor = lightTheme.colors.background1;
+
 // others
-lightTheme.colors.toggleOn.button = lightTheme.colors.toggleOn[0];
-lightTheme.colors.toggleOn.track = lightTheme.colors.toggleOn[1];
-lightTheme.colors.toggleOff.button = lightTheme.colors.toggleOff[0];
-lightTheme.colors.toggleOff.track = lightTheme.colors.toggleOff[1];
+lightTheme.colors.toggleOn.button = lightTheme.colors.background1;
+lightTheme.colors.toggleOn.track = lightTheme.colors.secondary.normal;
+lightTheme.colors.toggleOff.button = transparentize(
+  0.13,
+  lightTheme.colors.background1,
+);
+lightTheme.colors.toggleOff.track = transparentize(
+  0.9,
+  lightTheme.colors.contrastColor,
+);
 
 lightTheme.colors.unknownCard.background = lightTheme.colors.unknownCard[0];
 lightTheme.colors.unknownCard.color = lightTheme.colors.unknownCard[1];
 lightTheme.colors.unknownCard.border = lightTheme.colors.unknownCard[2];
+
+lightTheme.colors.rewardCircleBackground = lightTheme.colors.background1;
+lightTheme.colors.cashBackSummaryChip = lightTheme.colors.background1;
 
 lightTheme.fonts.pageTitle = lightTheme.fonts.heading;
 lightTheme.fonts.heading1 = lightTheme.fonts.heading;
@@ -672,46 +726,69 @@ lightTheme.lineHeights.smallText = lightTheme.fontSizes.smallText * 1.25;
 
 // main theme
 darkTheme.colors.primary.normal = darkTheme.colors.primary[0];
-darkTheme.colors.primary.dark = darkTheme.colors.primary[1];
-darkTheme.colors.primary.border = darkTheme.colors.primary[2];
-darkTheme.colors.primary.walletBackground = darkTheme.colors.primary[3];
+darkTheme.colors.primary.dark = darkTheme.colors.primary.normal;
+darkTheme.colors.primary.normal20Opacity = transparentize(
+  0.8,
+  darkTheme.colors.primary.normal,
+);
+darkTheme.colors.primary.walletBackground = darkTheme.colors.primary[2];
 
 darkTheme.colors.secondary.normal = darkTheme.colors.secondary[0];
-darkTheme.colors.secondary.light = darkTheme.colors.secondary[1];
-darkTheme.colors.secondary.dark = darkTheme.colors.secondary[2];
-darkTheme.colors.secondary.border = darkTheme.colors.secondary[3];
-darkTheme.colors.secondary.superLight = darkTheme.colors.secondary[4];
-darkTheme.colors.secondary.walletBackground = darkTheme.colors.secondary[5];
-
-// text
-darkTheme.colors.textOnError.normal = darkTheme.colors.textOnError[0];
-darkTheme.colors.textOnError.light = darkTheme.colors.textOnError[1];
-darkTheme.colors.textOnError.superLight = darkTheme.colors.textOnError[2];
-
-darkTheme.colors.textOnBackground.highEmphasis =
-  darkTheme.colors.textOnBackground[0];
-darkTheme.colors.textOnBackground.mediumEmphasis =
-  darkTheme.colors.textOnBackground[1];
-darkTheme.colors.textOnBackground.disabled =
-  darkTheme.colors.textOnBackground[2];
-darkTheme.colors.textOnThemeBackground.highEmphasis =
-  darkTheme.colors.textOnThemeBackground[0];
-darkTheme.colors.textOnThemeBackground.mediumEmphasis =
-  darkTheme.colors.textOnThemeBackground[1];
+darkTheme.colors.secondary.light = darkTheme.colors.secondary.normal;
+darkTheme.colors.secondary.dark = darkTheme.colors.secondary.normal;
+darkTheme.colors.secondary.normal20Opacity = transparentize(
+  0.8,
+  darkTheme.colors.secondary.normal,
+);
+darkTheme.colors.secondary.normal10Opacity = transparentize(
+  0.9,
+  darkTheme.colors.secondary.normal,
+);
+darkTheme.colors.secondary.walletBackground = darkTheme.colors.secondary[1];
 
 // background
 darkTheme.colors.background1 = darkTheme.colors.background[0];
-darkTheme.colors.background2 = darkTheme.colors.background[1];
-darkTheme.colors.background3 = darkTheme.colors.background[2];
-darkTheme.colors.background4 = darkTheme.colors.background[3];
-darkTheme.colors.elevatedBackground1 = darkTheme.colors.elevatedBackground[0];
-darkTheme.colors.elevatedBackground2 = darkTheme.colors.elevatedBackground[1];
-darkTheme.colors.elevatedBackground3 = darkTheme.colors.elevatedBackground[2];
-darkTheme.colors.elevatedBackground4 = darkTheme.colors.elevatedBackground[3];
+darkTheme.colors.background2 = transparentize(
+  0.88,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.background3 = darkTheme.colors.background2 = transparentize(
+  0.8,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.background4 = darkTheme.colors.background1;
+darkTheme.colors.elevatedBackgroundFlat =
+  darkTheme.colors.elevatedBackground[0];
+darkTheme.colors.elevatedBackgroundLow = darkTheme.colors.elevatedBackground[1];
+darkTheme.colors.elevatedBackgroundMedium =
+  darkTheme.colors.elevatedBackground[2];
+darkTheme.colors.elevatedBackgroundHigh =
+  darkTheme.colors.elevatedBackground[3];
+
+darkTheme.colors.elevatedDarkerBackgroundFlat =
+  darkTheme.colors.elevatedDarkerBackground[0];
+darkTheme.colors.elevatedDarkerBackgroundLow =
+  darkTheme.colors.elevatedDarkerBackground[1];
+darkTheme.colors.elevatedDarkerBackgroundMedium =
+  darkTheme.colors.elevatedDarkerBackground[2];
+darkTheme.colors.elevatedDarkerBackgroundHigh =
+  darkTheme.colors.elevatedDarkerBackground[3];
+
+darkTheme.colors.elevatedDarkerCardFlat =
+  darkTheme.colors.elevatedDarkerCardSurface[0];
+darkTheme.colors.elevatedDarkerCardLow =
+  darkTheme.colors.elevatedDarkerCardSurface[1];
+darkTheme.colors.elevatedDarkerCardMedium =
+  darkTheme.colors.elevatedDarkerCardSurface[2];
+darkTheme.colors.elevatedDarkerCardHigh =
+  darkTheme.colors.elevatedDarkerCardSurface[3];
+
 darkTheme.colors.elevatedThemeBackground.mrp =
   darkTheme.colors.elevatedThemeBackground[0];
 darkTheme.colors.elevatedThemeBackground.mdt =
   darkTheme.colors.elevatedThemeBackground[1];
+
+darkTheme.colors.themeBackground = darkTheme.colors.background1;
 
 darkTheme.colors.linearGradientBackground.theme =
   darkTheme.colors.linearGradientBackground[0];
@@ -725,6 +802,52 @@ darkTheme.colors.linearGradientBackground.infinite =
   darkTheme.colors.linearGradientBackground[4];
 darkTheme.colors.linearGradientBackground.infinite_privilege =
   darkTheme.colors.linearGradientBackground[5];
+
+// text
+darkTheme.colors.textOnError.normal = darkTheme.colors.textOnError[0];
+darkTheme.colors.textOnError.light = transparentize(
+  0.3,
+  darkTheme.colors.textOnError.normal,
+);
+darkTheme.colors.textOnError.superLight = transparentize(
+  0.84,
+  darkTheme.colors.textOnError.normal,
+);
+
+darkTheme.colors.textOnBackground.highEmphasis = transparentize(
+  0.13,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.textOnBackground.mediumEmphasis = transparentize(
+  0.4,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.textOnBackground.disabled = transparentize(
+  0.62,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.textOnThemeBackground.highEmphasis = transparentize(
+  0.13,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.textOnThemeBackground.mediumEmphasis = transparentize(
+  0.4,
+  darkTheme.colors.contrastColor,
+);
+
+// DetailBox
+darkTheme.colors.detailBox.primary = transparentize(
+  0.8,
+  darkTheme.colors.primary.normal,
+);
+darkTheme.colors.detailBox.secondary = transparentize(
+  0.8,
+  darkTheme.colors.secondary.normal,
+);
+darkTheme.colors.detailBox.error = transparentize(
+  0.8,
+  darkTheme.colors.textOnError.normal,
+);
 
 // membership
 darkTheme.colors.membership.newbie.badge.background =
@@ -868,11 +991,27 @@ darkTheme.colors.tag.onBackground.text.normal = transparentize(
   darkTheme.colors.contrastColor,
 );
 
+// button
+darkTheme.colors.buttonContrastBorderColor = transparentize(
+  0.8,
+  darkTheme.colors.secondary.normal,
+);
+darkTheme.colors.buttonContrastTextColor = darkTheme.colors.secondary.normal;
+
 // others
-darkTheme.colors.toggleOn.button = darkTheme.colors.toggleOn[0];
-darkTheme.colors.toggleOn.track = darkTheme.colors.toggleOn[1];
-darkTheme.colors.toggleOff.button = darkTheme.colors.toggleOff[0];
-darkTheme.colors.toggleOff.track = darkTheme.colors.toggleOff[1];
+darkTheme.colors.toggleOn.button = darkTheme.colors.secondary.normal;
+darkTheme.colors.toggleOn.track = transparentize(
+  0.62,
+  darkTheme.colors.secondary.normal,
+);
+darkTheme.colors.toggleOff.button = transparentize(
+  0.4,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.toggleOff.track = transparentize(
+  0.62,
+  darkTheme.colors.contrastColor,
+);
 
 darkTheme.colors.unknownCard.background = darkTheme.colors.unknownCard[0];
 darkTheme.colors.unknownCard.color = darkTheme.colors.unknownCard[1];

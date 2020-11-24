@@ -21,7 +21,7 @@ export const icon = css`
 `;
 
 export const sectionContainer = (theme) => css`
-  ${theme.colors.elevatedBackground3}
+  ${theme.colors.elevatedBackgroundMedium}
   margin-vertical: 16px;
   padding: 24px;
   padding-top: 16px;
@@ -32,7 +32,7 @@ export const sectionContainer = (theme) => css`
 export const lowerHalfSectionContainer = (theme) => css`
   padding: 24px;
   padding-top: 40px;
-  ${theme.colors.elevatedBackground3}
+  ${theme.colors.elevatedBackgroundMedium}
   border-top-width: 0;
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;

@@ -9,7 +9,7 @@ import {APP_BAR_HEIGHT} from '@/constants/layout';
 import AppButton from '@/components/AppButton';
 import AccountIconWithBadge from '@/components/AccountIconWithBadge';
 import ArrowLeftIcon from '@/assets/arrow_left_icon.svg';
-
+import {css} from '@emotion/native';
 import {LabelText, styles} from './style';
 
 import BrowseScreen from '@/screens/BrowseScreen';
@@ -65,9 +65,9 @@ const WalletStackScreen = () => {
         headerLeftContainerStyle: {
           paddingLeft: 24,
         },
-        cardStyle: {
-          backgroundColor: theme.colors.background4,
-        },
+        cardStyle: css`
+          ${theme.colors.elevatedDarkerBackgroundFlat}
+        `,
       }}>
       <WalletStack.Screen
         name="wallet"

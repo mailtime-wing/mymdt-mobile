@@ -36,7 +36,7 @@ export const rewardMeContainer = css`
 `;
 
 export const upperSection = (theme) => css`
-  background: ${theme.colors.secondary.superLight};
+  background: ${theme.colors.secondary.normal10Opacity};
   flex-direction: row;
   justify-items: center;
   align-content: center;
