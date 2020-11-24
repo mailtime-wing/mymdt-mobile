@@ -30,7 +30,7 @@ const BottomSheetOptionList = ({
     setIsExpand(!isExpand);
   };
 
-  const handleOptionPress = optionIndex => {
+  const handleOptionPress = (optionIndex) => {
     setActiveItemIndex(optionIndex);
     onItemPress();
   };

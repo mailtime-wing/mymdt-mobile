@@ -14,7 +14,7 @@ import {
   lowerSection,
   arrow,
   brand as brandName,
-  brandPercentage,
+  // brandPercentage,
   imageContainer,
   brandDetail as brandDetailContainer,
   selectedMerchant,
@@ -28,9 +28,9 @@ import ShoppingBagAddIcon from '@/assets/icon_shopping-bag-add.svg';
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
 import BrandIcon from '@/components/BrandIcon';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, FormattedNumber} from 'react-intl';
 
-const CashBackItem = ({icon, brand}) => {
+const CashBackItem = ({icon, brand, earnInTotal, earnInPeriod}) => {
   const theme = useTheme();
   // TODO: create <AppTag /> component for %
   return (
@@ -43,13 +43,13 @@ const CashBackItem = ({icon, brand}) => {
           <AppText variant="heading5" style={brandName(theme)}>
             {brand}
           </AppText>
-          <AppText variant="heading6" style={brandPercentage(theme)}>
+          {/* <AppText variant="heading6" style={brandPercentage(theme)}>
             <FormattedMessage
               id="cash_back_percentage"
               defaultMessage="{percentage}% cashback"
               values={{percentage: 0.5}}
             />
-          </AppText>
+          </AppText> */}
         </View>
 
         <AppText variant="caption" style={earned(theme)}>
@@ -59,7 +59,7 @@ const CashBackItem = ({icon, brand}) => {
               amount: (
                 <AppText variant="caption" style={amount(theme)}>
                   <FormattedMessage id="currencies.usd" defaultMessage="USD" />{' '}
-                  5
+                  <FormattedNumber value={Number(earnInPeriod)} />
                 </AppText>
               ),
             }}
@@ -72,7 +72,7 @@ const CashBackItem = ({icon, brand}) => {
               amount: (
                 <AppText variant="caption" style={amount(theme)}>
                   <FormattedMessage id="currencies.usd" defaultMessage="USD" />{' '}
-                  3240
+                  <FormattedNumber value={Number(earnInTotal)} />
                 </AppText>
               ),
             }}
@@ -83,7 +83,13 @@ const CashBackItem = ({icon, brand}) => {
   );
 };
 
-const CashBackSummarySection = ({navigation, onPress, style}) => {
+const CashBackSummarySection = ({
+  merchantsData,
+  navigation,
+  onPress,
+  style,
+  summaryData,
+}) => {
   const theme = useTheme();
 
   return (
@@ -109,7 +115,11 @@ const CashBackSummarySection = ({navigation, onPress, style}) => {
                       id="currencies.usd"
                       defaultMessage="USD"
                     />{' '}
-                    10
+                    <FormattedNumber
+                      value={Number(
+                        summaryData?.data?.total_cashback_in_period || 0,
+                      )}
+                    />
                   </AppText>
                 ),
               }}
@@ -125,7 +135,9 @@ const CashBackSummarySection = ({navigation, onPress, style}) => {
                       id="currencies.usd"
                       defaultMessage="USD"
                     />{' '}
-                    6480
+                    <FormattedNumber
+                      value={Number(summaryData?.data.total_cashback || 0)}
+                    />
                   </AppText>
                 ),
               }}
@@ -151,14 +163,21 @@ const CashBackSummarySection = ({navigation, onPress, style}) => {
             defaultMessage="Cash Back from Selected Merchants"
           />
         </AppText>
-        <CashBackItem icon={require('@/assets/netflix.png')} brand="Amazon" />
-        <CashBackItem
-          icon={require('@/assets/netflix.png')}
-          brand="Rakuten JP"
-        />
+        {summaryData?.data?.merchant_summary_infos.map((merchant_summary) => (
+          <CashBackItem
+            icon={{
+              uri: merchantsData?.find(
+                (merchant) => merchant.name === merchant_summary.merchant,
+              )?.logo,
+            }}
+            brand={merchant_summary.merchant}
+            earnInTotal={merchant_summary.total_cashback}
+            earnInPeriod={merchant_summary.total_cashback_in_period}
+          />
+        ))}
         <AppButton
           onPress={() =>
-            navigation.navigate('settings', {screen: 'merchants_preference'})
+            navigation.navigate('settings', {screen: 'offers_preference_edit'})
           }
           variant="filled"
           sizeVariant="normal"

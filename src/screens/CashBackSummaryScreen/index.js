@@ -4,13 +4,17 @@ import React, {
   useEffect,
   useState,
   useContext,
+  useMemo,
 } from 'react';
-import {TRANSACTIONS_QUERY} from '@/api/data';
 import {VirtualizedList, TouchableOpacity, Image, View} from 'react-native';
 import {useTheme} from 'emotion-theming';
-import {FormattedMessage, FormattedNumber} from 'react-intl';
-import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
-import {MEASURABLE_REWARD_POINT} from '@/constants/currency';
+import {FormattedNumber} from 'react-intl';
+import {MM} from '@/constants/currency';
+import {GET_MERCHANTS_API} from '@/api/data';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import {AUTH_TOKENS} from '@/api/auth';
+import {useQuery} from '@apollo/client';
 
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -31,17 +35,29 @@ import {ThemeContext} from '@/context/theme';
 import AppIcon from '@/components/AppIcon';
 import AppText from '@/components/AppText2';
 import MissingCartIcon from '@/assets/icon_missed-shopping-cart.svg';
-import TransactionBottomSheet from '@/components/TransactionBottomSheet';
+// import TransactionBottomSheet from '@/components/TransactionBottomSheet';
 
 import TransactionsHistory from '@/components/TransactionsHistory';
-import AppButton from '@/components/AppButton';
+// import AppButton from '@/components/AppButton';
 import BrandIcon from '@/components/BrandIcon';
+import {FormattedMessage} from 'react-intl';
 
-const filterList = [
-  [],
-  ['foo@gmail.com', 'bar@gmail.com'],
-  ['Mastercard (•••• 1001)', 'ABC Bank (•••• 1234)'],
-];
+import {useSWRInfinite} from 'swr';
+
+const url = 'https://distribute-alpha.reward.me/cashback/histories';
+
+const getKey = (pageIndex, previousPageData) => {
+  // reached the end
+  if (previousPageData && !previousPageData.data) {
+    return null;
+  }
+  // first page, we don't have `previousPageData`
+  if (pageIndex === 0) {
+    return `${url}?first=10`;
+  }
+  // add the cursor to the API endpoint
+  return `${url}?after=${previousPageData.endCursor}&first=10`;
+};
 
 const SummaryChip = ({currency, amount, range, style}) => {
   const theme = useTheme();
@@ -64,109 +80,105 @@ const SummaryChip = ({currency, amount, range, style}) => {
   );
 };
 
-const CashBackSummaryScreen = ({navigation}) => {
+const CashBackSummaryScreen = ({navigation, route}) => {
   const theme = useTheme();
   const {isDark} = useContext(ThemeContext);
+  const {cashBackTotal, cashBackTotalInPeriod} = route.params;
   const backgroundImg = isDark
     ? require('@/assets/cashback-history-background_dark.png')
     : require('@/assets/cashback-history-background.png');
-  const [showBottomSheet, setShowBottomSheet] = useState(false);
-  const [activeFilterIndex, setActiveFilterIndex] = useState(0);
-  // TODO: use real data when have api (do not have cash back api this moment)
-  // now: hardcode using MRP transaction data
-  const [getTransactions, {data, fetchMore}] = useLazyQueryWithAuth(
-    TRANSACTIONS_QUERY,
-    {
-      fetchPolicy: 'network-only',
-    },
-  );
+  // const [showBottomSheet, setShowBottomSheet] = useState(false);
+  // const [activeFilterSectionIndex, setActiveFilterSectionIndex] = useState(0);
+  // const [activeFilterItemIndex, setActiveFilterItemIndex] = useState(null);
+  const [cashBackHistoryList, setCashBackHistoryList] = useState([]);
 
-  const currentCardData = data?.userProfile?.currencyAccounts[0];
-  const currencyCode = MEASURABLE_REWARD_POINT;
-  const cardTransactionsHistory = currentCardData?.transactions?.edges.map(
-    (transaction) =>
-      (transaction = {
-        ...transaction,
-        icon: (
-          <BrandIcon
-            sizeVariant="normal"
-            ImgSrc={require('@/assets/netflix.png')}
-          />
-        ),
-      }),
+  const {data: merchantsData, loading: merchantsLoading} = useQueryWithAuth(
+    GET_MERCHANTS_API,
   );
-  const pageInfo = currentCardData?.transactions.pageInfo;
-  const filter = activeFilterIndex ? filterList[activeFilterIndex].value : null;
+  const {data: authData} = useQuery(AUTH_TOKENS);
+
+  const fetcher = (...args) =>
+    fetch(...args, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authData.accessToken}`,
+      },
+    }).then((res) => res.json());
+
+  const {data: fetchedCashBackData} = useSWRInfinite(getKey, fetcher);
+
+  const currencyCode = MM;
+
+  // TODO: handle pagination
+
+  const cashBackHistoryRawList = useMemo(
+    () =>
+      !!fetchedCashBackData &&
+      fetchedCashBackData[0].data?.edges.map(
+        (h) =>
+          (h = {
+            cursor: h.cursor,
+            icon: merchantsLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <BrandIcon
+                sizeVariant="normal"
+                ImgSrc={{
+                  uri: merchantsData?.merchants.find(
+                    (merchant) => merchant.name === h.node.merchant,
+                  ).logo,
+                }}
+              />
+            ),
+            node: {
+              amount: h.node.cashback,
+              id: h.node.id,
+              title: h.node.merchant,
+              transactionTime: h.node.history_time,
+              type: h.node.provider,
+              data: {
+                email: h.node.data?.account_email,
+                subType: h.node.data?.subType,
+                mask: h.node.data?.mask,
+              },
+            },
+          }),
+      ),
+    [fetchedCashBackData, merchantsData, merchantsLoading],
+  );
 
   useEffect(() => {
-    getTransactions({
-      variables: {
-        currencyCode: MEASURABLE_REWARD_POINT,
-      },
-    });
-  }, [getTransactions]);
+    setCashBackHistoryList(cashBackHistoryRawList);
+  }, [cashBackHistoryRawList]);
 
-  const handleFilterPress = () => {
-    setShowBottomSheet(true);
-  };
+  // const dataByMerchants = [];
+  // const dataByEmails = [];
+  // const dataByBanks = {};
 
-  const handleLayoutPress = () => {
-    setShowBottomSheet(false);
-  };
+  // const filterList = [
+  //   {title: 'Cashback from Selected Merchants', data: dataByMerchants},
+  //   {title: 'Cashback from Emails', data: dataByEmails},
+  //   {title: 'Cashback from Bank accounts', data: dataByBanks},
+  // ];
 
-  const handleItemPress = (index) => {
-    setActiveFilterIndex(index);
-  };
+  // const handleFilterPress = () => {
+  //   setShowBottomSheet(true);
+  // };
 
-  const onApplyPress = () => {
-    getTransactions({
-      variables: {
-        ...(filter && {
-          filter: {
-            type: filter,
-          },
-        }),
-        currencyCode: MEASURABLE_REWARD_POINT,
-      },
-    });
+  // const handleLayoutPress = () => {
+  //   setShowBottomSheet(false);
+  // };
 
-    setShowBottomSheet(false);
-  };
+  // const handleItemPress = (index, itemIndex) => {
+  //   setActiveFilterSectionIndex(index);
+  //   setActiveFilterItemIndex(itemIndex);
+  // };
 
-  const onLoadMore = () => {
-    if (!pageInfo?.hasNextPage) {
-      return;
-    }
+  // const onApplyPress = () => {
+  //   setShowBottomSheet(false);
+  // };
 
-    fetchMore({
-      ...(filter && {
-        filter: {
-          type: filter,
-        },
-      }),
-      variables: {
-        currencyCode: MEASURABLE_REWARD_POINT,
-        cursor: pageInfo.endCursor,
-      },
-      updateQuery: (previousResult, {fetchMoreResult}) => {
-        if (
-          !fetchMoreResult?.userProfile?.currencyAccounts?.[0]?.transactions
-            ?.edges?.length
-        ) {
-          return previousResult;
-        }
-
-        const newData = JSON.parse(JSON.stringify(fetchMoreResult));
-
-        newData.userProfile.currencyAccounts[0].transactions.edges = [
-          ...previousResult.userProfile.currencyAccounts[0].transactions.edges,
-          ...fetchMoreResult.userProfile.currencyAccounts[0].transactions.edges,
-        ];
-
-        return newData;
-      },
-    });
-  };
+  const onLoadMore = () => {};
 
   const handleMissingCartPress = useCallback(() => {
     navigation.navigate('missing_receipt');
@@ -208,7 +220,6 @@ const CashBackSummaryScreen = ({navigation}) => {
             <View style={body}>
               <SummaryChip
                 currency="USD"
-                amount={10.12}
                 range={
                   <FormattedMessage
                     id="in_past_days"
@@ -218,14 +229,15 @@ const CashBackSummaryScreen = ({navigation}) => {
                     }}
                   />
                 }
+                amount={cashBackTotalInPeriod}
                 style={firstChipMargin}
               />
               <SummaryChip
                 currency="USD"
-                amount={1234.21}
                 range={
                   <FormattedMessage id="in_totals" defaultMessage="In Totals" />
                 }
+                amount={cashBackTotal}
               />
               <Image
                 style={banner}
@@ -245,33 +257,33 @@ const CashBackSummaryScreen = ({navigation}) => {
                     defaultMessage="Cash Back History"
                   />
                 </AppText>
-                <AppButton
+                {/* <AppButton
                   onPress={handleFilterPress}
                   variant="outlined"
                   sizeVariant="compact"
                   colorVariant="secondary"
                   text={<FormattedMessage id="button.filter" />}
-                />
+                /> */}
               </View>
             }
             currencyCode={currencyCode}
             navigation={navigation}
-            transactionsHistoryList={cardTransactionsHistory}
+            transactionsHistoryList={cashBackHistoryList}
             onEndReached={onLoadMore}
             style={historyBackground(theme)}
           />
         }
       />
-      {showBottomSheet && (
+      {/* {showBottomSheet && (
         <TransactionBottomSheet
           title={<FormattedMessage id="filter_by" defaultMessage="Filter by" />}
           items={filterList}
-          activeOptionIndex={activeFilterIndex}
+          activeOptionIndex={activeFilterSectionIndex}
           onLayoutPress={handleLayoutPress}
           onItemPress={handleItemPress}
           onApplyPress={onApplyPress}
         />
-      )}
+      )} */}
     </>
   );
 };

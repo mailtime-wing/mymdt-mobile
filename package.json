@@ -59,6 +59,7 @@
     "react-native-switches": "^1.2.5",
     "react-native-url-polyfill": "^1.2.0",
     "react-native-version-number": "^0.3.6",
+    "swr": "^0.3.9",
     "xmldom": "^0.3.0"
   },
   "devDependencies": {

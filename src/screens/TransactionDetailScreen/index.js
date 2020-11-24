@@ -8,6 +8,9 @@ import TransactitonType from '@/enum/transactionsType';
 import ConvertIcon from '@/assets/convert_icon.svg';
 import TransactionAmount from '@/components/TransactionAmount';
 import FormattedTransactionDate from '@/components/FormattedTransactionDate';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import BrandIcon from '@/components/BrandIcon';
+import {GET_MERCHANTS_API} from '@/api/data';
 
 import {
   section,
@@ -24,6 +27,7 @@ import {useTheme} from 'emotion-theming';
 const RenderTransationDetail = ({transactionItem}) => {
   const {title, transactionTime} = transactionItem;
   const theme = useTheme();
+
   switch (transactionItem.type) {
     case TransactitonType.CHECK_IN:
       return (
@@ -151,6 +155,42 @@ const RenderTransationDetail = ({transactionItem}) => {
           </View>
         </>
       );
+    case TransactitonType.MAI:
+      // TODO: confirm detail with designer
+      return (
+        <>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              Recipient
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              {transactionItem.data.email}
+            </AppText>
+          </View>
+        </>
+      );
+    case TransactitonType.BANK:
+      // TODO: confirm detail with designer
+      return (
+        <>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              Bank
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              {transactionItem.data.subType}
+            </AppText>
+          </View>
+          <View style={itemContainer}>
+            <AppText variant="body1" style={titleStyle(theme)}>
+              Card
+            </AppText>
+            <AppText variant="body2" style={detail(theme)}>
+              {transactionItem.data.mask}
+            </AppText>
+          </View>
+        </>
+      );
     default:
       return null;
   }
@@ -158,6 +198,7 @@ const RenderTransationDetail = ({transactionItem}) => {
 
 const TransactionDetailScreen = ({route}) => {
   const theme = useTheme();
+  const {data: merchantsData} = useQueryWithAuth(GET_MERCHANTS_API);
   const {
     item: {node: transactionItem},
     currencyCode,
@@ -175,7 +216,21 @@ const TransactionDetailScreen = ({route}) => {
           <TransactionItem
             title={transactionItem.title}
             date={transactionItem.transactionTime}
-            icon={ConvertIcon}
+            icon={
+              transactionItem.type === TransactitonType.MAI ||
+              transactionItem.type === TransactitonType.BANK ? (
+                <BrandIcon
+                  sizeVariant="normal"
+                  ImgSrc={{
+                    uri: merchantsData?.merchants.find(
+                      (merchant) => merchant.name === transactionItem.title,
+                    ).logo,
+                  }}
+                />
+              ) : (
+                ConvertIcon
+              )
+            }
             coinBackgroundColor={theme.colors.secondary.normal}
             coin={
               <TransactionAmount
