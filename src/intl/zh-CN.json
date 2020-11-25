@@ -286,6 +286,12 @@
     "me": "ME",
     "usd": "USD"
   },
+  "currencyDisplayName": {
+    "RD": "Reward Dollar",
+    "MDT": "量数通证",
+    "ME": "ME Token",
+    "USD": "美元"
+  },
   "button": {
     "done": "完成",
     "edit": "编辑",

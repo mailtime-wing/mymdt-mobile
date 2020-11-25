@@ -286,6 +286,12 @@
     "me": "ME",
     "usd": "USD"
   },
+  "currencyDisplayName": {
+    "RD": "Reward Dollar",
+    "MDT": "Measurable Data Token",
+    "ME": "ME Token",
+    "USD": "US Dollar"
+  },
   "button": {
     "done": "Done",
     "edit": "Edit",

@@ -40,7 +40,6 @@ import AppText from '@/components/AppText2';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ConversionRate from '@/components/ConversionRate';
 import ConvertIcon from '@/assets/convert.svg';
-import {ME, REWARD_DOLLAR} from '@/constants/currency';
 
 const inputAccessoryViewID = 'converterButtons';
 
@@ -144,10 +143,6 @@ const ConvertForm = ({
   const [isAmountFocus, setIsAmountFocus] = useState(false);
   const [toAmount, setToAmount] = useState(0);
   const [clientError, setClientError] = useState('');
-  const label = {
-    [REWARD_DOLLAR]: 'Reward Dollar',
-    [ME]: 'Me',
-  };
 
   useEffect(() => {
     setToAmount(values.amount * conversionRate);
@@ -201,7 +196,7 @@ const ConvertForm = ({
           onFocus={() => setIsAmountFocus(true)}
           isFocus={isAmountFocus}>
           <AppText variant="value" style={converterType(theme, isAmountFocus)}>
-            {label[from]}
+            <FormattedMessage id={`currencyDisplayName.${from}`} />
           </AppText>
           <ConverterInput
             keyboardType="numeric"
@@ -224,7 +219,7 @@ const ConvertForm = ({
         </TouchableOpacity>
         <ConverterContainer isFocus={false}>
           <AppText variant="value" style={converterType(theme)}>
-            {label[to]}
+            <FormattedMessage id={`currencyDisplayName.${to}`} />
           </AppText>
           <AppText
             variant="heading1"
