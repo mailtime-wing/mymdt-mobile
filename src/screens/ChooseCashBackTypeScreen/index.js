@@ -12,7 +12,7 @@ import ScreenContainer from '@/components/ScreenContainer';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {UPDATE_USER_CASHBACK_CURRENCY_CODE_API} from '@/api/data';
-import {REWARD_DOLLAR, MEASURABLE_DATA_TOKEN} from '@/constants/currency';
+import {REWARD_DOLLAR, ME} from '@/constants/currency';
 
 import {
   container,
@@ -38,7 +38,7 @@ const cashbackTypeList = [
     title: 'Return in Measurable Data Token',
     detail:
       'MDT is a cryptocurrency that its value may vary from time to time.',
-    type: MEASURABLE_DATA_TOKEN,
+    type: ME,
   },
 ];
 

@@ -4,7 +4,7 @@ import {FormattedMessage, FormattedDate} from 'react-intl';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 import {CLAIM_REWARD_API, GET_CURRENCY_CODE} from '@/api/data';
-import {MEASURABLE_DATA_TOKEN} from '@/constants/currency';
+import {ME} from '@/constants/currency';
 
 import {
   Container,
@@ -35,7 +35,7 @@ const TaskList = ({taskList, userRewardList, onClaimPress}) => {
 
   const cashbackCurrencyCode =
     currencyCodeData?.userProfile?.cashbackCurrencyCode;
-  const convert = cashbackCurrencyCode === MEASURABLE_DATA_TOKEN;
+  const convert = cashbackCurrencyCode === ME;
 
   const handleRewardGotPress = () => {
     reset();

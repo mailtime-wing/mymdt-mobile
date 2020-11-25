@@ -5,7 +5,7 @@ import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 import {GET_CHECK_IN_STATUS_API, CHECK_IN_API} from '@/api/data';
 import {IntlContext} from '@/context/Intl';
-import {MEASURABLE_DATA_TOKEN} from '@/constants/currency';
+import {ME} from '@/constants/currency';
 
 import {margin, dayList, container, checkInButton} from './style';
 
@@ -44,7 +44,7 @@ const DailyCheckIn = () => {
   const todayRewardAmount =
     (todayAndAfterRewards && todayAndAfterRewards[today - 1]) || 0;
   const cashbackCurrencyCode = data?.userProfile?.cashbackCurrencyCode;
-  const convert = cashbackCurrencyCode === MEASURABLE_DATA_TOKEN;
+  const convert = cashbackCurrencyCode === ME;
   const coinColor = theme.colors.textOfMrp;
 
   const handleRewardGotPress = () => {
