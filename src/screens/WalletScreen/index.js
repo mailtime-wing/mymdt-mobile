@@ -124,7 +124,10 @@ const WalletScreen = ({navigation}) => {
       </SafeAreaView>
       <TouchableOpacity style={currencyRow(theme)} onPress={handleMrpPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
-          <FormattedMessage id="currencies.rd" defaultMessage="Reward Dollar" />
+          <FormattedMessage
+            id="currencyDisplayCode.RD"
+            defaultMessage="Reward Dollar"
+          />
         </AppText>
         {loading ? (
           <LoadingSpinner style={spinner} />
@@ -159,7 +162,7 @@ const WalletScreen = ({navigation}) => {
       </TouchableOpacity>
       <TouchableOpacity style={currencyRow(theme)} onPress={handleMdtPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
-          <FormattedMessage id="currencies.mdt" defaultMessage="MDT" />
+          <FormattedMessage id="currencyDisplayCode.MDT" defaultMessage="MDT" />
         </AppText>
         {loading ? (
           <LoadingSpinner style={spinner} />
@@ -192,7 +195,7 @@ const WalletScreen = ({navigation}) => {
                 values={{
                   amount: earnedMM,
                   currency: (
-                    <FormattedMessage id="currencies.me" defaultMessage="ME" />
+                    <FormattedMessage id="currencyDisplayCode.ME" defaultMessage="ME" />
                   ),
                   day: 7,
                 }}
@@ -209,7 +212,7 @@ const WalletScreen = ({navigation}) => {
         style={[currencyRow(theme), lastCurrencyRow]}
         onPress={handleNewTokenPress}>
         <AppText variant="subTitle2" style={currency(theme)}>
-          <FormattedMessage id="currencies.me" defaultMessage="ME" />
+          <FormattedMessage id="currencyDisplayCode.ME" defaultMessage="ME" />
         </AppText>
         {loading ? (
           <LoadingSpinner style={spinner} />

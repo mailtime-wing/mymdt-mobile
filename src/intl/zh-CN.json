@@ -280,11 +280,11 @@
   "binance": "Binance",
   "okex": "OKEx",
   "digifinex": "Digifinex",
-  "currencies": {
-    "rd": "Reward Dollar",
-    "mdt": "MDT",
-    "me": "ME",
-    "usd": "USD"
+  "currencyDisplayCode": {
+    "RD": "Reward Dollar",
+    "MDT": "MDT",
+    "ME": "ME",
+    "USD": "USD"
   },
   "currencyDisplayName": {
     "RD": "Reward Dollar",

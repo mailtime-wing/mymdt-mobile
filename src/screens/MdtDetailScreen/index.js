@@ -55,7 +55,7 @@ const MdtDetailScreen = ({navigation}) => {
     <ScrollView>
       <SafeAreaView style={container(theme)}>
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
-          <FormattedMessage id="currencies.mdt" defaultMessage="MDT" />{' '}
+          <FormattedMessage id="currencyDisplayCode.MDT" defaultMessage="MDT" />{' '}
           <FormattedMessage id="total_balance" defaultMessage="total balance" />
         </AppText>
         {loading ? (

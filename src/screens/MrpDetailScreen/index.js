@@ -51,7 +51,10 @@ const MrpDetailScreen = ({navigation}) => {
     <ScrollView>
       <SafeAreaView style={container(theme)}>
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
-          <FormattedMessage id="currencies.rd" defaultMessage="Reward Dollar" />{' '}
+          <FormattedMessage
+            id="currencyDisplayCode.RD"
+            defaultMessage="Reward Dollar"
+          />{' '}
           <FormattedMessage id="total_balance" defaultMessage="total balance" />
         </AppText>
         {loading ? (

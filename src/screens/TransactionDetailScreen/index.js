@@ -145,7 +145,10 @@ const RenderTransationDetail = ({transactionItem}) => {
               <FormattedMessage id="amount" defaultMessage="Amount" />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              <FormattedMessage id="currencies.usd" defaultMessage="USD" />{' '}
+              <FormattedMessage
+                id="currencyDisplayCode.USD"
+                defaultMessage="USD"
+              />{' '}
               {transactionItem.data.amount}
             </AppText>
           </View>
@@ -207,7 +210,10 @@ const RenderTransationDetail = ({transactionItem}) => {
               <FormattedMessage id="amount" defaultMessage="Amount" />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              <FormattedMessage id="currencies.usd" defaultMessage="USD" />{' '}
+              <FormattedMessage
+                id="currencyDisplayCode.USD"
+                defaultMessage="USD"
+              />{' '}
               {transactionItem.data.amount}
             </AppText>
           </View>

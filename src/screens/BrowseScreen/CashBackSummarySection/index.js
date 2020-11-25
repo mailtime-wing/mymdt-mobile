@@ -58,7 +58,10 @@ const CashBackItem = ({icon, brand, earnInTotal, earnInPeriod}) => {
             values={{
               amount: (
                 <AppText variant="caption" style={amount(theme)}>
-                  <FormattedMessage id="currencies.usd" defaultMessage="USD" />{' '}
+                  <FormattedMessage
+                    id="currencyDisplayCode.USD"
+                    defaultMessage="USD"
+                  />{' '}
                   <FormattedNumber value={Number(earnInPeriod)} />
                 </AppText>
               ),
@@ -71,7 +74,10 @@ const CashBackItem = ({icon, brand, earnInTotal, earnInPeriod}) => {
             values={{
               amount: (
                 <AppText variant="caption" style={amount(theme)}>
-                  <FormattedMessage id="currencies.usd" defaultMessage="USD" />{' '}
+                  <FormattedMessage
+                    id="currencyDisplayCode.USD"
+                    defaultMessage="USD"
+                  />{' '}
                   <FormattedNumber value={Number(earnInTotal)} />
                 </AppText>
               ),
@@ -112,7 +118,7 @@ const CashBackSummarySection = ({
                 amount: (
                   <AppText variant="caption" style={amount(theme)}>
                     <FormattedMessage
-                      id="currencies.usd"
+                      id="currencyDisplayCode.USD"
                       defaultMessage="USD"
                     />{' '}
                     <FormattedNumber
@@ -132,7 +138,7 @@ const CashBackSummarySection = ({
                 amount: (
                   <AppText variant="caption" style={amount(theme)}>
                     <FormattedMessage
-                      id="currencies.usd"
+                      id="currencyDisplayCode.USD"
                       defaultMessage="USD"
                     />{' '}
                     <FormattedNumber

@@ -51,7 +51,7 @@ const NewTokenDetailScreen = ({navigation}) => {
     <ScrollView>
       <SafeAreaView style={container(theme)}>
         <AppText variant="label" style={[total(theme), textAlignCenter]}>
-          <FormattedMessage id="currencies.me" defaultMessage="ME" />{' '}
+          <FormattedMessage id="currencyDisplayCode.ME" defaultMessage="ME" />{' '}
           <FormattedMessage id="total_balance" defaultMessage="total balance" />
         </AppText>
         {loading ? (
