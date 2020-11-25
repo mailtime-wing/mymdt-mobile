@@ -162,7 +162,7 @@ const BrowseScreen = ({navigation}) => {
   // TODO: add card scaled shadow
   return (
     <LinearGradientBackground colors={levelGradientMap[userLevel].gradient}>
-      <AccountBar navigation={navigation} showCoins />
+      <AccountBar navigation={navigation} />
       <ScrollView>
         <MembershipCard userLevel={userLevel} style={imageStyle} />
         <UpgradeSection

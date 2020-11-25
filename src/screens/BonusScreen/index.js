@@ -13,7 +13,7 @@ import NoMoreContent from '@/components/NoMoreContent';
 import DailyCheckIn from '@/components/DailyCheckIn';
 import TaskList from '@/components/TaskList';
 
-const BonusScreen = props => {
+const BonusScreen = (props) => {
   const {data, refetch} = useQueryWithAuth(GET_USER_TASK_GROUPS_AND_REWARD_API);
 
   const userRewardList = data?.userProfile?.rewards;
@@ -25,7 +25,7 @@ const BonusScreen = props => {
   return (
     <LinearGradientBackground>
       <ScrollContainer>
-        <AccountBar showCoins {...props} />
+        <AccountBar {...props} />
         <BonusBox
           title={<FormattedMessage id="check_in_task" />}
           detail={<FormattedMessage id="check_in_task_detail" />}
