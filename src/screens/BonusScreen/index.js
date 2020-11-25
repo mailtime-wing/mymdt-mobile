@@ -6,7 +6,7 @@ import {GET_USER_TASK_GROUPS_AND_REWARD_API} from '@/api/data';
 
 import {MarginBottom, ScrollContainer, TaskListContainer} from './style';
 
-import AccountBar from '@/components/AccountBar';
+import ScreenContainer from '@/components/ScreenContainer';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import BonusBox from '@/components/BonusBox';
 import NoMoreContent from '@/components/NoMoreContent';
@@ -24,39 +24,40 @@ const BonusScreen = (props) => {
 
   return (
     <LinearGradientBackground>
-      <ScrollContainer>
-        <AccountBar {...props} />
-        <BonusBox
-          title={<FormattedMessage id="check_in_task" />}
-          detail={<FormattedMessage id="check_in_task_detail" />}
-          children={<DailyCheckIn />}
-        />
-        <MarginBottom />
-        {data?.userProfile?.taskGroups.map(
-          ({name, description, userTasks}, index) => (
-            <Fragment key={name}>
-              <BonusBox
-                title={name}
-                detail={description}
-                icon={require('@/assets/daily_task_icon.png')}
-                children={
-                  <TaskListContainer>
-                    <TaskList
-                      taskList={userTasks}
-                      userRewardList={userRewardList}
-                      onClaimPress={handleOnClaimPress}
-                    />
-                  </TaskListContainer>
-                }
-              />
-              {index !== data?.userProfile?.taskGroups.length - 1 && (
-                <MarginBottom />
-              )}
-            </Fragment>
-          ),
-        )}
-        <NoMoreContent />
-      </ScrollContainer>
+      <ScreenContainer hasTopBar headerTransparent>
+        <ScrollContainer>
+          <BonusBox
+            title={<FormattedMessage id="check_in_task" />}
+            detail={<FormattedMessage id="check_in_task_detail" />}
+            children={<DailyCheckIn />}
+          />
+          <MarginBottom />
+          {data?.userProfile?.taskGroups.map(
+            ({name, description, userTasks}, index) => (
+              <Fragment key={name}>
+                <BonusBox
+                  title={name}
+                  detail={description}
+                  icon={require('@/assets/daily_task_icon.png')}
+                  children={
+                    <TaskListContainer>
+                      <TaskList
+                        taskList={userTasks}
+                        userRewardList={userRewardList}
+                        onClaimPress={handleOnClaimPress}
+                      />
+                    </TaskListContainer>
+                  }
+                />
+                {index !== data?.userProfile?.taskGroups.length - 1 && (
+                  <MarginBottom />
+                )}
+              </Fragment>
+            ),
+          )}
+          <NoMoreContent />
+        </ScrollContainer>
+      </ScreenContainer>
     </LinearGradientBackground>
   );
 };

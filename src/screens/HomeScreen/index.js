@@ -1,17 +1,17 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {FormattedMessage} from 'react-intl';
 import {GET_CHECK_USER_CAN_UPGRADE_DATA, GET_MERCHANTS_API} from '@/api/data';
 
 import membershipLevel from '@/enum/membershipLevel';
-import AccountBar from '@/components/AccountBar';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import MembershipCard from '@/components/MembershipCard';
 import QuickActions from '@/components/QuickActions';
 import UpgradeSection from './UpgradeSection';
 import CashBackSummarySection from './CashBackSummarySection';
 import MembershipInfoCard from './MembershipInfoCard';
+import ScreenContainer from '@/components/ScreenContainer';
 
 import AwardIcon from '@/assets/icon_award.svg';
 import CreditCardIcon from '@/assets/icon_credit-card.svg';
@@ -20,7 +20,7 @@ import BagIcon from '@/assets/icon_shopping-bag';
 import ReferralIcon from '@/assets/referral_icon.svg';
 import MailIcon from '@/assets/icon_mail.svg';
 
-import {imageStyle, upgradeSection, sectionMargin} from './style';
+import {container, imageStyle, upgradeSection, sectionMargin} from './style';
 import {useTheme} from 'emotion-theming';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -31,7 +31,7 @@ import useSWR from 'swr';
 
 const url = 'https://distribute-alpha.reward.me/cashback/summary?period=7';
 
-const BrowseScreen = ({navigation}) => {
+const HomeScreen = ({navigation}) => {
   const theme = useTheme();
   const {data, loading} = useQueryWithAuth(GET_CHECK_USER_CAN_UPGRADE_DATA);
   const {
@@ -162,38 +162,41 @@ const BrowseScreen = ({navigation}) => {
   // TODO: add card scaled shadow
   return (
     <LinearGradientBackground colors={levelGradientMap[userLevel].gradient}>
-      <AccountBar navigation={navigation} />
-      <ScrollView>
-        <MembershipCard userLevel={userLevel} style={imageStyle} />
-        <UpgradeSection
-          userNextLevel={userNextLevel}
-          navigation={navigation}
-          style={[upgradeSection, sectionMargin]}
-          membership={nextLevelMembership}
-          referFriendCount={referFriendCount}
-          bindDataSourceCount={bindDataSourceCount}
-          currentStakeAmount={currentStakeAmount}
-        />
-        <QuickActions style={sectionMargin} actionList={quickActionList} />
-        {merchantsLoading || isSummaryLoading ? (
-          <LoadingSpinner />
-        ) : merchantsError || summaryError ? null : (
-          <CashBackSummarySection
-            navigation={navigation}
-            onPress={handleCashBackSummaryPress}
-            style={sectionMargin}
-            merchantsData={merchantsData?.merchants}
-            summaryData={summaryData}
-          />
-        )}
-        <MembershipInfoCard
-          userLevel={userLevel}
-          style={sectionMargin}
-          onPress={handleViewMorePress}
-        />
-      </ScrollView>
+      <ScreenContainer hasTopBar headerTransparent>
+        <ScrollView>
+          <MembershipCard userLevel={userLevel} style={imageStyle} />
+          <View style={container(theme)}>
+            <UpgradeSection
+              userNextLevel={userNextLevel}
+              navigation={navigation}
+              style={[upgradeSection, sectionMargin]}
+              membership={nextLevelMembership}
+              referFriendCount={referFriendCount}
+              bindDataSourceCount={bindDataSourceCount}
+              currentStakeAmount={currentStakeAmount}
+            />
+            <QuickActions style={sectionMargin} actionList={quickActionList} />
+            {merchantsLoading || isSummaryLoading ? (
+              <LoadingSpinner />
+            ) : merchantsError || summaryError ? null : (
+              <CashBackSummarySection
+                navigation={navigation}
+                onPress={handleCashBackSummaryPress}
+                style={sectionMargin}
+                merchantsData={merchantsData?.merchants}
+                summaryData={summaryData}
+              />
+            )}
+            <MembershipInfoCard
+              userLevel={userLevel}
+              style={sectionMargin}
+              onPress={handleViewMorePress}
+            />
+          </View>
+        </ScrollView>
+      </ScreenContainer>
     </LinearGradientBackground>
   );
 };
 
-export default BrowseScreen;
+export default HomeScreen;

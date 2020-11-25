@@ -1,17 +1,10 @@
-import styled from '@emotion/native';
+import {css} from '@emotion/native';
 import {StyleSheet} from 'react-native';
-import Text from '@/components/AppText';
 
-export const LabelText = styled(Text)`
-  color: ${props =>
-    props.focused
-      ? props.theme.colors.background1
-      : props.theme.colors.textOnBackground.mediumEmphasis};
-  font-size: 10px;
-  line-height: 16px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+export const label = (theme, focused) => css`
+  color: ${focused
+    ? theme.colors.background1
+    : theme.colors.textOnBackground.mediumEmphasis};
   margin-top: 8px;
 `;
 

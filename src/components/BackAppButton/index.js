@@ -4,11 +4,11 @@ import {FormattedMessage} from 'react-intl';
 import AppButton from '@/components/AppButton';
 import ArrowLeftIcon from '@/assets/arrow_left_icon.svg';
 
-const BackAppButton = props => (
+const BackAppButton = ({colorVariant, ...props}) => (
   <AppButton
     variant="outlined"
     sizeVariant="normal"
-    colorVariant="secondary"
+    colorVariant={colorVariant ? colorVariant : 'secondary'}
     svgIcon={ArrowLeftIcon}
     text={<FormattedMessage id="button.back" defaultMessage="back" />}
     {...props}

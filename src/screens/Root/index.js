@@ -23,7 +23,7 @@ import ChooseCashBackTypeScreen from '@/screens/ChooseCashBackTypeScreen';
 import IntroductionScreen from '@/screens/IntroductionScreen';
 import WelcomeScreen from '@/screens/WelcomeScreen';
 import SignUpRewardScreen from '@/screens/SignUpRewardScreen';
-import HomeStack from '@/screens/HomeStack';
+import HomeTab from '@/screens/HomeTab';
 import MembershipScreen from '@/screens/MembershipScreen';
 import ChooseRegionScreen from '@/screens/ChooseRegionScreen';
 import DataSourceInfoScreen from '@/screens/DataSourceInfoScreen';
@@ -60,6 +60,10 @@ import WithdrawalScreen from '@/screens/WithdrawalScreen';
 import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
 import TransactionDetailScreen from '@/screens/TransactionDetailScreen';
 
+import MdtDetailScreen from '@/screens/MdtDetailScreen';
+import MrpDetailScreen from '@/screens/MrpDetailScreen';
+import NewTokenDetailScreen from '@/screens/NewTokenDetailScreen';
+
 import MembershipDetailScreen from '@/screens/MembershipDetailScreen';
 import UpgradeScreen from '@/screens/UpgradeScreen';
 import CashBackSummaryScreen from '@/screens/CashBackSummaryScreen';
@@ -70,6 +74,7 @@ import {SetupFlowContext} from '@/context/setupFlow';
 import BackAppButton from '@/components/BackAppButton';
 import CloseIconButton from '@/components/CloseIconButton';
 import BackIconButton from '@/components/BackIconButton';
+import AccountIconWithBadge from '@/components/AccountIconWithBadge';
 import {APP_BAR_HEIGHT} from '@/constants/layout';
 
 import {styles} from './style';
@@ -151,7 +156,14 @@ const setupScreens = [
 ];
 
 const authScreens = [
-  {name: 'home', component: HomeStack, options: {headerShown: false}},
+  {
+    name: 'home',
+    component: HomeTab,
+    options: {
+      headerLeft: (props) => <AccountIconWithBadge {...props} />,
+      headerTransparent: true,
+    },
+  },
   {
     name: 'membership',
     component: MembershipScreen,
@@ -161,6 +173,11 @@ const authScreens = [
     name: 'upgrade',
     component: UpgradeScreen,
     options: {headerShown: false},
+  },
+  {
+    name: 'membership_detail',
+    component: MembershipDetailScreen,
+    options: {themeStyle: true},
   },
 ];
 
@@ -172,11 +189,6 @@ const authModalScreens = [
   {name: 'withdrawal', component: WithdrawalScreen},
   {name: 'missing_receipt', component: MissingReceiptScreen},
   {name: 'transaction_detail', component: TransactionDetailScreen},
-  {
-    name: 'membership_detail',
-    component: MembershipDetailScreen,
-    options: {themeStyle: true},
-  },
   {
     name: 'cash_back_summary',
     component: CashBackSummaryScreen,
@@ -353,6 +365,51 @@ const Main = () => {
     backgroundColor: theme.colors.background1,
   };
 
+  const walletHeaderStyle = {
+    height: top + APP_BAR_HEIGHT,
+    elevation: 0,
+    shadowColor: 'transparent',
+    backgroundColor: theme.colors.secondary.walletBackground,
+  };
+
+  const walletCardStyle = [
+    css`
+      ${theme.colors.elevatedDarkerBackgroundFlat}
+    `,
+    {
+      ...styles.card,
+    },
+  ];
+
+  const walletOptions = {
+    cardStyle: walletCardStyle,
+    headerStyle: walletHeaderStyle,
+  };
+
+  const walletScreens = [
+    {
+      name: 'mrp_detail',
+      component: MrpDetailScreen,
+      options: walletOptions,
+    },
+    {
+      name: 'mdt_detail',
+      component: MdtDetailScreen,
+      options: {
+        ...walletOptions,
+        headerStyle: {
+          ...walletHeaderStyle,
+          backgroundColor: theme.colors.primary.walletBackground,
+        },
+      },
+    },
+    {
+      name: 'newToken_detail',
+      component: NewTokenDetailScreen,
+      options: walletOptions,
+    },
+  ];
+
   return (
     <MainStack.Navigator
       headerMode="screen"
@@ -415,6 +472,21 @@ const Main = () => {
               {...screenProps}
               options={{
                 headerLeft: BackAppButton,
+                ...options,
+              }}
+            />
+          ))
+        : null}
+      {isLoggedIn
+        ? walletScreens.map(({name, options, ...screenProps}) => (
+            <MainStack.Screen
+              key={name}
+              name={name}
+              {...screenProps}
+              options={{
+                headerLeft: (props) => (
+                  <BackAppButton colorVariant="white" {...props} />
+                ),
                 ...options,
               }}
             />
