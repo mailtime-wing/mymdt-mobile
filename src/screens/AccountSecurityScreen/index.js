@@ -3,6 +3,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import {FormattedMessage} from 'react-intl';
 import {View} from 'react-native';
 import {useTheme} from 'emotion-theming';
+import Config from 'react-native-config';
 
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import ModalContainer from '@/components/ModalContainer';
@@ -11,7 +12,6 @@ import SpecialListOption from '@/components/SpecialListOption';
 import Switch from '@/components/Switch';
 import EnterPinModal from '@/components/EnterPinModal';
 import {GET_USER_SECURITY_SETTINGS} from '@/api/data';
-
 import TickIcon from '@/assets/tick.svg';
 
 import {container, tickButton} from './style';
@@ -63,15 +63,17 @@ const AccountSecurityScreen = ({navigation}) => {
             )
           }
         />
-        <SpecialListOption
-          label={<FormattedMessage id="face_id_or_touch_id" />}
-          value={
-            <Switch
-              value={isFaceIdToggled}
-              onChange={() => setIsFaceIdToggled(!isFaceIdToggled)}
-            />
-          }
-        />
+        {Config.EXPERIMENTAL_FEATURE === 'true' && (
+          <SpecialListOption
+            label={<FormattedMessage id="face_id_or_touch_id" />}
+            value={
+              <Switch
+                value={isFaceIdToggled}
+                onChange={() => setIsFaceIdToggled(!isFaceIdToggled)}
+              />
+            }
+          />
+        )}
         {isPinSet && (
           <ListOption
             key="forget_pin"

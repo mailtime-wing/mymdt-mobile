@@ -1,26 +1,23 @@
 import React from 'react';
 import {View, ScrollView, Image} from 'react-native';
+import {useTheme} from 'emotion-theming';
+import Config from 'react-native-config';
+import SafeAreaView from 'react-native-safe-area-view';
+import {FormattedMessage} from 'react-intl';
+
 import {TRANSACTIONS_QUERY} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
-import {useTheme} from 'emotion-theming';
-
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 import TransactionAmount from '@/components/TransactionAmount';
 import LoadingSpinner from '@/components/LoadingSpinner';
-
 import {MEASURABLE_DATA_TOKEN, USD} from '@/constants/currency';
-
-import SafeAreaView from 'react-native-safe-area-view';
-
 import WithdrawalIcon from '@/assets/icon_upload.svg';
 import DepositIcon from '@/assets/icon_download.svg';
-
 import convertToUsdAmount from '@/utils/convertToUsdAmount';
 
 import MdtStake from './MdtStake';
 import MdtTransactionHistory from './MdtTransactionHistory';
-import {FormattedMessage} from 'react-intl';
 
 import {
   container,
@@ -83,24 +80,26 @@ const MdtDetailScreen = ({navigation}) => {
             />
           </>
         )}
-        <View style={rowContainer}>
-          <AppButton
-            variant="filled"
-            sizeVariant="normal"
-            colorVariant="primaryDark"
-            text="withdraw"
-            svgIcon={WithdrawalIcon}
-            style={marginRight}
-            disabled={mdtAmount <= 0}
-          />
-          <AppButton
-            variant="filled"
-            sizeVariant="normal"
-            colorVariant="primaryDark"
-            text="deposit"
-            svgIcon={DepositIcon}
-          />
-        </View>
+        {Config.EXPERIMENTAL_FEATURE === 'true' && (
+          <View style={rowContainer}>
+            <AppButton
+              variant="filled"
+              sizeVariant="normal"
+              colorVariant="primaryDark"
+              text="withdraw"
+              svgIcon={WithdrawalIcon}
+              style={marginRight}
+              disabled={mdtAmount <= 0}
+            />
+            <AppButton
+              variant="filled"
+              sizeVariant="normal"
+              colorVariant="primaryDark"
+              text="deposit"
+              svgIcon={DepositIcon}
+            />
+          </View>
+        )}
       </SafeAreaView>
       {staking ? (
         <MdtStake

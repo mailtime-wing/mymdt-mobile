@@ -1,26 +1,23 @@
 import React from 'react';
 import {View, ScrollView} from 'react-native';
+import {useTheme} from 'emotion-theming';
+import SafeAreaView from 'react-native-safe-area-view';
+import Config from 'react-native-config';
+import {FormattedMessage} from 'react-intl';
+
 import {TRANSACTIONS_QUERY} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
-import {useTheme} from 'emotion-theming';
-
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 import TransactionAmount from '@/components/TransactionAmount';
 import LoadingSpinner from '@/components/LoadingSpinner';
-
 import {USD, ME} from '@/constants/currency';
-
-import SafeAreaView from 'react-native-safe-area-view';
-
 import WithdrawalIcon from '@/assets/icon_upload.svg';
 import DepositIcon from '@/assets/icon_download.svg';
-
 import convertToUsdAmount from '@/utils/convertToUsdAmount';
 
 import NextStakeReward from './NextStakeReward';
 import NewTokenTransactionHistory from './NewTokenTransactionHistory';
-import {FormattedMessage} from 'react-intl';
 
 import {
   container,
@@ -79,26 +76,30 @@ const NewTokenDetailScreen = ({navigation}) => {
             />
           </>
         )}
-        <View style={rowContainer}>
-          <AppButton
-            variant="filled"
-            sizeVariant="normal"
-            colorVariant="secondaryDark"
-            text="withdraw"
-            svgIcon={WithdrawalIcon}
-            style={marginRight}
-            disabled={newTokenAmount <= 0}
-          />
-          <AppButton
-            variant="filled"
-            sizeVariant="normal"
-            colorVariant="secondaryDark"
-            text="deposit"
-            svgIcon={DepositIcon}
-          />
-        </View>
+        {Config.EXPERIMENTAL_FEATURE === 'true' && (
+          <View style={rowContainer}>
+            <AppButton
+              variant="filled"
+              sizeVariant="normal"
+              colorVariant="secondaryDark"
+              text="withdraw"
+              svgIcon={WithdrawalIcon}
+              style={marginRight}
+              disabled={newTokenAmount <= 0}
+            />
+            <AppButton
+              variant="filled"
+              sizeVariant="normal"
+              colorVariant="secondaryDark"
+              text="deposit"
+              svgIcon={DepositIcon}
+            />
+          </View>
+        )}
       </SafeAreaView>
-      <NextStakeReward style={sectionMargin} />
+      {Config.EXPERIMENTAL_FEATURE === 'true' && (
+        <NextStakeReward style={sectionMargin} />
+      )}
       <NewTokenTransactionHistory
         navigation={navigation}
         currencyCode={currencyCode}

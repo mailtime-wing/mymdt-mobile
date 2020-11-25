@@ -3,6 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import {View, Linking} from 'react-native';
 import VersionNumber from 'react-native-version-number';
 import {useTheme} from 'emotion-theming';
+import Config from 'react-native-config';
 
 import {IntlContext} from '@/context/Intl';
 import {ThemeContext} from '@/context/theme';
@@ -107,11 +108,13 @@ const SettingScreen = () => {
           value={language.label}
           onPress={() => setShowLanguageBottomSheet(true)}
         />
-        <ListOption
-          key="currency"
-          label={<FormattedMessage id="currency" />}
-          value="USD"
-        />
+        {Config.EXPERIMENTAL_FEATURE === 'true' && (
+          <ListOption
+            key="currency"
+            label={<FormattedMessage id="currency" />}
+            value="USD"
+          />
+        )}
         <SpecialListOption
           key="push_notification"
           label={<FormattedMessage id="push_notification" />}

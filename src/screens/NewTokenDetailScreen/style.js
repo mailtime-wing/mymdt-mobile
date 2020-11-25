@@ -19,7 +19,6 @@ export const totalBalance = css`
 
 export const amount = css`
   justify-content: center;
-  margin-bottom: 24px;
 `;
 
 export const textAlignCenter = css`
@@ -29,6 +28,7 @@ export const textAlignCenter = css`
 export const rowContainer = css`
   flex-direction: row;
   justify-content: center;
+  margin-top: 24px;
 `;
 
 export const marginRight = css`

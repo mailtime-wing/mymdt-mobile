@@ -3,13 +3,13 @@ import {View, TouchableOpacity, ScrollView} from 'react-native';
 import {TRANSACTIONS_QUERY} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {useTheme} from 'emotion-theming';
+import Config from 'react-native-config';
 
 import AppText from '@/components/AppText2';
 import TransactionAmount from '@/components/TransactionAmount';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import QuickActions from '@/components/QuickActions';
 
-import DollarSignIcon from '@/assets/dollar_sign_icon';
 import ConvertIcon from '@/assets/convert_icon.svg';
 // import GiftIcon from '@/assets/gift_icon.svg';
 import WithdrawalIcon from '@/assets/icon_upload.svg';
@@ -70,13 +70,17 @@ const WalletScreen = ({navigation}) => {
     {
       name: 'Stake MDT',
       icon: StakeMdtIcon,
-      action: () => navigation.navigate('settings'),
+      action: () => navigation.navigate('membership_detail'),
     },
-    {
-      name: 'Withdraw',
-      icon: WithdrawalIcon,
-      action: () => navigation.navigate('settings'),
-    },
+    ...(Config.EXPERIMENTAL_FEATURE === 'true'
+      ? [
+          {
+            name: 'Withdraw',
+            icon: WithdrawalIcon,
+            action: () => navigation.navigate('settings'),
+          },
+        ]
+      : []),
     {
       name: 'Convert',
       icon: ConvertIcon,
@@ -85,11 +89,6 @@ const WalletScreen = ({navigation}) => {
           initialFrom: ME,
           initialTo: REWARD_DOLLAR,
         }),
-    },
-    {
-      name: 'Cashback type',
-      icon: DollarSignIcon,
-      action: () => navigation.navigate('settings'),
     },
   ];
 

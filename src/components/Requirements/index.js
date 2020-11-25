@@ -57,6 +57,7 @@ const Requirements = ({
               <FormattedMessage id="button.request" defaultMessage="Request" />
             }
             style={requestButton}
+            disabled
           />
         </View>
       ) : (

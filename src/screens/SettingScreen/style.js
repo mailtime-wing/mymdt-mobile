@@ -30,6 +30,7 @@ export const listHeader = (theme) => css`
 
 export const container = (theme) => css`
   ${theme.colors.elevatedDarkerBackgroundMedium}
+  padding-bottom: 24px;
 `;
 
 export const cardContainer = (theme) => css`
