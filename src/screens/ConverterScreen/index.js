@@ -6,7 +6,6 @@ import {useTheme} from 'emotion-theming';
 import {GET_CONVERSION_RATE_API, CURRENCY_CONVERT_API} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
-import {REWARD_DOLLAR, MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 
 import {detailStyle, container} from './style';
 
@@ -19,22 +18,11 @@ const ConverterScreen = ({navigation, route}) => {
   const {initialFrom, initialTo} = route.params;
   const [from, setFrom] = useState(initialFrom);
   const [to, setTo] = useState(initialTo);
-  const isConvertFromMrpToMdt =
-    from === REWARD_DOLLAR && to === MEASURABLE_DATA_TOKEN;
-  const isConvertFromMdtToMrp =
-    from === MEASURABLE_DATA_TOKEN && to === REWARD_DOLLAR;
 
   const handleChangeConvertCurrency = useCallback(() => {
-    if (isConvertFromMrpToMdt) {
-      setFrom(MEASURABLE_DATA_TOKEN);
-      setTo(REWARD_DOLLAR);
-    }
-
-    if (isConvertFromMdtToMrp) {
-      setFrom(REWARD_DOLLAR);
-      setTo(MEASURABLE_DATA_TOKEN);
-    }
-  }, [isConvertFromMrpToMdt, isConvertFromMdtToMrp]);
+    setFrom(to);
+    setTo(from);
+  }, [to, from]);
 
   const [convert] = useMutationWithAuth(CURRENCY_CONVERT_API);
   const {data} = useQueryWithAuth(GET_CONVERSION_RATE_API, {

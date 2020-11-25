@@ -40,7 +40,7 @@ import AppText from '@/components/AppText2';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ConversionRate from '@/components/ConversionRate';
 import ConvertIcon from '@/assets/convert.svg';
-import {MEASURABLE_DATA_TOKEN, REWARD_DOLLAR} from '@/constants/currency';
+import {ME, REWARD_DOLLAR} from '@/constants/currency';
 
 const inputAccessoryViewID = 'converterButtons';
 
@@ -145,8 +145,8 @@ const ConvertForm = ({
   const [toAmount, setToAmount] = useState(0);
   const [clientError, setClientError] = useState('');
   const label = {
-    [REWARD_DOLLAR]: 'RewardPoint',
-    [MEASURABLE_DATA_TOKEN]: 'Measurable Data Token',
+    [REWARD_DOLLAR]: 'Reward Dollar',
+    [ME]: 'Me',
   };
 
   useEffect(() => {

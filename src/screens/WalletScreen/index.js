@@ -80,7 +80,7 @@ const WalletScreen = ({navigation}) => {
       icon: ConvertIcon,
       action: () =>
         navigation.navigate('converter', {
-          initialFrom: MEASURABLE_DATA_TOKEN,
+          initialFrom: ME,
           initialTo: REWARD_DOLLAR,
         }),
     },

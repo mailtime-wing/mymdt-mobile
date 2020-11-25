@@ -2,39 +2,22 @@ import React from 'react';
 import {View} from 'react-native';
 import {useTheme} from 'emotion-theming';
 
-import MDTCoin from '@/components/MDTCoin';
-import MRPCoin from '@/components/MRPCoin';
 import AppText from '@/components/AppText2';
-
-import {REWARD_DOLLAR, MEASURABLE_DATA_TOKEN} from '@/constants/currency';
+import TransactionAmount from '@/components/TransactionAmount';
 
 import {almostEqualSymbol, container} from './style';
 
-const TransactionCoin = ({type, amount}) => {
+const ConversionTransactionAmount = (props) => {
   const theme = useTheme();
-  if (type === REWARD_DOLLAR) {
-    return (
-      <MRPCoin
-        amount={amount}
-        size={16}
-        fontSize={16}
-        color={theme.colors.textOfMrp}
-      />
-    );
-  }
-
-  if (type === MEASURABLE_DATA_TOKEN) {
-    return (
-      <MDTCoin
-        amount={amount}
-        size={16}
-        fontSize={16}
-        color={theme.colors.textOfMdt}
-      />
-    );
-  }
-
-  return null;
+  return (
+    <TransactionAmount
+      unitSizeVariant="small"
+      amountSizeVariant="normal"
+      unitColor={theme.colors.secondary.normal}
+      amountColor={theme.colors.textOnBackground.mediumEmphasis}
+      {...props}
+    />
+  );
 };
 
 const ConversionRate = ({conversionRate, from, to}) => {
@@ -42,11 +25,11 @@ const ConversionRate = ({conversionRate, from, to}) => {
 
   return (
     <View style={container}>
-      <TransactionCoin type={from} amount={1} />
+      <ConversionTransactionAmount amount={1} unitVariant={from} />
       <AppText variant="body2" style={almostEqualSymbol(theme)}>
         ≈
       </AppText>
-      <TransactionCoin type={to} amount={conversionRate} />
+      <ConversionTransactionAmount amount={conversionRate} unitVariant={to} />
     </View>
   );
 };
