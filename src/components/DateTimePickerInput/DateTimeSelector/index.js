@@ -1,4 +1,5 @@
 import React from 'react';
+import {Platform} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {useTheme} from 'emotion-theming';
 
@@ -14,7 +15,7 @@ const DateTimeSelector = ({date, onChange, onDismiss}) => {
 
   return (
     <DateTimePicker
-      testID="date"
+      display={Platform.OS === 'ios' ? 'spinner' : 'default'}
       value={new Date(date)}
       mode="date"
       textColor={theme.colors.textOnBackground.highEmphasis}
