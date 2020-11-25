@@ -167,7 +167,7 @@ const CashBackSummarySection = ({
           <CashBackItem
             icon={{
               uri: merchantsData?.find(
-                (merchant) => merchant.name === merchant_summary.merchant,
+                (merchant) => merchant.id === merchant_summary.merchant_id,
               )?.logo,
             }}
             brand={merchant_summary.merchant}

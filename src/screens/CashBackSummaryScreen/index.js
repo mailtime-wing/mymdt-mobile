@@ -125,8 +125,8 @@ const CashBackSummaryScreen = ({navigation, route}) => {
                 sizeVariant="normal"
                 ImgSrc={{
                   uri: merchantsData?.merchants.find(
-                    (merchant) => merchant.name === h.node.merchant,
-                  ).logo,
+                    (merchant) => merchant.id === h.node.merchant_id,
+                  )?.logo,
                 }}
               />
             ),
