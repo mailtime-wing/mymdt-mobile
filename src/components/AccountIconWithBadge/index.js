@@ -15,7 +15,7 @@ const AccountIconWithBadge = () => {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('membership')}
+      onPress={() => navigation.navigate('settings')}
       style={container}>
       <AppAvator
         variant="image"

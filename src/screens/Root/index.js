@@ -24,13 +24,11 @@ import IntroductionScreen from '@/screens/IntroductionScreen';
 import WelcomeScreen from '@/screens/WelcomeScreen';
 import SignUpRewardScreen from '@/screens/SignUpRewardScreen';
 import HomeTab from '@/screens/HomeTab';
-import MembershipScreen from '@/screens/MembershipScreen';
 import ChooseRegionScreen from '@/screens/ChooseRegionScreen';
 import DataSourceInfoScreen from '@/screens/DataSourceInfoScreen';
 import LinkedCardsScreen from '@/screens/LinkedCardsScreen';
 import LinkedEmailsScreen from '@/screens/LinkedEmailsScreen';
 
-import SignOutScreen from '@/screens/SignOutScreen';
 import NotificationScreen from '@/screens/NotificationScreen';
 import UserProfileEditScreen from '@/screens/UserProfileEditScreen';
 import BindEmailEditScreen from '@/screens/BindEmailEditScreen';
@@ -165,11 +163,6 @@ const authScreens = [
     },
   },
   {
-    name: 'membership',
-    component: MembershipScreen,
-    options: {headerTransparent: true},
-  },
-  {
     name: 'upgrade',
     component: UpgradeScreen,
     options: {headerShown: false},
@@ -201,7 +194,11 @@ const authModalScreens = [
 ];
 
 const settingScreens = [
-  {name: 'settingsHome', component: SettingScreen},
+  {
+    name: 'settingsHome',
+    component: SettingScreen,
+    options: {headerTransparent: true},
+  },
   {name: 'edit_profile', component: UserProfileEditScreen},
   {name: 'offers_preference_edit', component: MerchantPreferenceEditScreen},
   {name: 'merchants_preference', component: MerchantSelectScreen},
@@ -217,7 +214,6 @@ const settingScreens = [
   {name: 'verify_identity', component: VerifyIdentityScreen},
   {name: 'reset_pin', component: ResetPinScreen},
   {name: 'pin_success', component: PinSuccessScreen},
-  {name: 'sign_out', component: SignOutScreen},
   {name: 'app_settings', component: AppSettingScreen},
   {name: 'faq_and_support', component: AppSettingScreen},
   {name: 'terms_of_service', component: AppSettingScreen},
@@ -552,13 +548,15 @@ const Root = () => {
         <RootStack.Screen
           name="Main"
           component={Main}
-          options={{headerShown: false}}
+          options={{
+            headerShown: false,
+          }}
         />
         {isLoggedIn ? (
           <RootStack.Screen
             name="settings"
             component={Setting}
-            options={{headerShown: false}}
+            options={{headerShown: false, cardStyle: styles.modalCard}}
           />
         ) : null}
         {isLoggedIn
@@ -573,9 +571,10 @@ const Root = () => {
                   headerStyle: options?.themeStyle
                     ? themeHeaderStyle
                     : rootHeaderStyle,
-                  cardStyle: options?.themeStyle
-                    ? themeCardStyle
-                    : rootCardStyle,
+                  cardStyle: [
+                    options?.themeStyle ? themeCardStyle : rootCardStyle,
+                    styles.modalCard,
+                  ],
                 }}
               />
             ))

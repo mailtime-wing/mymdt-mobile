@@ -13,20 +13,37 @@ import ArrowIcon from '@/assets/list_arrow.svg';
 
 import AppText from '@/components/AppText2';
 
-const ListOption = ({label, value, icon, noArrow, ...props}) => {
+const ListOption = ({
+  label,
+  value,
+  icon: SvgIcon,
+  optionIcon,
+  noArrow,
+  style,
+  ...props
+}) => {
   const theme = useTheme();
   return (
-    <TouchableOpacity style={option} {...props}>
-      <AppText variant="body1" style={listLabel(theme)}>
-        {label}
-      </AppText>
+    <TouchableOpacity style={[option, style]} {...props}>
+      <View style={valueContainer}>
+        {SvgIcon && (
+          <SvgIcon
+            stroke={theme.colors.secondary.normal}
+            strokeWidth="2"
+            style={marginRight}
+          />
+        )}
+        <AppText variant="body1" style={listLabel(theme)}>
+          {label}
+        </AppText>
+      </View>
       <View style={valueContainer}>
         {value && (
           <AppText variant="body1" style={[listValue(theme), marginRight]}>
             {value}
           </AppText>
         )}
-        {icon && <View style={marginRight}>{icon}</View>}
+        {optionIcon && <View style={marginRight}>{optionIcon}</View>}
         {noArrow ? null : (
           <ArrowIcon stroke={theme.colors.borderColor} strokeWidth={2} />
         )}
