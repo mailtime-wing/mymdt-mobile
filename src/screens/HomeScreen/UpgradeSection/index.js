@@ -17,8 +17,7 @@ import checkCanUpgrade from '@/utils/checkCanUpgrade';
 const UpgradeSection = ({userNextLevel, style, navigation, ...props}) => {
   const theme = useTheme();
   const [upgradeMembership] = useMutationWithAuth(UPGRADE_MEMBERSHIP, {
-    skip: !props.membership.id,
-    variables: {id: props.membership.id},
+    variables: {id: props.membership?.id},
   });
   const nextLevelString = (
     <FormattedMessage id={`membership_level_${userNextLevel}`} />

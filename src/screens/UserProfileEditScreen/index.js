@@ -30,10 +30,11 @@ import DateTimePickerInput from '@/components/DateTimePickerInput';
 import ListOption from '@/components/ListOption';
 
 import ModalContainer from '@/components/ModalContainer';
-import EditButton from '@/components/EditButton';
-import CancelButton from '@/components/CancelButton';
-import ConfirmButton from '@/components/ConfirmButton';
+import BackIconButton from '@/components/BackIconButton';
 import CloseIconButton from '@/components/CloseIconButton';
+import EditAppButton from '@/components/EditAppButton';
+import ConfirmAppButton from '@/components/ConfirmAppButton';
+import CancelAppButton from '@/components/CancelAppButton';
 import Input from '@/components/AppInput';
 import AppAvator from '@/components/AppAvator';
 import AppText from '@/components/AppText2';
@@ -136,7 +137,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
   }, [formState.isConfirmed, formState.isCancelled, submitForm, resetForm]);
 
   const handleCameraPress = () => {
-    ImagePicker.showImagePicker(cameraOptions, response => {
+    ImagePicker.showImagePicker(cameraOptions, (response) => {
       if (response.didCancel) {
         // handle cancel
       } else if (response.error) {
@@ -217,7 +218,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
             key="gender"
             label={<FormattedMessage id="gender" />}
             value={
-              genderOptions.find(gender => gender.value === values.gender)
+              genderOptions.find((gender) => gender.value === values.gender)
                 ?.label
             }
             noArrow
@@ -277,7 +278,7 @@ const UserProfileEditScreen = ({navigation}) => {
     dispatch({type: UPDATE_IS_CANCELLED});
   };
 
-  const handleSubmitPress = async values => {
+  const handleSubmitPress = async (values) => {
     try {
       await updateUserProfileRequest({
         variables: {
@@ -298,13 +299,13 @@ const UserProfileEditScreen = ({navigation}) => {
     profilePicture: require('@/assets/dog_avatar.png'),
     name: data?.userProfile?.name,
     gender: genderOptions.find(
-      gender => gender.value === data?.userProfile?.gender,
+      (gender) => gender.value === data?.userProfile?.gender,
     )?.value,
     dob: data?.userProfile?.birthday,
     phone: data?.userProfile?.phoneNumber,
   };
 
-  const validate = values => {
+  const validate = (values) => {
     dispatch({type: UPDATE_IS_VALUE_CHANGED});
     const errors = {};
 
@@ -320,9 +321,9 @@ const UserProfileEditScreen = ({navigation}) => {
   useLayoutEffect(() => {
     if (state.isEditing) {
       navigation.setOptions({
-        headerLeft: () => <CancelButton onPress={handleCancelPress} />,
+        headerLeft: () => <CancelAppButton onPress={handleCancelPress} />,
         headerRight: () => (
-          <ConfirmButton
+          <ConfirmAppButton
             onPress={handleConfirmPress}
             disabled={!state.isValuesChanged}
           />
@@ -330,8 +331,14 @@ const UserProfileEditScreen = ({navigation}) => {
       });
     } else {
       navigation.setOptions({
-        headerLeft: props => <CloseIconButton {...props} />,
-        headerRight: () => <EditButton onPress={handleEditPress} />,
+        headerLeft: ({onPress}) => {
+          return onPress ? (
+            <BackIconButton onPress={onPress} />
+          ) : (
+            <CloseIconButton onPress={() => navigation.goBack()} />
+          );
+        },
+        headerRight: () => <EditAppButton onPress={handleEditPress} />,
       });
     }
   }, [navigation, state]);
@@ -351,8 +358,8 @@ const UserProfileEditScreen = ({navigation}) => {
             <Formik
               enableReinitialize={true}
               initialValues={initialValues}
-              onSubmit={values => handleSubmitPress(values)}
-              validate={values => validate(values)}>
+              onSubmit={(values) => handleSubmitPress(values)}
+              validate={(values) => validate(values)}>
               <UserProfileEditForm
                 handleDatePickerPress={handleDatePickerPress}
                 formState={state}

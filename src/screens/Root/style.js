@@ -9,4 +9,8 @@ export const styles = StyleSheet.create({
     display: 'none',
   },
   card: {},
+  modalCard: {
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+  },
 });
