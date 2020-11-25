@@ -4,6 +4,15 @@ export const container = (theme) => css`
   background: ${theme.colors.secondary.walletBackground};
 `;
 
+export const scrollContainer = (theme) => css`
+  ${theme.colors.elevatedDarkerBackgroundFlat};
+  flex: 1;
+`;
+
+export const safeAreaContainer = (theme) => css`
+  background: ${theme.colors.secondary.walletBackground};
+`;
+
 export const total = (theme) => css`
   color: ${theme.colors.textOnThemeBackground.mediumEmphasis};
   margin-top: 24px;

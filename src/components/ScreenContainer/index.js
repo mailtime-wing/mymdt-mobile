@@ -4,7 +4,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 
 import {APP_BAR_HEIGHT} from '@/constants/layout';
 
-import {container, safeAreaStyle} from './style';
+import {safeAreaStyle} from './style';
 
 // TODO: maybe this can be replaced by using `cardStyle` on screen component?
 function ScreenContainer({
@@ -24,10 +24,7 @@ function ScreenContainer({
 
   return (
     <SafeAreaView style={safeAreaStyle}>
-      <View
-        style={[container, {marginTop}, style]}
-        hasTopBar={hasTopBar}
-        {...props}>
+      <View style={[{marginTop}, style]} hasTopBar={hasTopBar} {...props}>
         {children}
       </View>
     </SafeAreaView>
