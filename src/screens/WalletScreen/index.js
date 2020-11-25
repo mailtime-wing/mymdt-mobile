@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import {View, TouchableOpacity, ScrollView} from 'react-native';
 import {TRANSACTIONS_QUERY} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
@@ -49,9 +50,16 @@ import {
 
 const WalletScreen = ({navigation}) => {
   const theme = useTheme();
-  const {data, loading} = useQueryWithAuth(TRANSACTIONS_QUERY, {
+  const {data, loading, refetch} = useQueryWithAuth(TRANSACTIONS_QUERY, {
     fetchPolicy: 'network-only',
   });
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
+
   const rpAmount =
     data?.userProfile?.currencyAccounts.find(
       (ca) => ca.currencyCode === REWARD_DOLLAR,
