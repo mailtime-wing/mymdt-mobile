@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View, ScrollView, Image, TouchableOpacity} from 'react-native';
+import {View, ScrollView, Image, TouchableOpacity, Linking} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {GET_USER_PROFILE_API} from '@/api/data';
@@ -55,13 +55,22 @@ const SettingScreen = ({navigation}) => {
 
   const generalSettingList = [
     {id: 'app_settings', icon: SettingIcon},
-    {id: 'faq_and_support', icon: HelpIcon},
     {
-      id: 'privacy_policy',
+      messageId: 'faq_and_support',
+      url: 'https://www.reward.me/?1',
+      icon: HelpIcon,
+    },
+    {
       messageId: 'terms_of_service_and_privacy_policy',
+      url: 'https://www.reward.me/?2',
       icon: BookIcon,
     },
-    {id: 'about_us', icon: RewardMeIcon},
+    {
+      messageId: 'about_us',
+      icon: RewardMeIcon,
+      url: 'https://www.reward.me/?3',
+    },
+    // TODO: add real url when website ready
   ];
 
   const backgroundImage = isDark
@@ -113,10 +122,16 @@ const SettingScreen = ({navigation}) => {
             </AppText>
             {generalSettingList.map((gs) => (
               <ListOption
-                key={gs.id}
+                key={gs.id || gs.url}
                 label={<FormattedMessage id={gs.messageId || gs.id} />}
                 icon={gs.icon}
-                onPress={() => navigation.navigate(gs.id)}
+                onPress={() => {
+                  if (gs.id) {
+                    navigation.navigate(gs.id);
+                  } else {
+                    Linking.openURL(gs.url);
+                  }
+                }}
               />
             ))}
           </View>
