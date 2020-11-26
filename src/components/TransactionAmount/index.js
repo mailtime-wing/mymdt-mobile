@@ -110,8 +110,8 @@ const TransactionAmount = ({
         ]}>
         <FormattedNumber
           value={amount}
-          minimumFractionDigits={showDecimal ? 4 : 0}
-          maximumFractionDigits={showDecimal ? 4 : 0}
+          minimumFractionDigits={showDecimal ? 2 : 0}
+          maximumFractionDigits={showDecimal ? 2 : 0}
         />
       </AppText>
       <AppText
