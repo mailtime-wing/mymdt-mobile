@@ -27,10 +27,10 @@
 		B606DDA32461046E00CAA2E6 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606DD93246014BC00CAA2E6 /* Dummy.swift */; };
 		B606DDA42461046F00CAA2E6 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606DD93246014BC00CAA2E6 /* Dummy.swift */; };
 		B606DDA52461047100CAA2E6 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B606DD93246014BC00CAA2E6 /* Dummy.swift */; };
+		B6982EE6256F7E1E009E5898 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6982EE5256F7E1E009E5898 /* BootSplash.storyboard */; };
 		CE570F21104C4C8889BBF5B2 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4356FC964D94E4FBB247D38 /* Inter-Medium.ttf */; };
 		E4A861414D4F4AFCEC62E206 /* libPods-RewardMe-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6668AC177D9D64DC5B43B235 /* libPods-RewardMe-tvOS.a */; };
 		F97D5BE62537FAB40084DC70 /* RewardMe.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = F9C307FD25062FAF00839944 /* RewardMe.entitlements */; };
-		F9AE9D392521ED2900E84BE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9AE9D382521ED2900E84BE2 /* LaunchScreen.storyboard */; };
 		F9EB711B253EE0E8002D8825 /* branch.debug.json in Resources */ = {isa = PBXBuildFile; fileRef = F9EB7119253EE0E8002D8825 /* branch.debug.json */; };
 		F9EB711C253EE0E8002D8825 /* branch.json in Resources */ = {isa = PBXBuildFile; fileRef = F9EB711A253EE0E8002D8825 /* branch.json */; };
 /* End PBXBuildFile section */
@@ -86,6 +86,7 @@
 		B606DD9B246017E100CAA2E6 /* libswiftDarwin.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDarwin.tbd; path = usr/lib/swift/libswiftDarwin.tbd; sourceTree = SDKROOT; };
 		B606DD9D246017E700CAA2E6 /* libswiftObjectiveC.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftObjectiveC.tbd; path = usr/lib/swift/libswiftObjectiveC.tbd; sourceTree = SDKROOT; };
 		B606DD9F246017EF00CAA2E6 /* libswiftCoreFoundation.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftCoreFoundation.tbd; path = usr/lib/swift/libswiftCoreFoundation.tbd; sourceTree = SDKROOT; };
+		B6982EE5256F7E1E009E5898 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = RewardMe/BootSplash.storyboard; sourceTree = "<group>"; };
 		C042B59D362A20C45C42D814 /* libPods-RewardMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RewardMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40715FBF7E249CAB0C7B691 /* Neo Sans Pro Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro Medium.ttf"; path = "../assets/Neo Sans Pro Medium.ttf"; sourceTree = "<group>"; };
 		C577C665E7714C92AC9E724C /* Neo Sans Pro.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Neo Sans Pro.ttf"; path = "../assets/Neo Sans Pro.ttf"; sourceTree = "<group>"; };
@@ -94,7 +95,6 @@
 		DFF8B1989C502EC318371828 /* Pods-RewardMe-RewardMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RewardMe-RewardMeTests.debug.xcconfig"; path = "Target Support Files/Pods-RewardMe-RewardMeTests/Pods-RewardMe-RewardMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F9AE9D382521ED2900E84BE2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F9C307FD25062FAF00839944 /* RewardMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RewardMe.entitlements; path = RewardMe/RewardMe.entitlements; sourceTree = "<group>"; };
 		F9EB7119253EE0E8002D8825 /* branch.debug.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = branch.debug.json; path = ../branch.debug.json; sourceTree = "<group>"; };
 		F9EB711A253EE0E8002D8825 /* branch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = branch.json; path = ../branch.json; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				F9AE9D382521ED2900E84BE2 /* LaunchScreen.storyboard */,
+				B6982EE5256F7E1E009E5898 /* BootSplash.storyboard */,
 			);
 			name = RewardMe;
 			sourceTree = "<group>";
@@ -404,7 +404,7 @@
 			files = (
 				F97D5BE62537FAB40084DC70 /* RewardMe.entitlements in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				F9AE9D392521ED2900E84BE2 /* LaunchScreen.storyboard in Resources */,
+				B6982EE6256F7E1E009E5898 /* BootSplash.storyboard in Resources */,
 				6150B33F4BDE4FA198E9ABBA /* Inter-Regular.ttf in Resources */,
 				5BA11D7B3E334F568C90C124 /* Neo Sans Pro.ttf in Resources */,
 				504367D6D25C442BA4E156EF /* Neo Sans Pro Light.ttf in Resources */,
@@ -768,7 +768,7 @@
 				CODE_SIGN_ENTITLEMENTS = RewardMe/RewardMe.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 29;
+				CURRENT_PROJECT_VERSION = 32;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2ALSZ7K238;
 				ENABLE_BITCODE = NO;
@@ -814,7 +814,7 @@
 				CODE_SIGN_ENTITLEMENTS = RewardMe/RewardMe.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 29;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_TEAM = 2ALSZ7K238;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = RewardMe/Info.plist;

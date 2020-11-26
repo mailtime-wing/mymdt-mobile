@@ -17,6 +17,7 @@
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
 
+#import "RNBootSplash.h"
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -88,6 +89,8 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
   [self.window makeKeyAndVisible];
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   center.delegate = self;
+  
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
   return YES;
 }
 

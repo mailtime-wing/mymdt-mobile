@@ -329,6 +329,8 @@ PODS:
     - React-Core (= 0.63.2)
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
+  - RNBootSplash (3.1.1):
+    - React-Core
   - RNCAsyncStorage (1.10.0):
     - React
   - RNCClipboard (1.2.3):
@@ -337,8 +339,8 @@ PODS:
     - React
   - RNCPushNotificationIOS (1.6.0):
     - React-Core
-  - RNDateTimePicker (2.3.2):
-    - React
+  - RNDateTimePicker (3.0.6):
+    - React-Core
   - RNDeviceInfo (6.0.2):
     - React
   - RNGestureHandler (1.6.1):
@@ -413,6 +415,7 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCClipboard (from `../node_modules/@react-native-community/clipboard`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
@@ -519,6 +522,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNBootSplash:
+    :path: "../node_modules/react-native-bootsplash"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
   RNCClipboard:
@@ -596,11 +601,12 @@ SPEC CHECKSUMS:
   React-RCTText: 1b6773e776e4b33f90468c20fe3b16ca3e224bb8
   React-RCTVibration: 4d2e726957f4087449739b595f107c0d4b6c2d2d
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
+  RNBootSplash: bd2ddb39b37042a54d7050bd59067dfd78c680d8
   RNCAsyncStorage: 6d99641f8e6f15d169d695d8ef184bf187903f11
   RNCClipboard: 48eaf27bea3de7c9a265529725434268d47a2ee9
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNCPushNotificationIOS: ec7ffe65c7b5097f8d287fd627e1c1674ea69cef
-  RNDateTimePicker: 4bd49e09f91ca73d69119a9e1173b0d43b82f5e5
+  RNDateTimePicker: 120f8d08b19dd50c0308d30a07c1982e4618e9ad
   RNDeviceInfo: bdd61e8b070d13a1dd9d022091981075ed4cde16
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNInAppBrowser: c1a0dad2734458d79bcb6c8f4297ba8658a1da9f
