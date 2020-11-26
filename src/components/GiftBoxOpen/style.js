@@ -13,7 +13,7 @@ export const Container = styled.View`
 `;
 
 export const Circle = styled.View`
-  background-color: ${props => props.theme.colors.rewardCircleBackground};
+  background-color: ${(props) => props.theme.colors.rewardCircleBackground};
   width: 300px;
   height: 300px;
   border-radius: 150px;

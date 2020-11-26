@@ -1,27 +1,26 @@
 import React, {useRef, useEffect, useState, useContext} from 'react';
-import {Animated} from 'react-native';
+import {Animated, View, TouchableOpacity} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
 import {AuthContext} from '@/context/auth';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import MDTGiftBox from '@/components/MDTGiftBox';
 import AppButton from '@/components/AppButton';
+import AppText from '@/components/AppText2';
+import TransactionAmount from '@/components/TransactionAmount';
 import useSetupFlow from '@/hooks/useSetupFlow';
-import {REWARD_DOLLAR} from '@/constants/currency';
+import {REWARD_DOLLAR, ME} from '@/constants/currency';
 
 import {
-  Container,
-  TouchableContainer,
-  OpenText,
-  GotRewardText,
-  YouGotRewardAmountText,
+  container,
+  gotContainer,
+  gotRewardText,
   GiftIcon,
-  SmallCoin,
-  RewardAmount,
-  TextContainer,
+  textContainer,
   ContinueButton,
-  buttonContainer,
+  button,
 } from './style';
+import {useTheme} from 'emotion-theming';
 
 const AnimatedText = (props) => {
   const fadeAnim = useRef(new Animated.Value(0.2)).current;
@@ -89,67 +88,60 @@ const AnimatedFloat = (props) => {
 };
 
 const GiftBoxReady = ({setIsOpened}) => {
+  const theme = useTheme();
   return (
-    <Container>
-      <GotRewardText>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => setIsOpened(true)}
+      style={container}>
+      <AppText variant="heading4" style={gotRewardText(theme)}>
         <FormattedMessage
           id="got_sign_up_reward"
           default="You got a sign-up reward"
         />
-      </GotRewardText>
+      </AppText>
       <AnimatedFloat>
         <GiftIcon source={require('@/assets/icon_gift.png')} />
       </AnimatedFloat>
       <AnimatedText>
-        <TouchableContainer activeOpacity={1} onPress={() => setIsOpened(true)}>
-          <OpenText>
-            <FormattedMessage id="tap_to_open" default="Tap to open" />
-          </OpenText>
-        </TouchableContainer>
+        <AppText variant="heading1" style={gotRewardText(theme)}>
+          <FormattedMessage id="tap_to_open" default="Tap to open" />
+        </AppText>
       </AnimatedText>
-    </Container>
+    </TouchableOpacity>
   );
 };
 
-const GiftBoxOpened = ({rewardAmount}) => {
+const GiftBoxOpened = ({isOpened, navigateByFlow, rewardAmount}) => {
+  const theme = useTheme();
   const {cashBackType} = useContext(AuthContext);
-  const coinIconSource =
-    cashBackType === REWARD_DOLLAR
-      ? require('@/assets/coin.png')
-      : require('@/assets/mdt_coin.png');
+  const isRewardDollar = cashBackType === REWARD_DOLLAR;
+  const TextColor = isRewardDollar
+    ? theme.colors.secondary.normal
+    : theme.colors.primary.normal;
 
-  return (
-    <Container>
-      <MDTGiftBox />
-      <TextContainer>
-        <YouGotRewardAmountText>
-          <FormattedMessage id="you_got" default="You got" />
-        </YouGotRewardAmountText>
-        <SmallCoin source={coinIconSource} />
-        <RewardAmount>{rewardAmount}</RewardAmount>
-      </TextContainer>
-    </Container>
-  );
-};
-
-const SignUpRewardScreen = ({route}) => {
-  const [isOpened, setIsOpened] = useState(false);
-  const {navigateByFlow} = useSetupFlow();
-  const accountSetupReward = route?.params?.accountSetupReward;
-  const rewardAmount = accountSetupReward?.value || 0;
   const handleContinuePress = () => {
     navigateByFlow();
   };
 
   return (
-    <LinearGradientBackground colors={['#FDFBF2', '#E2FAFF']}>
-      <Container>
-        {isOpened ? (
-          <GiftBoxOpened rewardAmount={rewardAmount} />
-        ) : (
-          <GiftBoxReady setIsOpened={setIsOpened} />
-        )}
-      </Container>
+    <View style={gotContainer}>
+      <MDTGiftBox />
+      <View style={textContainer}>
+        <AppText variant="heading1" style={{color: TextColor}}>
+          <FormattedMessage id="you_got" default="You got" />
+          <TransactionAmount
+            amount={rewardAmount}
+            unitVariant={isRewardDollar ? REWARD_DOLLAR : ME}
+            unitColor={TextColor}
+            unitSizeVariant="normal"
+            amountSizeVariant="large"
+            amountColor={TextColor}
+            showDecimal={false}
+          />
+        </AppText>
+      </View>
+
       <ContinueButton>
         {isOpened && (
           <AppButton
@@ -158,10 +150,33 @@ const SignUpRewardScreen = ({route}) => {
             variant="filled"
             sizeVariant="large"
             colorVariant="secondary"
-            style={buttonContainer}
+            style={button}
           />
         )}
       </ContinueButton>
+    </View>
+  );
+};
+
+const SignUpRewardScreen = ({route}) => {
+  const [isOpened, setIsOpened] = useState(false);
+  const {navigateByFlow} = useSetupFlow();
+  const accountSetupReward = route?.params?.accountSetupReward;
+  const rewardAmount = accountSetupReward?.value || 0;
+
+  return (
+    <LinearGradientBackground>
+      <View style={container}>
+        {isOpened ? (
+          <GiftBoxOpened
+            navigateByFlow={navigateByFlow}
+            isOpened={isOpened}
+            rewardAmount={rewardAmount}
+          />
+        ) : (
+          <GiftBoxReady setIsOpened={setIsOpened} />
+        )}
+      </View>
     </LinearGradientBackground>
   );
 };
