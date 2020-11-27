@@ -1,28 +1,22 @@
 import React from 'react';
+import {View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
 import {REWARD_DOLLAR} from '@/constants/currency';
 
-import {
-  DayTextEnglish,
-  DayNumberTextEnglish,
-  DayNumberTextChinese,
-  DayTextChinese,
-  Card,
-} from './style';
-
-import MRPCoin from '@/components/MRPCoin';
-import MDTCoin from '@/components/MDTCoin';
+import {card, centered, margin, day as dayStyle} from './style';
+import TransactionAmount from '@/components/TransactionAmount';
+import AppText from '@/components/AppText2';
+import {useTheme} from 'emotion-theming';
 
 const DayList = ({
   todayAndAfterRewards,
   today,
   checkedInToday,
   daysPresentInBadge,
-  cashbackCurrencyCode,
   isEnglish,
-  coinColor,
 }) => {
+  const theme = useTheme();
   return (
     // TODO: special handle dark mode style for daily check in
     <>
@@ -34,46 +28,76 @@ const DayList = ({
           const passedDay = isTodayCheckedIn ? day <= today : day < today;
 
           return (
-            <Card key={index} passedDay={passedDay} isToday={isToday}>
+            <View
+              key={index}
+              style={[
+                card(theme, isToday),
+                passedDay && {backgroundColor: theme.colors.secondary.normal},
+              ]}>
               {isEnglish ? (
                 <>
-                  <DayTextEnglish passedDay={passedDay} isToday={isToday}>
+                  <AppText
+                    variant="label"
+                    style={[
+                      dayStyle(theme),
+                      isToday && {color: theme.colors.secondary.dark},
+                      passedDay && {color: theme.colors.background1},
+                    ]}>
                     <FormattedMessage id="day" defaultMessage="Day" />
-                  </DayTextEnglish>
-                  <DayNumberTextEnglish passedDay={passedDay} isToday={isToday}>
+                  </AppText>
+                  <AppText
+                    variant="digit36"
+                    style={[
+                      dayStyle(theme),
+                      isToday && {color: theme.colors.secondary.dark},
+                      passedDay && {color: theme.colors.background1},
+                      margin,
+                    ]}>
                     {day}
-                  </DayNumberTextEnglish>
+                  </AppText>
                 </>
               ) : (
                 <>
-                  <DayNumberTextChinese passedDay={passedDay} isToday={isToday}>
+                  <AppText
+                    variant="digit36"
+                    style={[
+                      dayStyle(theme),
+                      isToday && {color: theme.colors.secondary.dark},
+                      passedDay && {color: theme.colors.background1},
+                    ]}>
                     {day}
-                  </DayNumberTextChinese>
-                  <DayTextChinese passedDay={passedDay} isToday={isToday}>
+                  </AppText>
+                  <AppText
+                    variant="label"
+                    style={[
+                      dayStyle(theme),
+                      isToday && {color: theme.colors.secondary.dark},
+                      passedDay && {color: theme.colors.background1},
+                      margin,
+                    ]}>
                     <FormattedMessage id="day" defaultMessage="Day" />
-                  </DayTextChinese>
+                  </AppText>
                 </>
               )}
-              {cashbackCurrencyCode === REWARD_DOLLAR ? (
-                <MRPCoin
-                  amount={amount}
-                  size={18}
-                  fontSize={16}
-                  color={(props) =>
-                    passedDay ? props.theme.colors.background1 : coinColor
-                  }
-                />
-              ) : (
-                <MDTCoin
-                  amount={amount}
-                  size={18}
-                  fontSize={16}
-                  color={(props) =>
-                    passedDay ? props.theme.colors.background1 : coinColor
-                  }
-                />
-              )}
-            </Card>
+              <TransactionAmount
+                amount={amount}
+                unitVariant={REWARD_DOLLAR}
+                unitSizeVariant="small"
+                amountSizeVariant="normal"
+                amountColor={
+                  passedDay
+                    ? theme.colors.textOnThemeBackground.highEmphasis
+                    : theme.colors.textOnBackground.mediumEmphasis
+                }
+                unitColor={
+                  passedDay
+                    ? theme.colors.textOnThemeBackground.white60Opacity
+                    : theme.colors.secondary.normal
+                }
+                style={centered}
+                showDecimal={false}
+              />
+            </View>
           );
         })}
     </>

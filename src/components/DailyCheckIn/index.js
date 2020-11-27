@@ -14,10 +14,8 @@ import RewardGotPopup from '@/components/RewardGotPopup';
 import PopupModal from '@/components/PopupModal';
 import DayList from './DayList';
 import AchievementBadge from './AchievementBadge';
-import {useTheme} from 'emotion-theming';
 
 const DailyCheckIn = () => {
-  const theme = useTheme();
   const [daysPresentInBadge, setDaysPresentInBadge] = useState(0);
   const {localeEnum} = useContext(IntlContext);
 
@@ -45,7 +43,6 @@ const DailyCheckIn = () => {
     (todayAndAfterRewards && todayAndAfterRewards[today - 1]) || 0;
   const cashbackCurrencyCode = data?.userProfile?.cashbackCurrencyCode;
   const convert = cashbackCurrencyCode === ME;
-  const coinColor = theme.colors.textOfMrp;
 
   const handleRewardGotPress = () => {
     reset();
@@ -69,9 +66,7 @@ const DailyCheckIn = () => {
           today={today}
           checkedInToday={checkedInToday}
           todayAndAfterRewards={todayAndAfterRewards}
-          cashbackCurrencyCode={cashbackCurrencyCode}
           isEnglish={isEnglish}
-          coinColor={coinColor}
         />
         <View style={margin} />
       </ScrollView>

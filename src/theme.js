@@ -42,10 +42,7 @@ export const darkTheme = {
     textOfMdt: '#9FBDE9',
     textOnError: ['#FF7171'],
     textOnBackground: {},
-    textOnThemeBackground: [
-      'rgba(255, 255, 255, 0.87)',
-      'rgba(255, 255, 255, 0.6)',
-    ],
+    textOnThemeBackground: {},
 
     // membership
     membership: {
@@ -426,8 +423,17 @@ lightTheme.colors.textOnThemeBackground.highEmphasis =
   lightTheme.colors.background1;
 lightTheme.colors.textOnThemeBackground.mediumEmphasis =
   lightTheme.colors.background1;
+lightTheme.colors.textOnThemeBackground.white = lightTheme.colors.background1;
+lightTheme.colors.textOnThemeBackground.white60Opacity = transparentize(
+  0.4,
+  lightTheme.colors.background1,
+);
 
 // DetailBox
+lightTheme.colors.detailBox.primary = transparentize(
+  0.9,
+  lightTheme.colors.primary.normal,
+);
 lightTheme.colors.detailBox.primary = transparentize(
   0.9,
   lightTheme.colors.primary.normal,
@@ -831,6 +837,11 @@ darkTheme.colors.textOnThemeBackground.highEmphasis = transparentize(
   darkTheme.colors.contrastColor,
 );
 darkTheme.colors.textOnThemeBackground.mediumEmphasis = transparentize(
+  0.4,
+  darkTheme.colors.contrastColor,
+);
+darkTheme.colors.textOnThemeBackground.white = darkTheme.colors.contrastColor;
+darkTheme.colors.textOnThemeBackground.white60Opacity = transparentize(
   0.4,
   darkTheme.colors.contrastColor,
 );
