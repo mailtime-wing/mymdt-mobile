@@ -126,7 +126,7 @@ const Requirements = ({
               task={
                 <FormattedMessage
                   id="bind_number_of_accounts"
-                  defaultMessage="Bind {number, plural, =0 {no account} one {# account} other {# accounts}}"
+                  defaultMessage="Bind {number, plural, =0 {no email or no card} one {# email or card} other {# emails or cards}}"
                   values={{
                     number: dataSourceBindingsNumRequired,
                   }}
