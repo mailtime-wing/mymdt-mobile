@@ -7,7 +7,7 @@ import {css} from '@emotion/native';
 import {UPGRADE_MEMBERSHIP} from '@/api/data';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
-import {container, sectionTitle} from './style';
+import {container, sectionTitle, button} from './style';
 import AppText from '@/components/AppText2';
 import Requirements from '@/components/Requirements';
 import AppButton from '@/components/AppButton';
@@ -68,6 +68,7 @@ const UpgradeSection = ({userNextLevel, style, navigation, ...props}) => {
           sizeVariant="normal"
           colorVariant="secondary"
           text={<FormattedMessage id="button.upgrade" />}
+          style={button}
         />
       )}
       {showConfirmUpgradePopup && (

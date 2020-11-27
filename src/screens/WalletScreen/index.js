@@ -85,7 +85,8 @@ const WalletScreen = ({navigation}) => {
     {
       name: 'Stake MDT',
       icon: StakeMdtIcon,
-      action: () => navigation.navigate('membership_detail'),
+      action: () =>
+        navigation.navigate('membership_detail', {showNextStaking: true}),
     },
     ...(Config.EXPERIMENTAL_FEATURE === 'true'
       ? [

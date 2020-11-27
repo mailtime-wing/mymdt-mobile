@@ -48,7 +48,8 @@ const HomeScreen = ({navigation}) => {
     data?.userProfile?.emailAccounts?.length ||
     0 + data?.userProfile?.bankItems?.length ||
     0;
-  const currentStakeAmount = data?.userProfile?.staking?.amount || 0;
+  const currentStakeAmount =
+    data?.userProfile?.staking[0]?.stakingPlan.amount || 0;
 
   const userLevel = data?.userProfile?.membership?.level || 0;
   const userNextLevel = userLevel + 1;
@@ -152,7 +153,7 @@ const HomeScreen = ({navigation}) => {
   };
 
   const handleViewMorePress = () => {
-    navigation.navigate('membership_detail');
+    navigation.navigate('membership_detail', {showNextLevel: true});
   };
 
   if (loading) {

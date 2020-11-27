@@ -57,8 +57,9 @@ const CurrentTag = ({style}) => {
   );
 };
 
-const MembershipCardList = ({navigation}) => {
+const MembershipCardList = ({navigation, route}) => {
   const theme = useTheme();
+  const {showNextLevel, showNextStaking} = route.params || {};
   const refCarousel = useRef(null);
   const [showConfirmUpgradePopup, setshowConfirmUpgradePopup] = useState(false);
   const [membershipToBeUpgraded, setMembershipToBeUpgraded] = useState({});
@@ -70,11 +71,6 @@ const MembershipCardList = ({navigation}) => {
     variables: {id: membershipToBeUpgraded.id},
   });
 
-  const userLevel = data?.userProfile?.membership?.level || 0;
-  const userNextLevel = userLevel + 1;
-  const [activeIndex, setActiveIndex] = useState(userNextLevel);
-  const availableMemberships = data?.userProfile?.availableMemberships || [];
-
   const referFriendCount =
     data?.userProfile?.referrals.filter(
       (referral) => referral.isReferrer && referral.status === 'PROCESSED',
@@ -83,8 +79,26 @@ const MembershipCardList = ({navigation}) => {
     data?.userProfile?.emailAccounts?.length ||
     0 + data?.userProfile?.bankItems?.length ||
     0;
-  const currentStakeAmount =
-    data?.userProfile?.staking[0]?.stakingPlan.amount || 0;
+  const currentStakingPlan = data?.userProfile?.staking[0]?.stakingPlan;
+  const currentStakeAmount = currentStakingPlan?.amount || 0;
+  const availableMemberships = data?.userProfile?.availableMemberships || [];
+  const nextStakingPlanLevel = availableMemberships.filter(
+    (ams) =>
+      !!ams.stakingPlan &&
+      ams.stakingPlan.id !== currentStakingPlan?.id &&
+      ams.stakingPlan.amount > currentStakeAmount,
+  )[0];
+
+  const userLevel = data?.userProfile?.membership?.level || 0;
+  const userNextLevel = userLevel + 1;
+  let initialLevel = userLevel;
+  if (showNextLevel) {
+    initialLevel = userNextLevel;
+  }
+  if (showNextStaking) {
+    initialLevel = nextStakingPlanLevel?.level || userLevel;
+  }
+  const [activeIndex, setActiveIndex] = useState(initialLevel);
 
   useFocusEffect(
     useCallback(() => {
@@ -301,7 +315,7 @@ const MembershipCardList = ({navigation}) => {
         inactiveSlideOpacity={1}
         activeAnimationType="decay"
         onSnapToItem={handleOnSnapToItem}
-        firstItem={userNextLevel}
+        firstItem={initialLevel}
       />
     </View>
   );
