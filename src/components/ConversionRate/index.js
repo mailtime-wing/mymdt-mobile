@@ -15,6 +15,8 @@ const ConversionTransactionAmount = (props) => {
       amountSizeVariant="normal"
       unitColor={theme.colors.secondary.normal}
       amountColor={theme.colors.textOnBackground.mediumEmphasis}
+      minimumFractionDigits={3}
+      maximumFractionDigits={3}
       {...props}
     />
   );

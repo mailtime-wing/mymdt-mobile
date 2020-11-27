@@ -22,6 +22,11 @@ import {useTheme} from 'emotion-theming';
  * @property {'small'|'normal'|'large'|'largeProportional'} amountSizeVariant
  * @property {string} amountColor
  * @property {string} unitColor
+ * @property {boolean} showDollarSign
+ * @property {boolean} showAlmostEqual
+ * @property {boolean} showDecimal
+ * @property {number} minimumFractionDigits
+ * @property {number} maximumFractionDigits
  */
 
 /**
@@ -39,6 +44,8 @@ const TransactionAmount = ({
   showDollarSign,
   showAlmostEqual,
   showDecimal,
+  minimumFractionDigits,
+  maximumFractionDigits,
   style,
 }) => {
   const theme = useTheme();
@@ -112,8 +119,8 @@ const TransactionAmount = ({
         ]}>
         <FormattedNumber
           value={amount}
-          minimumFractionDigits={showDecimal ? 2 : 0}
-          maximumFractionDigits={showDecimal ? 2 : 0}
+          minimumFractionDigits={showDecimal ? minimumFractionDigits : 0}
+          maximumFractionDigits={showDecimal ? maximumFractionDigits : 0}
         />
       </AppText>
       <AppText
@@ -132,6 +139,8 @@ TransactionAmount.defaultProps = {
   amountSizeVariant: 'normal',
   unitSizeVariant: 'normal',
   showDecimal: true,
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
 };
 
 export default TransactionAmount;
