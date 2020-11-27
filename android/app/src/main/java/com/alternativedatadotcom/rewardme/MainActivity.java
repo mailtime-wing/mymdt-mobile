@@ -3,6 +3,8 @@ package com.alternativedatadotcom.rewardme;
 import com.facebook.react.ReactActivity;
 import io.branch.rnbranch.*;
 import android.content.Intent;
+import com.zoontek.rnbootsplash.RNBootSplash;
+import android.os.Bundle;
 
 public class MainActivity extends ReactActivity {
 
@@ -13,6 +15,14 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "RewardMe";
+  }
+
+
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    RNBootSplash.init(R.drawable.bootsplash, MainActivity.this);
   }
 
   @Override

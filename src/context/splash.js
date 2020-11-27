@@ -2,7 +2,7 @@ import React, {createContext, useContext} from 'react';
 
 import {AuthContext} from '@/context/auth';
 import {PreloadDataContext} from '@/context/preloadData';
-import SplashScreen from '@/screens/SplashScreen';
+import RNBootSplash from 'react-native-bootsplash';
 
 export const SplashContext = createContext(false);
 
@@ -11,8 +11,14 @@ export const SplashProvider = ({children}) => {
   const {initialized: preloadDataInitialized} = useContext(PreloadDataContext);
 
   // ensure all data required by our app is loaded
+  useEffect(() => {
+    if (authInitialized && preloadDataInitialized) {
+      RNBootSplash.hide();
+    }
+  }, [authInitialized, preloadDataInitialized]);
+
   if (!authInitialized || !preloadDataInitialized) {
-    return <SplashScreen />;
+    return null;
   }
 
   return (
