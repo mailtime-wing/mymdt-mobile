@@ -50,7 +50,7 @@ const AccountSecurityScreen = ({navigation}) => {
           key="pin"
           label={<FormattedMessage id="pin" />}
           onPress={handlePinPress}
-          icon={
+          optionIcon={
             isPinSet && (
               <View style={tickButton(theme)}>
                 <TickIcon
