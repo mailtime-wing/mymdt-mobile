@@ -284,6 +284,9 @@
   "redeemableForGiftCards": "Redeemable for gift cards",
   "cryptocurrency": "Cryptocurrency",
   "cashbackWillBePaidIn": "Cashback will be paid in ME coins",
+  "stake_amount_of_mdt": "Stake {amount} MDT",
+  "refer_number_of_friends": "Refer {number, plural, =0 {no friend} one {# friend} other {# friends}}",
+  "bind_number_of_accounts": "Bind {number, plural, =0 {no account} one {# account} other {# accounts}}",
   "currencyDisplayCode": {
     "RD": "Reward Dollar",
     "MDT": "MDT",
