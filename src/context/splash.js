@@ -12,9 +12,19 @@ export const SplashProvider = ({children}) => {
 
   // ensure all data required by our app is loaded
   useEffect(() => {
+    let timeoutId;
     if (authInitialized && preloadDataInitialized) {
-      RNBootSplash.hide();
+      // delay the hiding so that UI is ready right after splash disappears
+      timeoutId = setTimeout(() => {
+        RNBootSplash.hide();
+      }, 300);
     }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [authInitialized, preloadDataInitialized]);
 
   if (!authInitialized || !preloadDataInitialized) {
