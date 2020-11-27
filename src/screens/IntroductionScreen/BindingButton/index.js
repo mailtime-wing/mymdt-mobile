@@ -13,7 +13,7 @@ const BindingButton = ({icon, title, caption, ...props}) => {
   const theme = useTheme();
   return (
     <Button {...props}>
-      <ButtonView style={theme.colors.elevatedBackgroundFlat}>
+      <ButtonView style={theme.colors.elevatedDarkerCardFlat}>
         {icon}
         <TextContainer>
           <ButtonTitle>{title}</ButtonTitle>

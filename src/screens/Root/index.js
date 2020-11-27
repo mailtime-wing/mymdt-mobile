@@ -49,6 +49,7 @@ import PinSuccessScreen from '@/screens/PinSuccessScreen';
 import MerchantPreferenceEditScreen from '@/screens/MerchantPreferenceEditScreen';
 import LinkedCardsSettingScreen from '@/screens/LinkedCardsSettingScreen';
 import ChooseRegionSettingScreen from '@/screens/ChooseRegionSettingScreen';
+import ChooseCashBackTypeSettingScreen from '@/screens/ChooseCashBackTypeSettingScreen';
 import DataSourceInfoSettingScreen from '@/screens/DataSourceInfoSettingScreen';
 import ReferralScreen from '@/screens/ReferralScreen';
 
@@ -191,6 +192,10 @@ const authModalScreens = [
     name: 'stake',
     component: StakeScreen,
   },
+  {
+    name: 'choose_cash_back_type_setting',
+    component: ChooseCashBackTypeSettingScreen,
+  },
 ];
 
 const settingScreens = [
@@ -290,6 +295,8 @@ const screenUnderModalOptions = {
   headerStyle: {
     height: APP_BAR_HEIGHT,
     shadowOffset: {x: 0, y: 0},
+    shadowColor: 'transparent',
+    elevation: 0,
   },
   headerLeftContainerStyle: {
     paddingLeft: 24,

@@ -110,14 +110,14 @@ const HomeScreen = ({navigation}) => {
       ),
       icon: BagIcon,
       action: () =>
-        navigation.navigate('settings', {screen: 'merchants_preference'}),
+        navigation.navigate('settings', {screen: 'offers_preference_edit'}),
     },
     {
       name: (
         <FormattedMessage id="cashback_type" defaultMessage="Cashback type" />
       ),
       icon: DollarSignIcon,
-      action: () => navigation.navigate('settings'),
+      action: () => navigation.navigate('choose_cash_back_type_setting'),
     },
   ];
 
