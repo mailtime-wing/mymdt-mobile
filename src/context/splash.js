@@ -11,8 +11,14 @@ export const SplashProvider = ({children}) => {
   const {initialized: preloadDataInitialized} = useContext(PreloadDataContext);
 
   // ensure all data required by our app is loaded
-  if (authInitialized && preloadDataInitialized) {
-    RNBootSplash.hide();
+  useEffect(() => {
+    if (authInitialized && preloadDataInitialized) {
+      RNBootSplash.hide();
+    }
+  }, [authInitialized, preloadDataInitialized]);
+
+  if (!authInitialized || !preloadDataInitialized) {
+    return null;
   }
 
   return (
