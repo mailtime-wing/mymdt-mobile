@@ -3,6 +3,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import {View, TouchableOpacity, ScrollView} from 'react-native';
 import {TRANSACTIONS_QUERY} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 import {useTheme} from 'emotion-theming';
 import Config from 'react-native-config';
 
@@ -24,10 +25,9 @@ import {
   REWARD_DOLLAR,
   MEASURABLE_DATA_TOKEN,
   ME,
+  USD,
   USDT,
 } from '@/constants/currency';
-
-import convertToUsdAmount from '@/utils/convertToUsdAmount';
 
 import ArrowIcon from '@/assets/list_arrow.svg';
 
@@ -60,7 +60,7 @@ const WalletScreen = ({navigation}) => {
     }, [refetch]),
   );
 
-  const rpAmount =
+  const rdAmount =
     data?.userProfile?.currencyAccounts.find(
       (ca) => ca.currencyCode === REWARD_DOLLAR,
     )?.balance || 0;
@@ -68,11 +68,18 @@ const WalletScreen = ({navigation}) => {
     data?.userProfile?.currencyAccounts.find(
       (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
     )?.balance || 0;
-  const ntAmount =
+  const meAmount =
     data?.userProfile?.currencyAccounts.find((ca) => ca.currencyCode === ME)
       ?.balance || 0;
-  const totalBalance = mdtAmount + ntAmount;
-  // const earnedMM = 40; // TODO: get from api
+  const {conversionRate: rdToUsdRate} = useCurrencyConvertToUsd(REWARD_DOLLAR);
+  const {conversionRate: mdtToUsdRate} = useCurrencyConvertToUsd(
+    MEASURABLE_DATA_TOKEN,
+  );
+  const {conversionRate: meToUsdRate} = useCurrencyConvertToUsd(ME);
+  const rdToUsdAmount = rdAmount * rdToUsdRate;
+  const mdtToUsdAmount = mdtAmount * mdtToUsdRate;
+  const meToUsdAmount = meAmount * meToUsdRate;
+  const totalBalance = rdToUsdAmount + mdtToUsdAmount + meToUsdAmount;
 
   const quickActionList = [
     {
@@ -138,6 +145,7 @@ const WalletScreen = ({navigation}) => {
                 showDollarSign
                 amountSizeVariant="largeProportional"
                 unitColor={theme.colors.textOnThemeBackground.highEmphasis}
+                unitVariant={USD}
                 amountColor={theme.colors.textOnThemeBackground.highEmphasis}
                 style={totalBalanceText}
               />
@@ -156,7 +164,7 @@ const WalletScreen = ({navigation}) => {
             ) : (
               <View style={amountContainer}>
                 <TransactionAmount
-                  amount={rpAmount}
+                  amount={rdAmount}
                   amountSizeVariant="normal"
                   unitSizeVariant="small"
                   unitVariant={REWARD_DOLLAR}
@@ -165,7 +173,7 @@ const WalletScreen = ({navigation}) => {
                   style={amount}
                 />
                 <TransactionAmount
-                  amount={convertToUsdAmount(rpAmount)}
+                  amount={rdToUsdAmount}
                   amountSizeVariant="small"
                   unitSizeVariant="small"
                   unitVariant={USDT}
@@ -203,7 +211,7 @@ const WalletScreen = ({navigation}) => {
                   style={amount}
                 />
                 <TransactionAmount
-                  amount={convertToUsdAmount(mdtAmount)}
+                  amount={mdtToUsdAmount}
                   amountSizeVariant="small"
                   unitSizeVariant="small"
                   unitVariant={USDT}
@@ -248,7 +256,7 @@ const WalletScreen = ({navigation}) => {
             ) : (
               <View style={amountContainer}>
                 <TransactionAmount
-                  amount={ntAmount}
+                  amount={meAmount}
                   amountSizeVariant="normal"
                   unitSizeVariant="small"
                   unitVariant={ME}
@@ -257,7 +265,7 @@ const WalletScreen = ({navigation}) => {
                   style={amount}
                 />
                 <TransactionAmount
-                  amount={convertToUsdAmount(ntAmount)}
+                  amount={meToUsdAmount}
                   amountSizeVariant="small"
                   unitSizeVariant="small"
                   unitVariant={USDT}

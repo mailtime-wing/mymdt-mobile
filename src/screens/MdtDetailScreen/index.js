@@ -14,7 +14,7 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import {MEASURABLE_DATA_TOKEN, USD} from '@/constants/currency';
 import WithdrawalIcon from '@/assets/icon_upload.svg';
 import DepositIcon from '@/assets/icon_download.svg';
-import convertToUsdAmount from '@/utils/convertToUsdAmount';
+import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 
 import MdtStake from './MdtStake';
 import MdtTransactionHistory from './MdtTransactionHistory';
@@ -35,6 +35,7 @@ const MdtDetailScreen = ({navigation}) => {
   const theme = useTheme();
   const currencyCode = MEASURABLE_DATA_TOKEN;
 
+  const {conversionRate} = useCurrencyConvertToUsd(MEASURABLE_DATA_TOKEN);
   const {data, loading} = useQueryWithAuth(TRANSACTIONS_QUERY, {
     fetchPolicy: 'network-only',
     variables: {
@@ -68,7 +69,7 @@ const MdtDetailScreen = ({navigation}) => {
               style={totalBalanceText}
             />
             <TransactionAmount
-              amount={convertToUsdAmount(mdtAmount)}
+              amount={mdtAmount * conversionRate}
               amountSizeVariant="small"
               unitSizeVariant="small"
               unitVariant={USD}

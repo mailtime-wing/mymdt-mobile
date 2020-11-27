@@ -10,7 +10,7 @@ import AppText from '@/components/AppText2';
 import TransactionAmount from '@/components/TransactionAmount';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import {REWARD_DOLLAR, USD} from '@/constants/currency';
-import convertToUsdAmount from '@/utils/convertToUsdAmount';
+import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 
 import MrpTransactionHistory from './MrpTransactionHistory';
 
@@ -26,6 +26,7 @@ import {
 const MrpDetailScreen = ({navigation}) => {
   const theme = useTheme();
   const currencyCode = REWARD_DOLLAR;
+  const {conversionRate} = useCurrencyConvertToUsd(REWARD_DOLLAR);
 
   const {data, loading} = useQueryWithAuth(TRANSACTIONS_QUERY, {
     fetchPolicy: 'network-only',
@@ -61,7 +62,7 @@ const MrpDetailScreen = ({navigation}) => {
               style={totalBalanceText}
             />
             <TransactionAmount
-              amount={convertToUsdAmount(mrpAmount)}
+              amount={mrpAmount * conversionRate}
               amountSizeVariant="small"
               unitSizeVariant="small"
               unitVariant={USD}

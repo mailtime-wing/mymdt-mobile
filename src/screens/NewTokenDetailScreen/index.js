@@ -14,7 +14,7 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import {USD, ME} from '@/constants/currency';
 import WithdrawalIcon from '@/assets/icon_upload.svg';
 import DepositIcon from '@/assets/icon_download.svg';
-import convertToUsdAmount from '@/utils/convertToUsdAmount';
+import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 
 import NextStakeReward from './NextStakeReward';
 import NewTokenTransactionHistory from './NewTokenTransactionHistory';
@@ -32,7 +32,8 @@ import {
 
 const NewTokenDetailScreen = ({navigation}) => {
   const theme = useTheme();
-  const currencyCode = 'USDT'; // TODO: change to newToken currencyCode when newToken avaliable
+  const currencyCode = ME;
+  const {conversionRate} = useCurrencyConvertToUsd(ME);
   const {data, loading} = useQueryWithAuth(TRANSACTIONS_QUERY, {
     fetchPolicy: 'network-only',
     variables: {
@@ -64,7 +65,7 @@ const NewTokenDetailScreen = ({navigation}) => {
               style={totalBalanceText}
             />
             <TransactionAmount
-              amount={convertToUsdAmount(newTokenAmount)}
+              amount={newTokenAmount * conversionRate}
               amountSizeVariant="small"
               unitSizeVariant="small"
               unitVariant={USD}

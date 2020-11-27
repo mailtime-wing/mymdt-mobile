@@ -8,7 +8,7 @@ import TransactionAmount from '@/components/TransactionAmount';
 
 import {USD, ME} from '@/constants/currency';
 
-import convertToUsdAmount from '@/utils/convertToUsdAmount';
+import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 
 import {container, header, center} from './style';
 import {FormattedMessage} from 'react-intl';
@@ -18,6 +18,7 @@ import {FormattedMessage} from 'react-intl';
 
 const NextStakeReward = ({style}) => {
   const theme = useTheme();
+  const {conversionRate} = useCurrencyConvertToUsd(ME);
   const nextStakeAmount = 1000;
   return (
     <View style={[container(theme), style]}>
@@ -36,7 +37,7 @@ const NextStakeReward = ({style}) => {
         style={center}
       />
       <TransactionAmount
-        amount={convertToUsdAmount(nextStakeAmount)}
+        amount={nextStakeAmount * conversionRate}
         amountSizeVariant="small"
         unitSizeVariant="small"
         unitVariant={USD}

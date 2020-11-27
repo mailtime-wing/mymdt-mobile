@@ -8,6 +8,7 @@ import {
   REWARD_DOLLAR,
   ME,
   USD,
+  USDT,
 } from '@/constants/currency';
 
 import {amount as amountStyle, container, unit as unitStyle} from './style';
@@ -57,6 +58,7 @@ const TransactionAmount = ({
       unit = ME;
       break;
     case USD:
+    case USDT:
       unit = 'USD';
       break;
     default:

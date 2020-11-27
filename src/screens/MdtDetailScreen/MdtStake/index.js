@@ -8,7 +8,7 @@ import TransactionAmount from '@/components/TransactionAmount';
 
 import {USD, MEASURABLE_DATA_TOKEN, ME} from '@/constants/currency';
 
-import convertToUsdAmount from '@/utils/convertToUsdAmount';
+import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 
 import {
   container,
@@ -35,6 +35,8 @@ const MdtStake = ({
 }) => {
   const theme = useTheme();
   const mdtStakeAmount = 100000;
+  const {conversionRate} = useCurrencyConvertToUsd(MEASURABLE_DATA_TOKEN);
+
   return (
     <View style={[container(theme), style]}>
       <AppText variant="heading6" style={header(theme)}>
@@ -49,7 +51,7 @@ const MdtStake = ({
         style={center}
       />
       <TransactionAmount
-        amount={convertToUsdAmount(mdtStakeAmount)}
+        amount={mdtStakeAmount * conversionRate}
         amountSizeVariant="small"
         unitSizeVariant="small"
         unitVariant={USD}
@@ -130,7 +132,7 @@ const MdtStake = ({
         style={center}
       />
       <TransactionAmount
-        amount={convertToUsdAmount(availableMdt)}
+        amount={availableMdt * conversionRate}
         amountSizeVariant="small"
         unitSizeVariant="small"
         unitVariant={USD}
