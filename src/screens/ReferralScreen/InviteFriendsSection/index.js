@@ -40,10 +40,9 @@ const InviteFriendSection = () => {
     maxCompletion: 0,
     rewardValue: 0,
   };
-  const processedReferralNumber =
-    data?.userProfile?.referrals?.filter(
-      (referral) => referral.isReferrer && referral.status === 'PROCESSED',
-    ).length || 0;
+  const numberOfReferralRecords =
+    data?.userProfile?.referrals?.filter((referral) => referral.isReferrer)
+      .length || 0;
 
   useEffect(() => {
     const generate = async () => {
@@ -107,13 +106,13 @@ const InviteFriendSection = () => {
         }
         progressLabel={
           <AppText variant="caption" style={progressLabelStyle(theme)}>
-            {`${processedReferralNumber}/${referralTask.maxCompletion}`}
+            {`${numberOfReferralRecords}/${referralTask.maxCompletion}`}
           </AppText>
         }
         progress={
           referralTask.maxCompletion === 0
             ? 0
-            : processedReferralNumber / referralTask.maxCompletion
+            : numberOfReferralRecords / referralTask.maxCompletion
         }
         style={progressBarContainer}
       />
