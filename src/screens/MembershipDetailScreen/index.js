@@ -8,7 +8,7 @@ import AppText from '@/components/AppText2';
 
 import MembershipCardList from './MembershipCardList';
 
-const MembershipDetailScreen = ({navigation}) => {
+const MembershipDetailScreen = ({navigation, ...props}) => {
   const theme = useTheme();
 
   useLayoutEffect(() => {
@@ -33,7 +33,7 @@ const MembershipDetailScreen = ({navigation}) => {
           defaultMessage="Membership program"
         />
       </AppText>
-      <MembershipCardList navigation={navigation} />
+      <MembershipCardList navigation={navigation} {...props} />
     </ScrollView>
   );
 };

@@ -48,11 +48,14 @@ const HomeScreen = ({navigation}) => {
     data?.userProfile?.emailAccounts?.length ||
     0 + data?.userProfile?.bankItems?.length ||
     0;
-  const currentStakeAmount = data?.userProfile?.staking?.amount || 0;
+  const currentStakeAmount =
+    data?.userProfile?.staking[0]?.stakingPlan.amount || 0;
 
   const userLevel = data?.userProfile?.membership?.level || 0;
-  const userNextLevel = userLevel + 1;
   const availableMemberships = data?.userProfile?.availableMemberships || [];
+  const maximumLevel =
+    availableMemberships[availableMemberships.length - 1]?.level;
+  const userNextLevel = userLevel === maximumLevel ? userLevel : userLevel + 1;
   const nextLevelMembership = availableMemberships.find(
     (ams) => ams.level === userNextLevel,
   );
@@ -152,30 +155,39 @@ const HomeScreen = ({navigation}) => {
   };
 
   const handleViewMorePress = () => {
-    navigation.navigate('membership_detail');
+    navigation.navigate('membership_detail', {showNextLevel: true});
   };
 
   if (loading) {
     return <LoadingSpinner />;
   }
-  // TODO: do not linear gradient the whole scroll view
+  // TODO: linear gradient should not across the whole scroll view
   // TODO: add card scaled shadow
+
   return (
     <LinearGradientBackground colors={levelGradientMap[userLevel].gradient}>
       <ScreenContainer hasTopBar headerTransparent>
         <ScrollView>
           <MembershipCard userLevel={userLevel} style={imageStyle} />
           <View style={container(theme)}>
-            <UpgradeSection
-              userNextLevel={userNextLevel}
-              navigation={navigation}
-              style={[upgradeSection, sectionMargin]}
-              membership={nextLevelMembership}
-              referFriendCount={referFriendCount}
-              bindDataSourceCount={bindDataSourceCount}
-              currentStakeAmount={currentStakeAmount}
+            {userLevel !== maximumLevel && (
+              <UpgradeSection
+                userNextLevel={userNextLevel}
+                navigation={navigation}
+                style={[upgradeSection, sectionMargin]}
+                membership={nextLevelMembership}
+                referFriendCount={referFriendCount}
+                bindDataSourceCount={bindDataSourceCount}
+                currentStakeAmount={currentStakeAmount}
+              />
+            )}
+            <QuickActions
+              style={[
+                sectionMargin,
+                userLevel === maximumLevel && upgradeSection,
+              ]}
+              actionList={quickActionList}
             />
-            <QuickActions style={sectionMargin} actionList={quickActionList} />
             {merchantsLoading || isSummaryLoading ? (
               <LoadingSpinner />
             ) : merchantsError || summaryError ? null : (

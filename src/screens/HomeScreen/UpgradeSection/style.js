@@ -10,3 +10,7 @@ export const sectionTitle = (theme) => css`
   text-align: center;
   margin-bottom: 24px;
 `;
+
+export const button = css`
+  margin-top: 16px;
+`;
