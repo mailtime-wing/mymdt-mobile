@@ -6,7 +6,11 @@ import {useTheme} from 'emotion-theming';
 import AppButton from '@/components/AppButton';
 import ProgressBar from '@/components/ProgressBar';
 import AppText from '@/components/AppText2';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import {BranchContext} from '@/context/branch';
+import {PreloadDataContext} from '@/context/preloadData';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import {GET_USER_TASKS_AND_REFERRALS} from '@/api/data';
 import ShareIcon from '@/assets/icon_share.svg';
 import {
   progressBarContainer,
@@ -26,6 +30,20 @@ const InviteFriendSection = () => {
   const intl = useIntl();
   const referralUrlRef = useRef('');
   const {branchUniversalObject, referralCode} = useContext(BranchContext);
+  const {appConfig} = useContext(PreloadDataContext);
+  const {data, isLoading, error} = useQueryWithAuth(
+    GET_USER_TASKS_AND_REFERRALS,
+  );
+  const referralTask = data?.userProfile?.tasks.find(
+    (task) => task.id === appConfig.referralTaskID,
+  ) || {
+    maxCompletion: 0,
+    rewardValue: 0,
+  };
+  const processedReferralNumber =
+    data?.userProfile?.referrals?.filter(
+      (referral) => referral.isReferrer && referral.status === 'PROCESSED',
+    ).length || 0;
 
   useEffect(() => {
     const generate = async () => {
@@ -65,6 +83,14 @@ const InviteFriendSection = () => {
     }
   };
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    // TODO: handle error
+  }
+
   return (
     <View style={container}>
       <AppText variant="body1" style={detailStyle(theme)}>
@@ -81,10 +107,14 @@ const InviteFriendSection = () => {
         }
         progressLabel={
           <AppText variant="caption" style={progressLabelStyle(theme)}>
-            20/50
+            {`${processedReferralNumber}/${referralTask.maxCompletion}`}
           </AppText>
         }
-        progress={20 / 50}
+        progress={
+          referralTask.maxCompletion === 0
+            ? 0
+            : processedReferralNumber / referralTask.maxCompletion
+        }
         style={progressBarContainer}
       />
       <AppText variant="heading5" style={sectionHeaderStyle(theme)}>
@@ -96,7 +126,7 @@ const InviteFriendSection = () => {
       <AppText variant="body1" style={detailStyle(theme)}>
         <FormattedMessage
           id="once_your_friend_entered_the_code"
-          defaultMessage="Once your friend entered the code and completed the account setup, you and your friend will get 500."
+          values={{amount: referralTask.rewardValue}}
         />
       </AppText>
       <View style={referralContainer}>

@@ -272,7 +272,7 @@
   "number_of_merchants": "{number} Merchants",
   "invite_friends_to_reward_me": "Invite friends to RewardMe. Rewards will be given if they can finish the account setup.",
   "share_your_referral_code": "Share your referral code",
-  "once_your_friend_entered_the_code": "Once your friend entered the code and completed the account setup, you and your friend will get 500.",
+  "once_your_friend_entered_the_code": "Once your friend entered the code and completed the account setup, you and your friend will get {amount}.",
   "pending": "Pending",
   "congratulations": "Congratulations!",
   "you_are_next_level_member_now": "You are {next_level} member now",

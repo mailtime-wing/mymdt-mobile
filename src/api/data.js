@@ -178,6 +178,7 @@ export const GET_APP_CONFIG_API = gql`
   query {
     appConfig {
       accountSetupTaskID
+      referralTaskID
     }
   }
 `;
@@ -611,6 +612,25 @@ export const UPDATE_USER_LOCALE = gql`
       user {
         id
         locale
+      }
+    }
+  }
+`;
+
+export const GET_USER_TASKS_AND_REFERRALS = gql`
+  query {
+    userProfile {
+      id
+      tasks {
+        id
+        rewardValue
+        maxCompletion
+      }
+      referrals {
+        id
+        status
+        userId
+        isReferrer
       }
     }
   }
