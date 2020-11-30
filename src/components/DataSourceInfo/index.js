@@ -7,9 +7,11 @@ import {screenStyle} from './style';
 
 import ScreenContainer from '@/components/ScreenContainer';
 import bankSyncServerDataAPIType from '@/enum/bankSyncServerDataAPIType';
+import MailTimeLogo from '@/assets/logo_mailtime.svg';
 import PlaidLogo from '@/assets/logo_plaid.svg';
 import CreditGoLogo from '@/assets/logo_creditgo.svg';
 import PlantoLogo from '@/assets/logo_planto.svg';
+import MailIcon from '@/assets/icon_mail.svg';
 import BankIcon from '@/assets/icon_bank.svg';
 import {useTheme} from 'emotion-theming';
 
@@ -17,6 +19,21 @@ const DataSourceInfo = ({type, onContinuePress}) => {
   const theme = useTheme();
 
   const layouts = {
+    mailtime: {
+      logo: <MailTimeLogo />,
+      rightIcon: MailIcon,
+      title: <FormattedMessage id="we_partner_with_mailtime" />,
+      descriptions: [
+        {
+          title: <FormattedMessage id="secure" defaultMessage="Secure" />,
+          caption: <FormattedMessage id="your_transactional_ereceipts_are" />,
+        },
+        {
+          title: <FormattedMessage id="private" defaultMessage="Private" />,
+          caption: <FormattedMessage id="your_credentials_will_never_be" />,
+        },
+      ],
+    },
     [bankSyncServerDataAPIType.PLAID]: {
       logo: <PlaidLogo fill={theme.colors.logo.plaid} />,
       rightIcon: BankIcon,

@@ -25,6 +25,7 @@ import WelcomeScreen from '@/screens/WelcomeScreen';
 import SignUpRewardScreen from '@/screens/SignUpRewardScreen';
 import HomeTab from '@/screens/HomeTab';
 import ChooseRegionScreen from '@/screens/ChooseRegionScreen';
+import EmailDataSourceInfoOnboardingScreen from '@/screens/EmailDataSourceInfoOnboardingScreen';
 import BankDataSourceInfoOnboardingScreen from '@/screens/BankDataSourceInfoOnboardingScreen';
 import LinkedCardsScreen from '@/screens/LinkedCardsScreen';
 import LinkedEmailsScreen from '@/screens/LinkedEmailsScreen';
@@ -50,6 +51,7 @@ import MerchantPreferenceEditScreen from '@/screens/MerchantPreferenceEditScreen
 import LinkedCardsSettingScreen from '@/screens/LinkedCardsSettingScreen';
 import ChooseRegionSettingScreen from '@/screens/ChooseRegionSettingScreen';
 import ChooseCashBackTypeSettingScreen from '@/screens/ChooseCashBackTypeSettingScreen';
+import EmailDataSourceInfoSettingScreen from '@/screens/EmailDataSourceInfoSettingScreen';
 import BankDataSourceInfoSettingScreen from '@/screens/BankDataSourceInfoSettingScreen';
 import ReferralScreen from '@/screens/ReferralScreen';
 
@@ -113,6 +115,10 @@ const setupScreens = [
     name: 'introduction',
     component: IntroductionScreen,
     options: {headerShown: false},
+  },
+  {
+    name: 'email_data_source_info_onboarding',
+    component: EmailDataSourceInfoOnboardingScreen,
   },
   {
     name: 'add_email',
@@ -231,6 +237,10 @@ const settingScreens = [
   {
     name: 'choose_region_setting',
     component: ChooseRegionSettingScreen,
+  },
+  {
+    name: 'email_data_source_info_setting',
+    component: EmailDataSourceInfoSettingScreen,
   },
   {
     name: 'bank_data_source_info_setting',

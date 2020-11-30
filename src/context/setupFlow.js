@@ -48,9 +48,18 @@ export const SetupFlowProvider = ({children}) => {
     'next',
   );
   graph.setEdge('introduction', 'notification_permission', 'skip');
-  graph.setEdge('introduction', 'add_email', 'email_flow');
+  graph.setEdge(
+    'introduction',
+    'email_data_source_info_onboarding',
+    'email_flow',
+  );
   graph.setPath(
-    ['add_email', 'linked_emails', 'notification_permission'],
+    [
+      'email_data_source_info_onboarding',
+      'add_email',
+      'linked_emails',
+      'notification_permission',
+    ],
     'next',
   );
   graph.setEdge('introduction', 'choose_region', 'card_flow');
@@ -81,14 +90,15 @@ export const SetupFlowProvider = ({children}) => {
       result.welcome = true;
       result.merchant_select = true;
     }
-    if (setupStatus?.isDataSourceBound) {
-      result.introduction = true;
-      result.add_email = true;
-      result.linked_emails = true;
-      result.choose_region = true;
-      result.bank_data_source_info_onboarding = true;
-      result.linked_cards = true;
-    }
+    // if (setupStatus?.isDataSourceBound) {
+    //   result.introduction = true;
+    //   result.email_data_source_info_onboarding = true;
+    //   result.add_email = true;
+    //   result.linked_emails = true;
+    //   result.choose_region = true;
+    //   result.bank_data_source_info_onboarding = true;
+    //   result.linked_cards = true;
+    // }
     if (setupStatus?.isCashbackCurrencyCodeSet && setupStatus?.isMerchantSet) {
       result.account_setup_done = true;
       result.sign_up_reward = true;

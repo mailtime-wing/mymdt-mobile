@@ -7,7 +7,7 @@ import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 import AppIcon from '@/components/AppIcon';
 import PhoneIcon from '@/assets/icon_smartphone.svg';
-import ShieldIcon from '@/assets/icon_shield.svg';
+import ShieldIcon from '@/assets/icon_shield_big.svg';
 import {Svg, Path} from 'react-native-svg';
 
 import {
@@ -105,7 +105,13 @@ const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
           <View key={i} style={dashDot(theme)} />
         ))}
         <View>
-          <ShieldIcon fill={shieldColor} style={iconShadow} />
+          <ShieldIcon
+            fill={shieldColor}
+            style={iconShadow}
+            // width={60}
+            // height={76}
+            // viewBox="0 0 60 76"
+          />
           <View style={logoPosition}>{logo}</View>
         </View>
         {[...Array(6)].map((_, i) => (

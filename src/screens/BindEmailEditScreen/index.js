@@ -208,7 +208,9 @@ const BindEmailEditScreen = ({navigation}) => {
       <ButtonContainer>
         <AppButton
           onPress={() =>
-            navigation.navigate('emails_binding', {navigateFromEdit: true})
+            navigation.navigate('email_data_source_info_setting', {
+              navigateFromEdit: true,
+            })
           }
           text={
             <FormattedMessage
