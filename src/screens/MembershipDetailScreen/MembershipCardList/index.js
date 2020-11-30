@@ -86,17 +86,18 @@ const MembershipCardList = ({navigation, route}) => {
     availableMemberships[availableMemberships.length - 1]?.level;
   const userLevel = data?.userProfile?.membership?.level || 0;
   const userNextLevel = userLevel === maximumLevel ? userLevel : userLevel + 1;
-  const nextStakingPlanLevel = availableMemberships.find(
-    (ams) =>
-      ams.level > userLevel && ams.stakingPlan?.id !== currentStakingPlan.id,
-  );
+  const nextStakingPlanLevel =
+    availableMemberships.find(
+      (ams) =>
+        ams.level > userLevel && ams.stakingPlan?.id !== currentStakingPlan.id,
+    )?.level || userLevel;
 
   let initialLevel = userLevel;
   if (showNextLevel) {
     initialLevel = userNextLevel;
   }
   if (showNextStaking) {
-    initialLevel = nextStakingPlanLevel?.level || userLevel;
+    initialLevel = nextStakingPlanLevel;
   }
   const [activeIndex, setActiveIndex] = useState(initialLevel);
 
