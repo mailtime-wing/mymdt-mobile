@@ -6,8 +6,6 @@ import Layout from './Layout';
 import {screenStyle} from './style';
 
 import ScreenContainer from '@/components/ScreenContainer';
-import LoadingSpinner from '@/components/LoadingSpinner';
-import useBankLogin from '@/hooks/useBankLogin';
 import bankSyncServerDataAPIType from '@/enum/bankSyncServerDataAPIType';
 import PlaidLogo from '@/assets/logo_plaid.svg';
 import CreditGoLogo from '@/assets/logo_creditgo.svg';
@@ -15,7 +13,7 @@ import PlantoLogo from '@/assets/logo_planto.svg';
 import BankIcon from '@/assets/icon_bank.svg';
 import {useTheme} from 'emotion-theming';
 
-const DataSourceInfo = ({type, countryCode, onConnected}) => {
+const DataSourceInfo = ({type, onContinuePress}) => {
   const theme = useTheme();
 
   const layouts = {
@@ -112,22 +110,11 @@ const DataSourceInfo = ({type, countryCode, onConnected}) => {
   };
 
   const layout = layouts[type];
-  const [login, {isError, isLoading}] = useBankLogin(type, countryCode, {
-    onConnected,
-  });
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
-  if (isError) {
-    // TODO: handle error
-  }
 
   return (
     <ScrollView>
       <ScreenContainer hasTopBar style={screenStyle}>
-        <Layout {...layout} onContinuePress={login} />
+        <Layout {...layout} onContinuePress={onContinuePress} />
       </ScreenContainer>
     </ScrollView>
   );

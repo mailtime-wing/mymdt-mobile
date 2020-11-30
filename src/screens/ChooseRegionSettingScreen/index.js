@@ -8,8 +8,8 @@ import {container} from './style';
 const ChooseRegionScreen = ({navigation}) => (
   <ModalContainer style={container}>
     <RegionSectionList
-      onItemPress={item =>
-        navigation.navigate('data_source_info_setting', item)
+      onItemPress={(item) =>
+        navigation.navigate('bank_data_source_info_setting', item)
       }
     />
   </ModalContainer>

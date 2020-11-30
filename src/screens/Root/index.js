@@ -25,7 +25,7 @@ import WelcomeScreen from '@/screens/WelcomeScreen';
 import SignUpRewardScreen from '@/screens/SignUpRewardScreen';
 import HomeTab from '@/screens/HomeTab';
 import ChooseRegionScreen from '@/screens/ChooseRegionScreen';
-import DataSourceInfoScreen from '@/screens/DataSourceInfoScreen';
+import BankDataSourceInfoOnboardingScreen from '@/screens/BankDataSourceInfoOnboardingScreen';
 import LinkedCardsScreen from '@/screens/LinkedCardsScreen';
 import LinkedEmailsScreen from '@/screens/LinkedEmailsScreen';
 
@@ -50,7 +50,7 @@ import MerchantPreferenceEditScreen from '@/screens/MerchantPreferenceEditScreen
 import LinkedCardsSettingScreen from '@/screens/LinkedCardsSettingScreen';
 import ChooseRegionSettingScreen from '@/screens/ChooseRegionSettingScreen';
 import ChooseCashBackTypeSettingScreen from '@/screens/ChooseCashBackTypeSettingScreen';
-import DataSourceInfoSettingScreen from '@/screens/DataSourceInfoSettingScreen';
+import BankDataSourceInfoSettingScreen from '@/screens/BankDataSourceInfoSettingScreen';
 import ReferralScreen from '@/screens/ReferralScreen';
 
 // wallet page
@@ -127,8 +127,8 @@ const setupScreens = [
     component: ChooseRegionScreen,
   },
   {
-    name: 'data_source_info',
-    component: DataSourceInfoScreen,
+    name: 'bank_data_source_info_onboarding',
+    component: BankDataSourceInfoOnboardingScreen,
   },
   {
     name: 'linked_cards',
@@ -233,8 +233,8 @@ const settingScreens = [
     component: ChooseRegionSettingScreen,
   },
   {
-    name: 'data_source_info_setting',
-    component: DataSourceInfoSettingScreen,
+    name: 'bank_data_source_info_setting',
+    component: BankDataSourceInfoSettingScreen,
   },
 ];
 

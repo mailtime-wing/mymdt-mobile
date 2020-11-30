@@ -57,7 +57,7 @@ export const SetupFlowProvider = ({children}) => {
   graph.setPath(
     [
       'choose_region',
-      'data_source_info',
+      'bank_data_source_info_onboarding',
       'linked_cards',
       'notification_permission',
     ],
@@ -86,7 +86,7 @@ export const SetupFlowProvider = ({children}) => {
       result.add_email = true;
       result.linked_emails = true;
       result.choose_region = true;
-      result.data_source_info = true;
+      result.bank_data_source_info_onboarding = true;
       result.linked_cards = true;
     }
     if (setupStatus?.isCashbackCurrencyCodeSet && setupStatus?.isMerchantSet) {

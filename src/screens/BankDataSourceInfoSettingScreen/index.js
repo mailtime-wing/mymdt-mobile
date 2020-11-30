@@ -1,18 +1,18 @@
 import React from 'react';
 import {useNavigationState} from '@react-navigation/native';
 
-import DataSourceInfo from '@/components/DataSourceInfo';
+import BankDataSourceInfo from '@/components/BankDataSourceInfo';
 
-const DataSourceInfoSettingScreen = ({navigation, route}) => {
-  const navigationStateRoutes = useNavigationState(state => state.routes);
+const BankDataSourceInfoSettingScreen = ({navigation, route}) => {
+  const navigationStateRoutes = useNavigationState((state) => state.routes);
 
   return (
-    <DataSourceInfo
+    <BankDataSourceInfo
       type={route.params.type}
       countryCode={route.params.countryCode}
       onConnected={() => {
         const linkedCardsSettingRoute = navigationStateRoutes.find(
-          _route => _route.name === 'linked_cards_setting',
+          (_route) => _route.name === 'linked_cards_setting',
         );
         if (linkedCardsSettingRoute) {
           navigation.navigate({key: linkedCardsSettingRoute.key});
@@ -25,4 +25,4 @@ const DataSourceInfoSettingScreen = ({navigation, route}) => {
   );
 };
 
-export default DataSourceInfoSettingScreen;
+export default BankDataSourceInfoSettingScreen;

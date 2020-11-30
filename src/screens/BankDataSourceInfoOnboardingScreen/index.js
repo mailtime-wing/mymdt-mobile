@@ -1,13 +1,13 @@
 import React from 'react';
 
-import DataSourceInfo from '@/components/DataSourceInfo';
+import BankDataSourceInfo from '@/components/BankDataSourceInfo';
 import useSetupFlow from '@/hooks/useSetupFlow';
 
-const DataSourceInfoScreen = ({route}) => {
+const BankDataSourceInfoOnboardingScreen = ({route}) => {
   const {navigateByFlow} = useSetupFlow();
 
   return (
-    <DataSourceInfo
+    <BankDataSourceInfo
       type={route.params.type}
       countryCode={route.params.countryCode}
       onConnected={() => navigateByFlow('next')}
@@ -15,4 +15,4 @@ const DataSourceInfoScreen = ({route}) => {
   );
 };
 
-export default DataSourceInfoScreen;
+export default BankDataSourceInfoOnboardingScreen;
