@@ -64,7 +64,15 @@ const Requirements = ({
         <>
           {!!stakingPlan && stakingPlan.amount && (
             <Requirement
-              task={`Stake ${stakingPlan.amount} MDT`}
+              task={
+                <FormattedMessage
+                  id="stake_amount_of_mdt"
+                  defaultMessage="Stake {amount} MDT"
+                  values={{
+                    amount: stakingPlan.amount,
+                  }}
+                />
+              }
               target={stakingPlan.amount}
               progress={currentStakeAmount}
               action={() =>
@@ -91,7 +99,15 @@ const Requirements = ({
 
           {!!referralsNumRequired && (
             <Requirement
-              task={`Refer ${referralsNumRequired} friend`}
+              task={
+                <FormattedMessage
+                  id="refer_number_of_friends"
+                  defaultMessage="Refer {number, plural, =0 {no friend} one {# friend} other {# friends}}"
+                  values={{
+                    number: referralsNumRequired,
+                  }}
+                />
+              }
               target={referralsNumRequired}
               progress={referFriendCount}
               action={() => navigation.navigate('referral')}
@@ -107,7 +123,15 @@ const Requirements = ({
 
           {!!dataSourceBindingsNumRequired && (
             <Requirement
-              task={`Bind ${dataSourceBindingsNumRequired} Email or ${dataSourceBindingsNumRequired} card`}
+              task={
+                <FormattedMessage
+                  id="bind_number_of_accounts"
+                  defaultMessage="Bind {number, plural, =0 {no email or no card} one {# email or card} other {# emails or cards}}"
+                  values={{
+                    number: dataSourceBindingsNumRequired,
+                  }}
+                />
+              }
               target={dataSourceBindingsNumRequired}
               progress={bindDataSourceCount}
               action={() => navigation.navigate('settings')}
