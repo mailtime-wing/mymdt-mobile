@@ -6,16 +6,19 @@ import {useTheme} from 'emotion-theming';
 import {GET_CONVERSION_RATE_API} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 
-import {convertedText, gotRewardText, convertedContainer} from './style';
+import {
+  convertedText,
+  gotRewardText,
+  convertedContainer,
+  centered,
+} from './style';
 
 import {REWARD_DOLLAR, ME} from '@/constants/currency';
-
-import MRPCoin from '@/components/MRPCoin';
-import MDTCoin from '@/components/MDTCoin';
 import MRPGiftBox from '@/components/MRPGiftBox';
 import MDTGiftBox from '@/components/MDTGiftBox';
 import AppText from '@/components/AppText2';
 import PopupModalWithLinearGradient from '@/components/PopupModalWithLinearGradient';
+import TransactionAmount from '@/components/TransactionAmount';
 
 const giftBoxStyle = {
   transform: [
@@ -44,9 +47,9 @@ const RewardGotPopup = ({
   });
 
   const conversionRate = data?.conversionRate || 0;
-  const convertedMdtAmount = rewardAmount * conversionRate;
-  const mrpTextColor = theme.colors.textOfMrp;
-  const mdtTextColor = theme.colors.textOfMdt;
+  const convertedRewardAmount = rewardAmount * conversionRate;
+  const primaryColor = theme.colors.primary.normal;
+  const secondaryColor = theme.colors.secondary.normal;
 
   return (
     <PopupModalWithLinearGradient callback={onOkPress} {...props}>
@@ -57,7 +60,10 @@ const RewardGotPopup = ({
       )}
       <AppText
         variant="heading4"
-        style={gotRewardText(theme, convert ? mdtTextColor : mrpTextColor)}>
+        style={[
+          gotRewardText,
+          {color: convert ? primaryColor : secondaryColor},
+        ]}>
         <FormattedMessage
           id="you_got_reward"
           values={{
@@ -66,18 +72,24 @@ const RewardGotPopup = ({
         />
       </AppText>
       {convert ? (
-        <MDTCoin
-          amount={convertedMdtAmount}
-          size={28}
-          fontSize={24}
-          color={mdtTextColor}
+        <TransactionAmount
+          amount={convertedRewardAmount}
+          unitVariant={ME}
+          unitSizeVariant="normal"
+          amountSizeVariant="largeProportional"
+          amountColor={primaryColor}
+          unitColor={primaryColor}
+          style={centered}
         />
       ) : (
-        <MRPCoin
+        <TransactionAmount
           amount={rewardAmount}
-          size={28}
-          fontSize={24}
-          color={mrpTextColor}
+          unitVariant={REWARD_DOLLAR}
+          unitSizeVariant="normal"
+          amountSizeVariant="largeProportional"
+          amountColor={secondaryColor}
+          unitColor={secondaryColor}
+          style={centered}
         />
       )}
       {convert && (
@@ -85,11 +97,14 @@ const RewardGotPopup = ({
           <AppText variant="body2" style={convertedText(theme)}>
             <FormattedMessage id="converted_from" />{' '}
           </AppText>
-          <MRPCoin
+          <TransactionAmount
             amount={rewardAmount}
-            size={16}
-            fontSize={16}
-            color={mrpTextColor}
+            unitVariant={REWARD_DOLLAR}
+            unitSizeVariant="small"
+            amountSizeVariant="normal"
+            amountColor={theme.colors.textOnBackground.disabled}
+            unitColor={theme.colors.textOnBackground.disabled}
+            style={centered}
           />
         </View>
       )}
