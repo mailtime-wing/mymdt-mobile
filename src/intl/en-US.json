@@ -289,6 +289,7 @@
   "stake_amount_of_mdt": "Stake {amount} MDT",
   "refer_number_of_friends": "Refer {number, plural, =0 {no friend} one {# friend} other {# friends}}",
   "bind_number_of_accounts": "Bind {number, plural, =0 {no email or no card} one {# email or card} other {# emails or cards}}",
+  "unknown_click_to_select_card_type": "Unknown (Click to select card type)",
   "currencyDisplayCode": {
     "RD": "Reward Dollar",
     "MDT": "MDT",

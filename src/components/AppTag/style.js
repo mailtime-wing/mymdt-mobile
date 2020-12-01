@@ -62,6 +62,12 @@ export const container = (theme, variant, sizeVariant, colorVariant) => css`
       background-color: ${theme.colors.tag.onBackground.background.transparent};
     `
     }
+    ${
+      colorVariant === 'error' &&
+      `
+      background-color: ${theme.colors.errorBackground};
+    `
+    }
   `}
   padding-horizontal: 8px;
 
@@ -128,6 +134,12 @@ export const text = (theme, variant, colorVariant) => css`
       color: ${theme.colors.tag.onBackground.text.transparent};
     `
     }
+    ${
+      colorVariant === 'error' &&
+      `
+      color: ${theme.colors.textOnError.normal};
+    `
+    }
   `}
 `;
 
@@ -143,7 +155,6 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.tag.primary.text.normal};
       stroke: ${theme.colors.tag.primary.text.normal};
-      stroke-width: 2;
     `
     }
     ${
@@ -151,7 +162,6 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.tag.secondary.text.normal};
       stroke: ${theme.colors.tag.secondary.text.normal};
-      stroke-width: 2;
     `
     }
     ${
@@ -159,7 +169,6 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.tag.contrast.text.normal};
       stroke: ${theme.colors.tag.contrast.text.normal};
-      stroke-width: 2;
     `
     }
     ${
@@ -167,7 +176,6 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.tag.onBackground.text.normal};
       stroke: ${theme.colors.tag.onBackground.text.normal};
-      stroke-width: 2;
     `
     }
     `}
@@ -178,7 +186,6 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.tag.primary.text.transparent};
       stroke: ${theme.colors.tag.primary.text.transparent};
-      stroke-width: 2;
     `
     }
     ${
@@ -186,7 +193,6 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.tag.secondary.text.transparent};
       stroke: ${theme.colors.tag.secondary.text.transparent};
-      stroke-width: 2;
     `
     }
     ${
@@ -194,7 +200,6 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.tag.contrast.text.transparent};
       stroke: ${theme.colors.tag.contrast.text.transparent};
-      stroke-width: 2;
     `
     }
     ${
@@ -202,7 +207,13 @@ export const icon = (theme, variant, colorVariant, haveText) => css`
       `
       fill: ${theme.colors.tag.onBackground.text.transparent};
       stroke: ${theme.colors.tag.onBackground.text.transparent};
-      stroke-width: 2;
+    `
+    }
+    ${
+      colorVariant === 'error' &&
+      `
+      fill: ${theme.colors.textOnError.normal};
+      stroke: ${theme.colors.textOnError.normal};
     `
     }
   `}

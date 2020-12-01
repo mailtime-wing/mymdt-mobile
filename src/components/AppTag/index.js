@@ -10,7 +10,7 @@ import {container, text as textStyle, icon} from './style';
  * @typedef {Object} Props
  * @property {'normal'|'transparent'} variant
  * @property {'small'|'normal'} sizeVariant
- * @property {'primary'|'secondary'|'contrast'|'onBackground'} colorVariant
+ * @property {'primary'|'secondary'|'contrast'|'onBackground'|'error'} colorVariant
  */
 
 /**

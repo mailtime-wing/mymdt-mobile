@@ -289,6 +289,7 @@
   "stake_amount_of_mdt": "Stake {amount} MDT",
   "refer_number_of_friends": "邀請 {number, plural, =0 {朋友} one {# 朋友} other {# 朋友}}",
   "bind_number_of_accounts": "綁定 {number, plural, =0 {帳號} one {# 帳號} other {# 帳號}}",
+  "unknown_click_to_select_card_type": "Unknown (Click to select card type)",
   "currencyDisplayCode": {
     "RD": "Reward Dollar",
     "MDT": "MDT",

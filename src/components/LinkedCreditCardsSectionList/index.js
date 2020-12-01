@@ -8,6 +8,7 @@ import {Svg, Path, Rect} from 'react-native-svg';
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 import PopupModal from '@/components/PopupModal';
+import AppTag from '@/components/AppTag';
 import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {
@@ -20,6 +21,7 @@ import VisaIcon from '@/assets/icon_visa.svg';
 import MasterIcon from '@/assets/icon_mastercard.svg';
 import DiscoverIcon from '@/assets/icon_discover.svg';
 import AEIcon from '@/assets/icon_ae.svg';
+import QuestionMarkIcon from '@/assets/icon_question_mark.svg';
 
 import ChooseSubtypeModal from './ChooseSubtypeModal';
 
@@ -27,6 +29,8 @@ import {
   headerContainer,
   title,
   description,
+  errorView,
+  errorMessage,
   sectionContainer,
   sectionTitle,
   sectionRemoveButton,
@@ -34,6 +38,7 @@ import {
   listItemInfoContainer,
   accountName,
   accountNo,
+  errorTag,
 } from './style';
 
 const UnknownCard = () => {
@@ -78,7 +83,7 @@ const componentToSubtypeMap = {
   [accountSubtypeEnum.AE]: AEIcon,
 };
 
-const ListHeader = () => {
+const ListHeader = ({anyUnknownCard}) => {
   const theme = useTheme();
   return (
     <View style={headerContainer}>
@@ -94,6 +99,16 @@ const ListHeader = () => {
           defaultMessage="It may take some time to analyze your shopping e-receipts. We will notify you once it’s done."
         />
       </AppText>
+      {anyUnknownCard && (
+        <View style={errorView(theme)}>
+          <AppText variant="body2" style={errorMessage(theme)}>
+            <FormattedMessage
+              id="itMayTakeSomeTimeToAnalyze"
+              defaultMessage="It may take some time to analyze your shopping e-receipts. We will notify you once it’s done."
+            />
+          </AppText>
+        </View>
+      )}
     </View>
   );
 };
@@ -132,13 +147,17 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
   useFocusEffect(fetchBankItems);
 
   const renderItem = ({item}) => {
+    const isUnknown =
+      item.accountSubtype === accountSubtypeEnum.UNKNOWN ||
+      !item.accountSubtype;
+
     const Icon = componentToSubtypeMap[item.accountSubtype] || UnknownCard;
     return (
       <TouchableOpacity
         style={listItemContainer}
         onPress={() => {
           setSelectedBankAccount(item);
-          setShowChooseSubtypeModal(show => !show);
+          setShowChooseSubtypeModal((show) => !show);
         }}>
         <Icon width={56} height={40} />
         <View style={listItemInfoContainer}>
@@ -146,9 +165,23 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
             {`**** ${item.mask}`}
           </AppText>
           <AppText variant="caption" style={accountNo(theme)}>
-            {item.accountName}
+            {isUnknown ? (
+              <FormattedMessage id="unknown_click_to_select_card_type" />
+            ) : (
+              item.accountName
+            )}
           </AppText>
         </View>
+        {isUnknown && (
+          <AppTag
+            style={errorTag}
+            variant="transparent"
+            colorVariant="error"
+            sizeVariant="normal"
+            svgIcon={QuestionMarkIcon}
+            text="Unknown Card"
+          />
+        )}
       </TouchableOpacity>
     );
   };
@@ -170,19 +203,29 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
     </View>
   );
 
+  /** @type Array<any> */
   const sections =
-    data?.userProfile?.bankItems.map(item => ({
+    data?.userProfile?.bankItems.map((item) => ({
       id: item.id,
       name: item.name,
       data: item.bankAccounts,
     })) || [];
+  const anyUnknownCard = sections.some((section) =>
+    section.data?.some(
+      (bankAccount) =>
+        bankAccount.accountSubtype === accountSubtypeEnum.UNKNOWN ||
+        !bankAccount.accountSubtype,
+    ),
+  );
 
   return (
     <>
       <SectionList
         sections={sections}
-        keyExtractor={item => item.id}
-        ListHeaderComponent={ListHeader}
+        keyExtractor={(item) => item.id}
+        ListHeaderComponent={() => (
+          <ListHeader anyUnknownCard={anyUnknownCard} />
+        )}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
         {...props}
@@ -207,7 +250,7 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
               }}
             />
           }
-          callback={async mode => {
+          callback={async (mode) => {
             if (mode === 'OK') {
               try {
                 await unbindBankItem({
@@ -216,10 +259,10 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
                   },
                 });
 
-                updateQuery(prev => {
+                updateQuery((prev) => {
                   const newData = JSON.parse(JSON.stringify(prev));
                   newData.userProfile.bankItems = newData.userProfile.bankItems.filter(
-                    bankItem => bankItem.id !== selectedBankItem.id,
+                    (bankItem) => bankItem.id !== selectedBankItem.id,
                   );
                   return newData;
                 });
@@ -233,8 +276,8 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
       <ChooseSubtypeModal
         mask={selectedBankAccount?.mask}
         visible={showChooseSubtypeModal}
-        onClosePress={() => setShowChooseSubtypeModal(show => !show)}
-        onSelect={async subtype => {
+        onClosePress={() => setShowChooseSubtypeModal((show) => !show)}
+        onSelect={async (subtype) => {
           try {
             await updateBankAccountSubtype({
               variables: {
@@ -243,11 +286,11 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
               },
             });
 
-            updateQuery(prev => {
+            updateQuery((prev) => {
               const newData = JSON.parse(JSON.stringify(prev));
-              newData.userProfile.bankItems.some(bankItem => {
+              newData.userProfile.bankItems.some((bankItem) => {
                 const bankAccount = bankItem.bankAccounts.find(
-                  account => account.id === selectedBankAccount.id,
+                  (account) => account.id === selectedBankAccount.id,
                 );
                 if (bankAccount) {
                   bankAccount.accountSubtype = subtype;
