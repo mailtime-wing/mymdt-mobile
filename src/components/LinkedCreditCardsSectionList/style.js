@@ -33,6 +33,7 @@ export const sectionContainer = (theme) => css`
   margin-horizontal: 24px;
   border-bottom-width: 1px;
   border-color: ${theme.colors.background3};
+  background-color: ${theme.colors.background1};
 `;
 
 export const sectionTitle = (theme) => css`

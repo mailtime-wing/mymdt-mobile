@@ -378,6 +378,7 @@ export const GET_BANK_ITEMS = gql`
           accountType
           accountSubtype
           isValid
+          isSubtypeBySystem
           mask
         }
       }

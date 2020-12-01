@@ -155,6 +155,7 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
     return (
       <TouchableOpacity
         style={listItemContainer}
+        disabled={!isUnknown && item.isSubtypeBySystem}
         onPress={() => {
           setSelectedBankAccount(item);
           setShowChooseSubtypeModal((show) => !show);

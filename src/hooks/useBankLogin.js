@@ -117,7 +117,7 @@ export default function useBankLogin(
               institutionId = urlObj.searchParams.get('institution_id');
               const accounts = JSON.parse(urlObj.searchParams.get('accounts'));
               if (Array.isArray(accounts)) {
-                accountPayload = accounts.map(account => ({
+                accountPayload = accounts.map((account) => ({
                   mask: account.meta?.number,
                   name: account.meta?.name,
                 }));
@@ -162,13 +162,14 @@ export default function useBankLogin(
               syncServerItemId: data.itemID,
               syncServerItemToken: data.itemToken,
               itemName: data.itemName,
-              accounts: data.accountDetails.map(detail => ({
+              accounts: data.accountDetails.map((detail) => ({
                 syncServerAccountId: detail.accountID,
                 accountName: detail.accountName,
                 accountType: detail.accountType,
                 accountSubtype: detail.accountSubType,
                 isValid: detail.isValid,
                 mask: detail.mask,
+                isSubtypeBySystem: detail.isSubTypeBySystem || false,
               })),
             },
           });
