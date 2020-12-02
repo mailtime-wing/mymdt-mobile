@@ -51,7 +51,6 @@ const UserProfileForm = ({
 
   return (
     <FormContainer>
-      <Input label={<FormattedMessage id="your_name" />} required name="name" />
       <GenderSelector gender={values.gender} setFieldValue={setFieldValue} />
       <AppText variant="caption" style={errorStyle(theme)}>
         {errors.gender ? errors.gender : ' '}
@@ -106,7 +105,6 @@ const UserProfileScreen = () => {
     try {
       await updateUserProfileRequest({
         variables: {
-          name: values.name,
           gender: values.gender,
           dateOfBirth: values.dob.toISOString(),
           referralCode: values.referralCode,
@@ -122,9 +120,6 @@ const UserProfileScreen = () => {
   const validate = (values) => {
     const errors = {};
 
-    if (!values.name) {
-      errors.name = 'Name Required';
-    }
     if (!values.gender) {
       errors.gender = 'Gender Required';
     }
@@ -155,7 +150,6 @@ const UserProfileScreen = () => {
             </AppText>
             <Formik
               initialValues={{
-                name: '',
                 gender: genderOptions[0].value,
                 dob: new Date('1990/1/1'),
                 referralCode: referringParams?.referralCode || '',
