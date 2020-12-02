@@ -89,7 +89,9 @@ const MembershipCardList = ({navigation, route}) => {
   const nextStakingPlanLevel =
     availableMemberships.find(
       (ams) =>
-        ams.level > userLevel && ams.stakingPlan?.id !== currentStakingPlan.id,
+        !!ams.stakingPlan?.id &&
+        ams.stakingPlan?.id !== currentStakingPlan?.id &&
+        ams.level > userLevel,
     )?.level || userLevel;
 
   let initialLevel = userLevel;
