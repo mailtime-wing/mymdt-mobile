@@ -90,15 +90,15 @@ export const SetupFlowProvider = ({children}) => {
       result.welcome = true;
       result.merchant_select = true;
     }
-    // if (setupStatus?.isDataSourceBound) {
-    //   result.introduction = true;
-    //   result.email_data_source_info_onboarding = true;
-    //   result.add_email = true;
-    //   result.linked_emails = true;
-    //   result.choose_region = true;
-    //   result.bank_data_source_info_onboarding = true;
-    //   result.linked_cards = true;
-    // }
+    if (setupStatus?.isDataSourceBound) {
+      result.introduction = true;
+      result.email_data_source_info_onboarding = true;
+      result.add_email = true;
+      result.linked_emails = true;
+      result.choose_region = true;
+      result.bank_data_source_info_onboarding = true;
+      result.linked_cards = true;
+    }
     if (setupStatus?.isCashbackCurrencyCodeSet && setupStatus?.isMerchantSet) {
       result.account_setup_done = true;
       result.sign_up_reward = true;
