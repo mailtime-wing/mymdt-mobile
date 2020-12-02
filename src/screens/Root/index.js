@@ -83,17 +83,6 @@ import {styles} from './style';
 const RootStack = createStackNavigator();
 const MainStack = createStackNavigator();
 
-const screens = [
-  {
-    name: 'onboarding',
-    component: OnboardingScreen,
-    options: {headerShown: false},
-  },
-  {name: 'enter', component: EnterScreen},
-  {name: 'verify_enter', component: VerifyEnterScreen},
-  {name: 'loading', component: LoadingScreen},
-];
-
 const setupScreens = [
   // 1st step: update user profile
   {
@@ -427,6 +416,7 @@ const Main = () => {
     <MainStack.Navigator
       headerMode="screen"
       screenOptions={{
+        // TODO: check if any common option is un-necessary
         headerTitleStyle: styles.headerTitle,
         cardStyle: cardStyle,
         headerStyle: headerStyle,
@@ -436,23 +426,44 @@ const Main = () => {
           paddingLeft: 24,
         },
       }}>
-      {!isLoggedIn &&
-        screens.map(({name, appBarShown, options, ...screenProps}) => (
-          <MainStack.Screen
-            key={name}
-            name={name}
-            {...screenProps}
-            options={{
-              headerLeft: (props) =>
-                appBarShown === false ? null : <BackAppButton {...props} />,
-              headerStyle: {
-                ...headerStyle,
-                ...(appBarShown === false && {height: top}),
-              },
-              ...options,
-            }}
-          />
-        ))}
+      {!isLoggedIn && (
+        <MainStack.Screen
+          name="onboarding"
+          component={OnboardingScreen}
+          options={{headerShown: false}}
+        />
+      )}
+      {!isLoggedIn && (
+        <MainStack.Screen
+          name="enter"
+          component={EnterScreen}
+          options={{
+            headerTitle: null,
+            headerLeft: (props) => <BackAppButton {...props} />,
+          }}
+        />
+      )}
+      {!isLoggedIn && (
+        <MainStack.Screen
+          name="verify_enter"
+          component={VerifyEnterScreen}
+          options={{
+            headerTitle: null,
+            headerLeft: (props) => <BackAppButton {...props} />,
+          }}
+        />
+      )}
+      {/* TODO: remove seemingly un-used loading screen */}
+      {!isLoggedIn && (
+        <MainStack.Screen
+          name="loading"
+          component={LoadingScreen}
+          options={{
+            headerTitle: null,
+            headerLeft: (props) => <BackAppButton {...props} />,
+          }}
+        />
+      )}
       {isLoggedIn
         ? setupScreens
             .filter((setupScreen) => validScreenNames[setupScreen.name])
