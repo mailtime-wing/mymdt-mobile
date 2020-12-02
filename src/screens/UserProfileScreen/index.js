@@ -157,7 +157,7 @@ const UserProfileScreen = () => {
               initialValues={{
                 name: '',
                 gender: genderOptions[0].value,
-                dob: new Date(),
+                dob: new Date('1990/1/1'),
                 referralCode: referringParams?.referralCode || '',
               }}
               onSubmit={(values) => handleSubmitPress(values)}
