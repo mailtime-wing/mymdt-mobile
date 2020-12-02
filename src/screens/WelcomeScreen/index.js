@@ -1,61 +1,49 @@
-import React from 'react';
-import {ScrollView} from 'react-native';
+import React, {useRef, useEffect} from 'react';
+import {View, TouchableOpacity, Animated} from 'react-native';
 import {FormattedMessage} from 'react-intl';
-import AutoScrolling from 'react-native-auto-scrolling';
 import {useTheme} from 'emotion-theming';
 
-import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
-import ScreenContainer from '@/components/ScreenContainer';
+import MembershipCard from '@/components/MembershipCard';
+import membershipLevel from '@/enum/membershipLevel';
 import useSetupFlow from '@/hooks/useSetupFlow';
 
-import {
-  PaddingContainer,
-  AppIconGridImageContainer,
-  AppIconGridImage,
-  titleStyle,
-  detailStyle,
-  startAndAgree,
-} from './style';
+import {welcome, container, contentContaienr} from './style';
+
+const FadeInView = ({children}) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const fadeIn = () => {
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 3000,
+      }).start();
+    };
+    fadeIn();
+  }, [fadeAnim]);
+  return <Animated.View style={{opacity: fadeAnim}}>{children}</Animated.View>;
+};
 
 const WelcomeScreen = () => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
-
   return (
-    <ScrollView>
-      <ScreenContainer hasTopBar>
-        <AppText variant="heading1" style={titleStyle(theme)}>
-          <FormattedMessage id="welcome" defaultMessage="Welcome!" />
-        </AppText>
-        <AppText variant="body1" style={detailStyle(theme)}>
-          <FormattedMessage
-            id="welcome_detail"
-            defaultMessage="RewardMe is a cashback app that let you earn points after online/offline shopping, in-app purchase or subscribe to online services."
-          />
-        </AppText>
-        <AppIconGridImageContainer>
-          <AutoScrolling endPaddingWidth={8} duration={20000}>
-            <AppIconGridImage source={require('@/assets/app_icon_grid.png')} />
-          </AutoScrolling>
-        </AppIconGridImageContainer>
-        <PaddingContainer>
-          <AppButton
-            onPress={() => navigateByFlow()}
-            text={<FormattedMessage id="button.next" defaultMessage="Next" />}
-            variant="filled"
-            sizeVariant="large"
-            colorVariant="secondary"
-          />
-        </PaddingContainer>
-        <AppText variant="caption" style={startAndAgree(theme)}>
-          <FormattedMessage
-            id="setting_up_agree_terms_and_policy"
-            defaultMessage="By using RewardMe services, you agree withRewardMe’s Terms of Service and Privacy Policy."
-          />
-        </AppText>
-      </ScreenContainer>
-    </ScrollView>
+    <TouchableOpacity style={container} onPress={() => navigateByFlow()}>
+      <View style={contentContaienr}>
+        <FadeInView>
+          <MembershipCard userLevel={membershipLevel.STARTER} />
+        </FadeInView>
+        <FadeInView>
+          <AppText variant="heading2" style={welcome(theme)}>
+            <FormattedMessage
+              id="welcome_to_reward_me"
+              defaultMessage="Welcome to RewardMe"
+            />
+          </AppText>
+        </FadeInView>
+      </View>
+    </TouchableOpacity>
   );
 };
 
