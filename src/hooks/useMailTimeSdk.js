@@ -53,7 +53,7 @@ export default () => {
   // TODO: move to app startup in future
   useEffect(() => {
     MailtimeAuth.setup(
-      Config.SDK_DEVELOPMENT !== false,
+      Config.SDK_DEVELOPMENT === 'true',
       Config.SDK_APP_KEY,
       Config.SDK_APP_SECRET,
       GOOGLE_CALLBACK_SCHEME,
