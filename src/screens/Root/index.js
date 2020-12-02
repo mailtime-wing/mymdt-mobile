@@ -427,42 +427,38 @@ const Main = () => {
         },
       }}>
       {!isLoggedIn && (
-        <MainStack.Screen
-          name="onboarding"
-          component={OnboardingScreen}
-          options={{headerShown: false}}
-        />
-      )}
-      {!isLoggedIn && (
-        <MainStack.Screen
-          name="enter"
-          component={EnterScreen}
-          options={{
-            headerTitle: null,
-            headerLeft: (props) => <BackAppButton {...props} />,
-          }}
-        />
-      )}
-      {!isLoggedIn && (
-        <MainStack.Screen
-          name="verify_enter"
-          component={VerifyEnterScreen}
-          options={{
-            headerTitle: null,
-            headerLeft: (props) => <BackAppButton {...props} />,
-          }}
-        />
-      )}
-      {/* TODO: remove seemingly un-used loading screen */}
-      {!isLoggedIn && (
-        <MainStack.Screen
-          name="loading"
-          component={LoadingScreen}
-          options={{
-            headerTitle: null,
-            headerLeft: (props) => <BackAppButton {...props} />,
-          }}
-        />
+        <>
+          <MainStack.Screen
+            name="onboarding"
+            component={OnboardingScreen}
+            options={{headerShown: false}}
+          />
+          <MainStack.Screen
+            name="enter"
+            component={EnterScreen}
+            options={{
+              headerTitle: null,
+              headerLeft: (props) => <BackAppButton {...props} />,
+            }}
+          />
+          <MainStack.Screen
+            name="verify_enter"
+            component={VerifyEnterScreen}
+            options={{
+              headerTitle: null,
+              headerLeft: (props) => <BackAppButton {...props} />,
+            }}
+          />
+          {/* TODO: remove seemingly un-used loading screen */}
+          <MainStack.Screen
+            name="loading"
+            component={LoadingScreen}
+            options={{
+              headerTitle: null,
+              headerLeft: (props) => <BackAppButton {...props} />,
+            }}
+          />
+        </>
       )}
       {isLoggedIn
         ? setupScreens
