@@ -25,7 +25,7 @@ const WelcomeScreen = () => {
   return (
     <ScrollView>
       <ScreenContainer hasTopBar>
-        <AppText variant="pageTitle" style={titleStyle(theme)}>
+        <AppText variant="heading1" style={titleStyle(theme)}>
           <FormattedMessage id="welcome" defaultMessage="Welcome!" />
         </AppText>
         <AppText variant="body1" style={detailStyle(theme)}>

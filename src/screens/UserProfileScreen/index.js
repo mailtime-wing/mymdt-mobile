@@ -138,8 +138,11 @@ const UserProfileScreen = () => {
         keyboardShouldPersistTaps="always">
         <KeyboardAvoidingView behavior="position">
           <Container>
-            <AppText variant="pageTitle" style={titleStyle(theme)}>
-              <FormattedMessage id="let_us_know" />
+            <AppText variant="heading1" style={titleStyle(theme)}>
+              <FormattedMessage
+                id="set_up_profile"
+                defaultMessage="Set Up Profile"
+              />
             </AppText>
             <AppText variant="body2" style={detailStyle(theme)}>
               <FormattedMessage id="we_hope_to_provide" />

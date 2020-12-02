@@ -103,10 +103,10 @@ const MerchantSelectScreen = ({route, navigation}) => {
     <Container>
       <ScrollContainer>
         <ScreenContainer hasTopBar>
-          <AppText variant="pageTitle" style={titleStyle(theme)}>
+          <AppText variant="heading1" style={titleStyle(theme)}>
             <FormattedMessage
               id="special_offer"
-              defaultMessage="Special Offer"
+              defaultMessage="Select Merchants"
             />
           </AppText>
           <AppText variant="body1" style={detailStyle(theme)}>

@@ -44,7 +44,7 @@ const BindEmailScreen = ({route, navigation}) => {
     }
   }, [loginSuccess, navigateByFlow]);
 
-  const handleConnectPress = values => {
+  const handleConnectPress = (values) => {
     login(values.email);
   };
 
@@ -64,7 +64,7 @@ const BindEmailScreen = ({route, navigation}) => {
     return <LoadingSpinner />;
   }
 
-  const validate = values => {
+  const validate = (values) => {
     const errors = {};
 
     if (!values.email) {
@@ -86,7 +86,7 @@ const BindEmailScreen = ({route, navigation}) => {
     if (
       !errors.email &&
       data?.userProfile?.emailAccounts?.some(
-        emailAccount => emailAccount.emailAddress === values.email,
+        (emailAccount) => emailAccount.emailAddress === values.email,
       )
     ) {
       errors.email = (
@@ -102,10 +102,10 @@ const BindEmailScreen = ({route, navigation}) => {
   return (
     <ScrollView style={scrollContainer}>
       <ScreenContainer hasTopBar>
-        <AppText variant="pageTitle" style={title(theme)}>
+        <AppText variant="heading1" style={title(theme)}>
           <FormattedMessage
             id="bind_email_accounts"
-            defaultMessage="BIND EMAILS"
+            defaultMessage="Bind Emails"
           />
         </AppText>
         <AppText variant="body1" style={detailStyle(theme)}>

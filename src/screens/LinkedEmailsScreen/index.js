@@ -156,7 +156,7 @@ const LinkedEmailsScreen = ({navigation, route}) => {
   return (
     <ScrollView>
       <ModalContainer>
-        <AppText variant="pageTitle" style={title(theme)}>
+        <AppText variant="heading1" style={title(theme)}>
           <FormattedMessage id="linked_emails" defaultMessage="linked emails" />
         </AppText>
         <Container>
