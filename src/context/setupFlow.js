@@ -92,7 +92,7 @@ export const SetupFlowProvider = ({children}) => {
       result.enjoy_cashback = true;
     }
     if (setupStatus?.isMerchantSet) {
-      result.merchant_select = true;
+      // result.merchant_select = true;
     }
     if (setupStatus?.isDataSourceBound) {
       result.introduction = true;

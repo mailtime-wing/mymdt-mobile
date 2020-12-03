@@ -16,7 +16,7 @@ export const titleStyle = (theme) => css`
 `;
 
 export const hightLightText = (theme) => css`
-  color: ${theme.colors.secondary.normal};
+  color: ${theme.colors.secondary.dark};
 `;
 
 export const Container = styled.View`
