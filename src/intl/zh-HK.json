@@ -292,6 +292,9 @@
   "unknown_click_to_select_card_type": "Unknown (Click to select card type)",
   "choose_region": "Choose region",
   "choose_issue_region": "Choose the issue region of your credit/debit card.",
+  "enjoy_cashback": "Enjoy Cash Back",
+  "enjoy_cashback_detail": "As a RewardMe member, you will enjoy cash back automatically on your purchases. Once a new transaction is recorded, your rewards await!",
+  "you_earned_first_reward": "You Just Earned Your First Reward!",
   "currencyDisplayCode": {
     "RD": "Reward Dollar",
     "MDT": "MDT",
@@ -344,7 +347,8 @@
     "stake_mdt": "Stake mdt",
     "invite_friends": "Invite friends",
     "bind": "bind",
-    "copy": "copy"
+    "copy": "copy",
+    "choose_cashback_type": "Choose Cash Back Type"
   },
   "error": {
     "required": "請填寫",

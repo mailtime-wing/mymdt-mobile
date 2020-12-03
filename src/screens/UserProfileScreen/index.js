@@ -105,6 +105,7 @@ const UserProfileScreen = () => {
     try {
       await updateUserProfileRequest({
         variables: {
+          name: values.name,
           gender: values.gender,
           dateOfBirth: values.dob.toISOString(),
           referralCode: values.referralCode,
@@ -150,6 +151,7 @@ const UserProfileScreen = () => {
             </AppText>
             <Formik
               initialValues={{
+                name: '',
                 gender: genderOptions[0].value,
                 dob: new Date('1990/1/1'),
                 referralCode: referringParams?.referralCode || '',

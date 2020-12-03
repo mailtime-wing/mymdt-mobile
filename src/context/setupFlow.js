@@ -39,15 +39,15 @@ export const SetupFlowProvider = ({children}) => {
   graph.setDefaultEdgeLabel('next');
   graph.setPath(
     [
-      'user_profile',
-      'choose_cash_back_type',
       'welcome',
+      'user_profile',
+      'enjoy_cashback',
       'merchant_select',
       'introduction',
     ],
     'next',
   );
-  graph.setEdge('introduction', 'notification_permission', 'skip');
+  graph.setEdge('introduction', 'congratulations', 'skip');
   graph.setEdge(
     'introduction',
     'email_data_source_info_onboarding',
@@ -58,7 +58,7 @@ export const SetupFlowProvider = ({children}) => {
       'email_data_source_info_onboarding',
       'add_email',
       'linked_emails',
-      'notification_permission',
+      'congratulations',
     ],
     'next',
   );
@@ -68,12 +68,18 @@ export const SetupFlowProvider = ({children}) => {
       'choose_region',
       'bank_data_source_info_onboarding',
       'linked_cards',
-      'notification_permission',
+      'congratulations',
     ],
     'next',
   );
   graph.setPath(
-    ['notification_permission', 'account_setup_done', 'sign_up_reward'],
+    [
+      'congratulations',
+      'choose_cash_back_type',
+      'account_setup_done',
+      'sign_up_reward',
+      'notification_permission',
+    ],
     'next',
   );
 
@@ -81,13 +87,11 @@ export const SetupFlowProvider = ({children}) => {
   const invalidScreenNames = useMemo(() => {
     const result = {};
     if (setupStatus?.isProfileCompleted) {
+      result.welcome = true;
       result.user_profile = true;
-    }
-    if (setupStatus?.isCashbackCurrencyCodeSet) {
-      result.choose_cash_back_type = true;
+      // result.enjoy_cashback = true;
     }
     if (setupStatus?.isMerchantSet) {
-      result.welcome = true;
       result.merchant_select = true;
     }
     if (setupStatus?.isDataSourceBound) {
@@ -98,6 +102,10 @@ export const SetupFlowProvider = ({children}) => {
       result.choose_region = true;
       result.bank_data_source_info_onboarding = true;
       result.linked_cards = true;
+    }
+    if (setupStatus?.isCashbackCurrencyCodeSet) {
+      result.congratulations = true;
+      result.choose_cash_back_type = true;
     }
     if (setupStatus?.isCashbackCurrencyCodeSet && setupStatus?.isMerchantSet) {
       result.account_setup_done = true;
