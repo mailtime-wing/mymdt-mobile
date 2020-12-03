@@ -16,7 +16,7 @@ export const sectionHeaderContainer = (theme) => css`
 `;
 
 export const item = css`
-  padding: 12px 0;
+  padding-vertical: 12px;
 `;
 
 export const title = (theme) => css`

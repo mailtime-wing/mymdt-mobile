@@ -51,7 +51,7 @@
   "receipt_date": "Receipt Date",
   "sender_email": "Sender’s email address",
   "order_number": "Order Number",
-  "amount": "amount",
+  "amount": "Amount",
   "address": "address",
   "minimum_withdrawal": "Minimum withdrawal: {amount} MDT",
   "transaction_fee": "Transaction Fee",

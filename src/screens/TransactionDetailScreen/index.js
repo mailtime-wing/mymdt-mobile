@@ -11,7 +11,7 @@ import FormattedTransactionDate from '@/components/FormattedTransactionDate';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import BrandIcon from '@/components/BrandIcon';
 import {GET_MERCHANTS_API} from '@/api/data';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, FormattedNumber} from 'react-intl';
 import {ME} from '@/constants/currency';
 
 import {
@@ -149,7 +149,7 @@ const RenderTransationDetail = ({transactionItem}) => {
                 id="currencyDisplayCode.USD"
                 defaultMessage="USD"
               />{' '}
-              {transactionItem.data.amount}
+              $<FormattedNumber value={transactionItem.data.amount} />
             </AppText>
           </View>
           <View style={itemContainer}>
@@ -170,16 +170,14 @@ const RenderTransationDetail = ({transactionItem}) => {
                 defaultMessage="Cash Back Earned"
               />
             </AppText>
-            <AppText variant="body2" style={detail(theme)}>
-              <TransactionAmount
-                amount={transactionItem.amount}
-                unitVariant={ME}
-                unitSizeVariant="small"
-                amountSizeVariant="normal"
-                unitColor={theme.colors.primary.normal}
-                amountColor={theme.colors.primary.normal}
-              />
-            </AppText>
+            <TransactionAmount
+              amount={transactionItem.amount}
+              unitVariant={ME}
+              unitSizeVariant="small"
+              amountSizeVariant="normal"
+              unitColor={theme.colors.primary.normal}
+              amountColor={theme.colors.primary.normal}
+            />
           </View>
         </>
       );
@@ -214,7 +212,7 @@ const RenderTransationDetail = ({transactionItem}) => {
                 id="currencyDisplayCode.USD"
                 defaultMessage="USD"
               />{' '}
-              {transactionItem.data.amount}
+              $<FormattedNumber value={transactionItem.data.amount} />
             </AppText>
           </View>
           <View style={itemContainer}>
