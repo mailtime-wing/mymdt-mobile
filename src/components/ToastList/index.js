@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View} from 'react-native';
+import {KeyboardAvoidingView} from 'react-native';
 import {ToastContext} from '@/context/toast';
 
 import AppToast from '@/components/AppToast';
@@ -9,7 +9,7 @@ import {position, container} from './style';
 const ToastList = ({toasts}) => {
   const {removeToast} = useContext(ToastContext);
   return (
-    <View style={position}>
+    <KeyboardAvoidingView behavior="position" style={position}>
       {toasts.map(({id, ...props}) => (
         <AppToast
           key={id}
@@ -18,7 +18,7 @@ const ToastList = ({toasts}) => {
           {...props}
         />
       ))}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
