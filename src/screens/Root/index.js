@@ -22,6 +22,8 @@ import AccountSetupDoneScreen from '@/screens/AccountSetupDoneScreen';
 import ChooseCashBackTypeScreen from '@/screens/ChooseCashBackTypeScreen';
 import IntroductionScreen from '@/screens/IntroductionScreen';
 import WelcomeScreen from '@/screens/WelcomeScreen';
+import EnjoyCashBackScreen from '@/screens/EnjoyCashBackScreen';
+import CongratulationsScreen from '@/screens/CongratulationsScreen';
 import SignUpRewardScreen from '@/screens/SignUpRewardScreen';
 import HomeTab from '@/screens/HomeTab';
 import ChooseRegionScreen from '@/screens/ChooseRegionScreen';
@@ -84,22 +86,27 @@ const RootStack = createStackNavigator();
 const MainStack = createStackNavigator();
 
 const setupScreens = [
-  // 1st step: update user profile
+  // 1st step: welcome screen
+  {name: 'welcome', component: WelcomeScreen, appBarShown: false},
+
+  // 2nd step: set up user profile
   {
     name: 'user_profile',
     component: UserProfileScreen,
     appBarShown: false,
   },
-  // 2nd step: choose cashback type
+
+  // 3rd step: enjoy cash back
   {
-    name: 'choose_cash_back_type',
-    component: ChooseCashBackTypeScreen,
-    options: {headerShown: false},
+    name: 'enjoy_cashback',
+    component: EnjoyCashBackScreen,
+    appBarShown: false,
   },
-  // 3rd step: select offers
-  {name: 'welcome', component: WelcomeScreen},
+
+  // 4th step: select merchants
   {name: 'merchant_select', component: MerchantSelectScreen},
-  // 4rd step: bind email (which is skippable)
+
+  // 5th step: bind email (which is skippable)
   {
     name: 'introduction',
     component: IntroductionScreen,
@@ -130,13 +137,22 @@ const setupScreens = [
     component: LinkedCardsScreen,
     options: {headerShown: false},
   },
-  // 5th step: turn on notification
+
+  // 6th step: congratulations
   {
-    name: 'notification_permission',
-    component: NotificationPermissionScreen,
+    name: 'congratulations',
+    component: CongratulationsScreen,
+    appBarShown: false,
+  },
+
+  // 7th step: choose cashback type
+  {
+    name: 'choose_cash_back_type',
+    component: ChooseCashBackTypeScreen,
     options: {headerShown: false},
   },
-  // 6th step: setup done and gain reward
+
+  // 8th step: setup done and gain reward
   {
     name: 'account_setup_done',
     component: AccountSetupDoneScreen,
@@ -145,6 +161,13 @@ const setupScreens = [
   {
     name: 'sign_up_reward',
     component: SignUpRewardScreen,
+    options: {headerShown: false},
+  },
+
+  // 9th step: turn on notification
+  {
+    name: 'notification_permission',
+    component: NotificationPermissionScreen,
     options: {headerShown: false},
   },
 ];

@@ -87,10 +87,10 @@ const ListHeader = ({anyUnknownCard}) => {
   const theme = useTheme();
   return (
     <View style={headerContainer}>
-      <AppText variant="pageTitle" style={title(theme)}>
+      <AppText variant="heading1" style={title(theme)}>
         <FormattedMessage
           id="linkedBankAccounts"
-          defaultMessage="LINKED BANK ACCOUNTS"
+          defaultMessage="Linked Bank Accounts"
         />
       </AppText>
       <AppText variant="body1" style={description(theme)}>

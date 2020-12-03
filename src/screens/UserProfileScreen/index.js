@@ -51,7 +51,6 @@ const UserProfileForm = ({
 
   return (
     <FormContainer>
-      <Input label={<FormattedMessage id="your_name" />} required name="name" />
       <GenderSelector gender={values.gender} setFieldValue={setFieldValue} />
       <AppText variant="caption" style={errorStyle(theme)}>
         {errors.gender ? errors.gender : ' '}
@@ -122,9 +121,6 @@ const UserProfileScreen = () => {
   const validate = (values) => {
     const errors = {};
 
-    if (!values.name) {
-      errors.name = 'Name Required';
-    }
     if (!values.gender) {
       errors.gender = 'Gender Required';
     }
@@ -138,8 +134,11 @@ const UserProfileScreen = () => {
         keyboardShouldPersistTaps="always">
         <KeyboardAvoidingView behavior="position">
           <Container>
-            <AppText variant="pageTitle" style={titleStyle(theme)}>
-              <FormattedMessage id="let_us_know" />
+            <AppText variant="heading1" style={titleStyle(theme)}>
+              <FormattedMessage
+                id="set_up_profile"
+                defaultMessage="Set Up Profile"
+              />
             </AppText>
             <AppText variant="body2" style={detailStyle(theme)}>
               <FormattedMessage id="we_hope_to_provide" />
@@ -154,7 +153,7 @@ const UserProfileScreen = () => {
               initialValues={{
                 name: '',
                 gender: genderOptions[0].value,
-                dob: new Date(),
+                dob: new Date('1990/1/1'),
                 referralCode: referringParams?.referralCode || '',
               }}
               onSubmit={(values) => handleSubmitPress(values)}

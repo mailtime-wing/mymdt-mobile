@@ -120,7 +120,7 @@ const VerifyVerificationCodeForm = ({
   return (
     <View style={container}>
       {title && (
-        <AppText variant="pageTitle" style={titleStyle(theme)}>
+        <AppText variant="heading1" style={titleStyle(theme)}>
           {title}
         </AppText>
       )}
@@ -128,7 +128,12 @@ const VerifyVerificationCodeForm = ({
         {description}
       </AppText>
       <TouchableOpacity disabled={isTimerStarted} onPress={handleSendPress}>
-        <AppText variant="body1" style={detailStyle(theme)}>
+        <AppText
+          variant="body1"
+          style={[
+            detailStyle(theme),
+            !isTimerStarted && {color: theme.colors.secondary.dark},
+          ]}>
           {isTimerStarted ? (
             <FormattedMessage
               id="resend_in_seconds"

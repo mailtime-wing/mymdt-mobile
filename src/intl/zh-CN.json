@@ -113,7 +113,7 @@
   "please_select_brands": "选取{number_of_merchants}个最常消费的商店",
   "up_to_cashback_percentage": "Up to {percentage}% cashback",
   "edit_prefernece_afterward": "建立帐号后你可以在设定里编辑你的购物喜好",
-  "let_us_know": "让我们认识你",
+  "set_up_profile": "让我们认识你",
   "bind_email_accounts": "绑定邮箱",
   "bind_more_email_later": "建立帐号后你可以在设定里编辑你的绑定邮箱",
   "dont_worry": "我们会透过人工智能技术检测消费单据，确保消费单据不会在垃圾邮件内。我们无法偷看你的私人邮件。",
@@ -290,6 +290,11 @@
   "refer_number_of_friends": "邀請 {number, plural, =0 {朋友} one {# 朋友} other {# 朋友}}",
   "bind_number_of_accounts": "綁定 {number, plural, =0 {帳號} one {# 帳號} other {# 帳號}}",
   "unknown_click_to_select_card_type": "Unknown (Click to select card type)",
+  "choose_region": "Choose region",
+  "choose_issue_region": "Choose the issue region of your credit/debit card.",
+  "enjoy_cashback": "Enjoy Cash Back",
+  "enjoy_cashback_detail": "As a RewardMe member, you will enjoy cash back automatically on your purchases. Once a new transaction is recorded, your rewards await!",
+  "you_earned_first_reward": "You Just Earned Your First Reward!",
   "currencyDisplayCode": {
     "RD": "Reward Dollar",
     "MDT": "MDT",
@@ -342,7 +347,8 @@
     "stake_mdt": "Stake mdt",
     "invite_friends": "Invite friends",
     "bind": "bind",
-    "copy": "copy"
+    "copy": "copy",
+    "choose_cashback_type": "Choose Cash Back Type"
   },
   "error": {
     "required": "请填写",

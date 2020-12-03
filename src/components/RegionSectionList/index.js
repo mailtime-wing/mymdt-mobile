@@ -68,7 +68,7 @@ const ChooseRegionScreen = ({onItemPress}) => {
 
   /** @type {Object.<string, Array<any>} */
   const dataByContinent = {};
-  fetchedData?.countryData?.forEach(countryItem => {
+  fetchedData?.countryData?.forEach((countryItem) => {
     if (!dataByContinent[countryItem.continent]) {
       dataByContinent[countryItem.continent] = [];
     }
@@ -78,8 +78,8 @@ const ChooseRegionScreen = ({onItemPress}) => {
     }
   });
   const data = Object.keys(dataByContinent)
-    .filter(continent => dataByContinent[continent].length > 0)
-    .map(continent => ({
+    .filter((continent) => dataByContinent[continent].length > 0)
+    .map((continent) => ({
       continent,
       data: dataByContinent[continent],
     }));
@@ -87,7 +87,7 @@ const ChooseRegionScreen = ({onItemPress}) => {
   return (
     <SectionList
       sections={data}
-      keyExtractor={item => item._id}
+      keyExtractor={(item) => item._id}
       renderItem={renderItem}
       renderSectionHeader={({section: {continent}}) => (
         <Section>
@@ -96,9 +96,17 @@ const ChooseRegionScreen = ({onItemPress}) => {
       )}
       ListHeaderComponent={
         <Header>
-          <Title>Choose region</Title>
+          <Title>
+            <FormattedMessage
+              id="choose_region"
+              defaultMessage="Choose region"
+            />
+          </Title>
           <Description>
-            Choose the issue region of your credit/debit card.
+            <FormattedMessage
+              id="choose_issue_region"
+              defaultMessage="Choose the issue region of your credit/debit card."
+            />
           </Description>
         </Header>
       }

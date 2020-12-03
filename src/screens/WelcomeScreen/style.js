@@ -1,34 +1,16 @@
-import styled, {css} from '@emotion/native';
+import {css} from '@emotion/native';
 
-export const titleStyle = theme => css`
+export const container = css`
+  flex: 1;
+`;
+
+export const contentContaienr = css`
+  margin-top: auto;
+  margin-bottom: auto;
+`;
+
+export const welcome = (theme) => css`
   color: ${theme.colors.secondary.normal};
-  margin-bottom: 29px;
-  padding-left: 24px;
-  padding-right: 24px;
-`;
-
-export const detailStyle = theme => css`
-  color: ${theme.colors.textOnBackground.mediumEmphasis};
-  padding-left: 24px;
-  padding-right: 24px;
-`;
-
-export const startAndAgree = theme => css`
+  margin-top: 41px;
   text-align: center;
-  color: ${theme.colors.textOnBackground.disabled};
-  margin-top: 11px;
-  padding-left: 24px;
-  padding-right: 24px;
 `;
-
-export const PaddingContainer = styled.View`
-  padding-left: 24px;
-  padding-right: 24px;
-`;
-
-export const AppIconGridImageContainer = styled.View`
-  margin-top: 48px;
-  margin-bottom: 48px;
-`;
-
-export const AppIconGridImage = styled.Image``;

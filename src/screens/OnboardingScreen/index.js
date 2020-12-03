@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useContext} from 'react';
 import {Dimensions, ScrollView, View, Image} from 'react-native';
 import {useTheme} from 'emotion-theming';
 import {
@@ -9,6 +9,7 @@ import {
   image as imageStyle,
   styles,
 } from './style';
+import {ThemeContext} from '@/context/theme';
 import ScreenContainer from '@/components/ScreenContainer';
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
@@ -30,13 +31,14 @@ const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 const CardSection = () => {
   const theme = useTheme();
+  const {isDark} = useContext(ThemeContext);
   const [activeIndex, setActiveIndex] = useState(0);
   const refCarousel = useRef(null);
 
   const renderItem = ({item: {header, detail, imgSrc}, index}) => {
     return (
       <View>
-        <Image style={imageStyle} source={imgSrc} resizeMode="center" />
+        <Image style={imageStyle} source={imgSrc} resizeMode="contain" />
         <View style={paddingHorizontal}>
           <AppText variant="heading3" style={headerStyle(theme)}>
             {header}
@@ -53,17 +55,23 @@ const CardSection = () => {
     {
       header: <FormattedMessage id="onboarding01_title" />,
       detail: <FormattedMessage id="onboarding01_detail" />,
-      imgSrc: require('@/assets/onboarding01.png'),
+      imgSrc: isDark
+        ? require('@/assets/onboarding01-dark.png')
+        : require('@/assets/onboarding01-light.png'),
     },
     {
       header: <FormattedMessage id="onboarding02_title" />,
       detail: <FormattedMessage id="onboarding02_detail" />,
-      imgSrc: require('@/assets/onboarding02.png'),
+      imgSrc: isDark
+        ? require('@/assets/onboarding02-dark.png')
+        : require('@/assets/onboarding02-light.png'),
     },
     {
       header: <FormattedMessage id="onboarding03_title" />,
       detail: <FormattedMessage id="onboarding03_detail" />,
-      imgSrc: require('@/assets/onboarding03.png'),
+      imgSrc: isDark
+        ? require('@/assets/onboarding03-dark.png')
+        : require('@/assets/onboarding03-light.png'),
     },
   ];
 
@@ -81,6 +89,7 @@ const CardSection = () => {
         containerCustomStyle={styles.container}
         activeAnimationType="decay"
         onSnapToItem={(index) => setActiveIndex(index)}
+        loop={true}
       />
       <Pagination
         dotsLength={data.length}

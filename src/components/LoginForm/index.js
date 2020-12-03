@@ -105,7 +105,7 @@ const LoginForm = ({
   return (
     <Container>
       {title && (
-        <AppText variant="pageTitle" style={titleStyle(theme)}>
+        <AppText variant="heading1" style={titleStyle(theme)}>
           {title}
         </AppText>
       )}

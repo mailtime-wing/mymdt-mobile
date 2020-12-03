@@ -53,7 +53,7 @@ const NotificationPermissionScreen = () => {
   return (
     <ScrollView>
       <Container>
-        <AppText variant="pageTitle" style={titleStyle(theme)}>
+        <AppText variant="heading1" style={titleStyle(theme)}>
           <FormattedMessage
             id="want_to_receive_latest_info"
             defaultMessage="Receive Latest Info"

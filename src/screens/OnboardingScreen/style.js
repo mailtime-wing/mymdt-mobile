@@ -22,7 +22,10 @@ export const detailStyle = (theme) => css`
 `;
 
 export const image = css`
-  width: 100%;
+  height: 343px;
+  aspect-ratio: 1;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const styles = StyleSheet.create({
