@@ -118,7 +118,7 @@
   "dont_worry": "Don’t worry. Our system only detects transactional email receipts, not your personal emails.",
   "we_hope_to_provide": "We hope to provide better in-app experience and bring you more offers and redeem options in the future.",
   "we_will_send_otp": "We’ll send you a verification code to your phone via text message.",
-  "we_have_sent_otp": "We have sent you the verification code to {phone_number}. Didn’t receive the code?",
+  "we_have_sent_otp": "We have sent a verification code to {phone_number}.",
   "verify_phone_number": "Verify phone number",
   "resend_the_code": "Resend the code",
   "email_account": "EMAIL {email_count}",

@@ -118,7 +118,7 @@
   "dont_worry": "我們會透過人工智能技術檢測消費單據，確保消費單據不會在垃圾郵件內。我們無法偷看你的私人郵件。",
   "we_hope_to_provide": "我們希望日後可以提供更適合你的購物返現體驗。",
   "we_will_send_otp": "We’ll send you a verification code to your phone via text message.",
-  "we_have_sent_otp": "We have sent you the verification code to {phone_number}. Didn’t receive the code?",
+  "we_have_sent_otp": "We have sent a verification code to {phone_number}.",
   "verify_phone_number": "Verify phone number",
   "resend_the_code": "再發送",
   "email_account": "第{email_count}個郵箱",
