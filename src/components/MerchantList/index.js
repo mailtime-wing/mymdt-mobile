@@ -10,6 +10,7 @@ import {
   merchantNameStyle,
 } from './style';
 
+import BrandIcon from '@/components/BrandIcon';
 import AppText from '@/components/AppText2';
 
 const Merchant = ({name, logo, cashbackRate, selected, isError, ...props}) => {
@@ -18,7 +19,7 @@ const Merchant = ({name, logo, cashbackRate, selected, isError, ...props}) => {
     <TouchableOpacity
       style={merchantContainer(theme, selected, isError)}
       {...props}>
-      <Image source={{uri: logo}} style={icon} />
+      <BrandIcon ImgSrc={{uri: logo}} sizeVariant="large" style={icon} />
       <AppText variant="subTitle1" style={merchantNameStyle(theme)}>
         {name}
       </AppText>

@@ -108,9 +108,8 @@
   "notification": "Notification",
   "join_rewardme": "JOIN REWARDME",
   "special_offer": "Select Merchants",
-  "select_offer_details": "We also provide a special offer for everyone. You can choose your favorite or frequently purchasing brands. The cashback rate depends on your membership level.",
   "confirm_select_offer_details": "Once you shop in these {number_of_merchants} brands, you will start earning cashback.",
-  "please_select_brands": "Please choose {number_of_merchants} brands/services to earn points when you shop there.",
+  "please_select_merchants": "Please {select_merchant_text} for cash back",
   "up_to_cashback_percentage": "Up to {percentage}% cashback",
   "edit_prefernece_afterward": "You can fill in later from profile page",
   "set_up_profile": "Set Up Profile",
@@ -295,6 +294,7 @@
   "enjoy_cashback": "Enjoy Cash Back",
   "enjoy_cashback_detail": "As a RewardMe member, you will enjoy cash back automatically on your purchases. Once a new transaction is recorded, your rewards await!",
   "you_earned_first_reward": "You Just Earned Your First Reward!",
+  "select_number_of_merchants": "{number_of_merchants, plural, =0 {select no merchant} one {select # merchant} other {select # merchants}}",
   "currencyDisplayCode": {
     "RD": "Reward Dollar",
     "MDT": "MDT",

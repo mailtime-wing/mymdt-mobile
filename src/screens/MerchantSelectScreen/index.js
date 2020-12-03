@@ -111,22 +111,18 @@ const MerchantSelectScreen = ({route, navigation}) => {
           </AppText>
           <AppText variant="body1" style={detailStyle(theme)}>
             <FormattedMessage
-              id="select_offer_details"
-              defaultMessage="We also provide a special offer for everyone. You can choose your favorite or frequently spend brands. The cashback rate depends on your membership level."
-            />
-          </AppText>
-          <AppText variant="body1" style={detailStyle(theme)}>
-            <FormattedMessage
-              id="please_select_brands"
-              defaultMessage="Please choose <FilterText>{number_of_merchants} brands/services</FilterText> to earn points with each time you spend there."
+              id="please_select_merchants"
+              defaultMessage="Please {select_merchant_text} for cash back"
               values={{
-                number_of_merchants: numberOfMerchant,
-                FilterText: (str) => (
+                select_merchant_text: (
                   <AppText variant="body1" style={hightLightText(theme)}>
-                    {str}
+                    <FormattedMessage
+                      id="select_number_of_merchants"
+                      defaultMessage="{number_of_merchants, plural, =0 {select no merchant} one {select # merchant} other {select # merchants}}"
+                      values={{number_of_merchants: numberOfMerchant}}
+                    />
                   </AppText>
                 ),
-                // TOFIX: formatting not work in react native
               }}
             />
           </AppText>

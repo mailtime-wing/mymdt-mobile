@@ -1,6 +1,6 @@
 import {css} from '@emotion/native';
 
-export const icon = (sizeVariant) => css`
+export const icon = (theme, sizeVariant) => css`
   ${sizeVariant === 'normal' &&
   `
     border-radius: 10px;
@@ -13,4 +13,5 @@ export const icon = (sizeVariant) => css`
   width: 64px;
   height: 64px;
   `}
+  border: 1px solid ${theme.colors.background3};
 `;
