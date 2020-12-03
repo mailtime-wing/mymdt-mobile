@@ -2,7 +2,22 @@ import {css} from '@emotion/native';
 import {StyleSheet} from 'react-native';
 
 export const container = css`
+  flex: 1;
   padding-bottom: 24px;
+  justify-content: space-between;
+`;
+
+export const cardSectionContainer = css`
+  flex: 1;
+`;
+
+export const separator = css`
+  flex-basis: 54;
+  flex-shrink: 100;
+`;
+
+export const carouselContainer = css`
+  flex-shrink: 1;
 `;
 
 export const paddingHorizontal = css`
@@ -31,7 +46,6 @@ export const image = css`
 export const styles = StyleSheet.create({
   container: {
     overflow: 'visible',
-    height: 'auto',
   },
   paginationDot: {
     width: 8,
@@ -40,7 +54,7 @@ export const styles = StyleSheet.create({
   },
   paginationContainer: {
     paddingVertical: 0,
-    marginTop: 60,
+    marginTop: 58,
     marginBottom: 16,
   },
 });

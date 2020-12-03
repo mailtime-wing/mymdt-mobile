@@ -1,8 +1,12 @@
 import React, {useState, useRef, useContext} from 'react';
-import {Dimensions, ScrollView, View, Image} from 'react-native';
+import {Dimensions, View, Image} from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 import {useTheme} from 'emotion-theming';
 import {
   container,
+  cardSectionContainer,
+  separator,
+  carouselContainer,
   paddingHorizontal,
   headerStyle,
   detailStyle,
@@ -10,7 +14,6 @@ import {
   styles,
 } from './style';
 import {ThemeContext} from '@/context/theme';
-import ScreenContainer from '@/components/ScreenContainer';
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
 import {FormattedMessage} from 'react-intl';
@@ -76,21 +79,24 @@ const CardSection = () => {
   ];
 
   return (
-    <View>
-      <Carousel
-        ref={refCarousel}
-        layout="default"
-        data={data}
-        renderItem={renderItem}
-        sliderWidth={sliderWidth}
-        itemWidth={itemWidth}
-        inactiveSlideScale={1}
-        inactiveSlideOpacity={0}
-        containerCustomStyle={styles.container}
-        activeAnimationType="decay"
-        onSnapToItem={(index) => setActiveIndex(index)}
-        loop={true}
-      />
+    <View style={cardSectionContainer}>
+      <View style={separator} />
+      <View style={carouselContainer}>
+        <Carousel
+          ref={refCarousel}
+          layout="default"
+          data={data}
+          renderItem={renderItem}
+          sliderWidth={sliderWidth}
+          itemWidth={itemWidth}
+          inactiveSlideScale={1}
+          inactiveSlideOpacity={0}
+          containerCustomStyle={styles.container}
+          activeAnimationType="decay"
+          onSnapToItem={(index) => setActiveIndex(index)}
+          loop={true}
+        />
+      </View>
       <Pagination
         dotsLength={data.length}
         activeDotIndex={activeIndex}
@@ -107,20 +113,18 @@ const CardSection = () => {
 };
 
 const OnboardingScreen = ({navigation}) => (
-  <ScrollView>
-    <ScreenContainer style={container}>
-      <CardSection />
-      <View style={paddingHorizontal}>
-        <AppButton
-          onPress={() => navigation.navigate('enter')}
-          text="start earning"
-          variant="filled"
-          sizeVariant="large"
-          colorVariant="secondary"
-        />
-      </View>
-    </ScreenContainer>
-  </ScrollView>
+  <SafeAreaView style={container}>
+    <CardSection />
+    <View style={paddingHorizontal}>
+      <AppButton
+        onPress={() => navigation.navigate('enter')}
+        text="start earning"
+        variant="filled"
+        sizeVariant="large"
+        colorVariant="secondary"
+      />
+    </View>
+  </SafeAreaView>
 );
 
 export default OnboardingScreen;
