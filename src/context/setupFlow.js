@@ -89,7 +89,7 @@ export const SetupFlowProvider = ({children}) => {
     if (setupStatus?.isProfileCompleted) {
       result.welcome = true;
       result.user_profile = true;
-      // result.enjoy_cashback = true;
+      result.enjoy_cashback = true;
     }
     if (setupStatus?.isMerchantSet) {
       result.merchant_select = true;

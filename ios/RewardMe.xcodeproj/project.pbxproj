@@ -353,7 +353,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 2ALSZ7K238;
+						DevelopmentTeam = TAPWFP66G4;
 						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 					};
@@ -770,7 +770,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 32;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 2ALSZ7K238;
+				DEVELOPMENT_TEAM = TAPWFP66G4;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -795,7 +795,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.alternativedatadotcom.rewardme;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alternativedatadotcom.rewardme.2;
 				PRODUCT_NAME = RewardMe;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
