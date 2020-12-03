@@ -40,7 +40,7 @@ const InternalLoginForm = ({title, submitButtonText, description}) => {
             return;
           }
         }
-      } catch (e) {}
+      } catch {}
       setFieldValue('phonePrefix', '+');
     };
     getPhonePrefix();
@@ -61,7 +61,7 @@ const InternalLoginForm = ({title, submitButtonText, description}) => {
                 />
               </PhonePrefixContainer>
               <PhoneContainer>
-                <Input keyboardType="phone-pad" name="phone" />
+                <Input keyboardType="phone-pad" name="phone" autoFocus />
               </PhoneContainer>
             </PhoneSectionContainer>
           </View>

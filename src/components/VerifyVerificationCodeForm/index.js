@@ -145,6 +145,7 @@ const VerifyVerificationCodeForm = ({
                   />
                 }
                 name="verificationCode"
+                autoFocus
               />
             </View>
           </View>
