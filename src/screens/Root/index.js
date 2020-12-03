@@ -62,6 +62,7 @@ import ConverterScreen from '@/screens/ConverterScreen';
 import WithdrawalScreen from '@/screens/WithdrawalScreen';
 import MissingReceiptScreen from '@/screens/MissingReceiptScreen';
 import TransactionDetailScreen from '@/screens/TransactionDetailScreen';
+import TransactionDetailMoreScreen from '@/screens/TransactionDetailMoreScreen';
 
 import MdtDetailScreen from '@/screens/MdtDetailScreen';
 import MrpDetailScreen from '@/screens/MrpDetailScreen';
@@ -201,6 +202,7 @@ const authModalScreens = [
   {name: 'withdrawal', component: WithdrawalScreen},
   {name: 'missing_receipt', component: MissingReceiptScreen},
   {name: 'transaction_detail', component: TransactionDetailScreen},
+  {name: 'transaction_detail_more', component: TransactionDetailMoreScreen},
   {
     name: 'cash_back_summary',
     component: CashBackSummaryScreen,

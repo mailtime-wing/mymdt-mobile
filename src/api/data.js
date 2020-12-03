@@ -302,6 +302,7 @@ export const TRANSACTIONS_QUERY = gql`
     $cursor: String
     $filter: TransactionFilter
     $currencyCode: CurrencyCode
+    $first: Int = 10
   ) {
     userProfile {
       id
@@ -310,7 +311,7 @@ export const TRANSACTIONS_QUERY = gql`
         id
         currencyCode
         balance
-        transactions(first: 10, after: $cursor, filter: $filter) {
+        transactions(first: $first, after: $cursor, filter: $filter) {
           edges {
             cursor
             node {
