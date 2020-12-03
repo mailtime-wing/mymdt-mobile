@@ -22,7 +22,8 @@ import {
 } from './style';
 import countryCodeData from '@/constants/countryCode';
 
-const InternalLoginForm = ({title, submitButtonText, description, theme}) => {
+const InternalLoginForm = ({title, submitButtonText, description}) => {
+  const theme = useTheme();
   const {setFieldValue, handleSubmit, isValid} = useFormikContext();
 
   // get phone prefix
@@ -49,7 +50,7 @@ const InternalLoginForm = ({title, submitButtonText, description, theme}) => {
     <AppKeyboardAvoidingView style={container} behavior="padding">
       <View style={formView}>
         <View>
-          <HeaderTitle>{title}</HeaderTitle>
+          {title && <HeaderTitle>{title}</HeaderTitle>}
           <View style={formBody}>
             <PhoneSectionContainer>
               <PhonePrefixContainer>
@@ -111,8 +112,6 @@ const LoginForm = ({
   onSendPress,
   onSubmit,
 }) => {
-  const theme = useTheme();
-
   return (
     <Formik
       initialValues={{
@@ -125,7 +124,6 @@ const LoginForm = ({
         submitButtonText={submitButtonText}
         onSendPress={onSendPress}
         description={description}
-        theme={theme}
         title={title}
       />
     </Formik>
