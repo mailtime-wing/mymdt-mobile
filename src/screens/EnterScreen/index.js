@@ -1,10 +1,8 @@
 import React, {useContext} from 'react';
-import {ScrollView} from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {IntlContext} from '@/context/Intl';
 import LoginForm from '@/components/LoginForm';
-import ScreenContainer from '@/components/ScreenContainer';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {GET_OTP_API} from '@/api/auth';
 import errorCodeEnum from '@/enum/errorCode';
@@ -68,23 +66,17 @@ const EnterScreen = ({navigation}) => {
   };
 
   return (
-    <ScrollView>
-      <ScreenContainer hasTopBar>
-        <LoginForm
-          title={<FormattedMessage id="welcome_to_reward_me" />}
-          description={
-            <FormattedMessage id="setting_up_agree_terms_and_policy" />
-          }
-          submitButtonText={
-            <FormattedMessage
-              id="button.send_verification_code"
-              defaultMessage="send verification code"
-            />
-          }
-          onSubmit={handleSubmitPress}
+    <LoginForm
+      title={<FormattedMessage id="welcome_to_reward_me" />}
+      description={<FormattedMessage id="setting_up_agree_terms_and_policy" />}
+      submitButtonText={
+        <FormattedMessage
+          id="button.send_verification_code"
+          defaultMessage="send verification code"
         />
-      </ScreenContainer>
-    </ScrollView>
+      }
+      onSubmit={handleSubmitPress}
+    />
   );
 };
 

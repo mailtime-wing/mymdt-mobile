@@ -8,18 +8,21 @@ import {Formik, useFormikContext} from 'formik';
 import Input from '@/components/AppInput';
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
+import HeaderTitle from '@/components/HeaderTitle';
+import AppKeyboardAvoidingView from '@/components/AppKeyboardAvoidingView';
 
 import {
-  Container,
   PhoneSectionContainer,
   PhonePrefixContainer,
   PhoneContainer,
-  titleStyle,
   termsStyle,
+  container,
+  formView,
+  formBody,
 } from './style';
 import countryCodeData from '@/constants/countryCode';
 
-const InternalLoginForm = ({submitButtonText, description, theme}) => {
+const InternalLoginForm = ({title, submitButtonText, description, theme}) => {
   const {setFieldValue, handleSubmit, isValid} = useFormikContext();
 
   // get phone prefix
@@ -43,34 +46,42 @@ const InternalLoginForm = ({submitButtonText, description, theme}) => {
   }, [setFieldValue]);
 
   return (
-    <View>
-      <PhoneSectionContainer>
-        <PhonePrefixContainer>
-          <Input
-            keyboardType="phone-pad"
-            label={<FormattedMessage id="phone_number" />}
-            name="phonePrefix"
+    <AppKeyboardAvoidingView style={container} behavior="padding">
+      <View style={formView}>
+        <View>
+          <HeaderTitle>{title}</HeaderTitle>
+          <View style={formBody}>
+            <PhoneSectionContainer>
+              <PhonePrefixContainer>
+                <Input
+                  keyboardType="phone-pad"
+                  label={<FormattedMessage id="phone_number" />}
+                  name="phonePrefix"
+                />
+              </PhonePrefixContainer>
+              <PhoneContainer>
+                <Input keyboardType="phone-pad" name="phone" />
+              </PhoneContainer>
+            </PhoneSectionContainer>
+          </View>
+        </View>
+        <View style={formBody}>
+          {description && (
+            <AppText variant="caption" style={termsStyle(theme)}>
+              {description}
+            </AppText>
+          )}
+          <AppButton
+            onPress={handleSubmit}
+            text={submitButtonText}
+            disabled={!isValid}
+            variant="filled"
+            sizeVariant="large"
+            colorVariant="secondary"
           />
-        </PhonePrefixContainer>
-        <PhoneContainer>
-          <Input keyboardType="phone-pad" name="phone" />
-        </PhoneContainer>
-      </PhoneSectionContainer>
-
-      {description && (
-        <AppText variant="caption" style={termsStyle(theme)}>
-          {description}
-        </AppText>
-      )}
-      <AppButton
-        onPress={handleSubmit}
-        text={submitButtonText}
-        disabled={!isValid}
-        variant="filled"
-        sizeVariant="large"
-        colorVariant="secondary"
-      />
-    </View>
+        </View>
+      </View>
+    </AppKeyboardAvoidingView>
   );
 };
 
@@ -103,27 +114,21 @@ const LoginForm = ({
   const theme = useTheme();
 
   return (
-    <Container>
-      {title && (
-        <AppText variant="heading1" style={titleStyle(theme)}>
-          {title}
-        </AppText>
-      )}
-      <Formik
-        initialValues={{
-          phone: '',
-          phonePrefix: '',
-        }}
-        onSubmit={onSubmit}
-        validate={validate}>
-        <InternalLoginForm
-          submitButtonText={submitButtonText}
-          onSendPress={onSendPress}
-          description={description}
-          theme={theme}
-        />
-      </Formik>
-    </Container>
+    <Formik
+      initialValues={{
+        phone: '',
+        phonePrefix: '',
+      }}
+      onSubmit={onSubmit}
+      validate={validate}>
+      <InternalLoginForm
+        submitButtonText={submitButtonText}
+        onSendPress={onSendPress}
+        description={description}
+        theme={theme}
+        title={title}
+      />
+    </Formik>
   );
 };
 

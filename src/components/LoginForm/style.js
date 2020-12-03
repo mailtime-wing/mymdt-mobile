@@ -12,23 +12,25 @@ export const VerificationCodeContainer = styled.View`
   flex: 1;
 `;
 
-export const titleStyle = (theme) => css`
-  color: ${theme.colors.secondary.normal};
-  margin-bottom: 24px;
-`;
-
 export const termsStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
-  margin-top: 110px;
   margin-bottom: 16px;
   padding: 0 24px;
   text-align: center;
 `;
 
-export const Container = styled.View`
-  padding-left: 24px;
-  padding-right: 24px;
+export const container = css`
+  flex: 1;
+`;
+
+export const formView = css`
+  flex: 1;
+  justify-content: space-between;
   padding-bottom: 24px;
+`;
+
+export const formBody = css`
+  padding-horizontal: 24px;
 `;
 
 export const PhoneSectionContainer = styled.View`
