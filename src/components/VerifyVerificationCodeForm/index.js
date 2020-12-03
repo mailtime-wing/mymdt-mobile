@@ -8,44 +8,26 @@ import {GET_OTP_API} from '@/api/auth';
 import {IntlContext} from '@/context/Intl';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 import useCountDownTimer from '@/hooks/timer';
-
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
 import Input from '@/components/AppInput';
+import HeaderTitle from '@/components/HeaderTitle';
+import AppKeyboardAvoidingView from '@/components/AppKeyboardAvoidingView';
 
-import {
-  container,
-  formContainer,
-  titleStyle,
-  detailStyle,
-  button,
-} from './style';
+import {container, inner, formBody, detailStyle, input} from './style';
 
-const SendOtpForm = ({submitButtonText}) => {
+const SubmitButton = (props) => {
   const {handleSubmit, isValid} = useFormikContext();
 
   return (
-    <View style={formContainer}>
-      <Input
-        keyboardType="number-pad"
-        label={
-          <FormattedMessage
-            id="verification_code"
-            defaultMessage="VERIFICATION CODE"
-          />
-        }
-        name="verificationCode"
-      />
-      <AppButton
-        onPress={handleSubmit}
-        text={submitButtonText}
-        disabled={!isValid}
-        variant="filled"
-        sizeVariant="large"
-        colorVariant="secondary"
-        style={button}
-      />
-    </View>
+    <AppButton
+      onPress={handleSubmit}
+      disabled={!isValid}
+      variant="filled"
+      sizeVariant="large"
+      colorVariant="secondary"
+      {...props}
+    />
   );
 };
 
@@ -118,43 +100,60 @@ const VerifyVerificationCodeForm = ({
   ]);
 
   return (
-    <View style={container}>
-      {title && (
-        <AppText variant="heading1" style={titleStyle(theme)}>
-          {title}
-        </AppText>
-      )}
-      <AppText variant="body1" style={detailStyle(theme)}>
-        {description}
-      </AppText>
-      <TouchableOpacity disabled={isTimerStarted} onPress={handleSendPress}>
-        <AppText
-          variant="body1"
-          style={[
-            detailStyle(theme),
-            !isTimerStarted && {color: theme.colors.secondary.dark},
-          ]}>
-          {isTimerStarted ? (
-            <FormattedMessage
-              id="resend_in_seconds"
-              values={{
-                seconds_left: timeLeft,
-              }}
-            />
-          ) : (
-            <FormattedMessage id="button.resend_verification_code" />
-          )}
-        </AppText>
-      </TouchableOpacity>
-      <Formik
-        initialValues={{
-          verificationCode: '',
-        }}
-        onSubmit={onSubmit}
-        validate={validate}>
-        <SendOtpForm submitButtonText={submitButtonText} />
-      </Formik>
-    </View>
+    <Formik
+      initialValues={{
+        verificationCode: '',
+      }}
+      onSubmit={onSubmit}
+      validate={validate}>
+      <AppKeyboardAvoidingView style={container} behavior="padding">
+        <View style={inner}>
+          <View>
+            {title && <HeaderTitle>{title}</HeaderTitle>}
+            <View style={formBody}>
+              <AppText variant="body1" style={detailStyle(theme)}>
+                {description}
+              </AppText>
+              <TouchableOpacity
+                disabled={isTimerStarted}
+                onPress={handleSendPress}>
+                <AppText
+                  variant="body1"
+                  style={[
+                    detailStyle(theme),
+                    !isTimerStarted && {color: theme.colors.secondary.dark},
+                  ]}>
+                  {isTimerStarted ? (
+                    <FormattedMessage
+                      id="resend_in_seconds"
+                      values={{
+                        seconds_left: timeLeft,
+                      }}
+                    />
+                  ) : (
+                    <FormattedMessage id="button.resend_verification_code" />
+                  )}
+                </AppText>
+              </TouchableOpacity>
+              <Input
+                style={input}
+                keyboardType="number-pad"
+                label={
+                  <FormattedMessage
+                    id="verification_code"
+                    defaultMessage="VERIFICATION CODE"
+                  />
+                }
+                name="verificationCode"
+              />
+            </View>
+          </View>
+          <View style={formBody}>
+            <SubmitButton text={submitButtonText} />
+          </View>
+        </View>
+      </AppKeyboardAvoidingView>
+    </Formik>
   );
 };
 

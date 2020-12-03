@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import {ScrollView} from 'react-native';
 import {useIntl} from 'react-intl';
 
 import {AuthContext} from '@/context/auth';
@@ -8,7 +7,6 @@ import {NotificationContext} from '@/context/notification';
 import {FormattedMessage} from 'react-intl';
 import errorCodeEnum from '@/enum/errorCode';
 import VerifyVerificationCodeForm from '@/components/VerifyVerificationCodeForm';
-import ScreenContainer from '@/components/ScreenContainer';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
@@ -75,30 +73,26 @@ const VerifyEnterScreen = ({route}) => {
   };
 
   return (
-    <ScrollView>
-      <ScreenContainer hasTopBar>
-        <VerifyVerificationCodeForm
-          title={<FormattedMessage id="enter_verification_code" />}
-          description={
-            <FormattedMessage
-              id="we_have_sent_otp"
-              values={{
-                phone_number: splitPhoneNumber(phoneNubmer),
-              }}
-            />
-          }
-          submitButtonText={
-            <FormattedMessage id="button.verify" defaultMessage="Verify" />
-          }
-          phoneNubmer={phoneNubmer}
-          otpActionKey="ENTER"
-          onSubmit={handleVerifyPress}
-          startCountdownOnMount={true}
-          initialCountdownSeconds={remainingSeconds}
-          requestOtpOnMount={false}
+    <VerifyVerificationCodeForm
+      title={<FormattedMessage id="enter_verification_code" />}
+      description={
+        <FormattedMessage
+          id="we_have_sent_otp"
+          values={{
+            phone_number: splitPhoneNumber(phoneNubmer),
+          }}
         />
-      </ScreenContainer>
-    </ScrollView>
+      }
+      submitButtonText={
+        <FormattedMessage id="button.verify" defaultMessage="Verify" />
+      }
+      phoneNubmer={phoneNubmer}
+      otpActionKey="ENTER"
+      onSubmit={handleVerifyPress}
+      startCountdownOnMount={true}
+      initialCountdownSeconds={remainingSeconds}
+      requestOtpOnMount={false}
+    />
   );
 };
 

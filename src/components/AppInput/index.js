@@ -21,6 +21,7 @@ const Input = ({
   textStyle,
   placeholder,
   additionalStringToValue,
+  style,
   ...props
 }) => {
   const theme = useTheme();
@@ -32,13 +33,13 @@ const Input = ({
     setIsFocus(true);
   };
 
-  const handleOnBlur = e => {
+  const handleOnBlur = (e) => {
     field.onBlur(props.name)(e);
     setIsFocus(false);
   };
 
   return (
-    <Container>
+    <Container style={style}>
       <AppText
         variant="label"
         style={labelStyle(theme, isFocus, isError)}
