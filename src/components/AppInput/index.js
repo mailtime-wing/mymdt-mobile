@@ -12,21 +12,37 @@ import {useField} from 'formik';
 
 import AppText from '@/components/AppText2';
 
+/**
+ * @typedef {import('react-native').ViewStyle} ViewStyle
+ * @typedef {import('react-native').TextStyle} TextStyle
+ *
+ * @typedef {Object} Props
+ * @property {string} name
+ * @property {JSX.Element} label
+ * @property {boolean} required
+ * @property {JSX.Element} remark
+ * @property {boolean} readOnly
+ * @property {TextStyle} remarkOuterStyle
+ * @property {TextStyle} textStyle
+ * @property {ViewStyle} style
+ *
+ * @typedef {import('react-native').TextInputProps} TextInputProps
+ * @type {import('react').FunctionComponent<TextInputProps & Props>}
+ */
 const Input = ({
+  name,
   label,
   required,
   remark,
   readOnly,
   remarkOuterStyle,
   textStyle,
-  placeholder,
-  additionalStringToValue,
   style,
   ...props
 }) => {
   const theme = useTheme();
   const [isFocus, setIsFocus] = useState(false);
-  const [field, meta] = useField(props.name);
+  const [field, meta] = useField(name);
   const isError = meta.touched && meta.error;
 
   const handleOnFocus = () => {
@@ -34,7 +50,7 @@ const Input = ({
   };
 
   const handleOnBlur = (e) => {
-    field.onBlur(props.name)(e);
+    field.onBlur(name)(e);
     setIsFocus(false);
   };
 
@@ -55,12 +71,11 @@ const Input = ({
         <TextInput
           {...props}
           onFocus={handleOnFocus}
-          onChangeText={field.onChange(props.name)}
+          onChangeText={field.onChange(name)}
           onBlur={handleOnBlur}
           value={field.value}
           autoCapitalize="none"
           isError={isError}
-          placeholder={placeholder}
           placeholderTextColor={theme.colors.textOnBackground.disabled}
           style={textStyle}
         />
