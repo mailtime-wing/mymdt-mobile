@@ -57,12 +57,16 @@ const TransactionAmount = ({
   switch (unitVariant) {
     case MEASURABLE_DATA_TOKEN:
       unit = 'MDT';
+      minimumFractionDigits = 4;
+      maximumFractionDigits = 4;
       break;
     case REWARD_DOLLAR:
       unit = 'R';
       break;
     case ME:
       unit = ME;
+      minimumFractionDigits = 4;
+      maximumFractionDigits = 4;
       break;
     case USD:
     case USDT:
@@ -102,15 +106,17 @@ const TransactionAmount = ({
 
   return (
     <View style={[container, style]}>
-      <AppText
-        variant={amountTextVariant}
-        style={[
-          amountStyle(theme, variant, unitVariant, amountSizeVariant),
-          amountColor && {color: amountColor},
-        ]}>
-        {showAlmostEqual && '≈'}
-        {showDollarSign && '$'}
-      </AppText>
+      {(showAlmostEqual || showDollarSign) && (
+        <AppText
+          variant={amountTextVariant}
+          style={[
+            amountStyle(theme, variant, unitVariant, amountSizeVariant),
+            amountColor && {color: amountColor},
+          ]}>
+          {showAlmostEqual && '≈'}
+          {showDollarSign && '$'}
+        </AppText>
+      )}
       <AppText
         variant={amountTextVariant}
         style={[
