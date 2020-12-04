@@ -34,8 +34,6 @@ const WelcomeScreen = () => {
       <View style={contentContaienr}>
         <FadeInView>
           <MembershipCard userLevel={membershipLevel.STARTER} />
-        </FadeInView>
-        <FadeInView>
           <AppText variant="heading2" style={welcome(theme)}>
             <FormattedMessage
               id="welcome_to_reward_me"

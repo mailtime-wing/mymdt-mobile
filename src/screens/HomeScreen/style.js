@@ -12,7 +12,7 @@ export const imageStyle = css`
 `;
 
 export const upgradeSection = css`
-  margin-top: -49px;
+  margin-top: -88px;
   padding-top: 90px;
 `;
 
