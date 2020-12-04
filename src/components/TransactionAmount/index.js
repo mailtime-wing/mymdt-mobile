@@ -106,18 +106,17 @@ const TransactionAmount = ({
 
   return (
     <View style={[container, style]}>
-      {showAlmostEqual ||
-        (showDollarSign && (
-          <AppText
-            variant={amountTextVariant}
-            style={[
-              amountStyle(theme, variant, unitVariant, amountSizeVariant),
-              amountColor && {color: amountColor},
-            ]}>
-            {showAlmostEqual && '≈'}
-            {showDollarSign && '$'}
-          </AppText>
-        ))}
+      {(showAlmostEqual || showDollarSign) && (
+        <AppText
+          variant={amountTextVariant}
+          style={[
+            amountStyle(theme, variant, unitVariant, amountSizeVariant),
+            amountColor && {color: amountColor},
+          ]}>
+          {showAlmostEqual && '≈'}
+          {showDollarSign && '$'}
+        </AppText>
+      )}
       <AppText
         variant={amountTextVariant}
         style={[
