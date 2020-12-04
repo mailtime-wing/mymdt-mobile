@@ -6,29 +6,43 @@ export const Container = styled(ScreenContainer)`
   align-items: center;
 `;
 
-export const ScrollContainer = styled.ScrollView`
-  background: ${props => props.theme.colors.themeBackground};
-  padding-left: 24px;
-  padding-right: 24px;
+export const bodyContainer = css`
+  padding-horizontal: 24px;
 `;
 
-export const BackgroundImage = styled.Image`
+export const container = (theme) => css`
+  flex: 1;
+  background: ${theme.colors.themeBackground};
+`;
+
+export const inner = css`
+  flex: 1;
+  justify-content: space-between;
+  padding-bottom: 24px;
+`;
+
+export const backgroundImage = css`
   align-self: center;
   margin-bottom: 16px;
 `;
 
-export const titleStyle = theme => css`
+export const titleStyle = (theme) => css`
   color: ${theme.colors.textOnThemeBackground.highEmphasis};
   text-align: center;
   margin-bottom: 16px;
 `;
 
-export const detailStyle = theme => css`
+export const detailStyle = (theme) => css`
   color: ${theme.colors.textOnThemeBackground.mediumEmphasis};
   text-align: center;
   margin-bottom: 16px;
 `;
 
 export const button = css`
-  width: 100%;
+  margin-horizontal: 24px;
+`;
+
+export const scale = css`
+  height: 178px;
+  aspect-ratio: 1.5;
 `;
