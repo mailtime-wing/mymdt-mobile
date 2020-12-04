@@ -18,6 +18,9 @@ import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 
 import NextStakeReward from './NextStakeReward';
 import NewTokenTransactionHistory from './NewTokenTransactionHistory';
+import transactionTypeToIcon from '@/utils/transactionTypeToIcon';
+
+import AppAvator from '@/components/AppAvator';
 
 import {
   container,
@@ -38,12 +41,31 @@ const NewTokenDetailScreen = ({navigation}) => {
     fetchPolicy: 'network-only',
     variables: {
       currencyCode: currencyCode,
+      first: 5,
     },
   });
+
   const newTokenAmount =
     data?.userProfile?.currencyAccounts.find(
       (ca) => ca.currencyCode === currencyCode,
     )?.balance || 0;
+
+  const currentCardData = data?.userProfile?.currencyAccounts[0];
+  const first5TransactionsHistory = currentCardData?.transactions?.edges.map(
+    (transaction) =>
+      (transaction = {
+        ...transaction,
+        icon: (
+          <AppAvator
+            variant="icon"
+            sizeVariant="small"
+            color={theme.colors.background1}
+            backgroundColor={theme.colors.secondary.normal}
+            svgIcon={transactionTypeToIcon(transaction.node?.type)}
+          />
+        ),
+      }),
+  );
 
   return (
     <ScrollView>
@@ -104,6 +126,7 @@ const NewTokenDetailScreen = ({navigation}) => {
       <NewTokenTransactionHistory
         navigation={navigation}
         currencyCode={currencyCode}
+        transactionsHistoryList={first5TransactionsHistory}
         style={sectionMargin}
       />
     </ScrollView>
