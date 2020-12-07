@@ -13,6 +13,9 @@ import {REWARD_DOLLAR, USD} from '@/constants/currency';
 import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 
 import MrpTransactionHistory from './MrpTransactionHistory';
+import transactionTypeToIcon from '@/utils/transactionTypeToIcon';
+
+import AppAvator from '@/components/AppAvator';
 
 import {
   container,
@@ -32,12 +35,31 @@ const MrpDetailScreen = ({navigation}) => {
     fetchPolicy: 'network-only',
     variables: {
       currencyCode: currencyCode,
+      first: 5,
     },
   });
+
   const mrpAmount =
     data?.userProfile?.currencyAccounts.find(
       (ca) => ca.currencyCode === currencyCode,
     )?.balance || 0;
+
+  const currentCardData = data?.userProfile?.currencyAccounts[0];
+  const first5TransactionsHistory = currentCardData?.transactions?.edges.map(
+    (transaction) =>
+      (transaction = {
+        ...transaction,
+        icon: (
+          <AppAvator
+            variant="icon"
+            sizeVariant="small"
+            color={theme.colors.background1}
+            backgroundColor={theme.colors.secondary.normal}
+            svgIcon={transactionTypeToIcon(transaction.node?.type)}
+          />
+        ),
+      }),
+  );
 
   return (
     <ScrollView>
@@ -78,6 +100,7 @@ const MrpDetailScreen = ({navigation}) => {
       <MrpTransactionHistory
         navigation={navigation}
         currencyCode={currencyCode}
+        transactionsHistoryList={first5TransactionsHistory}
         style={sectionMargin}
       />
     </ScrollView>

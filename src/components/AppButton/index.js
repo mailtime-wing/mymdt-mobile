@@ -25,6 +25,7 @@ const AppButton = ({
   svgIcon: SvgIcon,
   disabled,
   style,
+  textPropsStyle,
   ...props
 }) => {
   const theme = useTheme();
@@ -40,7 +41,7 @@ const AppButton = ({
       {SvgIcon && <SvgIcon {...icon(theme, variant, colorVariant, !!text)} />}
       <AppText
         variant={sizeVariant === 'moreCompact' ? 'moreCompactButton' : 'button'}
-        style={textStyle(theme, variant, colorVariant)}>
+        style={[textStyle(theme, variant, colorVariant), textPropsStyle]}>
         {text}
       </AppText>
     </TouchableOpacity>

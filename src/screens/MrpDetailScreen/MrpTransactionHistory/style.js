@@ -9,6 +9,11 @@ export const historyHeaderContainer = (theme) => css`
   border-bottom-color: ${theme.colors.background2};
 `;
 
+export const moreContainer = css`
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const cashBackTitle = (theme) => css`
   color: ${theme.colors.secondary.normal};
 `;

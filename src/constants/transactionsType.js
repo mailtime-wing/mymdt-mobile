@@ -1,6 +1,0 @@
-export const REWARD = 'reward'
-export const REDEEM = 'redeem'
-export const INTEREST = 'interest'
-export const CHECK_IN = 'check_in'
-export const DATA_POINT_FROM_EMAIL = 'email'
-export const DATA_POINT_FROM_BANK = 'bank'
