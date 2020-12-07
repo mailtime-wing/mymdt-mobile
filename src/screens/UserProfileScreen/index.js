@@ -51,6 +51,7 @@ const UserProfileForm = ({
 
   return (
     <FormContainer>
+      <Input label={<FormattedMessage id="your_name" />} required name="name" />
       <GenderSelector gender={values.gender} setFieldValue={setFieldValue} />
       <AppText variant="caption" style={errorStyle(theme)}>
         {errors.gender ? errors.gender : ' '}
@@ -121,6 +122,9 @@ const UserProfileScreen = () => {
   const validate = (values) => {
     const errors = {};
 
+    if (!values.name) {
+      errors.name = 'Name Required';
+    }
     if (!values.gender) {
       errors.gender = 'Gender Required';
     }
