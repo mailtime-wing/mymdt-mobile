@@ -40,9 +40,12 @@ const BindEmailScreen = ({route, navigation}) => {
 
   useEffect(() => {
     if (loginSuccess) {
+      if (navigateFromEdit) {
+        return navigation.pop(2);
+      }
       navigateByFlow('next', {loginSuccess: true});
     }
-  }, [loginSuccess, navigateByFlow]);
+  }, [loginSuccess, navigateFromEdit, navigation, navigateByFlow]);
 
   const handleConnectPress = (values) => {
     login(values.email);
