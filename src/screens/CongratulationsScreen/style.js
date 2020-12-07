@@ -11,7 +11,6 @@ export const contentContaienr = css`
 
 export const congrats = (theme) => css`
   color: ${theme.colors.secondary.normal};
-  margin-top: 41px;
   text-align: center;
 `;
 

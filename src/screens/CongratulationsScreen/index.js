@@ -41,8 +41,6 @@ const CongratulationsScreen = () => {
       <View style={contentContaienr}>
         <FadeInView>
           <MembershipCard userLevel={membershipLevel.STARTER} />
-        </FadeInView>
-        <FadeInView>
           <AppText variant="heading2" style={congrats(theme)}>
             <FormattedMessage
               id="congratulations"
@@ -55,21 +53,21 @@ const CongratulationsScreen = () => {
               defaultMessage="You Just Earned Your First Reward!"
             />
           </AppText>
-        </FadeInView>
 
-        <AppButton
-          onPress={() => navigateByFlow()}
-          text={
-            <FormattedMessage
-              id="button.choose_cashback_type"
-              defaultMessage="Choose Cash Back Type"
-            />
-          }
-          variant="filled"
-          sizeVariant="normal"
-          colorVariant="secondary"
-          style={button}
-        />
+          <AppButton
+            onPress={() => navigateByFlow()}
+            text={
+              <FormattedMessage
+                id="button.choose_cashback_type"
+                defaultMessage="Choose Cash Back Type"
+              />
+            }
+            variant="filled"
+            sizeVariant="normal"
+            colorVariant="secondary"
+            style={button}
+          />
+        </FadeInView>
       </View>
     </View>
   );
