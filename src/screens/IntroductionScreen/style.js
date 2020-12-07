@@ -1,10 +1,4 @@
-import styled, {css} from '@emotion/native';
-import ScreenContainer from '@/components/ScreenContainer';
-
-export const Container = styled(ScreenContainer)`
-  padding-bottom: 24px;
-  align-items: center;
-`;
+import {css} from '@emotion/native';
 
 export const bodyContainer = css`
   padding-horizontal: 24px;
@@ -13,12 +7,6 @@ export const bodyContainer = css`
 export const container = (theme) => css`
   flex: 1;
   background: ${theme.colors.themeBackground};
-`;
-
-export const inner = css`
-  flex: 1;
-  justify-content: space-between;
-  padding-bottom: 24px;
 `;
 
 export const backgroundImage = css`
@@ -44,5 +32,4 @@ export const button = css`
 
 export const scale = css`
   height: 178px;
-  aspect-ratio: 1.5;
 `;

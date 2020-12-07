@@ -9,8 +9,8 @@ export const bodyContainer = css`
 `;
 
 export const inner = css`
-  flex: 1;
   justify-content: space-between;
+  flex: 1;
   padding-bottom: 24px;
 `;
 
@@ -24,5 +24,5 @@ export const detail = (theme) => css`
 `;
 
 export const image = css`
-  margin-bottom: 40px;
+  width: 100%;
 `;

@@ -7,7 +7,6 @@ import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import HeaderTitle from '@/components/HeaderTitle';
-import AppKeyboardAvoidingView from '@/components/AppKeyboardAvoidingView';
 
 import {detail, bodyContainer, image, container, inner} from './style';
 
@@ -15,28 +14,26 @@ const EnjoyCashBackScreen = () => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
   return (
-    <AppKeyboardAvoidingView style={container} behavior="padding">
+    <View style={container}>
+      <HeaderTitle>
+        <FormattedMessage
+          id="enjoy_cashback"
+          defaultMessage="Enjoy Cash Back"
+        />
+      </HeaderTitle>
       <View style={inner}>
-        <View>
-          <HeaderTitle>
+        <View style={bodyContainer}>
+          <AppText variant="body1" style={detail(theme)}>
             <FormattedMessage
-              id="enjoy_cashback"
-              defaultMessage="Enjoy Cash Back"
+              id="enjoy_cashback_detail"
+              defaultMessage="As a RewardMe member, you will enjoy cash back automatically on your purchases. Once a new transaction is recorded, your rewards await!"
             />
-          </HeaderTitle>
-          <View style={bodyContainer}>
-            <AppText variant="body1" style={detail(theme)}>
-              <FormattedMessage
-                id="enjoy_cashback_detail"
-                defaultMessage="As a RewardMe member, you will enjoy cash back automatically on your purchases. Once a new transaction is recorded, your rewards await!"
-              />
-            </AppText>
-            <Image
-              source={require('@/assets/enjoy_cashback.png')}
-              resizeMode="contain"
-              style={image}
-            />
-          </View>
+          </AppText>
+          <Image
+            source={require('@/assets/enjoy_cashback.png')}
+            style={image}
+            resizeMode="contain"
+          />
         </View>
         <View style={bodyContainer}>
           <AppButton
@@ -48,7 +45,7 @@ const EnjoyCashBackScreen = () => {
           />
         </View>
       </View>
-    </AppKeyboardAvoidingView>
+    </View>
   );
 };
 
