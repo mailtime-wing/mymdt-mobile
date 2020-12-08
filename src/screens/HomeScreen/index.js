@@ -16,8 +16,8 @@ import ScreenContainer from '@/components/ScreenContainer';
 
 import AwardIcon from '@/assets/icon_award.svg';
 import CreditCardIcon from '@/assets/icon_credit-card.svg';
-import DollarSignIcon from '@/assets/dollar_sign_icon';
-import BagIcon from '@/assets/icon_shopping-bag';
+import DollarSignIcon from '@/assets/dollar_sign_icon.svg';
+import BagIcon from '@/assets/icon_shopping-bag.svg';
 import ReferralIcon from '@/assets/referral_icon.svg';
 import MailIcon from '@/assets/icon_mail.svg';
 

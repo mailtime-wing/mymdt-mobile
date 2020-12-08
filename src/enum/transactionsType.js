@@ -5,6 +5,7 @@ export default {
   CHECK_IN: 'check-in',
   STAKING: 'staking',
   CONVERSION: 'conversion',
-  CASH_BACK: 'mai',
+  MAI: 'mai',
+  CASH_BACK: 'cashback',
   BANK: 'bank',
 };

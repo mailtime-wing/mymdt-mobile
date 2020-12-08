@@ -74,6 +74,14 @@ const transactionTypeToNameMap = {
       />
     ),
   },
+  [TransactitonType.MAI]: {
+    name: (
+      <FormattedMessage
+        id="transactionType.cashback"
+        defaultMessage="CASHBACK"
+      />
+    ),
+  },
   [TransactitonType.BANK]: {
     name: <FormattedMessage id="transactionType.bank" defaultMessage="Bank" />,
   },
@@ -153,7 +161,7 @@ const RenderTransationDetail = ({transactionItem}) => {
           </View>
         </>
       );
-    case TransactitonType.CASH_BACK:
+    case TransactitonType.MAI:
       return (
         <>
           <View style={itemContainer}>
@@ -230,6 +238,7 @@ const RenderTransationDetail = ({transactionItem}) => {
               amountSizeVariant="normal"
               unitColor={theme.colors.primary.normal}
               amountColor={theme.colors.primary.normal}
+              showPositiveSign={true}
             />
           </View>
         </>
@@ -294,6 +303,7 @@ const RenderTransationDetail = ({transactionItem}) => {
                 amountSizeVariant="normal"
                 unitColor={theme.colors.primary.normal}
                 amountColor={theme.colors.primary.normal}
+                showPositiveSign={true}
               />
             </AppText>
           </View>
@@ -325,7 +335,7 @@ const TransactionDetailScreen = ({route}) => {
             title={transactionItem.title}
             date={transactionItem.transactionTime}
             icon={
-              transactionItem.type === TransactitonType.CASH_BACK ||
+              transactionItem.type === TransactitonType.MAI ||
               transactionItem.type === TransactitonType.BANK ? (
                 <BrandIcon
                   sizeVariant="normal"
@@ -346,10 +356,22 @@ const TransactionDetailScreen = ({route}) => {
                 variant={
                   currencyCode === transactionItem.data?.from ? 'from' : 'to'
                 }
+                amountColor={
+                  (transactionItem.type === TransactitonType.MAI ||
+                    transactionItem.type === TransactitonType.BANK) &&
+                  theme.colors.primary.normal
+                }
+                unitColor={
+                  (transactionItem.type === TransactitonType.MAI ||
+                    transactionItem.type === TransactitonType.BANK) &&
+                  theme.colors.primary.normal
+                }
                 unitVariant={currencyCode}
                 unitSizeVariant="small"
+                showPositiveSign={true}
               />
             }
+            hideDivider
             style={transactionItemStyle}
           />
         </View>

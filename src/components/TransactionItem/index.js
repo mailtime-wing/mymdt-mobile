@@ -14,12 +14,12 @@ import {
 } from './style';
 import {useTheme} from 'emotion-theming';
 
-const TransactionItem = ({title, date, icon, coin, style}) => {
+const TransactionItem = ({title, date, icon, coin, style, hideDivider}) => {
   const theme = useTheme();
   return (
     <View style={[container, style]}>
       <View style={iconContainer}>{icon}</View>
-      <View style={border(theme)}>
+      <View style={border(theme, hideDivider)}>
         <View style={transaction}>
           <AppText variant="body1" style={nameStyle(theme)} numberOfLines={1}>
             {title}

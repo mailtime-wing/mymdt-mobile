@@ -19,9 +19,11 @@ export const dateStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.disabled};
 `;
 
-export const border = (theme) => css`
+export const border = (theme, hideDivider) => css`
   border-bottom-width: 1px;
-  border-bottom-color: ${theme.colors.background2};
+  border-bottom-color: ${hideDivider
+    ? 'transparent'
+    : theme.colors.background2};
   margin-left: 16px;
   padding-right: 16px;
   flex-grow: 1;
