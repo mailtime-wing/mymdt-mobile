@@ -351,8 +351,14 @@ PODS:
     - React
   - RNScreens (2.7.0):
     - React
+  - RNSentry (2.1.0):
+    - React-Core
+    - Sentry (= 6.0.9)
   - RNSVG (12.1.0):
     - React
+  - Sentry (6.0.9):
+    - Sentry/Core (= 6.0.9)
+  - Sentry/Core (6.0.9)
   - SVProgressHUD (2.2.5)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -426,6 +432,7 @@ DEPENDENCIES:
   - RNInAppBrowser (from `../node_modules/react-native-inappbrowser-reborn`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -446,6 +453,7 @@ SPEC REPOS:
     - Moya
     - ObjectMapper
     - OpenSSL-Universal
+    - Sentry
     - SVProgressHUD
     - YogaKit
   https://github.com/measurabledatatoken/podspecs.git:
@@ -544,6 +552,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   Yoga:
@@ -612,7 +622,9 @@ SPEC CHECKSUMS:
   RNInAppBrowser: c1a0dad2734458d79bcb6c8f4297ba8658a1da9f
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
+  RNSentry: 51972e3fe50e2fb38ae459af8c87d61f63f364db
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
+  Sentry: 388c9dc093b2fd3a264466a5c5b21e25959610a9
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
