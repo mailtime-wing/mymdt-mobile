@@ -160,7 +160,7 @@ const RenderTransationDetail = ({transactionItem}) => {
               />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              {transactionItem.cashbackRate}%
+              {transactionItem.cashbackRate * 100}%
             </AppText>
           </View>
           <View style={itemContainer}>
@@ -223,7 +223,7 @@ const RenderTransationDetail = ({transactionItem}) => {
               />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
-              {transactionItem.cashbackRate}%
+              {transactionItem.cashbackRate * 100}%
             </AppText>
           </View>
           <View style={itemContainer}>

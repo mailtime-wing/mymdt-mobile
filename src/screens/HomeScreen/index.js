@@ -30,6 +30,10 @@ import {AUTH_TOKENS} from '@/api/auth';
 import {useQuery} from '@apollo/client';
 import useSWR from 'swr';
 
+import {ME} from '@/constants/currency';
+
+import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
+
 const url = 'https://distribute-alpha.reward.me/cashback/summary?period=7';
 
 const HomeScreen = ({navigation}) => {
@@ -37,6 +41,7 @@ const HomeScreen = ({navigation}) => {
   const {data, loading, refetch} = useQueryWithAuth(
     GET_CHECK_USER_CAN_UPGRADE_DATA,
   );
+  const {conversionRate} = useCurrencyConvertToUsd(ME);
   const {
     data: merchantsData,
     loading: merchantsLoading,
@@ -88,6 +93,9 @@ const HomeScreen = ({navigation}) => {
 
   const {data: summaryData, error: summaryError} = useSWR(url, fetcher);
   const isSummaryLoading = !summaryData && !summaryError;
+  const cashBackTotal = summaryData?.data?.total_cashback * conversionRate || 0;
+  const cashBackTotalInPeriod =
+    summaryData?.data?.total_cashback_in_period * conversionRate || 0;
   // TODO: handle error
 
   const quickActionList = [
@@ -157,8 +165,8 @@ const HomeScreen = ({navigation}) => {
   const handleCashBackSummaryPress = () => {
     if (summaryData) {
       navigation.navigate('cash_back_summary', {
-        cashBackTotal: summaryData.data.total_cashback || 0,
-        cashBackTotalInPeriod: summaryData.data.total_cashback_in_period || 0,
+        cashBackTotal: cashBackTotal,
+        cashBackTotalInPeriod: cashBackTotalInPeriod,
       });
     }
   };
@@ -206,6 +214,7 @@ const HomeScreen = ({navigation}) => {
                 style={sectionMargin}
                 merchantsData={merchantsData?.merchants}
                 summaryData={summaryData}
+                meToUseConversionRate={conversionRate}
               />
             )}
             <MembershipInfoCard
