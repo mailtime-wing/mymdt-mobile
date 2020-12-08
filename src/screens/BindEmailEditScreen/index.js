@@ -1,4 +1,11 @@
-import React, {useState, useEffect, useLayoutEffect, useReducer} from 'react';
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useReducer,
+  useCallback,
+} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 import {
@@ -93,7 +100,7 @@ const BindEmailEditScreen = ({navigation}) => {
   const theme = useTheme();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [emails, setEmails] = useState([{id: null, emailAddress: ''}]);
-  const {data, loading, refetch} = useQueryWithAuth(
+  const {data, loading, updateQuery, refetch} = useQueryWithAuth(
     GET_USER_EMAIL_ACCOUNTS_API,
     {
       fetchPolicy: 'cache-and-network',
@@ -103,6 +110,12 @@ const BindEmailEditScreen = ({navigation}) => {
     unbindEmailRequest,
     {loading: unbindEmailLoading},
   ] = useMutationWithAuth(UNBIND_EMAIL_ACCOUNT_API);
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
 
   useEffect(() => {
     dispatch({type: RESET});
@@ -168,7 +181,18 @@ const BindEmailEditScreen = ({navigation}) => {
         },
       });
       dispatch({type: UPDATE_IS_EMAIL_UNBIND_CANCELLED}); // = reset
-      refetch();
+
+      updateQuery((prev) => {
+        if (state.unbindingEmail?.id) {
+          const newData = JSON.parse(
+            JSON.stringify(prev),
+          ).userProfile.emailAccounts.filter(
+            (_email) => _email.id !== state.unbindingEmail?.id,
+          );
+          return newData;
+        }
+        return false;
+      });
     } catch (e) {
       console.error(e);
     }

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import {ScrollView, View} from 'react-native';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {FormattedMessage} from 'react-intl';
@@ -33,7 +34,9 @@ const url = 'https://distribute-alpha.reward.me/cashback/summary?period=7';
 
 const HomeScreen = ({navigation}) => {
   const theme = useTheme();
-  const {data, loading} = useQueryWithAuth(GET_CHECK_USER_CAN_UPGRADE_DATA);
+  const {data, loading, refetch} = useQueryWithAuth(
+    GET_CHECK_USER_CAN_UPGRADE_DATA,
+  );
   const {
     data: merchantsData,
     loading: merchantsLoading,
@@ -58,6 +61,12 @@ const HomeScreen = ({navigation}) => {
   const userNextLevel = userLevel === maximumLevel ? userLevel : userLevel + 1;
   const nextLevelMembership = availableMemberships.find(
     (ams) => ams.level === userNextLevel,
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
   );
 
   const {data: authData} = useQuery(AUTH_TOKENS);
