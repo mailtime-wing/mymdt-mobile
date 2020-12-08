@@ -295,6 +295,17 @@
   "enjoy_cashback_detail": "As a RewardMe member, you will enjoy cash back automatically on your purchases. Once a new transaction is recorded, your rewards await!",
   "you_earned_first_reward": "You Just Earned Your First Reward!",
   "select_number_of_merchants": "{number_of_merchants, plural, =0 {select no merchant} one {select # merchant} other {select # merchants}}",
+  "detail": "Detail",
+  "transactionType": {
+    "reward": "Reward",
+    "redeem": "Redeem",
+    "interest": "Interest",
+    "check_in": "Check In",
+    "staking": "Staking",
+    "converion": "Converion",
+    "cashback": "Cashback",
+    "bank": "Bank"
+  },
   "currencyDisplayCode": {
     "RD": "Reward Dollar",
     "MDT": "MDT",

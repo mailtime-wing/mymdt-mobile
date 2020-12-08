@@ -26,6 +26,59 @@ import {
 
 import {useTheme} from 'emotion-theming';
 
+const transactionTypeToNameMap = {
+  [TransactitonType.REWARD]: {
+    name: (
+      <FormattedMessage id="transactionType.reward" defaultMessage="Reward" />
+    ),
+  },
+  [TransactitonType.REDEEM]: {
+    name: (
+      <FormattedMessage id="transactionType.redeem" defaultMessage="Redeem" />
+    ),
+  },
+  [TransactitonType.INTEREST]: {
+    name: (
+      <FormattedMessage
+        id="transactionType.interest"
+        defaultMessage="Interest"
+      />
+    ),
+  },
+  [TransactitonType.CHECK_IN]: {
+    name: (
+      <FormattedMessage
+        id="transactionType.check_in"
+        defaultMessage="Check In"
+      />
+    ),
+  },
+  [TransactitonType.STAKING]: {
+    name: (
+      <FormattedMessage id="transactionType.staking" defaultMessage="Staking" />
+    ),
+  },
+  [TransactitonType.CONVERSION]: {
+    name: (
+      <FormattedMessage
+        id="transactionType.converion"
+        defaultMessage="Converion"
+      />
+    ),
+  },
+  [TransactitonType.CASH_BACK]: {
+    name: (
+      <FormattedMessage
+        id="transactionType.cashback"
+        defaultMessage="CASHBACK"
+      />
+    ),
+  },
+  [TransactitonType.BANK]: {
+    name: <FormattedMessage id="transactionType.bank" defaultMessage="Bank" />,
+  },
+};
+
 const RenderTransationDetail = ({transactionItem}) => {
   const {title, transactionTime} = transactionItem;
   const theme = useTheme();
@@ -100,7 +153,7 @@ const RenderTransationDetail = ({transactionItem}) => {
           </View>
         </>
       );
-    case TransactitonType.MAI:
+    case TransactitonType.CASH_BACK:
       return (
         <>
           <View style={itemContainer}>
@@ -265,14 +318,14 @@ const TransactionDetailScreen = ({route}) => {
         <View style={section}>
           <View style={sectionHeaderContainer(theme)}>
             <AppText variant="label" style={sectionHeader(theme)}>
-              {transactionItem.type}
+              {transactionTypeToNameMap[transactionItem.type].name}
             </AppText>
           </View>
           <TransactionItem
             title={transactionItem.title}
             date={transactionItem.transactionTime}
             icon={
-              transactionItem.type === TransactitonType.MAI ||
+              transactionItem.type === TransactitonType.CASH_BACK ||
               transactionItem.type === TransactitonType.BANK ? (
                 <BrandIcon
                   sizeVariant="normal"
@@ -303,7 +356,7 @@ const TransactionDetailScreen = ({route}) => {
         <View style={section}>
           <View style={sectionHeaderContainer(theme)}>
             <AppText variant="label" style={sectionHeader(theme)}>
-              detail
+              <FormattedMessage id="detail" defaultMessage="Detail" />
             </AppText>
           </View>
           <RenderTransationDetail transactionItem={transactionItem} />
