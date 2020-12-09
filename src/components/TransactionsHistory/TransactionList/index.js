@@ -31,6 +31,7 @@ const TransactionList = ({
               unitSizeVariant="small"
               unitVariant={currencyCode}
               amount={item.node.amount}
+              showPositiveSign={true}
             />
           }
         />

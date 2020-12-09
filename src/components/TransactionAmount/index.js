@@ -25,6 +25,7 @@ import {useTheme} from 'emotion-theming';
  * @property {boolean} showDollarSign
  * @property {boolean} showAlmostEqual
  * @property {boolean} showDecimal
+ * @property {boolean} showPositiveSign
  * @property {number} minimumFractionDigits
  * @property {number} maximumFractionDigits
  */
@@ -44,6 +45,7 @@ const TransactionAmount = ({
   showDollarSign,
   showAlmostEqual,
   showDecimal,
+  showPositiveSign,
   minimumFractionDigits,
   maximumFractionDigits,
   style,
@@ -123,6 +125,7 @@ const TransactionAmount = ({
           amountStyle(theme, variant, unitVariant, amountSizeVariant),
           amountColor && {color: amountColor},
         ]}>
+        {showPositiveSign && amount >= 0 && '+'}
         <FormattedNumber
           value={amount}
           minimumFractionDigits={showDecimal ? minimumFractionDigits : 0}

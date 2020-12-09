@@ -30,6 +30,14 @@ import AppText from '@/components/AppText2';
 import BrandIcon from '@/components/BrandIcon';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 
+const FormattedNumber2Decimal = (props) => (
+  <FormattedNumber
+    minimumFractionDigits={2}
+    maximumFractionDigits={2}
+    {...props}
+  />
+);
+
 const CashBackItem = ({icon, brand, earnInTotal, earnInPeriod}) => {
   const theme = useTheme();
   // TODO: create <AppTag /> component for %
@@ -62,7 +70,7 @@ const CashBackItem = ({icon, brand, earnInTotal, earnInPeriod}) => {
                     id="currencyDisplayCode.USD"
                     defaultMessage="USD"
                   />{' '}
-                  <FormattedNumber value={Number(earnInPeriod)} />
+                  <FormattedNumber2Decimal value={Number(earnInPeriod)} />
                 </AppText>
               ),
             }}
@@ -78,7 +86,7 @@ const CashBackItem = ({icon, brand, earnInTotal, earnInPeriod}) => {
                     id="currencyDisplayCode.USD"
                     defaultMessage="USD"
                   />{' '}
-                  <FormattedNumber value={Number(earnInTotal)} />
+                  <FormattedNumber2Decimal value={Number(earnInTotal)} />
                 </AppText>
               ),
             }}
@@ -95,6 +103,7 @@ const CashBackSummarySection = ({
   onPress,
   style,
   summaryData,
+  meToUseConversionRate,
 }) => {
   const theme = useTheme();
 
@@ -121,9 +130,10 @@ const CashBackSummarySection = ({
                       id="currencyDisplayCode.USD"
                       defaultMessage="USD"
                     />{' '}
-                    <FormattedNumber
+                    <FormattedNumber2Decimal
                       value={Number(
-                        summaryData?.data?.total_cashback_in_period || 0,
+                        summaryData?.data?.total_cashback_in_period *
+                          meToUseConversionRate || 0,
                       )}
                     />
                   </AppText>
@@ -141,8 +151,11 @@ const CashBackSummarySection = ({
                       id="currencyDisplayCode.USD"
                       defaultMessage="USD"
                     />{' '}
-                    <FormattedNumber
-                      value={Number(summaryData?.data.total_cashback || 0)}
+                    <FormattedNumber2Decimal
+                      value={Number(
+                        summaryData?.data.total_cashback *
+                          meToUseConversionRate || 0,
+                      )}
                     />
                   </AppText>
                 ),
@@ -177,8 +190,12 @@ const CashBackSummarySection = ({
               )?.logo,
             }}
             brand={merchant_summary.merchant}
-            earnInTotal={merchant_summary.total_cashback}
-            earnInPeriod={merchant_summary.total_cashback_in_period}
+            earnInTotal={
+              merchant_summary.total_cashback * meToUseConversionRate
+            }
+            earnInPeriod={
+              merchant_summary.total_cashback_in_period * meToUseConversionRate
+            }
           />
         ))}
         <AppButton
