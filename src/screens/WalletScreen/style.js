@@ -28,19 +28,22 @@ export const textAlignCenter = css`
   text-align: center;
 `;
 
-export const currencyRow = (theme) => css`
-  flex-direction: row;
+export const currenciesView = (theme) => css`
   ${theme.colors.elevatedDarkerCardFlat};
-  padding-vertical: 16px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  padding-bottom: 16px;
+`;
+
+export const separator = (theme) => css`
+  margin-left: 24px;
   border-bottom-width: 1px;
   border-bottom-color: ${theme.colors.background2};
 `;
 
-export const lastCurrencyRow = css`
-  border-bottom-width: 0px;
-  border-bottom-left-radius: 24px;
-  border-bottom-right-radius: 24px;
-  padding-bottom: 24px;
+export const currencyRow = (theme) => css`
+  flex-direction: row;
+  padding-vertical: 16px;
 `;
 
 export const currency = (theme) => css`

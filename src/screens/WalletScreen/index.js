@@ -37,11 +37,12 @@ import {
   total,
   totalBalance as totalBalanceText,
   textAlignCenter,
+  currenciesView,
+  separator,
   currencyRow,
   currency,
   amount as amountStyle,
   amountContainer,
-  lastCurrencyRow,
   arrow,
   spinner,
   // payout,
@@ -201,46 +202,49 @@ const WalletScreen = ({navigation}) => {
               />
             )}
           </View>
-          <CurrencyAccountItem
-            loading={loading}
-            currencyName={
-              <FormattedMessage
-                id="currencyDisplayCode.RD"
-                defaultMessage="Reward Dollar"
-              />
-            }
-            amount={rdAmount}
-            amountUnitVariant={REWARD_DOLLAR}
-            usdAmount={rdToUsdAmount}
-            onPress={handleMrpPress}
-          />
-          <CurrencyAccountItem
-            loading={loading}
-            currencyName={
-              <FormattedMessage
-                id="currencyDisplayCode.MDT"
-                defaultMessage="MDT"
-              />
-            }
-            amount={mdtAmount}
-            amountUnitVariant={MEASURABLE_DATA_TOKEN}
-            usdAmount={mdtToUsdAmount}
-            onPress={handleMdtPress}
-          />
-          <CurrencyAccountItem
-            style={lastCurrencyRow}
-            loading={loading}
-            currencyName={
-              <FormattedMessage
-                id="currencyDisplayCode.ME"
-                defaultMessage="ME"
-              />
-            }
-            amount={meAmount}
-            amountUnitVariant={ME}
-            usdAmount={meToUsdAmount}
-            onPress={handleNewTokenPress}
-          />
+          <View style={currenciesView(theme)}>
+            <CurrencyAccountItem
+              loading={loading}
+              currencyName={
+                <FormattedMessage
+                  id="currencyDisplayCode.RD"
+                  defaultMessage="Reward Dollar"
+                />
+              }
+              amount={rdAmount}
+              amountUnitVariant={REWARD_DOLLAR}
+              usdAmount={rdToUsdAmount}
+              onPress={handleMrpPress}
+            />
+            <View style={separator(theme)} />
+            <CurrencyAccountItem
+              loading={loading}
+              currencyName={
+                <FormattedMessage
+                  id="currencyDisplayCode.MDT"
+                  defaultMessage="MDT"
+                />
+              }
+              amount={mdtAmount}
+              amountUnitVariant={MEASURABLE_DATA_TOKEN}
+              usdAmount={mdtToUsdAmount}
+              onPress={handleMdtPress}
+            />
+            <View style={separator(theme)} />
+            <CurrencyAccountItem
+              loading={loading}
+              currencyName={
+                <FormattedMessage
+                  id="currencyDisplayCode.ME"
+                  defaultMessage="ME"
+                />
+              }
+              amount={meAmount}
+              amountUnitVariant={ME}
+              usdAmount={meToUsdAmount}
+              onPress={handleNewTokenPress}
+            />
+          </View>
           <QuickActions actionList={quickActionList} style={sectionMargin} />
         </ScrollView>
       </ScreenContainer>
