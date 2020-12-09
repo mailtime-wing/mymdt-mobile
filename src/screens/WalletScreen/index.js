@@ -39,7 +39,7 @@ import {
   textAlignCenter,
   currencyRow,
   currency,
-  amount,
+  amount as amountStyle,
   amountContainer,
   lastCurrencyRow,
   arrow,
@@ -47,6 +47,55 @@ import {
   // payout,
   sectionMargin,
 } from './style';
+
+const CurrencyAccountItem = ({
+  loading,
+  currencyName,
+  amount,
+  amountUnitVariant,
+  usdAmount,
+  style,
+  ...props
+}) => {
+  const theme = useTheme();
+  return (
+    <TouchableOpacity style={[currencyRow(theme), style]} {...props}>
+      <AppText variant="subTitle2" style={currency(theme)}>
+        {currencyName}
+      </AppText>
+      {loading ? (
+        <LoadingSpinner style={spinner} />
+      ) : (
+        <View style={amountContainer}>
+          <TransactionAmount
+            amount={amount}
+            amountSizeVariant="normal"
+            unitSizeVariant="small"
+            unitVariant={amountUnitVariant}
+            unitColor={theme.colors.secondary.dark}
+            amountColor={theme.colors.textOnBackground.mediumEmphasis}
+            style={amountStyle}
+          />
+          <TransactionAmount
+            amount={usdAmount}
+            amountSizeVariant="small"
+            unitSizeVariant="small"
+            unitVariant={USDT}
+            showDollarSign
+            showAlmostEqual
+            unitColor={theme.colors.textOnBackground.mediumEmphasis}
+            amountColor={theme.colors.textOnBackground.mediumEmphasis}
+            style={amountStyle}
+          />
+        </View>
+      )}
+      <ArrowIcon
+        stroke={theme.colors.textOnBackground.mediumEmphasis}
+        style={arrow}
+      />
+    </TouchableOpacity>
+  );
+};
 
 const WalletScreen = ({navigation}) => {
   const theme = useTheme();
@@ -152,137 +201,46 @@ const WalletScreen = ({navigation}) => {
               />
             )}
           </View>
-
-          <TouchableOpacity style={currencyRow(theme)} onPress={handleMrpPress}>
-            <AppText variant="subTitle2" style={currency(theme)}>
+          <CurrencyAccountItem
+            loading={loading}
+            currencyName={
               <FormattedMessage
                 id="currencyDisplayCode.RD"
                 defaultMessage="Reward Dollar"
               />
-            </AppText>
-            {loading ? (
-              <LoadingSpinner style={spinner} />
-            ) : (
-              <View style={amountContainer}>
-                <TransactionAmount
-                  amount={rdAmount}
-                  amountSizeVariant="normal"
-                  unitSizeVariant="small"
-                  unitVariant={REWARD_DOLLAR}
-                  unitColor={theme.colors.secondary.dark}
-                  amountColor={theme.colors.textOnBackground.mediumEmphasis}
-                  style={amount}
-                />
-                <TransactionAmount
-                  amount={rdToUsdAmount}
-                  amountSizeVariant="small"
-                  unitSizeVariant="small"
-                  unitVariant={USDT}
-                  showDollarSign
-                  showAlmostEqual
-                  unitColor={theme.colors.textOnBackground.mediumEmphasis}
-                  amountColor={theme.colors.textOnBackground.mediumEmphasis}
-                  style={amount}
-                />
-              </View>
-            )}
-            <ArrowIcon
-              stroke={theme.colors.textOnBackground.mediumEmphasis}
-              style={arrow}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={currencyRow(theme)} onPress={handleMdtPress}>
-            <AppText variant="subTitle2" style={currency(theme)}>
+            }
+            amount={rdAmount}
+            amountUnitVariant={REWARD_DOLLAR}
+            usdAmount={rdToUsdAmount}
+            onPress={handleMrpPress}
+          />
+          <CurrencyAccountItem
+            loading={loading}
+            currencyName={
               <FormattedMessage
                 id="currencyDisplayCode.MDT"
                 defaultMessage="MDT"
               />
-            </AppText>
-            {loading ? (
-              <LoadingSpinner style={spinner} />
-            ) : (
-              <View style={amountContainer}>
-                <TransactionAmount
-                  amount={mdtAmount}
-                  amountSizeVariant="normal"
-                  unitSizeVariant="small"
-                  unitVariant={MEASURABLE_DATA_TOKEN}
-                  amountColor={theme.colors.textOnBackground.mediumEmphasis}
-                  unitColor={theme.colors.secondary.dark}
-                  style={amount}
-                />
-                <TransactionAmount
-                  amount={mdtToUsdAmount}
-                  amountSizeVariant="small"
-                  unitSizeVariant="small"
-                  unitVariant={USDT}
-                  showDollarSign
-                  showAlmostEqual
-                  unitColor={theme.colors.textOnBackground.mediumEmphasis}
-                  amountColor={theme.colors.textOnBackground.mediumEmphasis}
-                  style={amount}
-                />
-                {/* <AppText variant="digit12mono" style={payout(theme)}>
-              <FormattedMessage
-                id="earned_amount_and_payout_in_days"
-                defaultMessage="Earned {amount}{currency} (Payout in {day} days)"
-                values={{
-                  amount: earnedMM,
-                  currency: (
-                    <FormattedMessage id="currencyDisplayCode.ME" defaultMessage="ME" />
-
-                  ),
-                  day: 7,
-                }}
-              />
-            </AppText> */}
-              </View>
-            )}
-            <ArrowIcon
-              stroke={theme.colors.textOnBackground.mediumEmphasis}
-              style={arrow}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[currencyRow(theme), lastCurrencyRow]}
-            onPress={handleNewTokenPress}>
-            <AppText variant="subTitle2" style={currency(theme)}>
+            }
+            amount={mdtAmount}
+            amountUnitVariant={MEASURABLE_DATA_TOKEN}
+            usdAmount={mdtToUsdAmount}
+            onPress={handleMdtPress}
+          />
+          <CurrencyAccountItem
+            style={lastCurrencyRow}
+            loading={loading}
+            currencyName={
               <FormattedMessage
                 id="currencyDisplayCode.ME"
                 defaultMessage="ME"
               />
-            </AppText>
-            {loading ? (
-              <LoadingSpinner style={spinner} />
-            ) : (
-              <View style={amountContainer}>
-                <TransactionAmount
-                  amount={meAmount}
-                  amountSizeVariant="normal"
-                  unitSizeVariant="small"
-                  unitVariant={ME}
-                  amountColor={theme.colors.textOnBackground.mediumEmphasis}
-                  unitColor={theme.colors.secondary.dark}
-                  style={amount}
-                />
-                <TransactionAmount
-                  amount={meToUsdAmount}
-                  amountSizeVariant="small"
-                  unitSizeVariant="small"
-                  unitVariant={USDT}
-                  showDollarSign
-                  showAlmostEqual
-                  unitColor={theme.colors.textOnBackground.mediumEmphasis}
-                  amountColor={theme.colors.textOnBackground.mediumEmphasis}
-                  style={amount}
-                />
-              </View>
-            )}
-            <ArrowIcon
-              stroke={theme.colors.textOnBackground.mediumEmphasis}
-              style={arrow}
-            />
-          </TouchableOpacity>
+            }
+            amount={meAmount}
+            amountUnitVariant={ME}
+            usdAmount={meToUsdAmount}
+            onPress={handleNewTokenPress}
+          />
           <QuickActions actionList={quickActionList} style={sectionMargin} />
         </ScrollView>
       </ScreenContainer>
