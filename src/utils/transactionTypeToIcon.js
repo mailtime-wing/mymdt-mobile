@@ -34,5 +34,5 @@ export default function transactionTypeToIcon(type) {
     },
   };
 
-  return transactionsIconMap[type].icon;
+  return transactionsIconMap[type]?.icon;
 }

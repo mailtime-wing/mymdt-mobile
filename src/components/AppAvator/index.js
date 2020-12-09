@@ -73,7 +73,7 @@ const AppAvator = ({
           {backgroundColor: backgroundColor},
           style,
         ]}>
-        <SvgIcon {...icon(sizeVariant, color)} />
+        {SvgIcon && <SvgIcon {...icon(sizeVariant, color)} />}
       </View>
     );
   }
