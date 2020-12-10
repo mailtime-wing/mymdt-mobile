@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Platform} from 'react-native';
 import CarrierInfo from 'react-native-carrier-info';
 import {FormattedMessage} from 'react-intl';
@@ -21,15 +21,19 @@ import {
   formBody,
 } from './style';
 import countryCodeData from '@/constants/countryCode';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 const InternalLoginForm = ({title, submitButtonText, description}) => {
   const theme = useTheme();
   const {setFieldValue, handleSubmit, isValid} = useFormikContext();
+  const [autoFocusOnPrefix, setAutoFocusOnPrefix] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // get phone prefix
   useEffect(() => {
     const getPhonePrefix = async () => {
       try {
+        setIsLoading(true);
         const result = await CarrierInfo.isoCountryCode();
         if (result) {
           let dialCode = countryCodeData.find(
@@ -37,14 +41,21 @@ const InternalLoginForm = ({title, submitButtonText, description}) => {
           )?.dial_code;
           if (dialCode) {
             setFieldValue('phonePrefix', dialCode);
+            setIsLoading(false);
             return;
           }
         }
       } catch {}
       setFieldValue('phonePrefix', '+');
+      setAutoFocusOnPrefix(true);
+      setIsLoading(false);
     };
     getPhonePrefix();
   }, [setFieldValue]);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <AppKeyboardAvoidingView
@@ -60,10 +71,15 @@ const InternalLoginForm = ({title, submitButtonText, description}) => {
                   keyboardType="phone-pad"
                   label={<FormattedMessage id="phone_number" />}
                   name="phonePrefix"
+                  autoFocus={autoFocusOnPrefix}
                 />
               </PhonePrefixContainer>
               <PhoneContainer>
-                <Input keyboardType="phone-pad" name="phone" autoFocus />
+                <Input
+                  keyboardType="phone-pad"
+                  name="phone"
+                  autoFocus={!autoFocusOnPrefix}
+                />
               </PhoneContainer>
             </PhoneSectionContainer>
           </View>
