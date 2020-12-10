@@ -65,7 +65,7 @@ export const ToastProvider = ({children}) => {
       if (_toastErrors.length) {
         toastContext.removeToast(_toastErrors[0].id);
       }
-    }, 3000);
+    }, 5000);
     return () => {
       clearInterval(interval);
     };
