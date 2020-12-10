@@ -45,6 +45,7 @@ export default function useBankLogin(
   const intl = useIntl();
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const [fetchAuthLink, {isError: isFetchAuthLinkError}] = useFetch(
     'https://bankwebhook-alpha.reward.me/getauthlink',
@@ -183,6 +184,7 @@ export default function useBankLogin(
         }
       } catch (e) {
         setIsError(true);
+        setError(e);
         setIsLoading(false);
       }
     };
@@ -212,6 +214,7 @@ export default function useBankLogin(
     } catch (e) {
       setIsLoading(false);
       setIsError(true);
+      setError(e);
     }
   }, [countryCode, dataAPIType, fetchAuthLink, intl.locale, userId]);
 
@@ -223,5 +226,5 @@ export default function useBankLogin(
     isFetchAccountDetailError ||
     !!getUserIdError;
 
-  return [login, {isError: anyError, isLoading: anyLoading}];
+  return [login, {isError: anyError, isLoading: anyLoading, error: error}];
 }

@@ -296,6 +296,7 @@
   "you_earned_first_reward": "You Just Earned Your First Reward!",
   "select_number_of_merchants": "{number_of_merchants, plural, =0 {select no merchant} one {select # merchant} other {select # merchants}}",
   "detail": "Detail",
+  "this_card_is_already_bound": "This card is already bound to an account. Please contact support@reward.me if you think there is any problem.",
   "transactionType": {
     "reward": "Reward",
     "redeem": "Redeem",
