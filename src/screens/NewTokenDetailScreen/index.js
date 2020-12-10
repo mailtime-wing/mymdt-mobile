@@ -5,7 +5,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 import Config from 'react-native-config';
 import {FormattedMessage} from 'react-intl';
 
-import {TRANSACTIONS_QUERY} from '@/api/data';
+import {TRANSACTIONS_QUERY, GET_USER_STAKING_INFO} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
@@ -44,6 +44,10 @@ const NewTokenDetailScreen = ({navigation}) => {
       first: 5,
     },
   });
+  const {
+    data: userStakingInfoData,
+    loading: userStakingInfoLoading,
+  } = useQueryWithAuth(GET_USER_STAKING_INFO);
 
   const newTokenAmount =
     data?.userProfile?.currencyAccounts.find(
@@ -66,6 +70,9 @@ const NewTokenDetailScreen = ({navigation}) => {
         ),
       }),
   );
+
+  // TODO: currently only one staking plan will exist. It can change in the future
+  const staking = userStakingInfoData?.userProfile?.staking?.[0];
 
   return (
     <ScrollView>
@@ -120,9 +127,15 @@ const NewTokenDetailScreen = ({navigation}) => {
           </View>
         )}
       </SafeAreaView>
-      {Config.EXPERIMENTAL_FEATURE === 'true' && (
-        <NextStakeReward style={sectionMargin} />
-      )}
+      {userStakingInfoLoading ? (
+        <LoadingSpinner color={theme.colors.background1} />
+      ) : staking ? (
+        <NextStakeReward
+          style={sectionMargin}
+          accuredRewardAmount={staking.payoutInfo.nextAmount}
+          nextPayoutDate={staking.payoutInfo.nextPayoutDate}
+        />
+      ) : null}
       <NewTokenTransactionHistory
         navigation={navigation}
         currencyCode={currencyCode}

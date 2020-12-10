@@ -222,6 +222,7 @@
   "annual_percentage_yield": "Annual Percentage Yield",
   "accured_reward": "Accured Reward",
   "cumulative_reward": "Cumulative Reward",
+  "unstake_in_days": "Unstake in {day} days",
   "payout_in_days": "Payout in {day} days",
   "available": "Available",
   "earned_amount_and_payout_in_days": "Earned {amount}{currency} (Payout in {day} days)",

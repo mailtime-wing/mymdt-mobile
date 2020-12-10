@@ -5,7 +5,7 @@ import Config from 'react-native-config';
 import SafeAreaView from 'react-native-safe-area-view';
 import {FormattedMessage} from 'react-intl';
 
-import {TRANSACTIONS_QUERY} from '@/api/data';
+import {TRANSACTIONS_QUERY, GET_USER_STAKING_INFO} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
@@ -46,6 +46,10 @@ const MdtDetailScreen = ({navigation}) => {
       first: 5,
     },
   });
+  const {
+    data: userStakingInfoData,
+    loading: userStakingInfoLoading,
+  } = useQueryWithAuth(GET_USER_STAKING_INFO);
 
   const mdtAmount =
     data?.userProfile?.currencyAccounts.find(
@@ -69,7 +73,8 @@ const MdtDetailScreen = ({navigation}) => {
       }),
   );
 
-  const staking = true; // TODO: get from api
+  // TODO: currently only one staking plan will exist. It can change in the future
+  const staking = userStakingInfoData?.userProfile?.staking?.[0];
 
   return (
     <ScrollView>
@@ -124,12 +129,18 @@ const MdtDetailScreen = ({navigation}) => {
           </View>
         )}
       </SafeAreaView>
-      {staking ? (
+      {userStakingInfoLoading ? (
+        <LoadingSpinner color={theme.colors.background1} />
+      ) : staking ? (
         <MdtStake
           style={sectionMargin}
-          paPercentage={5}
-          accuredRewardAmount={100}
-          cumulativeRewardAmount={3000}
+          mdtStakeAmount={staking.stakingPlan.amount}
+          stakeDate={staking.stakeDate}
+          lockupPeriodInDay={staking.stakingPlan.lockupPeriodInDay}
+          paPercentage={staking.stakingPlan.interestRate}
+          accuredRewardAmount={staking.payoutInfo.nextAmount}
+          nextPayoutDate={staking.payoutInfo.nextPayoutDate}
+          cumulativeRewardAmount={staking.payoutInfo.cumulativeAmount}
           availableMdt={mdtAmount}
         />
       ) : (

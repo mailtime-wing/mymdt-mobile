@@ -15,3 +15,8 @@ export const header = (theme) => css`
 export const center = css`
   justify-content: center;
 `;
+
+export const tag = css`
+  align-self: center;
+  margin-top: 16px;
+`;

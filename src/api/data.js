@@ -637,3 +637,28 @@ export const GET_USER_TASKS_AND_REFERRALS = gql`
     }
   }
 `;
+
+export const GET_USER_STAKING_INFO = gql`
+  query {
+    userProfile {
+      id
+      staking {
+        id
+        stakeDate
+        stakingPlan {
+          id
+          lockupPeriodInDay
+          interestRate
+          sourceCurrencyCode
+          yieldCurrencyCode
+          amount
+        }
+        payoutInfo {
+          nextAmount
+          nextPayoutDate
+          cumulativeAmount
+        }
+      }
+    }
+  }
+`;

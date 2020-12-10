@@ -1,25 +1,25 @@
 import React from 'react';
 import {View} from 'react-native';
+import {FormattedMessage} from 'react-intl';
 
 import {useTheme} from 'emotion-theming';
 
 import AppText from '@/components/AppText2';
 import TransactionAmount from '@/components/TransactionAmount';
-
+import AppTag from '@/components/AppTag';
 import {USD, ME} from '@/constants/currency';
-
 import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
+import getDaysBetween from '@/utils/getDaysBetween';
 
-import {container, header, center} from './style';
-import {FormattedMessage} from 'react-intl';
+import {container, header, center, tag} from './style';
 
-// TODO: add tag payout when related commit merged
-// TODO: add recent transaction when related commit merged
-
-const NextStakeReward = ({style}) => {
+const NextStakeReward = ({style, accuredRewardAmount, nextPayoutDate}) => {
   const theme = useTheme();
   const {conversionRate} = useCurrencyConvertToUsd(ME);
-  const nextStakeAmount = 1000;
+
+  let payoutInDays = getDaysBetween(new Date(), new Date(nextPayoutDate));
+  payoutInDays = payoutInDays < 0 ? 0 : payoutInDays;
+
   return (
     <View style={[container(theme), style]}>
       <AppText variant="heading6" style={header(theme)}>
@@ -29,7 +29,7 @@ const NextStakeReward = ({style}) => {
         />
       </AppText>
       <TransactionAmount
-        amount={nextStakeAmount}
+        amount={accuredRewardAmount}
         amountSizeVariant="largeProportional"
         amountColor={theme.colors.textOnBackground.mediumEmphasis}
         unitVariant={ME}
@@ -37,15 +37,28 @@ const NextStakeReward = ({style}) => {
         style={center}
       />
       <TransactionAmount
-        amount={nextStakeAmount * conversionRate}
+        amount={accuredRewardAmount * conversionRate}
         amountSizeVariant="small"
         unitSizeVariant="small"
         unitVariant={USD}
         showDollarSign
         showAlmostEqual
-        unitColor={theme.colors.textOnThemeBackground.mediumEmphasis}
-        amountColor={theme.colors.textOnThemeBackground.mediumEmphasis}
+        unitColor={theme.colors.textOnBackground.mediumEmphasis}
+        amountColor={theme.colors.textOnBackground.mediumEmphasis}
         style={center}
+      />
+      <AppTag
+        style={tag}
+        variant="transparent"
+        sizeVariant="normal"
+        colorVariant="secondary"
+        text={
+          <FormattedMessage
+            id="payout_in_days"
+            defaultMessage="Payout in {day} days"
+            values={{day: payoutInDays}}
+          />
+        }
       />
     </View>
   );

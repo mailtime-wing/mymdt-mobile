@@ -1,19 +1,21 @@
 import React from 'react';
 import {View} from 'react-native';
-
+import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
 import AppText from '@/components/AppText2';
 import TransactionAmount from '@/components/TransactionAmount';
-
+import AppTag from '@/components/AppTag';
 import {USD, MEASURABLE_DATA_TOKEN, ME} from '@/constants/currency';
-
 import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
+import LockIcon from '@/assets/icon_lock.svg';
+import getDaysBetween from '@/utils/getDaysBetween';
 
 import {
   container,
   header,
   center,
+  tag,
   diviver,
   summary,
   summaryHeader,
@@ -21,21 +23,30 @@ import {
   rowContainer,
   payout,
 } from './style';
-import {FormattedMessage} from 'react-intl';
-
-// TODO: add tag payout when related commit merged
-// TODO: add recent transaction when related commit merged
 
 const MdtStake = ({
   style,
+  mdtStakeAmount,
+  stakeDate,
+  lockupPeriodInDay,
   paPercentage,
   accuredRewardAmount,
+  nextPayoutDate,
   cumulativeRewardAmount,
   availableMdt,
 }) => {
   const theme = useTheme();
-  const mdtStakeAmount = 100000;
   const {conversionRate} = useCurrencyConvertToUsd(MEASURABLE_DATA_TOKEN);
+
+  const now = new Date();
+
+  const stakeDateInDate = new Date(stakeDate);
+  stakeDateInDate.setDate(stakeDateInDate.getDate() + lockupPeriodInDay);
+  let unstakeInDays = getDaysBetween(now, stakeDateInDate);
+  unstakeInDays = unstakeInDays < 0 ? 0 : unstakeInDays;
+
+  let payoutInDays = getDaysBetween(now, new Date(nextPayoutDate));
+  payoutInDays = payoutInDays < 0 ? 0 : payoutInDays;
 
   return (
     <View style={[container(theme), style]}>
@@ -60,6 +71,19 @@ const MdtStake = ({
         unitColor={theme.colors.textOnBackground.mediumEmphasis}
         amountColor={theme.colors.textOnBackground.mediumEmphasis}
         style={center}
+      />
+      <AppTag
+        style={tag}
+        variant="transparent"
+        sizeVariant="normal"
+        colorVariant="primary"
+        text={
+          <FormattedMessage
+            id="unstake_in_days"
+            values={{day: unstakeInDays}}
+          />
+        }
+        svgIcon={LockIcon}
       />
       <View style={summary(theme)}>
         <View style={rowContainer}>
@@ -87,7 +111,7 @@ const MdtStake = ({
                 <FormattedMessage
                   id="payout_in_days"
                   defaultMessage="Payout in {day} days"
-                  values={{day: 6}}
+                  values={{day: payoutInDays}}
                 />
               </AppText>
             }
