@@ -11,12 +11,12 @@ export const cardSectionContainer = css`
   flex: 1;
 `;
 
-export const separator = css`
+export const marginBetweenTopAndCarousel = css`
   flex-basis: 54;
   flex-shrink: 100;
 `;
 
-export const carouselContainer = css`
+export const itemContainer = css`
   flex-shrink: 1;
 `;
 
@@ -24,8 +24,17 @@ export const paddingHorizontal = css`
   padding-horizontal: 24px;
 `;
 
+export const itemContentContainer = css`
+  ${paddingHorizontal};
+  flex-shrink: 1;
+`;
+
+export const marginBetweenImageAndHeader = css`
+  flex-basis: 40;
+  flex-shrink: 1;
+`;
+
 export const headerStyle = (theme) => css`
-  margin-top: 40px;
   margin-bottom: 10px;
   color: ${theme.colors.secondary.normal};
   text-align: center;
@@ -43,6 +52,11 @@ export const image = css`
   margin-right: auto;
 `;
 
+export const marginBetweenCarouselAndPagination = css`
+  flex-basis: 58;
+  flex-shrink: 5;
+`;
+
 export const styles = StyleSheet.create({
   container: {
     overflow: 'visible',
@@ -54,7 +68,6 @@ export const styles = StyleSheet.create({
   },
   paginationContainer: {
     paddingVertical: 0,
-    marginTop: 58,
     marginBottom: 16,
   },
 });

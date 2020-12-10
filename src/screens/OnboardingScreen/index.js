@@ -5,12 +5,15 @@ import {useTheme} from 'emotion-theming';
 import {
   container,
   cardSectionContainer,
-  separator,
-  carouselContainer,
+  marginBetweenTopAndCarousel,
+  itemContainer,
   paddingHorizontal,
+  itemContentContainer,
+  marginBetweenImageAndHeader,
   headerStyle,
   detailStyle,
   image as imageStyle,
+  marginBetweenCarouselAndPagination,
   styles,
 } from './style';
 import {ThemeContext} from '@/context/theme';
@@ -40,9 +43,10 @@ const CardSection = () => {
 
   const renderItem = ({item: {header, detail, imgSrc}, index}) => {
     return (
-      <View>
+      <View style={itemContainer}>
         <Image style={imageStyle} source={imgSrc} resizeMode="contain" />
-        <View style={paddingHorizontal}>
+        <View style={itemContentContainer}>
+          <View style={marginBetweenImageAndHeader} />
           <AppText variant="heading3" style={headerStyle(theme)}>
             {header}
           </AppText>
@@ -80,23 +84,22 @@ const CardSection = () => {
 
   return (
     <View style={cardSectionContainer}>
-      <View style={separator} />
-      <View style={carouselContainer}>
-        <Carousel
-          ref={refCarousel}
-          layout="default"
-          data={data}
-          renderItem={renderItem}
-          sliderWidth={sliderWidth}
-          itemWidth={itemWidth}
-          inactiveSlideScale={1}
-          inactiveSlideOpacity={0}
-          containerCustomStyle={styles.container}
-          activeAnimationType="decay"
-          onSnapToItem={(index) => setActiveIndex(index)}
-          loop={true}
-        />
-      </View>
+      <View style={marginBetweenTopAndCarousel} />
+      <Carousel
+        ref={refCarousel}
+        layout="default"
+        data={data}
+        renderItem={renderItem}
+        sliderWidth={sliderWidth}
+        itemWidth={itemWidth}
+        inactiveSlideScale={1}
+        inactiveSlideOpacity={0}
+        containerCustomStyle={styles.container}
+        activeAnimationType="decay"
+        onSnapToItem={(index) => setActiveIndex(index)}
+        loop={true}
+      />
+      <View style={marginBetweenCarouselAndPagination} />
       <Pagination
         dotsLength={data.length}
         activeDotIndex={activeIndex}
