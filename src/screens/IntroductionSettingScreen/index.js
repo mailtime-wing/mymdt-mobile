@@ -1,10 +1,10 @@
 import React, {useLayoutEffect} from 'react';
+import {View} from 'react-native';
 import {useTheme} from 'emotion-theming';
 
 import {container} from './style';
 
 import ChooseBindDataSource from '@/components/ChooseBindDataSource';
-import SafeAreaView from 'react-native-safe-area-view';
 
 const IntroductionSettingScreen = ({navigation}) => {
   const theme = useTheme();
@@ -20,7 +20,7 @@ const IntroductionSettingScreen = ({navigation}) => {
   });
 
   return (
-    <SafeAreaView style={container(theme)}>
+    <View style={container(theme)}>
       <ChooseBindDataSource
         onEmailChoose={() =>
           navigation.navigate('settings', {
@@ -33,7 +33,7 @@ const IntroductionSettingScreen = ({navigation}) => {
           })
         }
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
