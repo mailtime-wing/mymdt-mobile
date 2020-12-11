@@ -134,7 +134,9 @@ const Requirements = ({
               }
               target={dataSourceBindingsNumRequired}
               progress={bindDataSourceCount}
-              action={() => navigation.navigate('settings')}
+              action={() =>
+                navigation.navigate('choose_bind_data_source_setting')
+              }
               actionText={
                 <FormattedMessage id="button.bind" defaultMessage="bind" />
               }

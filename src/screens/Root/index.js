@@ -55,6 +55,7 @@ import ChooseRegionSettingScreen from '@/screens/ChooseRegionSettingScreen';
 import ChooseCashBackTypeSettingScreen from '@/screens/ChooseCashBackTypeSettingScreen';
 import EmailDataSourceInfoSettingScreen from '@/screens/EmailDataSourceInfoSettingScreen';
 import BankDataSourceInfoSettingScreen from '@/screens/BankDataSourceInfoSettingScreen';
+import IntroductionSettingScreen from '@/screens/IntroductionSettingScreen';
 import ReferralScreen from '@/screens/ReferralScreen';
 
 // wallet page
@@ -216,6 +217,10 @@ const authModalScreens = [
     name: 'choose_cash_back_type_setting',
     component: ChooseCashBackTypeSettingScreen,
   },
+  {
+    name: 'choose_bind_data_source_setting',
+    component: IntroductionSettingScreen,
+  },
 ];
 
 const settingScreens = [
@@ -228,7 +233,7 @@ const settingScreens = [
   {name: 'offers_preference_edit', component: MerchantPreferenceEditScreen},
   {name: 'merchants_preference', component: MerchantSelectScreen},
   {name: 'emails_binding', component: BindEmailScreen}, // same as add_email in setupScreens (but different navigator)
-  {name: 'emails_binding_edit', component: BindEmailEditScreen}, // enter by the user menu
+  {name: 'linked_emails_setting', component: BindEmailEditScreen}, // enter by the user menu
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'verify_phone_number', component: VerifyPhoneNumberScreen},
   {name: 'change_phone_number', component: ChangePhoneNumberScreen},
