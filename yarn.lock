@@ -7889,8 +7889,8 @@ react-native-linear-gradient@^2.5.6:
   resolved "https://github.com/measurabledatatoken/react-native-mailtime-push.git#d5df6c0170beb6b1a73bc68f3f25bb4a1f1214f9"
 
 "react-native-mailtime-sdk@https://github.com/measurabledatatoken/react-native-mailtime-sdk.git":
-  version "0.1.1"
-  resolved "https://github.com/measurabledatatoken/react-native-mailtime-sdk.git#20ae5a39b6573effc728e8e7d2bc73685bc2a78f"
+  version "0.1.2"
+  resolved "https://github.com/measurabledatatoken/react-native-mailtime-sdk.git#980917678171b9bb4df797704100815fdbefabd5"
 
 react-native-raw-bottom-sheet@^2.1.0:
   version "2.1.0"
