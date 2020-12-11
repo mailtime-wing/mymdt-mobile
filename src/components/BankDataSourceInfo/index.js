@@ -17,7 +17,6 @@ const BankDataSourceInfo = ({type, countryCode, onConnected}) => {
     onConnected,
   });
   const [show, setShow] = useState(false);
-  console.log(isError);
 
   useEffect(() => {
     if (isError && error) {
