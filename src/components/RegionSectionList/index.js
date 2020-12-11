@@ -4,6 +4,9 @@ import {FormattedMessage} from 'react-intl';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import useFetch from '@/hooks/useFetch';
 import bankSyncServerDataAPIType from '@/enum/bankSyncServerDataAPIType';
+import {GET_USER_PHONE_NUMBER} from '@/api/data';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import countryCodeData from '@/constants/countryCode';
 
 import {
   SectionList,
@@ -29,6 +32,12 @@ const supportedDataAPIType = [
 ];
 
 const ChooseRegionScreen = ({onItemPress}) => {
+  const {data: userData, loading} = useQueryWithAuth(GET_USER_PHONE_NUMBER);
+  const userPhoneNumber = userData?.userProfile?.phoneNumber;
+  const userCountryCode = countryCodeData.find((c) =>
+    userPhoneNumber.includes(c.dial_code),
+  )?.code;
+
   const [, {data: fetchedData, isError, isLoading}] = useFetch(
     'https://bankwebhook-alpha.reward.me/bankcountryconfig',
     {
@@ -58,7 +67,7 @@ const ChooseRegionScreen = ({onItemPress}) => {
     </Item>
   );
 
-  if (isLoading) {
+  if (loading || isLoading) {
     return <LoadingSpinner />;
   }
 
@@ -84,9 +93,24 @@ const ChooseRegionScreen = ({onItemPress}) => {
       data: dataByContinent[continent],
     }));
 
+  let sortedData = data;
+  if (userCountryCode) {
+    let targetIndex;
+    data.forEach((continent, index) => {
+      continent.data.forEach((countryData) => {
+        if (countryData.countryCode === userCountryCode) {
+          targetIndex = index;
+        }
+      });
+    });
+
+    sortedData = data.filter((continent, index) => index !== targetIndex);
+    sortedData.unshift(data[targetIndex]);
+  }
+
   return (
     <SectionList
-      sections={data}
+      sections={sortedData}
       keyExtractor={(item) => item._id}
       renderItem={renderItem}
       renderSectionHeader={({section: {continent}}) => (
