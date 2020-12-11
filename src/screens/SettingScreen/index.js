@@ -42,7 +42,11 @@ const SettingScreen = ({navigation}) => {
   const {signOut} = useContext(AuthContext);
 
   const accountSettingList = [
-    {id: 'emails_binding_edit', icon: MailIcon},
+    {
+      id: 'linked_emails_setting',
+      messageId: 'emails_binding_edit',
+      icon: MailIcon,
+    },
     // {id: 'offers_preference_edit', icon: CreditCardIcon},
     {
       id: 'linked_cards_setting',
