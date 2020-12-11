@@ -46,7 +46,8 @@ export const detailStyle = (theme) => css`
 `;
 
 export const image = css`
-  height: 343px;
+  flex-basis: 343px;
+  flex-shrink: 1;
   aspect-ratio: 1;
   margin-left: auto;
   margin-right: auto;
@@ -54,7 +55,7 @@ export const image = css`
 
 export const marginBetweenCarouselAndPagination = css`
   flex-basis: 58;
-  flex-shrink: 5;
+  flex-shrink: 6;
 `;
 
 export const styles = StyleSheet.create({
