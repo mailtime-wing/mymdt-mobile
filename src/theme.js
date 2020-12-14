@@ -171,15 +171,15 @@ export const lightTheme = {
     background: ['#FFFFFF', '#F2F2F2'],
     elevatedBackground: [
       'background-color: #FFFFFF;',
-      'background-color: #FFFFFF; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);',
-      'background-color: #FFFFFF; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);',
-      'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);',
+      'background-color: #FFFFFF; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); elevation: 2;',
+      'background-color: #FFFFFF; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); elevation: 6;',
+      'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); elevation: 10;',
     ],
     elevatedDarkerBackground: [
       'background-color: #F2F2F2;',
-      'background-color: #F2F2F2; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);',
-      'background-color: #F2F2F2; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);',
-      'background-color: #F2F2F2; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);',
+      'background-color: #F2F2F2; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); elevation: 2;',
+      'background-color: #F2F2F2; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); elevation: 6;',
+      'background-color: #F2F2F2; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); elevation: 10;',
     ],
     elevatedDarkerCardSurface: [
       'background-color: #FFFFFF;',
@@ -187,6 +187,7 @@ export const lightTheme = {
       'background-color: #FFFFFF;',
       'background-color: #FFFFFF;',
     ],
+    // TODO: check if react-native supports this: https://stackoverflow.com/a/54765631/7754670
     elevatedThemeBackground: [
       'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(11, 142, 157, 0.1);',
       'background-color: #FFFFFF; box-shadow: 0px 4px 8px rgba(3, 99, 239, 0.1);',
