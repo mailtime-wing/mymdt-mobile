@@ -1,8 +1,8 @@
 import React from 'react';
-import {Image} from 'react-native';
+import {View, Image} from 'react-native';
 import {useTheme} from 'emotion-theming';
 
-import {icon} from './style';
+import {iconContainer, icon} from './style';
 
 /**
  * @typedef {Object} Props
@@ -17,11 +17,9 @@ import {icon} from './style';
 const BrandIcon = ({ImgSrc, sizeVariant, style, ...props}) => {
   const theme = useTheme();
   return (
-    <Image
-      source={ImgSrc}
-      style={[icon(theme, sizeVariant), style]}
-      {...props}
-    />
+    <View style={[iconContainer(theme, sizeVariant)]}>
+      <Image source={ImgSrc} style={[icon(sizeVariant), style]} {...props} />
+    </View>
   );
 };
 
