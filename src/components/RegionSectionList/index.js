@@ -34,9 +34,9 @@ const supportedDataAPIType = [
 const ChooseRegionScreen = ({onItemPress}) => {
   const {data: userData, loading} = useQueryWithAuth(GET_USER_PHONE_NUMBER);
   const userPhoneNumber = userData?.userProfile?.phoneNumber;
-  const userCountryCode = countryCodeData.find((c) =>
-    userPhoneNumber.includes(c.dial_code),
-  )?.code;
+  const userCountryCode = userPhoneNumber
+    ? countryCodeData.find((c) => userPhoneNumber.includes(c.dial_code))?.code
+    : '';
 
   const [, {data: fetchedData, isError, isLoading}] = useFetch(
     'https://bankwebhook-alpha.reward.me/bankcountryconfig',
