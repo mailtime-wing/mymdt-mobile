@@ -8,7 +8,7 @@ import AppButton from '@/components/AppButton';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import HeaderTitle from '@/components/HeaderTitle';
 
-import {detail, bodyContainer, image, container, inner} from './style';
+import {detail, content, image, container, inner} from './style';
 
 const EnjoyCashBackScreen = () => {
   const theme = useTheme();
@@ -22,7 +22,7 @@ const EnjoyCashBackScreen = () => {
         />
       </HeaderTitle>
       <View style={inner}>
-        <View style={bodyContainer}>
+        <View style={content}>
           <AppText variant="body1" style={detail(theme)}>
             <FormattedMessage
               id="enjoy_cashback_detail"
@@ -35,15 +35,13 @@ const EnjoyCashBackScreen = () => {
             resizeMode="contain"
           />
         </View>
-        <View style={bodyContainer}>
-          <AppButton
-            onPress={() => navigateByFlow()}
-            text={<FormattedMessage id="button.start" defaultMessage="Start" />}
-            variant="filled"
-            sizeVariant="large"
-            colorVariant="secondary"
-          />
-        </View>
+        <AppButton
+          onPress={() => navigateByFlow()}
+          text={<FormattedMessage id="button.start" defaultMessage="Start" />}
+          variant="filled"
+          sizeVariant="large"
+          colorVariant="secondary"
+        />
       </View>
     </View>
   );

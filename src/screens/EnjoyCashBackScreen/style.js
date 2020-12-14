@@ -4,13 +4,14 @@ export const container = css`
   flex: 1;
 `;
 
-export const bodyContainer = css`
-  padding-horizontal: 24px;
+export const content = css`
+  flex: 1;
 `;
 
 export const inner = css`
   justify-content: space-between;
   flex: 1;
+  padding-horizontal: 24px;
   padding-bottom: 24px;
 `;
 
@@ -24,5 +25,6 @@ export const detail = (theme) => css`
 `;
 
 export const image = css`
-  width: 100%;
+  max-width: 100%;
+  flex-shrink: 1;
 `;
