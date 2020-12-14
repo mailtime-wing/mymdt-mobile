@@ -4,6 +4,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   ScrollView,
+  Platform,
 } from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
@@ -136,7 +137,8 @@ const UserProfileScreen = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="always">
-        <KeyboardAvoidingView behavior="position">
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'position' : ''}>
           <Container>
             <AppText variant="heading1" style={titleStyle(theme)}>
               <FormattedMessage
