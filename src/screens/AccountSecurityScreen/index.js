@@ -6,7 +6,7 @@ import {useTheme} from 'emotion-theming';
 import Config from 'react-native-config';
 
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import ListOption from '@/components/ListOption';
 import SpecialListOption from '@/components/SpecialListOption';
 import Switch from '@/components/Switch';
@@ -44,7 +44,10 @@ const AccountSecurityScreen = ({navigation}) => {
   };
 
   return (
-    <ModalContainer title={<FormattedMessage id="account_security" />}>
+    <View>
+      <HeaderTitle>
+        <FormattedMessage id="account_security" />
+      </HeaderTitle>
       <View style={container}>
         <ListOption
           key="pin"
@@ -96,7 +99,7 @@ const AccountSecurityScreen = ({navigation}) => {
           }
         />
       </View>
-    </ModalContainer>
+    </View>
   );
 };
 

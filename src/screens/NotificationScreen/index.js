@@ -1,7 +1,7 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {View, ScrollView} from 'react-native';
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import AppText from '@/components/AppText2';
 
 import {divider, detailStyle, subjectStyle, container} from './style';
@@ -33,11 +33,9 @@ const NotificationScreen = () => {
   const theme = useTheme();
   return (
     <ScrollView>
-      <ModalContainer
-        title={
-          <FormattedMessage id="notification" defaultMessage="Notification" />
-        }
-      />
+      <HeaderTitle>
+        <FormattedMessage id="notification" defaultMessage="Notification" />
+      </HeaderTitle>
       {dummyData.map(({subject, detail}, i) => (
         <View key={i}>
           <View style={container}>

@@ -1,8 +1,8 @@
 import React, {useReducer, useEffect, useCallback} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
-
+import {View} from 'react-native';
 import PinForm from '@/components/PinForm';
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import {CHANGE_PIN_API} from '@/api/auth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 
@@ -84,17 +84,17 @@ const ChangePinScreen = ({navigation}) => {
     }
   }, [error, reset]);
 
-  const handleOldPinOnFulfill = pin => {
+  const handleOldPinOnFulfill = (pin) => {
     dispatch({type: SAVE_OLD_PIN, payload: pin});
     dispatch({type: NEXT_STEP});
   };
 
-  const handleNewPinOnFulfill = pin => {
+  const handleNewPinOnFulfill = (pin) => {
     dispatch({type: SAVE_NEW_PIN, payload: pin});
     dispatch({type: NEXT_STEP});
   };
 
-  const handleVerifyPinOnFinish = async pin => {
+  const handleVerifyPinOnFinish = async (pin) => {
     dispatch({type: SAVE_NEW_CONFIRMED_PIN, payload: pin});
   };
 
@@ -173,15 +173,17 @@ const ChangePinScreen = ({navigation}) => {
   const currentStep = steps[state.step - 1];
 
   return (
-    <ModalContainer
-      title={<FormattedMessage id="change_pin" defaultMessage="Change Pin" />}>
+    <View>
+      <HeaderTitle>
+        <FormattedMessage id="change_pin" defaultMessage="Change Pin" />
+      </HeaderTitle>
       <PinForm
         hints={currentStep.hints}
         onFulfill={currentStep.onFulfill}
         error={currentStep.error}
         key={state.step}
       />
-    </ModalContainer>
+    </View>
   );
 };
 

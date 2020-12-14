@@ -5,11 +5,8 @@ import {useTheme} from 'emotion-theming';
 
 import InviteFriendsSection from './InviteFriendsSection';
 import RewardsSection from './RewardsSection';
-import ScreenContainer from '@/components/ScreenContainer';
-import AppText from '@/components/AppText2';
+import HeaderTitle from '@/components/HeaderTitle';
 import TabSection from '@/components/TabSection';
-
-import {titleStyle} from './style';
 
 const tabList = [
   {
@@ -35,19 +32,17 @@ const ReferralScreen = () => {
   const theme = useTheme();
 
   return (
-    <ScreenContainer>
-      <ScrollView>
-        <AppText variant="pageTitle" style={titleStyle(theme)}>
-          <FormattedMessage id="referral" defaultMessage="Referral" />
-        </AppText>
-        <TabSection
-          tabList={tabList}
-          RenderTabContent={RenderTabContent}
-          activeTextColor={theme.colors.secondary.dark}
-          activeTabColor={theme.colors.secondary.normal}
-        />
-      </ScrollView>
-    </ScreenContainer>
+    <ScrollView>
+      <HeaderTitle>
+        <FormattedMessage id="referral" defaultMessage="Referral" />
+      </HeaderTitle>
+      <TabSection
+        tabList={tabList}
+        RenderTabContent={RenderTabContent}
+        activeTextColor={theme.colors.secondary.dark}
+        activeTabColor={theme.colors.secondary.normal}
+      />
+    </ScrollView>
   );
 };
 

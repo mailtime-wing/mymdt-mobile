@@ -1,8 +1,9 @@
 import React, {useReducer, useEffect, useCallback} from 'react';
+import {View} from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import PinForm from '@/components/PinForm';
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import {RESET_PIN_API} from '@/api/auth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 
@@ -77,12 +78,12 @@ const ResetPinScreen = ({navigation, route}) => {
     }
   }, [error, reset]);
 
-  const handleNewPinOnFulfill = pin => {
+  const handleNewPinOnFulfill = (pin) => {
     dispatch({type: SAVE_NEW_PIN, payload: pin});
     dispatch({type: NEXT_STEP});
   };
 
-  const handleVerifyPinOnFinish = async pin => {
+  const handleVerifyPinOnFinish = async (pin) => {
     dispatch({type: SAVE_NEW_CONFIRMED_PIN, payload: pin});
   };
 
@@ -152,15 +153,17 @@ const ResetPinScreen = ({navigation, route}) => {
   const currentStep = steps[state.step - 1];
 
   return (
-    <ModalContainer
-      title={<FormattedMessage id="reset_pin" defaultMessage="Reset Pin" />}>
+    <View>
+      <HeaderTitle>
+        <FormattedMessage id="reset_pin" defaultMessage="Reset Pin" />
+      </HeaderTitle>
       <PinForm
         hints={currentStep.hints}
         onFulfill={currentStep.onFulfill}
         error={currentStep.error}
         key={state.step}
       />
-    </ModalContainer>
+    </View>
   );
 };
 

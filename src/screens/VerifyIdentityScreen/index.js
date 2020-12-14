@@ -1,6 +1,5 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
-import ModalContainer from '@/components/ModalContainer';
 
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {GET_USER_PHONE_NUMBER} from '@/api/data';
@@ -23,26 +22,24 @@ const VerifyIdentityScreen = ({navigation, route}) => {
   };
 
   return (
-    <ModalContainer>
-      <VerifyVerificationCodeForm
-        title={<FormattedMessage id="verify_identity" />}
-        description={
-          <FormattedMessage
-            id="we_have_sent_otp"
-            values={{
-              phone_number: splitPhoneNumber(phoneNubmer),
-            }}
-          />
-        }
-        submitButtonText={
-          <FormattedMessage id="button.submit" defaultMessage="Submit" />
-        }
-        phoneNubmer={phoneNubmer}
-        otpActionKey={otpActionKey}
-        onSubmit={handleSubmitPress}
-        requestOtpOnMount={true}
-      />
-    </ModalContainer>
+    <VerifyVerificationCodeForm
+      title={<FormattedMessage id="verify_identity" />}
+      description={
+        <FormattedMessage
+          id="we_have_sent_otp"
+          values={{
+            phone_number: splitPhoneNumber(phoneNubmer),
+          }}
+        />
+      }
+      submitButtonText={
+        <FormattedMessage id="button.submit" defaultMessage="Submit" />
+      }
+      phoneNubmer={phoneNubmer}
+      otpActionKey={otpActionKey}
+      onSubmit={handleSubmitPress}
+      requestOtpOnMount={true}
+    />
   );
 };
 

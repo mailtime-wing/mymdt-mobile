@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
 import {useTheme} from 'emotion-theming';
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 
@@ -12,8 +12,10 @@ import {detailStyle, container} from './style';
 const ForgetPinScreen = ({navigation}) => {
   const theme = useTheme();
   return (
-    <ModalContainer
-      title={<FormattedMessage id="forget_pin" defaultMessage="Forget Pin" />}>
+    <View>
+      <HeaderTitle>
+        <FormattedMessage id="forget_pin" defaultMessage="Forget Pin" />
+      </HeaderTitle>
       <View style={container}>
         <AppText variant="body1" style={detailStyle(theme)}>
           <FormattedMessage id="forget_pin_detail" />
@@ -31,7 +33,7 @@ const ForgetPinScreen = ({navigation}) => {
           colorVariant="secondary"
         />
       </View>
-    </ModalContainer>
+    </View>
   );
 };
 

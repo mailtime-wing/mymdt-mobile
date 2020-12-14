@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
 import {useTheme} from 'emotion-theming';
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 
@@ -13,13 +13,13 @@ const VerifyPhoneNumberScreen = ({navigation, route}) => {
   const {pin} = route.params;
   const theme = useTheme();
   return (
-    <ModalContainer
-      title={
+    <View>
+      <HeaderTitle>
         <FormattedMessage
           id="change_phone_number"
           defaultMessage="Change Phone Number"
         />
-      }>
+      </HeaderTitle>
       <View style={container}>
         <AppText variant="body1" style={detailStyle(theme)}>
           <FormattedMessage id="change_phone_number_detail" />
@@ -38,7 +38,7 @@ const VerifyPhoneNumberScreen = ({navigation, route}) => {
           colorVariant="secondary"
         />
       </View>
-    </ModalContainer>
+    </View>
   );
 };
 

@@ -13,13 +13,7 @@ export const HeaderContainer = styled.View`
   align-items: center;
 `;
 
-export const title = theme => css`
-  color: ${theme.colors.secondary.normal};
-  margin-bottom: 24px;
-  margin-left: 24px;
-`;
-
-export const headerStyle = theme => css`
+export const headerStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.disabled};
 `;
 
@@ -29,10 +23,10 @@ export const CustomeSwitch = styled.Switch`
 `;
 
 export const MarginTop = styled.View`
-  ${props => `margin-top: ${props.value || 8}px;`}
+  ${(props) => `margin-top: ${props.value || 8}px;`}
 `;
 
-export const emailStyle = theme => css`
+export const emailStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
@@ -40,12 +34,12 @@ export const unbindButtonContainer = css`
   width: auto;
 `;
 
-export const detailStyle = theme => css`
+export const detailStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
   margin-bottom: 24px;
 `;
 
-export const noEmailStyle = theme => css`
+export const noEmailStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.disabled};
   margin-top: 24px;
   margin-bottom: 16px;
@@ -61,8 +55,8 @@ export const NoEmailContainer = styled.View`
 `;
 
 export const ButtonContainer = styled.TouchableOpacity`
-  background-color: ${props => props.theme.colors.secondary.normal};
-  opacity: ${props => props.disabled && '0.5'};
+  background-color: ${(props) => props.theme.colors.secondary.normal};
+  opacity: ${(props) => props.disabled && '0.5'};
 
   text-transform: uppercase;
   justify-content: center;

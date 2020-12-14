@@ -1,7 +1,6 @@
 import styled, {css} from '@emotion/native';
 
 export const headerDetailStyle = (theme) => css`
-  margin-top: 24px;
   margin-bottom: 40px;
   color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;

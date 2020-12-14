@@ -3,7 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import {useFocusEffect} from '@react-navigation/native';
 import {GET_USER_MERCHANTS_API, GET_MERCHANT_AVAILABLE_AT} from '@/api/data';
 
-import ModalContaienr from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import AppButton from '@/components/AppButton';
 import MerchantList from '@/components/MerchantList';
 import PopupModal from '@/components/PopupModal';
@@ -66,84 +66,82 @@ const MerchantPreferenceEditScreen = ({navigation}) => {
 
   return (
     <ScrollContainer>
-      <ModalContaienr
-        title={
-          <FormattedMessage id="special_offer" defaultMessage="Special Offer" />
-        }>
-        <Container>
-          <AppText variant="body1" style={headerDetailStyle(theme)}>
-            <FormattedMessage
-              id="edit_preference_in_30_days"
-              defaultMessage="You can edit your favorite brand preference once in 30 days. You will receive cashback based on your membership level."
-            />
-          </AppText>
-          <RowContainer>
-            <AppText variant="subTitle2" style={headerStyle(theme)}>
-              <FormattedMessage
-                id="max_choices"
-                defaultMessage="Maximum choices"
-              />
-            </AppText>
-            <AppText variant="body1" style={numberOfBrandStyle(theme)}>
-              <FormattedMessage
-                id="number_of_merchants"
-                defaultMessage="{number} Merchants"
-                values={{number: numberOfMerchant}}
-              />
-            </AppText>
-          </RowContainer>
-          <AppText variant="caption" style={detailStyle(theme)}>
-            <FormattedMessage
-              id="choose_more_brand_when_upgrade"
-              defaultMessage="You can choose more brands when your membership is upgraded."
-            />
-          </AppText>
-
-          <Divider />
-          <RowContainer>
-            <AppText variant="subTitle2" style={headerStyle(theme)}>
-              <FormattedMessage id="your_choices" defaultMessage="Preference" />
-            </AppText>
-            <AppButton
-              onPress={handleEditPress}
-              text={<FormattedMessage id="button.edit" defaultMessage="edit" />}
-              variant="filled"
-              sizeVariant="compact"
-              colorVariant="secondary"
-            />
-          </RowContainer>
-          <AppText variant="caption" style={detailStyle(theme)}>
-            <FormattedMessage
-              id="get_reward_from_brands"
-              defaultMessage="Choose your favorite brands with the special cashback rate."
-            />
-          </AppText>
-          {loading ? (
-            <LoadingSpinner />
-          ) : (
-            <MerchantList merchantList={data?.userProfile?.merchants} />
-          )}
-        </Container>
-        {showModal && (
-          <PopupModal
-            title={
-              <FormattedMessage
-                id="edited_preference_recently"
-                defaultMessage="It seems you’ve edited the preference recently."
-              />
-            }
-            detail={
-              <FormattedMessage
-                id="edited_in_30_days"
-                values={{
-                  date: <FormattedTransactionDate value={canEditDate} />,
-                }}
-              />
-            }
-            callback={() => setShowModal(false)}
+      <HeaderTitle>
+        <FormattedMessage id="special_offer" defaultMessage="Special Offer" />
+      </HeaderTitle>
+      <Container>
+        <AppText variant="body1" style={headerDetailStyle(theme)}>
+          <FormattedMessage
+            id="edit_preference_in_30_days"
+            defaultMessage="You can edit your favorite brand preference once in 30 days. You will receive cashback based on your membership level."
           />
+        </AppText>
+        <RowContainer>
+          <AppText variant="subTitle2" style={headerStyle(theme)}>
+            <FormattedMessage
+              id="max_choices"
+              defaultMessage="Maximum choices"
+            />
+          </AppText>
+          <AppText variant="body1" style={numberOfBrandStyle(theme)}>
+            <FormattedMessage
+              id="number_of_merchants"
+              defaultMessage="{number} Merchants"
+              values={{number: numberOfMerchant}}
+            />
+          </AppText>
+        </RowContainer>
+        <AppText variant="caption" style={detailStyle(theme)}>
+          <FormattedMessage
+            id="choose_more_brand_when_upgrade"
+            defaultMessage="You can choose more brands when your membership is upgraded."
+          />
+        </AppText>
+
+        <Divider />
+        <RowContainer>
+          <AppText variant="subTitle2" style={headerStyle(theme)}>
+            <FormattedMessage id="your_choices" defaultMessage="Preference" />
+          </AppText>
+          <AppButton
+            onPress={handleEditPress}
+            text={<FormattedMessage id="button.edit" defaultMessage="edit" />}
+            variant="filled"
+            sizeVariant="compact"
+            colorVariant="secondary"
+          />
+        </RowContainer>
+        <AppText variant="caption" style={detailStyle(theme)}>
+          <FormattedMessage
+            id="get_reward_from_brands"
+            defaultMessage="Choose your favorite brands with the special cashback rate."
+          />
+        </AppText>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <MerchantList merchantList={data?.userProfile?.merchants} />
         )}
-      </ModalContaienr>
+      </Container>
+      {showModal && (
+        <PopupModal
+          title={
+            <FormattedMessage
+              id="edited_preference_recently"
+              defaultMessage="It seems you’ve edited the preference recently."
+            />
+          }
+          detail={
+            <FormattedMessage
+              id="edited_in_30_days"
+              values={{
+                date: <FormattedTransactionDate value={canEditDate} />,
+              }}
+            />
+          }
+          callback={() => setShowModal(false)}
+        />
+      )}
     </ScrollContainer>
   );
 };

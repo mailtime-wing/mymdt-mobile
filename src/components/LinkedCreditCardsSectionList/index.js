@@ -9,6 +9,7 @@ import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 import PopupModal from '@/components/PopupModal';
 import AppTag from '@/components/AppTag';
+import HeaderTitle from '@/components/HeaderTitle';
 import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {
@@ -86,29 +87,31 @@ const componentToSubtypeMap = {
 const ListHeader = ({anyUnknownCard}) => {
   const theme = useTheme();
   return (
-    <View style={headerContainer}>
-      <AppText variant="heading1" style={title(theme)}>
+    <View>
+      <HeaderTitle>
         <FormattedMessage
           id="linkedBankAccounts"
           defaultMessage="Linked Bank Accounts"
         />
-      </AppText>
-      <AppText variant="body1" style={description(theme)}>
-        <FormattedMessage
-          id="itMayTakeSomeTimeToAnalyze"
-          defaultMessage="It may take some time to analyze your shopping e-receipts. We will notify you once it’s done."
-        />
-      </AppText>
-      {anyUnknownCard && (
-        <View style={errorView(theme)}>
-          <AppText variant="body2" style={errorMessage(theme)}>
-            <FormattedMessage
-              id="itMayTakeSomeTimeToAnalyze"
-              defaultMessage="It may take some time to analyze your shopping e-receipts. We will notify you once it’s done."
-            />
-          </AppText>
-        </View>
-      )}
+      </HeaderTitle>
+      <View style={headerContainer}>
+        <AppText variant="body1" style={description(theme)}>
+          <FormattedMessage
+            id="itMayTakeSomeTimeToAnalyze"
+            defaultMessage="It may take some time to analyze your shopping e-receipts. We will notify you once it’s done."
+          />
+        </AppText>
+        {anyUnknownCard && (
+          <View style={errorView(theme)}>
+            <AppText variant="body2" style={errorMessage(theme)}>
+              <FormattedMessage
+                id="itMayTakeSomeTimeToAnalyze"
+                defaultMessage="It may take some time to analyze your shopping e-receipts. We will notify you once it’s done."
+              />
+            </AppText>
+          </View>
+        )}
+      </View>
     </View>
   );
 };
