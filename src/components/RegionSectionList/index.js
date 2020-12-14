@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -67,14 +67,6 @@ const ChooseRegionScreen = ({onItemPress}) => {
     </Item>
   );
 
-  if (loading || isLoading) {
-    return <LoadingSpinner />;
-  }
-
-  if (isError) {
-    // TODO: handle error
-  }
-
   /** @type {Object.<string, Array<any>} */
   const dataByContinent = {};
   fetchedData?.countryData?.forEach((countryItem) => {
@@ -93,19 +85,40 @@ const ChooseRegionScreen = ({onItemPress}) => {
       data: dataByContinent[continent],
     }));
 
-  let sortedData = data;
-  if (userCountryCode) {
-    let targetIndex;
-    data.forEach((continent, index) => {
-      continent.data.forEach((countryData) => {
-        if (countryData.countryCode === userCountryCode) {
-          targetIndex = index;
-        }
-      });
-    });
+  const sortedData = useMemo(() => {
+    if (!data) {
+      return [];
+    }
 
-    sortedData = data.filter((continent, index) => index !== targetIndex);
-    sortedData.unshift(data[targetIndex]);
+    if (!userCountryCode) {
+      return data;
+    }
+
+    const targetIndex = data.findIndex((continent) =>
+      continent.data.some(
+        (countryData) => countryData.countryCode === userCountryCode,
+      ),
+    );
+
+    if (targetIndex < 0) {
+      return data;
+    }
+
+    return [...data].sort((a, b) => {
+      return a.continent === data[targetIndex].continent
+        ? -1
+        : b.continent === data[targetIndex].continent
+        ? 1
+        : 0;
+    });
+  }, [data, userCountryCode]);
+
+  if (loading || isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (isError) {
+    // TODO: handle error
   }
 
   return (
