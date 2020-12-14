@@ -1,23 +1,14 @@
 import React from 'react';
-import {View, Image, Dimensions} from 'react-native';
+import {View, Image} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
-import {
-  bodyContainer,
-  backgroundImage,
-  titleStyle,
-  detailStyle,
-  scale,
-} from './style';
+import {bodyContainer, backgroundImage, titleStyle, detailStyle} from './style';
 
 import BindingButton from './BindingButton';
 import EmailIcon from '@/assets/icon_mail.svg';
 import CreditCardIcon from '@/assets/icon_credit-card.svg';
 import AppText from '@/components/AppText2';
-
-const {width} = Dimensions.get('window');
-const scaleDown = width < 414;
 
 const ChooseBindDataSource = ({onEmailChoose, onBankChoose}) => {
   const theme = useTheme();
@@ -25,7 +16,7 @@ const ChooseBindDataSource = ({onEmailChoose, onBankChoose}) => {
     <View style={bodyContainer}>
       <Image
         source={require('@/assets/introduce_1.png')}
-        style={[backgroundImage, scaleDown && scale]}
+        style={backgroundImage}
         resizeMode="contain"
       />
       <AppText variant="heading3" style={titleStyle(theme)}>
