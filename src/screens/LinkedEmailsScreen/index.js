@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useReducer} from 'react';
 import {ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import SpecialListOption from '@/components/SpecialListOption';
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
@@ -26,7 +26,6 @@ import {
   detailStyle,
   noEmailStyle,
   headerStyle,
-  title,
 } from './style';
 import {useTheme} from 'emotion-theming';
 
@@ -155,92 +154,88 @@ const LinkedEmailsScreen = ({navigation, route}) => {
 
   return (
     <ScrollView>
-      <ModalContainer>
-        <AppText variant="heading1" style={title(theme)}>
-          <FormattedMessage id="linked_emails" defaultMessage="linked emails" />
+      <HeaderTitle>
+        <FormattedMessage id="linked_emails" defaultMessage="linked emails" />
+      </HeaderTitle>
+      <Container>
+        <AppText variant="body1" style={detailStyle(theme)}>
+          <FormattedMessage id="linked_emails_detail" />
         </AppText>
-        <Container>
-          <AppText variant="body1" style={detailStyle(theme)}>
-            <FormattedMessage id="linked_emails_detail" />
+        <HeaderContainer>
+          <AppText variant="label" style={headerStyle(theme)}>
+            <FormattedMessage id="email" defaultMessage="email" />
           </AppText>
-          <HeaderContainer>
-            <AppText variant="label" style={headerStyle(theme)}>
-              <FormattedMessage id="email" defaultMessage="email" />
-            </AppText>
-          </HeaderContainer>
-          {emails.length > 0 ? (
-            emails.map((email, index) => (
-              <>
-                <SpecialListOption
-                  key={email.emailAddress}
-                  label={
-                    <AppText variant="body1" style={emailStyle(theme)}>
-                      {email.emailAddress}
-                    </AppText>
-                  }
-                  value={
-                    <AppButton
-                      style={unbindButtonContainer}
-                      onPress={() => handleUnbindPress(email)}
-                      text={
-                        <FormattedMessage
-                          id="button.remove"
-                          defaultMessage="remove"
-                        />
-                      }
-                      variant="outlined"
-                      sizeVariant="compact"
-                      colorVariant="alert"
-                    />
-                  }
-                />
-                <MarginTop />
-              </>
-            ))
-          ) : (
-            <NoEmailContainer>
-              <Image source={require('@/assets/no_email_added.png')} />
-              <AppText variant="heading3" style={noEmailStyle(theme)}>
-                <FormattedMessage
-                  id="no_email_added"
-                  defaultMessage="No email added"
-                />
-              </AppText>
-            </NoEmailContainer>
-          )}
-          <MarginTop value={80} />
-          <AppButton
-            onPress={handleFinishPress}
-            text={
-              <FormattedMessage id="button.finish" defaultMessage="finish" />
-            }
-            variant="filled"
-            sizeVariant="large"
-            colorVariant="secondary"
-          />
-          <MarginTop value={16} />
-          <AppButton
-            onPress={handleOtherLinkMethodPress}
-            text={
-              <FormattedMessage
-                id="button.connect_more"
-                defaultMessage="Connect more"
+        </HeaderContainer>
+        {emails.length > 0 ? (
+          emails.map((email, index) => (
+            <>
+              <SpecialListOption
+                key={email.emailAddress}
+                label={
+                  <AppText variant="body1" style={emailStyle(theme)}>
+                    {email.emailAddress}
+                  </AppText>
+                }
+                value={
+                  <AppButton
+                    style={unbindButtonContainer}
+                    onPress={() => handleUnbindPress(email)}
+                    text={
+                      <FormattedMessage
+                        id="button.remove"
+                        defaultMessage="remove"
+                      />
+                    }
+                    variant="outlined"
+                    sizeVariant="compact"
+                    colorVariant="alert"
+                  />
+                }
               />
-            }
-            variant="outlined"
-            sizeVariant="normal"
-            colorVariant="secondary"
-          />
-        </Container>
-
-        {state.isUnbinding && (
-          <PopupModal
-            title="Remove this email"
-            detail={`You will not get any data rewards from ${state.unbindingEmail?.emailAddress} after unbinding.`}
-            callback={handleCallback}
-          />
+              <MarginTop />
+            </>
+          ))
+        ) : (
+          <NoEmailContainer>
+            <Image source={require('@/assets/no_email_added.png')} />
+            <AppText variant="heading3" style={noEmailStyle(theme)}>
+              <FormattedMessage
+                id="no_email_added"
+                defaultMessage="No email added"
+              />
+            </AppText>
+          </NoEmailContainer>
         )}
-      </ModalContainer>
+        <MarginTop value={80} />
+        <AppButton
+          onPress={handleFinishPress}
+          text={<FormattedMessage id="button.finish" defaultMessage="finish" />}
+          variant="filled"
+          sizeVariant="large"
+          colorVariant="secondary"
+        />
+        <MarginTop value={16} />
+        <AppButton
+          onPress={handleOtherLinkMethodPress}
+          text={
+            <FormattedMessage
+              id="button.connect_more"
+              defaultMessage="Connect more"
+            />
+          }
+          variant="outlined"
+          sizeVariant="normal"
+          colorVariant="secondary"
+        />
+      </Container>
+
+      {state.isUnbinding && (
+        <PopupModal
+          title="Remove this email"
+          detail={`You will not get any data rewards from ${state.unbindingEmail?.emailAddress} after unbinding.`}
+          callback={handleCallback}
+        />
+      )}
     </ScrollView>
   );
 };

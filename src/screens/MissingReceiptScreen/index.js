@@ -22,7 +22,7 @@ import {
   amountContainer,
 } from './style';
 
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
 import Input from '@/components/AppInput';
@@ -178,13 +178,13 @@ const MissingReceiptScreen = ({navigation}) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <TouchableWithoutFeedback onPress={handleSpacePress}>
-          <ModalContainer
-            title={
+          <View>
+            <HeaderTitle>
               <FormattedMessage
                 id="missing_receipt"
                 defaultMessage="ProfileMissing Receipt"
               />
-            }>
+            </HeaderTitle>
             <View style={container}>
               <AppText variant="body1" style={detailStyle(theme)}>
                 <FormattedMessage
@@ -208,7 +208,7 @@ const MissingReceiptScreen = ({navigation}) => {
                 />
               </Formik>
             </View>
-          </ModalContainer>
+          </View>
         </TouchableWithoutFeedback>
       </ScrollView>
     </KeyboardAvoidingView>

@@ -2,7 +2,6 @@ import React, {useState, useLayoutEffect} from 'react';
 import {View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
-import ModalContainer from '@/components/ModalContainer';
 import LinkedCreditCardsSectionList from '@/components/LinkedCreditCardsSectionList';
 import BackIconButton from '@/components/BackIconButton';
 import CloseIconButton from '@/components/CloseIconButton';
@@ -57,18 +56,16 @@ const LinkedCardsSettingScreen = ({navigation}) => {
   }, [isEditing, navigation]);
 
   return (
-    <ModalContainer>
-      <LinkedCreditCardsSectionList
-        enableRemove={isEditing}
-        ListFooterComponent={
-          isEditing ? null : (
-            <EditModeListFooter
-              onPress={() => navigation.navigate('choose_region_setting')}
-            />
-          )
-        }
-      />
-    </ModalContainer>
+    <LinkedCreditCardsSectionList
+      enableRemove={isEditing}
+      ListFooterComponent={
+        isEditing ? null : (
+          <EditModeListFooter
+            onPress={() => navigation.navigate('choose_region_setting')}
+          />
+        )
+      }
+    />
   );
 };
 

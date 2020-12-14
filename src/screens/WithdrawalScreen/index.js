@@ -22,7 +22,7 @@ import {
   formContainer,
 } from './style';
 
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import AppButton from '@/components/AppButton';
 import Input from '@/components/AppInput';
 import AppText from '@/components/AppText2';
@@ -124,7 +124,7 @@ const WithdrawalScreen = () => {
     Keyboard.dismiss();
   };
 
-  const handleSubmitPress = async values => {
+  const handleSubmitPress = async (values) => {
     try {
       // TODO: integrate API
     } catch (e) {
@@ -139,7 +139,7 @@ const WithdrawalScreen = () => {
     note: '',
   };
 
-  const validate = values => {
+  const validate = (values) => {
     const errors = {};
 
     if (!values.address) {
@@ -170,23 +170,18 @@ const WithdrawalScreen = () => {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <TouchableWithoutFeedback onPress={handleSpacePress}>
-          <ModalContainer
-            title={
-              <FormattedMessage
-                id="withdraw_mdt"
-                defaultMessage="Withdraw MDT"
-              />
-            }>
-            <Container>
-              <Formik
-                enableReinitialize={true}
-                initialValues={initialValues}
-                onSubmit={handleSubmitPress}
-                validate={validate}>
-                <Form />
-              </Formik>
-            </Container>
-          </ModalContainer>
+          <HeaderTitle>
+            <FormattedMessage id="withdraw_mdt" defaultMessage="Withdraw MDT" />
+          </HeaderTitle>
+          <Container>
+            <Formik
+              enableReinitialize={true}
+              initialValues={initialValues}
+              onSubmit={handleSubmitPress}
+              validate={validate}>
+              <Form />
+            </Formik>
+          </Container>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </ScrollView>

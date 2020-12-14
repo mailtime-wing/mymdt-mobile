@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, ScrollView} from 'react-native';
-import ModalContainer from '@/components/ModalContainer';
 import AppText from '@/components/AppText2';
 import ConversionRate from '@/components/ConversionRate';
 import TransactionItem from '@/components/TransactionItem';
@@ -323,68 +322,66 @@ const TransactionDetailScreen = ({route}) => {
   } = route.params;
 
   return (
-    <ModalContainer>
-      <ScrollView>
-        <View style={section}>
-          <View style={sectionHeaderContainer(theme)}>
-            <AppText variant="label" style={sectionHeader(theme)}>
-              {transactionTypeToNameMap[transactionItem.type].name}
-            </AppText>
-          </View>
-          <TransactionItem
-            title={transactionItem.title}
-            date={transactionItem.transactionTime}
-            icon={
-              transactionItem.type === TransactitonType.MAI ||
-              transactionItem.type === TransactitonType.BANK ? (
-                <BrandIcon
-                  sizeVariant="normal"
-                  ImgSrc={{
-                    uri: merchantsData?.merchants.find(
-                      (merchant) => merchant.name === transactionItem.title,
-                    ).logo,
-                  }}
-                />
-              ) : (
-                ConvertIcon
-              )
-            }
-            coinBackgroundColor={theme.colors.secondary.normal}
-            coin={
-              <TransactionAmount
-                amount={transactionItem.amount}
-                variant={
-                  currencyCode === transactionItem.data?.from ? 'from' : 'to'
-                }
-                amountColor={
-                  (transactionItem.type === TransactitonType.MAI ||
-                    transactionItem.type === TransactitonType.BANK) &&
-                  theme.colors.primary.normal
-                }
-                unitColor={
-                  (transactionItem.type === TransactitonType.MAI ||
-                    transactionItem.type === TransactitonType.BANK) &&
-                  theme.colors.primary.normal
-                }
-                unitVariant={currencyCode}
-                unitSizeVariant="small"
-                showPositiveSign={true}
+    <ScrollView>
+      <View style={section}>
+        <View style={sectionHeaderContainer(theme)}>
+          <AppText variant="label" style={sectionHeader(theme)}>
+            {transactionTypeToNameMap[transactionItem.type].name}
+          </AppText>
+        </View>
+        <TransactionItem
+          title={transactionItem.title}
+          date={transactionItem.transactionTime}
+          icon={
+            transactionItem.type === TransactitonType.MAI ||
+            transactionItem.type === TransactitonType.BANK ? (
+              <BrandIcon
+                sizeVariant="normal"
+                ImgSrc={{
+                  uri: merchantsData?.merchants.find(
+                    (merchant) => merchant.name === transactionItem.title,
+                  ).logo,
+                }}
               />
-            }
-            hideDivider
-            style={transactionItemStyle}
-          />
+            ) : (
+              ConvertIcon
+            )
+          }
+          coinBackgroundColor={theme.colors.secondary.normal}
+          coin={
+            <TransactionAmount
+              amount={transactionItem.amount}
+              variant={
+                currencyCode === transactionItem.data?.from ? 'from' : 'to'
+              }
+              amountColor={
+                (transactionItem.type === TransactitonType.MAI ||
+                  transactionItem.type === TransactitonType.BANK) &&
+                theme.colors.primary.normal
+              }
+              unitColor={
+                (transactionItem.type === TransactitonType.MAI ||
+                  transactionItem.type === TransactitonType.BANK) &&
+                theme.colors.primary.normal
+              }
+              unitVariant={currencyCode}
+              unitSizeVariant="small"
+              showPositiveSign={true}
+            />
+          }
+          hideDivider
+          style={transactionItemStyle}
+        />
+      </View>
+      <View style={section}>
+        <View style={sectionHeaderContainer(theme)}>
+          <AppText variant="label" style={sectionHeader(theme)}>
+            <FormattedMessage id="detail" defaultMessage="Detail" />
+          </AppText>
         </View>
-        <View style={section}>
-          <View style={sectionHeaderContainer(theme)}>
-            <AppText variant="label" style={sectionHeader(theme)}>
-              <FormattedMessage id="detail" defaultMessage="Detail" />
-            </AppText>
-          </View>
-          <RenderTransationDetail transactionItem={transactionItem} />
-        </View>
-      </ScrollView>
-    </ModalContainer>
+        <RenderTransationDetail transactionItem={transactionItem} />
+      </View>
+    </ScrollView>
   );
 };
 

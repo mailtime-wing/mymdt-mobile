@@ -8,7 +8,7 @@ import Config from 'react-native-config';
 import {IntlContext} from '@/context/Intl';
 import {ThemeContext} from '@/context/theme';
 import {NotificationContext} from '@/context/notification';
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import ListOption from '@/components/ListOption';
 import SpecialListOption from '@/components/SpecialListOption';
 import Switch from '@/components/Switch';
@@ -97,10 +97,10 @@ const SettingScreen = () => {
   };
 
   return (
-    <ModalContainer
-      title={
+    <View>
+      <HeaderTitle>
         <FormattedMessage id="app_settings" defaultMessage="App settings" />
-      }>
+      </HeaderTitle>
       <View style={container}>
         <ListOption
           key="language"
@@ -165,7 +165,7 @@ const SettingScreen = () => {
           callback={handlePopupCallback}
         />
       )}
-    </ModalContainer>
+    </View>
   );
 };
 

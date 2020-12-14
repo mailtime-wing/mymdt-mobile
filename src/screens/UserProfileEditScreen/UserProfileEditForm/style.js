@@ -1,10 +1,14 @@
 import styled, {css} from '@emotion/native';
 
-export const formContainer = css`
+export const container = css`
   padding-horizontal: 24px;
 `;
 
-export const profilePictureText = theme => css`
+export const formContainer = css`
+  margin-top: 24px;
+`;
+
+export const profilePictureText = (theme) => css`
   color: ${theme.colors.contrastColor};
 `;
 
@@ -29,15 +33,11 @@ export const dateFieldContainer = css`
   margin-top: 24px;
 `;
 
-export const errorStyle = theme => css`
+export const errorStyle = (theme) => css`
   color: ${theme.colors.textOnError.normal};
 `;
 
-export const nameStyle = theme => css`
+export const nameStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
   margin-left: 24px;
-`;
-
-export const marginTop = css`
-  margin-top: 48px;
 `;

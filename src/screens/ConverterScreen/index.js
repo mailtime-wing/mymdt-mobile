@@ -9,7 +9,7 @@ import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 import {detailStyle, container} from './style';
 
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import AppText from '@/components/AppText2';
 import ConvertForm from './ConvertForm';
 
@@ -68,32 +68,30 @@ const ConverterScreen = ({navigation, route}) => {
   return (
     <ScrollView keyboardShouldPersistTaps="handled">
       <KeyboardAvoidingView behavior="position">
-        <ModalContainer
-          title={
-            <FormattedMessage id="converter" defaultMessage="Converter" />
-          }>
-          <View style={container}>
-            <AppText variant="body1" style={detailStyle(theme)}>
-              <FormattedMessage
-                id="converter_detail"
-                defaultMessage="converter_detail"
-              />
-            </AppText>
-            <Formik
-              initialValues={{
-                amount: 0,
-              }}
-              onSubmit={handleConvertPress}
-              validate={validate}>
-              <ConvertForm
-                conversionRate={conversionRate}
-                changeConvertCurrency={handleChangeConvertCurrency}
-                from={from}
-                to={to}
-              />
-            </Formik>
-          </View>
-        </ModalContainer>
+        <HeaderTitle>
+          <FormattedMessage id="converter" defaultMessage="Converter" />
+        </HeaderTitle>
+        <View style={container}>
+          <AppText variant="body1" style={detailStyle(theme)}>
+            <FormattedMessage
+              id="converter_detail"
+              defaultMessage="converter_detail"
+            />
+          </AppText>
+          <Formik
+            initialValues={{
+              amount: 0,
+            }}
+            onSubmit={handleConvertPress}
+            validate={validate}>
+            <ConvertForm
+              conversionRate={conversionRate}
+              changeConvertCurrency={handleChangeConvertCurrency}
+              from={from}
+              to={to}
+            />
+          </Formik>
+        </View>
       </KeyboardAvoidingView>
     </ScrollView>
   );

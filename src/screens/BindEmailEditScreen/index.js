@@ -5,6 +5,7 @@ import React, {
   useReducer,
   useCallback,
 } from 'react';
+import {View} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
@@ -23,7 +24,7 @@ import {
   addEmailButton,
 } from './style';
 
-import ModalContainer from '@/components/ModalContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import SpecialListOption from '@/components/SpecialListOption';
 import AppButton from '@/components/AppButton';
 import BackIconButton from '@/components/BackIconButton';
@@ -203,7 +204,10 @@ const BindEmailEditScreen = ({navigation}) => {
   }
 
   return (
-    <ModalContainer title={<FormattedMessage id="linked_emails" />}>
+    <View>
+      <HeaderTitle>
+        <FormattedMessage id="linked_emails" />
+      </HeaderTitle>
       <TitleContainer>
         <AppText variant="label" style={titleText(theme)}>
           <FormattedMessage id="email" defaultMessage="email" />
@@ -255,7 +259,7 @@ const BindEmailEditScreen = ({navigation}) => {
           callback={handleCallback}
         />
       )}
-    </ModalContainer>
+    </View>
   );
 };
 
