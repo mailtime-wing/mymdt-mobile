@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
 import useFetch from '@/hooks/useFetch';
 import bankSyncServerDataAPIType from '@/enum/bankSyncServerDataAPIType';
+import {GET_USER_PHONE_NUMBER} from '@/api/data';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import countryCodeData from '@/constants/countryCode';
 
 import {
   SectionList,
@@ -29,6 +32,12 @@ const supportedDataAPIType = [
 ];
 
 const ChooseRegionScreen = ({onItemPress}) => {
+  const {data: userData, loading} = useQueryWithAuth(GET_USER_PHONE_NUMBER);
+  const userPhoneNumber = userData?.userProfile?.phoneNumber;
+  const userCountryCode = countryCodeData.find((c) =>
+    userPhoneNumber.includes(c.dial_code),
+  )?.code;
+
   const [, {data: fetchedData, isError, isLoading}] = useFetch(
     'https://bankwebhook-alpha.reward.me/bankcountryconfig',
     {
@@ -58,14 +67,6 @@ const ChooseRegionScreen = ({onItemPress}) => {
     </Item>
   );
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
-  if (isError) {
-    // TODO: handle error
-  }
-
   /** @type {Object.<string, Array<any>} */
   const dataByContinent = {};
   fetchedData?.countryData?.forEach((countryItem) => {
@@ -84,9 +85,45 @@ const ChooseRegionScreen = ({onItemPress}) => {
       data: dataByContinent[continent],
     }));
 
+  const sortedData = useMemo(() => {
+    if (!data) {
+      return [];
+    }
+
+    if (!userCountryCode) {
+      return data;
+    }
+
+    const targetIndex = data.findIndex((continent) =>
+      continent.data.some(
+        (countryData) => countryData.countryCode === userCountryCode,
+      ),
+    );
+
+    if (targetIndex < 0) {
+      return data;
+    }
+
+    return [...data].sort((a, b) => {
+      return a.continent === data[targetIndex].continent
+        ? -1
+        : b.continent === data[targetIndex].continent
+        ? 1
+        : 0;
+    });
+  }, [data, userCountryCode]);
+
+  if (loading || isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (isError) {
+    // TODO: handle error
+  }
+
   return (
     <SectionList
-      sections={data}
+      sections={sortedData}
       keyExtractor={(item) => item._id}
       renderItem={renderItem}
       renderSectionHeader={({section: {continent}}) => (
