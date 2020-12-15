@@ -2,6 +2,7 @@ import {css} from '@emotion/native';
 import {transparentize} from 'polished';
 
 export const layout = css`
+  padding-top: 16px;
   align-items: center;
 `;
 
