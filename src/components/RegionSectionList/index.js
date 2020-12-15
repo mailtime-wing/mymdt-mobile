@@ -31,7 +31,7 @@ const supportedDataAPIType = [
   bankSyncServerDataAPIType.CREDIGO,
 ];
 
-const ChooseRegionScreen = ({onItemPress}) => {
+const RegionSectionList = ({onItemPress}) => {
   const {data: userData, loading} = useQueryWithAuth(GET_USER_PHONE_NUMBER);
   const userPhoneNumber = userData?.userProfile?.phoneNumber;
   const userCountryCode = userPhoneNumber
@@ -151,4 +151,4 @@ const ChooseRegionScreen = ({onItemPress}) => {
   );
 };
 
-export default ChooseRegionScreen;
+export default RegionSectionList;
