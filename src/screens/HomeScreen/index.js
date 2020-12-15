@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
-import {ScrollView, View} from 'react-native';
+import {ScrollView, View, TouchableOpacity} from 'react-native';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {FormattedMessage} from 'react-intl';
 import {GET_CHECK_USER_CAN_UPGRADE_DATA, GET_MERCHANTS_API} from '@/api/data';
@@ -21,7 +21,13 @@ import BagIcon from '@/assets/icon_shopping-bag.svg';
 import ReferralIcon from '@/assets/referral_icon.svg';
 import MailIcon from '@/assets/icon_mail.svg';
 
-import {container, imageStyle, upgradeSection, sectionMargin} from './style';
+import {
+  container,
+  imageStyle,
+  upgradeSection,
+  sectionMargin,
+  cardContainer,
+} from './style';
 import {useTheme} from 'emotion-theming';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -175,6 +181,10 @@ const HomeScreen = ({navigation}) => {
     navigation.navigate('membership_detail', {showNextLevel: true});
   };
 
+  const handleMembershipCardPress = () => {
+    navigation.navigate('membership_detail');
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -185,7 +195,11 @@ const HomeScreen = ({navigation}) => {
     <LinearGradientBackground colors={levelGradientMap[userLevel].gradient}>
       <ScreenContainer hasTopBar headerTransparent>
         <ScrollView>
-          <MembershipCard userLevel={userLevel} style={imageStyle} />
+          <TouchableOpacity
+            onPress={handleMembershipCardPress}
+            style={cardContainer}>
+            <MembershipCard userLevel={userLevel} style={imageStyle} />
+          </TouchableOpacity>
           <View style={container(theme)}>
             {userLevel !== maximumLevel && (
               <UpgradeSection

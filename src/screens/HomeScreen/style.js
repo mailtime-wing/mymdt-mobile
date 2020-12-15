@@ -5,15 +5,20 @@ export const container = (theme) => css`
   height: 100%;
 `;
 
+export const cardContainer = css`
+  z-index: 1;
+  margin-top: 16px;
+  align-self: center;
+`;
+
 export const imageStyle = css`
   align-self: center;
-  margin-top: 16px;
-  z-index: 1;
 `;
 
 export const upgradeSection = css`
   margin-top: -88px;
   padding-top: 90px;
+  z-index: -1;
 `;
 
 export const sectionMargin = css`
