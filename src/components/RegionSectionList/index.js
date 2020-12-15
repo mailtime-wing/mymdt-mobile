@@ -1,7 +1,9 @@
 import React, {useMemo} from 'react';
+import {View, SectionList} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
+import HeaderTitle from '@/components/HeaderTitle';
 import useFetch from '@/hooks/useFetch';
 import bankSyncServerDataAPIType from '@/enum/bankSyncServerDataAPIType';
 import {GET_USER_PHONE_NUMBER} from '@/api/data';
@@ -9,15 +11,13 @@ import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import countryCodeData from '@/constants/countryCode';
 
 import {
-  SectionList,
-  Header,
-  Title,
   Description,
   Section,
   SectionText,
   Item,
   ItemText,
   CountryFlag,
+  styles,
 } from './style';
 
 const initialFetchOptions = {
@@ -131,21 +131,22 @@ const RegionSectionList = ({onItemPress}) => {
           <SectionText>{continent}</SectionText>
         </Section>
       )}
+      contentContainerStyle={styles.contentContainerStyle}
       ListHeaderComponent={
-        <Header>
-          <Title>
+        <View>
+          <HeaderTitle>
             <FormattedMessage
               id="choose_region"
               defaultMessage="Choose region"
             />
-          </Title>
+          </HeaderTitle>
           <Description>
             <FormattedMessage
               id="choose_issue_region"
               defaultMessage="Choose the issue region of your credit/debit card."
             />
           </Description>
-        </Header>
+        </View>
       }
     />
   );

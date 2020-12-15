@@ -1,34 +1,17 @@
+import {StyleSheet} from 'react-native';
 import styled from '@emotion/native';
 
 import AppText from '@/components/AppText2';
-import ScreenContainer from '@/components/ScreenContainer';
 import withAttrs from '@/utils/withAttrs';
-
-export const Container = styled(ScreenContainer)`
-  flex: 1;
-`;
-
-export const SectionList = styled.SectionList`
-  flex: 1;
-  margin-bottom: 40px;
-`;
-
-export const Header = styled.View`
-  padding-horizontal: 24px;
-  margin-bottom: 24px;
-`;
-
-export const Title = styled(withAttrs(AppText, {variant: 'heading1'}))`
-  color: ${(props) => props.theme.colors.secondary.normal};
-  margin-bottom: 24px;
-`;
 
 export const Description = styled(withAttrs(AppText, {variant: 'body1'}))`
   color: ${(props) => props.theme.colors.textOnBackground.mediumEmphasis};
+  margin-horizontal: 24px;
 `;
 
 export const Section = styled.View`
   padding: 16px 24px;
+  background-color: ${(props) => props.theme.colors.background1};
 `;
 
 export const SectionText = styled(withAttrs(AppText, {variant: 'label'}))`
@@ -51,3 +34,9 @@ export const CountryFlag = styled.Image`
   margin-right: 16px;
   border-radius: 20px;
 `;
+
+export const styles = StyleSheet.create({
+  contentContainerStyle: {
+    paddingBottom: 24,
+  },
+});
