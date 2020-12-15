@@ -5,7 +5,7 @@ import RegionSectionList from '@/components/RegionSectionList';
 
 import {container} from './style';
 
-const ChooseRegionScreen = ({navigation}) => (
+const ChooseRegionSettingScreen = ({navigation}) => (
   <View style={container}>
     <RegionSectionList
       onItemPress={(item) =>
@@ -15,4 +15,4 @@ const ChooseRegionScreen = ({navigation}) => (
   </View>
 );
 
-export default ChooseRegionScreen;
+export default ChooseRegionSettingScreen;
