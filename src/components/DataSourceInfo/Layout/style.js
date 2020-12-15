@@ -2,14 +2,18 @@ import {css} from '@emotion/native';
 import {transparentize} from 'polished';
 
 export const layout = css`
-  padding-top: 16px;
+  flex: 1;
+  justify-content: space-between;
+`;
+
+export const contentContainer = css`
+  flex: 1;
   align-items: center;
 `;
 
 export const icons = css`
   flex-direction: row;
   align-items: center;
-  margin-bottom: 40px;
 `;
 
 export const circleBackground = css`
@@ -48,7 +52,6 @@ export const logoPosition = css`
 export const title = (theme) => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
   text-align: center;
-  margin-bottom: 40px;
 `;
 
 export const descriptionBoxContainer = (theme) => css`
@@ -56,7 +59,6 @@ export const descriptionBoxContainer = (theme) => css`
   background-color: ${theme.colors.detailBox.secondary};
   border-radius: 16px;
   padding: 24px;
-  margin-bottom: 40px;
 `;
 
 export const descriptionLineContainer = css`

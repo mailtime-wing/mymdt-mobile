@@ -1,5 +1,4 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 
 import Layout from './Layout';
@@ -128,13 +127,7 @@ const DataSourceInfo = ({type, onContinuePress}) => {
   const layout = layouts[type];
 
   return (
-    <ScrollView>
-      <Layout
-        style={screenStyle}
-        {...layout}
-        onContinuePress={onContinuePress}
-      />
-    </ScrollView>
+    <Layout style={screenStyle} {...layout} onContinuePress={onContinuePress} />
   );
 };
 

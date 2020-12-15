@@ -12,6 +12,7 @@ import {Svg, Path} from 'react-native-svg';
 
 import {
   layout,
+  contentContainer,
   icons,
   circleBackground,
   iconShadow,
@@ -27,6 +28,10 @@ import {
   button,
 } from './style';
 import {FormattedMessage} from 'react-intl';
+
+const FlexBox = ({flexBasis, flexShrink}) => (
+  <View style={{flexBasis, flexShrink}} />
+);
 
 // create this SVG component because current <AppIcon /> do not support multi fill color
 const Lock = () => {
@@ -94,74 +99,80 @@ const Layout = ({
 
   return (
     <View style={[layout, style]}>
-      <View style={icons}>
-        <View
-          style={[
-            circleBackground,
-            css`
-              ${theme.colors.elevatedBackgroundMedium}
-            `,
-          ]}>
-          <AppIcon
-            sizeVariant="normal"
-            color={theme.colors.secondary.normal}
-            svgIcon={PhoneIcon}
-          />
-        </View>
-        {[...Array(6)].map((_, i) => (
-          <View key={i} style={dashDot(theme)} />
-        ))}
-        <View>
-          <ShieldIcon
-            fill={shieldColor}
-            style={[
-              css`
-                ${theme.colors.elevatedBackgroundMedium}
-              `,
-              iconShadow,
-            ]}
-          />
+      <View style={contentContainer}>
+        <FlexBox flexBasis={16} flexShrink={1} />
+        <View style={icons}>
           <View
             style={[
+              circleBackground,
               css`
                 ${theme.colors.elevatedBackgroundMedium}
               `,
-              logoPosition,
             ]}>
-            {logo}
+            <AppIcon
+              sizeVariant="normal"
+              color={theme.colors.secondary.normal}
+              svgIcon={PhoneIcon}
+            />
+          </View>
+          {[...Array(6)].map((_, i) => (
+            <View key={i} style={dashDot(theme)} />
+          ))}
+          <View>
+            <ShieldIcon
+              fill={shieldColor}
+              style={[
+                css`
+                  ${theme.colors.elevatedBackgroundMedium}
+                `,
+                iconShadow,
+              ]}
+            />
+            <View
+              style={[
+                css`
+                  ${theme.colors.elevatedBackgroundMedium}
+                `,
+                logoPosition,
+              ]}>
+              {logo}
+            </View>
+          </View>
+          {[...Array(6)].map((_, i) => (
+            <View key={i} style={dashDot(theme)} />
+          ))}
+          <View
+            style={[
+              circleBackground,
+              css`
+                ${theme.colors.elevatedBackgroundMedium}
+              `,
+            ]}>
+            <AppIcon
+              sizeVariant="normal"
+              color={theme.colors.secondary.normal}
+              svgIcon={rightIcon}
+            />
           </View>
         </View>
-        {[...Array(6)].map((_, i) => (
-          <View key={i} style={dashDot(theme)} />
-        ))}
-        <View
-          style={[
-            circleBackground,
-            css`
-              ${theme.colors.elevatedBackgroundMedium}
-            `,
-          ]}>
-          <AppIcon
-            sizeVariant="normal"
-            color={theme.colors.secondary.normal}
-            svgIcon={rightIcon}
-          />
+        <FlexBox flexBasis={40} flexShrink={1} />
+        <AppText variant="heading3" style={titleStyle(theme)}>
+          {title}
+        </AppText>
+        <FlexBox flexBasis={40} flexShrink={1} />
+        <View style={descriptionBoxContainer(theme)}>
+          {descriptions.map((descriptionLine, i) => [
+            <DescriptionLine
+              key={descriptionLine.title}
+              title={descriptionLine.title}
+              caption={descriptionLine.caption}
+            />,
+            i < descriptions.length - 1 && (
+              <View key={`separator-${i}`} style={descriptionLineSeparator} />
+            ),
+          ])}
         </View>
-      </View>
-      <AppText variant="heading3" style={titleStyle(theme)}>
-        {title}
-      </AppText>
-      <View style={descriptionBoxContainer(theme)}>
-        {descriptions.map((descriptionLine, i) => [
-          <DescriptionLine
-            key={descriptionLine.title}
-            title={descriptionLine.title}
-            caption={descriptionLine.caption}
-          />,
-          i < descriptions.length - 1 && (
-            <View key={`separator-${i}`} style={descriptionLineSeparator} />
-          ),
-        ])}
+        <FlexBox flexBasis={40} flexShrink={1} />
       </View>
       <AppButton
         style={button}
