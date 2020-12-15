@@ -7934,8 +7934,8 @@ react-native-linear-gradient@^2.5.6:
   integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
 "react-native-mailtime-push@https://github.com/measurabledatatoken/react-native-mailtime-push.git":
-  version "1.0.1"
-  resolved "https://github.com/measurabledatatoken/react-native-mailtime-push.git#d5df6c0170beb6b1a73bc68f3f25bb4a1f1214f9"
+  version "1.0.2"
+  resolved "https://github.com/measurabledatatoken/react-native-mailtime-push.git#56e8bb2303b7f48d6e8ec686f26a5d3a226e6f70"
 
 "react-native-mailtime-sdk@https://github.com/measurabledatatoken/react-native-mailtime-sdk.git":
   version "0.1.2"
