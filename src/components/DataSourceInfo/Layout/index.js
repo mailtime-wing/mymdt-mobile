@@ -107,12 +107,22 @@ const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
         <View>
           <ShieldIcon
             fill={shieldColor}
-            style={iconShadow}
-            // width={60}
-            // height={76}
-            // viewBox="0 0 60 76"
+            style={[
+              css`
+                ${theme.colors.elevatedBackgroundMedium}
+              `,
+              iconShadow,
+            ]}
           />
-          <View style={logoPosition}>{logo}</View>
+          <View
+            style={[
+              css`
+                ${theme.colors.elevatedBackgroundMedium}
+              `,
+              logoPosition,
+            ]}>
+            {logo}
+          </View>
         </View>
         {[...Array(6)].map((_, i) => (
           <View key={i} style={dashDot(theme)} />

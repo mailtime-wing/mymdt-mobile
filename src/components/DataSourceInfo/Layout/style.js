@@ -20,7 +20,11 @@ export const circleBackground = css`
 `;
 
 export const iconShadow = css`
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: transparent;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
 `;
 
 export const dashDot = (theme) => css`
@@ -37,6 +41,7 @@ export const logoPosition = css`
   top: 14;
   left: 0;
   right: 0;
+  background-color: transparent;
 `;
 
 export const title = (theme) => css`
