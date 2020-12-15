@@ -78,7 +78,14 @@ const DescriptionLine = ({title, caption}) => {
   );
 };
 
-const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
+const Layout = ({
+  style,
+  logo,
+  rightIcon,
+  title,
+  descriptions,
+  onContinuePress,
+}) => {
   const theme = useTheme();
   const backgroundColorRegexp = /(background-color:\s)(#.{6})/;
   const shieldColor = backgroundColorRegexp.exec(
@@ -86,7 +93,7 @@ const Layout = ({logo, rightIcon, title, descriptions, onContinuePress}) => {
   )[2];
 
   return (
-    <View style={layout}>
+    <View style={[layout, style]}>
       <View style={icons}>
         <View
           style={[

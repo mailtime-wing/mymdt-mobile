@@ -5,7 +5,6 @@ import {FormattedMessage} from 'react-intl';
 import Layout from './Layout';
 import {screenStyle} from './style';
 
-import ScreenContainer from '@/components/ScreenContainer';
 import bankSyncServerDataAPIType from '@/enum/bankSyncServerDataAPIType';
 import MailTimeLogo from '@/assets/logo_mailtime.svg';
 import PlaidLogo from '@/assets/logo_plaid.svg';
@@ -130,9 +129,11 @@ const DataSourceInfo = ({type, onContinuePress}) => {
 
   return (
     <ScrollView>
-      <ScreenContainer hasTopBar style={screenStyle}>
-        <Layout {...layout} onContinuePress={onContinuePress} />
-      </ScreenContainer>
+      <Layout
+        style={screenStyle}
+        {...layout}
+        onContinuePress={onContinuePress}
+      />
     </ScrollView>
   );
 };
