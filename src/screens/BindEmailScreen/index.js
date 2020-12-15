@@ -1,5 +1,5 @@
 import React, {useEffect, useLayoutEffect} from 'react';
-import {ScrollView} from 'react-native';
+import {View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {Formik} from 'formik';
 import {useTheme} from 'emotion-theming';
@@ -10,13 +10,13 @@ import AppButton from '@/components/AppButton';
 import BackButton from '@/components/BackButton';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import ScreenContainer from '@/components/ScreenContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import useMailTimeSdk from '@/hooks/useMailTimeSdk';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {GET_USER_EMAIL_ACCOUNTS_API} from '@/api/data';
 
-import {scrollContainer, detailStyle, title} from './style';
+import {container, innerContainer, formContainer, detailStyle} from './style';
 
 const BindEmailScreen = ({route, navigation}) => {
   const navigateFromEdit = route?.params?.navigateFromEdit;
@@ -76,7 +76,7 @@ const BindEmailScreen = ({route, navigation}) => {
       );
     }
 
-    const emailRegex = /[^@]+@[^\.]+\..+/;
+    const emailRegex = /[^@]+@[^.]+\..+/;
     if (!errors.email && !emailRegex.test(values.email)) {
       errors.email = (
         <FormattedMessage
@@ -103,14 +103,14 @@ const BindEmailScreen = ({route, navigation}) => {
   };
 
   return (
-    <ScrollView style={scrollContainer}>
-      <ScreenContainer hasTopBar>
-        <AppText variant="heading1" style={title(theme)}>
-          <FormattedMessage
-            id="bind_email_accounts"
-            defaultMessage="Bind Emails"
-          />
-        </AppText>
+    <View style={container}>
+      <HeaderTitle>
+        <FormattedMessage
+          id="bind_email_accounts"
+          defaultMessage="Bind Emails"
+        />
+      </HeaderTitle>
+      <View style={innerContainer}>
         <AppText variant="body1" style={detailStyle(theme)}>
           <FormattedMessage id="dont_worry" />
         </AppText>
@@ -119,7 +119,7 @@ const BindEmailScreen = ({route, navigation}) => {
           onSubmit={handleConnectPress}
           validate={validate}>
           {({handleSubmit, isValid}) => (
-            <>
+            <View style={formContainer}>
               <Input
                 label={<FormattedMessage id="email" defaultMessage="Email" />}
                 required
@@ -139,18 +139,18 @@ const BindEmailScreen = ({route, navigation}) => {
                 sizeVariant="large"
                 colorVariant="secondary"
               />
-            </>
+            </View>
           )}
         </Formik>
-        {loginFail && (
-          <PopupModal
-            title="Fail"
-            detail="Login Fail"
-            callback={handlePopupPress}
-          />
-        )}
-      </ScreenContainer>
-    </ScrollView>
+      </View>
+      {loginFail && (
+        <PopupModal
+          title="Fail"
+          detail="Login Fail"
+          callback={handlePopupPress}
+        />
+      )}
+    </View>
   );
 };
 
