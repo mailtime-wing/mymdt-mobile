@@ -97,7 +97,7 @@ const reducer = (state, action) => {
   }
 };
 
-const BindEmailEditScreen = ({navigation}) => {
+const LinkedEmailsSettingScreen = ({navigation}) => {
   const theme = useTheme();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [emails, setEmails] = useState([{id: null, emailAddress: ''}]);
@@ -263,4 +263,4 @@ const BindEmailEditScreen = ({navigation}) => {
   );
 };
 
-export default BindEmailEditScreen;
+export default LinkedEmailsSettingScreen;

@@ -34,7 +34,7 @@ import LinkedEmailsScreen from '@/screens/LinkedEmailsScreen';
 
 import NotificationScreen from '@/screens/NotificationScreen';
 import UserProfileEditScreen from '@/screens/UserProfileEditScreen';
-import BindEmailEditScreen from '@/screens/BindEmailEditScreen';
+import LinkedEmailsSettingScreen from '@/screens/LinkedEmailsSettingScreen';
 import SettingScreen from '@/screens/SettingScreen';
 import AppSettingScreen from '@/screens/AppSettingScreen';
 
@@ -233,7 +233,7 @@ const settingScreens = [
   {name: 'offers_preference_edit', component: MerchantPreferenceEditScreen},
   {name: 'merchants_preference', component: MerchantSelectScreen},
   {name: 'emails_binding', component: BindEmailScreen}, // same as add_email in setupScreens (but different navigator)
-  {name: 'linked_emails_setting', component: BindEmailEditScreen}, // enter by the user menu
+  {name: 'linked_emails_setting', component: LinkedEmailsSettingScreen}, // enter by the user menu
   {name: 'account_security', component: AccountSecurityScreen},
   {name: 'verify_phone_number', component: VerifyPhoneNumberScreen},
   {name: 'change_phone_number', component: ChangePhoneNumberScreen},
