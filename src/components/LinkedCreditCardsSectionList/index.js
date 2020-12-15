@@ -28,7 +28,6 @@ import ChooseSubtypeModal from './ChooseSubtypeModal';
 
 import {
   headerContainer,
-  title,
   description,
   errorView,
   errorMessage,
@@ -104,10 +103,7 @@ const ListHeader = ({anyUnknownCard}) => {
         {anyUnknownCard && (
           <View style={errorView(theme)}>
             <AppText variant="body2" style={errorMessage(theme)}>
-              <FormattedMessage
-                id="itMayTakeSomeTimeToAnalyze"
-                defaultMessage="It may take some time to analyze your shopping e-receipts. We will notify you once it’s done."
-              />
+              <FormattedMessage id="youCannonEarnCashbackFrom" />
             </AppText>
           </View>
         )}

@@ -5,11 +5,6 @@ export const headerContainer = css`
   margin-bottom: 16px;
 `;
 
-export const title = (theme) => css`
-  color: ${theme.colors.secondary.normal};
-  margin-bottom: 24px;
-`;
-
 export const description = (theme) => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;

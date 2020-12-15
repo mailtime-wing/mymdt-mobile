@@ -183,6 +183,7 @@
   "tap_to_open": "Tap to open",
   "linkedBankAccounts": "Linked Bank Accounts",
   "itMayTakeSomeTimeToAnalyze": "It may take some time to analyze your shopping e-receipts. We will notify you once it’s done.",
+  "youCannonEarnCashbackFrom": "You cannot earn cash back from certain cards until you resolve the issues.",
   "unknownCardType": "Unknown card type",
   "selectCardTypeFor": "Select the card type for •••• {mask}",
   "VISA": "VISA",
