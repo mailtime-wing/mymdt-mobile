@@ -8,11 +8,11 @@ export const content = css`
   flex: 1;
 `;
 
-export const inner = css`
+export const inner = (theme) => css`
   justify-content: space-between;
   flex: 1;
   padding-horizontal: 24px;
-  padding-bottom: 24px;
+  padding-bottom: ${String(theme.space.marginBetweenContentAndScreenBottom)}px;
 `;
 
 export const title = (theme) => css`

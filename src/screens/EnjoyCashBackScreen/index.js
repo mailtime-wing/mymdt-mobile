@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Image} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
@@ -14,14 +15,14 @@ const EnjoyCashBackScreen = () => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
   return (
-    <View style={container}>
+    <SafeAreaView forceInset={{bottom: 'always'}} style={container}>
       <HeaderTitle>
         <FormattedMessage
           id="enjoy_cashback"
           defaultMessage="Enjoy Cash Back"
         />
       </HeaderTitle>
-      <View style={inner}>
+      <View style={inner(theme)}>
         <View style={content}>
           <AppText variant="body1" style={detail(theme)}>
             <FormattedMessage
@@ -43,7 +44,7 @@ const EnjoyCashBackScreen = () => {
           colorVariant="secondary"
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
