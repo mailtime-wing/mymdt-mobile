@@ -1,10 +1,10 @@
 import {css} from '@emotion/native';
 import {StyleSheet} from 'react-native';
 
-export const container = css`
+export const container = (theme) => css`
   flex: 1;
-  padding-bottom: 24px;
   justify-content: space-between;
+  margin-bottom: ${String(theme.space.marginBetweenContentAndScreenBottom)}px;
 `;
 
 export const cardSectionContainer = css`
@@ -55,7 +55,7 @@ export const image = css`
 
 export const marginBetweenCarouselAndPagination = css`
   flex-basis: 58;
-  flex-shrink: 6;
+  flex-shrink: 7;
 `;
 
 export const styles = StyleSheet.create({

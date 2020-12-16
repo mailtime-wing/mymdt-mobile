@@ -115,19 +115,25 @@ const CardSection = () => {
   );
 };
 
-const OnboardingScreen = ({navigation}) => (
-  <SafeAreaView style={container}>
-    <CardSection />
-    <View style={paddingHorizontal}>
-      <AppButton
-        onPress={() => navigation.navigate('enter')}
-        text="start earning"
-        variant="filled"
-        sizeVariant="large"
-        colorVariant="secondary"
-      />
-    </View>
-  </SafeAreaView>
-);
+const OnboardingScreen = ({navigation}) => {
+  const theme = useTheme();
+
+  return (
+    <SafeAreaView
+      forceInset={{top: 'always', bottom: 'always'}}
+      style={container(theme)}>
+      <CardSection />
+      <View style={paddingHorizontal}>
+        <AppButton
+          onPress={() => navigation.navigate('enter')}
+          text="start earning"
+          variant="filled"
+          sizeVariant="large"
+          colorVariant="secondary"
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
 
 export default OnboardingScreen;
