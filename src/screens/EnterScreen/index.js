@@ -1,11 +1,14 @@
 import React, {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import {IntlContext} from '@/context/Intl';
 import LoginForm from '@/components/LoginForm';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {GET_OTP_API} from '@/api/auth';
 import errorCodeEnum from '@/enum/errorCode';
+
+import {container} from './style';
 
 const EnterScreen = ({navigation}) => {
   const {localeEnum} = useContext(IntlContext);
@@ -66,17 +69,21 @@ const EnterScreen = ({navigation}) => {
   };
 
   return (
-    <LoginForm
-      title={<FormattedMessage id="welcome_to_reward_me" />}
-      description={<FormattedMessage id="setting_up_agree_terms_and_policy" />}
-      submitButtonText={
-        <FormattedMessage
-          id="button.send_verification_code"
-          defaultMessage="send verification code"
-        />
-      }
-      onSubmit={handleSubmitPress}
-    />
+    <SafeAreaView forceInset={{bottom: 'always'}} style={container}>
+      <LoginForm
+        title={<FormattedMessage id="welcome_to_reward_me" />}
+        description={
+          <FormattedMessage id="setting_up_agree_terms_and_policy" />
+        }
+        submitButtonText={
+          <FormattedMessage
+            id="button.send_verification_code"
+            defaultMessage="send verification code"
+          />
+        }
+        onSubmit={handleSubmitPress}
+      />
+    </SafeAreaView>
   );
 };
 

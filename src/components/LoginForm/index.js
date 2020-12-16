@@ -48,7 +48,7 @@ const InternalLoginForm = ({title, submitButtonText, description}) => {
 
   return (
     <AppKeyboardAvoidingView style={container} behavior="padding">
-      <View style={formView}>
+      <View style={formView(theme)}>
         <View>
           {title && <HeaderTitle>{title}</HeaderTitle>}
           <View style={formBody}>
