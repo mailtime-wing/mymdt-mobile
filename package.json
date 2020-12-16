@@ -50,6 +50,7 @@
     "react-native-image-picker": "^2.3.1",
     "react-native-inappbrowser-reborn": "^3.4.0",
     "react-native-linear-gradient": "^2.5.6",
+    "react-native-localize": "^2.0.1",
     "react-native-mailtime-push": "https://github.com/measurabledatatoken/react-native-mailtime-push.git",
     "react-native-mailtime-sdk": "https://github.com/measurabledatatoken/react-native-mailtime-sdk.git",
     "react-native-raw-bottom-sheet": "^2.1.0",

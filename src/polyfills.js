@@ -4,6 +4,7 @@ import {shouldPolyfill as shouldPolyfillLocale} from '@formatjs/intl-locale/shou
 import {shouldPolyfill as shouldPolyfillPluralRules} from '@formatjs/intl-pluralrules/should-polyfill';
 import {shouldPolyfill as shouldPolyfillNumberFormat} from '@formatjs/intl-numberformat/should-polyfill';
 import {shouldPolyfill as shouldPolyfillDateTimeFormat} from '@formatjs/intl-datetimeformat/should-polyfill';
+import * as RNLocalize from 'react-native-localize';
 
 /**
  * This is polyfill required for `Intl` (which is required by `react-intl`)
@@ -51,5 +52,9 @@ if (shouldPolyfillDateTimeFormat()) {
 
     require('@formatjs/intl-datetimeformat/locale-data/en-US');
     require('@formatjs/intl-datetimeformat/locale-data/zh');
+  }
+
+  if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
+    Intl.DateTimeFormat.__setDefaultTimeZone(RNLocalize.getTimeZone());
   }
 }

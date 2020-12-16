@@ -347,6 +347,8 @@ PODS:
     - React
   - RNInAppBrowser (3.4.0):
     - React
+  - RNLocalize (2.0.1):
+    - React-Core
   - RNReanimated (1.8.0):
     - React
   - RNScreens (2.7.0):
@@ -430,6 +432,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNInAppBrowser (from `../node_modules/react-native-inappbrowser-reborn`)
+  - RNLocalize (from `../node_modules/react-native-localize`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - "RNSentry (from `../node_modules/@sentry/react-native`)"
@@ -548,6 +551,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNInAppBrowser:
     :path: "../node_modules/react-native-inappbrowser-reborn"
+  RNLocalize:
+    :path: "../node_modules/react-native-localize"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -620,6 +625,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: bdd61e8b070d13a1dd9d022091981075ed4cde16
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNInAppBrowser: c1a0dad2734458d79bcb6c8f4297ba8658a1da9f
+  RNLocalize: 41026b7c14878f1a1b381bc79f668f1fbf841adb
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
   RNSentry: 51972e3fe50e2fb38ae459af8c87d61f63f364db
