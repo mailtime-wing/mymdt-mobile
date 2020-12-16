@@ -2,7 +2,7 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
-import {container, button} from './style';
+import {container} from './style';
 
 import useSetupFlow from '@/hooks/useSetupFlow';
 import AppButton from '@/components/AppButton';
@@ -30,7 +30,6 @@ const IntroductionScreen = () => {
             />
           }
           onPress={() => navigateByFlow('skip')}
-          style={button}
         />
       </ChooseBindDataSource>
     </SafeAreaView>
