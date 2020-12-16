@@ -6,7 +6,7 @@ import {container} from './style';
 
 import ChooseBindDataSource from '@/components/ChooseBindDataSource';
 
-const IntroductionSettingScreen = ({navigation}) => {
+const ChooseBindDataSourceSettingScreen = ({navigation}) => {
   const theme = useTheme();
 
   useLayoutEffect(() => {
@@ -37,4 +37,4 @@ const IntroductionSettingScreen = ({navigation}) => {
   );
 };
 
-export default IntroductionSettingScreen;
+export default ChooseBindDataSourceSettingScreen;

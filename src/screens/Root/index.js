@@ -20,7 +20,7 @@ import LoadingScreen from '@/screens/LoadingScreen';
 import NotificationPermissionScreen from '@/screens/NotificationPermissionScreen';
 import AccountSetupDoneScreen from '@/screens/AccountSetupDoneScreen';
 import ChooseCashBackTypeScreen from '@/screens/ChooseCashBackTypeScreen';
-import IntroductionScreen from '@/screens/IntroductionScreen';
+import ChooseBindDataSourceOnboardingScreen from '@/screens/ChooseBindDataSourceOnboardingScreen';
 import WelcomeScreen from '@/screens/WelcomeScreen';
 import EnjoyCashBackScreen from '@/screens/EnjoyCashBackScreen';
 import CongratulationsScreen from '@/screens/CongratulationsScreen';
@@ -55,7 +55,7 @@ import ChooseRegionSettingScreen from '@/screens/ChooseRegionSettingScreen';
 import ChooseCashBackTypeSettingScreen from '@/screens/ChooseCashBackTypeSettingScreen';
 import EmailDataSourceInfoSettingScreen from '@/screens/EmailDataSourceInfoSettingScreen';
 import BankDataSourceInfoSettingScreen from '@/screens/BankDataSourceInfoSettingScreen';
-import IntroductionSettingScreen from '@/screens/IntroductionSettingScreen';
+import ChooseBindDataSourceSettingScreen from '@/screens/ChooseBindDataSourceSettingScreen';
 import ReferralScreen from '@/screens/ReferralScreen';
 
 // wallet page
@@ -111,7 +111,7 @@ const setupScreens = [
   // 5th step: bind email (which is skippable)
   {
     name: 'introduction',
-    component: IntroductionScreen,
+    component: ChooseBindDataSourceOnboardingScreen,
     options: {headerShown: false},
   },
   {
@@ -219,7 +219,7 @@ const authModalScreens = [
   },
   {
     name: 'choose_bind_data_source_setting',
-    component: IntroductionSettingScreen,
+    component: ChooseBindDataSourceSettingScreen,
   },
 ];
 

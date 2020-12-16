@@ -9,7 +9,7 @@ import AppButton from '@/components/AppButton';
 import ChooseBindDataSource from '@/components/ChooseBindDataSource';
 import SafeAreaView from 'react-native-safe-area-view';
 
-const IntroductionScreen = () => {
+const ChooseBindDataSourceOnboardingScreen = () => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
   return (
@@ -36,4 +36,4 @@ const IntroductionScreen = () => {
   );
 };
 
-export default IntroductionScreen;
+export default ChooseBindDataSourceOnboardingScreen;
