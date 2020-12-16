@@ -1,9 +1,5 @@
 import {css} from '@emotion/native';
 
-export const button = css`
-  margin-bottom: 16px;
-`;
-
 export const container = (theme) => css`
   ${theme.colors.elevatedDarkerCardFlat};
   flex-direction: row;

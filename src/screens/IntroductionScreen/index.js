@@ -13,24 +13,26 @@ const IntroductionScreen = () => {
   const theme = useTheme();
   const {navigateByFlow} = useSetupFlow();
   return (
-    <SafeAreaView style={container(theme)}>
+    <SafeAreaView
+      forceInset={{bottom: 'always', top: 'always'}}
+      style={container(theme)}>
       <ChooseBindDataSource
         onEmailChoose={() => navigateByFlow('email_flow')}
-        onBankChoose={() => navigateByFlow('card_flow')}
-      />
-      <AppButton
-        variant="outlined"
-        sizeVariant="normal"
-        colorVariant="contrast"
-        text={
-          <FormattedMessage
-            id="button.skip_for_now"
-            defaultMessage="Skip for now"
-          />
-        }
-        onPress={() => navigateByFlow('skip')}
-        style={button}
-      />
+        onBankChoose={() => navigateByFlow('card_flow')}>
+        <AppButton
+          variant="outlined"
+          sizeVariant="normal"
+          colorVariant="contrast"
+          text={
+            <FormattedMessage
+              id="button.skip_for_now"
+              defaultMessage="Skip for now"
+            />
+          }
+          onPress={() => navigateByFlow('skip')}
+          style={button}
+        />
+      </ChooseBindDataSource>
     </SafeAreaView>
   );
 };

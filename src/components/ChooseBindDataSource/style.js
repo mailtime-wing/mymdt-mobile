@@ -5,16 +5,18 @@ import {css} from '@emotion/native';
 const {width} = Dimensions.get('window');
 const scaleDown = width <= 375;
 
-export const bodyContainer = css`
-  flex-shrink: 1;
+export const bodyContainer = (theme) => css`
+  flex: 1;
+  background: ${theme.colors.themeBackground};
   padding-horizontal: ${scaleDown ? '16px' : '24px'};
+  padding-bottom: ${String(theme.space.marginBetweenContentAndScreenBottom)}px;
 `;
 
 export const backgroundImage = css`
   align-self: center;
   margin-bottom: 16px;
   max-width: 100%;
-  flex-shrink: 1;
+  flex: 1;
 `;
 
 export const titleStyle = (theme) => css`
@@ -27,4 +29,8 @@ export const detailStyle = (theme) => css`
   color: ${theme.colors.textOnThemeBackground.mediumEmphasis};
   text-align: center;
   margin-bottom: 16px;
+`;
+
+export const margin = css`
+  margin-vertical: 8px;
 `;

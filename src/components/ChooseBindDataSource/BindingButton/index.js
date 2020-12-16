@@ -3,13 +3,13 @@ import {View, TouchableOpacity} from 'react-native';
 import AppText from '@/components/AppText2';
 import AppIcon from '@/components/AppIcon';
 
-import {button, container, header, textContainer} from './style';
+import {container, header, textContainer} from './style';
 import {useTheme} from 'emotion-theming';
 
 const BindingButton = ({icon, title, caption, ...props}) => {
   const theme = useTheme();
   return (
-    <TouchableOpacity style={button} {...props}>
+    <TouchableOpacity {...props}>
       <View style={container(theme)}>
         <AppIcon
           svgIcon={icon}

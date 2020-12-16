@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {View} from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 import {useTheme} from 'emotion-theming';
 
 import {container} from './style';
@@ -20,7 +20,7 @@ const IntroductionSettingScreen = ({navigation}) => {
   });
 
   return (
-    <View style={container(theme)}>
+    <SafeAreaView forceInset={{bottom: 'always'}} style={container(theme)}>
       <ChooseBindDataSource
         onEmailChoose={() =>
           navigation.navigate('settings', {
@@ -33,7 +33,7 @@ const IntroductionSettingScreen = ({navigation}) => {
           })
         }
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -1,6 +1,10 @@
 import {Platform} from 'react-native';
 import {transparentize} from 'polished';
 
+const space = {
+  marginBetweenContentAndScreenBottom: 16,
+};
+
 export const darkTheme = {
   colors: {
     // main theme
@@ -158,6 +162,7 @@ export const darkTheme = {
   fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36, 48, 11],
   fontWeights: [400, 500, 600, 700],
   lineHeights: {},
+  space,
 };
 
 export const lightTheme = {
@@ -313,6 +318,7 @@ export const lightTheme = {
   fontSizes: [10, 12, 14, 16, 18, 20, 24, 30, 36, 48, 11],
   fontWeights: [400, 500, 600, 700],
   lineHeights: {},
+  space,
 };
 
 // main theme
