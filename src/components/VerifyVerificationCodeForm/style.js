@@ -4,10 +4,10 @@ export const container = css`
   flex: 1;
 `;
 
-export const inner = css`
+export const inner = (theme) => css`
   flex: 1;
   justify-content: space-between;
-  padding-bottom: 24px;
+  padding-bottom: ${String(theme.space.marginBetweenContentAndScreenBottom)}px;
 `;
 
 export const formBody = css`

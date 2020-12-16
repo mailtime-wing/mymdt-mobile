@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import {useIntl} from 'react-intl';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import {AuthContext} from '@/context/auth';
 import {IntlContext} from '@/context/Intl';
@@ -11,6 +12,8 @@ import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
 import {ENTER_API} from '@/api/auth';
+
+import {container} from './style';
 
 const VerifyEnterScreen = ({route}) => {
   const intl = useIntl();
@@ -73,26 +76,28 @@ const VerifyEnterScreen = ({route}) => {
   };
 
   return (
-    <VerifyVerificationCodeForm
-      title={<FormattedMessage id="enter_verification_code" />}
-      description={
-        <FormattedMessage
-          id="we_have_sent_otp"
-          values={{
-            phone_number: splitPhoneNumber(phoneNubmer),
-          }}
-        />
-      }
-      submitButtonText={
-        <FormattedMessage id="button.verify" defaultMessage="Verify" />
-      }
-      phoneNubmer={phoneNubmer}
-      otpActionKey="ENTER"
-      onSubmit={handleVerifyPress}
-      startCountdownOnMount={true}
-      initialCountdownSeconds={remainingSeconds}
-      requestOtpOnMount={false}
-    />
+    <SafeAreaView forceInset={{bottom: 'always'}} style={container}>
+      <VerifyVerificationCodeForm
+        title={<FormattedMessage id="enter_verification_code" />}
+        description={
+          <FormattedMessage
+            id="we_have_sent_otp"
+            values={{
+              phone_number: splitPhoneNumber(phoneNubmer),
+            }}
+          />
+        }
+        submitButtonText={
+          <FormattedMessage id="button.verify" defaultMessage="Verify" />
+        }
+        phoneNubmer={phoneNubmer}
+        otpActionKey="ENTER"
+        onSubmit={handleVerifyPress}
+        startCountdownOnMount={true}
+        initialCountdownSeconds={remainingSeconds}
+        requestOtpOnMount={false}
+      />
+    </SafeAreaView>
   );
 };
 

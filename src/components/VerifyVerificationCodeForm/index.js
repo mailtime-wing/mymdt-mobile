@@ -107,7 +107,7 @@ const VerifyVerificationCodeForm = ({
       onSubmit={onSubmit}
       validate={validate}>
       <AppKeyboardAvoidingView style={container} behavior="padding">
-        <View style={inner}>
+        <View style={inner(theme)}>
           <View>
             {title && <HeaderTitle>{title}</HeaderTitle>}
             <View style={formBody}>
