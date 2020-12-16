@@ -43,8 +43,9 @@ const MerchantSelectScreen = ({route, navigation}) => {
   } = useQueryWithAuth(GET_ALLOWED_MERCHANT_NUM);
   const [chooseMerchantRequest] = useMutationWithAuth(CHOOSE_MERCHANTS_API);
   const numberOfMerchant =
-    allowedMerchantNum &&
-    allowedMerchantNum.userProfile.membership.merchantsNumAllowed;
+    (allowedMerchantNum &&
+      allowedMerchantNum.userProfile.membership.merchantsNumAllowed) ||
+    0;
 
   const formatOfferString = () => {
     const result = selectedMerchants
@@ -142,25 +143,13 @@ const MerchantSelectScreen = ({route, navigation}) => {
           <AppText
             variant="label"
             style={brandSelectedText(theme, isErrorFromMerchantList)}>
-            {isErrorFromMerchantList ? (
-              <FormattedMessage
-                id="more_merchants_selected"
-                defaultMessage="MORE THAN {numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED"
-                values={{
-                  numberOfMerchant: numberOfMerchant,
-                  merchantCount: selectedMerchants.length,
-                }}
-              />
-            ) : (
-              <FormattedMessage
-                id="merchants_selected"
-                defaultMessage="{numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED"
-                values={{
-                  numberOfMerchant: selectedMerchants.length,
-                  merchantCount: selectedMerchants.length,
-                }}
-              />
-            )}
+            <FormattedMessage
+              id="merchants_selected"
+              values={{
+                selected: selectedMerchants.length,
+                total: numberOfMerchant,
+              }}
+            />
           </AppText>
           <AppButton
             onPress={handleNextPress}

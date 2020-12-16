@@ -27,8 +27,9 @@ export const fixedContainer = (theme) => css`
 
 export const fixedInnerContainer = (theme) => css`
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  padding-horizontal: 24px;
   padding-vertical: ${String(
     theme.space.marginBetweenContentAndScreenBottom,
   )}px;
@@ -38,8 +39,5 @@ export const brandSelectedText = (theme, isError) => css`
   color: ${isError
     ? theme.colors.textOnError.normal
     : theme.colors.secondary.normal};
-  margin-top: 16px;
-  margin-bottom: 16px;
-  max-width: 40%;
   text-align: left;
 `;
