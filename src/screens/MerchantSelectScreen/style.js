@@ -1,6 +1,10 @@
-import styled, {css} from '@emotion/native';
+import {css} from '@emotion/native';
 
-export const ScrollContainer = styled.ScrollView`
+export const container = css`
+  flex: 1;
+`;
+
+export const scrollInnerContainer = css`
   padding-left: 24px;
   padding-right: 24px;
 `;
@@ -10,28 +14,24 @@ export const detailStyle = (theme) => css`
   margin-bottom: 30px;
 `;
 
-export const titleStyle = (theme) => css`
-  color: ${theme.colors.secondary.normal};
-  margin-bottom: 30px;
-`;
-
 export const hightLightText = (theme) => css`
   color: ${theme.colors.secondary.dark};
 `;
 
-export const Container = styled.View`
-  flex: 1;
+export const fixedContainer = (theme) => css`
+  border-width: 1px;
+  border-radius: 24px 24px 0px 0px;
+  border-color: ${theme.colors.borderColor};
+  elevation: 1;
 `;
 
-export const FixedContainer = styled.View`
+export const fixedInnerContainer = (theme) => css`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  height: 110px;
-  border-width: 1px;
-  border-radius: 24px 24px 0px 0px;
-  border-color: ${(props) => props.theme.colors.borderColor};
-  elevation: 1;
+  padding-vertical: ${String(
+    theme.space.marginBetweenContentAndScreenBottom,
+  )}px;
 `;
 
 export const brandSelectedText = (theme, isError) => css`

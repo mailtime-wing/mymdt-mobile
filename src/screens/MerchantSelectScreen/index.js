@@ -1,12 +1,14 @@
 import React, {useState, useCallback} from 'react';
+import {View, ScrollView} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import AppButton from '@/components/AppButton';
 import MerchantList from '@/components/MerchantList';
 import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import ScreenContainer from '@/components/ScreenContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import AppText from '@/components/AppText2';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
@@ -18,11 +20,11 @@ import {
 } from '@/api/data';
 
 import {
-  ScrollContainer,
-  Container,
-  FixedContainer,
+  container,
+  scrollInnerContainer,
+  fixedContainer,
+  fixedInnerContainer,
   detailStyle,
-  titleStyle,
   hightLightText,
   brandSelectedText,
 } from './style';
@@ -100,15 +102,15 @@ const MerchantSelectScreen = ({route, navigation}) => {
   }
 
   return (
-    <Container>
-      <ScrollContainer>
-        <ScreenContainer hasTopBar>
-          <AppText variant="heading1" style={titleStyle(theme)}>
-            <FormattedMessage
-              id="special_offer"
-              defaultMessage="Select Merchants"
-            />
-          </AppText>
+    <View style={container}>
+      <ScrollView>
+        <HeaderTitle>
+          <FormattedMessage
+            id="special_offer"
+            defaultMessage="Select Merchants"
+          />
+        </HeaderTitle>
+        <View style={scrollInnerContainer}>
           <AppText variant="body1" style={detailStyle(theme)}>
             <FormattedMessage
               id="please_select_merchants"
@@ -133,43 +135,45 @@ const MerchantSelectScreen = ({route, navigation}) => {
             merchantsLimit={numberOfMerchant}
             onError={handleError}
           />
-        </ScreenContainer>
-      </ScrollContainer>
-      <FixedContainer>
-        <AppText
-          variant="label"
-          style={brandSelectedText(theme, isErrorFromMerchantList)}>
-          {isErrorFromMerchantList ? (
-            <FormattedMessage
-              id="more_merchants_selected"
-              defaultMessage="MORE THAN {numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED"
-              values={{
-                numberOfMerchant: numberOfMerchant,
-                merchantCount: selectedMerchants.length,
-              }}
-            />
-          ) : (
-            <FormattedMessage
-              id="merchants_selected"
-              defaultMessage="{numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED"
-              values={{
-                numberOfMerchant: selectedMerchants.length,
-                merchantCount: selectedMerchants.length,
-              }}
-            />
-          )}
-        </AppText>
-        <AppButton
-          onPress={handleNextPress}
-          disabled={isErrorFromMerchantList}
-          text={
-            <FormattedMessage id="button.confirm" defaultMessage="confirm" />
-          }
-          variant="filled"
-          sizeVariant="normal"
-          colorVariant="secondary"
-        />
-      </FixedContainer>
+        </View>
+      </ScrollView>
+      <SafeAreaView style={fixedContainer(theme)}>
+        <View style={fixedInnerContainer(theme)}>
+          <AppText
+            variant="label"
+            style={brandSelectedText(theme, isErrorFromMerchantList)}>
+            {isErrorFromMerchantList ? (
+              <FormattedMessage
+                id="more_merchants_selected"
+                defaultMessage="MORE THAN {numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED"
+                values={{
+                  numberOfMerchant: numberOfMerchant,
+                  merchantCount: selectedMerchants.length,
+                }}
+              />
+            ) : (
+              <FormattedMessage
+                id="merchants_selected"
+                defaultMessage="{numberOfMerchant} {merchantCount, plural, =0 {merchant} one {merchant} other {merchants}} SELECTED"
+                values={{
+                  numberOfMerchant: selectedMerchants.length,
+                  merchantCount: selectedMerchants.length,
+                }}
+              />
+            )}
+          </AppText>
+          <AppButton
+            onPress={handleNextPress}
+            disabled={isErrorFromMerchantList}
+            text={
+              <FormattedMessage id="button.confirm" defaultMessage="confirm" />
+            }
+            variant="filled"
+            sizeVariant="normal"
+            colorVariant="secondary"
+          />
+        </View>
+      </SafeAreaView>
       {!!showConfirmPopup && (
         <PopupModal
           title="Confirmation"
@@ -177,7 +181,7 @@ const MerchantSelectScreen = ({route, navigation}) => {
           callback={handlePopupState}
         />
       )}
-    </Container>
+    </View>
   );
 };
 
