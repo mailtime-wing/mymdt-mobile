@@ -14,7 +14,7 @@ import OnboardingScreen from '@/screens/OnboardingScreen';
 import MerchantSelectScreen from '@/screens/MerchantSelectScreen';
 import EnterScreen from '@/screens/EnterScreen';
 import VerifyEnterScreen from '@/screens/VerifyEnterScreen';
-import UserProfileScreen from '@/screens/UserProfileScreen';
+import UserProfileSetupOnboardingScreen from '@/screens/UserProfileSetupOnboardingScreen';
 import BindEmailScreen from '@/screens/BindEmailScreen';
 import LoadingScreen from '@/screens/LoadingScreen';
 import NotificationPermissionScreen from '@/screens/NotificationPermissionScreen';
@@ -94,7 +94,7 @@ const setupScreens = [
   // 2nd step: set up user profile
   {
     name: 'user_profile',
-    component: UserProfileScreen,
+    component: UserProfileSetupOnboardingScreen,
     appBarShown: false,
   },
 

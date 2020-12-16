@@ -85,7 +85,7 @@ const UserProfileForm = ({
   );
 };
 
-const UserProfileScreen = () => {
+const UserProfileSetupOnboardingScreen = () => {
   const theme = useTheme();
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [updateUserProfileRequest] = useMutationWithAuth(
@@ -178,4 +178,4 @@ const UserProfileScreen = () => {
   );
 };
 
-export default UserProfileScreen;
+export default UserProfileSetupOnboardingScreen;
