@@ -4,6 +4,8 @@ import {transparentize} from 'polished';
 export const layout = css`
   flex: 1;
   justify-content: space-between;
+  margin-horizontal: 24px;
+  align-items: center;
 `;
 
 export const contentContainer = css`

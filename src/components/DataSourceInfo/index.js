@@ -1,8 +1,10 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
+import SafeAreaView from 'react-native-safe-area-view';
+import {useTheme} from 'emotion-theming';
 
 import Layout from './Layout';
-import {screenStyle} from './style';
+import {screenStyle, container} from './style';
 
 import bankSyncServerDataAPIType from '@/enum/bankSyncServerDataAPIType';
 import MailTimeLogo from '@/assets/logo_mailtime.svg';
@@ -11,7 +13,6 @@ import CreditGoLogo from '@/assets/logo_creditgo.svg';
 import PlantoLogo from '@/assets/logo_planto.svg';
 import MailIcon from '@/assets/icon_mail.svg';
 import BankIcon from '@/assets/icon_bank.svg';
-import {useTheme} from 'emotion-theming';
 
 const DataSourceInfo = ({type, onContinuePress}) => {
   const theme = useTheme();
@@ -127,7 +128,13 @@ const DataSourceInfo = ({type, onContinuePress}) => {
   const layout = layouts[type];
 
   return (
-    <Layout style={screenStyle} {...layout} onContinuePress={onContinuePress} />
+    <SafeAreaView style={container} forceInset={{bottom: 'always'}}>
+      <Layout
+        style={screenStyle(theme)}
+        {...layout}
+        onContinuePress={onContinuePress}
+      />
+    </SafeAreaView>
   );
 };
 

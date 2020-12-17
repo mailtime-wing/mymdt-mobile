@@ -1,7 +1,9 @@
 import {css} from '@emotion/native';
 
-export const screenStyle = css`
-  margin-horizontal: 24px;
-  padding-bottom: 24px;
-  align-items: center;
+export const container = css`
+  flex: 1;
+`;
+
+export const screenStyle = (theme) => css`
+  padding-bottom: ${String(theme.space.marginBetweenContentAndScreenBottom)}px;
 `;
