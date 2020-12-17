@@ -19,6 +19,7 @@ import useSetupFlow from '@/hooks/useSetupFlow';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {BranchContext} from '@/context/branch';
 import {UPDATE_USER_PROFILE_API} from '@/api/data';
+import getAge from '@/utils/getAge';
 
 import {
   Container,
@@ -27,7 +28,6 @@ import {
   detailStyle,
   errorStyle,
   requiredText,
-  dateContainer,
 } from './style';
 
 const UserProfileForm = ({
@@ -59,7 +59,6 @@ const UserProfileForm = ({
       </AppText>
       <DateTimePickerInput
         onPress={handleDatePickerPress}
-        style={dateContainer}
         label={
           <FormattedMessage id="date_of_birth" defaultMessage="DATE OF BIRTH" />
         }
@@ -124,10 +123,21 @@ const UserProfileSetupOnboardingScreen = () => {
     const errors = {};
 
     if (!values.name) {
-      errors.name = 'Name Required';
+      errors.name = (
+        <FormattedMessage id="error.user_profile_setup_name_required" />
+      );
     }
-    if (!values.gender) {
-      errors.gender = 'Gender Required';
+
+    if (values.dob) {
+      const age = getAge(new Date(values.dob));
+      if (age < 16) {
+        errors.dob = (
+          <FormattedMessage
+            id="error.user_profile_setup_miniumn_age_required"
+            values={{age: 16}}
+          />
+        );
+      }
     }
     return errors;
   };

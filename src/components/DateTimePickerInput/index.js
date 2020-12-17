@@ -2,7 +2,7 @@ import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {useIntl} from 'react-intl';
 import {useTheme} from 'emotion-theming';
-import {TextInput, labelStyle, inputContainer} from './style';
+import {TextInput, labelStyle, inputContainer, errorStyle} from './style';
 import {useField, useFormikContext} from 'formik';
 
 import AppText from '@/components/AppText2';
@@ -24,7 +24,7 @@ const DateTimePickerInput = ({
   const isError = meta.error;
   const {setFieldValue} = useFormikContext();
 
-  const handleDateChange = date => {
+  const handleDateChange = (date) => {
     if (!date) {
       return;
     }
@@ -32,7 +32,7 @@ const DateTimePickerInput = ({
     setFieldValue(name, date);
   };
 
-  const changeDateFormat = isoDate => {
+  const changeDateFormat = (isoDate) => {
     return intl.formatDate(isoDate, {
       year: 'numeric',
       month: '2-digit',
@@ -61,6 +61,13 @@ const DateTimePickerInput = ({
           {...props}
         />
       </View>
+      <AppText
+        variant="caption"
+        style={errorStyle(theme)}
+        numberOfLines={1}
+        ellipsizeMode="clip">
+        {isError ? meta.error : ' '}
+      </AppText>
       {showDatePicker && (
         <DateTimeSelector
           date={field.value}

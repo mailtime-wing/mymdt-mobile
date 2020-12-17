@@ -26,10 +26,6 @@ export const requiredText = (theme) => css`
   color: ${theme.colors.textOnBackground.mediumEmphasis};
 `;
 
-export const dateContainer = css`
-  margin-bottom: 24px;
-`;
-
 export const GenderContainer = styled.View`
   height: 48px;
   width: 80%;

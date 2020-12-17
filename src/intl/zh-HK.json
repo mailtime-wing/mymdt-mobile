@@ -379,6 +379,8 @@
     "error_code_305": "用戶已存在。",
     "something_went_wrong_please_try_again_later": "出錯了，請稍後再試。",
     "enter_screen_invalid_phone_number": "電話號碼無效。",
-    "enter_screen_action_not_available": "您請求驗證碼的次數過多，請稍後再試。"
+    "enter_screen_action_not_available": "您請求驗證碼的次數過多，請稍後再試。",
+    "user_profile_setup_name_required": "Name is required",
+    "user_profile_setup_miniumn_age_required": "Only users who are {age} or older can use this app"
   }
 }
