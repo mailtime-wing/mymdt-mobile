@@ -6,7 +6,7 @@ import {iconContainer, icon} from './style';
 
 /**
  * @typedef {Object} Props
- * @property {'normal'|'large'} sizeVariant
+ * @property {'small'|'normal'|'large'} sizeVariant
  */
 
 /**

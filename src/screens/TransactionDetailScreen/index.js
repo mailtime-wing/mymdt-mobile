@@ -336,7 +336,7 @@ const TransactionDetailScreen = ({route}) => {
             transactionItem.type === TransactitonType.MAI ||
             transactionItem.type === TransactitonType.BANK ? (
               <BrandIcon
-                sizeVariant="normal"
+                sizeVariant="small"
                 ImgSrc={{
                   uri: merchantsData?.merchants.find(
                     (merchant) => merchant.name === transactionItem.title,

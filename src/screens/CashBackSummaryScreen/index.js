@@ -122,7 +122,7 @@ const CashBackSummaryScreen = ({navigation, route}) => {
               <LoadingSpinner />
             ) : (
               <BrandIcon
-                sizeVariant="normal"
+                sizeVariant="small"
                 ImgSrc={{
                   uri: merchantsData?.merchants.find(
                     (merchant) => merchant.id === h.node.merchant_id,
