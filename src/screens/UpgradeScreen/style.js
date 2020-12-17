@@ -24,10 +24,20 @@ export const button = css`
 
 export const firework = css`
   z-index: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
 
 export const background = css`
   height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
 
 export const congratsContainer = css`
