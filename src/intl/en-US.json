@@ -381,6 +381,7 @@
     "enter_screen_invalid_phone_number": "Phone number is not valid",
     "enter_screen_action_not_available": "You've requested verification code too many times. Please try again later.",
     "user_profile_setup_name_required": "Name is required",
-    "user_profile_setup_miniumn_age_required": "Only users who are {age} or older can use this app"
+    "user_profile_setup_miniumn_age_required": "Only users who are {age} or older can use this app",
+    "user_profile_setup_referral_code_invalid": "Referral code is invalid"
   }
 }

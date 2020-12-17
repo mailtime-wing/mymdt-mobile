@@ -6,7 +6,7 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {Formik, useFormikContext} from 'formik';
 import {useTheme} from 'emotion-theming';
 
@@ -20,6 +20,7 @@ import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {BranchContext} from '@/context/branch';
 import {UPDATE_USER_PROFILE_API} from '@/api/data';
 import getAge from '@/utils/getAge';
+import errorCodeEnum from '@/enum/errorCode';
 
 import {
   Container,
@@ -86,9 +87,52 @@ const UserProfileForm = ({
 
 const UserProfileSetupOnboardingScreen = () => {
   const theme = useTheme();
+  const intl = useIntl();
+
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [updateUserProfileRequest] = useMutationWithAuth(
     UPDATE_USER_PROFILE_API,
+    {
+      context: {
+        errorMessageHandler: {
+          errorMap: {
+            [errorCodeEnum.DATA_NOT_FOUND]: intl.formatMessage({
+              id: 'error.user_profile_setup_referral_code_invalid',
+            }),
+            [errorCodeEnum.ACTION_NOT_AVAILABLE]: intl.formatMessage({
+              id: 'error.user_profile_setup_referral_code_invalid',
+            }),
+            [errorCodeEnum.DATA_INVALID]: ({field}) => {
+              console.log('field', field);
+              switch (field) {
+                case 'dateOfBirth': {
+                  return intl.formatMessage(
+                    {
+                      id: 'error.user_profile_setup_miniumn_age_required',
+                    },
+                    {
+                      age: 16,
+                    },
+                  );
+                }
+                case 'otp': {
+                  return intl.formatMessage(
+                    {
+                      id: 'error.error_code_202_with_field',
+                    },
+                    {
+                      field: intl.formatMessage({
+                        id: 'verification_code',
+                      }),
+                    },
+                  );
+                }
+              }
+            },
+          },
+        },
+      },
+    },
   );
   const {navigateByFlow} = useSetupFlow();
   const {referringParams} = useContext(BranchContext);
@@ -114,8 +158,7 @@ const UserProfileSetupOnboardingScreen = () => {
       });
       navigateByFlow();
     } catch (e) {
-      console.error(e);
-      // handle error later
+      // TODO: use setErrors from formik to make invalid field red?
     }
   };
 
@@ -139,6 +182,7 @@ const UserProfileSetupOnboardingScreen = () => {
         );
       }
     }
+
     return errors;
   };
 
