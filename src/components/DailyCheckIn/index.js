@@ -5,7 +5,6 @@ import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 import {GET_CHECK_IN_STATUS_API, CHECK_IN_API} from '@/api/data';
 import {IntlContext} from '@/context/Intl';
-import {ME} from '@/constants/currency';
 
 import {margin, dayList, container, checkInButton} from './style';
 
@@ -41,8 +40,6 @@ const DailyCheckIn = () => {
   const todayAndAfterRewards = data?.userProfile?.checkInStatus?.rewards;
   const todayRewardAmount =
     (todayAndAfterRewards && todayAndAfterRewards[today - 1]) || 0;
-  const cashbackCurrencyCode = data?.userProfile?.cashbackCurrencyCode;
-  const convert = cashbackCurrencyCode === ME;
 
   const handleRewardGotPress = () => {
     reset();
@@ -93,7 +90,6 @@ const DailyCheckIn = () => {
         onOkPress={handleRewardGotPress}
         rewardName={<FormattedMessage id="reward_type_check_in" />}
         rewardAmount={todayRewardAmount}
-        convert={convert}
       />
       <PopupModal
         visible={!!checkInError}

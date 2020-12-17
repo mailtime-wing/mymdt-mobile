@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
-import {GET_CONVERSION_RATE_API} from '@/api/data';
+import {GET_CONVERSION_RATE_API, GET_CURRENCY_CODE} from '@/api/data';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 
 import {
@@ -28,15 +28,13 @@ const giftBoxStyle = {
   ],
 };
 
-const RewardGotPopup = ({
-  convert,
-  rewardName,
-  rewardAmount,
-  onOkPress,
-  ...props
-}) => {
+const RewardGotPopup = ({rewardName, rewardAmount, onOkPress, ...props}) => {
   const theme = useTheme();
 
+  const {data: currencyCodeData} = useQueryWithAuth(GET_CURRENCY_CODE);
+  const cashbackCurrencyCode =
+    currencyCodeData?.userProfile?.cashbackCurrencyCode;
+  const convert = cashbackCurrencyCode === ME;
   // only call when convert to mdt
   const {data} = useQueryWithAuth(GET_CONVERSION_RATE_API, {
     skip: !convert || rewardAmount === 0,

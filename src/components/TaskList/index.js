@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import {Linking} from 'react-native';
 import {FormattedMessage, FormattedDate} from 'react-intl';
-import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
-import {CLAIM_REWARD_API, GET_CURRENCY_CODE} from '@/api/data';
-import {ME} from '@/constants/currency';
+import {CLAIM_REWARD_API} from '@/api/data';
 
 import {
   Container,
@@ -26,16 +24,11 @@ const flexEnd = {justifyContent: 'flex-end'};
 const TaskList = ({taskList, userRewardList, onClaimPress}) => {
   const theme = useTheme();
   const [clientError, setClientError] = useState(false);
-  const {data: currencyCodeData} = useQueryWithAuth(GET_CURRENCY_CODE);
   const [claimRewardRequest, {data, error}, reset] = useMutationWithReset(
     CLAIM_REWARD_API,
     {},
     {withAuth: true},
   );
-
-  const cashbackCurrencyCode =
-    currencyCodeData?.userProfile?.cashbackCurrencyCode;
-  const convert = cashbackCurrencyCode === ME;
 
   const handleRewardGotPress = () => {
     reset();
@@ -145,7 +138,6 @@ const TaskList = ({taskList, userRewardList, onClaimPress}) => {
               onOkPress={handleRewardGotPress}
               rewardName={<FormattedMessage id="reward_type_bonus_task" />}
               rewardAmount={task.rewardValue}
-              convert={convert}
             />
           </RowContainer>
         );
