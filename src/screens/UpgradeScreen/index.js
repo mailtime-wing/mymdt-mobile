@@ -25,7 +25,7 @@ const moveUpDuration = 300;
 const UpgradeScreen = ({navigation, route}) => {
   const theme = useTheme();
   const lottieRef = useRef();
-  const {level} = route.params || 0;
+  const level = route?.params?.level || 0;
   const [currentLevel, setCurrentLevel] = useState(level - 1);
 
   useLayoutEffect(() => {
