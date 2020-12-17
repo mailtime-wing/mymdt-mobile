@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {Formik} from 'formik';
 import {useTheme} from 'emotion-theming';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import AppText from '@/components/AppText2';
 import Input from '@/components/AppInput';
@@ -103,14 +104,14 @@ const BindEmailScreen = ({route, navigation}) => {
   };
 
   return (
-    <View style={container}>
+    <SafeAreaView style={container} forceInset={{bottom: 'always'}}>
       <HeaderTitle>
         <FormattedMessage
           id="bind_email_accounts"
           defaultMessage="Bind Emails"
         />
       </HeaderTitle>
-      <View style={innerContainer}>
+      <View style={innerContainer(theme)}>
         <AppText variant="body1" style={detailStyle(theme)}>
           <FormattedMessage id="dont_worry" />
         </AppText>
@@ -150,7 +151,7 @@ const BindEmailScreen = ({route, navigation}) => {
           callback={handlePopupPress}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

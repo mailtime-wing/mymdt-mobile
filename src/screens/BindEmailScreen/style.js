@@ -2,13 +2,13 @@ import {css} from '@emotion/native';
 
 export const container = css`
   flex: 1;
-  padding-bottom: 24px;
 `;
 
-export const innerContainer = css`
+export const innerContainer = (theme) => css`
   flex: 1;
   padding-left: 24px;
   padding-right: 24px;
+  padding-bottom: ${String(theme.space.marginBetweenContentAndScreenBottom)}px;
 `;
 
 export const formContainer = css`
