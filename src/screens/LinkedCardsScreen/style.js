@@ -2,7 +2,7 @@ import {css} from '@emotion/native';
 
 export const footerContainer = css`
   margin-horizontal: 24px;
-  margin-vertical: 40px;
+  margin-top: 40px;
 `;
 
 export const moreButton = css`
