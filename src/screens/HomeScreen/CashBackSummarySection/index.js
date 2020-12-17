@@ -44,7 +44,7 @@ const CashBackItem = ({icon, brand, earnInTotal, earnInPeriod}) => {
   return (
     <View style={rowContainer}>
       <View style={imageContainer}>
-        <BrandIcon sizeVariant="large" ImgSrc={icon} />
+        <BrandIcon sizeVariant="normal" ImgSrc={icon} />
       </View>
       <View style={brandDetailContainer(theme)}>
         <View style={rowContainer}>

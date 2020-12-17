@@ -19,7 +19,7 @@ const Merchant = ({name, logo, cashbackRate, selected, isError, ...props}) => {
     <TouchableOpacity
       style={merchantContainer(theme, selected, isError)}
       {...props}>
-      <BrandIcon ImgSrc={{uri: logo}} sizeVariant="large" style={icon} />
+      <BrandIcon ImgSrc={{uri: logo}} sizeVariant="large" />
       <AppText variant="subTitle1" style={merchantNameStyle(theme)}>
         {name}
       </AppText>
