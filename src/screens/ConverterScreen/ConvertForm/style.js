@@ -18,13 +18,6 @@ export const converterContainer = (theme, isFocus) => css`
     background-color: ${theme.colors.inputFocusBackground};`};
 `;
 
-export const converterType = (theme, isFocus) => css`
-  color: ${isFocus
-    ? theme.colors.secondary.dark
-    : theme.colors.textOnBackground.disabled};
-  margin-bottom: 8px;
-`;
-
 export const toAmountText = (theme) => css`
   color: ${theme.colors.textOnBackground.disabled};
 `;
@@ -33,7 +26,7 @@ export const input = (theme) => css`
   font-size: 36px;
   line-height: 44px;
   text-align: right;
-  color: ${theme.colors.contrastColor};
+  color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
 export const numberText = (theme) => css`
@@ -66,10 +59,24 @@ export const leftContainer = css`
   flex-direction: column;
 `;
 
-export const conversionRateText = (theme) => css`
+export const textOnBackgroundHighEmphasis = (theme) => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;
 
-export const conversionUpdateDate = (theme) => css`
+export const textOnBackgroundDisabled = (theme) => css`
   color: ${theme.colors.textOnBackground.disabled};
+`;
+
+export const currencyName = (theme) => css`
+  color: ${theme.colors.textOnBackground.highEmphasis};
+`;
+
+export const convertTypeContainer = css`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const convertType = css`
+  margin-right: 8px;
+  width: 30px;
 `;

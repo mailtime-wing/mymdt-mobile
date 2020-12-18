@@ -14,14 +14,16 @@ import {
   toAmountText,
   input as inputStyle,
   margin,
-  converterType,
   numberText,
   // errorText,
   convertIcon,
   conversionSection,
   leftContainer,
-  conversionRateText,
-  conversionUpdateDate,
+  textOnBackgroundHighEmphasis,
+  textOnBackgroundDisabled,
+  currencyName,
+  convertTypeContainer,
+  convertType,
 } from './style';
 
 import AppButton from '@/components/AppButton';
@@ -74,13 +76,13 @@ const ConvertForm = ({
     <>
       <View style={conversionSection}>
         <View style={leftContainer}>
-          <AppText variant="body1" style={conversionRateText(theme)}>
+          <AppText variant="body1" style={textOnBackgroundHighEmphasis(theme)}>
             <FormattedMessage
               id="conversion_rate"
               defaultMessage="Conversion Rate"
             />
           </AppText>
-          <AppText variant="caption" style={conversionUpdateDate(theme)}>
+          <AppText variant="caption" style={textOnBackgroundDisabled(theme)}>
             <FormattedMessage
               id="lastupdate_at"
               defaultMessage="Last update at {time}"
@@ -99,9 +101,21 @@ const ConvertForm = ({
       </View>
       <View style={convertersContainer}>
         <View style={[converterContainer(theme, isEditing), margin]}>
-          <AppText variant="value" style={converterType(theme, isEditing)}>
-            <FormattedMessage id={`currencyDisplayName.${from}`} />
-          </AppText>
+          <View style={convertTypeContainer}>
+            <AppText
+              variant="overline"
+              style={[textOnBackgroundDisabled(theme), convertType]}>
+              <FormattedMessage id="from" defaultMessage="from" />
+            </AppText>
+            <AppText
+              variant="heading6"
+              style={[
+                currencyName(theme),
+                isEditing && {color: theme.colors.secondary.dark},
+              ]}>
+              <FormattedMessage id={`currencyDisplayName.${from}`} />
+            </AppText>
+          </View>
           {isEditing ? (
             <TextInput
               value={values.amount}
@@ -129,9 +143,16 @@ const ConvertForm = ({
           <ConvertIcon fill={theme.colors.secondary.normal} />
         </TouchableOpacity>
         <View style={converterContainer(theme, false)}>
-          <AppText variant="value" style={converterType(theme)}>
-            <FormattedMessage id={`currencyDisplayName.${to}`} />
-          </AppText>
+          <View style={convertTypeContainer}>
+            <AppText
+              variant="overline"
+              style={[textOnBackgroundDisabled(theme), convertType]}>
+              <FormattedMessage id="to" defaultMessage="to" />
+            </AppText>
+            <AppText variant="heading6" style={currencyName(theme)}>
+              <FormattedMessage id={`currencyDisplayName.${to}`} />
+            </AppText>
+          </View>
           <AppText
             variant="heading1"
             style={numberText(theme)}
