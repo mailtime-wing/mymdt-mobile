@@ -5,11 +5,11 @@ import AppText from '@/components/AppText2';
 
 import {title} from './style';
 
-export default function PageTitle({children, ...props}) {
+export default function PageTitle({children, style, ...props}) {
   const theme = useTheme();
 
   return (
-    <AppText variant="heading1" style={title(theme)} {...props}>
+    <AppText variant="heading1" style={[title(theme), style]} {...props}>
       {children}
     </AppText>
   );

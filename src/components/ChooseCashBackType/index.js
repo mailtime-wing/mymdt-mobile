@@ -1,13 +1,14 @@
 import React, {useContext} from 'react';
-import {View, ScrollView, Image, TouchableOpacity} from 'react-native';
+import {View, Image, TouchableOpacity} from 'react-native';
 import {FormattedMessage} from 'react-intl';
+import {useTheme} from 'emotion-theming';
 import {css} from '@emotion/native';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import {AuthContext} from '@/context/auth';
-import {useTheme} from 'emotion-theming';
 
 import AppText from '@/components/AppText2';
-import ScreenContainer from '@/components/ScreenContainer';
+import HeaderTitle from '@/components/HeaderTitle';
 import AppTag from '@/components/AppTag';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {UPDATE_USER_CASHBACK_CURRENCY_CODE_API} from '@/api/data';
@@ -15,7 +16,8 @@ import {REWARD_DOLLAR, ME} from '@/constants/currency';
 
 import {
   container,
-  scrollContainer,
+  innerContainer,
+  separator,
   button,
   boxContainer,
   detail,
@@ -81,14 +83,16 @@ const ChooseCashBackTypeSetting = ({onChoose}) => {
   };
 
   return (
-    <ScrollView style={scrollContainer(theme)}>
-      <ScreenContainer style={container}>
-        <AppText variant="pageTitle" style={titleStyle(theme)}>
-          <FormattedMessage id="cashback_type" />
-        </AppText>
-        <AppText variant="body1" style={detail(theme)}>
-          <FormattedMessage id="choose_which_currency_for_cashback" />
-        </AppText>
+    <SafeAreaView
+      forceInset={{top: 'always', bottom: 'always'}}
+      style={container(theme)}>
+      <HeaderTitle variant="pageTitle" style={titleStyle(theme)}>
+        <FormattedMessage id="cashback_type" />
+      </HeaderTitle>
+      <AppText variant="body1" style={detail(theme)}>
+        <FormattedMessage id="choose_which_currency_for_cashback" />
+      </AppText>
+      <View style={innerContainer(theme)}>
         <CashBackType
           theme={theme}
           source={require('@/assets/rewardpoint-coins.png')}
@@ -102,6 +106,7 @@ const ChooseCashBackTypeSetting = ({onChoose}) => {
           description={<FormattedMessage id="redeemableForGiftCards" />}
           onPress={() => handlePress(REWARD_DOLLAR)}
         />
+        <View style={separator} />
         <CashBackType
           theme={theme}
           source={require('@/assets/mdt-coins.png')}
@@ -110,8 +115,8 @@ const ChooseCashBackTypeSetting = ({onChoose}) => {
           description={<FormattedMessage id="cashbackWillBePaidIn" />}
           onPress={() => handlePress(ME)}
         />
-      </ScreenContainer>
-    </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 };
 

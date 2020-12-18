@@ -1,19 +1,22 @@
 import {css} from '@emotion/native';
 
-export const container = css`
-  padding-bottom: 24px;
-  align-items: center;
+export const container = (theme) => css`
+  flex: 1;
+  background: ${theme.colors.themeBackground};
 `;
 
-export const scrollContainer = (theme) => css`
-  background: ${theme.colors.themeBackground};
+export const innerContainer = (theme) => css`
+  flex: 1;
   padding-left: 24px;
   padding-right: 24px;
+  margin-bottom: ${String(theme.space.marginBetweenContentAndScreenBottom)}px;
 `;
 
 export const detail = (theme) => css`
   color: ${theme.colors.textOnThemeBackground.mediumEmphasis};
   margin-bottom: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
 `;
 
 export const titleStyle = (theme) => css`
@@ -21,16 +24,20 @@ export const titleStyle = (theme) => css`
   margin-bottom: 4px;
 `;
 
+export const separator = css`
+  margin-vertical: 8px;
+`;
+
 export const button = css`
-  align-self: stretch;
-  margin-bottom: 16px;
+  flex: 1;
 `;
 
 export const boxContainer = css`
+  flex: 1;
   border-radius: 24px;
   padding-horizontal: 24px;
-  padding-vertical: 52px;
   align-items: center;
+  justify-content: center;
 `;
 
 export const image = css`
