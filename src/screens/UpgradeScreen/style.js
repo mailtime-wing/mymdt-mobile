@@ -4,6 +4,7 @@ export const container = css`
   margin-top: auto;
   margin-bottom: auto;
   align-self: center;
+  z-index: 0;
 `;
 
 export const congrats = (theme) => css`
@@ -18,5 +19,29 @@ export const member = (theme) => css`
 
 export const button = css`
   align-self: center;
-  margin-top: 40px;
+  margin-top: 20px;
+`;
+
+export const firework = css`
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;
+
+export const background = css`
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;
+
+export const congratsContainer = css`
+  align-self: center;
+  position: absolute;
+  top: 170;
 `;

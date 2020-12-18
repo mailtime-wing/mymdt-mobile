@@ -71,6 +71,10 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - lottie-ios (3.1.9)
+  - lottie-react-native (3.5.0):
+    - lottie-ios (~> 3.1.8)
+    - React
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
@@ -392,6 +396,7 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (~> 0.41.1)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - lottie-react-native (from `../node_modules/lottie-react-native`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -453,6 +458,7 @@ SPEC REPOS:
     - Flipper-PeerTalk
     - Flipper-RSocket
     - FlipperKit
+    - lottie-ios
     - Moya
     - ObjectMapper
     - OpenSSL-Universal
@@ -475,6 +481,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  lottie-react-native:
+    :path: "../node_modules/lottie-react-native"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -583,6 +591,8 @@ SPEC CHECKSUMS:
   FlipperKit: bc68102cd4952a258a23c9c1b316c7bec1fecf83
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
+  lottie-react-native: 1fb4ce21d6ad37dab8343eaff8719df76035bd93
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   MTAuth: eeebaf1ca8a11876c1c67179347274fddd37ae35
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
