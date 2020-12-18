@@ -1,15 +1,9 @@
-import React, {
-  useState,
-  useCallback,
-  createContext,
-  useMemo,
-  useEffect,
-} from 'react';
+import React, {useState, useCallback, useMemo, useEffect} from 'react';
 import ToastList from '@/components/ToastList';
 import {TOAST_ERRORS} from '@/api/data';
 import {useQuery, useApolloClient} from '@apollo/client';
 
-export const ToastContext = createContext();
+import ToastContext from './index';
 
 function assignToastId(toastList) {
   let toastId = 1;
@@ -19,7 +13,7 @@ function assignToastId(toastList) {
   return toastList.map((te) => ({...te, id: toastId++}));
 }
 
-export const ToastProvider = ({children}) => {
+const ToastProvider = ({children}) => {
   const client = useApolloClient();
   const [, setErrors] = useState(false);
   const {data} = useQuery(TOAST_ERRORS);
@@ -78,3 +72,5 @@ export const ToastProvider = ({children}) => {
     </ToastContext.Provider>
   );
 };
+
+export default ToastProvider;

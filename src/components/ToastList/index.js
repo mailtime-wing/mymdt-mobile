@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {KeyboardAvoidingView} from 'react-native';
-import {ToastContext} from '@/context/toast';
+import ToastContext from '@/context/toast';
 
 import AppToast from '@/components/AppToast';
 

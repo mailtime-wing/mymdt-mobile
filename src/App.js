@@ -9,7 +9,7 @@ import {AuthProvider} from '@/context/auth';
 import {PreloadDataProvider} from '@/context/preloadData';
 import {SetupFlowProvider} from '@/context/setupFlow';
 import {NotificationProvider} from '@/context/notification';
-import {ToastProvider} from '@/context/toast';
+import ToastProvider from '@/context/toast/provider';
 import {BranchProvider} from '@/context/branch';
 import {SplashProvider} from '@/context/splash';
 import NavigationRoot from '@/screens/Root';
