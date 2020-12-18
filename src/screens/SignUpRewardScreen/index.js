@@ -16,6 +16,7 @@ import {
   openContainer,
   readyContainer,
   gotRewardText,
+  giftContainer,
   textContainer,
   giftIcon,
   inner,
@@ -120,8 +121,8 @@ const GiftBoxOpened = ({isRewardDollar, rewardAmount, handleContinuePress}) => {
 
   return (
     <View style={openContainer}>
-      <MDTGiftBox />
-      <View style={inner}>
+      <View style={giftContainer}>
+        <MDTGiftBox />
         <View style={textContainer}>
           <AppText variant="heading1" style={{color: TextColor}}>
             <FormattedMessage id="you_got" default="You got" />{' '}
@@ -137,6 +138,8 @@ const GiftBoxOpened = ({isRewardDollar, rewardAmount, handleContinuePress}) => {
             !
           </AppText>
         </View>
+      </View>
+      <View style={inner(theme)}>
         <AppButton
           onPress={handleContinuePress}
           text={<FormattedMessage id="button.continue" default="continue" />}
@@ -176,7 +179,8 @@ const SignUpRewardScreen = ({route}) => {
   };
 
   return (
-    <LinearGradientBackground>
+    <LinearGradientBackground
+      safeAreaProps={{forceInset: {top: 'always', bottom: 'always'}}}>
       {isOpened ? (
         <GiftBoxOpened
           isRewardDollar={isRewardDollar}

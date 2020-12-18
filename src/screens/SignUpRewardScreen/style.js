@@ -21,14 +21,17 @@ export const readyContainer = css`
 
 export const openContainer = css`
   flex: 1;
-  margin-top: 100px;
 `;
 
-export const inner = css`
-  justify-content: space-between;
-  flex: 1;
+export const inner = (theme) => css`
   padding-horizontal: 24px;
-  padding-bottom: 24px;
+  margin-bottom: ${String(theme.space.marginBetweenContentAndScreenBottom)}px;
+`;
+
+export const giftContainer = css`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const textContainer = css`
