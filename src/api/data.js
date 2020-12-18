@@ -2,7 +2,11 @@ import {gql} from 'apollo-boost';
 
 export const TOAST_ERRORS = gql`
   query ToastErrors {
-    toastErrors @client
+    toastErrors @client {
+      id
+      text
+      variant
+    }
   }
 `;
 

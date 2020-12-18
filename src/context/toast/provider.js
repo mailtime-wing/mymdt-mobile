@@ -1,73 +1,57 @@
-import React, {useState, useCallback, useMemo, useEffect} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import ToastList from '@/components/ToastList';
-import {TOAST_ERRORS} from '@/api/data';
-import {useQuery, useApolloClient} from '@apollo/client';
+import {useApolloClient} from '@apollo/client';
 
+import apolloAddToast from '@/apollo/addToast';
 import ToastContext from './index';
-
-function assignToastId(toastList) {
-  let toastId = 1;
-  if (toastList.length <= 0) {
-    return toastList;
-  }
-  return toastList.map((te) => ({...te, id: toastId++}));
-}
 
 const ToastProvider = ({children}) => {
   const client = useApolloClient();
-  const [, setErrors] = useState(false);
-  const {data} = useQuery(TOAST_ERRORS);
-  const toastErrors = data.toastErrors;
-  const _toastErrors = assignToastId(toastErrors);
 
-  const addToast = useCallback(
-    (toastObj) => {
-      client.writeQuery({
-        query: TOAST_ERRORS,
-        data: {
-          toastErrors: [...toastErrors, toastObj],
-        },
-      });
-      setErrors((err) => !err);
-    },
-    [toastErrors, client],
-  );
+  const addToast = useCallback((toastObj) => apolloAddToast(client, toastObj), [
+    client,
+  ]);
 
   const removeToast = useCallback(
     (_toastId) => {
-      client.writeQuery({
-        query: TOAST_ERRORS,
-        data: {
-          toastErrors: _toastErrors.filter((te) => te.id !== _toastId),
+      client.cache.modify({
+        fields: {
+          toastErrors(existingToastErrorRefs = [], {readField}) {
+            return existingToastErrorRefs.filter(
+              (ref) => readField('id', ref) !== _toastId,
+            );
+          },
         },
       });
-      setErrors((err) => !err);
     },
-    [client, _toastErrors],
+    [client],
   );
+
+  const popToast = useCallback(() => {
+    client.cache.modify({
+      fields: {
+        toastErrors(existingToastErrorRefs = [], {readField}) {
+          if (existingToastErrorRefs.length === 0) {
+            return existingToastErrorRefs;
+          }
+          return existingToastErrorRefs.slice(1);
+        },
+      },
+    });
+  }, [client]);
 
   const toastContext = useMemo(
     () => ({
       addToast,
       removeToast,
+      popToast,
     }),
-    [addToast, removeToast],
+    [addToast, removeToast, popToast],
   );
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (_toastErrors.length) {
-        toastContext.removeToast(_toastErrors[0].id);
-      }
-    }, 5000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [toastContext, _toastErrors]);
 
   return (
     <ToastContext.Provider value={toastContext}>
-      <ToastList toasts={_toastErrors} />
+      <ToastList />
       {children}
     </ToastContext.Provider>
   );

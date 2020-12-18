@@ -1,24 +1,14 @@
-import {TOAST_ERRORS} from '@/api/data';
 import {onError} from '@apollo/client/link/error';
 
 import globalIntl from '@/intl';
+import addToast from '@/apollo/addToast';
 
 const errorLink = onError(
   ({graphQLErrors, networkError, operation, forward}) => {
     const client = operation.client;
-    const {toastErrors} = client.readQuery({
-      query: TOAST_ERRORS,
-    });
 
     function writeErrorIntoQuery(error) {
-      if (toastErrors.every((_error) => _error.text !== error)) {
-        client.writeQuery({
-          query: TOAST_ERRORS,
-          data: {
-            toastErrors: [...toastErrors, {text: error, variant: 'error'}],
-          },
-        });
-      }
+      addToast(client, {text: error, variant: 'error'});
     }
 
     if (graphQLErrors) {
