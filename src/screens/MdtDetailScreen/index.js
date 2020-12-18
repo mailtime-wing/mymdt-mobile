@@ -75,6 +75,7 @@ const MdtDetailScreen = ({navigation}) => {
 
   // TODO: currently only one staking plan will exist. It can change in the future
   const staking = userStakingInfoData?.userProfile?.staking?.[0];
+  const mdtTotalAmount = mdtAmount + staking?.stakingPlan?.amount;
 
   return (
     <ScrollView>
@@ -88,7 +89,7 @@ const MdtDetailScreen = ({navigation}) => {
         ) : (
           <>
             <TransactionAmount
-              amount={mdtAmount}
+              amount={mdtTotalAmount}
               amountSizeVariant="largeProportional"
               amountColor={theme.colors.textOnThemeBackground.highEmphasis}
               unitVariant={currencyCode}
@@ -96,7 +97,7 @@ const MdtDetailScreen = ({navigation}) => {
               style={totalBalanceText}
             />
             <TransactionAmount
-              amount={mdtAmount * conversionRate}
+              amount={mdtTotalAmount * conversionRate}
               amountSizeVariant="small"
               unitSizeVariant="small"
               unitVariant={USD}
