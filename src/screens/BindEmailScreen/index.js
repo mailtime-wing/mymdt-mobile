@@ -154,7 +154,7 @@ const BindEmailScreen = ({route, navigation}) => {
               />
               <AppButton
                 onPress={handleSubmit}
-                disabled={!isValid}
+                disabled={!isValid || sdkLoading}
                 text={
                   <FormattedMessage
                     id="button.connect"
