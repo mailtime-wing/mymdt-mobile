@@ -1,6 +1,6 @@
-import React, {useEffect, useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect, useContext} from 'react';
 import {View} from 'react-native';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {Formik} from 'formik';
 import {useTheme} from 'emotion-theming';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -9,25 +9,21 @@ import AppText from '@/components/AppText2';
 import Input from '@/components/AppInput';
 import AppButton from '@/components/AppButton';
 import BackButton from '@/components/BackButton';
-import PopupModal from '@/components/PopupModal';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import HeaderTitle from '@/components/HeaderTitle';
 import useSetupFlow from '@/hooks/useSetupFlow';
 import useMailTimeSdk from '@/hooks/useMailTimeSdk';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {GET_USER_EMAIL_ACCOUNTS_API} from '@/api/data';
+import ToastContext from '@/context/toast';
+import errorCodeEnum from '@/enum/errorCode';
 
 import {container, innerContainer, formContainer, detailStyle} from './style';
 
 const BindEmailScreen = ({route, navigation}) => {
   const navigateFromEdit = route?.params?.navigateFromEdit;
-  const {
-    login,
-    reset,
-    loading: sdkLoading,
-    loginSuccess,
-    loginFail,
-  } = useMailTimeSdk();
+  const intl = useIntl();
+  const {login, loading: sdkLoading, loginSuccess, error} = useMailTimeSdk();
   // TODO: handle error
   const {data, loading: fetchLoading} = useQueryWithAuth(
     GET_USER_EMAIL_ACCOUNTS_API,
@@ -38,6 +34,7 @@ const BindEmailScreen = ({route, navigation}) => {
 
   const {navigateByFlow} = useSetupFlow();
   const theme = useTheme();
+  const {addToast} = useContext(ToastContext);
 
   useEffect(() => {
     if (loginSuccess) {
@@ -48,12 +45,40 @@ const BindEmailScreen = ({route, navigation}) => {
     }
   }, [loginSuccess, navigateFromEdit, navigation, navigateByFlow]);
 
+  useEffect(() => {
+    if (error) {
+      if (error.graphQLErrors) {
+        error.graphQLErrors.map((graphQLError) => {
+          const code = graphQLError.extensions?.code;
+          if (!code) {
+            return;
+          }
+          switch (code) {
+            case errorCodeEnum.DATA_ALREADY_EXIST: {
+              addToast({
+                text: intl.formatMessage({
+                  id: 'this_email_is_already_bound',
+                }),
+                variant: 'error',
+              });
+              return;
+            }
+          }
+        }, []);
+        return;
+      }
+
+      addToast({
+        text: intl.formatMessage({
+          id: 'error.something_went_wrong_please_try_again_later',
+        }),
+        variant: 'error',
+      });
+    }
+  }, [error, addToast, intl]);
+
   const handleConnectPress = (values) => {
     login(values.email);
-  };
-
-  const handlePopupPress = () => {
-    reset();
   };
 
   useLayoutEffect(() => {
@@ -64,7 +89,7 @@ const BindEmailScreen = ({route, navigation}) => {
     }
   }, [navigation, navigateFromEdit]);
 
-  if (sdkLoading || fetchLoading) {
+  if (fetchLoading) {
     return <LoadingSpinner />;
   }
 
@@ -138,19 +163,18 @@ const BindEmailScreen = ({route, navigation}) => {
                 }
                 variant="filled"
                 sizeVariant="large"
-                colorVariant="secondary"
-              />
+                colorVariant="secondary">
+                {sdkLoading && (
+                  <LoadingSpinner
+                    color={theme.colors.textOnThemeBackground.mediumEmphasis}
+                    size="small"
+                  />
+                )}
+              </AppButton>
             </View>
           )}
         </Formik>
       </View>
-      {loginFail && (
-        <PopupModal
-          title="Fail"
-          detail="Login Fail"
-          callback={handlePopupPress}
-        />
-      )}
     </SafeAreaView>
   );
 };

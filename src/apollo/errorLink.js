@@ -22,7 +22,7 @@ const errorLink = onError(
         });
 
         if (errorMessageHandler) {
-          if (errorMessageHandler.defaultErrorMessage) {
+          if (errorMessageHandler.defaultErrorMessage !== undefined) {
             errorMessage = errorMessageHandler.defaultErrorMessage;
           }
           if (

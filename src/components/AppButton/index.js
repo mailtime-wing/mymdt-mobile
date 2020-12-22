@@ -26,6 +26,7 @@ const AppButton = ({
   disabled,
   style,
   textPropsStyle,
+  children,
   ...props
 }) => {
   const theme = useTheme();
@@ -39,11 +40,15 @@ const AppButton = ({
       disabled={disabled}
       {...props}>
       {SvgIcon && <SvgIcon {...icon(theme, variant, colorVariant, !!text)} />}
-      <AppText
-        variant={sizeVariant === 'moreCompact' ? 'moreCompactButton' : 'button'}
-        style={[textStyle(theme, variant, colorVariant), textPropsStyle]}>
-        {text}
-      </AppText>
+      {children || (
+        <AppText
+          variant={
+            sizeVariant === 'moreCompact' ? 'moreCompactButton' : 'button'
+          }
+          style={[textStyle(theme, variant, colorVariant), textPropsStyle]}>
+          {text}
+        </AppText>
+      )}
     </TouchableOpacity>
   );
 };

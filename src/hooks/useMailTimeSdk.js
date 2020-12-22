@@ -1,4 +1,4 @@
-import {useReducer, useEffect} from 'react';
+import {useReducer, useEffect, useMemo} from 'react';
 import Config from 'react-native-config';
 import MailtimeAuth from 'react-native-mailtime-sdk';
 
@@ -25,8 +25,13 @@ const reducer = (state, action) => {
       return initialState;
     }
     case UPDATE_SDK_STATUS: {
+      let sdkError = state.sdkError;
+      if (action.payload !== STATUS_FAILED) {
+        sdkError = null;
+      }
       return {
         ...state,
+        sdkError,
         sdkLoginStatus: action.payload,
       };
     }
@@ -47,7 +52,14 @@ const GOOGLE_CALLBACK_SCHEME =
 
 export default () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [bindEmailRequest] = useMutationWithAuth(BIND_EMAIL_ACCOUNT_API);
+  const [bindEmailRequest] = useMutationWithAuth(BIND_EMAIL_ACCOUNT_API, {
+    context: {
+      // leave error message handling to caller
+      errorMessageHandler: {
+        defaultErrorMessage: null,
+      },
+    },
+  });
 
   // setup for mailtime sdk
   // TODO: move to app startup in future
@@ -64,8 +76,10 @@ export default () => {
       Config.SDK_CLIENT_TYPE,
       '1.0',
     );
-    MailtimeAuth.setAccessGoogleWithAppPassword(true);
+    MailtimeAuth.setAccessGoogleWithAppPassword(false);
   }, []);
+
+  const constants = useMemo(() => MailtimeAuth.getConstants(), []);
 
   const login = async (emailAddress) => {
     try {
@@ -90,7 +104,6 @@ export default () => {
       });
       return;
     } catch (e) {
-      const constants = MailtimeAuth.getConstants();
       switch (e.code) {
         case constants.E_CANCELED: {
           dispatch({type: SDK_LOGIN_READY});
@@ -119,5 +132,6 @@ export default () => {
     loginSuccess: state.sdkLoginStatus === STATUS_SUCCEEDED,
     loginFail: state.sdkLoginStatus === STATUS_FAILED,
     error: state.sdkError,
+    constants,
   };
 };
