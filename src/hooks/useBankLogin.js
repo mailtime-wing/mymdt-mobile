@@ -70,7 +70,14 @@ export default function useBankLogin(
   } = useQueryWithAuth(GET_USER_ID);
   const userId = getUserIdData?.userProfile?.id;
 
-  const [bindBankItem] = useMutationWithAuth(BIND_BANK_ITEM);
+  const [bindBankItem] = useMutationWithAuth(BIND_BANK_ITEM, {
+    context: {
+      // leave error message handling to caller
+      errorMessageHandler: {
+        defaultErrorMessage: null,
+      },
+    },
+  });
 
   const _onConnected = useEventCallback(onConnected);
 

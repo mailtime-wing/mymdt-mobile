@@ -2,13 +2,14 @@ import React from 'react';
 import {View} from 'react-native';
 import {css} from '@emotion/native';
 import {useTheme} from 'emotion-theming';
+import {Svg, Path} from 'react-native-svg';
 
 import AppText from '@/components/AppText2';
 import AppButton from '@/components/AppButton';
 import AppIcon from '@/components/AppIcon';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import PhoneIcon from '@/assets/icon_smartphone.svg';
 import ShieldIcon from '@/assets/icon_shield_big.svg';
-import {Svg, Path} from 'react-native-svg';
 
 import {
   layout,
@@ -85,6 +86,7 @@ const DescriptionLine = ({title, caption}) => {
 
 const Layout = ({
   style,
+  isLoading,
   logo,
   rightIcon,
   title,
@@ -183,7 +185,14 @@ const Layout = ({
         variant="filled"
         sizeVariant="large"
         colorVariant="secondary"
-      />
+        disabled={isLoading}>
+        {isLoading && (
+          <LoadingSpinner
+            color={theme.colors.textOnThemeBackground.mediumEmphasis}
+            size="small"
+          />
+        )}
+      </AppButton>
     </View>
   );
 };

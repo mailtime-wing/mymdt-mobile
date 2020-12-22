@@ -14,7 +14,7 @@ import PlantoLogo from '@/assets/logo_planto.svg';
 import MailIcon from '@/assets/icon_mail.svg';
 import BankIcon from '@/assets/icon_bank.svg';
 
-const DataSourceInfo = ({type, onContinuePress}) => {
+const DataSourceInfo = ({type, onContinuePress, isLoading}) => {
   const theme = useTheme();
 
   const layouts = {
@@ -131,6 +131,7 @@ const DataSourceInfo = ({type, onContinuePress}) => {
     <SafeAreaView style={container} forceInset={{bottom: 'always'}}>
       <Layout
         style={screenStyle(theme)}
+        isLoading={isLoading}
         {...layout}
         onContinuePress={onContinuePress}
       />
