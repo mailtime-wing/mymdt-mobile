@@ -76,7 +76,7 @@ export default () => {
       Config.SDK_CLIENT_TYPE,
       '1.0',
     );
-    MailtimeAuth.setAccessGoogleWithAppPassword(false);
+    MailtimeAuth.setAccessGoogleWithAppPassword(true);
   }, []);
 
   const constants = useMemo(() => MailtimeAuth.getConstants(), []);
