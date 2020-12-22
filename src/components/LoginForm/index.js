@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import {View, Platform} from 'react-native';
 import CarrierInfo from 'react-native-carrier-info';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
@@ -47,7 +47,9 @@ const InternalLoginForm = ({title, submitButtonText, description}) => {
   }, [setFieldValue]);
 
   return (
-    <AppKeyboardAvoidingView style={container} behavior="padding">
+    <AppKeyboardAvoidingView
+      style={container}
+      behavior={Platform.OS === 'ios' ? 'padding' : ''}>
       <View style={formView(theme)}>
         <View>
           {title && <HeaderTitle>{title}</HeaderTitle>}

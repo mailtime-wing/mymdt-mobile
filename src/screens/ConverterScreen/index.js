@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {View, KeyboardAvoidingView, ScrollView} from 'react-native';
+import {View, KeyboardAvoidingView, ScrollView, Platform} from 'react-native';
 import {Formik} from 'formik';
 import {useTheme} from 'emotion-theming';
 import {GET_CONVERSION_RATE_API, CURRENCY_CONVERT_API} from '@/api/data';
@@ -67,7 +67,7 @@ const ConverterScreen = ({navigation, route}) => {
 
   return (
     <ScrollView keyboardShouldPersistTaps="handled">
-      <KeyboardAvoidingView behavior="position">
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : ''}>
         <HeaderTitle>
           <FormattedMessage id="converter" defaultMessage="Converter" />
         </HeaderTitle>

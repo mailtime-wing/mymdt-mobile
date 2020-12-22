@@ -1,5 +1,5 @@
 import React from 'react';
-import {KeyboardAvoidingView} from 'react-native';
+import {KeyboardAvoidingView, Platform} from 'react-native';
 import {useHeaderHeight} from '@react-navigation/stack';
 
 /**
@@ -11,7 +11,10 @@ const AppKeyboardAvoidingView = (props) => {
   const headerHeight = useHeaderHeight();
 
   return (
-    <KeyboardAvoidingView keyboardVerticalOffset={headerHeight} {...props} />
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={Platform.OS === 'ios' ? headerHeight : 0}
+      {...props}
+    />
   );
 };
 

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {KeyboardAvoidingView} from 'react-native';
+import {KeyboardAvoidingView, Platform} from 'react-native';
 import {useQuery} from '@apollo/client';
 
 import ToastContext from '@/context/toast';
@@ -28,7 +28,9 @@ const ToastList = () => {
   }, [toasts, popToast]);
 
   return (
-    <KeyboardAvoidingView behavior="position" style={position}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'position' : ''}
+      style={position}>
       {toasts.map(({id, ...props}) => (
         <AppToast
           key={id}

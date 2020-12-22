@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useCallback, useRef} from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, Platform} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 import {Formik, useFormikContext} from 'formik';
@@ -106,7 +106,9 @@ const VerifyVerificationCodeForm = ({
       }}
       onSubmit={onSubmit}
       validate={validate}>
-      <AppKeyboardAvoidingView style={container} behavior="padding">
+      <AppKeyboardAvoidingView
+        style={container}
+        behavior={Platform.OS === 'ios' ? 'padding' : ''}>
         <View style={inner(theme)}>
           <View>
             {title && <HeaderTitle>{title}</HeaderTitle>}
