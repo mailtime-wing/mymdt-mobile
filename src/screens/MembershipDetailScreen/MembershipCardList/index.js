@@ -66,6 +66,9 @@ const MembershipCardList = ({navigation, route}) => {
 
   const {data, loading, refetch} = useQueryWithAuth(
     GET_CHECK_USER_CAN_UPGRADE_DATA,
+    {
+      fetchPolicy: 'network-only',
+    },
   );
   const [upgradeMembership] = useMutationWithAuth(UPGRADE_MEMBERSHIP, {
     variables: {id: membershipToBeUpgraded.id},
@@ -75,10 +78,9 @@ const MembershipCardList = ({navigation, route}) => {
     data?.userProfile?.referrals.filter(
       (referral) => referral.isReferrer && referral.status === 'PROCESSED',
     ).length || 0;
-  const bindDataSourceCount =
-    data?.userProfile?.emailAccounts?.length ||
-    0 + data?.userProfile?.bankItems?.length ||
-    0;
+  const bindEmailCount = data?.userProfile?.emailAccounts?.length || 0;
+  const bindCardCount = data?.userProfile?.bankItems?.length || 0;
+  const bindDataSourceCount = bindEmailCount + bindCardCount;
   const currentStakingPlan = data?.userProfile?.staking[0]?.stakingPlan;
   const currentStakeAmount = currentStakingPlan?.amount || 0;
   const availableMemberships = data?.userProfile?.availableMemberships || [];
