@@ -1,6 +1,15 @@
 import {css} from '@emotion/native';
 import {transparentize} from 'polished';
 
+const borderWidth = 1;
+// lineHeights.button = lightTheme.fontSizes.button + 4
+// add-on line-height = 4px
+// originalPaddingVertical - (add-on line-height)/2 = newPaddingVertical
+const moreCompactPaddingVertical = 5; // 7 - 2 = 5
+const compactPaddingVertical = 3; // 5 - 2 = 3
+const normalPaddingVertical = 9; // 11 - 2 = 9
+const largePaddingVertical = 19; // 21 - 2 = 19
+
 export const container = (
   theme,
   variant,
@@ -12,6 +21,30 @@ export const container = (
   align-items: center;
   flex-direction: row;
   ${disabled && 'opacity: 0.4;'}
+
+  ${sizeVariant === 'moreCompact' &&
+  `
+    padding-vertical: ${moreCompactPaddingVertical}px;
+    border-radius: 16px;
+    `}
+  ${sizeVariant === 'compact' &&
+  `
+    padding-vertical: ${compactPaddingVertical}px;
+    padding-horizontal: 8px;
+    border-radius: 16px;
+    `}
+  ${sizeVariant === 'normal' &&
+  `
+    padding-vertical: ${normalPaddingVertical}px;
+    padding-horizontal: 12px;
+    border-radius: 28px;
+    `}
+  ${sizeVariant === 'large' &&
+  `
+    padding-vertical: ${largePaddingVertical}px;
+    padding-horizontal: 21px;
+    border-radius: 28px;
+  `}
 
   ${variant === 'filled' &&
   `
@@ -64,7 +97,7 @@ export const container = (
   `}
   ${variant === 'outlined' &&
   `
-      border-width: 1px;
+    border-width: ${borderWidth}px;
     ${
       colorVariant === 'primary' &&
       `
@@ -98,33 +131,31 @@ export const container = (
       border-color: white;
     `
     }
-  `}
 
-${sizeVariant === 'moreCompact' &&
-  `
-    border-radius: 12px;
-    height: 24px;
-    `}
-  ${sizeVariant === 'compact' &&
-  `
-    padding-left: 8px;
-    padding-right: 8px;
-    border-radius: 12px;
-    height: 24px;
-    `}
-  ${sizeVariant === 'normal' &&
-  `
-    padding-left: 12px;
-    padding-right: 12px;
-    border-radius: 28px;
-    height: 36px;
-    `}
-  ${sizeVariant === 'large' &&
-  `
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 28px;
-    height: 56px;
+    ${
+      sizeVariant === 'moreCompact' &&
+      `
+    padding-vertical: ${moreCompactPaddingVertical - borderWidth}px;
+    `
+    }
+    ${
+      sizeVariant === 'compact' &&
+      `
+      padding-vertical: ${compactPaddingVertical - borderWidth}px;
+      `
+    }
+    ${
+      sizeVariant === 'normal' &&
+      `
+      padding-vertical: ${normalPaddingVertical - borderWidth}px;
+      `
+    }
+    ${
+      sizeVariant === 'large' &&
+      `
+      padding-vertical: ${largePaddingVertical - borderWidth}px;
+    `
+    }
   `}
 `;
 
