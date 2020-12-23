@@ -20,7 +20,7 @@ const AccountIconWithBadge = () => {
       <AppAvator
         variant="image"
         sizeVariant="small"
-        imageSrc={require('@/assets/dog_avatar.png')}
+        imageSrc={require('@/assets/rewardme_avatar.png')}
       />
       <MembershipLevelChip
         style={membershipPosition}
