@@ -128,7 +128,6 @@ const UserProfileEditScreen = ({navigation}) => {
   };
 
   const initialValues = {
-    profilePicture: require('@/assets/rewardme_avatar.png'),
     name: data?.userProfile?.name,
     gender: genderOptions.find(
       (gender) => gender.value === data?.userProfile?.gender,

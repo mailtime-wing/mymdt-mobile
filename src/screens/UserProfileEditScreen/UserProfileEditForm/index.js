@@ -69,7 +69,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
                 <AppAvator
                   variant="image"
                   sizeVariant="normal"
-                  imageSrc={values.profilePicture}
+                  imageSrc={require('@/assets/rewardme_avatar.png')}
                 />
               </View>
             </View>
@@ -106,7 +106,7 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
               <AppAvator
                 variant="image"
                 sizeVariant="normal"
-                imageSrc={values.profilePicture}
+                imageSrc={require('@/assets/rewardme_avatar.png')}
               />
               <AppText variant="subTitle1" style={nameStyle(theme)}>
                 {values.name}
