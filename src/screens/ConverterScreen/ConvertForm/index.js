@@ -81,11 +81,13 @@ const ConvertForm = ({
     handleSubmit,
     isValid,
     handleBlur: handleBlurForFormik,
-    handleChange,
+    setFieldValue,
     errors,
   } = useFormikContext();
   // TODO: use formik's own focus state when it is ready: https://github.com/formium/formik/pull/2317
   const [focus, setFocus] = useState(false);
+  // TODO: refactor to move related code to other component, e.g. NumberInput
+  const [amountInString, setAmountInString] = useState('');
 
   const handleAmountChange = useCallback(
     (amount) => {
@@ -93,8 +95,9 @@ const ConvertForm = ({
         amount = String(amount);
       }
 
-      if (!amount && amount !== 0) {
-        handleChange('amount')('');
+      if (!amount && amount !== '0') {
+        setAmountInString('');
+        setFieldValue('amount', 0);
         return;
       }
 
@@ -102,9 +105,10 @@ const ConvertForm = ({
         return;
       }
 
-      handleChange('amount')(amount);
+      setAmountInString(amount);
+      setFieldValue('amount', Number(amount));
     },
-    [handleChange],
+    [setFieldValue],
   );
 
   const handleBlur = (e) => {
@@ -151,7 +155,7 @@ const ConvertForm = ({
           focus={focus}
           title={<FormattedMessage id="from" defaultMessage="from" />}
           currencyName={<FormattedMessage id={`currencyDisplayName.${from}`} />}
-          value={focus ? values.amount : intl.formatNumber(values.amount)}
+          value={focus ? amountInString : intl.formatNumber(values.amount)}
           inputAccessoryViewID={inputAccessoryViewID}
           onChangeText={handleAmountChange}
           onBlur={handleBlur}
