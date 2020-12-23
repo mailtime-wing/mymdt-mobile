@@ -59,7 +59,7 @@ const ConverterScreen = ({navigation, route}) => {
     if (Number(values.amount) <= 0) {
       errors.amount = (
         <FormattedMessage
-          id="amount_cannot_be_zero"
+          id="error.amount_cannot_be_zero"
           defaultMessage="Amount cannot be zero"
         />
       );

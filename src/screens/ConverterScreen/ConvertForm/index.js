@@ -1,17 +1,11 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {
-  FormattedMessage,
-  FormattedNumber,
-  FormattedTime,
-  useIntl,
-} from 'react-intl';
+import React, {useState, useCallback} from 'react';
+import {FormattedMessage, FormattedTime, useIntl} from 'react-intl';
 import {View, TouchableOpacity, Platform, TextInput} from 'react-native';
 import {useFormikContext} from 'formik';
 import {useTheme} from 'emotion-theming';
 import {
   converterContainer,
   convertersContainer,
-  toAmountText,
   input as inputStyle,
   margin,
   errorText,
@@ -20,7 +14,7 @@ import {
   leftContainer,
   textOnBackgroundHighEmphasis,
   textOnBackgroundDisabled,
-  currencyName,
+  currencyName as currencyNameStyle,
   convertTypeContainer,
   convertType,
 } from './style';
@@ -29,11 +23,49 @@ import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
 import ConversionRate from '@/components/ConversionRate';
 import ConvertIcon from '@/assets/convert.svg';
+import isNumeric from '@/utils/isNumeric';
 
 import KeyboardButtons from './KeyboardButtons';
 
 const inputAccessoryViewID = 'converterButtons';
-const floatRegex = /^\d*\.?\d*$/;
+
+const AmountInput = ({
+  style,
+  focus,
+  title,
+  currencyName,
+  editable,
+  ...props
+}) => {
+  const theme = useTheme();
+  return (
+    <View style={[converterContainer(theme, focus), style]}>
+      <View style={convertTypeContainer}>
+        <AppText
+          variant="overline"
+          style={[textOnBackgroundDisabled(theme), convertType]}>
+          {title}
+        </AppText>
+        <AppText
+          variant="heading6"
+          style={[
+            currencyNameStyle(theme),
+            focus && {color: theme.colors.secondary.dark},
+          ]}>
+          {currencyName}
+        </AppText>
+      </View>
+      <TextInput
+        style={inputStyle(theme, !editable)}
+        editable={editable}
+        {...props}
+      />
+    </View>
+  );
+};
+AmountInput.defaultProps = {
+  editable: true,
+};
 
 const ConvertForm = ({
   conversionRate,
@@ -46,39 +78,45 @@ const ConvertForm = ({
   const intl = useIntl();
   const {
     values,
-    setFieldValue,
     handleSubmit,
     isValid,
-    touched,
-    setTouched,
+    handleBlur: handleBlurForFormik,
+    handleChange,
     errors,
   } = useFormikContext();
-  const [toAmount, setToAmount] = useState(0);
+  // TODO: use formik's own focus state when it is ready: https://github.com/formium/formik/pull/2317
+  const [focus, setFocus] = useState(false);
 
-  useEffect(() => {
-    setToAmount(values.amount * conversionRate);
-  }, [conversionRate, values.amount, from, to]);
-
-  const handleAmountValueOnChange = useCallback(
+  const handleAmountChange = useCallback(
     (amount) => {
-      if (isNaN(amount)) {
+      if (typeof amount !== 'string') {
+        amount = String(amount);
+      }
+
+      if (!amount && amount !== 0) {
+        handleChange('amount')('');
         return;
       }
-      if (floatRegex.test(amount)) {
-        setFieldValue('amount', amount || 0);
+
+      if (!isNumeric(amount)) {
         return;
       }
+
+      handleChange('amount')(amount);
     },
-    [setFieldValue],
+    [handleChange],
   );
 
-  const handleOnBlur = () => {
-    setTouched(false);
+  const handleBlur = (e) => {
+    setFocus(false);
+    handleBlurForFormik('amount')(e);
   };
 
-  const handleOnFocus = () => {
-    setTouched(true);
+  const handleFocus = () => {
+    setFocus(true);
   };
+
+  const toAmount = values.amount * conversionRate;
 
   return (
     <>
@@ -108,68 +146,36 @@ const ConvertForm = ({
         />
       </View>
       <View style={convertersContainer}>
-        <View style={[converterContainer(theme, touched), margin]}>
-          <View style={convertTypeContainer}>
-            <AppText
-              variant="overline"
-              style={[textOnBackgroundDisabled(theme), convertType]}>
-              <FormattedMessage id="from" defaultMessage="from" />
-            </AppText>
-            <AppText
-              variant="heading6"
-              style={[
-                currencyName(theme),
-                touched && {color: theme.colors.secondary.dark},
-              ]}>
-              <FormattedMessage id={`currencyDisplayName.${from}`} />
-            </AppText>
-          </View>
-          {touched ? (
-            <TextInput
-              value={String(values.amount)}
-              inputAccessoryViewID={inputAccessoryViewID}
-              onChangeText={handleAmountValueOnChange}
-              onBlur={handleOnBlur}
-              style={inputStyle(theme)}
-              keyboardType="numeric"
-              autoFocus
-            />
-          ) : (
-            <TextInput
-              value={intl.formatNumber(values.amount)}
-              onFocus={handleOnFocus}
-              style={inputStyle(theme)}
-            />
-          )}
-          {Platform.OS === 'ios' && (
-            <KeyboardButtons
-              inputAccessoryViewID={inputAccessoryViewID}
-              handleAmountValueOnChange={handleAmountValueOnChange}
-              from={from}
-            />
-          )}
-        </View>
+        <AmountInput
+          style={margin}
+          focus={focus}
+          title={<FormattedMessage id="from" defaultMessage="from" />}
+          currencyName={<FormattedMessage id={`currencyDisplayName.${from}`} />}
+          value={focus ? values.amount : intl.formatNumber(values.amount)}
+          inputAccessoryViewID={inputAccessoryViewID}
+          onChangeText={handleAmountChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          keyboardType="numeric"
+          autoFocus
+        />
+        {Platform.OS === 'ios' && (
+          <KeyboardButtons
+            inputAccessoryViewID={inputAccessoryViewID}
+            handleAmountValueOnChange={handleAmountChange}
+            from={from}
+          />
+        )}
         <TouchableOpacity onPress={changeConvertCurrency} style={convertIcon}>
           <ConvertIcon fill={theme.colors.secondary.normal} />
         </TouchableOpacity>
-        <View style={converterContainer(theme, false)}>
-          <View style={convertTypeContainer}>
-            <AppText
-              variant="overline"
-              style={[textOnBackgroundDisabled(theme), convertType]}>
-              <FormattedMessage id="to" defaultMessage="to" />
-            </AppText>
-            <AppText variant="heading6" style={currencyName(theme)}>
-              <FormattedMessage id={`currencyDisplayName.${to}`} />
-            </AppText>
-          </View>
-          <AppText
-            variant="digit36"
-            style={toAmountText(theme)}
-            numberOfLines={1}>
-            <FormattedNumber value={toAmount} />
-          </AppText>
-        </View>
+        <AmountInput
+          focus={false}
+          title={<FormattedMessage id="to" defaultMessage="to" />}
+          currencyName={<FormattedMessage id={`currencyDisplayName.${to}`} />}
+          value={intl.formatNumber(toAmount)}
+          editable={false}
+        />
       </View>
       {!!errors.amount && (
         <AppText variant="caption" style={errorText(theme)}>

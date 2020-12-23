@@ -19,16 +19,15 @@ export const converterContainer = (theme, isFocus) => css`
   justify-content: space-between;
 `;
 
-export const toAmountText = (theme) => css`
-  text-align: right;
-  color: ${theme.colors.textOnBackground.disabled};
-`;
-
-export const input = (theme) => css`
+export const input = (theme, disabled) => css`
   font-size: 36px;
   line-height: 44px;
   text-align: right;
   color: ${theme.colors.textOnBackground.highEmphasis};
+  ${disabled &&
+  `
+    color: ${theme.colors.textOnBackground.disabled};
+  `}
 `;
 
 export const margin = css`

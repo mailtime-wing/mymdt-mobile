@@ -58,7 +58,7 @@ const KeyboardButtons = ({
           onPress={handleConvertAllPress}
           style={inputAccessoryButton(theme)}>
           {loading ? (
-            <LoadingSpinner />
+            <LoadingSpinner size="small" />
           ) : (
             <AppText variant="button" style={inputAccessoryButtonText(theme)}>
               <FormattedMessage
