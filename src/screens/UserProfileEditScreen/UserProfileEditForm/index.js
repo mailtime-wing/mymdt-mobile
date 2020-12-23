@@ -1,11 +1,9 @@
 import React, {useEffect} from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import {FormattedMessage, FormattedDate} from 'react-intl';
-import ImagePicker from 'react-native-image-picker';
 import {useFormikContext} from 'formik';
 
 import {
-  FillIcon,
   errorStyle,
   formContainer,
   nameStyle,
@@ -28,15 +26,6 @@ import HeaderTitle from '@/components/HeaderTitle';
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
 import {useTheme} from 'emotion-theming';
 
-const cameraOptions = {
-  title: 'CHANGE PROFILE PHOTO',
-  customButtons: [{name: 'REMOVE', title: 'Remove Current Photo'}],
-  storageOptions: {
-    skipBackup: true,
-    path: 'images',
-  },
-};
-
 const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
   const theme = useTheme();
   const {
@@ -57,23 +46,6 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
     }
   }, [formState.isConfirmed, formState.isCancelled, submitForm, resetForm]);
 
-  const handleCameraPress = () => {
-    ImagePicker.showImagePicker(cameraOptions, (response) => {
-      if (response.didCancel) {
-        // handle cancel
-      } else if (response.error) {
-        console.error('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        setFieldValue('profilePicture', null);
-      } else {
-        const source = {uri: response.uri};
-        if (source) {
-          setFieldValue('profilePicture', source);
-        }
-      }
-    });
-  };
-
   return (
     <View>
       {!formState.isEditing && (
@@ -93,14 +65,13 @@ const UserProfileEditForm = ({handleDatePickerPress, formState}) => {
                   defaultMessage="profile photo"
                 />
               </AppText>
-              <TouchableOpacity onPress={() => handleCameraPress()}>
+              <View>
                 <AppAvator
                   variant="image"
                   sizeVariant="normal"
                   imageSrc={values.profilePicture}
                 />
-              </TouchableOpacity>
-              <FillIcon source={require('@/assets/filled.png')} />
+              </View>
             </View>
             <Input
               label={<FormattedMessage id="your_name" />}
