@@ -21,6 +21,11 @@ DerivedData
 *.ipa
 *.xcuserstate
 
+# Android Studio
+.project
+.settings
+.classpath
+
 # Android/IntelliJ
 #
 build/
@@ -65,3 +70,5 @@ buck-out/
 !.env.sample
 
 .vscode
+
+secret.properties
