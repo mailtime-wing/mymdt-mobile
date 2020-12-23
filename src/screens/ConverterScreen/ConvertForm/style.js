@@ -16,9 +16,11 @@ export const converterContainer = (theme, isFocus) => css`
   ${isFocus &&
   `border: 2px solid ${theme.colors.secondary.normal};
     background-color: ${theme.colors.inputFocusBackground};`};
+  justify-content: space-between;
 `;
 
 export const toAmountText = (theme) => css`
+  text-align: right;
   color: ${theme.colors.textOnBackground.disabled};
 `;
 
@@ -27,12 +29,6 @@ export const input = (theme) => css`
   line-height: 44px;
   text-align: right;
   color: ${theme.colors.textOnBackground.highEmphasis};
-`;
-
-export const numberText = (theme) => css`
-  flex: 1;
-  text-align: right;
-  color: ${theme.colors.textOnBackground.disabled};
 `;
 
 export const margin = css`

@@ -384,6 +384,7 @@
     "enter_screen_action_not_available": "您请求验证码的次数过多。请稍后再试.",
     "user_profile_setup_name_required": "Name is required",
     "user_profile_setup_miniumn_age_required": "Only users who are {age} or older can use this app",
-    "user_profile_setup_referral_code_invalid": "Referral code is invalid"
+    "user_profile_setup_referral_code_invalid": "Referral code is invalid",
+    "amount_cannot_be_zero": "Amount cannot be zero"
   }
 }

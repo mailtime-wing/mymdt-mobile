@@ -14,8 +14,7 @@ import {
   toAmountText,
   input as inputStyle,
   margin,
-  numberText,
-  // errorText,
+  errorText,
   convertIcon,
   conversionSection,
   leftContainer,
@@ -34,6 +33,7 @@ import ConvertIcon from '@/assets/convert.svg';
 import KeyboardButtons from './KeyboardButtons';
 
 const inputAccessoryViewID = 'converterButtons';
+const floatRegex = /^\d*\.?\d*$/;
 
 const ConvertForm = ({
   conversionRate,
@@ -44,32 +44,40 @@ const ConvertForm = ({
 }) => {
   const theme = useTheme();
   const intl = useIntl();
-  const {values, setFieldValue, handleSubmit, isValid} = useFormikContext();
+  const {
+    values,
+    setFieldValue,
+    handleSubmit,
+    isValid,
+    touched,
+    setTouched,
+    errors,
+  } = useFormikContext();
   const [toAmount, setToAmount] = useState(0);
-  // const [clientError, setClientError] = useState('');
-  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     setToAmount(values.amount * conversionRate);
-  }, [conversionRate, values]);
+  }, [conversionRate, values.amount, from, to]);
 
   const handleAmountValueOnChange = useCallback(
     (amount) => {
-      setFieldValue('amount', amount);
+      if (isNaN(amount)) {
+        return;
+      }
+      if (floatRegex.test(amount)) {
+        setFieldValue('amount', amount || 0);
+        return;
+      }
     },
     [setFieldValue],
   );
 
-  // const handleError = useCallback((error) => {
-  //   setClientError(error);
-  // }, []);
-
   const handleOnBlur = () => {
-    setIsEditing(false);
+    setTouched(false);
   };
 
   const handleOnFocus = () => {
-    setIsEditing(true);
+    setTouched(true);
   };
 
   return (
@@ -85,7 +93,7 @@ const ConvertForm = ({
           <AppText variant="caption" style={textOnBackgroundDisabled(theme)}>
             <FormattedMessage
               id="lastupdate_at"
-              defaultMessage="Last update at {time}"
+              defaultMessage="Last update at {time} "
               values={{
                 time: <FormattedTime value={new Date()} />,
               }}
@@ -100,7 +108,7 @@ const ConvertForm = ({
         />
       </View>
       <View style={convertersContainer}>
-        <View style={[converterContainer(theme, isEditing), margin]}>
+        <View style={[converterContainer(theme, touched), margin]}>
           <View style={convertTypeContainer}>
             <AppText
               variant="overline"
@@ -111,18 +119,20 @@ const ConvertForm = ({
               variant="heading6"
               style={[
                 currencyName(theme),
-                isEditing && {color: theme.colors.secondary.dark},
+                touched && {color: theme.colors.secondary.dark},
               ]}>
               <FormattedMessage id={`currencyDisplayName.${from}`} />
             </AppText>
           </View>
-          {isEditing ? (
+          {touched ? (
             <TextInput
-              value={values.amount}
+              value={String(values.amount)}
               inputAccessoryViewID={inputAccessoryViewID}
               onChangeText={handleAmountValueOnChange}
               onBlur={handleOnBlur}
               style={inputStyle(theme)}
+              keyboardType="numeric"
+              autoFocus
             />
           ) : (
             <TextInput
@@ -154,20 +164,18 @@ const ConvertForm = ({
             </AppText>
           </View>
           <AppText
-            variant="heading1"
-            style={numberText(theme)}
+            variant="digit36"
+            style={toAmountText(theme)}
             numberOfLines={1}>
-            <AppText variant="digit36" style={toAmountText(theme)}>
-              <FormattedNumber value={toAmount} />
-            </AppText>
+            <FormattedNumber value={toAmount} />
           </AppText>
         </View>
       </View>
-      {/* {!!clientError && (
-        <AppText variant="label" style={errorText(theme)}>
-          {clientError}
+      {!!errors.amount && (
+        <AppText variant="caption" style={errorText(theme)}>
+          {errors.amount}
         </AppText>
-      )} */}
+      )}
       <AppButton
         onPress={handleSubmit}
         disabled={!isValid}
