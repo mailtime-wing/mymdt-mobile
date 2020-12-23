@@ -8,7 +8,6 @@ export const container = (
   colorVariant,
   disabled,
 ) => css`
-  border-radius: 28px;
   justify-content: center;
   align-items: center;
   flex-direction: row;
@@ -101,31 +100,31 @@ export const container = (
     }
   `}
 
-  ${sizeVariant === 'moreCompact' &&
+${sizeVariant === 'moreCompact' &&
   `
-    padding-top: 7px;
-    padding-bottom: 7px;
+    border-radius: 12px;
+    height: 24px;
     `}
   ${sizeVariant === 'compact' &&
   `
-    padding-top: 4px;
-    padding-bottom: 4px;
     padding-left: 8px;
     padding-right: 8px;
+    border-radius: 12px;
+    height: 24px;
     `}
   ${sizeVariant === 'normal' &&
   `
-    padding-top: 10px;
-    padding-bottom: 10px;
     padding-left: 12px;
     padding-right: 12px;
+    border-radius: 28px;
+    height: 36px;
     `}
   ${sizeVariant === 'large' &&
   `
-    padding-top: 20px;
-    padding-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    border-radius: 28px;
+    height: 56px;
   `}
 `;
 
