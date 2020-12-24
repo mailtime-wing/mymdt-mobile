@@ -720,9 +720,9 @@ lightTheme.lineHeights.body2 = lightTheme.fontSizes.body2 * 1.5;
 lightTheme.lineHeights.caption = lightTheme.fontSizes.caption * 1.5;
 lightTheme.lineHeights.captionNew = lightTheme.fontSizes.captionNew * 1.25;
 lightTheme.lineHeights.value = lightTheme.fontSizes.value * 1.5;
-lightTheme.lineHeights.button = lightTheme.fontSizes.button * 1.5;
+lightTheme.lineHeights.button = lightTheme.fontSizes.button + 4;
 lightTheme.lineHeights.moreCompactButton =
-  lightTheme.fontSizes.moreCompactButton * 1.5;
+  lightTheme.fontSizes.moreCompactButton + 4;
 lightTheme.lineHeights.label = lightTheme.fontSizes.label * 1.5;
 lightTheme.lineHeights.overline = lightTheme.fontSizes.overline * 1.5;
 lightTheme.lineHeights.smallText = lightTheme.fontSizes.smallText * 1.25;
@@ -1143,9 +1143,9 @@ darkTheme.lineHeights.body2 = darkTheme.fontSizes.body2 * 1.5;
 darkTheme.lineHeights.caption = darkTheme.fontSizes.caption * 1.5;
 darkTheme.lineHeights.captionNew = darkTheme.fontSizes.captionNew * 1.25;
 darkTheme.lineHeights.value = darkTheme.fontSizes.value * 1.5;
-darkTheme.lineHeights.button = darkTheme.fontSizes.button * 1.5;
+darkTheme.lineHeights.button = darkTheme.fontSizes.button + 4;
 darkTheme.lineHeights.moreCompactButton =
-  darkTheme.fontSizes.moreCompactButton * 1.5;
+  darkTheme.fontSizes.moreCompactButton + 4;
 darkTheme.lineHeights.label = darkTheme.fontSizes.label * 1.5;
 darkTheme.lineHeights.overline = darkTheme.fontSizes.overline * 1.5;
 darkTheme.lineHeights.smallText = darkTheme.fontSizes.smallText * 1.25;
