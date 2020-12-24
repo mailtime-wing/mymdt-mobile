@@ -91,7 +91,7 @@ const SettingScreen = ({navigation}) => {
               <AppAvator
                 variant="image"
                 sizeVariant="normal"
-                imageSrc={require('@/assets/dog_avatar.png')}
+                imageSrc={require('@/assets/rewardme_avatar.png')}
               />
               <ListOption
                 label={
