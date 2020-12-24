@@ -58,10 +58,9 @@ const HomeScreen = ({navigation}) => {
     data?.userProfile?.referrals.filter(
       (referral) => referral.isReferrer && referral.status === 'PROCESSED',
     ).length || 0;
-  const bindDataSourceCount =
-    data?.userProfile?.emailAccounts?.length ||
-    0 + data?.userProfile?.bankItems?.length ||
-    0;
+  const bindEmailCount = data?.userProfile?.emailAccounts?.length || 0;
+  const bindCardCount = data?.userProfile?.bankItems?.length || 0;
+  const bindDataSourceCount = bindEmailCount + bindCardCount;
   const currentStakeAmount =
     data?.userProfile?.staking[0]?.stakingPlan.amount || 0;
 
@@ -114,7 +113,7 @@ const HomeScreen = ({navigation}) => {
       name: <FormattedMessage id="add_email" defaultMessage="Add Email" />,
       icon: MailIcon,
       action: () =>
-        navigation.navigate('settings', {screen: 'emails_binding_edit'}),
+        navigation.navigate('settings', {screen: 'linked_emails_setting'}),
     },
     {
       name: <FormattedMessage id="add_card" defaultMessage="Add Card" />,
