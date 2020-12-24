@@ -1,6 +1,7 @@
 import {useState, useEffect, useRef, useCallback} from 'react';
 import {Linking} from 'react-native';
 import {useIntl} from 'react-intl';
+import Config from 'react-native-config';
 
 import useFetch from '@/hooks/useFetch';
 import inAppBrowser from '@/utils/inAppBrowser';
@@ -48,7 +49,7 @@ export default function useBankLogin(
   const [error, setError] = useState(null);
 
   const [fetchAuthLink, {isError: isFetchAuthLinkError}] = useFetch(
-    'https://bankwebhook-alpha.reward.me/getauthlink',
+    `${Config.BANKDATA_API_SCHEME}://${Config.BANKDATA_API_ENDPOINT}/getauthlink`,
     {
       initialFetchOptions,
       lazy: true,
@@ -56,7 +57,7 @@ export default function useBankLogin(
   );
 
   const [fetchAccountDetail, {isError: isFetchAccountDetailError}] = useFetch(
-    'https://bankwebhook-alpha.reward.me/getaccountdetail',
+    `${Config.BANKDATA_API_SCHEME}://${Config.BANKDATA_API_ENDPOINT}/getaccountdetail`,
     {
       initialFetchOptions,
       lazy: true,

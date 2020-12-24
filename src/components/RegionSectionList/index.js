@@ -1,3 +1,4 @@
+import Config from 'react-native-config';
 import React, {useMemo} from 'react';
 import {View, SectionList} from 'react-native';
 import {FormattedMessage} from 'react-intl';
@@ -39,7 +40,7 @@ const RegionSectionList = ({onItemPress}) => {
     : '';
 
   const [, {data: fetchedData, isError, isLoading}] = useFetch(
-    'https://bankwebhook-alpha.reward.me/bankcountryconfig',
+    `${Config.BANKDATA_API_SCHEME}://${Config.BANKDATA_API_ENDPOINT}/bankcountryconfig`,
     {
       initialFetchOptions,
     },
