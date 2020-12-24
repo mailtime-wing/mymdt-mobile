@@ -59,16 +59,12 @@ const TransactionAmount = ({
   switch (unitVariant) {
     case MEASURABLE_DATA_TOKEN:
       unit = 'MDT';
-      minimumFractionDigits = 4;
-      maximumFractionDigits = 4;
       break;
     case REWARD_DOLLAR:
       unit = 'R';
       break;
     case ME:
       unit = ME;
-      minimumFractionDigits = 4;
-      maximumFractionDigits = 4;
       break;
     case USD:
     case USDT:
