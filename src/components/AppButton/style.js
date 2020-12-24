@@ -25,19 +25,19 @@ export const container = (
   ${sizeVariant === 'moreCompact' &&
   `
     padding-vertical: ${moreCompactPaddingVertical}px;
-    border-radius: 16px;
+    border-radius: 12px;
     `}
   ${sizeVariant === 'compact' &&
   `
     padding-vertical: ${compactPaddingVertical}px;
     padding-horizontal: 8px;
-    border-radius: 16px;
+    border-radius: 12px;
     `}
   ${sizeVariant === 'normal' &&
   `
     padding-vertical: ${normalPaddingVertical}px;
     padding-horizontal: 12px;
-    border-radius: 28px;
+    border-radius: 18px;
     `}
   ${sizeVariant === 'large' &&
   `
