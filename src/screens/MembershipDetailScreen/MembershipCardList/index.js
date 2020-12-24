@@ -66,9 +66,6 @@ const MembershipCardList = ({navigation, route}) => {
 
   const {data, loading, refetch} = useQueryWithAuth(
     GET_CHECK_USER_CAN_UPGRADE_DATA,
-    {
-      fetchPolicy: 'network-only',
-    },
   );
   const [upgradeMembership] = useMutationWithAuth(UPGRADE_MEMBERSHIP, {
     variables: {id: membershipToBeUpgraded.id},

@@ -46,9 +46,6 @@ const HomeScreen = ({navigation}) => {
   const theme = useTheme();
   const {data, loading, refetch} = useQueryWithAuth(
     GET_CHECK_USER_CAN_UPGRADE_DATA,
-    {
-      fetchPolicy: 'network-only',
-    },
   );
   const {conversionRate} = useCurrencyConvertToUsd(ME);
   const {
