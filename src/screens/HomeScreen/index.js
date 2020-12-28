@@ -96,7 +96,7 @@ const HomeScreen = ({navigation}) => {
     fetcher,
   );
   const isSummaryLoading = !summaryData && !summaryError;
-  const cashBackTotal = summaryData?.data?.total_cashback * conversionRate || 0;
+  const cashBackTotal = summaryData?.data?.totalCashback * conversionRate || 0;
   const cashBackTotalInPeriod =
     summaryData?.data?.totalCashbackInPeriod * conversionRate || 0;
 
