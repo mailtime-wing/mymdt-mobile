@@ -301,6 +301,8 @@
   "from": "from",
   "to": "to",
   "poloniex": "Poloniex",
+  "from": "from",
+  "to": "to",
   "transactionType": {
     "reward": "Reward",
     "redeem": "Redeem",
