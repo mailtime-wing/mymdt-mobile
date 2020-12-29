@@ -1,8 +1,8 @@
 import {useSWRInfinite} from 'swr';
 import {AUTH_TOKENS} from '@/api/auth';
 import {useQuery} from '@apollo/client';
-
-const url = 'https://distribute-alpha.reward.me/cashback/histories';
+import Config from 'react-native-config';
+const url = `${Config.DISTRIBUTE_API_SCHEME}${Config.DISTRIBUTE_API_ENDPOINT}/cashback/histories`;
 
 const getKey = (pageIndex, previousPageData) => {
   // reached the end
