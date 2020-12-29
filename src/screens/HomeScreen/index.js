@@ -41,7 +41,7 @@ import {ME} from '@/constants/currency';
 import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 
 import Config from 'react-native-config';
-const url = `${Config.DISTRIBUTE_API_SCHEME}${Config.DISTRIBUTE_API_ENDPOINT}/cashback/summary?period=7`;
+const url = `${Config.DISTRIBUTE_API_SCHEME}://${Config.DISTRIBUTE_API_ENDPOINT}/cashback/summary?period=7`;
 
 const HomeScreen = ({navigation}) => {
   const theme = useTheme();
