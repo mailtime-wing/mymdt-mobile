@@ -300,6 +300,7 @@
   "this_card_is_already_bound": "This card is already bound to an account. Please contact support@reward.me if you think there is any problem.",
   "from": "from",
   "to": "to",
+  "poloniex": "Poloniex",
   "transactionType": {
     "reward": "Reward",
     "redeem": "Redeem",
