@@ -7964,7 +7964,7 @@ react-native-localize@^2.0.1:
 
 "react-native-mailtime-sdk@https://github.com/measurabledatatoken/react-native-mailtime-sdk.git":
   version "0.1.5"
-  resolved "https://github.com/measurabledatatoken/react-native-mailtime-sdk.git#5582fbb6a27e3969bafaecaff7cc05b17e58b102"
+  resolved "https://github.com/measurabledatatoken/react-native-mailtime-sdk.git#399ddfd7a40fe9e57a49ab64550007243d0cf202"
 
 react-native-raw-bottom-sheet@^2.1.0:
   version "2.1.0"
