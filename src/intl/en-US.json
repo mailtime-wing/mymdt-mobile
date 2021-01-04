@@ -301,8 +301,6 @@
   "from": "from",
   "to": "to",
   "poloniex": "Poloniex",
-  "from": "from",
-  "to": "to",
   "enter_gift_code": "Enter Gift Code",
   "mdt_gift_code": "MDT Gift Code",
   "redeem_successfully": "Successfully Redeemed",
@@ -372,7 +370,8 @@
     "invite_friends": "Invite friends",
     "bind": "bind",
     "copy": "copy",
-    "choose_cashback_type": "Choose Cash Back Type"
+    "choose_cashback_type": "Choose Cash Back Type",
+    "try_again": "Try Again"
   },
   "error": {
     "required": "Required",

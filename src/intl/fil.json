@@ -369,7 +369,8 @@
         "invite_friends": "Imbitahan ang mga kaibigan",
         "bind": "i-link",
         "copy": "kopyahin",
-        "choose_cashback_type": "Pumili ng Uri ng Cash Back"
+        "choose_cashback_type": "Pumili ng Uri ng Cash Back",
+        "try_again": "Try Again"
     },
     "error": {
         "required": "Kinakailangan",

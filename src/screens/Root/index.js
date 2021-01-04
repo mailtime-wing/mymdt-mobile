@@ -74,6 +74,7 @@ import UpgradeScreen from '@/screens/UpgradeScreen';
 import CashBackSummaryScreen from '@/screens/CashBackSummaryScreen';
 import StakeScreen from '@/screens/StakeScreen';
 import DepositScreen from '@/screens/DepositScreen';
+import GiftCodeScreen from '@/screens/GiftCodeScreen';
 
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
@@ -217,6 +218,13 @@ const authModalScreens = [
   {
     name: 'deposit',
     component: DepositScreen,
+  },
+  {
+    name: 'mdt_gift_code',
+    component: GiftCodeScreen,
+    options: {
+      headerTransparent: true,
+    },
   },
   {
     name: 'choose_cash_back_type_setting',

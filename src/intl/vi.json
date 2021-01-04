@@ -369,7 +369,8 @@
         "invite_friends": "M\u1eddi b\u1ea1n b\u00e8",
         "bind": "li\u00ean k\u1ebft",
         "copy": "sao ch\u00e9p",
-        "choose_cashback_type": "Ch\u1ecdn lo\u1ea1i ti\u1ec1n ho\u00e0n l\u1ea1i"
+        "choose_cashback_type": "Ch\u1ecdn lo\u1ea1i ti\u1ec1n ho\u00e0n l\u1ea1i",
+        "try_again": "Try Again"
     },
     "error": {
         "required": "B\u1eaft bu\u1ed9c",

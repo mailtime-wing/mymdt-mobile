@@ -369,7 +369,8 @@
         "invite_friends": "Jemput rakan",
         "bind": "ikat",
         "copy": "salin",
-        "choose_cashback_type": "Pilih Jenis Pulangan Tunai"
+        "choose_cashback_type": "Pilih Jenis Pulangan Tunai",
+        "try_again": "Try Again"
     },
     "error": {
         "required": "Diperlukan",

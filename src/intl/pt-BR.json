@@ -369,7 +369,8 @@
         "invite_friends": "Convidar amigos",
         "bind": "vincular",
         "copy": "copiar",
-        "choose_cashback_type": "Escolha o tipo de cashback"
+        "choose_cashback_type": "Escolha o tipo de cashback",
+        "try_again": "Try Again"
     },
     "error": {
         "required": "Obrigat\u00f3rio",
