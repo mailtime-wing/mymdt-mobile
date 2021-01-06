@@ -58,11 +58,12 @@ const StackScreen = ({navigation, route}) => {
   const [updateStakingPlan] = useMutationWithAuth(UPDATE_STAKING_PLAN, {
     variables: {id: stakingPlan.id},
   });
-  const availableMdt = data?.userProfile?.currencyAccounts[0]?.balance || 0;
+  const availableMdt = data?.userProfile?.currencyAccounts?.[0]?.balance || 0;
   //TODO: It will need to switch wallet in the future
-  const address = data?.userProfile?.currencyAccounts[0]?.wallets.filter(
-    (w) => w.type === 'eth',
-  )[0].address;
+  const address =
+    data?.userProfile?.currencyAccounts?.[0]?.wallets?.filter(
+      (w) => w.type === 'eth',
+    )?.[0]?.address || '';
 
   const stakeAmount = stakingPlan.amount;
   const stakeDate = new Date();
