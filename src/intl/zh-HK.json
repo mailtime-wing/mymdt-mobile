@@ -298,6 +298,8 @@
   "select_number_of_merchants": "{number_of_merchants, plural, =0 {選取} one {選取 # 個商戶} other {選取 # 個商戶}}",
   "detail": "Detail",
   "this_card_is_already_bound": "This card is already bound to an account. Please contact support@reward.me if you think there is any problem.",
+  "from": "from",
+  "to": "to",
   "transactionType": {
     "reward": "Reward",
     "redeem": "Redeem",
@@ -382,6 +384,7 @@
     "enter_screen_action_not_available": "您請求驗證碼的次數過多，請稍後再試。",
     "user_profile_setup_name_required": "Name is required",
     "user_profile_setup_miniumn_age_required": "Only users who are {age} or older can use this app",
-    "user_profile_setup_referral_code_invalid": "Referral code is invalid"
+    "user_profile_setup_referral_code_invalid": "Referral code is invalid",
+    "amount_cannot_be_zero": "Amount cannot be zero"
   }
 }

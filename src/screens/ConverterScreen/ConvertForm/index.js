@@ -1,134 +1,70 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {
-  FormattedMessage,
-  FormattedNumber,
-  FormattedTime,
-  useIntl,
-} from 'react-intl';
-import {
-  View,
-  InputAccessoryView,
-  TouchableOpacity,
-  Platform,
-} from 'react-native';
-import {useFormikContext, useField} from 'formik';
+import React, {useState, useCallback} from 'react';
+import {FormattedMessage, FormattedTime, useIntl} from 'react-intl';
+import {View, TouchableOpacity, Platform, TextInput} from 'react-native';
+import {useFormikContext} from 'formik';
 import {useTheme} from 'emotion-theming';
-
-import {GET_CURRENCY_BALANCE_API} from '@/api/data';
-import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
-
 import {
-  ConvertersContainer,
-  ConverterContainer,
-  Input,
-  Margin,
-  InputAccessoryViewContainer,
-  InputAccessoryButton,
-  converterType,
-  numberText,
-  inputAccessoryButtonText,
+  converterContainer,
+  convertersContainer,
+  input as inputStyle,
+  margin,
   errorText,
   convertIcon,
   conversionSection,
   leftContainer,
-  conversionRateText,
-  conversionUpdateDate,
+  textOnBackgroundHighEmphasis,
+  textOnBackgroundDisabled,
+  currencyName as currencyNameStyle,
+  convertTypeContainer,
+  convertType,
 } from './style';
 
 import AppButton from '@/components/AppButton';
 import AppText from '@/components/AppText2';
-import LoadingSpinner from '@/components/LoadingSpinner';
 import ConversionRate from '@/components/ConversionRate';
 import ConvertIcon from '@/assets/convert.svg';
+import isNumeric from '@/utils/isNumeric';
+
+import KeyboardButtons from './KeyboardButtons';
 
 const inputAccessoryViewID = 'converterButtons';
 
-const KeyboardButtons = ({handleConverterOnChange, from}) => {
-  const theme = useTheme();
-  const [getBalance, {data, loading}] = useLazyQueryWithAuth(
-    GET_CURRENCY_BALANCE_API,
-    {
-      fetchPolicy: 'network-only',
-    },
-  );
-
-  useEffect(() => {
-    if (data) {
-      handleConverterOnChange(
-        data?.userProfile?.currencyAccounts[0]?.balance || 0,
-      );
-    }
-  }, [data, handleConverterOnChange]);
-
-  const handleConvertAllPress = () => {
-    getBalance({
-      variables: {
-        currencyCode: from,
-      },
-    });
-  };
-
-  return (
-    <InputAccessoryView nativeID={inputAccessoryViewID}>
-      <InputAccessoryViewContainer>
-        <InputAccessoryButton onPress={() => handleConverterOnChange(0)}>
-          <AppText variant="button" style={inputAccessoryButtonText(theme)}>
-            <FormattedMessage id="button.clear" defaultMessage="clear" />
-          </AppText>
-        </InputAccessoryButton>
-        <InputAccessoryButton onPress={handleConvertAllPress}>
-          {loading ? (
-            <LoadingSpinner />
-          ) : (
-            <AppText variant="button" style={inputAccessoryButtonText(theme)}>
-              <FormattedMessage
-                id="button.convert_all"
-                defaultMessage="Convert all"
-              />
-            </AppText>
-          )}
-        </InputAccessoryButton>
-      </InputAccessoryViewContainer>
-    </InputAccessoryView>
-  );
-};
-
-const ConverterInput = ({
+const AmountInput = ({
+  style,
+  focus,
   title,
-  name,
-  handleError,
-  setFieldValue,
+  currencyName,
+  editable,
   ...props
 }) => {
-  const intl = useIntl();
-  const [field, meta] = useField(name);
-  const onError = meta.error;
-  // TODO: handle when have error design
-
-  const handleChange = (text) => {
-    // TODO: handle other symbol in the future e.g. "1.000.000"
-    let result = text;
-
-    if (isNaN(text)) {
-      result = Number(text.split(',').join(''));
-    }
-
-    setFieldValue('amount', result);
-  };
-
-  useEffect(() => {
-    handleError(meta.error);
-  }, [handleError, meta.error, onError]);
-
+  const theme = useTheme();
   return (
-    <>
-      <Input
-        value={intl.formatNumber(field.value)}
-        onChangeText={handleChange}
+    <View style={[converterContainer(theme, focus), style]}>
+      <View style={convertTypeContainer}>
+        <AppText
+          variant="overline"
+          style={[textOnBackgroundDisabled(theme), convertType]}>
+          {title}
+        </AppText>
+        <AppText
+          variant="heading6"
+          style={[
+            currencyNameStyle(theme),
+            focus && {color: theme.colors.secondary.dark},
+          ]}>
+          {currencyName}
+        </AppText>
+      </View>
+      <TextInput
+        style={inputStyle(theme, !editable)}
+        editable={editable}
         {...props}
       />
-    </>
+    </View>
   );
+};
+AmountInput.defaultProps = {
+  editable: true,
 };
 
 const ConvertForm = ({
@@ -139,44 +75,67 @@ const ConvertForm = ({
   ...props
 }) => {
   const theme = useTheme();
-  const {values, setFieldValue, handleSubmit, isValid} = useFormikContext();
-  const [isAmountFocus, setIsAmountFocus] = useState(false);
-  const [toAmount, setToAmount] = useState(0);
-  const [clientError, setClientError] = useState('');
+  const intl = useIntl();
+  const {
+    values,
+    handleSubmit,
+    isValid,
+    handleBlur: handleBlurForFormik,
+    setFieldValue,
+    errors,
+  } = useFormikContext();
+  // TODO: use formik's own focus state when it is ready: https://github.com/formium/formik/pull/2317
+  const [focus, setFocus] = useState(false);
+  // TODO: refactor to move related code to other component, e.g. NumberInput
+  const [amountInString, setAmountInString] = useState('');
 
-  useEffect(() => {
-    setToAmount(values.amount * conversionRate);
-  }, [conversionRate, values]);
-
-  const handleOnBlur = () => {
-    setIsAmountFocus(false);
-  };
-
-  const handleConverterOnChange = useCallback(
+  const handleAmountChange = useCallback(
     (amount) => {
-      setFieldValue('amount', amount);
+      if (typeof amount !== 'string') {
+        amount = String(amount);
+      }
+
+      if (!amount && amount !== '0') {
+        setAmountInString('');
+        setFieldValue('amount', 0);
+        return;
+      }
+
+      if (!isNumeric(amount)) {
+        return;
+      }
+
+      setAmountInString(amount);
+      setFieldValue('amount', Number(amount));
     },
     [setFieldValue],
   );
 
-  const handleError = useCallback((error) => {
-    setClientError(error);
-  }, []);
+  const handleBlur = (e) => {
+    setFocus(false);
+    handleBlurForFormik('amount')(e);
+  };
+
+  const handleFocus = () => {
+    setFocus(true);
+  };
+
+  const toAmount = values.amount * conversionRate;
 
   return (
     <>
       <View style={conversionSection}>
         <View style={leftContainer}>
-          <AppText variant="body1" style={conversionRateText(theme)}>
+          <AppText variant="body1" style={textOnBackgroundHighEmphasis(theme)}>
             <FormattedMessage
               id="conversion_rate"
               defaultMessage="Conversion Rate"
             />
           </AppText>
-          <AppText variant="caption" style={conversionUpdateDate(theme)}>
+          <AppText variant="caption" style={textOnBackgroundDisabled(theme)}>
             <FormattedMessage
               id="lastupdate_at"
-              defaultMessage="Last update at {time}"
+              defaultMessage="Last update at {time} "
               values={{
                 time: <FormattedTime value={new Date()} />,
               }}
@@ -190,48 +149,41 @@ const ConvertForm = ({
           {...props}
         />
       </View>
-      <ConvertersContainer>
-        <ConverterContainer
-          onBlur={handleOnBlur}
-          onFocus={() => setIsAmountFocus(true)}
-          isFocus={isAmountFocus}>
-          <AppText variant="value" style={converterType(theme, isAmountFocus)}>
-            <FormattedMessage id={`currencyDisplayName.${from}`} />
-          </AppText>
-          <ConverterInput
-            keyboardType="numeric"
-            name="amount"
+      <View style={convertersContainer}>
+        <AmountInput
+          style={margin}
+          focus={focus}
+          title={<FormattedMessage id="from" defaultMessage="from" />}
+          currencyName={<FormattedMessage id={`currencyDisplayName.${from}`} />}
+          value={focus ? amountInString : intl.formatNumber(values.amount)}
+          inputAccessoryViewID={inputAccessoryViewID}
+          onChangeText={handleAmountChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          keyboardType="numeric"
+          autoFocus
+        />
+        {Platform.OS === 'ios' && (
+          <KeyboardButtons
             inputAccessoryViewID={inputAccessoryViewID}
-            editable={true}
-            handleError={handleError}
-            setFieldValue={setFieldValue}
+            handleAmountValueOnChange={handleAmountChange}
+            from={from}
           />
-          {Platform.OS === 'ios' && (
-            <KeyboardButtons
-              handleConverterOnChange={handleConverterOnChange}
-              from={from}
-            />
-          )}
-        </ConverterContainer>
-        <Margin />
+        )}
         <TouchableOpacity onPress={changeConvertCurrency} style={convertIcon}>
           <ConvertIcon fill={theme.colors.secondary.normal} />
         </TouchableOpacity>
-        <ConverterContainer isFocus={false}>
-          <AppText variant="value" style={converterType(theme)}>
-            <FormattedMessage id={`currencyDisplayName.${to}`} />
-          </AppText>
-          <AppText
-            variant="heading1"
-            style={numberText(theme)}
-            numberOfLines={1}>
-            <FormattedNumber value={toAmount} />
-          </AppText>
-        </ConverterContainer>
-      </ConvertersContainer>
-      {!!clientError && (
-        <AppText variant="label" style={errorText(theme)}>
-          {clientError}
+        <AmountInput
+          focus={false}
+          title={<FormattedMessage id="to" defaultMessage="to" />}
+          currencyName={<FormattedMessage id={`currencyDisplayName.${to}`} />}
+          value={intl.formatNumber(toAmount)}
+          editable={false}
+        />
+      </View>
+      {!!errors.amount && (
+        <AppText variant="caption" style={errorText(theme)}>
+          {errors.amount}
         </AppText>
       )}
       <AppButton
