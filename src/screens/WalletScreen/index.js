@@ -125,10 +125,9 @@ const WalletScreen = ({navigation}) => {
       (ca) => ca.currencyCode === MEASURABLE_DATA_TOKEN,
     )?.balance || 0;
 
+  // TODO: there will be multiple stakings in the future
   const staking = userStakingInfoData?.userProfile?.staking?.[0];
-  const mdtStakingAmount = staking?.stakingPlan
-    ? staking.stakingPlan.amount
-    : 0;
+  const mdtStakingAmount = staking?.stakingPlan?.amount || 0;
   const mdtTotalAmount = mdtAvailableAmount + mdtStakingAmount;
 
   const meAmount =
