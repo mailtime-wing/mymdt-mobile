@@ -64,10 +64,10 @@ const Privileges = ({
             numberOfLines={2}>
             <FormattedMessage
               id="staking_interest_rate_percentage_return_in_new_token"
-              defaultMessage="{percentage}% p.a. MDT Stake Rewards Return in {token}*"
+              defaultMessage="{percentage}% p.a. MDT Stake Rewards Return in {token} Token*"
               values={{
                 percentage: stakingInterestRate,
-                token: <FormattedMessage id="currencyDisplayName.ME" />,
+                token: <FormattedMessage id="currencyDisplayCode.ME" />,
               }}
             />
           </AppText>
