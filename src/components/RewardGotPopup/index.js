@@ -11,7 +11,6 @@ import {
   gotRewardText,
   convertedContainer,
   centered,
-  container,
 } from './style';
 
 import {REWARD_DOLLAR, ME} from '@/constants/currency';
@@ -44,7 +43,7 @@ const RewardGotPopup = ({rewardName, rewardAmount, onOkPress, ...props}) => {
 
   return (
     <PopupModalWithLinearGradient callback={onOkPress} {...props}>
-      <View style={container}>{convert ? <MeGiftBox /> : <MRPGiftBox />}</View>
+      {convert ? <MeGiftBox /> : <MRPGiftBox />}
       <AppText
         variant="heading4"
         style={[
