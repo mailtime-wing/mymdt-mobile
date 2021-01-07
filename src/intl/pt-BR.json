@@ -300,12 +300,14 @@
     "this_card_is_already_bound": "Este e-mail j\u00e1 est\u00e1 vinculado a uma conta. Entre em contato com support@reward.me caso acredite que isto \u00e9 um erro.",
     "from": "de",
     "to": "para",
+    "poloniex": "Poloniex",
     "enter_gift_code": "Enter Gift Code",
     "mdt_gift_code": "MDT Gift Code",
     "redeem_successfully": "Successfully Redeemed",
     "invalid_gift_code": "Invalid Gift Code",
     "make_sure_correct_gift_code": "Please make sure you enter the correct code. If you have any queries, please contact {email}",
   "deposit_detail": "Depositing MDT in RewardMe is easy. Transfer MDT from any crypto exchange to the deposit address below.",
+  "mdt_gift_codes_rights": "MDT gift codes are given out at specific events. Measurable Foundation Ltd. reserves all rights.",
     "transactionType": {
         "reward": "Recompensa",
         "redeem": "Resgatar",
@@ -369,7 +371,8 @@
         "invite_friends": "Convidar amigos",
         "bind": "vincular",
         "copy": "copiar",
-        "choose_cashback_type": "Escolha o tipo de cashback"
+        "choose_cashback_type": "Escolha o tipo de cashback",
+        "try_again": "Try Again"
     },
     "error": {
         "required": "Obrigat\u00f3rio",
@@ -390,6 +393,7 @@
         "enter_screen_action_not_available": "Voc\u00ea solicitou c\u00f3digos de verifica\u00e7\u00e3o demais. Tente novamente mais tarde.",
         "user_profile_setup_name_required": "O nome \u00e9 obrigat\u00f3rio",
         "user_profile_setup_miniumn_age_required": "Apenas usu\u00e1rios de {age} anos ou mais podem usar este app",
-        "user_profile_setup_referral_code_invalid": "O c\u00f3digo de indica\u00e7\u00e3o \u00e9 inv\u00e1lido"
+        "user_profile_setup_referral_code_invalid": "O c\u00f3digo de indica\u00e7\u00e3o \u00e9 inv\u00e1lido",
+        "amount_cannot_be_zero": "Amount cannot be zero"
     }
 }

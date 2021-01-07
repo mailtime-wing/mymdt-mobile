@@ -300,12 +300,14 @@
     "this_card_is_already_bound": "Th\u1ebb n\u00e0y \u0111\u00e3 \u0111\u01b0\u1ee3c li\u00ean k\u1ebft v\u1edbi m\u1ed9t t\u00e0i kho\u1ea3n. Vui l\u00f2ng li\u00ean h\u1ec7 v\u1edbi support@reward.me n\u1ebfu b\u1ea1n cho r\u1eb1ng c\u00f3 b\u1ea5t k\u1ef3 v\u1ea5n \u0111\u1ec1 n\u00e0o.",
     "from": "t\u1eeb",
     "to": "\u0111\u1ec3",
+    "poloniex": "Poloniex",
     "enter_gift_code": "Enter Gift Code",
     "mdt_gift_code": "MDT Gift Code",
     "redeem_successfully": "Successfully Redeemed",
     "invalid_gift_code": "Invalid Gift Code",
     "make_sure_correct_gift_code": "Please make sure you enter the correct code. If you have any queries, please contact {email}",
   "deposit_detail": "Depositing MDT in RewardMe is easy. Transfer MDT from any crypto exchange to the deposit address below.",
+  "mdt_gift_codes_rights": "MDT gift codes are given out at specific events. Measurable Foundation Ltd. reserves all rights.",
     "transactionType": {
         "reward": "Ph\u1ea7n th\u01b0\u1edfng",
         "redeem": "\u0110\u1ed5i th\u01b0\u1edfng",
@@ -369,7 +371,8 @@
         "invite_friends": "M\u1eddi b\u1ea1n b\u00e8",
         "bind": "li\u00ean k\u1ebft",
         "copy": "sao ch\u00e9p",
-        "choose_cashback_type": "Ch\u1ecdn lo\u1ea1i ti\u1ec1n ho\u00e0n l\u1ea1i"
+        "choose_cashback_type": "Ch\u1ecdn lo\u1ea1i ti\u1ec1n ho\u00e0n l\u1ea1i",
+        "try_again": "Try Again"
     },
     "error": {
         "required": "B\u1eaft bu\u1ed9c",
@@ -390,6 +393,7 @@
         "enter_screen_action_not_available": "B\u1ea1n \u0111\u00e3 y\u00eau c\u1ea7u m\u00e3 x\u00e1c th\u1ef1c qu\u00e1 nhi\u1ec1u l\u1ea7n. Vui l\u00f2ng th\u1eed l\u1ea1i sau.",
         "user_profile_setup_name_required": "T\u00ean l\u00e0 b\u1eaft bu\u1ed9c",
         "user_profile_setup_miniumn_age_required": "Ch\u1ec9 nh\u1eefng ng\u01b0\u1eddi d\u00f9ng t\u1eeb {age} tr\u1edf l\u00ean m\u1edbi c\u00f3 th\u1ec3 s\u1eed d\u1ee5ng \u1ee9ng d\u1ee5ng n\u00e0y",
-        "user_profile_setup_referral_code_invalid": "M\u00e3 gi\u1edbi thi\u1ec7u kh\u00f4ng h\u1ee3p l\u1ec7"
+        "user_profile_setup_referral_code_invalid": "M\u00e3 gi\u1edbi thi\u1ec7u kh\u00f4ng h\u1ee3p l\u1ec7",
+        "amount_cannot_be_zero": "Amount cannot be zero"
     }
 }

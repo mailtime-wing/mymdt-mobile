@@ -128,6 +128,7 @@ export const darkTheme = {
       ['#656565', '#363636'],
       ['#695A26', '#353329'],
       ['#000000', '#383838'],
+      ['rgba(18, 18, 18, 0)', 'rgba(18, 18, 18, 0.6)'],
     ],
     tabScreenStatusBar: '#121212',
 
@@ -286,6 +287,7 @@ export const lightTheme = {
       ['#DEDEDE', '#F6F6F6'],
       ['#EEDBBA', '#FFF8EC'],
       ['#A3A3A3', '#F2F2F2'],
+      ['rgba(35, 78, 182, 0)', 'rgba(30, 66, 155, 0.6)'],
     ],
     tabScreenStatusBar: '#FDFBF2',
 
@@ -402,6 +404,8 @@ lightTheme.colors.linearGradientBackground.infinite =
   lightTheme.colors.linearGradientBackground[4];
 lightTheme.colors.linearGradientBackground.infinite_privilege =
   lightTheme.colors.linearGradientBackground[5];
+lightTheme.colors.linearGradientBackground.mdt_gift_code =
+  lightTheme.colors.linearGradientBackground[6];
 
 // text
 lightTheme.colors.textOnError.normal = lightTheme.colors.textOnError[0];
@@ -815,6 +819,8 @@ darkTheme.colors.linearGradientBackground.infinite =
   darkTheme.colors.linearGradientBackground[4];
 darkTheme.colors.linearGradientBackground.infinite_privilege =
   darkTheme.colors.linearGradientBackground[5];
+darkTheme.colors.linearGradientBackground.mdt_gift_code =
+  darkTheme.colors.linearGradientBackground[6];
 
 // text
 darkTheme.colors.textOnError.normal = darkTheme.colors.textOnError[0];

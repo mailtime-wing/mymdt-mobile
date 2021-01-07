@@ -300,12 +300,14 @@
     "this_card_is_already_bound": "Kad ini sudah diikat dengan akaun. Sila hubungi support@reward.me jika anda rasa terdapat sebarang masalah.",
     "from": "daripada",
     "to": "kepada",
+    "poloniex": "Poloniex",
     "enter_gift_code": "Enter Gift Code",
     "mdt_gift_code": "MDT Gift Code",
     "redeem_successfully": "Successfully Redeemed",
     "invalid_gift_code": "Invalid Gift Code",
     "make_sure_correct_gift_code": "Please make sure you enter the correct code. If you have any queries, please contact {email}",
   "deposit_detail": "Depositing MDT in RewardMe is easy. Transfer MDT from any crypto exchange to the deposit address below.",
+  "mdt_gift_codes_rights": "MDT gift codes are given out at specific events. Measurable Foundation Ltd. reserves all rights.",
     "transactionType": {
         "reward": "Ganjaran",
         "redeem": "Tebus",
@@ -369,7 +371,8 @@
         "invite_friends": "Jemput rakan",
         "bind": "ikat",
         "copy": "salin",
-        "choose_cashback_type": "Pilih Jenis Pulangan Tunai"
+        "choose_cashback_type": "Pilih Jenis Pulangan Tunai",
+        "try_again": "Try Again"
     },
     "error": {
         "required": "Diperlukan",
@@ -390,6 +393,7 @@
         "enter_screen_action_not_available": "Anda telah meminta kod penentusahan banyak kali. Sila cuba sebentar lagi.",
         "user_profile_setup_name_required": "Nama diperlukan",
         "user_profile_setup_miniumn_age_required": "Hanya pengguna yang berumur {age} atau lebih tua boleh menggunakan aplikasi ini",
-        "user_profile_setup_referral_code_invalid": "Kod rujukan tidak sah"
+        "user_profile_setup_referral_code_invalid": "Kod rujukan tidak sah",
+        "amount_cannot_be_zero": "Amount cannot be zero"
     }
 }
