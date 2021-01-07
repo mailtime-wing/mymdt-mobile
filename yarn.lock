@@ -8012,8 +8012,8 @@ react-native-localize@^2.0.1:
   resolved "https://github.com/measurabledatatoken/react-native-mailtime-push.git#56e8bb2303b7f48d6e8ec686f26a5d3a226e6f70"
 
 "react-native-mailtime-sdk@https://github.com/measurabledatatoken/react-native-mailtime-sdk.git":
-  version "0.1.5"
-  resolved "https://github.com/measurabledatatoken/react-native-mailtime-sdk.git#399ddfd7a40fe9e57a49ab64550007243d0cf202"
+  version "0.1.6"
+  resolved "https://github.com/measurabledatatoken/react-native-mailtime-sdk.git#c296b01db5691de17dcd51fc048e58bd92a38787"
 
 react-native-raw-bottom-sheet@^2.1.0:
   version "2.1.0"
