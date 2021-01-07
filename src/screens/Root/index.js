@@ -73,6 +73,7 @@ import MembershipDetailScreen from '@/screens/MembershipDetailScreen';
 import UpgradeScreen from '@/screens/UpgradeScreen';
 import CashBackSummaryScreen from '@/screens/CashBackSummaryScreen';
 import StakeScreen from '@/screens/StakeScreen';
+import DepositScreen from '@/screens/DepositScreen';
 
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
@@ -212,6 +213,10 @@ const authModalScreens = [
   {
     name: 'stake',
     component: StakeScreen,
+  },
+  {
+    name: 'deposit',
+    component: DepositScreen,
   },
   {
     name: 'choose_cash_back_type_setting',
