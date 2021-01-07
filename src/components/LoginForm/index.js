@@ -27,13 +27,12 @@ const InternalLoginForm = ({title, submitButtonText, description}) => {
   const theme = useTheme();
   const {setFieldValue, handleSubmit, isValid} = useFormikContext();
   const [autoFocusOnPrefix, setAutoFocusOnPrefix] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // get phone prefix
   useEffect(() => {
     const getPhonePrefix = async () => {
       try {
-        setIsLoading(true);
         const result = await CarrierInfo.isoCountryCode();
         if (result) {
           let dialCode = countryCodeData.find(
