@@ -11,3 +11,9 @@ export const formView = (theme) => css`
   padding-bottom: ${String(theme.space.marginBetweenContentAndScreenBottom)}px;
   padding-horizontal: 24px;
 `;
+
+export const detail = (theme) => css`
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
+  text-align: center;
+  margin-top: 16px;
+`;

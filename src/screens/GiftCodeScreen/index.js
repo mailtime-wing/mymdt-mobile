@@ -2,13 +2,21 @@ import React, {useReducer} from 'react';
 import SafeAreaView from 'react-native-safe-area-view';
 import {Image, View, Keyboard} from 'react-native';
 import AppText from '@/components/AppText2';
-import {image, title, container} from './style';
+import {
+  image,
+  title,
+  container,
+  linearGradient,
+  safeAreaView,
+  backgroundContainer,
+} from './style';
 import {useTheme} from 'emotion-theming';
 import {FormattedMessage} from 'react-intl';
 import {REDEEM_GIFT_CODE} from '@/api/auth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
+import LinearGradient from 'react-native-linear-gradient';
 
 import GiftCodeForm from './GiftCodeForm';
 import RedeemSuccess from './RedeemSuccess';
@@ -77,16 +85,22 @@ const GiftCodeScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView forceInset={{bottom: 'always'}} style={container}>
-      <View>
+    <SafeAreaView forceInset={{bottom: 'always'}} style={safeAreaView}>
+      <View style={container}>
+        <AppText variant="heading2" style={title(theme)}>
+          <FormattedMessage id="mdt_gift_code" defaultMessage="MDT Gift Code" />
+        </AppText>
         <Image
           source={require('@/assets/redeem-gift-code.png')}
           resizeMode="cover"
           style={image}
         />
-        <AppText variant="heading2" style={title(theme)}>
-          <FormattedMessage id="mdt_gift_code" defaultMessage="MDT Gift Code" />
-        </AppText>
+        <View style={backgroundContainer}>
+          <LinearGradient
+            colors={theme.colors.linearGradientBackground.mdt_gift_code}
+            style={linearGradient}
+          />
+        </View>
       </View>
 
       {loading && <LoadingSpinner />}
