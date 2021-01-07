@@ -300,6 +300,7 @@
     "this_card_is_already_bound": "Naka-link na ang account na ito sa isang account. Pakikontak ang support@reward.me kung sa tingin mo ay may problema.",
     "from": "mula",
     "to": "hanggang",
+    "poloniex": "Poloniex",
     "enter_gift_code": "Enter Gift Code",
     "mdt_gift_code": "MDT Gift Code",
     "redeem_successfully": "Successfully Redeemed",
@@ -392,6 +393,7 @@
         "enter_screen_action_not_available": "Nag-request ka ng verification code nang maraming beses. Pakisubukan muli mamaya.",
         "user_profile_setup_name_required": "Kailangan ng pangalan",
         "user_profile_setup_miniumn_age_required": "Mga user lang na {age} at pataas ang pwedeng gumamit ng app na ito",
-        "user_profile_setup_referral_code_invalid": "Invalid ang referral code"
+        "user_profile_setup_referral_code_invalid": "Invalid ang referral code",
+        "amount_cannot_be_zero": "Amount cannot be zero"
     }
 }
