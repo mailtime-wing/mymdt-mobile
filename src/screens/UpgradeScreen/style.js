@@ -4,7 +4,6 @@ export const container = css`
   margin-top: auto;
   margin-bottom: auto;
   align-self: center;
-  z-index: 0;
 `;
 
 export const congrats = (theme) => css`
