@@ -145,7 +145,9 @@ const WalletScreen = ({navigation}) => {
 
   const quickActionList = [
     {
-      name: 'Stake MDT',
+      name: (
+        <FormattedMessage id="button.stake_mdt" defaultMessage="Stake MDT" />
+      ),
       icon: StakeMdtIcon,
       action: () =>
         navigation.navigate('membership_detail', {showNextStaking: true}),
@@ -153,14 +155,19 @@ const WalletScreen = ({navigation}) => {
     ...(Config.EXPERIMENTAL_FEATURE === 'true'
       ? [
           {
-            name: 'Withdraw',
+            name: (
+              <FormattedMessage
+                id="withdraw_mdt"
+                defaultMessage="withdraw MDT"
+              />
+            ),
             icon: WithdrawalIcon,
             action: () => navigation.navigate('settings'),
           },
         ]
       : []),
     {
-      name: 'Convert',
+      name: <FormattedMessage id="button.convert" defaultMessage="Convert" />,
       icon: ConvertIcon,
       action: () =>
         navigation.navigate('converter', {
@@ -169,7 +176,9 @@ const WalletScreen = ({navigation}) => {
         }),
     },
     {
-      name: 'MDT Gift Code',
+      name: (
+        <FormattedMessage id="mdt_gift_code" defaultMessage="MDT Gift Code" />
+      ),
       icon: MyMdtIcon,
       action: () => navigation.navigate('mdt_gift_code'),
     },

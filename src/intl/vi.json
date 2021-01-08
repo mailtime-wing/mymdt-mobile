@@ -314,9 +314,15 @@
         "interest": "L\u00e3i",
         "check_in": "Ki\u1ec3m nh\u1eadp",
         "staking": "\u0110\u1eb7t c\u01b0\u1ee3c",
-        "converion": "Chuy\u1ec3n \u0111\u1ed5i",
+        "conversion": "Chuy\u1ec3n \u0111\u1ed5i",
         "cashback": "Ho\u00e0n l\u1ea1i ti\u1ec1n",
-        "bank": "Ng\u00e2n h\u00e0ng"
+        "bank": "Ng\u00e2n h\u00e0ng",
+        "unstake": "Unstake",
+        "stake_payout": "Staking Payout",
+        "email": "Email",
+        "deposit": "Deposit",
+        "withdraw": "Withdraw",
+        "gift_code": "Gift Code"
     },
     "currencyDisplayCode": {
         "RD": "Ti\u1ec1n th\u01b0\u1edfng",
