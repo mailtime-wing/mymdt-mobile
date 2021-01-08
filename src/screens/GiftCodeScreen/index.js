@@ -67,7 +67,7 @@ const GiftCodeScreen = ({navigation}) => {
       });
 
       if (data) {
-        dispatch({type: SUCCESS, payload: data?.value || 0});
+        dispatch({type: SUCCESS, payload: data.redeemGiftCode?.value || 0});
       }
     } catch (e) {
       console.error('Error in redeem gift code', e);
