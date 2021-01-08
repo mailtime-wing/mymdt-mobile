@@ -401,7 +401,7 @@
     "user_profile_setup_miniumn_age_required": "Hanya pengguna yang berumur {age} atau lebih tua boleh menggunakan aplikasi ini",
     "user_profile_setup_referral_code_invalid": "Kod rujukan tidak sah",
     "amount_cannot_be_zero": "Amount cannot be zero",
-    "verificaion_code_invalid": "Kod Penentusahan tidak sah.",
+    "verification_code_invalid": "Kod Penentusahan tidak sah.",
     "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
   }
 }

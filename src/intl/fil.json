@@ -401,7 +401,7 @@
     "user_profile_setup_miniumn_age_required": "Mga user lang na {age} at pataas ang pwedeng gumamit ng app na ito",
     "user_profile_setup_referral_code_invalid": "Invalid ang referral code",
     "amount_cannot_be_zero": "Amount cannot be zero",
-    "verificaion_code_invalid": "Invalid ang Verification Code.",
+    "verification_code_invalid": "Invalid ang Verification Code.",
     "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
   }
 }

@@ -401,7 +401,7 @@
     "user_profile_setup_miniumn_age_required": "Only users who are {age} or older can use this app",
     "user_profile_setup_referral_code_invalid": "Referral code is invalid",
     "amount_cannot_be_zero": "Amount cannot be zero",
-    "verificaion_code_invalid": "Verification Code invalid.",
+    "verification_code_invalid": "Verification Code invalid.",
     "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
   }
 }

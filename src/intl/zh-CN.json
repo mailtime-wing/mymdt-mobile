@@ -401,7 +401,7 @@
     "user_profile_setup_miniumn_age_required": "只有{age}以上的用户才可以使用此应用。",
     "user_profile_setup_referral_code_invalid": "邀请码无效",
     "amount_cannot_be_zero": "Amount cannot be zero",
-    "verificaion_code_invalid": "验证码错误。",
+    "verification_code_invalid": "验证码错误。",
     "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
   }
 }
