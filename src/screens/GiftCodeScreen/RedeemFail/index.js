@@ -14,7 +14,7 @@ import {
 } from './style';
 import AppText from '@/components/AppText2';
 
-const RedeemFail = ({handleTryAgainPress}) => {
+const RedeemFail = ({onTryAgainPress}) => {
   const theme = useTheme();
   return (
     <View style={container(theme)}>
@@ -48,7 +48,7 @@ const RedeemFail = ({handleTryAgainPress}) => {
         </View>
       </View>
       <AppButton
-        onPress={handleTryAgainPress}
+        onPress={onTryAgainPress}
         text={
           <FormattedMessage id="button.try_again" defaultMessage="Try Again" />
         }

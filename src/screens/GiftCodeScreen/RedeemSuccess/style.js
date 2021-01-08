@@ -16,10 +16,12 @@ export const redeemMsg = (theme) => css`
 
 export const image = css`
   align-self: center;
+  aspect-ratio: 1;
 `;
 
-export const redeemedAmount = css`
+export const amountContainer = css`
   position: absolute;
   align-self: center;
-  top: 50%;
+  align-items: center;
+  height: 100%;
 `;
