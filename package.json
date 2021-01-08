@@ -96,6 +96,9 @@
     "*.{js,jsx}": [
       "prettier --write",
       "eslint --max-warnings=0 --ignore-pattern '!.eslintrc.js' --fix"
+    ],
+    "*.json": [
+      "prettier --write"
     ]
   }
 }
