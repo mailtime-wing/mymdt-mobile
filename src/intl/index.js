@@ -54,10 +54,12 @@ class Intl {
     [locales.EN_US]: {
       ...enCountryNames,
       ...enMessages,
+      HK: 'Hong Kong',
     },
     [locales.ZH_HK]: {
       ...hkCountryNames,
       ...hkMessages,
+      HK: '香港',
     },
     [locales.ZH_CN]: {
       ...cnCountryNames,
