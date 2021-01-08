@@ -313,10 +313,16 @@
       "redeem": "Redeem",
       "interest": "Interest",
       "check_in": "Check In",
-      "staking": "Staking",
-      "converion": "Conversion",
+      "staking": "Stake",
+      "conversion": "Conversion",
       "cashback": "Reward",
-      "bank": "Bank"
+      "bank": "Bank",
+      "unstake": "Unstake",
+      "stake_payout": "Staking Payout",
+      "email": "Email",
+      "deposit": "Deposit",
+      "withdraw": "Withdraw",
+      "gift_code": "Gift Code"
   },
   "currencyDisplayCode": {
       "RD": "Reward Dollar",

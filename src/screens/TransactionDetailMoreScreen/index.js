@@ -3,7 +3,7 @@ import React from 'react';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 
 import {TRANSACTIONS_QUERY} from '@/api/data';
-import transactionTypeToIcon from '@/utils/transactionTypeToIcon';
+import transactionTypeToIconAndName from '@/utils/transactionTypeToIconAndName';
 import AppAvator from '@/components/AppAvator';
 import TransactionsHistory from '@/components/TransactionsHistory';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -31,7 +31,12 @@ const TransactionDetailMoreScreen = ({navigation, route}) => {
             sizeVariant="small"
             color={theme.colors.background1}
             backgroundColor={iconColor}
-            svgIcon={transactionTypeToIcon(transaction.node?.type)}
+            svgIcon={
+              transactionTypeToIconAndName(
+                transaction.node?.type,
+                transaction.node?.amount || 0,
+              ).icon
+            }
           />
         ),
       }),

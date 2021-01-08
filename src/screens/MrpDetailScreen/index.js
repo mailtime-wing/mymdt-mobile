@@ -13,7 +13,7 @@ import {REWARD_DOLLAR, USD} from '@/constants/currency';
 import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 
 import MrpTransactionHistory from './MrpTransactionHistory';
-import transactionTypeToIcon from '@/utils/transactionTypeToIcon';
+import transactionTypeToIconAndName from '@/utils/transactionTypeToIconAndName';
 
 import AppAvator from '@/components/AppAvator';
 
@@ -55,7 +55,12 @@ const MrpDetailScreen = ({navigation}) => {
             sizeVariant="small"
             color={theme.colors.background1}
             backgroundColor={theme.colors.secondary.normal}
-            svgIcon={transactionTypeToIcon(transaction.node?.type)}
+            svgIcon={
+              transactionTypeToIconAndName(
+                transaction.node?.type,
+                transaction.node?.amount || 0,
+              ).icon
+            }
           />
         ),
       }),

@@ -314,9 +314,15 @@
       "interest": "利率",
       "check_in": "簽到",
       "staking": "Staking",
-      "converion": "轉換",
+      "conversion": "轉換",
       "cashback": "獎賞",
-      "bank": "銀行"
+      "bank": "銀行",
+      "unstake": "Unstake",
+      "stake_payout": "Staking Payout",
+      "email": "Email",
+      "deposit": "Deposit",
+      "withdraw": "Withdraw",
+      "gift_code": "Gift Code"
   },
   "currencyDisplayCode": {
       "RD": "獎賞積分",

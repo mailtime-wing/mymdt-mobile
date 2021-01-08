@@ -314,9 +314,15 @@
         "interest": "Juros",
         "check_in": "Fa\u00e7a login",
         "staking": "Apostas",
-        "converion": "Convers\u00e3o",
+        "conversion": "Convers\u00e3o",
         "cashback": "Cashback",
-        "bank": "Banco"
+        "bank": "Banco",
+        "unstake": "Unstake",
+        "stake_payout": "Staking Payout",
+        "email": "Email",
+        "deposit": "Deposit",
+        "withdraw": "Withdraw",
+        "gift_code": "Gift Code"
     },
     "currencyDisplayCode": {
         "RD": "D\u00f3lar de recompensa",

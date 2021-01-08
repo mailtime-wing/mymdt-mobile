@@ -18,7 +18,7 @@ import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 
 import MdtStake from './MdtStake';
 import MdtTransactionHistory from './MdtTransactionHistory';
-import transactionTypeToIcon from '@/utils/transactionTypeToIcon';
+import transactionTypeToIconAndName from '@/utils/transactionTypeToIconAndName';
 
 import AppAvator from '@/components/AppAvator';
 import StakeToUpgradeBanner from '@/components/StakeToUpgradeBanner';
@@ -68,7 +68,12 @@ const MdtDetailScreen = ({navigation}) => {
             sizeVariant="small"
             color={theme.colors.background1}
             backgroundColor={theme.colors.primary.normal}
-            svgIcon={transactionTypeToIcon(transaction.node?.type)}
+            svgIcon={
+              transactionTypeToIconAndName(
+                transaction.node?.type,
+                transaction.node?.amount || 0,
+              ).icon
+            }
           />
         ),
       }),
@@ -78,10 +83,6 @@ const MdtDetailScreen = ({navigation}) => {
   const staking = userStakingInfoData?.userProfile?.staking?.[0];
   let mdtTotalAmount =
     mdtAmount + (staking?.stakingPlan ? staking.stakingPlan.amount : 0);
-
-  const handleBannerPress = () => {
-    navigation.navigate('membership_detail', {showNextStaking: true});
-  };
 
   return (
     <ScrollView>

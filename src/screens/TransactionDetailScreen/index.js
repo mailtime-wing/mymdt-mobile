@@ -12,6 +12,7 @@ import BrandIcon from '@/components/BrandIcon';
 import {GET_MERCHANTS_API} from '@/api/data';
 import {FormattedMessage, FormattedNumber} from 'react-intl';
 import {ME} from '@/constants/currency';
+import transactionTypeToIconAndName from '@/utils/transactionTypeToIconAndName';
 
 import {
   section,
@@ -24,67 +25,6 @@ import {
 } from './style';
 
 import {useTheme} from 'emotion-theming';
-
-const transactionTypeToNameMap = {
-  [TransactitonType.REWARD]: {
-    name: (
-      <FormattedMessage id="transactionType.reward" defaultMessage="Reward" />
-    ),
-  },
-  [TransactitonType.REDEEM]: {
-    name: (
-      <FormattedMessage id="transactionType.redeem" defaultMessage="Redeem" />
-    ),
-  },
-  [TransactitonType.INTEREST]: {
-    name: (
-      <FormattedMessage
-        id="transactionType.interest"
-        defaultMessage="Interest"
-      />
-    ),
-  },
-  [TransactitonType.CHECK_IN]: {
-    name: (
-      <FormattedMessage
-        id="transactionType.check_in"
-        defaultMessage="Check In"
-      />
-    ),
-  },
-  [TransactitonType.STAKING]: {
-    name: (
-      <FormattedMessage id="transactionType.staking" defaultMessage="Staking" />
-    ),
-  },
-  [TransactitonType.CONVERSION]: {
-    name: (
-      <FormattedMessage
-        id="transactionType.converion"
-        defaultMessage="Converion"
-      />
-    ),
-  },
-  [TransactitonType.CASH_BACK]: {
-    name: (
-      <FormattedMessage
-        id="transactionType.cashback"
-        defaultMessage="CASHBACK"
-      />
-    ),
-  },
-  [TransactitonType.MAI]: {
-    name: (
-      <FormattedMessage
-        id="transactionType.cashback"
-        defaultMessage="CASHBACK"
-      />
-    ),
-  },
-  [TransactitonType.BANK]: {
-    name: <FormattedMessage id="transactionType.bank" defaultMessage="Bank" />,
-  },
-};
 
 const RenderTransationDetail = ({transactionItem}) => {
   const {title, transactionTime} = transactionItem;
@@ -326,7 +266,12 @@ const TransactionDetailScreen = ({route}) => {
       <View style={section}>
         <View style={sectionHeaderContainer(theme)}>
           <AppText variant="label" style={sectionHeader(theme)}>
-            {transactionTypeToNameMap[transactionItem.type].name}
+            {
+              transactionTypeToIconAndName(
+                transactionItem.type,
+                transactionItem.amount,
+              ).name
+            }
           </AppText>
         </View>
         <TransactionItem

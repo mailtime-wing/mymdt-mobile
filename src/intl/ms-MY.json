@@ -314,9 +314,15 @@
         "interest": "Faedah",
         "check_in": "Daftar Masuk",
         "staking": "Taruhan",
-        "converion": "Penukaran",
+        "conversion": "Penukaran",
         "cashback": "Pulangan Tunai",
-        "bank": "Bank"
+        "bank": "Bank",
+        "unstake": "Unstake",
+        "stake_payout": "Staking Payout",
+        "email": "Email",
+        "deposit": "Deposit",
+        "withdraw": "Withdraw",
+        "gift_code": "Gift Code"
     },
     "currencyDisplayCode": {
         "RD": "Dolar Ganjaran",
