@@ -16,24 +16,53 @@ const BankDataSourceInfo = ({type, countryCode, onConnected}) => {
   useEffect(() => {
     if (error) {
       if (error.graphQLErrors) {
-        error.graphQLErrors.map((graphQLError) => {
-          const code = graphQLError.extensions?.code;
-          if (!code) {
+        const errorCode = error.graphQLErrors.find(
+          (graphQLError) => graphQLError.extensions?.code,
+        );
+
+        switch (errorCode) {
+          case errorCodeEnum.DATA_ALREADY_EXIST: {
+            addToast({
+              text: intl.formatMessage({
+                id: 'this_card_is_already_bound',
+              }),
+              variant: 'error',
+            });
             return;
           }
-          switch (code) {
-            case errorCodeEnum.DATA_ALREADY_EXIST: {
-              addToast({
-                text: intl.formatMessage({
-                  id: 'this_card_is_already_bound',
-                }),
-                variant: 'error',
-              });
-              return;
-            }
+        }
+      }
+
+      if (error.code) {
+        switch (error.code) {
+          case errorCodeEnum.DATA_NOT_FOUND: {
+            addToast({
+              text: intl.formatMessage({
+                id: 'error.no_credit_card_found',
+              }),
+              variant: 'error',
+            });
+            return;
           }
-        }, []);
-        return;
+          case errorCodeEnum.DATA_INVALID: {
+            addToast({
+              text: intl.formatMessage({
+                id: 'error.error_code_202',
+              }),
+              variant: 'error',
+            });
+            return;
+          }
+          case errorCodeEnum.BAD_CREDENTIAL: {
+            addToast({
+              text: intl.formatMessage({
+                id: 'error.error_code_300',
+              }),
+              variant: 'error',
+            });
+            return;
+          }
+        }
       }
 
       addToast({

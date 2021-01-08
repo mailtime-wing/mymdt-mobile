@@ -389,7 +389,9 @@
     "pin_verification_fail": "Penentusahan gagal.\nSila masukkan pin baru sekali lagi.",
     "error_code_100": "Ralat Sistem, Sila cuba sebentar lagi",
     "error_code_201": "Pengguna sudah wujud. Sila daftar masuk.",
+    "error_code_202": "Data submitted is not valid.",
     "error_code_202_with_field": "{field} tidak sah.",
+    "error_code_300": "The credential is not correct. Please try again later.",
     "error_code_301": "Pengguna tidak wujud.",
     "error_code_305": "Pengguna sudah wujud.",
     "something_went_wrong_please_try_again_later": "Sesuatu telah berlaku. Sila cuba sebentar lagi.",
@@ -399,6 +401,7 @@
     "user_profile_setup_miniumn_age_required": "Hanya pengguna yang berumur {age} atau lebih tua boleh menggunakan aplikasi ini",
     "user_profile_setup_referral_code_invalid": "Kod rujukan tidak sah",
     "amount_cannot_be_zero": "Amount cannot be zero",
-    "verificaion_code_invalid": "Kod Penentusahan tidak sah."
+    "verificaion_code_invalid": "Kod Penentusahan tidak sah.",
+    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
   }
 }

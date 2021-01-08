@@ -389,7 +389,9 @@
     "pin_verification_fail": "验证失败，请重新输入密码",
     "error_code_100": "系统错误，请稍后再试。",
     "error_code_201": "用户已存在，请登入。",
+    "error_code_202": "Data submitted is not valid.",
     "error_code_202_with_field": "{field}无效。",
+    "error_code_300": "The credential is not correct. Please try again later.",
     "error_code_301": "用戶不存在。",
     "error_code_305": "用户已存在。",
     "something_went_wrong_please_try_again_later": "出错了，请稍后再试。",
@@ -399,6 +401,7 @@
     "user_profile_setup_miniumn_age_required": "只有{age}以上的用户才可以使用此应用。",
     "user_profile_setup_referral_code_invalid": "邀请码无效",
     "amount_cannot_be_zero": "Amount cannot be zero",
-    "verificaion_code_invalid": "验证码错误。"
+    "verificaion_code_invalid": "验证码错误。",
+    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
   }
 }

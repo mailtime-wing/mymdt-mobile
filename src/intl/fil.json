@@ -389,7 +389,9 @@
     "pin_verification_fail": "Hindi na-verify.\nMaglagay muli ng bagong pin.",
     "error_code_100": "May Error sa System, Pakisubukan muli mamaya.",
     "error_code_201": "Mayroon nang ganyang user. Mag-sign in.",
+    "error_code_202": "Data submitted is not valid.",
     "error_code_202_with_field": "Hindi valid ang {field}.",
+    "error_code_300": "The credential is not correct. Please try again later.",
     "error_code_301": "Walang ganyang user.",
     "error_code_305": "Mayroon nang ganyang user.",
     "something_went_wrong_please_try_again_later": "Nagkaroon ng problema. Pakisubukan muli.",
@@ -399,6 +401,7 @@
     "user_profile_setup_miniumn_age_required": "Mga user lang na {age} at pataas ang pwedeng gumamit ng app na ito",
     "user_profile_setup_referral_code_invalid": "Invalid ang referral code",
     "amount_cannot_be_zero": "Amount cannot be zero",
-    "verificaion_code_invalid": "Invalid ang Verification Code."
+    "verificaion_code_invalid": "Invalid ang Verification Code.",
+    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
   }
 }

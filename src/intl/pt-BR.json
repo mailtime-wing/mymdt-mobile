@@ -389,7 +389,9 @@
     "pin_verification_fail": "Falha na verifica\u00e7\u00e3o.\nInsira um novo PIN novamente.",
     "error_code_100": "Erro do sistema. Tente novamente mais tarde.",
     "error_code_201": "O usu\u00e1rio j\u00e1 existe. Fa\u00e7a login.",
+    "error_code_202": "Data submitted is not valid.",
     "error_code_202_with_field": "{field} \u00e9 inv\u00e1lido.",
+    "error_code_300": "The credential is not correct. Please try again later.",
     "error_code_301": "O usu\u00e1rio n\u00e3o existe.",
     "error_code_305": "O usu\u00e1rio j\u00e1 existe.",
     "something_went_wrong_please_try_again_later": "Algo deu errado. Tente novamente mais tarde.",
@@ -399,6 +401,7 @@
     "user_profile_setup_miniumn_age_required": "Apenas usu\u00e1rios de {age} anos ou mais podem usar este app",
     "user_profile_setup_referral_code_invalid": "O c\u00f3digo de indica\u00e7\u00e3o \u00e9 inv\u00e1lido",
     "amount_cannot_be_zero": "Amount cannot be zero",
-    "verificaion_code_invalid": "C\u00f3digo de verifica\u00e7\u00e3o inv\u00e1lido."
+    "verificaion_code_invalid": "C\u00f3digo de verifica\u00e7\u00e3o inv\u00e1lido.",
+    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
   }
 }

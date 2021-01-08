@@ -389,7 +389,9 @@
     "pin_verification_fail": "Verification failed.\nPlease enter a new pin again.",
     "error_code_100": "System Error, Please try again later.",
     "error_code_201": "User already exist. Please sign in.",
+    "error_code_202": "Data submitted is not valid.",
     "error_code_202_with_field": "{field} is not valid.",
+    "error_code_300": "The credential is not correct. Please try again later.",
     "error_code_301": "User does not exist.",
     "error_code_305": "User already exist.",
     "something_went_wrong_please_try_again_later": "Something went wrong. Please try again later.",
@@ -399,6 +401,7 @@
     "user_profile_setup_miniumn_age_required": "Only users who are {age} or older can use this app",
     "user_profile_setup_referral_code_invalid": "Referral code is invalid",
     "amount_cannot_be_zero": "Amount cannot be zero",
-    "verificaion_code_invalid": "Verification Code invalid."
+    "verificaion_code_invalid": "Verification Code invalid.",
+    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
   }
 }

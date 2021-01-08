@@ -5,10 +5,12 @@ import Config from 'react-native-config';
 
 import useFetch from '@/hooks/useFetch';
 import inAppBrowser from '@/utils/inAppBrowser';
+import CustomError from '@/utils/customError';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {BIND_BANK_ITEM, GET_USER_ID} from '@/api/data';
 import bankSyncServerDataAPITypeEnum from '@/enum/bankSyncServerDataAPIType';
+import errorCodeEnum from '@/enum/errorCode';
 
 const initialFetchOptions = {
   method: 'POST',
@@ -162,8 +164,7 @@ export default function useBankLogin(
           }
 
           if (!data.accountDetails?.length) {
-            // TODO: use error code to distinguish?
-            throw new Error('No credit card info');
+            throw new CustomError(errorCodeEnum.DATA_NOT_FOUND);
           }
 
           await bindBankItem({

@@ -2,6 +2,7 @@
 // https://www.robinwieruch.de/react-hooks-fetch-data
 // https://github.com/vercel/swr/blob/master/src/use-swr.ts
 import {useState, useEffect, useReducer, useCallback, useRef} from 'react';
+import CustomError from '@/utils/customError';
 
 /**
  *
@@ -66,15 +67,32 @@ export default function useFetch(
           ...fetchOptions,
         });
 
+        const contentType = result.headers.get('Content-Type');
         if (result.status < 200 || result.status > 399) {
-          let errorMessage = '';
+          let errorResult = '';
           try {
-            errorMessage = await result.text();
+            // if Content-Type is application/json
+            if (/application\/json/.test(contentType)) {
+              errorResult = await result.json();
+            } else {
+              // else, treat it as text/html
+              errorResult = await result.text();
+            }
           } catch {}
-          throw new Error(errorMessage);
+          if (errorResult.errorCode) {
+            throw new CustomError(
+              errorResult.errorCode,
+              errorResult.errorMessage,
+            );
+          }
+
+          if (typeof errorResult === 'string' && errorResult !== '') {
+            throw new Error(errorResult);
+          }
+
+          throw new Error('Unexpected fetching error!');
         }
 
-        const contentType = result.headers.get('Content-Type');
         let data = null;
         // if Content-Type is application/json
         if (/application\/json/.test(contentType)) {
