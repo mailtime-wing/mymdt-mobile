@@ -19,14 +19,14 @@ const renderClientError = (errorCode) => {
     case errorCodeEnum.DATA_INVALID:
       return (
         <FormattedMessage
-          id="error.error_code_202"
+          id="error.verificaion_code_invalid"
           defaultMessage="Verification Code invalid."
         />
       );
     case errorCodeEnum.DATA_EXPIRED:
       return (
         <FormattedMessage
-          id="error.error_code_203"
+          id="error.verificaion_code_invalid"
           defaultMessage="Verification Code invalid."
         />
       );
