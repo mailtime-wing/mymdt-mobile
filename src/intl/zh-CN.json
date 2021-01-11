@@ -131,7 +131,7 @@
   "referral_code": "邀请码",
   "claim_gift_on_birthday": "每年可享生日礼遇",
   "login_in_agree_terms_and_policy": "登录你的邮箱帐号表示你已接受 RewardMe 赏我的 服务条款 与 隐私政策",
-  "setting_up_agree_terms_and_policy": "建立你的帐号并使用服务表示你已接受 RewardMe 赏我的 服务条款 与 隐私政策",
+  "setting_up_agree_terms_and_policy": "建立你的帐号并使用服务表示你已接受 RewardMe 赏我的 <a>服务条款</a> 与 <b>隐私政策</b>",
   "setting_up_account": "正在建立您的帐号…",
   "searching_for_receipts": "正在检测过去的消费帐单…",
   "it_might_take_some_time": "机器人需要一段时间，完成后会通知你。",
