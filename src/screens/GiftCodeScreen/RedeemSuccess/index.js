@@ -6,7 +6,14 @@ import TransactionAmount from '@/components/TransactionAmount';
 
 import {MEASURABLE_DATA_TOKEN} from '@/constants/currency';
 import {useTheme} from 'emotion-theming';
-import {container, redeemMsg, image, amountContainer} from './style';
+import {
+  container,
+  redeemMsg,
+  image,
+  amountContainer,
+  marginBetweenImageAndMsg,
+  imageAndMsgContainer,
+} from './style';
 import AppText from '@/components/AppText2';
 
 const {height} = Dimensions.get('window');
@@ -39,13 +46,13 @@ const RedeemSuccess = ({onConfirmPress, amount = 0}) => {
   const theme = useTheme();
   return (
     <View style={container(theme)}>
-      <View>
+      <View style={imageAndMsgContainer}>
+        <View style={marginBetweenImageAndMsg} />
         <ScaleBounce>
           <Image
             source={require('@/assets/redeemed_background.png')}
             resizeMode="contain"
-            style={[image, {height: height * 0.3125}]}
-            // 0.3125=240/768 from figma
+            style={image}
           />
           <View style={amountContainer}>
             <TransactionAmount
@@ -59,6 +66,7 @@ const RedeemSuccess = ({onConfirmPress, amount = 0}) => {
             />
           </View>
         </ScaleBounce>
+        <View style={marginBetweenImageAndMsg} />
         <AppText variant="heading4" style={redeemMsg(theme)}>
           <FormattedMessage
             id="redeem_successfully"
