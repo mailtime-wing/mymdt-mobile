@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {useTheme} from 'emotion-theming';
+import LoadingAnimation from '@/components/LoadingAnimation';
 
 import AppText from '@/components/AppText2';
 
@@ -27,27 +28,41 @@ const AppButton = ({
   style,
   textPropsStyle,
   children,
+  isLoading,
   ...props
 }) => {
   const theme = useTheme();
+  const _isLoading = isLoading && sizeVariant === 'large'; // loading animation only apply to large button
+  const _disabled = disabled || _isLoading;
 
   return (
     <TouchableOpacity
       style={[
-        container(theme, variant, sizeVariant, colorVariant, disabled),
+        container(
+          theme,
+          variant,
+          sizeVariant,
+          colorVariant,
+          _disabled,
+          _isLoading,
+        ),
         style,
       ]}
-      disabled={disabled}
+      disabled={_disabled}
       {...props}>
       {SvgIcon && <SvgIcon {...icon(theme, variant, colorVariant, !!text)} />}
-      {children || (
-        <AppText
-          variant={
-            sizeVariant === 'moreCompact' ? 'moreCompactButton' : 'button'
-          }
-          style={[textStyle(theme, variant, colorVariant), textPropsStyle]}>
-          {text}
-        </AppText>
+      {_isLoading ? (
+        <LoadingAnimation />
+      ) : (
+        children || (
+          <AppText
+            variant={
+              sizeVariant === 'moreCompact' ? 'moreCompactButton' : 'button'
+            }
+            style={[textStyle(theme, variant, colorVariant), textPropsStyle]}>
+            {text}
+          </AppText>
+        )
       )}
     </TouchableOpacity>
   );
@@ -55,6 +70,7 @@ const AppButton = ({
 
 AppButton.defaultProps = {
   disabled: false,
+  isLoading: false,
 };
 
 export default AppButton;

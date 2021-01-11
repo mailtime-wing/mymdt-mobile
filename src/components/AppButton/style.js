@@ -16,6 +16,7 @@ export const container = (
   sizeVariant,
   colorVariant,
   disabled,
+  isLoading,
 ) => css`
   justify-content: center;
   align-items: center;
@@ -94,6 +95,12 @@ export const container = (
       background-color: ${theme.colors.background1};
     `
     }
+    ${
+      isLoading &&
+      `
+      padding-vertical: 10px;
+      `
+    }
   `}
   ${variant === 'outlined' &&
   `
@@ -155,6 +162,12 @@ export const container = (
       `
       padding-vertical: ${largePaddingVertical - borderWidth}px;
     `
+    }
+    ${
+      isLoading &&
+      `
+      padding-vertical: 9px;
+      `
     }
   `}
 `;

@@ -14,7 +14,7 @@ const EnterScreen = ({navigation}) => {
   const {localeEnum} = useContext(IntlContext);
   const intl = useIntl();
 
-  const [otpRequest] = useMutationWithAuth(GET_OTP_API, {
+  const [otpRequest, {loading}] = useMutationWithAuth(GET_OTP_API, {
     context: {
       errorMessageHandler: {
         errorMap: {
@@ -82,6 +82,7 @@ const EnterScreen = ({navigation}) => {
           />
         }
         onSubmit={handleSubmitPress}
+        otpLoading={loading}
       />
     </SafeAreaView>
   );
