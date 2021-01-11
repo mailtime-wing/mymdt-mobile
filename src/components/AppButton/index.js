@@ -32,7 +32,8 @@ const AppButton = ({
   ...props
 }) => {
   const theme = useTheme();
-  const isLargeButtonLoading = isLoading && sizeVariant === 'large';
+  const _isLoading = isLoading && sizeVariant === 'large'; // loading animation only apply to large button
+  const _disabled = disabled || _isLoading;
 
   return (
     <TouchableOpacity
@@ -42,16 +43,15 @@ const AppButton = ({
           variant,
           sizeVariant,
           colorVariant,
-          disabled,
-          isLargeButtonLoading,
+          _disabled,
+          _isLoading,
         ),
         style,
       ]}
-      disabled={disabled}
+      disabled={_disabled}
       {...props}>
       {SvgIcon && <SvgIcon {...icon(theme, variant, colorVariant, !!text)} />}
-      {isLargeButtonLoading ? (
-        // this animation only apply to large button
+      {_isLoading ? (
         <LoadingAnimation />
       ) : (
         children || (

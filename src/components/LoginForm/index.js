@@ -101,7 +101,7 @@ const InternalLoginForm = ({
             variant="filled"
             sizeVariant="large"
             colorVariant="secondary"
-            loading={otpLoading}
+            isLoading={otpLoading}
           />
         </View>
       </View>

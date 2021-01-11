@@ -16,7 +16,7 @@ export const container = (
   sizeVariant,
   colorVariant,
   disabled,
-  isLargeButtonLoading,
+  isLoading,
 ) => css`
   justify-content: center;
   align-items: center;
@@ -96,7 +96,7 @@ export const container = (
     `
     }
     ${
-      isLargeButtonLoading &&
+      isLoading &&
       `
       padding-vertical: 10px;
       `
@@ -164,7 +164,7 @@ export const container = (
     `
     }
     ${
-      isLargeButtonLoading &&
+      isLoading &&
       `
       padding-vertical: 9px;
       `
