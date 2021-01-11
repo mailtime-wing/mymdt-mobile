@@ -9,13 +9,21 @@ export const container = (theme) => css`
 
 export const contentContainer = css`
   flex: 1;
-  justify-content: space-around;
 `;
 
 export const redeemMsg = (theme) => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
   text-align: center;
-  margin-bottom: 16px;
+`;
+
+export const marginBetweenImageAndMsg = css`
+  flex-basis: 48;
+  flex-shrink: 40;
+`;
+
+export const marginBetweenMsgAndDetail = css`
+  flex-basis: 16;
+  flex-shrink: 20;
 `;
 
 export const detail = (theme) => css`
@@ -28,5 +36,7 @@ export const email = (theme) => css`
 `;
 
 export const image = css`
+  flex-basis: 144;
+  flex-shrink: 1;
   align-self: center;
 `;

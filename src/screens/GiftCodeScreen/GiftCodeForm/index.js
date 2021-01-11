@@ -9,7 +9,7 @@ import {Formik} from 'formik';
 import AppKeyboardAvoidingView from '@/components/AppKeyboardAvoidingView';
 import {useTheme} from 'emotion-theming';
 
-const GiftCodeForm = ({handleOnSubmit}) => {
+const GiftCodeForm = ({onSubmitPress}) => {
   const theme = useTheme();
 
   return (
@@ -21,7 +21,7 @@ const GiftCodeForm = ({handleOnSubmit}) => {
           initialValues={{
             redeemCode: '',
           }}
-          onSubmit={handleOnSubmit}>
+          onSubmit={onSubmitPress}>
           {({handleSubmit, isValid}) => (
             <View style={formView(theme)}>
               <View>

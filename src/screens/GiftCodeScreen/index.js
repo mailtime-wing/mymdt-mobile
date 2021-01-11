@@ -106,15 +106,15 @@ const GiftCodeScreen = ({navigation}) => {
       {loading && <LoadingSpinner />}
       {state.status === SUCCESS && (
         <RedeemSuccess
-          handleConfirmPress={handleConfirmPress}
+          onConfirmPress={handleConfirmPress}
           amount={state.redeemAmount}
         />
       )}
       {state.status === FAIL && (
-        <RedeemFail handleTryAgainPress={handleTryAgainPress} />
+        <RedeemFail onTryAgainPress={handleTryAgainPress} />
       )}
       {state.status === READY && (
-        <GiftCodeForm handleOnSubmit={handleSubmitPress} />
+        <GiftCodeForm onSubmitPress={handleSubmitPress} />
       )}
     </SafeAreaView>
   );
