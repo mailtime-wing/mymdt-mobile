@@ -308,6 +308,8 @@
   "make_sure_correct_gift_code": "Please make sure you enter the correct code. If you have any queries, please contact {email}",
   "deposit_detail": "Depositing MDT in RewardMe is easy. Transfer MDT from any crypto exchange to the deposit address below.",
   "mdt_gift_codes_rights": "MDT gift codes are given out at specific events. Measurable Foundation Ltd. reserves all rights.",
+  "loading_account_information": "Loading Account Information",
+  "this_may_take_a_few_minutes": "This may take a few minutes",
   "transactionType": {
     "reward": "Reward",
     "redeem": "Redeem",

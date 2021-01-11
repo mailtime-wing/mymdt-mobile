@@ -75,6 +75,8 @@ import CashBackSummaryScreen from '@/screens/CashBackSummaryScreen';
 import StakeScreen from '@/screens/StakeScreen';
 import DepositScreen from '@/screens/DepositScreen';
 import GiftCodeScreen from '@/screens/GiftCodeScreen';
+import LoadingAccountInformationOnboardingScreen from '@/screens/LoadingAccountInformationOnboardingScreen';
+import LoadingAccountInformationSettingScreen from '@/screens/LoadingAccountInformationSettingScreen';
 
 import {AuthContext} from '@/context/auth';
 import {SetupFlowContext} from '@/context/setupFlow';
@@ -135,6 +137,11 @@ const setupScreens = [
   {
     name: 'bank_data_source_info_onboarding',
     component: BankDataSourceInfoOnboardingScreen,
+  },
+  {
+    name: 'loading_account_information_onboarding',
+    component: LoadingAccountInformationOnboardingScreen,
+    options: {headerShown: false},
   },
   {
     name: 'linked_cards',
@@ -277,6 +284,11 @@ const settingScreens = [
   {
     name: 'bank_data_source_info_setting',
     component: BankDataSourceInfoSettingScreen,
+  },
+  {
+    name: 'loading_account_information_setting',
+    component: LoadingAccountInformationSettingScreen,
+    options: {headerShown: false},
   },
 ];
 

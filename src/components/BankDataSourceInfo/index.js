@@ -2,33 +2,52 @@ import React, {useEffect, useContext} from 'react';
 import {useIntl} from 'react-intl';
 
 import DataSourceInfo from '@/components/DataSourceInfo';
-import useBankLogin from '@/hooks/useBankLogin';
 import errorCodeEnum from '@/enum/errorCode';
 import ToastContext from '@/context/toast';
+import {BankContext} from '@/context/bank';
+import useEventCallback from '@/hooks/useEventCallback';
 
 const BankDataSourceInfo = ({type, countryCode, onConnected}) => {
   const intl = useIntl();
   const {addToast} = useContext(ToastContext);
-  const [login, {isLoading, error}] = useBankLogin(type, countryCode, {
-    onConnected,
-  });
+  const {setup, login, isLoading, isLoadingAccountDetails, error} = useContext(
+    BankContext,
+  );
+
+  const _onConnected = useEventCallback(onConnected);
+
+  useEffect(() => {
+    const reset = setup(type, countryCode);
+
+    return () => {
+      reset();
+    };
+  }, [setup, type, countryCode]);
+
+  useEffect(() => {
+    if (isLoadingAccountDetails) {
+      _onConnected();
+    }
+  }, [isLoadingAccountDetails, _onConnected]);
 
   useEffect(() => {
     if (error) {
       if (error.graphQLErrors) {
-        const errorCode = error.graphQLErrors.find(
-          (graphQLError) => graphQLError.extensions?.code,
+        const graphQLError = error.graphQLErrors.find(
+          (_graphQLError) => _graphQLError.extensions?.code,
         );
 
-        switch (errorCode) {
-          case errorCodeEnum.DATA_ALREADY_EXIST: {
-            addToast({
-              text: intl.formatMessage({
-                id: 'this_card_is_already_bound',
-              }),
-              variant: 'error',
-            });
-            return;
+        if (graphQLError?.extensions?.code) {
+          switch (graphQLError.extensions.code) {
+            case errorCodeEnum.DATA_ALREADY_EXIST: {
+              addToast({
+                text: intl.formatMessage({
+                  id: 'this_card_is_already_bound',
+                }),
+                variant: 'error',
+              });
+              return;
+            }
           }
         }
       }

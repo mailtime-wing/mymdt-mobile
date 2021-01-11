@@ -1,4 +1,10 @@
-import {useState, useEffect, useRef, useCallback} from 'react';
+import React, {
+  createContext,
+  useReducer,
+  useEffect,
+  useCallback,
+  useMemo,
+} from 'react';
 import {Linking} from 'react-native';
 import {useIntl} from 'react-intl';
 import Config from 'react-native-config';
@@ -19,36 +25,74 @@ const initialFetchOptions = {
   },
 };
 
-function useEventCallback(fn, dependencies = []) {
-  const ref = useRef(() => {
-    throw new Error('Cannot call an event handler while rendering.');
-  });
+const bankContextInitialValue = {
+  setup: (_dataAPIType, _countryCode) => () => {},
+  login: async () => {},
+  isLoading: false,
+  isLoadingAccountDetails: false,
+  isError: false,
+  error: null,
+};
 
-  useEffect(() => {
-    ref.current = fn;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fn, ...dependencies]);
+const initialState = {
+  dataAPIType: '',
+  countryCode: '',
+  isLoading: false,
+  isLoadingAccountDetails: false,
+  isError: false,
+  error: null,
+};
 
-  return useCallback(
-    (...args) => {
-      const refFn = ref.current;
-      if (typeof refFn === 'function') {
-        return refFn(...args);
-      }
-    },
-    [ref],
-  );
+const SETUP = 'setup';
+const SET_IS_LOADING = 'setIsLoading';
+const SET_IS_LOADING_ACCOINT_DETAILS = 'setIsLoadingAccountDetails';
+const SET_ERROR = 'setError';
+
+/**
+ *
+ * @param {typeof initialState} state
+ * @param {*} action
+ *
+ * @returns {typeof initialState}
+ */
+function reducer(state, action) {
+  switch (action.type) {
+    case SETUP: {
+      return {
+        ...initialState,
+        dataAPIType: action.payload.dataAPIType,
+        countryCode: action.payload.countryCode,
+      };
+    }
+    case SET_IS_LOADING: {
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+    }
+    case SET_IS_LOADING_ACCOINT_DETAILS: {
+      return {
+        ...state,
+        isLoadingAccountDetails: action.payload,
+      };
+    }
+    case SET_ERROR: {
+      return {
+        ...state,
+        isError: true,
+        error: action.payload,
+      };
+    }
+    default:
+      throw new Error();
+  }
 }
 
-export default function useBankLogin(
-  dataAPIType,
-  countryCode,
-  {onConnected} = {},
-) {
+export const BankContext = createContext(bankContextInitialValue);
+
+export const BankProvider = ({children}) => {
   const intl = useIntl();
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const [fetchAuthLink, {isError: isFetchAuthLinkError}] = useFetch(
     `${Config.BANKDATA_API_SCHEME}://${Config.BANKDATA_API_ENDPOINT}/getauthlink`,
@@ -82,8 +126,7 @@ export default function useBankLogin(
     },
   });
 
-  const _onConnected = useEventCallback(onConnected);
-
+  const {dataAPIType, countryCode} = state;
   useEffect(() => {
     let mounted = true;
     /**
@@ -117,7 +160,10 @@ export default function useBankLogin(
         }
 
         if (flow) {
-          setIsLoading(true);
+          dispatch({
+            type: SET_IS_LOADING,
+            payload: true,
+          });
 
           let publicToken = '';
           let institutionId = '';
@@ -143,6 +189,11 @@ export default function useBankLogin(
           }
 
           inAppBrowser.close();
+
+          dispatch({
+            type: SET_IS_LOADING_ACCOINT_DETAILS,
+            payload: true,
+          });
 
           // {
           //   "accountDetails": [...],
@@ -188,13 +239,29 @@ export default function useBankLogin(
             return;
           }
 
-          setIsLoading(false);
-          _onConnected(data);
+          dispatch({
+            type: SET_IS_LOADING_ACCOINT_DETAILS,
+            payload: false,
+          });
+
+          dispatch({
+            type: SET_IS_LOADING,
+            payload: false,
+          });
         }
       } catch (e) {
-        setIsError(true);
-        setError(e);
-        setIsLoading(false);
+        dispatch({
+          type: SET_ERROR,
+          payload: e,
+        });
+        dispatch({
+          type: SET_IS_LOADING_ACCOINT_DETAILS,
+          payload: false,
+        });
+        dispatch({
+          type: SET_IS_LOADING,
+          payload: false,
+        });
       }
     };
 
@@ -203,11 +270,38 @@ export default function useBankLogin(
       mounted = false;
       Linking.removeEventListener('url', handler);
     };
-  }, [_onConnected, bindBankItem, dataAPIType, fetchAccountDetail, userId]);
+  }, [bindBankItem, fetchAccountDetail, userId, dataAPIType]);
+
+  const setup = useCallback((_dataAPIType, _countryCode) => {
+    dispatch({
+      type: SETUP,
+      payload: {
+        dataAPIType: _dataAPIType,
+        countryCode: _countryCode,
+      },
+    });
+
+    return () => {
+      dispatch({
+        type: SETUP,
+        payload: {
+          dataAPIType: '',
+          countryCode: '',
+        },
+      });
+    };
+  }, []);
 
   const login = useCallback(async () => {
+    if (!dataAPIType || !dataAPIType) {
+      return;
+    }
+
     try {
-      setIsLoading(true);
+      dispatch({
+        type: SET_IS_LOADING,
+        payload: true,
+      });
 
       const authLink = await fetchAuthLink({
         body: JSON.stringify({
@@ -218,22 +312,53 @@ export default function useBankLogin(
         }),
       });
 
-      setIsLoading(false);
+      dispatch({
+        type: SET_IS_LOADING,
+        payload: false,
+      });
       await inAppBrowser.open(authLink);
     } catch (e) {
-      setIsLoading(false);
-      setIsError(true);
-      setError(e);
+      dispatch({
+        type: SET_IS_LOADING,
+        payload: false,
+      });
+      dispatch({
+        type: SET_ERROR,
+        payload: e,
+      });
     }
   }, [countryCode, dataAPIType, fetchAuthLink, intl.locale, userId]);
 
-  const anyLoading = isLoading || getUserIdLoading;
+  const anyLoading = state.isLoading || getUserIdLoading;
 
   const anyError =
-    isError ||
+    state.isError ||
     isFetchAuthLinkError ||
     isFetchAccountDetailError ||
     !!getUserIdError;
 
-  return [login, {isError: anyError, isLoading: anyLoading, error: error}];
-}
+  const bankContext = useMemo(
+    () => ({
+      setup,
+      login,
+      isLoading: anyLoading,
+      isLoadingAccountDetails: state.isLoadingAccountDetails,
+      isError: anyError,
+      error: state.error,
+    }),
+    [
+      setup,
+      login,
+      anyLoading,
+      state.isLoadingAccountDetails,
+      anyError,
+      state.error,
+    ],
+  );
+
+  return (
+    <BankContext.Provider value={bankContext}>{children}</BankContext.Provider>
+  );
+};
+
+export default BankProvider;

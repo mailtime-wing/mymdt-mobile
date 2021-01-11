@@ -67,6 +67,7 @@ export const SetupFlowProvider = ({children}) => {
     [
       'choose_region',
       'bank_data_source_info_onboarding',
+      'loading_account_information_onboarding',
       'linked_cards',
       'congratulations',
     ],
@@ -101,6 +102,7 @@ export const SetupFlowProvider = ({children}) => {
       result.linked_emails = true;
       result.choose_region = true;
       result.bank_data_source_info_onboarding = true;
+      result.loading_account_information_onboarding = true;
       result.linked_cards = true;
     }
     if (setupStatus?.isCashbackCurrencyCodeSet) {
