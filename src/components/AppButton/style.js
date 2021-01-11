@@ -16,6 +16,7 @@ export const container = (
   sizeVariant,
   colorVariant,
   disabled,
+  isLargeButtonLoading,
 ) => css`
   justify-content: center;
   align-items: center;
@@ -94,6 +95,12 @@ export const container = (
       background-color: ${theme.colors.background1};
     `
     }
+    ${
+      isLargeButtonLoading &&
+      `
+      padding-vertical: 10px;
+      `
+    }
   `}
   ${variant === 'outlined' &&
   `
@@ -155,6 +162,12 @@ export const container = (
       `
       padding-vertical: ${largePaddingVertical - borderWidth}px;
     `
+    }
+    ${
+      isLargeButtonLoading &&
+      `
+      padding-vertical: 9px;
+      `
     }
   `}
 `;

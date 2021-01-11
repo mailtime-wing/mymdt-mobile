@@ -23,7 +23,12 @@ import {
 import countryCodeData from '@/constants/countryCode';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
-const InternalLoginForm = ({title, submitButtonText, description}) => {
+const InternalLoginForm = ({
+  title,
+  submitButtonText,
+  description,
+  otpLoading,
+}) => {
   const theme = useTheme();
   const {setFieldValue, handleSubmit, isValid} = useFormikContext();
   const [autoFocusOnPrefix, setAutoFocusOnPrefix] = useState(false);
@@ -96,6 +101,7 @@ const InternalLoginForm = ({title, submitButtonText, description}) => {
             variant="filled"
             sizeVariant="large"
             colorVariant="secondary"
+            loading={otpLoading}
           />
         </View>
       </View>
@@ -122,13 +128,7 @@ const validate = (values) => {
   return errors;
 };
 
-const LoginForm = ({
-  title,
-  description,
-  submitButtonText,
-  onSendPress,
-  onSubmit,
-}) => {
+const LoginForm = ({onSubmit, ...props}) => {
   return (
     <Formik
       initialValues={{
@@ -137,12 +137,7 @@ const LoginForm = ({
       }}
       onSubmit={onSubmit}
       validate={validate}>
-      <InternalLoginForm
-        submitButtonText={submitButtonText}
-        onSendPress={onSendPress}
-        description={description}
-        title={title}
-      />
+      <InternalLoginForm {...props} />
     </Formik>
   );
 };
