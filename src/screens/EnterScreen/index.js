@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import {Text} from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 import SafeAreaView from 'react-native-safe-area-view';
 
@@ -8,9 +9,13 @@ import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {GET_OTP_API} from '@/api/auth';
 import errorCodeEnum from '@/enum/errorCode';
 
-import {container} from './style';
+import {container, terms} from './style';
+import {useTheme} from 'emotion-theming';
+import inAppBrowser from '@/utils/inAppBrowser';
+import urls from '@/constants/urls';
 
 const EnterScreen = ({navigation}) => {
+  const theme = useTheme();
   const {localeEnum} = useContext(IntlContext);
   const intl = useIntl();
 
@@ -73,7 +78,26 @@ const EnterScreen = ({navigation}) => {
       <LoginForm
         title={<FormattedMessage id="welcome_to_reward_me" />}
         description={
-          <FormattedMessage id="setting_up_agree_terms_and_policy" />
+          <FormattedMessage
+            id="setting_up_agree_terms_and_policy"
+            defaultMessage="By using the RewardMe service, you agree to RewardMe\u2019s <a>Terms of Service</a> and <b>Privacy Policy</b>."
+            values={{
+              a: (msg) => (
+                <Text
+                  style={terms(theme)}
+                  onPress={() => inAppBrowser.open(urls.TERMS_OF_USE)}>
+                  {msg}
+                </Text>
+              ),
+              b: (msg) => (
+                <Text
+                  style={terms(theme)}
+                  onPress={() => inAppBrowser.open(urls.PRIVACY_POLICY)}>
+                  {msg}
+                </Text>
+              ),
+            }}
+          />
         }
         submitButtonText={
           <FormattedMessage

@@ -1,10 +1,11 @@
 import React, {useContext} from 'react';
-import {View, ScrollView, Image, TouchableOpacity, Linking} from 'react-native';
+import {View, ScrollView, Image, TouchableOpacity} from 'react-native';
 import {FormattedMessage} from 'react-intl';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {GET_USER_PROFILE_API} from '@/api/data';
 import AppAvator from '@/components/AppAvator';
 import inAppBrowser from '@/utils/inAppBrowser';
+import urls from '@/constants/urls';
 
 import {
   listHeader,
@@ -62,18 +63,18 @@ const SettingScreen = ({navigation}) => {
     {id: 'app_settings', icon: SettingIcon},
     {
       messageId: 'faq_and_support',
-      url: 'https://www.reward.me/faq',
       icon: HelpIcon,
+      url: urls.FAQ,
     },
     {
       messageId: 'terms_of_service_and_privacy_policy',
-      url: 'https://reward.me/tandc',
       icon: BookIcon,
+      url: urls.PRIVACY_POLICY,
     },
     {
       messageId: 'about_us',
       icon: RewardMeIcon,
-      url: 'https://reward.me/aboutus',
+      url: urls.ABOUT_US,
     },
     // TODO: add real url when website ready
   ];

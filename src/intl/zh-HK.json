@@ -131,7 +131,7 @@
   "referral_code": "邀請碼",
   "claim_gift_on_birthday": "每年可享生日禮遇",
   "login_in_agree_terms_and_policy": "登錄你的郵箱帳號表示你已接受 RewardMe 賞我的 服務條款 與 隱私政策",
-  "setting_up_agree_terms_and_policy": "建立你的帳號並使用服務表示你已接受 RewardMe 賞我的 服務條款 與 隱私政策",
+  "setting_up_agree_terms_and_policy": "建立你的帳號並使用服務表示你已接受 RewardMe 賞我的 <a>服務條款</a> 與 <b>隱私政策</b>",
   "setting_up_account": "正在建立您的帳號…",
   "searching_for_receipts": "正在檢測過去的消費帳單…",
   "it_might_take_some_time": "機器人需要一段時間，完成後會通知你。",

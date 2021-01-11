@@ -131,7 +131,7 @@
   "referral_code": "Referral Code",
   "claim_gift_on_birthday": "You can claim gift on your birthday",
   "login_in_agree_terms_and_policy": "By logging in your email address, you agree to RewardMe\u2019s Terms of Service and Privacy Policy.",
-  "setting_up_agree_terms_and_policy": "By using the RewardMe service, you agree to RewardMe\u2019s Terms of Service and Privacy Policy.",
+  "setting_up_agree_terms_and_policy": "By using the RewardMe service, you agree to RewardMe\u2019s <a>Terms of Service</a> and <b>Privacy Policy</b>.",
   "setting_up_account": "Setting up your account...",
   "searching_for_receipts": "Searching for Receipts...",
   "it_might_take_some_time": "It might take some time, we will notify you once it\u2019s done.",
