@@ -13,6 +13,7 @@ import ToastProvider from '@/context/toast/provider';
 import {BranchProvider} from '@/context/branch';
 import {SplashProvider} from '@/context/splash';
 import {BankProvider} from '@/context/bank';
+import {VersionCheckProvider} from '@/context/versionCheck';
 import NavigationRoot from '@/screens/Root';
 
 function App() {
@@ -25,16 +26,18 @@ function App() {
               <IntlContainer>
                 <NotificationProvider>
                   <PreloadDataProvider>
-                    <BranchProvider>
-                      <SplashProvider>
-                        {/* UI related components are placed under splash to avoid flickerin */}
-                        <SetupFlowProvider>
-                          <BankProvider>
-                            <NavigationRoot />
-                          </BankProvider>
-                        </SetupFlowProvider>
-                      </SplashProvider>
-                    </BranchProvider>
+                    <VersionCheckProvider>
+                      <BranchProvider>
+                        <SplashProvider>
+                          {/* UI related components are placed under splash to avoid flickerin */}
+                          <SetupFlowProvider>
+                            <BankProvider>
+                              <NavigationRoot />
+                            </BankProvider>
+                          </SetupFlowProvider>
+                        </SplashProvider>
+                      </BranchProvider>
+                    </VersionCheckProvider>
                   </PreloadDataProvider>
                 </NotificationProvider>
               </IntlContainer>

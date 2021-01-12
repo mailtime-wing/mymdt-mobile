@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {View, Linking} from 'react-native';
-import VersionNumber from 'react-native-version-number';
 import {useTheme} from 'emotion-theming';
 import Config from 'react-native-config';
 
 import {IntlContext} from '@/context/Intl';
+import {VersionCheckContext} from '@/context/versionCheck';
 import {ThemeContext} from '@/context/theme';
 import {NotificationContext} from '@/context/notification';
 import HeaderTitle from '@/components/HeaderTitle';
@@ -24,6 +24,9 @@ import {appVersionStyle, container} from './style';
 const SettingScreen = () => {
   const theme = useTheme();
   const {languageList, language, saveLocale} = useContext(IntlContext);
+  const {currentAppVersion, currentBuildVersion} = useContext(
+    VersionCheckContext,
+  );
   const {checkPermissions, request} = useContext(NotificationContext);
   const [showPopup, setShowPopup] = useState(false);
   const [showLanguageBottomSheet, setShowLanguageBottomSheet] = useState(false);
@@ -133,7 +136,7 @@ const SettingScreen = () => {
             id="app_version"
             defaultMessage="App Version: {version}"
             values={{
-              version: `${VersionNumber.appVersion}-${VersionNumber.buildVersion}`,
+              version: `${currentAppVersion}-${currentBuildVersion}`,
             }}
           />
         </AppText>
