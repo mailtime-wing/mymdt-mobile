@@ -11,6 +11,7 @@ import jwt_decode from 'jwt-decode';
 import {AUTH_TOKENS, REFRESH_TOKEN_API} from '@/api/auth';
 import {GET_INITIAL_USER_DATA} from '@/api/data';
 import {useMutation} from '@apollo/client';
+import {FormattedMessage} from 'react-intl';
 
 import PopupModal from '@/components/PopupModal';
 import {REWARD_DOLLAR} from '@/constants/currency';
@@ -206,8 +207,18 @@ export const AuthProvider = ({children}) => {
       {children}
       {authData.isRefreshTokenExpired && (
         <PopupModal
-          title="Token Expired"
-          detail="Please login again"
+          title={
+            <FormattedMessage
+              id="error.token_expired"
+              defaultMessage="Token Expired"
+            />
+          }
+          detail={
+            <FormattedMessage
+              id="please_login_again"
+              defaultMessage="Please login again"
+            />
+          }
           callback={handlePopupPress}
         />
       )}

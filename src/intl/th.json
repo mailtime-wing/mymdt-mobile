@@ -314,6 +314,9 @@
   "linked_cards": "Linked Cards",
   "select_card": "Select Card",
   "require_staking_days": "Require Staking for {number_of_day} {number_of_day, plural, =0 {day} one {day} other {days}}",
+  "new_version_available": "New version avaliable",
+  "you_need_to_update_before_use": "A new version {latest_app_version} is avaliable. You will need to update to use this app.",
+  "please_login_again": "Please login again",
   "transactionType": {
     "reward": "\u0e23\u0e32\u0e07\u0e27\u0e31\u0e25",
     "redeem": "\u0e41\u0e25\u0e01",
@@ -384,7 +387,9 @@
     "bind": "\u0e1c\u0e39\u0e01",
     "copy": "\u0e04\u0e31\u0e14\u0e25\u0e2d\u0e01",
     "choose_cashback_type": "\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e40\u0e07\u0e34\u0e19\u0e04\u0e37\u0e19",
-    "try_again": "Try Again"
+    "try_again": "Try Again",
+    "next_time": "Next Time",
+    "update": "Update"
   },
   "error": {
     "required": "\u0e08\u0e33\u0e40\u0e1b\u0e47\u0e19",
@@ -408,6 +413,7 @@
     "user_profile_setup_referral_code_invalid": "\u0e23\u0e2b\u0e31\u0e2a\u0e41\u0e19\u0e30\u0e19\u0e33\u0e44\u0e21\u0e48\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07",
     "amount_cannot_be_zero": "Amount cannot be zero",
     "verification_code_invalid": "\u0e23\u0e2b\u0e31\u0e2a\u0e22\u0e37\u0e19\u0e22\u0e31\u0e19\u0e44\u0e21\u0e48\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07",
-    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
+    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts.",
+    "token_expired": "Token Expired"
   }
 }

@@ -115,5 +115,7 @@
 	<false/>
 	<key>branch_app_domain</key>
 	<string>get.reward.me</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<string>itms-apps</string>
 </dict>
 </plist>

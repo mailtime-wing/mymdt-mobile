@@ -314,6 +314,9 @@
   "linked_cards": "Linked Cards",
   "select_card": "Select Card",
   "require_staking_days": "Require Staking for {number_of_day} {number_of_day, plural, =0 {day} one {day} other {days}}",
+  "new_version_available": "New version avaliable",
+  "you_need_to_update_before_use": "A new version {latest_app_version} is avaliable. You will need to update to use this app.",
+  "please_login_again": "Please login again",
   "transactionType": {
     "reward": "Recompensa",
     "redeem": "Resgatar",
@@ -384,7 +387,9 @@
     "bind": "vincular",
     "copy": "copiar",
     "choose_cashback_type": "Escolha o tipo de cashback",
-    "try_again": "Try Again"
+    "try_again": "Try Again",
+    "next_time": "Next Time",
+    "update": "Update"
   },
   "error": {
     "required": "Obrigat\u00f3rio",
@@ -408,6 +413,7 @@
     "user_profile_setup_referral_code_invalid": "O c\u00f3digo de indica\u00e7\u00e3o \u00e9 inv\u00e1lido",
     "amount_cannot_be_zero": "Amount cannot be zero",
     "verification_code_invalid": "C\u00f3digo de verifica\u00e7\u00e3o inv\u00e1lido.",
-    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
+    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts.",
+    "token_expired": "Token Expired"
   }
 }

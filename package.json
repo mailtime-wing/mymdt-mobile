@@ -35,6 +35,7 @@
     "@sentry/react-native": "^2.1.0",
     "@umpirsky/country-list": "https://github.com/umpirsky/country-list.git",
     "apollo-boost": "^0.4.7",
+    "compare-versions": "^3.6.0",
     "emotion-theming": "^10.0.27",
     "formik": "^2.1.4",
     "graphql": "^14.6.0",

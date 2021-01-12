@@ -314,6 +314,9 @@
   "linked_cards": "Linked Cards",
   "select_card": "Select Card",
   "require_staking_days": "Require Staking for {number_of_day} {number_of_day, plural, =0 {day} one {day} other {days}}",
+  "new_version_available": "New version avaliable",
+  "you_need_to_update_before_use": "A new version {latest_app_version} is avaliable. You will need to update to use this app.",
+  "please_login_again": "Please login again",
   "transactionType": {
     "reward": "奖赏",
     "redeem": "兑换",
@@ -384,7 +387,9 @@
     "bind": "绑定",
     "copy": "复制",
     "choose_cashback_type": "选择奖赏类型",
-    "try_again": "重试"
+    "try_again": "重试",
+    "next_time": "Next Time",
+    "update": "Update"
   },
   "error": {
     "required": "请填写",
@@ -408,6 +413,7 @@
     "user_profile_setup_referral_code_invalid": "邀请码无效",
     "amount_cannot_be_zero": "Amount cannot be zero",
     "verification_code_invalid": "验证码错误。",
-    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts."
+    "no_credit_card_found": "No credit card found in the account. Please try other bank accounts.",
+    "token_expired": "Token Expired"
   }
 }
