@@ -189,6 +189,7 @@
   "MASTER": "Mastercard",
   "DISCOVER": "Discover",
   "AE": "American Express",
+  "UNIONPAY": "UnionPay",
   "confirm_to_remove": "确认移除 {name}?",
   "you_will_not_get_any_data_rewards_from": "您将不会从 {name} 获得购物奖赏。",
   "add_new_card": "添加新卡",
@@ -310,6 +311,8 @@
   "mdt_gift_codes_rights": "MDT gift codes are given out at specific events. Measurable Foundation Ltd. reserves all rights.",
   "loading_account_information": "Loading Account Information",
   "this_may_take_a_few_minutes": "This may take a few minutes",
+  "linked_cards": "Linked Cards",
+  "select_card": "Select Card",
   "transactionType": {
     "reward": "奖赏",
     "redeem": "兑换",

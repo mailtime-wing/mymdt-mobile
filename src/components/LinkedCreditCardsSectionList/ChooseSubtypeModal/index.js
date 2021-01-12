@@ -22,6 +22,7 @@ import VisaIcon from '@/assets/icon_visa.svg';
 import MasterIcon from '@/assets/icon_mastercard.svg';
 import DiscoverIcon from '@/assets/icon_discover.svg';
 import AEIcon from '@/assets/icon_ae.svg';
+import UnionPayIcon from '@/assets/icon_unionpay.svg';
 
 const SubtypeItem = ({label, icon: Icon, onPress}) => {
   const theme = useTheme();
@@ -56,6 +57,11 @@ const subtypes = [
     label: <FormattedMessage id="ae" defaultMessage="American Express" />,
     icon: AEIcon,
   },
+  {
+    value: accountSubtypeEnum.UNIONPAY,
+    label: <FormattedMessage id="unionpay" defaultMessage="UnionPay" />,
+    icon: UnionPayIcon,
+  },
 ];
 
 const ChooseSubtypeModal = ({mask, onSelect, onClosePress, ...props}) => {
@@ -85,7 +91,7 @@ const ChooseSubtypeModal = ({mask, onSelect, onClosePress, ...props}) => {
           }}
         />
       </AppText>
-      {subtypes.map(subtype => (
+      {subtypes.map((subtype) => (
         <SubtypeItem
           key={subtype.value}
           label={subtype.label}

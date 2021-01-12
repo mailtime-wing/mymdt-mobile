@@ -189,6 +189,7 @@
   "MASTER": "Mastercard",
   "DISCOVER": "Discover",
   "AE": "American Express",
+  "UNIONPAY": "UnionPay",
   "confirm_to_remove": "Sahkan untuk keluarkan {name}?",
   "you_will_not_get_any_data_rewards_from": "Anda tidak akan mendapat ganjaran data daripada {name}.",
   "add_new_card": "Tambah Kad Baru",
@@ -310,6 +311,8 @@
   "mdt_gift_codes_rights": "MDT gift codes are given out at specific events. Measurable Foundation Ltd. reserves all rights.",
   "loading_account_information": "Loading Account Information",
   "this_may_take_a_few_minutes": "This may take a few minutes",
+  "linked_cards": "Linked Cards",
+  "select_card": "Select Card",
   "transactionType": {
     "reward": "Ganjaran",
     "redeem": "Tebus",

@@ -5,19 +5,17 @@ export const headerContainer = css`
   margin-bottom: 16px;
 `;
 
-export const description = (theme) => css`
-  color: ${theme.colors.textOnBackground.mediumEmphasis};
-`;
-
 export const errorView = (theme) => css`
-  background-color: ${theme.colors.errorBackground};
+  flex-direction: row;
+  align-items: center;
+  background-color: ${theme.colors.detailBox.secondary};
   padding: 16px;
   border-radius: 16px;
-  margin-top: 16px;
 `;
 
 export const errorMessage = (theme) => css`
-  color: ${theme.colors.textOnError.light};
+  color: ${theme.colors.secondary.dark};
+  margin-left: 16px;
 `;
 
 export const sectionContainer = (theme) => css`
@@ -25,7 +23,8 @@ export const sectionContainer = (theme) => css`
   align-items: center;
   padding-top: 14px;
   padding-bottom: 11px;
-  margin-horizontal: 24px;
+  padding-right: 24px;
+  margin-left: 24px;
   border-bottom-width: 1px;
   border-color: ${theme.colors.background3};
   background-color: ${theme.colors.background1};
@@ -43,7 +42,9 @@ export const sectionRemoveButton = (enabled) => css`
 
 export const listItemContainer = css`
   flex-direction: row;
-  padding: 16px 24px;
+  padding-vertical: 16px;
+  padding-left: 24px;
+  padding-right: 16px;
   align-items: center;
 `;
 
@@ -60,6 +61,8 @@ export const accountNo = (theme) => css`
   color: ${theme.colors.textOnBackground.disabled};
 `;
 
-export const errorTag = css`
-  margin-right: 8px;
+export const itemSeparator = (theme) => css`
+  border-bottom-width: 1px;
+  border-color: ${theme.colors.background3};
+  margin-left: 96px;
 `;

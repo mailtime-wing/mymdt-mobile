@@ -4,4 +4,5 @@ export default {
   VISA: 'VISA',
   MASTER: 'MASTER',
   DISCOVER: 'DISCOVER',
+  UNIONPAY: 'UNIONPAY',
 };

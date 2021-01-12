@@ -189,6 +189,7 @@
   "MASTER": "Mastercard",
   "DISCOVER": "Discover",
   "AE": "American Express",
+  "UNIONPAY": "UnionPay",
   "confirm_to_remove": "X\u00e1c nh\u1eadn x\u00f3a {name}?",
   "you_will_not_get_any_data_rewards_from": "B\u1ea1n s\u1ebd kh\u00f4ng nh\u1eadn \u0111\u01b0\u1ee3c b\u1ea5t k\u1ef3 ph\u1ea7n th\u01b0\u1edfng d\u1eef li\u1ec7u n\u00e0o t\u1eeb {name}.",
   "add_new_card": "Th\u00eam th\u1ebb m\u1edbi",
@@ -310,6 +311,8 @@
   "mdt_gift_codes_rights": "MDT gift codes are given out at specific events. Measurable Foundation Ltd. reserves all rights.",
   "loading_account_information": "Loading Account Information",
   "this_may_take_a_few_minutes": "This may take a few minutes",
+  "linked_cards": "Linked Cards",
+  "select_card": "Select Card",
   "transactionType": {
     "reward": "Ph\u1ea7n th\u01b0\u1edfng",
     "redeem": "\u0110\u1ed5i th\u01b0\u1edfng",

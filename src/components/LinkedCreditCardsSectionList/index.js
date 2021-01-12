@@ -22,13 +22,13 @@ import VisaIcon from '@/assets/icon_visa.svg';
 import MasterIcon from '@/assets/icon_mastercard.svg';
 import DiscoverIcon from '@/assets/icon_discover.svg';
 import AEIcon from '@/assets/icon_ae.svg';
-import QuestionMarkIcon from '@/assets/icon_question_mark.svg';
+import UnionPayIcon from '@/assets/icon_unionpay.svg';
+import AlertCircleIcon from '@/assets/icon_alert_circle.svg';
 
 import ChooseSubtypeModal from './ChooseSubtypeModal';
 
 import {
   headerContainer,
-  description,
   errorView,
   errorMessage,
   sectionContainer,
@@ -38,10 +38,10 @@ import {
   listItemInfoContainer,
   accountName,
   accountNo,
-  errorTag,
+  itemSeparator,
 } from './style';
 
-const UnknownCard = () => {
+const UnknownCard = (props) => {
   const theme = useTheme();
   return (
     <Svg
@@ -49,7 +49,8 @@ const UnknownCard = () => {
       height="40"
       viewBox="0 0 48 34"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
       <Rect
         width="48"
         height="34"
@@ -81,6 +82,7 @@ const componentToSubtypeMap = {
   [accountSubtypeEnum.MASTER]: MasterIcon,
   [accountSubtypeEnum.DISCOVER]: DiscoverIcon,
   [accountSubtypeEnum.AE]: AEIcon,
+  [accountSubtypeEnum.UNIONPAY]: UnionPayIcon,
 };
 
 const ListHeader = ({anyUnknownCard}) => {
@@ -88,20 +90,12 @@ const ListHeader = ({anyUnknownCard}) => {
   return (
     <View>
       <HeaderTitle>
-        <FormattedMessage
-          id="linkedBankAccounts"
-          defaultMessage="Linked Bank Accounts"
-        />
+        <FormattedMessage id="linked_cards" defaultMessage="Linked Cards" />
       </HeaderTitle>
       <View style={headerContainer}>
-        <AppText variant="body1" style={description(theme)}>
-          <FormattedMessage
-            id="itMayTakeSomeTimeToAnalyze"
-            defaultMessage="It may take some time to analyze your shopping e-receipts. We will notify you once it’s done."
-          />
-        </AppText>
         {anyUnknownCard && (
           <View style={errorView(theme)}>
+            <AlertCircleIcon stroke={theme.colors.secondary.dark} />
             <AppText variant="body2" style={errorMessage(theme)}>
               <FormattedMessage id="youCannonEarnCashbackFrom" />
             </AppText>
@@ -110,6 +104,11 @@ const ListHeader = ({anyUnknownCard}) => {
       </View>
     </View>
   );
+};
+
+const ItemSeparatorComponent = () => {
+  const theme = useTheme();
+  return <View style={itemSeparator(theme)} />;
 };
 
 /**
@@ -162,24 +161,20 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
         <Icon width={56} height={40} />
         <View style={listItemInfoContainer}>
           <AppText variant="body1" style={accountName(theme)}>
-            {`**** ${item.mask}`}
+            {item.accountName}
           </AppText>
-          <AppText variant="caption" style={accountNo(theme)}>
-            {isUnknown ? (
-              <FormattedMessage id="unknown_click_to_select_card_type" />
-            ) : (
-              item.accountName
-            )}
-          </AppText>
+          {!!item.mask && (
+            <AppText variant="caption" style={accountNo(theme)}>
+              {`**** ${item.mask}`}
+            </AppText>
+          )}
         </View>
         {isUnknown && (
           <AppTag
-            style={errorTag}
             variant="transparent"
-            colorVariant="error"
+            colorVariant="secondary"
             sizeVariant="normal"
-            svgIcon={QuestionMarkIcon}
-            text="Unknown Card"
+            text={<FormattedMessage id="select_card" />}
           />
         )}
       </TouchableOpacity>
@@ -226,6 +221,7 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
         ListHeaderComponent={() => (
           <ListHeader anyUnknownCard={anyUnknownCard} />
         )}
+        ItemSeparatorComponent={ItemSeparatorComponent}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
         {...props}
