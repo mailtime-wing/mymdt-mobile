@@ -29,6 +29,7 @@ import ChooseSubtypeModal from './ChooseSubtypeModal';
 
 import {
   headerContainer,
+  detailText,
   errorView,
   errorMessage,
   sectionContainer,
@@ -93,6 +94,9 @@ const ListHeader = ({anyUnknownCard}) => {
         <FormattedMessage id="linked_cards" defaultMessage="Linked Cards" />
       </HeaderTitle>
       <View style={headerContainer}>
+        <AppText variant="body1" style={detailText(theme)}>
+          <FormattedMessage id="itMayTakeSomeTimeToAnalyze" />
+        </AppText>
         {anyUnknownCard && (
           <View style={errorView(theme)}>
             <AlertCircleIcon stroke={theme.colors.secondary.dark} />

@@ -5,6 +5,11 @@ export const headerContainer = css`
   margin-bottom: 16px;
 `;
 
+export const detailText = (theme) => css`
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
+  margin-bottom: 24px;
+`;
+
 export const errorView = (theme) => css`
   flex-direction: row;
   align-items: center;
