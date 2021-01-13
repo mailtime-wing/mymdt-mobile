@@ -13,6 +13,10 @@ export const highEmphasis = (theme) => css`
   flex-shrink: 1;
 `;
 
+export const disabled = (theme) => css`
+  color: ${theme.colors.textOnBackground.disabled};
+`;
+
 export const privilege = (theme) => css`
   color: ${theme.colors.secondary.normal};
   text-align: center;

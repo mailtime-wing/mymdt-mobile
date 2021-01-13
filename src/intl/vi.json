@@ -313,6 +313,7 @@
   "this_may_take_a_few_minutes": "This may take a few minutes",
   "linked_cards": "Linked Cards",
   "select_card": "Select Card",
+  "require_staking_days": "Require Staking for {number_of_day} {number_of_day, plural, =0 {day} one {day} other {days}}",
   "transactionType": {
     "reward": "Ph\u1ea7n th\u01b0\u1edfng",
     "redeem": "\u0110\u1ed5i th\u01b0\u1edfng",
