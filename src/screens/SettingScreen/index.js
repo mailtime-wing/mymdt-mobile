@@ -69,7 +69,7 @@ const SettingScreen = ({navigation}) => {
     {
       messageId: 'terms_of_service_and_privacy_policy',
       icon: BookIcon,
-      url: urls.PRIVACY_POLICY,
+      url: urls.TERMS_AND_PRIVACY,
     },
     {
       messageId: 'about_us',
