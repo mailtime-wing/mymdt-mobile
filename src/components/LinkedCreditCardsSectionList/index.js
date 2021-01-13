@@ -128,7 +128,7 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
   const [showChooseSubtypeModal, setShowChooseSubtypeModal] = useState(false);
   const [selectedBankItem, setSelectedBankItem] = useState(null);
   const [selectedBankAccount, setSelectedBankAccount] = useState(null);
-  const [fetchBankItems, {data, updateQuery}] = useLazyQueryWithAuth(
+  const [fetchBankItems, {data, updateQuery, client}] = useLazyQueryWithAuth(
     GET_BANK_ITEMS,
     {
       fetchPolicy: 'cache-and-network',
@@ -255,12 +255,15 @@ const LinkedCreditCardsSectionList = ({enableRemove, ...props}) => {
                   },
                 });
 
-                updateQuery((prev) => {
-                  const newData = JSON.parse(JSON.stringify(prev));
-                  newData.userProfile.bankItems = newData.userProfile.bankItems.filter(
-                    (bankItem) => bankItem.id !== selectedBankItem.id,
-                  );
-                  return newData;
+                client.cache.modify({
+                  id: client.cache.identify(data.userProfile),
+                  fields: {
+                    bankItems(list, {readField}) {
+                      return list.filter(
+                        (n) => readField('id', n) !== selectedBankItem.id,
+                      );
+                    },
+                  },
                 });
                 // TODO: handle error
               } catch (e) {}
