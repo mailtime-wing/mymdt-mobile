@@ -183,8 +183,10 @@ export const GET_APP_CONFIG_API = gql`
     appConfig {
       accountSetupTaskID
       referralTaskID
-      minimumAppVersion
-      latestAppVersion
+      minimumIOSAppVersion
+      latestIOSAppVersion
+      minimumAndroidAppVersion
+      latestAndroidAppVersion
     }
   }
 `;
