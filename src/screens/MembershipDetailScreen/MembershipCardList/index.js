@@ -230,6 +230,9 @@ const MembershipCardList = ({navigation, route}) => {
             cashbackPercentage={membership.cashbackPercentage}
             merchantsNumAllowed={membership.merchantsNumAllowed}
             stakingInterestRate={membership.stakingInterestRate}
+            stakingLockupPeriodInDay={
+              membership.stakingPlan?.lockupPeriodInDay || 0
+            }
             style={privilegeSectionPadding}
           />
         )}
