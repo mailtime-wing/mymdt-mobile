@@ -5,7 +5,7 @@ import {useLazyQuery} from '@apollo/client';
  * @typedef {import('@apollo/client').LazyQueryHookOptions} LazyQueryHookOptions
  *
  * @param  {DocumentNode} query
- * @param  {QueryHookOptions} options
+ * @param  {LazyQueryHookOptions} options
  *
  */
 export default function useLazyQueryWithAuth(query, options = {}) {
