@@ -1,19 +1,20 @@
 import React from 'react';
+import {View} from 'react-native';
 import {useTheme} from 'emotion-theming';
 
-import {RowContainer, rowTextStyle} from './style';
+import {rowContainer, rowTextStyle} from './style';
 
 import AppText from '@/components/AppText2';
 
-const SpecialListOption = ({label, value, ...props}) => {
+const SpecialListOption = ({label, value, style, ...props}) => {
   const theme = useTheme();
   return (
-    <RowContainer {...props}>
+    <View style={[rowContainer, style]} {...props}>
       <AppText variant="body1" style={rowTextStyle(theme)}>
         {label}
       </AppText>
       {value}
-    </RowContainer>
+    </View>
   );
 };
 

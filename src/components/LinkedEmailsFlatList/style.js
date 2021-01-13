@@ -1,14 +1,23 @@
-import styled, {css} from '@emotion/native';
+import {css} from '@emotion/native';
 
-export const TitleContainer = styled.View`
+export const titleContainer = css`
   flex-direction: row;
   justify-content: space-between;
-  padding: 16px 24px;
+  padding-vertical: 16px;
   align-items: center;
+`;
+
+export const screenHorizontalPadding = css`
+  padding-horizontal: 24px;
 `;
 
 export const removeText = (theme) => css`
   color: ${theme.colors.textOnError.normal};
+`;
+
+export const detailText = (theme) => css`
+  color: ${theme.colors.textOnBackground.mediumEmphasis};
+  margin-bottom: 24px;
 `;
 
 export const titleText = (theme) => css`
@@ -16,7 +25,7 @@ export const titleText = (theme) => css`
 `;
 
 export const itemContainer = css`
-  padding: 6px 24px;
+  padding-vertical: 6px;
   min-height: 48px;
 `;
 

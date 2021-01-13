@@ -41,6 +41,7 @@ const LinkedEmailsSettingScreen = ({navigation}) => {
 
   return (
     <LinkedEmailsFlatList
+      enableRemove
       isEditing={isEditing}
       ListFooterComponent={
         isEditing ? null : (

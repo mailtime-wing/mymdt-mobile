@@ -1,12 +1,12 @@
-import styled, {css} from '@emotion/native';
+import {css} from '@emotion/native';
 
-export const RowContainer = styled.View`
+export const rowContainer = css`
   flex-direction: row;
   justify-content: space-between;
-  padding: 8px 0;
+  padding-vertical: 8px;
   align-items: center;
 `;
 
-export const rowTextStyle = theme => css`
+export const rowTextStyle = (theme) => css`
   color: ${theme.colors.textOnBackground.highEmphasis};
 `;

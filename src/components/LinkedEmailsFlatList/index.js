@@ -16,7 +16,9 @@ import {
 } from '@/api/data';
 
 import {
-  TitleContainer,
+  titleContainer,
+  screenHorizontalPadding,
+  detailText,
   titleText,
   itemContainer,
   unbindButton,
@@ -30,11 +32,16 @@ const ListHeader = () => {
       <HeaderTitle>
         <FormattedMessage id="linked_emails" defaultMessage="Linked Emails" />
       </HeaderTitle>
-      <TitleContainer>
+      <AppText
+        variant="body1"
+        style={[screenHorizontalPadding, detailText(theme)]}>
+        <FormattedMessage id="linked_emails_detail" />
+      </AppText>
+      <View style={[screenHorizontalPadding, titleContainer]}>
         <AppText variant="label" style={titleText(theme)}>
           <FormattedMessage id="email" defaultMessage="email" />
         </AppText>
-      </TitleContainer>
+      </View>
     </View>
   );
 };
@@ -70,10 +77,11 @@ const LinkedEmailsFlatList = ({enableRemove, isEditing, ...props}) => {
   const renderItem = ({item}) => {
     return (
       <SpecialListOption
-        style={itemContainer}
+        style={[screenHorizontalPadding, itemContainer]}
         label={<AppText variant="body1">{item.emailAddress}</AppText>}
         value={
-          isEditing && (
+          isEditing &&
+          enableRemove && (
             <TouchableOpacity
               style={unbindButton(theme)}
               onPress={() => setSelectedEmailAccount(item)}>
