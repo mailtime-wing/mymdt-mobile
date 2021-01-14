@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@mipmap/rewardme_android_appicon_background"/>
-    <foreground android:drawable="@mipmap/rewardme_android_appicon_foreground"/>
-</adaptive-icon>
