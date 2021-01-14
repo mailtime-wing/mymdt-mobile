@@ -1,5 +1,5 @@
 import React, {useEffect, useContext, useRef} from 'react';
-import {View, TextInput, Share, Platform} from 'react-native';
+import {View, Text, Share, Platform} from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useTheme} from 'emotion-theming';
 
@@ -131,11 +131,9 @@ const InviteFriendSection = () => {
       <View style={referralContainer}>
         <View style={inputContainer}>
           <View style={textInputContainer(theme)}>
-            <TextInput
-              value={referralCode}
-              style={textInput(theme)}
-              editable={false}
-            />
+            <Text style={textInput(theme)} selectable>
+              {referralCode}
+            </Text>
           </View>
         </View>
         <AppButton
