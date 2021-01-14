@@ -26,18 +26,18 @@ function App() {
               <IntlContainer>
                 <NotificationProvider>
                   <PreloadDataProvider>
-                    <VersionCheckProvider>
-                      <BranchProvider>
-                        <SplashProvider>
+                    <BranchProvider>
+                      <SplashProvider>
+                        <VersionCheckProvider>
                           {/* UI related components are placed under splash to avoid flickerin */}
                           <SetupFlowProvider>
                             <BankProvider>
                               <NavigationRoot />
                             </BankProvider>
                           </SetupFlowProvider>
-                        </SplashProvider>
-                      </BranchProvider>
-                    </VersionCheckProvider>
+                        </VersionCheckProvider>
+                      </SplashProvider>
+                    </BranchProvider>
                   </PreloadDataProvider>
                 </NotificationProvider>
               </IntlContainer>

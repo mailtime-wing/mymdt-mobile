@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useEffect} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 
 import {AuthContext} from '@/context/auth';
 import {PreloadDataContext} from '@/context/preloadData';
@@ -9,6 +9,7 @@ export const SplashContext = createContext(false);
 export const SplashProvider = ({children}) => {
   const {initialized: authInitialized} = useContext(AuthContext);
   const {initialized: preloadDataInitialized} = useContext(PreloadDataContext);
+  const [splashHidden, setSplashHidden] = useState(false);
 
   // ensure all data required by our app is loaded
   useEffect(() => {
@@ -17,6 +18,7 @@ export const SplashProvider = ({children}) => {
       // delay the hiding so that UI is ready right after splash disappears
       timeoutId = setTimeout(() => {
         RNBootSplash.hide();
+        setSplashHidden(true);
       }, 300);
     }
 
@@ -32,7 +34,9 @@ export const SplashProvider = ({children}) => {
   }
 
   return (
-    <SplashContext.Provider value={true}>{children}</SplashContext.Provider>
+    <SplashContext.Provider value={splashHidden}>
+      {children}
+    </SplashContext.Provider>
   );
 };
 

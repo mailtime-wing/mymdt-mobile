@@ -8,8 +8,10 @@ import React, {
 import AsyncStorage from '@react-native-community/async-storage';
 import {Linking, Platform} from 'react-native';
 import {PreloadDataContext} from '@/context/preloadData';
+import {SplashContext} from '@/context/splash';
 import PopupModal from '@/components/PopupModal';
 import ForceAppUpdateModal from '@/components/ForceAppUpdateModal';
+import PseudoSplashScreen from '@/components/PseudoSplashScreen';
 import {FormattedMessage} from 'react-intl';
 import VersionNumber from 'react-native-version-number';
 import compareVersions from 'compare-versions';
@@ -26,22 +28,22 @@ export const VersionCheckContext = createContext(initialContextValue);
 
 export const VersionCheckProvider = ({children}) => {
   const {appConfig} = useContext(PreloadDataContext);
-  const [finishLoading, setFinishLoading] = useState(false);
+  const splashHidden = useContext(SplashContext);
 
   const minAppVersion = isIOS
-    ? appConfig?.minimumIOSAppVersion || ''
-    : appConfig?.minimumAndroidAppVersion || '';
+    ? appConfig.minimumIOSAppVersion || ''
+    : appConfig.minimumAndroidAppVersion || '';
   const latestAppVersion = isIOS
-    ? appConfig?.latestIOSAppVersion || ''
-    : appConfig?.latestAndroidAppVersion || '';
+    ? appConfig.latestIOSAppVersion || ''
+    : appConfig.latestAndroidAppVersion || '';
 
   const isMinVersionLargerThanExistingVersion =
-    compareVersions(minAppVersion, initialContextValue?.existingAppVersion) ===
+    compareVersions(minAppVersion, initialContextValue.existingAppVersion) ===
     1;
   const isLatestVersionLargerThanExistingVersion =
     compareVersions(
       latestAppVersion,
-      initialContextValue?.existingAppVersion,
+      initialContextValue.existingAppVersion,
     ) === 1;
 
   const shouldShowForceUpdate = isMinVersionLargerThanExistingVersion;
@@ -51,40 +53,38 @@ export const VersionCheckProvider = ({children}) => {
     !shouldShowForceUpdate;
 
   const [showUpdate, setShowUpdate] = useState(shouldShowUpdate);
-  const [showForceUpdate, setShowForceUpdate] = useState(shouldShowForceUpdate);
+  const [showForceUpdate] = useState(shouldShowForceUpdate);
   const [shouldPromptSoftUpdate, setShouldPromptSoftUpdate] = useState(null);
-  const [skippedVersionArr, setSkippedVersionArr] = useState([]);
 
   useEffect(() => {
     const getSkippedVersion = async () => {
       try {
-        const result = await AsyncStorage.getItem(SKIPPED_VERSION);
-        if (result && Array.isArray(result)) {
-          setSkippedVersionArr(JSON.parse(result));
+        let result = await AsyncStorage.getItem(SKIPPED_VERSION);
+        if (!result) {
+          result = [];
+        } else {
+          result = JSON.parse(result);
+          if (!Array.isArray(result)) {
+            result = [];
+          }
         }
+
+        if (result.includes(latestAppVersion)) {
+          setShouldPromptSoftUpdate(false);
+          return;
+        }
+
+        setShouldPromptSoftUpdate(true);
+        result.push(latestAppVersion);
+        await AsyncStorage.setItem(SKIPPED_VERSION, JSON.stringify(result));
+
+        return;
       } catch (e) {
         console.error(`${e} in getting theme mode`);
       }
     };
     getSkippedVersion();
-  }, [shouldShowForceUpdate, shouldShowUpdate, latestAppVersion]);
-
-  useEffect(() => {
-    setShowUpdate(shouldShowUpdate);
-    setShowForceUpdate(shouldShowForceUpdate);
-
-    if (!Array.isArray(skippedVersionArr)) {
-      return;
-    }
-    const shouldPrompt = !skippedVersionArr.includes(latestAppVersion);
-    setShouldPromptSoftUpdate(shouldPrompt);
-    setFinishLoading(true);
-  }, [
-    shouldShowUpdate,
-    shouldShowForceUpdate,
-    skippedVersionArr,
-    latestAppVersion,
-  ]);
+  }, [latestAppVersion]);
 
   const openAppStoreUrl = async () => {
     const url = isIOS ? urls.APP_STORE : urls.GOOGLE_PLAY;
@@ -94,49 +94,34 @@ export const VersionCheckProvider = ({children}) => {
     }
   };
 
-  const handleSkipVersionPress = useCallback(async () => {
-    if (!Array.isArray(skippedVersionArr)) {
-      return;
+  const handlePopupPress = useCallback(async (pressed) => {
+    if (pressed === 'OK') {
+      openAppStoreUrl();
     }
-
-    try {
-      if (!skippedVersionArr.includes(latestAppVersion)) {
-        await AsyncStorage.setItem(
-          SKIPPED_VERSION,
-          JSON.stringify(skippedVersionArr.push(latestAppVersion)),
-        );
-      }
-    } catch (e) {
-      console.error(`${e} in skip update version`);
-    }
-  }, [skippedVersionArr, latestAppVersion]);
-
-  const handlePopupPress = useCallback(
-    async (pressed) => {
-      if (pressed === 'OK') {
-        openAppStoreUrl();
-      }
-      setShowUpdate(false);
-      handleSkipVersionPress();
-    },
-    [handleSkipVersionPress],
-  );
+    setShowUpdate(false);
+  }, []);
 
   const handleForceUpdatePress = () => {
     openAppStoreUrl();
-    setShowForceUpdate(false);
   };
 
+  // if force update is required, rendering children (the rest of the app) can cause bugs,
+  // so we render a pseudo-splash screen instead. In other case, rendering children should
+  // be fine.
+  //
+  // Besides, `splashHidden` is considered because the splash screen does not work well with
+  // Modal. Only one can exist at the same time, so we need to ensure splash is hidden
+  // before opening the modal
   return (
     <VersionCheckContext.Provider value={initialContextValue}>
-      {finishLoading && children}
-      {!!showForceUpdate && (
+      {showForceUpdate ? <PseudoSplashScreen /> : children}
+      {!!showForceUpdate && splashHidden && (
         <ForceAppUpdateModal
           latestAppVersion={latestAppVersion}
           onUpdatePress={handleForceUpdatePress}
         />
       )}
-      {!!showUpdate && shouldPromptSoftUpdate && (
+      {!!showUpdate && shouldPromptSoftUpdate && splashHidden && (
         <PopupModal
           title={
             <FormattedMessage
