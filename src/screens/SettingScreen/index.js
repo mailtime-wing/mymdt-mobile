@@ -33,6 +33,7 @@ import ShieldIcon from '@/assets/icon_shield.svg';
 import HelpIcon from '@/assets/icon_help-circle.svg';
 import BookIcon from '@/assets/icon_book-open.svg';
 import RewardMeIcon from '@/assets/icon_rewardme.svg';
+import PhoneIcon from '@/assets/icon_phone.svg';
 
 const SettingScreen = ({navigation}) => {
   const theme = useTheme();
@@ -76,7 +77,11 @@ const SettingScreen = ({navigation}) => {
       icon: RewardMeIcon,
       url: urls.ABOUT_US,
     },
-    // TODO: add real url when website ready
+    {
+      messageId: 'contact_us',
+      icon: PhoneIcon,
+      url: 'mailto:support@reward.me',
+    },
   ];
 
   const backgroundImage = isDark
