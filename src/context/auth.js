@@ -11,9 +11,7 @@ import jwt_decode from 'jwt-decode';
 import {AUTH_TOKENS, REFRESH_TOKEN_API} from '@/api/auth';
 import {GET_INITIAL_USER_DATA} from '@/api/data';
 import {useMutation} from '@apollo/client';
-import {FormattedMessage} from 'react-intl';
 
-import PopupModal from '@/components/PopupModal';
 import {REWARD_DOLLAR} from '@/constants/currency';
 
 export const AuthContext = createContext({
@@ -165,15 +163,6 @@ export const AuthProvider = ({children}) => {
     }
   }, [authData.accessToken, authData.refreshToken, authData.tokensInitialized]);
 
-  const handlePopupPress = useCallback(
-    (pressed) => {
-      if (pressed) {
-        signOut();
-      }
-    },
-    [signOut],
-  );
-
   const authContext = useMemo(
     () => ({
       initialized: authData.tokensInitialized,
@@ -203,26 +192,7 @@ export const AuthProvider = ({children}) => {
   );
 
   return (
-    <AuthContext.Provider value={authContext}>
-      {children}
-      {authData.isRefreshTokenExpired && (
-        <PopupModal
-          title={
-            <FormattedMessage
-              id="error.token_expired"
-              defaultMessage="Token Expired"
-            />
-          }
-          detail={
-            <FormattedMessage
-              id="please_login_again"
-              defaultMessage="Please login again"
-            />
-          }
-          callback={handlePopupPress}
-        />
-      )}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>
   );
 };
 

@@ -14,6 +14,7 @@ import {BranchProvider} from '@/context/branch';
 import {SplashProvider} from '@/context/splash';
 import {BankProvider} from '@/context/bank';
 import {VersionCheckProvider} from '@/context/versionCheck';
+import RefreshTokenExpiredModal from '@/components/RefreshTokenExpiredModal';
 import NavigationRoot from '@/screens/Root';
 
 function App() {
@@ -28,8 +29,8 @@ function App() {
                   <PreloadDataProvider>
                     <BranchProvider>
                       <SplashProvider>
+                        {/* UI related components are placed under splash to avoid flickerin */}
                         <VersionCheckProvider>
-                          {/* UI related components are placed under splash to avoid flickerin */}
                           <SetupFlowProvider>
                             <BankProvider>
                               <NavigationRoot />
@@ -40,6 +41,7 @@ function App() {
                     </BranchProvider>
                   </PreloadDataProvider>
                 </NotificationProvider>
+                <RefreshTokenExpiredModal />
               </IntlContainer>
             </AuthProvider>
           </ToastProvider>
