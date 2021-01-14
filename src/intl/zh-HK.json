@@ -206,7 +206,7 @@
   "referralOgTitle": "RewardMe 賞我",
   "referralOgDescription": "雙重購物獎賞，雙重禮遇，就在賞我！",
   "joinRewardMe": "加入賞我！",
-  "joinRewardMeWithThisLink": "加入 RewardMe 賞我 {link}，立即贏取獎賞！",
+  "joinRewardMeWithThisLink": "加入 RewardMe 賞我，立即贏取獎賞！",
   "earned_in_past_7_days": "過去7天獲得了 {amount} ",
   "earned_in_total": "共獲得 {amount} ",
   "you_will_enjoy_pa_percentage": "您將獲得 {pa_percentage} MDT Staking 獎勵。每7天，相應的 ME token 獎勵將發送至您的賞我錢包。",
