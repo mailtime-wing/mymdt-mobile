@@ -62,9 +62,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>47</string>
+	<string>50</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<string>itms-apps</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -115,7 +117,5 @@
 	<false/>
 	<key>branch_app_domain</key>
 	<string>get.reward.me</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<string>itms-apps</string>
 </dict>
 </plist>
