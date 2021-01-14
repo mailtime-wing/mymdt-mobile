@@ -14,12 +14,12 @@ import CashBackSummarySection from './CashBackSummarySection';
 import MembershipInfoCard from './MembershipInfoCard';
 import ScreenContainer from '@/components/ScreenContainer';
 
-import AwardIcon from '@/assets/icon_award.svg';
-import CreditCardIcon from '@/assets/icon_credit-card.svg';
-import DollarSignIcon from '@/assets/dollar_sign_icon.svg';
-import BagIcon from '@/assets/icon_shopping-bag.svg';
-import ReferralIcon from '@/assets/referral_icon.svg';
-import MailIcon from '@/assets/icon_mail.svg';
+import AwardIcon from './AwardIcon';
+import CreditCardIcon from './CreditCardIcon';
+import DollarSignIcon from './DollarSignIcon';
+import BagIcon from './BagIcon';
+import ReferralIcon from './ReferralIcon';
+import MailIcon from './MailIcon';
 
 import {
   container,
