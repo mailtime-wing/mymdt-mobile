@@ -24,7 +24,7 @@ import {appVersionStyle, container} from './style';
 const SettingScreen = () => {
   const theme = useTheme();
   const {languageList, language, saveLocale} = useContext(IntlContext);
-  const {currentAppVersion, currentBuildVersion} = useContext(
+  const {existingAppVersion, existingBuildVersion} = useContext(
     VersionCheckContext,
   );
   const {checkPermissions, request} = useContext(NotificationContext);
@@ -136,7 +136,7 @@ const SettingScreen = () => {
             id="app_version"
             defaultMessage="App Version: {version}"
             values={{
-              version: `${currentAppVersion}-${currentBuildVersion}`,
+              version: `${existingAppVersion}-${existingBuildVersion}`,
             }}
           />
         </AppText>
