@@ -1,4 +1,5 @@
 import React, {useContext, useEffect} from 'react';
+import analytics from '@react-native-firebase/analytics';
 import {Linking} from 'react-native';
 import {
   createStackNavigator,
@@ -572,6 +573,9 @@ const Main = () => {
 };
 
 const Root = () => {
+  const routeNameRef = React.useRef();
+  const navigationRef = React.useRef();
+
   const {isLoggedIn} = useContext(AuthContext);
   const theme = useTheme();
 
@@ -611,7 +615,28 @@ const Root = () => {
   }, []);
 
   return (
-    <NavigationContainer linking={linking}>
+    <NavigationContainer
+      ref={navigationRef}
+      linking={linking}
+      onReady={() =>
+        (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
+      }
+      onStateChange={async (state) => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+
+        if (previousRouteName !== currentRouteName) {
+          await analytics().logScreenView({
+            screen_name: currentRouteName,
+            screen_class: currentRouteName,
+          });
+
+          //  for build funnel
+          await analytics().logEvent(`Page_${currentRouteName}`, {});
+        }
+        // Save the current route name for later comparision
+        routeNameRef.current = currentRouteName;
+      }}>
       <RootStack.Navigator
         mode="modal"
         headerMode="screen"
