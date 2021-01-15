@@ -198,7 +198,7 @@ const RenderTransationDetail = ({transactionItem}) => {
           </View>
           <View style={itemContainer}>
             <AppText variant="body1" style={titleStyle(theme)}>
-              <FormattedMessage id="bank" defaultMessage="Bank" />
+              <FormattedMessage id="card_type" defaultMessage="Card Type" />
             </AppText>
             <AppText variant="body2" style={detail(theme)}>
               {transactionItem.data.subType}

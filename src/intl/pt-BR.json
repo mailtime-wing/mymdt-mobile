@@ -318,6 +318,7 @@
   "you_need_to_update_before_use": "A new version {latest_app_version} is avaliable. You will need to update to use this app.",
   "please_login_again": "Please login again",
   "contact_us": "Contact Us",
+  "card_type": "Card Type",
   "transactionType": {
     "reward": "Recompensa",
     "redeem": "Resgatar",
