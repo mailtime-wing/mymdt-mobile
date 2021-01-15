@@ -188,6 +188,7 @@ const CashBackSummarySection = ({
           })
           .map((merchantSummary) => (
             <CashBackItem
+              key={merchantSummary.merchantId}
               icon={{
                 uri: merchantsData?.find(
                   (merchant) => merchant.id === merchantSummary.merchantId,
