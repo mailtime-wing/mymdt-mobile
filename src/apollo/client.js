@@ -22,9 +22,9 @@ const link = ApolloLink.from([
     operation.client = operation.getContext().client || client;
     return forward(operation);
   }),
+  errorLink,
   new RefreshAccessTokenErrorLink(),
   authLink,
-  errorLink,
   new HttpLink({
     uri: `${Config.API_SCHEME}://${Config.API_ENDPOINT}`,
   }),
