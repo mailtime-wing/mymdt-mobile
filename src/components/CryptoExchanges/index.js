@@ -53,33 +53,33 @@ const CryptoExchanges = () => {
   if (isChinaPhoneNumber) {
     binanceUrl = 'https://accounts.binancezh.pro/cn/register?ref=VXR61SQI';
     okexUrl = 'https://www.okex.com/join/1/1838164';
-    digifinexUrl = 'https://www.digifinex.xyz/zh-cn/from/lpKlJk';
+    digifinexUrl = 'https://www.digifinex.com/zh-cn/from/lpKlJk';
     poloniexUrl = 'https://poloniex.com/signup?c=SVEPCE4E&ref=mdt.io';
   } else {
     switch (locale) {
       case locales.EN_US:
         binanceUrl = 'https://www.binance.com/en/register?ref=VXR61SQI';
         okexUrl = 'https://www.okex.com/join/1/1838164';
-        digifinexUrl = 'https://www.digifinex.xyz/en-ww/from/lpKlJk';
+        digifinexUrl = 'https://www.digifinex.com/en-ww/from/lpKlJk';
         poloniexUrl = 'https://poloniex.com/signup?c=SVEPCE4E&ref=mdt.io';
         break;
       case locales.ZH_HK:
         binanceUrl = 'https://accounts.binance.com/tw/register?ref=VXR61SQI';
         okexUrl = 'https://www.okex.com/join/1/1838164';
-        digifinexUrl = 'https://www.digifinex.xyz/zh-hk/from/lpKlJk';
+        digifinexUrl = 'https://www.digifinex.com/zh-hk/from/lpKlJk';
         poloniexUrl = 'https://poloniex.com/signup?c=SVEPCE4E&ref=mdt.io';
         break;
       case locales.ZH_CN:
         binanceUrl = 'https://accounts.binance.com/cn/register?ref=VXR61SQI';
         okexUrl = 'https://www.okex.com/join/1/1838164';
-        digifinexUrl = 'https://www.digifinex.xyz/zh-cn/from/lpKlJk';
+        digifinexUrl = 'https://www.digifinex.com/zh-cn/from/lpKlJk';
         poloniexUrl = 'https://poloniex.com/signup?c=SVEPCE4E&ref=mdt.io';
         break;
       default:
         // default using english version
         binanceUrl = 'https://www.binance.com/en/register?ref=VXR61SQI';
         okexUrl = 'https://www.okex.com/join/1/1838164';
-        digifinexUrl = 'https://www.digifinex.xyz/en-ww/from/lpKlJk';
+        digifinexUrl = 'https://www.digifinex.com/en-ww/from/lpKlJk';
         poloniexUrl = 'https://poloniex.com/signup?c=SVEPCE4E&ref=mdt.io';
         break;
     }
