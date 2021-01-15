@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {useIntl} from 'react-intl';
 import SafeAreaView from 'react-native-safe-area-view';
+import {useMutation} from '@apollo/client';
 
 import {AuthContext} from '@/context/auth';
 import {IntlContext} from '@/context/Intl';
@@ -8,7 +9,6 @@ import {NotificationContext} from '@/context/notification';
 import {FormattedMessage} from 'react-intl';
 import errorCodeEnum from '@/enum/errorCode';
 import VerifyVerificationCodeForm from '@/components/VerifyVerificationCodeForm';
-import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 
 import splitPhoneNumber from '@/utils/splitPhoneNumber';
 import {ENTER_API} from '@/api/auth';
@@ -18,7 +18,7 @@ import {container} from './style';
 const VerifyEnterScreen = ({route}) => {
   const intl = useIntl();
 
-  const [enterRequest] = useMutationWithAuth(ENTER_API, {
+  const [enterRequest] = useMutation(ENTER_API, {
     context: {
       errorMessageHandler: {
         errorMap: {

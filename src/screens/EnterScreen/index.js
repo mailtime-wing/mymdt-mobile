@@ -2,10 +2,10 @@ import React, {useContext} from 'react';
 import {Text} from 'react-native';
 import {FormattedMessage, useIntl} from 'react-intl';
 import SafeAreaView from 'react-native-safe-area-view';
+import {useMutation} from '@apollo/client';
 
 import {IntlContext} from '@/context/Intl';
 import LoginForm from '@/components/LoginForm';
-import useMutationWithAuth from '@/hooks/useMutationWithAuth';
 import {GET_OTP_API} from '@/api/auth';
 import errorCodeEnum from '@/enum/errorCode';
 
@@ -19,7 +19,7 @@ const EnterScreen = ({navigation}) => {
   const {localeEnum} = useContext(IntlContext);
   const intl = useIntl();
 
-  const [otpRequest, {loading}] = useMutationWithAuth(GET_OTP_API, {
+  const [otpRequest, {loading}] = useMutation(GET_OTP_API, {
     context: {
       errorMessageHandler: {
         errorMap: {
