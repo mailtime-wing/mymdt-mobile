@@ -3,6 +3,7 @@ import {ApolloProvider} from '@apollo/client';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import client from '@/apollo/client';
+import SWRConfig from '@/swr';
 import {ThemeProvider} from '@/context/theme';
 import {IntlContainer} from '@/context/Intl';
 import {AuthProvider} from '@/context/auth';
@@ -20,33 +21,35 @@ import NavigationRoot from '@/screens/Root';
 function App() {
   return (
     <ApolloProvider client={client}>
-      <SafeAreaProvider>
-        <ThemeProvider>
-          <ToastProvider>
-            <AuthProvider>
-              <IntlContainer>
-                <NotificationProvider>
-                  <PreloadDataProvider>
-                    <BranchProvider>
-                      <SplashProvider>
-                        {/* UI related components are placed under splash to avoid flickerin */}
-                        <VersionCheckProvider>
-                          <SetupFlowProvider>
-                            <BankProvider>
-                              <NavigationRoot />
-                            </BankProvider>
-                          </SetupFlowProvider>
-                        </VersionCheckProvider>
-                      </SplashProvider>
-                    </BranchProvider>
-                  </PreloadDataProvider>
-                </NotificationProvider>
-                <RefreshTokenExpiredModal />
-              </IntlContainer>
-            </AuthProvider>
-          </ToastProvider>
-        </ThemeProvider>
-      </SafeAreaProvider>
+      <SWRConfig>
+        <SafeAreaProvider>
+          <ThemeProvider>
+            <ToastProvider>
+              <AuthProvider>
+                <IntlContainer>
+                  <NotificationProvider>
+                    <PreloadDataProvider>
+                      <BranchProvider>
+                        <SplashProvider>
+                          {/* UI related components are placed under splash to avoid flickerin */}
+                          <VersionCheckProvider>
+                            <SetupFlowProvider>
+                              <BankProvider>
+                                <NavigationRoot />
+                              </BankProvider>
+                            </SetupFlowProvider>
+                          </VersionCheckProvider>
+                        </SplashProvider>
+                      </BranchProvider>
+                    </PreloadDataProvider>
+                  </NotificationProvider>
+                  <RefreshTokenExpiredModal />
+                </IntlContainer>
+              </AuthProvider>
+            </ToastProvider>
+          </ThemeProvider>
+        </SafeAreaProvider>
+      </SWRConfig>
     </ApolloProvider>
   );
 }

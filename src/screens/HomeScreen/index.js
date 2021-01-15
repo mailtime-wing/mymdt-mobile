@@ -3,8 +3,11 @@ import {useFocusEffect} from '@react-navigation/native';
 import {ScrollView, View, TouchableOpacity} from 'react-native';
 import useQueryWithAuth from '@/hooks/useQueryWithAuth';
 import {FormattedMessage} from 'react-intl';
-import {GET_CHECK_USER_CAN_UPGRADE_DATA, GET_MERCHANTS_API} from '@/api/data';
+import useSWR from 'swr';
+import {useTheme} from 'emotion-theming';
+import Config from 'react-native-config';
 
+import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
 import membershipLevel from '@/enum/membershipLevel';
 import LinearGradientBackground from '@/components/LinearGradientBackground';
 import MembershipCard from '@/components/MembershipCard';
@@ -13,6 +16,9 @@ import UpgradeSection from './UpgradeSection';
 import CashBackSummarySection from './CashBackSummarySection';
 import MembershipInfoCard from './MembershipInfoCard';
 import ScreenContainer from '@/components/ScreenContainer';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import {ME} from '@/constants/currency';
+import {GET_CHECK_USER_CAN_UPGRADE_DATA, GET_MERCHANTS_API} from '@/api/data';
 
 import AwardIcon from './AwardIcon';
 import CreditCardIcon from './CreditCardIcon';
@@ -20,7 +26,6 @@ import DollarSignIcon from './DollarSignIcon';
 import BagIcon from './BagIcon';
 import ReferralIcon from './ReferralIcon';
 import MailIcon from './MailIcon';
-
 import {
   container,
   imageStyle,
@@ -28,20 +33,8 @@ import {
   sectionMargin,
   cardContainer,
 } from './style';
-import {useTheme} from 'emotion-theming';
 
-import LoadingSpinner from '@/components/LoadingSpinner';
-
-import {AUTH_TOKENS} from '@/api/auth';
-import {useQuery} from '@apollo/client';
-import useSWR from 'swr';
-
-import {ME} from '@/constants/currency';
-
-import useCurrencyConvertToUsd from '@/hooks/useCurrencyConvertToUsd';
-
-import Config from 'react-native-config';
-const url = `${Config.DISTRIBUTE_API_SCHEME}://${Config.DISTRIBUTE_API_ENDPOINT}/cashback/summary?period=7`;
+const CASHBACK_SUMMARY_URL = `${Config.DISTRIBUTE_API_SCHEME}://${Config.DISTRIBUTE_API_ENDPOINT}/cashback/summary?period=7`;
 
 const HomeScreen = ({navigation}) => {
   const theme = useTheme();
@@ -49,11 +42,9 @@ const HomeScreen = ({navigation}) => {
     GET_CHECK_USER_CAN_UPGRADE_DATA,
   );
   const {conversionRate} = useCurrencyConvertToUsd(ME);
-  const {
-    data: merchantsData,
-    loading: merchantsLoading,
-    error: merchantsError,
-  } = useQueryWithAuth(GET_MERCHANTS_API);
+  const {data: merchantsData, loading: merchantsLoading} = useQueryWithAuth(
+    GET_MERCHANTS_API,
+  );
 
   const referFriendCount =
     data?.userProfile?.referrals.filter(
@@ -74,26 +65,8 @@ const HomeScreen = ({navigation}) => {
     (ams) => ams.level === userNextLevel,
   );
 
-  const {data: authData} = useQuery(AUTH_TOKENS);
-  const fetcher = async (...args) => {
-    const res = await fetch(...args, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${authData.accessToken}`,
-      },
-    });
-
-    if (!res.ok) {
-      const error = new Error('An error occurred while fetching the data.');
-      throw error;
-    }
-
-    return res.json();
-  };
-
   const {data: summaryData, error: summaryError, revalidate} = useSWR(
-    url,
-    fetcher,
+    CASHBACK_SUMMARY_URL,
   );
   const isSummaryLoading = !summaryData && !summaryError;
   const cashBackTotal = summaryData?.data?.totalCashback * conversionRate || 0;
@@ -226,7 +199,7 @@ const HomeScreen = ({navigation}) => {
             />
             {merchantsLoading || isSummaryLoading ? (
               <LoadingSpinner />
-            ) : merchantsError || summaryError ? null : (
+            ) : !merchantsData?.merchants || !summaryData ? null : (
               <CashBackSummarySection
                 navigation={navigation}
                 onPress={handleCashBackSummaryPress}
