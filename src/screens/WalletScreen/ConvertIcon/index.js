@@ -1,5 +1,5 @@
 import React from 'react';
-import {Svg, Path, G, Rect, Defs, ClipPath} from 'react-native-svg';
+import {Svg, Path, G} from 'react-native-svg';
 
 import {useTheme} from 'emotion-theming';
 
@@ -7,45 +7,41 @@ const ConvertIcon = () => {
   const theme = useTheme();
   return (
     <Svg
-      width="25"
+      width="24"
       height="24"
-      viewBox="0 0 25 24"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <G style="mix-blend-mode:multiply">
         <Path
-          d="M22.5 5.99756V9.99756H18.5"
-          stroke={theme.colors.secondary.normal}
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M22 4.99756C22.5523 4.99756 23 5.44527 23 5.99756V9.99756C23 10.5498 22.5523 10.9976 22 10.9976H18C17.4477 10.9976 17 10.5498 17 9.99756C17 9.44527 17.4477 8.99756 18 8.99756H21V5.99756C21 5.44527 21.4477 4.99756 22 4.99756Z"
+          fill={theme.colors.secondary.normal}
         />
       </G>
       <G style="mix-blend-mode:multiply">
         <Path
-          d="M2.5 18V14H6.5"
-          stroke={theme.colors.primary.normal}
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M1 14C1 13.4477 1.44772 13 2 13H6C6.55228 13 7 13.4477 7 14C7 14.5523 6.55228 15 6 15H3V18C3 18.5523 2.55228 19 2 19C1.44772 19 1 18.5523 1 18V14Z"
+          fill={theme.colors.primary.normal}
         />
       </G>
       <G style="mix-blend-mode:multiply">
         <Path
-          d="M2.5 14L7.02335 18.3615C8.07107 19.4371 9.36727 20.2229 10.791 20.6455C12.2147 21.068 13.7195 21.1137 15.1651 20.778C16.6106 20.4424 17.9498 19.7365 19.0575 18.7262C20.1653 17.7159 21.0056 16.434 21.5 15.0003"
-          stroke={theme.colors.primary.normal}
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M1.28013 13.3059C1.66348 12.9083 2.29654 12.8968 2.69411 13.2801L7.21746 17.6416C7.22498 17.6489 7.23239 17.6562 7.23969 17.6637C8.16953 18.6184 9.31758 19.3134 10.5755 19.6868C11.8334 20.0601 13.1622 20.1004 14.4389 19.8039C15.7157 19.5075 16.9011 18.8834 17.8837 17.9873C18.8663 17.0911 19.6141 15.9518 20.0546 14.6743C20.2347 14.1522 20.8039 13.8749 21.326 14.055C21.8481 14.235 22.1254 14.8042 21.9454 15.3264C21.3971 16.9163 20.4642 18.3406 19.2314 19.465C17.9984 20.5896 16.5055 21.3773 14.8912 21.7521C13.2769 22.1269 11.5961 22.076 10.0064 21.6041C8.42207 21.1339 6.98189 20.2615 5.81825 19.0707L1.30589 14.7199C0.908319 14.3365 0.896785 13.7035 1.28013 13.3059Z"
+          fill={theme.colors.primary.normal}
         />
       </G>
       <G style="mix-blend-mode:multiply">
         <Path
-          d="M3.5 8.99966C3.99442 7.56596 4.83471 6.28415 5.94248 5.27382C7.05024 4.26349 8.38937 3.55759 9.83491 3.22197C11.2805 2.88635 12.7853 2.93195 14.209 3.35453C15.6327 3.7771 16.9289 4.56288 17.9767 5.63853L22.5 10"
-          stroke={theme.colors.secondary.normal}
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M13.4245 4.31319C12.1667 3.93986 10.8378 3.89964 9.5611 4.19606C8.28428 4.4925 7.09889 5.11658 6.11637 6.01268C5.13369 6.90892 4.38593 8.04823 3.94539 9.32567C3.76534 9.84779 3.19613 10.1251 2.67402 9.94503C2.1519 9.76498 1.87461 9.19576 2.05466 8.67365C2.60296 7.08369 3.53579 5.65938 4.76864 4.53497C6.00165 3.41041 7.49452 2.62267 9.10878 2.24788C10.7232 1.87306 12.404 1.92405 13.9936 2.39586C15.578 2.86612 17.0181 3.73847 18.1818 4.92924L22.6941 9.28013C23.0917 9.66348 23.1032 10.2965 22.7199 10.6941C22.3366 11.0917 21.7035 11.1032 21.3059 10.7199L16.7826 6.3584C16.775 6.35114 16.7676 6.34376 16.7603 6.33627C15.8305 5.38165 14.6825 4.68657 13.4245 4.31319Z"
+          fill={theme.colors.secondary.normal}
         />
       </G>
     </Svg>

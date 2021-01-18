@@ -7,32 +7,30 @@ const CreditCardIcon = () => {
   const theme = useTheme();
   return (
     <Svg
-      width="24"
+      width="25"
       height="24"
-      viewBox="0 0 24 24"
+      viewBox="0 0 25 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <G style="mix-blend-mode:multiply">
         <Path
-          d="M21 4H3C1.89543 4 1 4.89543 1 6V18C1 19.1046 1.89543 20 3 20H21C22.1046 20 23 19.1046 23 18V6C23 4.89543 22.1046 4 21 4Z"
-          stroke={theme.colors.secondary.normal}
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M3.5 5C2.94772 5 2.5 5.44772 2.5 6V18C2.5 18.5523 2.94772 19 3.5 19H21.5C22.0523 19 22.5 18.5523 22.5 18V6C22.5 5.44772 22.0523 5 21.5 5H3.5ZM0.5 6C0.5 4.34315 1.84315 3 3.5 3H21.5C23.1569 3 24.5 4.34315 24.5 6V18C24.5 19.6569 23.1569 21 21.5 21H3.5C1.84315 21 0.5 19.6569 0.5 18V6Z"
+          fill={theme.colors.secondary.normal}
         />
       </G>
       <G style="mix-blend-mode:multiply">
         <Path
-          d="M1 16H23"
-          stroke={theme.colors.primary.normal}
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M0.5 16C0.5 15.4477 0.947715 15 1.5 15H23.5C24.0523 15 24.5 15.4477 24.5 16C24.5 16.5523 24.0523 17 23.5 17H1.5C0.947715 17 0.5 16.5523 0.5 16Z"
+          fill={theme.colors.primary.normal}
         />
       </G>
       <G style="mix-blend-mode:multiply">
         <Rect
-          x="4.5"
+          x="5"
           y="9.5"
           width="3"
           height="2"
@@ -40,7 +38,7 @@ const CreditCardIcon = () => {
           fill={theme.colors.primary.normal}
         />
         <Rect
-          x="4.5"
+          x="5"
           y="9.5"
           width="3"
           height="2"
