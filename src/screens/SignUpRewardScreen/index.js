@@ -21,6 +21,9 @@ import {
   giftContainer,
   textContainer,
   inner,
+  convertedText,
+  convertedContainer,
+  centered,
 } from './style';
 import {useTheme} from 'emotion-theming';
 
@@ -80,30 +83,50 @@ const GiftBoxReady = ({onPress}) => {
   );
 };
 
-const GiftBoxOpened = ({isRewardDollar, rewardAmount, handleContinuePress}) => {
+const GiftBoxOpened = ({
+  convert,
+  rewardAmount,
+  convertedRewardAmount,
+  handleContinuePress,
+}) => {
   const theme = useTheme();
-  const TextColor = isRewardDollar
-    ? theme.colors.secondary.normal
-    : theme.colors.primary.normal;
+  const TextColor = convert
+    ? theme.colors.primary.normal
+    : theme.colors.secondary.normal;
 
   return (
     <View style={openContainer}>
       <View style={giftContainer}>
-        {isRewardDollar ? <MRPGiftBox /> : <MeGiftBox />}
+        {convert ? <MeGiftBox /> : <MRPGiftBox />}
         <View style={textContainer}>
           <AppText variant="heading1" style={{color: TextColor}}>
             <FormattedMessage id="you_got" default="You got" />{' '}
             <TransactionAmount
-              amount={rewardAmount}
-              unitVariant={isRewardDollar ? REWARD_DOLLAR : ME}
+              amount={convert ? convertedRewardAmount : rewardAmount}
+              unitVariant={convert ? ME : REWARD_DOLLAR}
               unitColor={TextColor}
               unitSizeVariant="normal"
               amountSizeVariant="large"
               amountColor={TextColor}
-              showDecimal={false}
             />{' '}
             !
           </AppText>
+          {convert && (
+            <View style={convertedContainer}>
+              <AppText variant="body2" style={convertedText(theme)}>
+                <FormattedMessage id="converted_from" />{' '}
+              </AppText>
+              <TransactionAmount
+                amount={rewardAmount}
+                unitVariant={REWARD_DOLLAR}
+                unitSizeVariant="small"
+                amountSizeVariant="normal"
+                amountColor={theme.colors.textOnBackground.disabled}
+                unitColor={theme.colors.textOnBackground.disabled}
+                style={centered}
+              />
+            </View>
+          )}
         </View>
       </View>
       <View style={inner(theme)}>
@@ -125,17 +148,19 @@ const SignUpRewardScreen = ({route}) => {
   const {data} = useQueryWithAuth(GET_CURRENCY_CODE);
   const accountSetupReward = route?.params?.accountSetupReward;
   const rewardAmount = accountSetupReward?.value || 0;
+  const cashBackType = data?.userProfile?.cashbackCurrencyCode;
+  const convert = cashBackType === ME;
+
   const {data: conversionRateData} = useQueryWithAuth(GET_CONVERSION_RATE_API, {
-    skip: rewardAmount === 0,
+    skip: !convert || rewardAmount === 0,
     variables: {
       from: REWARD_DOLLAR,
       to: ME,
     },
   });
-  const cashBackType = data?.userProfile?.cashbackCurrencyCode;
+
   const conversionRate = conversionRateData?.conversionRate || 0;
-  const isRewardDollar = cashBackType === REWARD_DOLLAR;
-  const rewardAmountInMe = rewardAmount * conversionRate;
+  const convertedRewardAmount = rewardAmount * conversionRate;
 
   const handleContinuePress = () => {
     navigateByFlow();
@@ -150,8 +175,9 @@ const SignUpRewardScreen = ({route}) => {
       safeAreaProps={{forceInset: {top: 'always', bottom: 'always'}}}>
       {isOpened ? (
         <GiftBoxOpened
-          isRewardDollar={isRewardDollar}
-          rewardAmount={isRewardDollar ? rewardAmount : rewardAmountInMe}
+          convert={convert}
+          rewardAmount={rewardAmount}
+          convertedRewardAmount={convertedRewardAmount}
           handleContinuePress={handleContinuePress}
         />
       ) : (
