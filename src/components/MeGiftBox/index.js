@@ -8,7 +8,7 @@ const MeGiftBox = () => (
     source={require('./get_me_token.json')}
     resizeMode="contain"
     autoPlay
-    loop
+    loop={false}
     style={animation}
   />
 );

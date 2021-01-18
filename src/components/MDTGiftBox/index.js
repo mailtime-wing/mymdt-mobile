@@ -8,7 +8,7 @@ const MDTGiftBox = () => (
     source={require('./get_mdt.json')}
     resizeMode="contain"
     autoPlay
-    loop
+    loop={false}
     style={animation}
   />
 );
