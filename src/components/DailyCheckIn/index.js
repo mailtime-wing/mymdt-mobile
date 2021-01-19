@@ -1,7 +1,8 @@
 import React, {useState, useContext, useRef, useEffect} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import {View, ScrollView, Dimensions} from 'react-native';
 import {FormattedMessage} from 'react-intl';
-import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import useLazyQueryWithAuth from '@/hooks/useLazyQueryWithAuth';
 import useMutationWithReset from '@/hooks/useMutationWithReset';
 import {GET_CHECK_IN_STATUS_API, CHECK_IN_API} from '@/api/data';
 import {IntlContext} from '@/context/Intl';
@@ -34,9 +35,14 @@ const DailyCheckIn = () => {
     }
   }, [todayElementLayout]);
 
-  const {data, loading, updateQuery} = useQueryWithAuth(
+  const [fetchCheckInData, {data, loading, updateQuery}] = useLazyQueryWithAuth(
     GET_CHECK_IN_STATUS_API,
+    {
+      fetchPolicy: 'cache-and-network',
+    },
   );
+
+  useFocusEffect(fetchCheckInData);
 
   const [
     checkIn,
@@ -50,6 +56,11 @@ const DailyCheckIn = () => {
     } catch (e) {
       console.error(e);
     }
+  };
+
+  const handleErrorPopupPress = () => {
+    reset();
+    fetchCheckInData();
   };
 
   const isEnglish = localeEnum === 'EN_US';
@@ -133,7 +144,7 @@ const DailyCheckIn = () => {
         visible={!!checkInError}
         title="Something went wrong!"
         detail="Please try again later"
-        callback={reset}
+        callback={handleErrorPopupPress}
       />
     </View>
   );
