@@ -254,7 +254,7 @@ const CashBackSummaryScreen = ({navigation, route}) => {
                 <Image
                   style={banner}
                   source={require('@/assets/upgrade_promotion_banner.png')}
-                  resizeMode="cover"
+                  resizeMode="stretch"
                 />
               </TouchableOpacity>
             </View>
