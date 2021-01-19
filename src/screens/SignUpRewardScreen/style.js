@@ -30,3 +30,18 @@ export const textContainer = css`
   margin-top: 30px;
   align-self: center;
 `;
+
+export const convertedText = (theme) => css`
+  color: ${theme.colors.textOnBackground.disabled};
+  align-items: center;
+`;
+
+export const convertedContainer = css`
+  flex-direction: row;
+  align-self: center;
+  margin-top: 8px;
+`;
+
+export const centered = css`
+  align-self: center;
+`;
