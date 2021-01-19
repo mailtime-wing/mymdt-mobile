@@ -8,7 +8,6 @@ const LoadingAnimation = () => {
       source={require('./button_animation.json')}
       resizeMode="contain"
       autoPlay
-      loop
       style={animation}
     />
   );

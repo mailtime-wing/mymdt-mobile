@@ -68,7 +68,7 @@ const GiftBoxReady = ({onPress}) => {
         source={require('./giftbox.json')}
         resizeMode="cover"
         autoPlay
-        loop
+        loop={false}
         style={{width: viewportWidth}}
       />
       <AnimatedText>

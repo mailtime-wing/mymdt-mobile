@@ -138,7 +138,6 @@ const UpgradeScreen = ({navigation, route}) => {
         ref={lottieRef}
         source={require('./firework_animation.json')}
         resizeMode="cover"
-        loop
         style={firework}
       />
       <View style={container}>
