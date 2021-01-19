@@ -4,6 +4,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from 'emotion-theming';
 import AppText from '@/components/AppText2';
+import useQueryWithAuth from '@/hooks/useQueryWithAuth';
+import {GET_CHECK_IN_STATUS_API} from '@/api/data';
 
 import {styles, label} from './style';
 
@@ -21,6 +23,8 @@ const Tab = createBottomTabNavigator();
 
 const HomeTab = () => {
   const theme = useTheme();
+  const {data} = useQueryWithAuth(GET_CHECK_IN_STATUS_API);
+  const checkedInToday = data?.userProfile?.checkInStatus?.hasCheckedInToday;
   const white = theme.colors.background1;
   const grey = theme.colors.textOnBackground.mediumEmphasis;
   const iconWidth = 24;
@@ -40,7 +44,12 @@ const HomeTab = () => {
       component: HomeScreen,
       svgIcon: HomeIcon,
     },
-    {name: 'bonus', component: BonusScreen, svgIcon: BonusIcon},
+    {
+      name: 'bonus',
+      component: BonusScreen,
+      svgIcon: BonusIcon,
+      options: {tabBarBadge: checkedInToday ? null : ''},
+    },
     // {name: 'redeem', component: RedeemScreen, svgIcon: RedeemIcon},
     {
       name: 'wallet',
@@ -85,6 +94,7 @@ const HomeTab = () => {
                   stroke={focused ? white : grey}
                 />
               ),
+              ...options,
             }}
           />
         ),
