@@ -117,7 +117,7 @@ const CashBackSummarySection = ({
           <AppText variant="heading4" style={summaryHeader(theme)}>
             <FormattedMessage
               id="cash_back_summary"
-              defaultMessage="Cash Back Summary"
+              defaultMessage="Rewards Summary"
             />
           </AppText>
           <AppText variant="caption" style={earned(theme)}>
@@ -179,7 +179,7 @@ const CashBackSummarySection = ({
         <AppText variant="subTitle3" style={selectedMerchant(theme)}>
           <FormattedMessage
             id="cash_back_from_selected_merchants"
-            defaultMessage="Cash Back from Selected Merchants"
+            defaultMessage="Rewards from Selected Merchants"
           />
         </AppText>
         {summaryData?.data?.merchantSummaryInfos
