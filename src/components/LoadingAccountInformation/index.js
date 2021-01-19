@@ -45,7 +45,6 @@ const LoadingAccountInformation = ({onBind, onError}) => {
         source={require('@/assets/rewardme_loading_lottie.json')}
         resizeMode="contain"
         autoPlay
-        loop
       />
     </SafeAreaView>
   );
